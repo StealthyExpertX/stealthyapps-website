@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FillPro Support</title>
+  <meta name="description" content="Support, troubleshooting, privacy contact, and known limits for the FillPro Chrome extension.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">F</span><span>FillPro</span></a>
+      <div class="nav-links">
+        <a href="support.html">Support</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="mailto:support@stealthyapps.com">Email Support</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <p class="eyebrow">Support</p>
+    <h1>FillPro Support</h1>
+    <p class="lead">Help for profile setup, on-page filling, smart rules, local file uploads, privacy questions, and known site limitations.</p>
+
+    <h2>Fast Start</h2>
+    <ol>
+      <li>Create a profile in the FillPro popup.</li>
+      <li>Add custom fields, smart rules, or local uploads if needed.</li>
+      <li>Open a normal web form and click Fill Page, use the on-page picker, or press Ctrl+Shift+F.</li>
+    </ol>
+
+    <h2>Best Use Cases</h2>
+    <ul>
+      <li>Job applications and candidate forms</li>
+      <li>Account creation and onboarding flows</li>
+      <li>Checkout contact and shipping sections</li>
+      <li>Lead capture, demo request, and contact forms</li>
+      <li>Vendor, partner, and client intake forms</li>
+    </ul>
+
+    <h2>Privacy Promise</h2>
+    <ul>
+      <li>Profile data stays in your browser.</li>
+      <li>No account is required for free use.</li>
+      <li>No analytics or background form-data collection.</li>
+      <li>Passwords, payment fields, SSNs, tax IDs, and one-time codes are skipped by design.</li>
+    </ul>
+
+    <h2>Using Smart Rules</h2>
+    <p>Smart rules help when a site uses awkward field names or labels that do not match normal profile keys.</p>
+    <ul>
+      <li>Use plain text for contains matching, for example work email.</li>
+      <li>Use JavaScript regex literal syntax for harder cases, like /best.*contact/i.</li>
+      <li>Use @field references to reuse existing profile values, like @email or @company_size.</li>
+    </ul>
+
+    <h2>Using Local Uploads</h2>
+    <p>Attach a resume, CV, cover letter, or similar file inside a profile. FillPro stores a local encoded copy in extension storage and uses it only when you choose to fill a matching upload field.</p>
+    <ul>
+      <li>Supported formats: PDF, DOC, DOCX, TXT, RTF, ODT, and Pages</li>
+      <li>Current per-file limit: 2 MB</li>
+      <li>Use a target pattern like resume, cv, or /cover.?letter/i.</li>
+    </ul>
+
+    <h2>Known Limits</h2>
+    <ul>
+      <li>Sites behind CAPTCHA, bot checks, or human verification must be cleared manually first.</li>
+      <li>Cross-origin embedded forms can remain unreachable under Chrome's privacy-first activeTab model.</li>
+      <li>Browser-native PDF tabs are not fillable. Compatible PDF.js-based HTML viewers are the supported path.</li>
+      <li>Payment cards, CVC, passwords, SSNs, tax IDs, and one-time codes are intentionally skipped.</li>
+      <li>Some sites intentionally block automation. In those cases, FillPro should report the blocker honestly instead of faking success.</li>
+    </ul>
+
+    <h2>Troubleshooting</h2>
+    <ul>
+      <li>If nothing fills, wait until the real form is visible, then try again.</li>
+      <li>If the wrong field was matched, add a smart rule for that site-specific label.</li>
+      <li>If an upload field is missed, add a more explicit file-target pattern like candidate resume or /curriculum/i.</li>
+      <li>If a page is dynamic, try the on-page picker after the form has fully appeared.</li>
+    </ul>
+
+    <h2>Contact</h2>
+    <p>Product support: <a href="mailto:support@stealthyapps.com">support@stealthyapps.com</a></p>
+    <p>Privacy requests: <a href="mailto:privacy@stealthyapps.com">privacy@stealthyapps.com</a></p>
+    <p>For privacy details, see the <a href="privacy-policy.html">FillPro Privacy Policy</a>.</p>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>FillPro Support</span>
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+    </div>
+  </footer>
+</body>
+</html>
