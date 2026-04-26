@@ -207,6 +207,23 @@ li + li {
   max-width: 780px;
 }
 
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.signature {
+  color: var(--soft);
+  font-weight: 750;
+  margin-top: 22px;
+}
+
+.small {
+  color: var(--muted);
+  font-size: 14px;
+}
+
 .kv {
   display: grid;
   grid-template-columns: 190px 1fr;

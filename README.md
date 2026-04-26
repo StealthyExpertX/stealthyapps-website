@@ -9,6 +9,8 @@ This repository is intentionally small. It hosts the Chrome Web Store-facing leg
 - `index.html` - public product/support landing page
 - `privacy-policy.html` - Chrome Web Store privacy policy URL
 - `support.html` - support, known limits, troubleshooting, and contact
+- `changelog.html` - public release notes page
+- `developer-letter.html` - friendly note from the developer
 
 ## Local Preview
 
@@ -19,6 +21,12 @@ Open `index.html` directly in a browser, or serve the folder with any static ser
 - Site: `https://stealthyexpertx.github.io/fillpro-site/`
 - Privacy policy: `https://stealthyexpertx.github.io/fillpro-site/privacy-policy.html`
 - Support: `https://stealthyexpertx.github.io/fillpro-site/support.html`
+- Changelog: `https://stealthyexpertx.github.io/fillpro-site/changelog.html`
+- Developer letter: `https://stealthyexpertx.github.io/fillpro-site/developer-letter.html`
+
+## Voice Notes
+
+The developer letter intentionally uses a more direct and human voice based on the public StealthyExpertX / RedstonerLabs profile tone: friendly, professional, tool-builder focused, and comfortable saying plainly what a product does and does not do.
 
 ## GitHub Pages
 

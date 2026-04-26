@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FillPro Changelog</title>
+  <meta name="description" content="Release notes for FillPro, including the initial public release and ongoing product improvements.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="index.html"><span class="brand-mark">F</span><span>FillPro</span></a>
+      <div class="nav-links">
+        <a href="support.html">Support</a>
+        <a href="changelog.html">Changelog</a>
+        <a href="developer-letter.html">Letter</a>
+        <a href="privacy-policy.html">Privacy</a>
+        <a href="mailto:support@stealthyapps.com">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page stack">
+    <div>
+      <p class="eyebrow">Release Notes</p>
+      <h1>FillPro Changelog</h1>
+      <p class="lead">A simple public log of what shipped. The goal is to keep this practical, readable, and honest.</p>
+    </div>
+
+    <section class="notice">
+      <h2>Version 1.0.0</h2>
+      <p class="meta">April 2026 | Initial public release</p>
+      <p>The first public FillPro release focuses on real-world web-form filling, local-first storage, and clear boundaries. It is built to help with repetitive form work without pretending to bypass pages that are intentionally blocked or sensitive.</p>
+    </section>
+
+    <section class="card">
+      <h2>What shipped</h2>
+      <ul>
+        <li>One-click Fill Page from the popup for normal accessible web forms.</li>
+        <li>On-page profile picker so filling can start without breaking focus on the form.</li>
+        <li>Private local profiles saved in Chrome extension storage on the device.</li>
+        <li>Custom fields and smart rules for awkward labels, odd field names, and site-specific matching.</li>
+        <li>Local file upload matching for resume, CV, and cover-letter style inputs.</li>
+        <li>Save current form as profile from the right-click context menu.</li>
+        <li>Free mode with no account required for core use.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Privacy and safety posture</h2>
+      <ul>
+        <li>Local-first storage for profiles, custom fields, rules, and attached upload copies.</li>
+        <li>No broad production host permissions.</li>
+        <li>Sensitive fields intentionally skipped, including passwords, payment fields, tax IDs, SSNs, and one-time codes.</li>
+        <li>Optional feedback diagnostics are user-triggered and prepared locally before sending.</li>
+        <li>Public privacy and support pages are available for store transparency.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Product direction in this release</h2>
+      <ul>
+        <li>Better support for real signup, onboarding, vendor, application, and contact forms.</li>
+        <li>Honest blocker reporting when sites are hidden behind bot checks, login walls, or other access barriers.</li>
+        <li>A lighter first-run experience that pushes users toward a real first fill instead of a long tutorial.</li>
+        <li>Support pages written for practical troubleshooting, not generic marketing copy.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Known boundary</h2>
+      <p>FillPro does not claim to bypass CAPTCHA, anti-bot systems, blocked login walls, cross-origin payment frames, or browser-native PDF viewers. If a page blocks access before a normal form is reachable, the product should say so plainly.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span>FillPro Changelog</span>
+      <span><a href="support.html">Support</a> | <a href="privacy-policy.html">Privacy Policy</a> | <a href="developer-letter.html">Developer Letter</a></span>
+    </div>
+  </footer>
+</body>
+</html>
