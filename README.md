@@ -1,74 +1,56 @@
-# Stealthy Apps — public site
+# Stealthy Apps
 
-Source for [stealthyapps.com](https://stealthyapps.com), the public site for **Stealthy Apps** — a one-person indie studio (Karl) building small, private browser extensions.
+Official website for [Stealthy Apps](https://stealthyapps.com) — a small independent software studio building private, practical browser tools.
 
-The site is intentionally static: plain HTML + CSS, one tiny mailto script, no framework, no analytics, no build step.
+The current product is **FillPro**, a local-first form autofill extension for Chrome, Edge, Firefox, and other Chromium-based browsers.
 
-## Structure
+## Official links
 
-```
-/                  # Stealthy Apps portfolio homepage
-/about.html        # About Karl
-/apps/fillpro/     # FillPro product page
-  index.html       # product overview, features, pricing, FAQ
-  privacy.html     # FillPro privacy policy (linked from CWS listing)
-  support.html     # FillPro support + contact form
-  changelog.html   # FillPro release notes
-/assets/           # shared logo + brand assets
-/styles.css        # shared visual system
-/contact.js        # tiny mailto-based contact flow
-/sitemap.xml       # SEO
-/robots.txt        # SEO + AI crawler allowlist
-/llms.txt          # AI-crawler summary (ChatGPT, Gemini, Perplexity, Claude)
-/humans.txt        # who built this
-/CNAME             # custom domain (stealthyapps.com)
-/404.html          # not-found page
-```
+- Website: [stealthyapps.com](https://stealthyapps.com)
+- FillPro: [stealthyapps.com/apps/fillpro/](https://stealthyapps.com/apps/fillpro/)
+- Privacy: [stealthyapps.com/apps/fillpro/privacy.html](https://stealthyapps.com/apps/fillpro/privacy.html)
+- Support: [stealthyapps.com/apps/fillpro/support.html](https://stealthyapps.com/apps/fillpro/support.html)
+- Changelog: [stealthyapps.com/apps/fillpro/changelog.html](https://stealthyapps.com/apps/fillpro/changelog.html)
 
-Old top-level paths (`/privacy-policy.html`, `/support.html`, `/changelog.html`) redirect to `/apps/fillpro/*` to preserve any existing inbound links.
+## What this site covers
 
-## Hosting
+- Product pages for current and future Stealthy Apps releases
+- FillPro pricing, feature overview, and browser support
+- Public privacy policy and support information
+- Release notes and product updates
 
-GitHub Pages, served from the `main` branch root. The `CNAME` file pins the custom domain `stealthyapps.com`.
+## Product approach
 
-### DNS setup (one-time, in your domain registrar)
+Stealthy Apps is built around a simple idea: small tools should stay small.
 
-For an apex domain (`stealthyapps.com`), add four A records pointing to GitHub Pages:
+- No analytics or tracking scripts
+- No account wall for the core experience
+- Local-first storage wherever possible
+- Clear boundaries around what the product does and does not do
 
-```
-185.199.108.153
-185.199.109.153
-185.199.110.153
-185.199.111.153
-```
+## Current app
 
-For the `www` subdomain, add a CNAME pointing to `stealthyexpertx.github.io.`
+### FillPro
 
-After DNS propagates, GitHub Pages will auto-provision a Let's Encrypt cert.
+FillPro helps people save profile details once and fill normal web forms faster.
+It is designed for repetitive form-heavy work such as applications, signups, contact flows, and other standard browser-based forms.
 
-### GitHub Pages settings
+FillPro intentionally skips passwords, payment fields, one-time codes, and similar sensitive inputs.
 
-Repo → Settings → Pages:
-- Source: **Deploy from a branch**
-- Branch: `main` / `/` (root)
-- Custom domain: `stealthyapps.com`
-- Enforce HTTPS: ✅
+## Support and privacy
 
-## SEO + AI search
+If you need help, want to report an issue, or need a privacy answer, use the public FillPro support page:
 
-- Schema.org JSON-LD on every page (`Person`, `Organization`, `WebSite`, `SoftwareApplication`, `FAQPage`, `BreadcrumbList`, `PrivacyPolicy`).
-- Open Graph + Twitter cards on every page.
-- Canonical URLs on every page.
-- `sitemap.xml`, `robots.txt`, and `llms.txt` for traditional + AI crawlers (GPTBot, Google-Extended, PerplexityBot, ClaudeBot, anthropic-ai, CCBot).
-- Question-format H2s on FAQ sections (LLMs prefer those).
+- [Support](https://stealthyapps.com/apps/fillpro/support.html)
+- [Privacy policy](https://stealthyapps.com/apps/fillpro/privacy.html)
 
-## Privacy posture (whole site)
+## About this repository
 
-- No analytics, no Google Tag Manager, no Meta Pixel.
-- No third-party fonts (uses system UI stack).
-- Strict CSP on the FillPro pages.
-- `referrer: no-referrer` on every page.
+This repository contains the public website source for Stealthy Apps and is published to GitHub Pages.
+Website updates are deployed automatically after changes are pushed to the `main` branch and the Pages workflow completes.
 
 ## License
 
-The site source in this repo is © Stealthy Apps. Content is not open source. Inspecting and learning from the markup is fine.
+Website content and branding are © Stealthy Apps. The repository is public for transparency and publishing, but the product code itself is maintained separately.
+
+Issues and public feedback are welcome.
