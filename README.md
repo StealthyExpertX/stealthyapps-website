@@ -18,6 +18,15 @@ Open `index.html` directly in a browser, or serve the folder with any static ser
 
 The included workflow deploys the static site from the repository root using GitHub Pages Actions.
 
+From this folder, publish with:
+
+```powershell
+gh auth login
+gh repo create StealthyExpertX/fillpro-site --public --source . --push
+```
+
+After the first push, GitHub Pages should deploy from the included workflow. If Pages is not enabled automatically, open the repository settings and set Pages to GitHub Actions.
+
 Expected production URLs after publishing under `StealthyExpertX/fillpro-site`:
 
 - `https://stealthyexpertx.github.io/fillpro-site/`
