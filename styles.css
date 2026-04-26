@@ -45,7 +45,7 @@ body {
   margin: 0;
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(12, 31, 38, 0.82) 0%, transparent 38%),
+    linear-gradient(180deg, rgba(16, 43, 52, 0.92) 0%, rgba(7, 18, 23, 0.38) 38%, transparent 72%),
     linear-gradient(180deg, #071217 0%, #08161d 42%, #061015 100%);
   color: var(--text);
   font: 16px/1.62 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -64,22 +64,22 @@ body::after {
 
 body::before {
   background:
-    linear-gradient(rgba(157, 231, 215, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(157, 231, 215, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(157, 231, 215, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(157, 231, 215, 0.06) 1px, transparent 1px);
   background-size: 72px 72px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 88%);
-  opacity: 0.22;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.92), rgba(0, 0, 0, 0.7) 48%, transparent 94%);
+  opacity: 0.32;
 }
 
 body::after {
   background:
-    linear-gradient(116deg, transparent 0 18%, rgba(157, 231, 215, 0.08) 36%, transparent 56% 100%),
-    linear-gradient(42deg, transparent 0 24%, rgba(117, 216, 255, 0.065) 44%, transparent 62% 100%),
-    linear-gradient(180deg, rgba(157, 231, 215, 0.035), transparent 44%);
-  background-size: 180% 180%, 160% 160%, 100% 100%;
+    linear-gradient(116deg, transparent 0 12%, rgba(157, 231, 215, 0.22) 31%, rgba(117, 216, 255, 0.12) 43%, transparent 66% 100%),
+    linear-gradient(42deg, transparent 0 16%, rgba(117, 216, 255, 0.14) 38%, rgba(157, 231, 215, 0.1) 52%, transparent 74% 100%),
+    linear-gradient(180deg, rgba(157, 231, 215, 0.08), transparent 58%);
+  background-size: 185% 185%, 165% 165%, 100% 100%;
   background-position: 18% 8%, 82% 14%, center;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.74) 45%, transparent 94%);
-  opacity: 0.92;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.96), rgba(0, 0, 0, 0.88) 48%, rgba(0, 0, 0, 0.28) 88%, transparent 100%);
+  opacity: 1;
   animation: ambientField 18s ease-in-out infinite alternate;
   will-change: background-position, opacity;
 }
@@ -89,6 +89,24 @@ main,
 footer {
   position: relative;
   z-index: 1;
+}
+
+main::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -96px;
+  z-index: -1;
+  width: 100%;
+  height: 680px;
+  pointer-events: none;
+  background:
+    linear-gradient(104deg, transparent 0 14%, rgba(157, 231, 215, 0.22) 28%, rgba(117, 216, 255, 0.15) 42%, transparent 62% 100%),
+    linear-gradient(154deg, transparent 0 30%, rgba(15, 118, 110, 0.2) 52%, transparent 75% 100%);
+  filter: blur(24px) saturate(120%);
+  opacity: 0.94;
+  mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.92) 14%, rgba(0, 0, 0, 0.84) 68%, transparent 100%);
+  animation: heroAurora 16s ease-in-out infinite alternate;
 }
 
 img {
@@ -1146,17 +1164,34 @@ footer {
 @keyframes ambientField {
   0% {
     background-position: 18% 8%, 82% 14%, center;
-    opacity: 0.84;
+    opacity: 0.9;
   }
 
   50% {
     background-position: 42% 16%, 64% 22%, center;
-    opacity: 0.96;
+    opacity: 1;
   }
 
   100% {
     background-position: 72% 10%, 28% 18%, center;
-    opacity: 0.9;
+    opacity: 0.94;
+  }
+}
+
+@keyframes heroAurora {
+  0% {
+    transform: translateY(0) skewY(-1deg);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translateY(10px) skewY(0deg);
+    opacity: 0.96;
+  }
+
+  100% {
+    transform: translateY(2px) skewY(1deg);
+    opacity: 0.82;
   }
 }
 
