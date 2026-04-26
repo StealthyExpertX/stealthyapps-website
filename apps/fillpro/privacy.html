@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FillPro Privacy Policy — Stealthy Apps</title>
-  <meta name="description" content="FillPro privacy policy. What FillPro stores locally, what it skips by design, third-party billing, retention, diagnostics, and permission scope.">
+  <meta name="description" content="Plain-English privacy notes for FillPro. What stays local, what gets skipped, and the only times anything leaves your browser.">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
   <meta name="theme-color" content="#0b1a23">
@@ -55,28 +55,32 @@
         <div class="page-intro">
           <p class="eyebrow">Privacy Policy</p>
           <h1>FillPro Privacy Policy</h1>
-          <p class="lead">FillPro keeps profile data local to the extension on your device. This page covers what is stored, what is skipped, what touches third parties, and how local data is managed.</p>
+          <p class="lead">Short version: what you save in FillPro stays in the extension on your device. I do not sell it, upload it, or quietly collect form values behind your back.</p>
         </div>
         <p class="meta">Effective: April 26, 2026 · Last updated: April 26, 2026</p>
       </div>
 
       <article class="boundary-card mini-card">
         <div class="page-intro">
-          <p class="eyebrow">Privacy snapshot</p>
-          <h2>What matters most.</h2>
+          <p class="eyebrow">Short version</p>
+          <h2>What actually matters.</h2>
         </div>
         <ul class="list-check">
-          <li>Profiles and uploads stay local to the extension on your device.</li>
+          <li>Your profiles, rules, and uploads stay on your device.</li>
           <li>FillPro does not collect form values in the background.</li>
-          <li>Support drafts only open when you choose to open them.</li>
+          <li>The only things that touch the outside world are billing and the support email you choose to open.</li>
         </ul>
       </article>
     </section>
 
-    <section class="policy-grid">
-      <article class="policy-card">
-        <p class="eyebrow">What FillPro stores</p>
-        <h3>Only what the product needs to fill forms.</h3>
+    <section class="section-shell">
+      <article class="boundary-card">
+        <div class="page-intro">
+          <p class="eyebrow">How data works here</p>
+          <h2>What FillPro stores, skips, and sends.</h2>
+        </div>
+
+        <h3>What gets saved</h3>
         <ul class="list-check">
           <li><strong>Profile data:</strong> names, email addresses, phone numbers, and other fields you enter into profiles.</li>
           <li><strong>Captured form data:</strong> values saved when you choose Save current form.</li>
@@ -84,74 +88,61 @@
           <li><strong>Smart rules:</strong> custom match patterns and values for awkward field names.</li>
           <li><strong>Usage counters:</strong> free-tier profile count state stored locally.</li>
         </ul>
-      </article>
 
-      <article class="policy-card">
-        <p class="eyebrow">What FillPro skips</p>
-        <h3>Sensitive fields are intentionally off-limits.</h3>
-        <p>FillPro is designed not to autofill or save passwords, payment card numbers, security codes, Social Security numbers, tax IDs, one-time codes, and similar credential or payment inputs.</p>
-      </article>
+        <h3>What FillPro will not save or fill</h3>
+        <p>Passwords, payment card numbers, CVCs, Social Security numbers, tax IDs, government identifiers, and one-time codes are off-limits by design. FillPro is not trying to be a password manager or a vault for sensitive data.</p>
 
-      <article class="policy-card">
-        <p class="eyebrow">Data sharing</p>
-        <h3>No background collection or sale of profile data.</h3>
-        <p>FillPro does not collect, sell, or share your saved profile data, captured form values, or attached files with third parties. Limited network activity only happens for optional Pro licensing with ExtensionPay or when you intentionally open a support email draft.</p>
-      </article>
+        <h3>What leaves your browser</h3>
+        <p>Your saved data does not leave your device. The only exceptions are:</p>
+        <ul class="list-check">
+          <li><strong>Billing:</strong> if you upgrade to Pro, ExtensionPay and Stripe handle the payment. I never see your card details.</li>
+          <li><strong>Support:</strong> if you open a support draft, that email goes through your own email app like any normal email.</li>
+        </ul>
 
-      <article class="policy-card">
-        <p class="eyebrow">Optional Pro billing</p>
-        <h3>Third-party payment handling stays separate.</h3>
-        <p>If you upgrade to Pro, payment is handled by ExtensionPay and Stripe. FillPro may store license status and related restore metadata locally so paid access can be recognized, but it does not store full payment details.</p>
-      </article>
+        <h3>Deleting your data</h3>
+        <p>Your saved profiles, rules, and uploads stay on your device until you remove them. I cannot inspect them or delete them remotely.</p>
+        <ul class="list-check">
+          <li>Delete profiles inside FillPro.</li>
+          <li>Uninstall the extension to remove extension-managed storage.</li>
+          <li>Delete exported files separately if you saved them outside the extension.</li>
+        </ul>
 
-      <article class="policy-card">
-        <p class="eyebrow">Retention and deletion</p>
-        <h3>Free-use data is managed on your device.</h3>
-        <p>Your saved profiles, rules, and attached uploads remain on your device until you remove them. Because that data stays local, support cannot remove it remotely. Delete profiles inside FillPro or uninstall the extension to remove extension-managed storage. Exported files you save outside the extension remain wherever you put them.</p>
-      </article>
+        <h3>Optional diagnostics</h3>
+        <p>If you use the feedback flow, FillPro can prepare an email draft with optional diagnostics you choose to include. That may contain page title, site path, visible field metadata, framework hints, browser details, and extension version. It does not include field values.</p>
 
-      <article class="policy-card">
-        <p class="eyebrow">Diagnostics</p>
-        <h3>Only when you opt in.</h3>
-        <p>If you use the feedback flow, FillPro can prepare an email draft with optional diagnostics you explicitly choose to include. Those may contain page title, site path, visible field metadata, framework hints, browser details, and extension version. Field values are not included.</p>
+        <h3>Permissions</h3>
+        <p>FillPro asks for a small set of permissions because that is all it needs to work.</p>
+        <table class="permissions-table">
+          <thead>
+            <tr>
+              <th>Permission</th>
+              <th>Why FillPro uses it</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>activeTab</strong></td>
+              <td>Lets FillPro fill fields on the page you are using when you click Fill Page.</td>
+            </tr>
+            <tr>
+              <td><strong>scripting</strong></td>
+              <td>Runs the fill logic on the current page.</td>
+            </tr>
+            <tr>
+              <td><strong>contextMenus</strong></td>
+              <td>Adds the Save current form as profile right-click option.</td>
+            </tr>
+            <tr>
+              <td><strong>storage</strong></td>
+              <td>Saves profiles, rules, uploads, and usage state locally.</td>
+            </tr>
+            <tr>
+              <td><strong>alarms</strong></td>
+              <td>Handles the optional 3-day reminder. No outside network use.</td>
+            </tr>
+          </tbody>
+        </table>
       </article>
-    </section>
-
-    <section class="boundary-card">
-      <div class="page-intro">
-        <p class="eyebrow">Permissions</p>
-        <h2>Permission scope stays narrow.</h2>
-      </div>
-      <table class="permissions-table">
-        <thead>
-          <tr>
-            <th>Permission</th>
-            <th>Why FillPro uses it</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>activeTab</strong></td>
-            <td>Required to fill form fields on the current page when you click Fill Page.</td>
-          </tr>
-          <tr>
-            <td><strong>scripting</strong></td>
-            <td>Required to run the form-filling logic on the current page.</td>
-          </tr>
-          <tr>
-            <td><strong>contextMenus</strong></td>
-            <td>Required to add the Save current form as profile right-click option.</td>
-          </tr>
-          <tr>
-            <td><strong>storage</strong></td>
-            <td>Required to save profiles, rules, uploads, and usage state locally.</td>
-          </tr>
-          <tr>
-            <td><strong>alarms</strong></td>
-            <td>Required to schedule the optional 3-day re-engagement reminder. No external network use.</td>
-          </tr>
-        </tbody>
-      </table>
     </section>
 
     <section class="boundary-card">
@@ -159,7 +150,7 @@
         <p class="eyebrow">Contact</p>
         <h2>Need a privacy answer?</h2>
       </div>
-      <p>Use the <a href="support.html#contact">support page contact form</a> and choose the Privacy topic. That opens a draft to the right inbox without publishing raw mailbox strings in the public page text.</p>
+      <p>Use the <a href="support.html#contact">support page contact form</a> and choose the Privacy topic. That opens an email draft to the right inbox. No hidden form system, no ticket maze.</p>
       <p class="small">FillPro is published by Stealthy Apps. Built by Karl.</p>
     </section>
   </main>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FillPro Changelog — Stealthy Apps</title>
-  <meta name="description" content="FillPro release notes — what shipped, privacy posture, and known browser limits.">
+  <meta name="description" content="FillPro release notes — what shipped, what improved, and what still has limits.">
   <link rel="canonical" href="https://stealthyapps.com/apps/fillpro/changelog.html">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; upgrade-insecure-requests">
@@ -38,7 +38,7 @@
         <div class="page-intro">
           <p class="eyebrow">Release Notes</p>
           <h1>FillPro Changelog</h1>
-          <p class="lead">A short release log for what shipped, what changed, and the limits users should know about.</p>
+          <p class="lead">Simple release notes. What shipped, what got better, and what still has limits.</p>
         </div>
       </div>
 
@@ -47,51 +47,55 @@
           <p class="eyebrow">Latest release</p>
           <h2>Version 1.0.0</h2>
         </div>
-        <p class="meta">April 26, 2026 | Launch edition</p>
-        <p>The first public FillPro release focuses on reusable profiles, local-first storage, smart rules, local upload matching, and clear unsupported states.</p>
+        <p class="meta">April 26, 2026 | First public release</p>
+        <p>Launch version. FillPro ships with reusable profiles, smart rules, local file matching, and clear limits instead of fake promises.</p>
       </article>
     </section>
 
-    <section class="release-grid">
-      <article class="release-card">
-        <p class="eyebrow">What shipped</p>
-        <h3>Core product flow</h3>
+    <section class="section-shell">
+      <article class="boundary-card">
+        <div class="page-intro">
+          <p class="eyebrow">Version 1.0.0</p>
+          <h2>What shipped in the launch build</h2>
+        </div>
+
+        <h3>Core flow</h3>
         <ul class="list-check">
-          <li>One-click Fill Page from the popup for normal accessible web forms.</li>
-          <li>On-page profile picker so filling can start without breaking focus.</li>
+          <li>One-click Fill Page from the popup for normal web forms.</li>
+          <li>On-page profile picker so you can fill without breaking focus.</li>
           <li>Custom fields and smart rules for awkward labels and site-specific matching.</li>
           <li>Local file upload matching for resume, CV, and cover-letter style inputs.</li>
         </ul>
-      </article>
 
-      <article class="release-card">
-        <p class="eyebrow">Trust posture</p>
-        <h3>Privacy and scope</h3>
+        <h3>Privacy from day one</h3>
         <ul class="list-check">
-          <li>Profile data stays local to the extension on the device.</li>
+          <li>Profile data stays local on your device.</li>
           <li>No broad production host permissions.</li>
           <li>Sensitive fields are intentionally skipped.</li>
-          <li>Optional feedback diagnostics are user-triggered and prepared locally.</li>
+          <li>Optional feedback diagnostics are only prepared when you ask for them.</li>
         </ul>
-      </article>
 
-      <article class="release-card">
-        <p class="eyebrow">User experience</p>
-        <h3>First-run experience</h3>
+        <h3>Small but important details</h3>
         <ul class="list-check">
-          <li>A lighter first-run path that pushes toward a real fill instead of a long tutorial.</li>
-          <li>Support pages written for practical troubleshooting and privacy guidance.</li>
-          <li>Free mode with no account required for core use.</li>
+          <li>A lighter first-run flow that gets you to a real fill faster.</li>
+          <li>Support and privacy pages written for actual use, not filler.</li>
+          <li>Free mode works without an account.</li>
         </ul>
       </article>
     </section>
 
     <section class="boundary-card">
       <div class="page-intro">
-        <p class="eyebrow">Known boundary</p>
-        <h2>Known browser and site limits.</h2>
+        <p class="eyebrow">Still not supported</p>
+        <h2>What FillPro will not try to fake.</h2>
       </div>
-      <p>FillPro does not bypass CAPTCHA, anti-bot systems, blocked login walls, cross-origin payment frames, or browser-native PDF viewers. If a page blocks access before a normal form is reachable, the extension reports that limit.</p>
+      <ul class="list-check">
+        <li>CAPTCHA, anti-bot checks, and verification walls</li>
+        <li>Cross-origin payment iframes</li>
+        <li>Browser-native PDF viewers</li>
+        <li>Pages that block access before a normal form is even reachable</li>
+      </ul>
+      <p>If a site blocks one of those paths, FillPro says so plainly instead of pretending it worked.</p>
     </section>
   </main>
 

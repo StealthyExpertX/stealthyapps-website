@@ -395,6 +395,15 @@ p {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.about-info-grid {
+  grid-template-columns: repeat(2, minmax(280px, 360px));
+  justify-content: center;
+}
+
+.about-info-grid .info-card {
+  text-align: center;
+}
+
 .plan-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

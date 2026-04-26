@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
     recipientNote.textContent = `${config.inboxLabel} selected.`;
     statusNode.dataset.state = 'idle';
     statusNode.textContent =
-      'This opens your default email app with a prefilled draft. Nothing is sent directly from this site.';
+      'This opens a prefilled draft in your default email app. Nothing gets sent from this site.';
   }
 
   topicField.addEventListener('change', updateTopicState);
