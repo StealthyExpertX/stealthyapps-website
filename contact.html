@@ -82,7 +82,7 @@
       <div class="page-intro">
         <p class="eyebrow">General contact</p>
         <h2>Send me a message.</h2>
-        <p>Name and email are required here so I know who to reply to. This site does not send the message itself. It opens a ready-to-send draft in your email app.</p>
+        <p>Name and email are required here so I know who to reply to. When the message is ready, you can continue with your default mail app, Gmail, Outlook, Yahoo, or copy everything manually.</p>
       </div>
 
       <form class="contact-form" data-contact-form data-contact-context="general" novalidate>
@@ -120,9 +120,21 @@
 
         <div class="contact-meta">
           <p class="helper" data-recipient-note></p>
-          <button class="button primary" type="submit">Open Email Draft</button>
+          <button class="button primary" type="submit">Choose Email App</button>
         </div>
-        <p class="small" data-contact-status aria-live="polite">This opens a prefilled draft in your default email app. Nothing gets sent from this site.</p>
+        <p class="small" data-contact-status aria-live="polite">Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.</p>
+
+        <div class="compose-panel" data-email-options hidden>
+          <p class="small compose-intro">If your default mail app does not open, use one of these options instead.</p>
+          <div class="compose-actions">
+            <a class="button primary" data-compose-link="default" href="#contact">Default Email App</a>
+            <a class="button" data-compose-link="gmail" href="#contact" target="_blank" rel="noopener noreferrer">Gmail</a>
+            <a class="button" data-compose-link="outlook" href="#contact" target="_blank" rel="noopener noreferrer">Outlook</a>
+            <a class="button" data-compose-link="yahoo" href="#contact" target="_blank" rel="noopener noreferrer">Yahoo</a>
+            <button class="button" type="button" data-compose-copy>Copy Email</button>
+          </div>
+          <p class="small compose-summary" data-compose-summary></p>
+        </div>
       </form>
 
       <p class="small">Need help with FillPro specifically? Use the <a href="apps/fillpro/support.html">FillPro support page</a> so your message lands in the product-specific support flow.</p>

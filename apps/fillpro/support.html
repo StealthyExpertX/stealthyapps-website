@@ -157,7 +157,7 @@
       <div class="page-intro">
         <p class="eyebrow">Contact</p>
         <h2>Tell me what happened.</h2>
-        <p>Use this form and it will open a draft in your email app with the right subject line so it lands in the right place.</p>
+        <p>Use this form and I will prepare the message for the right inbox. Then you can continue with your default mail app, Gmail, Outlook, Yahoo, or copy everything manually.</p>
       </div>
 
       <form class="contact-form" data-contact-form data-contact-context="support" novalidate>
@@ -196,9 +196,21 @@
 
         <div class="contact-meta">
           <p class="helper" data-recipient-note></p>
-          <button class="button primary" type="submit">Open Email Draft</button>
+          <button class="button primary" type="submit">Choose Email App</button>
         </div>
-        <p class="small" data-contact-status aria-live="polite">This opens a prefilled draft in your default email app. Nothing gets sent from this site.</p>
+        <p class="small" data-contact-status aria-live="polite">Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.</p>
+
+        <div class="compose-panel" data-email-options hidden>
+          <p class="small compose-intro">If your default mail app does not open, use one of these options instead.</p>
+          <div class="compose-actions">
+            <a class="button primary" data-compose-link="default" href="#contact">Default Email App</a>
+            <a class="button" data-compose-link="gmail" href="#contact" target="_blank" rel="noopener noreferrer">Gmail</a>
+            <a class="button" data-compose-link="outlook" href="#contact" target="_blank" rel="noopener noreferrer">Outlook</a>
+            <a class="button" data-compose-link="yahoo" href="#contact" target="_blank" rel="noopener noreferrer">Yahoo</a>
+            <button class="button" type="button" data-compose-copy>Copy Email</button>
+          </div>
+          <p class="small compose-summary" data-compose-summary></p>
+        </div>
       </form>
 
       <p class="small">Use the Privacy topic for data, storage, or billing-privacy questions. For the full plain-English version, see the <a href="privacy.html">FillPro Privacy Policy</a>.</p>

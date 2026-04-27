@@ -983,6 +983,35 @@ p {
   margin-top: 18px;
 }
 
+.compose-panel {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: calc(var(--radius) + 4px);
+  background: rgba(117, 216, 255, 0.06);
+}
+
+.compose-panel[hidden] {
+  display: none;
+}
+
+.compose-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.compose-panel .button {
+  flex: 0 0 auto;
+}
+
+.compose-intro,
+.compose-summary {
+  margin: 0;
+}
+
 .field-row {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }

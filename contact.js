@@ -11,13 +11,37 @@ const CONTACT_MAILBOXES = {
   },
 };
 
+const WEBMAIL_PROVIDERS = {
+  gmail: {
+    label: 'Gmail',
+    buildUrl: (compose) =>
+      `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(compose.to)}` +
+      `&su=${encodeURIComponent(compose.subject)}` +
+      `&body=${encodeURIComponent(compose.body)}`,
+  },
+  outlook: {
+    label: 'Outlook',
+    buildUrl: (compose) =>
+      `https://outlook.live.com/mail/0/deeplink/compose?to=${encodeURIComponent(compose.to)}` +
+      `&subject=${encodeURIComponent(compose.subject)}` +
+      `&body=${encodeURIComponent(compose.body)}`,
+  },
+  yahoo: {
+    label: 'Yahoo Mail',
+    buildUrl: (compose) =>
+      `https://compose.mail.yahoo.com/?to=${encodeURIComponent(compose.to)}` +
+      `&subject=${encodeURIComponent(compose.subject)}` +
+      `&body=${encodeURIComponent(compose.body)}`,
+  },
+};
+
 const CONTACT_CONTEXTS = {
   support: {
     subjectPrefix: 'FillPro',
     requireName: false,
     requireReplyEmail: false,
     idleMessage:
-      'This opens a prefilled draft in your default email app. Nothing gets sent from this site.',
+      'Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.',
     topics: {
       support: {
         label: 'Support',
@@ -61,7 +85,7 @@ const CONTACT_CONTEXTS = {
     requireName: true,
     requireReplyEmail: true,
     idleMessage:
-      'This opens a prefilled draft in your default email app. Nothing gets sent from this site.',
+      'Choose your email app after the form is ready. You can use your default mail app, Gmail, Outlook, Yahoo, or copy the prepared message.',
     topics: {
       general: {
         label: 'General',
@@ -117,6 +141,52 @@ function findReasonLabel(config, reasonValue) {
   return match ? match[1] : config.reasons[0][1];
 }
 
+function buildComposePayload(context, config, reasonLabel, name, replyEmail, message) {
+  const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
+  const subject = `${context.subjectPrefix} ${config.label}: ${reasonLabel}`;
+  const body = [
+    `Topic: ${config.label}`,
+    `Reason: ${reasonLabel}`,
+    `Name: ${name || 'Not provided'}`,
+    `Reply email: ${replyEmail || 'Use the sender address from this message'}`,
+    `Page: ${window.location.pathname}`,
+    '',
+    'Message:',
+    message,
+  ].join('\n');
+
+  return {
+    to: recipient,
+    subject,
+    body,
+    mailto:
+      `mailto:${recipient}?subject=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body.slice(0, 3200))}`,
+  };
+}
+
+function copyTextFallback(text) {
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.position = 'absolute';
+  field.style.left = '-9999px';
+  document.body.appendChild(field);
+  field.select();
+  const copied = document.execCommand('copy');
+  document.body.removeChild(field);
+  return copied;
+}
+
+async function copyComposeText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  return copyTextFallback(text);
+}
+
 function setStatus(statusNode, state, text) {
   statusNode.dataset.state = state;
   statusNode.textContent = text;
@@ -138,6 +208,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const messageField = form.querySelector('#contactMessage');
   const replyField = form.querySelector('#contactReply');
   const nameField = form.querySelector('#contactName');
+  const emailOptions = form.querySelector('[data-email-options]');
+  const composeSummary = form.querySelector('[data-compose-summary]');
+  const copyButton = form.querySelector('[data-compose-copy]');
+  let currentCompose = null;
 
   if (
     !topicField ||
@@ -151,7 +225,49 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  function hideEmailOptions() {
+    currentCompose = null;
+
+    if (emailOptions) {
+      emailOptions.hidden = true;
+    }
+
+    if (composeSummary) {
+      composeSummary.textContent = '';
+    }
+  }
+
+  function showEmailOptions(compose) {
+    if (!emailOptions) {
+      return;
+    }
+
+    currentCompose = compose;
+
+    emailOptions.querySelectorAll('[data-compose-link]').forEach((link) => {
+      const provider = link.dataset.composeLink;
+
+      if (provider === 'default') {
+        link.href = compose.mailto;
+        return;
+      }
+
+      if (WEBMAIL_PROVIDERS[provider]) {
+        link.href = WEBMAIL_PROVIDERS[provider].buildUrl(compose);
+      }
+    });
+
+    if (composeSummary) {
+      composeSummary.textContent =
+        `Prepared for ${compose.to}. Use the buttons below to open your default mail app, Gmail, Outlook, Yahoo, or copy the message.`;
+    }
+
+    emailOptions.hidden = false;
+  }
+
   function updateTopicState() {
+    hideEmailOptions();
+
     if (!topics[topicField.value]) {
       topicField.value = getDefaultTopicKey(topics);
     }
@@ -170,6 +286,45 @@ document.addEventListener('DOMContentLoaded', () => {
   topicField.addEventListener('change', updateTopicState);
   updateTopicState();
 
+  [reasonField, messageField, replyField, nameField].forEach((field) => {
+    field.addEventListener('input', () => {
+      if (!currentCompose) {
+        return;
+      }
+
+      hideEmailOptions();
+      setStatus(statusNode, 'idle', context.idleMessage);
+    });
+  });
+
+  if (copyButton) {
+    copyButton.addEventListener('click', async () => {
+      if (!currentCompose) {
+        setStatus(statusNode, 'error', 'Prepare the message first, then use copy if you need it.');
+        return;
+      }
+
+      const textToCopy = [
+        `To: ${currentCompose.to}`,
+        `Subject: ${currentCompose.subject}`,
+        '',
+        currentCompose.body,
+      ].join('\n');
+
+      try {
+        const copied = await copyComposeText(textToCopy);
+
+        if (!copied) {
+          throw new Error('Copy failed');
+        }
+
+        setStatus(statusNode, 'success', 'Email details copied. Paste them into any mail app if you prefer.');
+      } catch (error) {
+        setStatus(statusNode, 'error', 'Copy failed here. Use the Gmail, Outlook, Yahoo, or default mail app buttons instead.');
+      }
+    });
+  }
+
   form.addEventListener('submit', (event) => {
     event.preventDefault();
 
@@ -181,7 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const name = nameField.value.trim();
 
     if (context.requireName && !name) {
-      setStatus(statusNode, 'error', 'Add your name before opening the draft.');
+      setStatus(statusNode, 'error', 'Add your name before choosing an email app.');
       nameField.focus();
       return;
     }
@@ -190,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Add your email before opening the draft.',
+        'Add your email before choosing an email app.',
       );
       replyField.focus();
       return;
@@ -200,7 +355,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Use a valid email address before opening the draft.',
+        'Use a valid email address before choosing an email app.',
       );
       replyField.focus();
       return;
@@ -210,33 +365,27 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Pick a topic, pick a reason, and write a short message before opening the draft.',
+        'Pick a topic, pick a reason, and write a short message before choosing an email app.',
       );
       return;
     }
 
-    const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
     const reasonLabel = findReasonLabel(config, reason);
-    const subject = `${context.subjectPrefix} ${config.label}: ${reasonLabel}`;
-    const body = [
-      `Topic: ${config.label}`,
-      `Reason: ${reasonLabel}`,
-      `Name: ${name || 'Not provided'}`,
-      `Reply email: ${replyEmail || 'Use the sender address from this draft'}`,
-      `Page: ${window.location.pathname}`,
-      '',
-      'Message:',
+    const compose = buildComposePayload(
+      context,
+      config,
+      reasonLabel,
+      name,
+      replyEmail,
       message,
-    ].join('\n');
+    );
 
-    window.location.href =
-      `mailto:${recipient}?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body.slice(0, 3200))}`;
+    showEmailOptions(compose);
 
     setStatus(
       statusNode,
       'success',
-      'Your email app should open with a ready-to-send draft.',
+      'Choose your email app below. Default mail app, Gmail, Outlook, Yahoo, and copy fallback are ready.',
     );
   });
 });
