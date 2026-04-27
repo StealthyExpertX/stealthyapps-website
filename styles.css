@@ -48,7 +48,7 @@ body {
     linear-gradient(180deg, rgba(16, 43, 52, 0.92) 0%, rgba(7, 18, 23, 0.38) 38%, transparent 72%),
     linear-gradient(180deg, #071217 0%, #08161d 42%, #061015 100%);
   color: var(--text);
-  font: 16px/1.62 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 16px/1.68 "Segoe UI Variable Text", "Segoe UI", "Avenir Next", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0;
   overflow-x: clip;
 }
@@ -205,11 +205,13 @@ main,
   font-size: 18px;
   line-height: 1.1;
   font-weight: 800;
+  font-family: "Segoe UI Variable Display", "Avenir Next", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .brand-subtitle {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.3;
 }
 
 .nav-links {
@@ -429,8 +431,8 @@ main {
 .eyebrow {
   margin: 0;
   color: var(--brand);
-  font-size: 12px;
-  line-height: 1.25;
+  font-size: 13px;
+  line-height: 1.3;
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
@@ -449,24 +451,26 @@ h2,
 h3 {
   color: var(--text);
   font-weight: 800;
+  font-family: "Segoe UI Variable Display", "Avenir Next", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 h1 {
   max-width: 720px;
   font-size: 54px;
-  line-height: 0.98;
+  line-height: 1.02;
   text-wrap: balance;
 }
 
 h2 {
   font-size: 34px;
-  line-height: 1.12;
+  line-height: 1.16;
   text-wrap: balance;
 }
 
 h3 {
-  font-size: 20px;
-  line-height: 1.2;
+  font-size: 21px;
+  line-height: 1.24;
+  text-wrap: balance;
 }
 
 p {
@@ -476,8 +480,8 @@ p {
 .lead {
   max-width: 62ch;
   color: var(--soft);
-  font-size: 19px;
-  line-height: 1.72;
+  font-size: 20px;
+  line-height: 1.7;
 }
 
 .actions,
@@ -615,7 +619,7 @@ p {
 
 .preview-badge,
 .release-badge {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
 }
 
@@ -823,6 +827,12 @@ p {
   text-align: center;
 }
 
+.about-info-grid .info-card p {
+  max-width: 34ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .plan-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -848,7 +858,7 @@ p {
   border-radius: var(--radius);
   background: rgba(15, 118, 110, 0.12);
   color: var(--brand-dark);
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 900;
 }
 
@@ -1002,9 +1012,22 @@ p {
   font-size: 15px;
 }
 
+.policy-card {
+  align-content: start;
+}
+
+.policy-card p,
+.policy-card .list-check {
+  max-width: 62ch;
+}
+
+.policy-card h3 {
+  max-width: 18ch;
+}
+
 .permissions-table th,
 .permissions-table td {
-  padding: 12px 0;
+  padding: 14px 0;
   border-top: 1px solid var(--line);
   text-align: left;
   vertical-align: top;
@@ -1012,7 +1035,7 @@ p {
 
 .permissions-table th {
   color: var(--soft);
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .permissions-table td:first-child,
@@ -1029,6 +1052,32 @@ p {
   color: var(--soft);
 }
 
+.permissions-table tbody tr {
+  transition: transform 220ms var(--ease-out);
+}
+
+.permissions-table tbody td {
+  background-image: linear-gradient(110deg, rgba(157, 231, 215, 0) 0%, rgba(157, 231, 215, 0.1) 48%, rgba(117, 216, 255, 0.08) 58%, rgba(157, 231, 215, 0) 100%);
+  background-size: 220% 100%;
+  background-position: 140% 0;
+  transition:
+    background-position 420ms var(--ease-out),
+    border-color 220ms ease,
+    color 220ms ease;
+}
+
+@media (hover: hover) {
+  .permissions-table tbody tr:hover td {
+    background-position: 0 0;
+    border-top-color: rgba(157, 231, 215, 0.28);
+    color: var(--soft);
+  }
+
+  .permissions-table tbody tr:hover strong {
+    color: var(--text);
+  }
+}
+
 .meta,
 .small,
 .helper {
@@ -1037,7 +1086,7 @@ p {
 }
 
 .small {
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .contact-card {
@@ -1137,7 +1186,7 @@ p {
 
 .contact-fieldset legend {
   color: var(--soft);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
 }
 
@@ -1147,7 +1196,7 @@ p {
 
 .field label {
   color: var(--soft);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 800;
 }
 
@@ -1273,9 +1322,21 @@ footer {
 
 .footer-inner {
   flex-wrap: wrap;
+  align-items: flex-start;
   padding: 24px 0 40px;
   color: var(--muted);
   font-size: 14px;
+}
+
+.footer-inner > :first-child {
+  flex: 0 1 28ch;
+  line-height: 1.45;
+  text-wrap: balance;
+}
+
+.footer-inner > :last-child {
+  flex: 1 1 320px;
+  text-align: right;
 }
 
 .footer-inner a {
@@ -1450,11 +1511,15 @@ footer {
     padding-top: 0;
     border-top: 0;
   }
+
+  .footer-inner > :last-child {
+    text-align: left;
+  }
 }
 
 @media (max-width: 560px) {
   body {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   body::before,
@@ -1518,6 +1583,11 @@ footer {
     padding: 7px 6px;
     text-align: center;
     font-size: 13px;
+  }
+
+  .policy-card h3 {
+    max-width: 15ch;
+    font-size: 19px;
   }
 
   .preview-header,

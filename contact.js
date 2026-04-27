@@ -36,6 +36,8 @@ const WEBMAIL_PROVIDERS = {
 };
 
 const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
+const DIRECT_SEND_CONSENT_NOTE =
+  'Sender confirmed the on-page direct-send notice, agreed not to send sensitive information, and accepted responsibility for submitted content.';
 
 const CONTACT_CONTEXTS = {
   support: {
@@ -200,6 +202,9 @@ function buildDirectSendPayload(
       page: window.location.href,
       message,
       details: compose.body,
+      'Submission method': 'Direct send from site form',
+      'Consent record': DIRECT_SEND_CONSENT_NOTE,
+      'Consent recorded at': new Date().toISOString(),
       _subject: compose.subject,
       _replyto: replyEmail,
       _template: 'table',

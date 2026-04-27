@@ -10,10 +10,10 @@
   <meta name="theme-color" content="#0b1a23">
   <link rel="canonical" href="https://stealthyapps.com/apps/fillpro/privacy.html">
   <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=ux-audit-v8">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="FillPro Privacy Policy">
+  <meta property="og:title" content="FillPro Privacy — Stealthy Apps">
   <meta property="og:description" content="Local-only data, no background collection, narrow permissions.">
   <meta property="og:url" content="https://stealthyapps.com/apps/fillpro/privacy.html">
   <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
@@ -53,17 +53,17 @@
     <section class="page-hero">
       <div class="surface page-hero-copy">
         <div class="page-intro">
-          <p class="eyebrow">Privacy Policy</p>
+          <p class="eyebrow">Privacy</p>
           <h1>FillPro Privacy Policy</h1>
-          <p class="lead">Short version: what you save in FillPro stays in the extension on your device. I do not sell it, upload it, or quietly collect form values behind your back.</p>
+          <p class="lead">FillPro keeps saved data in the extension on your device. I do not sell it, upload it, or collect form values in the background.</p>
         </div>
         <p class="meta">Effective: April 26, 2026 · Last updated: April 27, 2026</p>
       </div>
 
       <article class="boundary-card mini-card">
         <div class="page-intro">
-          <p class="eyebrow">Short version</p>
-          <h2>What actually matters.</h2>
+          <p class="eyebrow">At a glance</p>
+          <h2>Local by default.</h2>
         </div>
         <ul class="list-check">
           <li>Your profiles, rules, and uploads stay on your device.</li>
@@ -74,43 +74,59 @@
     </section>
 
     <section class="section-shell">
+      <div class="section-heading">
+        <p class="eyebrow">How data works here</p>
+        <h2>The privacy boundary, clearly.</h2>
+        <p>What FillPro keeps on your device, what it refuses to touch, and the small number of cases where anything leaves your browser.</p>
+      </div>
+
+      <div class="policy-grid">
+        <article class="policy-card">
+          <h3>What gets saved</h3>
+          <ul class="list-check">
+            <li><strong>Profile data:</strong> names, email addresses, phone numbers, and other fields you enter into profiles.</li>
+            <li><strong>Captured form data:</strong> values saved when you choose Save current form.</li>
+            <li><strong>Attached uploads:</strong> local file copies used for matching upload inputs you choose to fill.</li>
+            <li><strong>Smart rules:</strong> custom match patterns and values for awkward field names.</li>
+            <li><strong>Usage counters:</strong> free-tier profile count state stored locally.</li>
+          </ul>
+        </article>
+
+        <article class="policy-card">
+          <h3>What FillPro will not save or fill</h3>
+          <p>Passwords, payment card numbers, CVCs, Social Security numbers, tax IDs, government identifiers, and one-time codes are off-limits by design. FillPro is not trying to be a password manager or a vault for sensitive data.</p>
+        </article>
+
+        <article class="policy-card">
+          <h3>What leaves your browser</h3>
+          <p>Your saved data does not leave your device. The only exceptions are:</p>
+          <ul class="list-check">
+            <li><strong>Billing:</strong> if you upgrade to Pro, ExtensionPay and Stripe handle the payment. I never see your card details.</li>
+            <li><strong>Support:</strong> if you use the support form, you can either send the message directly from the site or prepare it in your own mail app or webmail composer.</li>
+          </ul>
+        </article>
+
+        <article class="policy-card">
+          <h3>Deleting your data</h3>
+          <p>Your saved profiles, rules, and uploads stay on your device until you remove them. I cannot inspect them or delete them remotely because that data does not sync to me.</p>
+          <ul class="list-check">
+            <li>Delete profiles inside FillPro.</li>
+            <li>Uninstall the extension to remove extension-managed storage.</li>
+            <li>Delete exported files separately if you saved them outside the extension.</li>
+          </ul>
+        </article>
+
+        <article class="policy-card">
+          <h3>Optional diagnostics</h3>
+          <p>If you use the feedback flow, FillPro can prepare an email draft with optional diagnostics you choose to include. That may contain page title, site path, visible field metadata, framework hints, browser details, and extension version. It does not include field values.</p>
+        </article>
+      </div>
+
       <article class="boundary-card">
         <div class="page-intro">
-          <p class="eyebrow">How data works here</p>
-          <h2>What FillPro stores, skips, and sends.</h2>
+          <p class="eyebrow">Permissions</p>
+          <h2>Why FillPro asks for each one.</h2>
         </div>
-
-        <h3>What gets saved</h3>
-        <ul class="list-check">
-          <li><strong>Profile data:</strong> names, email addresses, phone numbers, and other fields you enter into profiles.</li>
-          <li><strong>Captured form data:</strong> values saved when you choose Save current form.</li>
-          <li><strong>Attached uploads:</strong> local file copies used for matching upload inputs you choose to fill.</li>
-          <li><strong>Smart rules:</strong> custom match patterns and values for awkward field names.</li>
-          <li><strong>Usage counters:</strong> free-tier profile count state stored locally.</li>
-        </ul>
-
-        <h3>What FillPro will not save or fill</h3>
-        <p>Passwords, payment card numbers, CVCs, Social Security numbers, tax IDs, government identifiers, and one-time codes are off-limits by design. FillPro is not trying to be a password manager or a vault for sensitive data.</p>
-
-        <h3>What leaves your browser</h3>
-        <p>Your saved data does not leave your device. The only exceptions are:</p>
-        <ul class="list-check">
-          <li><strong>Billing:</strong> if you upgrade to Pro, ExtensionPay and Stripe handle the payment. I never see your card details.</li>
-          <li><strong>Support:</strong> if you use the support form, you can either send the message directly from the site or prepare it in your own mail app or webmail composer. Direct send delivers it to my inbox without opening your email app.</li>
-        </ul>
-
-        <h3>Deleting your data</h3>
-        <p>Your saved profiles, rules, and uploads stay on your device until you remove them. I cannot inspect them or delete them remotely because that data does not sync to me.</p>
-        <ul class="list-check">
-          <li>Delete profiles inside FillPro.</li>
-          <li>Uninstall the extension to remove extension-managed storage.</li>
-          <li>Delete exported files separately if you saved them outside the extension.</li>
-        </ul>
-
-        <h3>Optional diagnostics</h3>
-        <p>If you use the feedback flow, FillPro can prepare an email draft with optional diagnostics you choose to include. That may contain page title, site path, visible field metadata, framework hints, browser details, and extension version. It does not include field values.</p>
-
-        <h3>Permissions</h3>
         <p>FillPro asks for a small set of permissions because that is all it needs to work.</p>
         <table class="permissions-table">
           <thead>
@@ -150,7 +166,7 @@
         <p class="eyebrow">Contact</p>
         <h2>Need a privacy answer?</h2>
       </div>
-      <p>Use the <a href="support.html#contact">support page contact form</a> and choose the Privacy topic. You can send directly to the right inbox or use your default mail app, Gmail, Outlook, Yahoo, and copy options. If your question is about deleting FillPro data, I can explain the steps, but I cannot remove anything remotely because the extension keeps it on your device.</p>
+      <p>Use the <a href="support.html#contact">support page contact form</a> and choose the Privacy topic. I can explain the policy and local deletion steps, but I cannot remove anything remotely because FillPro keeps that data on your device.</p>
       <p class="small">FillPro is published by Stealthy Apps. Built by Karl.</p>
     </section>
   </main>

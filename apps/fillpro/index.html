@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FillPro — Local-first autofill</title>
-  <meta name="description" content="FillPro is a private, local-only form autofill extension for Chrome, Edge, Firefox, Brave, Opera, Vivaldi, and Arc. No tracking. No accounts. Skips passwords, payment fields, and one-time codes by design. Free tier with 3 profiles. Pro from $3.99/month with a 7-day free trial.">
-  <meta name="keywords" content="form autofill, chrome autofill, firefox autofill, edge autofill, private autofill, fillpro, lastpass alternative, dashlane alternative, indie autofill extension, no tracking autofill, local-only autofill">
+  <meta name="description" content="FillPro is a private, local-only form autofill extension for Chrome. No tracking. No accounts. Skips passwords, payment fields, and one-time codes by design. Free tier with 3 profiles. Pro from $3.99/month with a 7-day free trial.">
+  <meta name="keywords" content="form autofill, chrome autofill, chrome extension, private autofill, fillpro, lastpass alternative, dashlane alternative, indie autofill extension, no tracking autofill, local-only autofill">
   <meta name="referrer" content="no-referrer">
   <meta name="theme-color" content="#0b1a23">
   <link rel="canonical" href="https://stealthyapps.com/apps/fillpro/">
   <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles.css?v=ux-audit-v8">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
@@ -20,7 +20,7 @@
   <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FillPro — Local-first autofill">
-  <meta name="twitter:description" content="Local-only autofill for Chrome, Edge, and Firefox. No tracking, no accounts.">
+  <meta name="twitter:description" content="Local-only autofill for Chrome. No tracking, no accounts.">
   <meta name="twitter:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
 
   <script type="application/ld+json">
@@ -31,10 +31,10 @@
         "@type": "SoftwareApplication",
         "name": "FillPro",
         "applicationCategory": "BrowserApplication",
-        "operatingSystem": "Chrome, Microsoft Edge, Firefox, Brave, Opera, Vivaldi, Arc",
+        "operatingSystem": "Chrome",
         "url": "https://stealthyapps.com/apps/fillpro/",
         "image": "https://stealthyapps.com/assets/fillpro-logo.svg",
-        "description": "Private, local-only form autofill for Chrome, Edge, Firefox, and other Chromium browsers. Skips passwords and payment fields by design.",
+        "description": "Private, local-only form autofill for Chrome. Skips passwords and payment fields by design.",
         "publisher": { "@type": "Organization", "name": "Stealthy Apps" },
         "author": { "@type": "Person", "name": "Karl" },
         "offers": [
@@ -66,8 +66,8 @@
           },
           {
             "@type": "Question",
-            "name": "Which browsers does FillPro support?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Chrome, Microsoft Edge, Firefox, Brave, Opera, Vivaldi, and Arc. Anything Chromium-based works from the Chrome Web Store build. Firefox uses a separate Add-ons listing." }
+            "name": "How is FillPro being released?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Chrome first. I only list support I can stand behind, and the public Chrome install link will appear on the site when it is live." }
           },
           {
             "@type": "Question",
@@ -120,10 +120,10 @@
         </div>
         <div class="actions">
           <a class="button primary" href="#features">See features</a>
-          <a class="button" href="#platforms">Browser availability</a>
+          <a class="button" href="#availability">Availability</a>
           <a class="button" href="#pricing">Pricing</a>
         </div>
-        <p class="small">Free includes 3 saved profiles. Public store links will appear here as each browser listing goes live.</p>
+        <p class="small">Free includes 3 saved profiles. The Chrome Web Store install link will appear here when the listing is live.</p>
       </div>
 
       <article class="boundary-card mini-card">
@@ -172,11 +172,11 @@
       </div>
     </section>
 
-    <section id="platforms" class="section-shell">
+    <section id="availability" class="section-shell">
       <div class="section-heading">
-        <p class="eyebrow">Supported browsers</p>
-        <h2>Browser rollout and listing status.</h2>
-        <p>Anything Chromium-based can use the Chrome build once the public listing is live. Firefox gets a native build with the same local-first approach.</p>
+        <p class="eyebrow">Availability</p>
+        <h2>Chrome first.</h2>
+        <p>FillPro is being released for Chrome first. I would rather support one browser properly than claim a bigger rollout before I can stand behind it.</p>
       </div>
       <div class="info-grid">
         <article class="info-card">
@@ -185,18 +185,9 @@
           <p class="meta">Chrome listing in progress.</p>
         </article>
         <article class="info-card">
-          <h3>Microsoft Edge</h3>
-          <p>The Edge build follows the same product surface and release notes. Native Edge Add-ons publishing comes after the main Chrome listing.</p>
-          <p class="meta">Edge Add-ons listing planned next.</p>
-        </article>
-        <article class="info-card">
-          <h3>Firefox</h3>
-          <p>Native Firefox build with the same local-only position and the same boundaries around sensitive fields.</p>
-          <p class="meta">Firefox Add-ons listing is still being finalized.</p>
-        </article>
-        <article class="info-card">
-          <h3>Brave, Opera, Vivaldi, Arc</h3>
-          <p>All Chromium-based. Once the Chrome listing is live, these browsers can use that same build.</p>
+          <h3>Release approach</h3>
+          <p>I keep support claims narrow on purpose. If it is listed here, it is something I can actually support right now.</p>
+          <p class="meta">Chrome first. Clear support boundaries.</p>
         </article>
       </div>
     </section>
@@ -205,7 +196,7 @@
       <div class="section-heading">
         <p class="eyebrow">Pricing</p>
         <h2>Useful free. Paid only if you need more.</h2>
-        <p>Try Pro free for 7 days with no card required. Free is meant to be genuinely useful. Pro is for people who need more room or want to support ongoing work. Pricing is based on the time it saves, and the paid tier helps keep FillPro improving without making the free version frustrating.</p>
+        <p>Try Pro free for 7 days with no card required. Free is meant to be genuinely useful. Pro is for people who need more room, and it helps fund continued work without turning the free version into a nuisance.</p>
       </div>
       <div class="plan-grid">
         <article class="feature-card">
@@ -229,7 +220,7 @@
             <li>Priority support</li>
             <li>Everything in Free</li>
           </ul>
-          <p class="small">Stripe handles billing through ExtensionPay. I never see your card. Paid upgrades help keep FillPro improving and support the rest of the work behind Stealthy Apps.</p>
+          <p class="small">Stripe handles billing through ExtensionPay. I never see your card. Pro helps fund maintenance and the rest of Stealthy Apps without changing how the free version works.</p>
         </article>
       </div>
     </section>
