@@ -157,24 +157,24 @@
       <div class="page-intro">
         <p class="eyebrow">Contact</p>
         <h2>Tell me what happened.</h2>
-        <p>Use this form and I will route it to the right inbox. You can send it directly from this site or continue with your default mail app, Gmail, Outlook, Yahoo, or copy everything manually.</p>
+        <p>Use this form for FillPro help, billing questions, or privacy requests. Tell me what happened, then choose whether to send it directly from this page or through your own email app.</p>
       </div>
 
       <form class="contact-form" data-contact-form data-contact-context="support" novalidate>
         <fieldset class="field-row contact-fieldset">
-          <legend>Contact details</legend>
+          <legend>Your details</legend>
           <div class="field">
             <label for="contactName">Name</label>
             <input id="contactName" name="contactName" type="text" autocomplete="name" placeholder="Your name">
           </div>
           <div class="field">
-            <label for="contactReply">Reply email</label>
+            <label for="contactReply">Email for replies</label>
             <input id="contactReply" name="contactReply" type="email" autocomplete="email" placeholder="you@example.com">
           </div>
         </fieldset>
 
         <fieldset class="field-row contact-fieldset">
-          <legend>Topic and reason</legend>
+          <legend>About your message</legend>
           <div class="field">
             <label for="contactTopic">Topic</label>
             <select id="contactTopic" name="contactTopic" required>
@@ -200,12 +200,12 @@
         </div>
 
         <div class="direct-panel">
-          <p class="small"><strong>Direct send notice:</strong> Send Directly delivers this message to the selected FillPro or Stealthy Apps inbox from this site instead of opening your email client.</p>
+          <p class="small"><strong>Direct send notice:</strong> Send Directly sends this message to the right FillPro inbox from this page. It does not open your email app.</p>
           <label class="consent-check" for="contactDirectConsent">
             <input id="contactDirectConsent" name="contactDirectConsent" type="checkbox" data-direct-consent>
-            <span>I understand this sends my message directly to Stealthy Apps rather than through my own email app, and I will not include passwords, payment card numbers, government IDs, or other highly sensitive information.</span>
+            <span>I understand this sends my message directly to Stealthy Apps for FillPro support, and I will not include passwords, payment card numbers, government IDs, or other highly sensitive information.</span>
           </label>
-          <p class="small">If you would rather keep control in your own mail app, use Choose Email App instead.</p>
+          <p class="small">If you would rather send it yourself, use Choose Email App.</p>
         </div>
 
         <div class="contact-meta">
@@ -215,10 +215,10 @@
             <button class="button" type="submit" data-contact-action="compose">Choose Email App</button>
           </div>
         </div>
-        <p class="small" data-contact-status aria-live="polite">Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.</p>
+        <p class="small" data-contact-status aria-live="polite">Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.</p>
 
         <div class="compose-panel" data-email-options hidden>
-          <p class="small compose-intro">If you would rather use your own email app instead of direct send, use one of these options.</p>
+          <p class="small compose-intro">Prefer to send it yourself? Use one of these options.</p>
           <div class="compose-actions">
             <a class="button primary" data-compose-link="default" href="#contact">Default Email App</a>
             <a class="button" data-compose-link="gmail" href="#contact" target="_blank" rel="noopener noreferrer">Gmail</a>

@@ -57,11 +57,11 @@
         <div class="page-intro">
           <p class="eyebrow">Contact</p>
           <h1>Get in touch.</h1>
-          <p class="lead">Use this page for general questions, tool ideas, feedback, privacy requests, or business inquiries. If you need help with FillPro itself, use the FillPro support page so you can describe what happened there.</p>
+          <p class="lead">Use this page for general questions, tool ideas, feedback, privacy requests, or business inquiries. If you are looking for a specific product, start on the Apps page and open that product from there.</p>
         </div>
         <div class="actions">
           <a class="button primary" href="#contact">Open Contact Form</a>
-          <a class="button" href="apps/fillpro/support.html">FillPro Support</a>
+          <a class="button" href="/#apps">View Apps</a>
         </div>
       </div>
 
@@ -82,12 +82,12 @@
       <div class="page-intro">
         <p class="eyebrow">General contact</p>
         <h2>Send me a message.</h2>
-        <p>Name and email are required here so I know who to reply to. When the message is ready, you can send it directly from this site or use your default mail app, Gmail, Outlook, Yahoo, or copy everything manually.</p>
+        <p>Name and email help me reply. Then choose whether you want to send the message directly from this page or through your own email app.</p>
       </div>
 
       <form class="contact-form" data-contact-form data-contact-context="general" novalidate>
         <fieldset class="field-row contact-fieldset">
-          <legend>Contact details</legend>
+          <legend>Your details</legend>
           <div class="field">
             <label for="contactName">Name</label>
             <input id="contactName" name="contactName" type="text" autocomplete="name" placeholder="Your name" required>
@@ -99,7 +99,7 @@
         </fieldset>
 
         <fieldset class="field-row contact-fieldset">
-          <legend>Topic and reason</legend>
+          <legend>About your message</legend>
           <div class="field">
             <label for="contactTopic">Topic</label>
             <select id="contactTopic" name="contactTopic" required>
@@ -124,12 +124,12 @@
         </div>
 
         <div class="direct-panel">
-          <p class="small"><strong>Direct send notice:</strong> Send Directly delivers this message to the selected Stealthy Apps inbox from this site instead of opening your email client.</p>
+          <p class="small"><strong>Direct send notice:</strong> Send Directly sends this message to my inbox from this page. It does not open your email app.</p>
           <label class="consent-check" for="contactDirectConsent">
             <input id="contactDirectConsent" name="contactDirectConsent" type="checkbox" data-direct-consent>
-            <span>I understand this sends my message directly to Stealthy Apps rather than through my own email app, and I will not include passwords, payment card numbers, government IDs, or other highly sensitive information.</span>
+            <span>I understand this sends my message directly to Stealthy Apps, and I will not include passwords, payment card numbers, government IDs, or other highly sensitive information.</span>
           </label>
-          <p class="small">Prefer to stay in your own mail app? Use Choose Email App instead.</p>
+          <p class="small">If you would rather send it yourself, use Choose Email App.</p>
         </div>
 
         <div class="contact-meta">
@@ -139,10 +139,10 @@
             <button class="button" type="submit" data-contact-action="compose">Choose Email App</button>
           </div>
         </div>
-        <p class="small" data-contact-status aria-live="polite">Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.</p>
+        <p class="small" data-contact-status aria-live="polite">Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.</p>
 
         <div class="compose-panel" data-email-options hidden>
-          <p class="small compose-intro">If you would rather use your own email app instead of direct send, use one of these options.</p>
+          <p class="small compose-intro">Prefer to send it yourself? Use one of these options.</p>
           <div class="compose-actions">
             <a class="button primary" data-compose-link="default" href="#contact">Default Email App</a>
             <a class="button" data-compose-link="gmail" href="#contact" target="_blank" rel="noopener noreferrer">Gmail</a>
@@ -154,7 +154,7 @@
         </div>
       </form>
 
-      <p class="small">Need help with FillPro specifically? Use the <a href="apps/fillpro/support.html">FillPro support page</a> so your message lands in the product-specific support flow.</p>
+      <p class="small">Looking for product-specific help? Start on the <a href="/#apps">Apps page</a> and open the product page you need.</p>
     </section>
   </main>
 

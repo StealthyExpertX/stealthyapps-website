@@ -43,12 +43,13 @@ const CONTACT_CONTEXTS = {
     requireName: false,
     requireReplyEmail: false,
     idleMessage:
-      'Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.',
+      'Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.',
     topics: {
       support: {
         label: 'Support',
         recipient: 'support',
         inboxLabel: 'FillPro support inbox',
+        routeNote: 'This goes straight to my FillPro support inbox.',
         reasons: [
           ['site_issue', 'A site did not fill correctly'],
           ['wrong_fill', 'The wrong field was filled'],
@@ -61,6 +62,7 @@ const CONTACT_CONTEXTS = {
         label: 'Billing / Pro',
         recipient: 'support',
         inboxLabel: 'FillPro billing inbox',
+        routeNote: 'This goes straight to my FillPro billing inbox.',
         reasons: [
           ['pro_access', 'Pro access or upgrade problem'],
           ['restore', 'Restore purchase or subscription'],
@@ -72,6 +74,7 @@ const CONTACT_CONTEXTS = {
         label: 'Privacy',
         recipient: 'privacy',
         inboxLabel: 'FillPro privacy inbox',
+        routeNote: 'This goes straight to my privacy inbox.',
         reasons: [
           ['data_question', 'Question about what stays local'],
           ['local_clear', 'How do I clear local data?'],
@@ -87,12 +90,13 @@ const CONTACT_CONTEXTS = {
     requireName: true,
     requireReplyEmail: true,
     idleMessage:
-      'Send directly from this site or choose your email app after the form is ready. Direct send goes straight to the selected inbox instead of opening your mail app.',
+      'Choose how you want to send this. Send Directly stays on this page. Choose Email App opens your mail app or webmail.',
     topics: {
       general: {
         label: 'General',
         recipient: 'support',
         inboxLabel: 'Stealthy Apps inbox',
+        routeNote: 'This goes straight to my general inbox.',
         reasons: [
           ['question', 'General question'],
           ['idea', 'Tool or app idea'],
@@ -105,6 +109,7 @@ const CONTACT_CONTEXTS = {
         label: 'Privacy',
         recipient: 'privacy',
         inboxLabel: 'Stealthy Apps privacy inbox',
+        routeNote: 'This goes straight to my privacy inbox.',
         reasons: [
           ['privacy_question', 'Privacy question'],
           ['data_request', 'Data or deletion request'],
@@ -327,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (composeSummary) {
-      composeSummary.textContent = `Prepared for ${compose.to}. Use the buttons below if you prefer your own email app instead of direct site delivery.`;
+      composeSummary.textContent = `Ready for ${compose.to}. Use any option below if you would rather send it through your own email app.`;
     }
 
     emailOptions.hidden = false;
@@ -355,7 +360,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const config = getTopicConfig(topics, topicField.value);
     reasonField.innerHTML = buildReasonOptions(config);
     reasonField.value = config.reasons[0][0];
-    recipientNote.textContent = `${config.inboxLabel} selected.`;
+    recipientNote.textContent =
+      config.routeNote || `This goes to ${config.inboxLabel}.`;
     setStatus(statusNode, 'idle', context.idleMessage);
   }
 
@@ -482,7 +488,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    if (requestedAction === 'direct' && directConsentField && !directConsentField.checked) {
+    if (
+      requestedAction === 'direct' &&
+      directConsentField &&
+      !directConsentField.checked
+    ) {
       setStatus(
         statusNode,
         'error',
@@ -508,7 +518,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'success',
-        'Choose your email app below. Default mail app, Gmail, Outlook, Yahoo, and copy fallback are ready.',
+        'Your message is ready. Pick the email option you want below.',
       );
       return;
     }
