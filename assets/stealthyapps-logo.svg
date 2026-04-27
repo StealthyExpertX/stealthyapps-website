@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Stealthy Apps logo">
+  <defs>
+    <linearGradient id="bg" x1="146" y1="118" x2="884" y2="918" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#133843" />
+      <stop offset="0.52" stop-color="#0d2231" />
+      <stop offset="1" stop-color="#071217" />
+    </linearGradient>
+    <linearGradient id="mark" x1="290" y1="248" x2="760" y2="784" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f7fffd" />
+      <stop offset="0.48" stop-color="#9de7d7" />
+      <stop offset="1" stop-color="#75d8ff" />
+    </linearGradient>
+    <filter id="shadow" x="154" y="124" width="716" height="784" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="30" stdDeviation="34" flood-color="#020617" flood-opacity="0.34" />
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)" />
+  <path d="M132 724c115 84 249 126 401 126 146 0 278-42 391-123v132c0 35-29 64-64 64H164c-35 0-64-29-64-64V730l32-6Z" fill="#041d26" opacity="0.4" />
+
+  <g filter="url(#shadow)">
+    <rect x="214" y="170" width="596" height="684" rx="176" fill="#081723" stroke="rgba(157, 231, 215, 0.16)" stroke-width="10" />
+    <circle cx="674" cy="300" r="118" fill="#9de7d7" opacity="0.08" />
+    <g fill="url(#mark)">
+      <rect x="288" y="278" width="448" height="128" rx="64" />
+      <rect x="288" y="278" width="128" height="300" rx="64" />
+      <rect x="288" y="618" width="448" height="128" rx="64" />
+      <rect x="608" y="446" width="128" height="300" rx="64" />
+    </g>
+    <rect x="492" y="324" width="48" height="354" rx="24" fill="#081723" />
+    <rect x="642" y="296" width="46" height="248" rx="23" fill="#f7fffd" opacity="0.18" />
+  </g>
+</svg>

@@ -36,4 +36,5 @@ Stealthy Apps is a personal portfolio for focused software projects. FillPro is 
 
 ## Contact
 
-- Email: via the contact form on https://stealthyapps.com/apps/fillpro/support.html#contact
+- General contact: https://stealthyapps.com/contact.html
+- FillPro support: https://stealthyapps.com/apps/fillpro/support.html#contact
