@@ -10,6 +10,28 @@
 
   var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
   var finePointerQuery = window.matchMedia('(pointer: fine)');
+  var coarsePointerQuery = window.matchMedia('(pointer: coarse)');
+
+  function syncPointerClass() {
+    root.classList.toggle(
+      'coarse-pointer',
+      coarsePointerQuery.matches && !finePointerQuery.matches,
+    );
+  }
+
+  syncPointerClass();
+
+  if (typeof coarsePointerQuery.addEventListener === 'function') {
+    coarsePointerQuery.addEventListener('change', syncPointerClass);
+  } else if (typeof coarsePointerQuery.addListener === 'function') {
+    coarsePointerQuery.addListener(syncPointerClass);
+  }
+
+  if (typeof finePointerQuery.addEventListener === 'function') {
+    finePointerQuery.addEventListener('change', syncPointerClass);
+  } else if (typeof finePointerQuery.addListener === 'function') {
+    finePointerQuery.addListener(syncPointerClass);
+  }
 
   function setRootVar(name, value) {
     root.style.setProperty(name, value);
@@ -122,12 +144,182 @@
   }
 
   function setupCardSpots() {
-    if (reduceMotionQuery.matches || !finePointerQuery.matches) {
+    if (reduceMotionQuery.matches) {
       return;
     }
 
-    var cardSelector = '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card';
+    var cardSelector =
+      '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card';
     var cards = document.querySelectorAll(cardSelector);
+
+    function setupCoarseCardSpots() {
+      var driftFrame = 0;
+
+      function queueDrift() {
+        if (driftFrame) {
+          return;
+        }
+
+        driftFrame = window.requestAnimationFrame(function () {
+          driftFrame = 0;
+
+          cards.forEach(function (card, index) {
+            if (card.classList.contains('is-touch-active')) {
+              return;
+            }
+
+            var rect = card.getBoundingClientRect();
+
+            if (rect.bottom < 0 || rect.top > window.innerHeight) {
+              return;
+            }
+
+            var center = rect.top + rect.height * 0.5;
+            var ratio = Math.max(0, Math.min(center / window.innerHeight, 1));
+            var driftX = 24 + (index % 3) * 22 + (1 - ratio) * 8;
+            var driftY = 16 + ratio * 48;
+
+            card.style.setProperty('--spot-x', driftX.toFixed(2) + '%');
+            card.style.setProperty('--spot-y', driftY.toFixed(2) + '%');
+          });
+        });
+      }
+
+      cards.forEach(function (card, index) {
+        var resetTimer = 0;
+        var baseAlpha =
+          card.matches('.page-hero-copy, .hero-copy') ? '0.12' : '0.072';
+
+        card.style.setProperty('--spot-alpha', baseAlpha);
+        card.style.setProperty('--spot-x', String(26 + (index % 3) * 20) + '%');
+        card.style.setProperty('--spot-y', String(18 + (index % 4) * 10) + '%');
+
+        function setTouchSpot(clientX, clientY, alpha) {
+          var rect = card.getBoundingClientRect();
+          var nextX = ((clientX - rect.left) / rect.width) * 100;
+          var nextY = ((clientY - rect.top) / rect.height) * 100;
+          var clampedX = Math.max(8, Math.min(nextX, 92));
+          var clampedY = Math.max(8, Math.min(nextY, 92));
+
+          card.style.setProperty('--spot-alpha', alpha);
+          card.style.setProperty('--spot-x', clampedX.toFixed(2) + '%');
+          card.style.setProperty('--spot-y', clampedY.toFixed(2) + '%');
+        }
+
+        function restoreBaseGlow(delay) {
+          window.clearTimeout(resetTimer);
+
+          resetTimer = window.setTimeout(function () {
+            card.classList.remove('is-touch-active');
+            card.style.setProperty('--spot-alpha', baseAlpha);
+            queueDrift();
+          }, delay);
+        }
+
+        function handlePointerDown(event) {
+          if (
+            event.pointerType &&
+            event.pointerType !== 'touch' &&
+            event.pointerType !== 'pen'
+          ) {
+            return;
+          }
+
+          card.classList.add('is-touch-active');
+          setTouchSpot(event.clientX, event.clientY, '0.18');
+          restoreBaseGlow(320);
+        }
+
+        function handlePointerMove(event) {
+          if (
+            event.pointerType &&
+            event.pointerType !== 'touch' &&
+            event.pointerType !== 'pen'
+          ) {
+            return;
+          }
+
+          if (!card.classList.contains('is-touch-active')) {
+            return;
+          }
+
+          setTouchSpot(event.clientX, event.clientY, '0.16');
+        }
+
+        function handlePointerEnd() {
+          restoreBaseGlow(220);
+        }
+
+        function handleTouchStart(event) {
+          if (window.PointerEvent) {
+            return;
+          }
+
+          var touch = event.touches && event.touches[0];
+
+          if (!touch) {
+            return;
+          }
+
+          card.classList.add('is-touch-active');
+          setTouchSpot(touch.clientX, touch.clientY, '0.18');
+          restoreBaseGlow(320);
+        }
+
+        function handleTouchMove(event) {
+          if (window.PointerEvent || !card.classList.contains('is-touch-active')) {
+            return;
+          }
+
+          var touch = event.touches && event.touches[0];
+
+          if (!touch) {
+            return;
+          }
+
+          setTouchSpot(touch.clientX, touch.clientY, '0.16');
+        }
+
+        card.addEventListener('pointerdown', handlePointerDown, {
+          passive: true,
+        });
+        card.addEventListener('pointermove', handlePointerMove, {
+          passive: true,
+        });
+        card.addEventListener('pointerup', handlePointerEnd, {
+          passive: true,
+        });
+        card.addEventListener('pointercancel', handlePointerEnd, {
+          passive: true,
+        });
+
+        card.addEventListener('touchstart', handleTouchStart, {
+          passive: true,
+        });
+        card.addEventListener('touchmove', handleTouchMove, {
+          passive: true,
+        });
+        card.addEventListener('touchend', handlePointerEnd, {
+          passive: true,
+        });
+        card.addEventListener('touchcancel', handlePointerEnd, {
+          passive: true,
+        });
+      });
+
+      queueDrift();
+      window.addEventListener('scroll', queueDrift, { passive: true });
+      window.addEventListener('resize', queueDrift);
+    }
+
+    if (!finePointerQuery.matches) {
+      if (coarsePointerQuery.matches) {
+        setupCoarseCardSpots();
+      }
+
+      return;
+    }
+
     var activeCard = null;
     var globalFrame = 0;
     var globalEvent = null;
@@ -150,7 +342,10 @@
 
     function renderGlobalSpot() {
       var event = globalEvent;
-      var target = event && event.target && event.target.closest ? event.target.closest(cardSelector) : null;
+      var target =
+        event && event.target && event.target.closest
+          ? event.target.closest(cardSelector)
+          : null;
 
       globalFrame = 0;
 
@@ -181,7 +376,9 @@
       globalFrame = window.requestAnimationFrame(renderGlobalSpot);
     }
 
-    document.addEventListener('pointermove', queueGlobalSpot, { passive: true });
+    document.addEventListener('pointermove', queueGlobalSpot, {
+      passive: true,
+    });
     document.addEventListener('mousemove', queueGlobalSpot, { passive: true });
     document.addEventListener('mouseleave', function () {
       if (activeCard) {
@@ -190,31 +387,41 @@
       }
     });
 
-    document.querySelectorAll('.page-hero-copy, .hero-copy').forEach(function (heroCard) {
-      heroCard.addEventListener('mousemove', function (event) {
-        setCardSpot(heroCard, event);
-      }, { passive: true });
+    document
+      .querySelectorAll('.page-hero-copy, .hero-copy')
+      .forEach(function (heroCard) {
+        heroCard.addEventListener(
+          'mousemove',
+          function (event) {
+            setCardSpot(heroCard, event);
+          },
+          { passive: true },
+        );
 
-      heroCard.addEventListener('pointermove', function (event) {
-        setCardSpot(heroCard, event);
-      }, { passive: true });
+        heroCard.addEventListener(
+          'pointermove',
+          function (event) {
+            setCardSpot(heroCard, event);
+          },
+          { passive: true },
+        );
 
-      heroCard.addEventListener('mouseenter', function () {
-        heroCard.style.setProperty('--spot-alpha', '0.16');
+        heroCard.addEventListener('mouseenter', function () {
+          heroCard.style.setProperty('--spot-alpha', '0.16');
+        });
+
+        heroCard.addEventListener('pointerenter', function () {
+          heroCard.style.setProperty('--spot-alpha', '0.16');
+        });
+
+        heroCard.addEventListener('mouseleave', function () {
+          resetCardSpot(heroCard);
+        });
+
+        heroCard.addEventListener('pointerleave', function () {
+          resetCardSpot(heroCard);
+        });
       });
-
-      heroCard.addEventListener('pointerenter', function () {
-        heroCard.style.setProperty('--spot-alpha', '0.16');
-      });
-
-      heroCard.addEventListener('mouseleave', function () {
-        resetCardSpot(heroCard);
-      });
-
-      heroCard.addEventListener('pointerleave', function () {
-        resetCardSpot(heroCard);
-      });
-    });
 
     cards.forEach(function (card) {
       var frame = 0;
@@ -258,17 +465,9 @@
       card.addEventListener('pointerenter', handleEnter);
       card.addEventListener('mouseenter', handleEnter);
 
-      card.addEventListener(
-        'pointermove',
-        handleMove,
-        { passive: true },
-      );
+      card.addEventListener('pointermove', handleMove, { passive: true });
 
-      card.addEventListener(
-        'mousemove',
-        handleMove,
-        { passive: true },
-      );
+      card.addEventListener('mousemove', handleMove, { passive: true });
 
       card.addEventListener('pointerleave', handleLeave);
       card.addEventListener('mouseleave', handleLeave);

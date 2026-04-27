@@ -680,6 +680,71 @@ p {
   --spot-alpha: 0.14;
 }
 
+.coarse-pointer body::before {
+  background-size: 58px 58px;
+  opacity: 0.42;
+}
+
+.coarse-pointer body::after {
+  background-size: 160% 160%, 148% 148%, 100% 100%;
+  opacity: 0.96;
+  animation-duration: 14s;
+}
+
+.coarse-pointer main::before {
+  top: -72px;
+  height: 620px;
+  filter: blur(28px) saturate(136%);
+  opacity: 1;
+}
+
+.coarse-pointer .page-hero-copy,
+.coarse-pointer .hero-copy,
+.coarse-pointer .boundary-card,
+.coarse-pointer .contact-card,
+.coarse-pointer .feature-card,
+.coarse-pointer .info-card,
+.coarse-pointer .support-card,
+.coarse-pointer .policy-card,
+.coarse-pointer .release-card,
+.coarse-pointer .mini-card,
+.coarse-pointer .surface {
+  --spot-alpha: 0.072;
+  box-shadow: 0 24px 58px rgba(0, 0, 0, 0.32), 0 0 0 1px rgba(157, 231, 215, 0.05);
+}
+
+.coarse-pointer .page-hero-copy,
+.coarse-pointer .hero-copy {
+  --spot-alpha: 0.12;
+}
+
+.coarse-pointer .feature-card.is-touch-active,
+.coarse-pointer .info-card.is-touch-active,
+.coarse-pointer .support-card.is-touch-active,
+.coarse-pointer .policy-card.is-touch-active,
+.coarse-pointer .release-card.is-touch-active,
+.coarse-pointer .boundary-card.is-touch-active,
+.coarse-pointer .mini-card.is-touch-active,
+.coarse-pointer .surface.is-touch-active,
+.coarse-pointer .contact-card.is-touch-active {
+  transform: translateY(-3px) scale(0.995);
+  border-color: rgba(157, 231, 215, 0.34);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.36), 0 0 0 1px rgba(157, 231, 215, 0.09), 0 0 34px rgba(117, 216, 255, 0.08);
+  --spot-alpha: 0.18;
+}
+
+.coarse-pointer .button:active,
+.coarse-pointer .quick-link:active,
+.coarse-pointer .nav-links a:active {
+  transform: translateY(-1px) scale(0.985);
+  border-color: rgba(157, 231, 215, 0.42);
+  box-shadow: 0 16px 28px rgba(0, 0, 0, 0.26), 0 0 0 1px rgba(157, 231, 215, 0.08);
+}
+
+.coarse-pointer .button.primary:active {
+  box-shadow: 0 20px 36px rgba(17, 121, 115, 0.28), 0 0 24px rgba(117, 216, 255, 0.18);
+}
+
 .meta a,
 .footer-inner a,
 .boundary-card p a,
@@ -1348,6 +1413,20 @@ footer {
   body::before,
   body::after {
     opacity: 0.5;
+  }
+
+  .coarse-pointer body::before {
+    opacity: 0.44;
+  }
+
+  .coarse-pointer body::after {
+    opacity: 0.92;
+  }
+
+  .coarse-pointer main::before {
+    top: -32px;
+    height: 520px;
+    opacity: 0.96;
   }
 
   main {
