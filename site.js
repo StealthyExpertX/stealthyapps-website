@@ -136,6 +136,7 @@
       return;
     }
 
+    var expectedHash = window.location.hash;
     var id = window.location.hash.slice(1);
 
     try {
@@ -155,6 +156,10 @@
     }
 
     function scroll() {
+      if (window.location.hash !== expectedHash) {
+        return;
+      }
+
       var header = document.querySelector('.site-header');
       var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
       var targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
@@ -164,6 +169,8 @@
     window.requestAnimationFrame(scroll);
     window.setTimeout(scroll, 100);
     window.setTimeout(scroll, 350);
+    window.setTimeout(scroll, 900);
+    window.setTimeout(scroll, 1800);
   }
 
   function ready(callback) {
@@ -182,4 +189,6 @@
     setupCurrentHashLink();
     scrollToInitialHash();
   });
+  window.addEventListener('load', scrollToInitialHash, { once: true });
+  window.addEventListener('hashchange', scrollToInitialHash);
 })();
