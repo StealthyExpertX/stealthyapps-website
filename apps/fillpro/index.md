@@ -47,7 +47,7 @@ FillPro is meant to win against basic form fillers on modern-form handling, agai
 
 ## Who it is for
 
-FillPro is best for people who repeatedly enter the same non-sensitive details into web forms: job seekers, founders, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
+FillPro is best for people who repeatedly enter the same non-sensitive details into web forms: job seekers, small teams, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
 
 ## Pricing
 

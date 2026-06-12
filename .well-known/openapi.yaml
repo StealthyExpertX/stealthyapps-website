@@ -4,7 +4,7 @@ info:
   description: Read-only access to public FillPro Markdown mirrors and plain-text discovery files.
   version: '1.0.0'
   contact:
-    name: Karl
+    name: Stealthy Apps
     email: support@stealthyapps.com
 servers:
   - url: https://stealthyapps.com

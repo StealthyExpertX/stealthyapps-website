@@ -131,12 +131,20 @@
     });
   }
 
-  function scrollToInitialHash() {
+  var lastHashScrollToken = '';
+
+  function scrollToInitialHash(force) {
     if (!window.location.hash || window.location.hash.length < 2) {
       return;
     }
 
     var expectedHash = window.location.hash;
+
+    if (!force && lastHashScrollToken === expectedHash) {
+      return;
+    }
+
+    lastHashScrollToken = expectedHash;
     var id = window.location.hash.slice(1);
 
     try {
@@ -155,15 +163,50 @@
       window.history.scrollRestoration = 'manual';
     }
 
+    function getTargetTop() {
+      var header = document.querySelector('.site-header');
+      var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
+      return {
+        offset: headerOffset,
+        top: target.getBoundingClientRect().top + window.scrollY - headerOffset,
+      };
+    }
+
     function scroll() {
       if (window.location.hash !== expectedHash) {
         return;
       }
 
-      var header = document.querySelector('.site-header');
-      var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
-      var targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
-      window.scrollTo(0, Math.max(targetTop, 0));
+      var position = getTargetTop();
+      var top = Math.max(position.top, 0);
+      var previousBehavior = root.style.scrollBehavior;
+
+      root.style.scrollBehavior = 'auto';
+      document.documentElement.scrollTop = top;
+      body.scrollTop = top;
+      window.scrollTo(0, top);
+
+      window.setTimeout(function () {
+        root.style.scrollBehavior = previousBehavior;
+      }, 0);
+    }
+
+    var attempts = 0;
+
+    function settleScroll() {
+      if (window.location.hash !== expectedHash) {
+        return;
+      }
+
+      scroll();
+      attempts += 1;
+
+      var position = getTargetTop();
+      var targetDistance = Math.abs(target.getBoundingClientRect().top - position.offset);
+
+      if (attempts < 16 && targetDistance > 8) {
+        window.setTimeout(settleScroll, 250);
+      }
     }
 
     window.requestAnimationFrame(scroll);
@@ -171,6 +214,7 @@
     window.setTimeout(scroll, 350);
     window.setTimeout(scroll, 900);
     window.setTimeout(scroll, 1800);
+    window.setTimeout(settleScroll, 2200);
   }
 
   function ready(callback) {
@@ -189,6 +233,20 @@
     setupCurrentHashLink();
     scrollToInitialHash();
   });
+  window.setTimeout(scrollToInitialHash, 0);
+  window.setTimeout(scrollToInitialHash, 500);
   window.addEventListener('load', scrollToInitialHash, { once: true });
-  window.addEventListener('hashchange', scrollToInitialHash);
+  window.addEventListener('hashchange', function () {
+    scrollToInitialHash(true);
+  });
+
+  var hashPolls = 0;
+  var hashPoller = window.setInterval(function () {
+    hashPolls += 1;
+    scrollToInitialHash();
+
+    if (hashPolls >= 24 || lastHashScrollToken) {
+      window.clearInterval(hashPoller);
+    }
+  }, 250);
 })();
