@@ -45,6 +45,22 @@ FillPro is not a password manager, payment wallet, identity vault, tax vault, or
 
 FillPro is meant to win against basic form fillers on modern-form handling, against job-application suites on privacy and restraint, against text expanders on field-level filling, and against password managers on non-login form coverage. It does not auto-submit applications or pretend to bypass CAPTCHA, anti-bot checks, login walls, payment iframes, or browser-native PDF viewers.
 
+## Free and paid competitor fit
+
+- Browser autofill and password managers are better for logins, cards, and saved addresses.
+- Macro-heavy autofill tools are better for scripts, selectors, repeated clicks, and auto-submit workflows.
+- Record-mode tools are better when one exact form must be replayed the same way every time.
+- Text expanders and AI workflow tools are better for snippets, outreach, support replies, and broad automation.
+- FillPro is best when the same non-sensitive profile details need to work across many unrelated web forms with different labels, dropdowns, checkboxes, and file upload fields.
+
+## FAQ
+
+Is FillPro better than Chrome Autofill? For passwords, cards, and saved addresses, no. For repeated business, job, signup, support, intake, and QA forms with custom labels or uploads, that is the problem FillPro is built to handle.
+
+Is FillPro a replacement for Text Blaze or Magical? No. Text expanders and workflow tools are better for snippets, outreach, and broad automation. FillPro is a focused form filler for profile fields, dropdowns, checkboxes, radios, textareas, and files.
+
+Why not auto-submit forms? Users should see what changed before a form leaves their browser. FillPro fills the page and leaves the final submit decision with the user.
+
 ## Who it is for
 
 FillPro is best for people who repeatedly enter the same non-sensitive details into web forms: job seekers, small teams, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
