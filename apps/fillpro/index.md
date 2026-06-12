@@ -1,6 +1,6 @@
 # FillPro - Chrome form filler for repeated web forms
 
-> FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves local profiles, fills repeated forms in a click, and skips passwords, payment cards, government IDs, tax IDs, and one-time codes by design.
+> FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves local profiles and fills repeated job, signup, intake, onboarding, support, and business forms in a click.
 
 - Canonical URL: https://stealthyapps.com/apps/fillpro/
 - Current release: 1.0.0
@@ -28,42 +28,33 @@ FillPro helps users fill job applications, signup forms, onboarding pages, intak
 - Support for modern custom inputs and component libraries.
 - Better matching for country, state, month, phone, birthday, middle name, and pronouns fields.
 
-## What FillPro intentionally skips
+## Privacy and control
 
-FillPro is not a password manager, payment wallet, identity vault, tax vault, or authentication tool. It tries to avoid:
-
-- Passwords.
-- Payment cards.
-- CVCs.
-- Bank fields.
-- Government IDs.
-- Tax IDs.
-- Social Security numbers.
-- One-time codes.
+Profiles, rules, and upload references stay local in Chrome extension storage. FillPro focuses on repeated profile details and keeps trust-sensitive fields with the tools users already use for them.
 
 ## Competitive position
 
-FillPro is meant to win against basic form fillers on modern-form handling, against job-application suites on privacy and restraint, against text expanders on field-level filling, and against password managers on non-login form coverage. It does not auto-submit applications or pretend to bypass CAPTCHA, anti-bot checks, login walls, payment iframes, or browser-native PDF viewers.
+FillPro is meant to win against basic form fillers on modern-form handling, against job-application suites on privacy and control, against text expanders on field-level filling, and against password managers on non-login form coverage. It is strongest when the same profile has to work across many unrelated sites with different labels, dropdowns, checkboxes, textareas, and upload fields.
 
 ## Free and paid competitor fit
 
-- Browser autofill and password managers are better for logins, cards, and saved addresses.
-- Macro-heavy autofill tools are better for scripts, selectors, repeated clicks, and auto-submit workflows.
-- Record-mode tools are better when one exact form must be replayed the same way every time.
-- Text expanders and AI workflow tools are better for snippets, outreach, support replies, and broad automation.
-- FillPro is best when the same non-sensitive profile details need to work across many unrelated web forms with different labels, dropdowns, checkboxes, and file upload fields.
+- Browser autofill and password managers: best for saved addresses, cards, and logins.
+- Macro-heavy autofill tools: best for scripted clicks, selectors, and repeatable browser automation.
+- Record-mode tools: best when one exact form repeats the same way every time.
+- Text expanders and workflow agents: best for snippets, writing, outreach, and broad shortcuts.
+- FillPro: best for repeated profile details across unrelated web forms with different labels, dropdowns, checkboxes, and file upload fields.
 
 ## FAQ
 
-Is FillPro better than Chrome Autofill? For passwords, cards, and saved addresses, no. For repeated business, job, signup, support, intake, and QA forms with custom labels or uploads, that is the problem FillPro is built to handle.
+When is FillPro better than Chrome Autofill? When the form goes beyond a saved address: job applications, business signups, support forms, intake pages, QA profiles, custom labels, dropdowns, and uploads.
 
-Is FillPro a replacement for Text Blaze or Magical? No. Text expanders and workflow tools are better for snippets, outreach, and broad automation. FillPro is a focused form filler for profile fields, dropdowns, checkboxes, radios, textareas, and files.
+How is FillPro different from Text Blaze or Magical? Those tools are strong for snippets and workflow shortcuts. FillPro works at the form-field level: profile values, dropdowns, checkboxes, radios, textareas, files, and undo.
 
-Why not auto-submit forms? Users should see what changed before a form leaves their browser. FillPro fills the page and leaves the final submit decision with the user.
+Why review before submit? Review catches site-specific mistakes before the form leaves your browser. FillPro handles the typing; you stay in control of sending.
 
 ## Who it is for
 
-FillPro is best for people who repeatedly enter the same non-sensitive details into web forms: job seekers, small teams, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
+FillPro is best for people who repeatedly enter the same profile details into web forms: job seekers, small teams, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
 
 ## Pricing
 
@@ -73,7 +64,7 @@ Pro adds more profiles, duplication, import, export, and advanced repeat-use wor
 
 ## Privacy
 
-Profiles, rules, and uploads stay local in Chrome extension storage. Pro billing is handled by ExtensionPay and Stripe. FillPro does not see card details.
+Profiles, rules, and uploads stay local in Chrome extension storage. Pro billing is handled by ExtensionPay and Stripe.
 
 Privacy page: https://stealthyapps.com/apps/fillpro/privacy/
 

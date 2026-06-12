@@ -8,7 +8,7 @@ The product exists because normal browser autofill is good at basic contact deta
 
 - Keep profile data local.
 - Fill useful non-sensitive fields quickly.
-- Skip passwords, payment cards, IDs, tax IDs, and one-time codes.
+- Keep passwords, payment cards, IDs, tax IDs, and one-time codes with the user's browser, password manager, or site controls.
 - Make pricing and privacy boundaries clear.
 - Support messy real-world sites instead of only perfect demo forms.
 

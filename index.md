@@ -9,7 +9,7 @@ Private Chrome form autofill for job applications, signup forms, onboarding page
 - Current release: 1.0.0
 - Last updated: 2026-06-12
 
-FillPro fills the web forms your browser still makes you type by hand. It stores profiles locally in Chrome extension storage, lets you choose the profile before filling, and intentionally skips passwords, payment cards, CVCs, government IDs, tax IDs, and one-time codes.
+FillPro fills the web forms your browser still makes you type by hand. It stores profiles locally in Chrome extension storage and lets you choose the profile before filling.
 
 ## Best fit
 
@@ -21,7 +21,7 @@ FillPro fills the web forms your browser still makes you type by hand. It stores
 
 ## Privacy boundary
 
-FillPro does not run a cloud profile service. Saved profiles, rules, custom fields, and upload references stay on the user's device. Billing for Pro is handled by ExtensionPay and Stripe.
+Saved profiles, rules, custom fields, and upload references stay on the user's device. Billing for Pro is handled by ExtensionPay and Stripe.
 
 ## Pricing
 
