@@ -1,0 +1,33 @@
+{
+  "$schema": "https://schema.modelcontextprotocol.io/registry/v1",
+  "name": "fillpro",
+  "title": "FillPro",
+  "description": "Private Chrome form autofill extension. Read-only public content endpoints for product, privacy, support, and release information.",
+  "homepage": "https://stealthyapps.com/",
+  "documentation": "https://stealthyapps.com/llms-full.txt",
+  "openapi": "https://stealthyapps.com/.well-known/openapi.yaml",
+  "agent_index": "https://stealthyapps.com/llms.txt",
+  "categories": ["productivity", "privacy", "browser-extensions"],
+  "products": [
+    {
+      "name": "FillPro",
+      "url": "https://stealthyapps.com/apps/fillpro/",
+      "platform": "Chrome",
+      "category": "form-autofill",
+      "data_location": "local",
+      "privacy_policy": "https://stealthyapps.com/apps/fillpro/privacy/",
+      "free_tier": true,
+      "pro_trial_days": 3,
+      "pricing": [
+        { "tier": "Free", "price": 0, "currency": "USD" },
+        { "tier": "Pro monthly", "price": 3.99, "currency": "USD" },
+        { "tier": "Pro yearly", "price": 29.99, "currency": "USD" },
+        { "tier": "Pro lifetime", "price": 39.99, "currency": "USD" }
+      ]
+    }
+  ],
+  "contact": {
+    "url": "https://stealthyapps.com/contact/",
+    "email": "support@stealthyapps.com"
+  }
+}

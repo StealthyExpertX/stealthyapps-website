@@ -1,0 +1,88 @@
+openapi: 3.1.0
+info:
+  title: FillPro public content API
+  description: Read-only access to public FillPro Markdown mirrors and plain-text discovery files.
+  version: '1.0.0'
+  contact:
+    name: Karl
+    email: support@stealthyapps.com
+servers:
+  - url: https://stealthyapps.com
+paths:
+  /llms.txt:
+    get:
+      operationId: getFillProIndex
+      summary: Get the compact FillPro plain-text index.
+      responses:
+        '200':
+          description: Plain text product index.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /llms-full.txt:
+    get:
+      operationId: getFillProFullCorpus
+      summary: Get the full FillPro plain-text corpus.
+      responses:
+        '200':
+          description: Plain text corpus combining canonical public pages.
+          content:
+            text/plain:
+              schema:
+                type: string
+  /index.md:
+    get:
+      operationId: getHomeMarkdown
+      summary: Markdown copy of the FillPro homepage.
+      responses:
+        '200':
+          description: Markdown content.
+          content:
+            text/markdown:
+              schema:
+                type: string
+  /apps/fillpro/index.md:
+    get:
+      operationId: getFillProMarkdown
+      summary: Markdown copy of the FillPro product page.
+      responses:
+        '200':
+          description: Markdown content for FillPro.
+          content:
+            text/markdown:
+              schema:
+                type: string
+  /apps/fillpro/privacy/index.md:
+    get:
+      operationId: getFillProPrivacyMarkdown
+      summary: Markdown copy of the FillPro privacy policy.
+      responses:
+        '200':
+          description: Markdown content for FillPro privacy.
+          content:
+            text/markdown:
+              schema:
+                type: string
+  /about/index.md:
+    get:
+      operationId: getAboutMarkdown
+      summary: Markdown copy of the About page.
+      responses:
+        '200':
+          description: Markdown content for About.
+          content:
+            text/markdown:
+              schema:
+                type: string
+  /contact/index.md:
+    get:
+      operationId: getContactMarkdown
+      summary: Markdown copy of the Contact page.
+      responses:
+        '200':
+          description: Markdown content for Contact.
+          content:
+            text/markdown:
+              schema:
+                type: string

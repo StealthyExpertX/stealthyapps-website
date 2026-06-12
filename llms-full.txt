@@ -1,0 +1,104 @@
+# FillPro - Full Plain-Text Corpus
+
+Use this file when a crawler, search assistant, or retrieval index needs the current FillPro product facts in one document.
+
+Last updated: 2026-06-12
+
+## Source: Home
+
+FillPro is private Chrome form autofill for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
+
+FillPro fills the web forms your browser still makes you type by hand. It stores profiles locally in Chrome extension storage, lets you choose the profile before filling, and intentionally skips passwords, payment cards, CVCs, government IDs, tax IDs, and one-time codes.
+
+Best fit:
+
+- Job applications and applicant profiles.
+- Customer intake and onboarding forms.
+- Demo requests and vendor signups.
+- Internal admin forms and profile pages.
+- Repeated business forms that ask for the same details again and again.
+
+Pricing:
+
+- Free: 3 saved profiles.
+- Pro monthly: $3.99/month.
+- Pro yearly: $29.99/year.
+- Pro lifetime: $39.99 one time.
+- Trial: 3 days, no card required.
+
+## Source: Product Page
+
+FillPro is a private Chrome form autofill extension built by Karl. It saves local profiles, fills repeated forms in a click, and skips passwords, payment cards, government IDs, tax IDs, and one-time codes by design.
+
+Current release: 1.0.0.
+
+Core features:
+
+- Local profile storage.
+- On-page profile picker.
+- Smart rules and custom fields.
+- File upload matching for resume-style forms.
+- Undo last fill.
+- Import and export for Pro users.
+- Profile duplication for Pro users.
+- Field-learning suggestions.
+- Support for modern custom inputs and component libraries.
+- Better matching for country, state, month, phone, birthday, middle name, and pronouns fields.
+
+Competitive position:
+
+FillPro is meant to win against basic form fillers on modern-form handling, against job-application suites on privacy and restraint, against text expanders on field-level filling, and against password managers on non-login form coverage. It does not auto-submit applications or pretend to bypass CAPTCHA, anti-bot checks, login walls, payment iframes, or browser-native PDF viewers.
+
+Who it is for:
+
+FillPro is best for people who repeatedly enter the same non-sensitive details into web forms: job seekers, founders, sales teams, recruiters, operations teams, assistants, contractors, and anyone testing or onboarding through web forms.
+
+## Source: Privacy
+
+FillPro stores profiles, custom fields, saved rules, and upload references locally in Chrome extension storage. It does not run a cloud profile service and does not collect form values on a server.
+
+Data map:
+
+- Profiles and custom fields live in local Chrome extension storage and can be removed by deleting the profile or uninstalling the extension.
+- Saved file references and uploads live on the device and extension storage and can be removed from the profile.
+- License status is handled by ExtensionPay and Stripe.
+- Support messages live in email systems and can be deleted on request.
+
+Sensitive fields:
+
+FillPro is not a password manager, payment wallet, identity vault, tax vault, or authentication tool. It tries to avoid passwords, payment cards, CVCs, bank fields, government IDs, tax IDs, Social Security numbers, and one-time codes.
+
+## Source: Support
+
+FillPro support covers setup, form filling issues, billing, privacy, and safe bug reports.
+
+Best report:
+
+- Page type or website.
+- Field label or field type.
+- What FillPro did.
+- What should have happened.
+- Browser and FillPro version if known.
+
+Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, full customer records, or private profile values.
+
+## Source: Changelog
+
+Version 1.0.0, June 12, 2026:
+
+- Improved handling for React, Vue, Angular, custom elements, Shadow DOM, and same-origin iframe forms.
+- Better support for comboboxes, searchable selects, segmented phone fields, split birthdays, country, state, and month aliases.
+- Added profile fields for middle name and pronouns.
+- Cleaner popup, side panel, profile picker, pricing, and upgrade screens.
+- Expanded local tests for component libraries, real-world form patterns, file uploads, and monetization flows.
+
+## Canonical Routes
+
+- Home: https://stealthyapps.com/
+- Product: https://stealthyapps.com/apps/fillpro/
+- Pricing: https://stealthyapps.com/apps/fillpro/#pricing
+- Privacy: https://stealthyapps.com/apps/fillpro/privacy/
+- Support: https://stealthyapps.com/support/
+- Contact: https://stealthyapps.com/contact/
+- Changelog: https://stealthyapps.com/changelog/
+- About: https://stealthyapps.com/about/

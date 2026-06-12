@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://stealthyapps.com/</loc>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/fillpro-popup.png</image:loc>
+      <image:title>FillPro extension popup</image:title>
+      <image:caption>FillPro Chrome extension profile picker and local form autofill popup.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/fillpro-logo.svg</image:loc>
+      <image:title>FillPro logo</image:title>
+      <image:caption>FillPro private form autofill logo.</image:caption>
+    </image:image>
+  </url>
+</urlset>

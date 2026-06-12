@@ -38,37 +38,63 @@ const WEBMAIL_PROVIDERS = {
 const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
 const DIRECT_SEND_CONSENT_NOTE =
   'Sender confirmed the on-page direct-send notice, agreed not to send sensitive information, and accepted responsibility for submitted content.';
+const UPDATE_CONSENT_NOTE =
+  'Sender opted into occasional follow-up, release-note, or product-update emails related to this message and can opt out later.';
+const DIRECT_SEND_AUTORESPONSE =
+  'Thanks for writing in about FillPro. I got your message and will reply as soon as I can. Please do not send passwords, payment details, government IDs, tax IDs, one-time codes, or private profile values.';
+const MIN_NAME_LENGTH = 2;
+const MIN_MESSAGE_LENGTH = 12;
+const KNOWN_PRODUCTS = {
+  fillpro: 'FillPro',
+};
 
 const CONTACT_CONTEXTS = {
-  support: {
+  general: {
     subjectPrefix: 'FillPro',
-    requireName: false,
-    requireReplyEmail: false,
-    idleMessage:
-      'Choose how you want to send this. Send Directly stays on this page. Use Email App opens your mail app or webmail.',
+    requireName: true,
+    requireReplyEmail: true,
+    idleMessage: 'Complete the required fields to send your message.',
     topics: {
-      support: {
-        label: 'Support',
+      general: {
+        label: 'General',
         recipient: 'support',
-        inboxLabel: 'FillPro support inbox',
-        routeNote: 'This goes straight to my FillPro support inbox.',
+        inboxLabel: 'FillPro inbox',
         reasons: [
-          ['site_issue', 'A site did not fill correctly'],
-          ['wrong_fill', 'The wrong field was filled'],
-          ['upload_help', 'A file upload is not matching'],
+          ['question', 'General question'],
+          ['feedback', 'Feedback'],
+          ['other', 'Something else'],
+        ],
+      },
+      product: {
+        label: 'FillPro',
+        recipient: 'support',
+        inboxLabel: 'FillPro product inbox',
+        reasons: [
+          ['product_help', 'Question about FillPro'],
           ['feature', 'Feature request'],
-          ['general', 'General help'],
+          ['bug', 'Something is not working'],
+          ['idea', 'Future tool idea'],
+        ],
+      },
+      business: {
+        label: 'Business',
+        recipient: 'support',
+        inboxLabel: 'FillPro business inbox',
+        reasons: [
+          ['business', 'Business or partnership'],
+          ['press', 'Press or media'],
+          ['licensing', 'Licensing or commercial question'],
+          ['other', 'Something else'],
         ],
       },
       billing: {
-        label: 'Billing / Pro',
+        label: 'Billing',
         recipient: 'support',
         inboxLabel: 'FillPro billing inbox',
-        routeNote: 'This goes straight to my FillPro billing inbox.',
         reasons: [
-          ['pro_access', 'Pro access or upgrade problem'],
+          ['pro_access', 'Upgrade, access, or purchase issue'],
           ['restore', 'Restore purchase or subscription'],
-          ['refund', 'Refund or billing question'],
+          ['refund', 'Refund or cancellation question'],
           ['pricing', 'Pricing question'],
         ],
       },
@@ -76,44 +102,6 @@ const CONTACT_CONTEXTS = {
         label: 'Privacy',
         recipient: 'privacy',
         inboxLabel: 'FillPro privacy inbox',
-        routeNote:
-          'This goes straight to my privacy inbox. I can explain what stays local and how to clear it, but I cannot delete FillPro data remotely.',
-        reasons: [
-          ['data_question', 'Question about what stays local'],
-          ['local_clear', 'How do I remove local FillPro data?'],
-          ['policy', 'Privacy policy question'],
-          ['billing_privacy', 'Purchase or billing privacy question'],
-          ['compliance', 'Compliance or legal request'],
-        ],
-      },
-    },
-  },
-  general: {
-    subjectPrefix: 'Stealthy Apps',
-    requireName: true,
-    requireReplyEmail: true,
-    idleMessage:
-      'Choose how you want to send this. Send Directly stays on this page. Use Email App opens your mail app or webmail.',
-    topics: {
-      general: {
-        label: 'General',
-        recipient: 'support',
-        inboxLabel: 'Stealthy Apps inbox',
-        routeNote: 'This goes straight to my general inbox.',
-        reasons: [
-          ['question', 'General question'],
-          ['idea', 'Tool or app idea'],
-          ['feedback', 'Feedback'],
-          ['business', 'Business or partnership'],
-          ['other', 'Something else'],
-        ],
-      },
-      privacy: {
-        label: 'Privacy',
-        recipient: 'privacy',
-        inboxLabel: 'Stealthy Apps privacy inbox',
-        routeNote:
-          'This goes straight to my privacy inbox. If a product stores data on your device, I can explain the policy and deletion steps, but I cannot remove that local data remotely.',
         reasons: [
           ['privacy_question', 'Privacy or policy question'],
           ['local_data', 'Question about local data or deletion'],
@@ -123,7 +111,90 @@ const CONTACT_CONTEXTS = {
       },
     },
   },
+  product: {
+    subjectPrefix: 'Product',
+    requireName: false,
+    requireReplyEmail: false,
+    idleMessage: 'Complete the required fields to send your message.',
+    topics: {},
+  },
 };
+
+function buildProductContext(form) {
+  const productName = (form.dataset.contactProduct || 'Product').trim();
+
+  return {
+    subjectPrefix: productName,
+    requireName: false,
+    requireReplyEmail: false,
+    idleMessage: 'Complete the required fields to send your message.',
+    topics: {
+      support: {
+        label: 'Support',
+        recipient: 'support',
+        inboxLabel: `${productName} inbox`,
+        reasons: [
+          ['site_issue', 'A site or workflow did not fill correctly'],
+          ['wrong_fill', 'The wrong field was matched'],
+          ['setup', 'Setup or usage question'],
+          ['feature', 'Feature request'],
+          ['other', 'Something else'],
+        ],
+      },
+      billing: {
+        label: 'Billing',
+        recipient: 'support',
+        inboxLabel: `${productName} billing inbox`,
+        reasons: [
+          ['pro_access', 'Upgrade, access, or purchase issue'],
+          ['restore', 'Restore purchase or subscription'],
+          ['refund', 'Refund or cancellation question'],
+          ['pricing', 'Pricing question'],
+        ],
+      },
+      privacy: {
+        label: 'Privacy',
+        recipient: 'privacy',
+        inboxLabel: `${productName} privacy inbox`,
+        reasons: [
+          ['data_question', 'Question about stored or local data'],
+          ['local_clear', 'How do I remove local data?'],
+          ['policy', 'Privacy policy question'],
+          ['compliance', 'Compliance or legal request'],
+        ],
+      },
+    },
+  };
+}
+
+function resolveContactContext(form) {
+  const contextKey = form.dataset.contactContext;
+
+  if (contextKey === 'product') {
+    return buildProductContext(form);
+  }
+
+  return CONTACT_CONTEXTS[contextKey] || CONTACT_CONTEXTS.general;
+}
+
+function normalizeProductLabel(rawValue) {
+  const value = `${rawValue || ''}`.trim();
+  if (!value) return '';
+
+  const mapped = KNOWN_PRODUCTS[value.toLowerCase()];
+  if (mapped) return mapped;
+
+  return value.replace(/\s+/g, ' ').slice(0, 48);
+}
+
+function getContactPrefill() {
+  const params = new URLSearchParams(window.location.search);
+  return {
+    topic: `${params.get('topic') || ''}`.trim(),
+    reason: `${params.get('reason') || ''}`.trim(),
+    productLabel: normalizeProductLabel(params.get('product')),
+  };
+}
 
 function decodeChars(values = []) {
   return String.fromCharCode(...values);
@@ -152,6 +223,18 @@ function findReasonLabel(config, reasonValue) {
   return match ? match[1] : config.reasons[0][1];
 }
 
+function joinRequirementList(items) {
+  if (items.length <= 1) {
+    return items[0] || '';
+  }
+
+  if (items.length === 2) {
+    return `${items[0]} and ${items[1]}`;
+  }
+
+  return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
 function buildComposePayload(
   context,
   config,
@@ -159,19 +242,28 @@ function buildComposePayload(
   name,
   replyEmail,
   message,
+  marketingConsent,
+  productLabel,
 ) {
   const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
-  const subject = `${context.subjectPrefix} ${config.label}: ${reasonLabel}`;
-  const body = [
+  const subjectLabel =
+    config.label === 'FillPro' ? 'Product' : config.label;
+  const subjectPrefix = productLabel || context.subjectPrefix;
+  const subject = `${subjectPrefix} ${subjectLabel}: ${reasonLabel}`;
+  const bodyLines = [
     `Topic: ${config.label}`,
     `Reason: ${reasonLabel}`,
+    productLabel ? `Product: ${productLabel}` : null,
     `Name: ${name || 'Not provided'}`,
     `Reply email: ${replyEmail || 'Use the sender address from this message'}`,
     `Page: ${window.location.pathname}`,
+    `Email updates: ${marketingConsent ? UPDATE_CONSENT_NOTE : 'Not opted in.'}`,
     '',
     'Message:',
     message,
-  ].join('\n');
+  ].filter(Boolean);
+
+  const body = bodyLines.join('\n');
 
   return {
     to: recipient,
@@ -191,6 +283,7 @@ function buildDirectSendPayload(
   replyEmail,
   message,
   honeypotValue,
+  marketingConsent,
 ) {
   return {
     endpoint: `${DIRECT_SEND_URL_BASE}${encodeURIComponent(compose.to)}`,
@@ -205,9 +298,12 @@ function buildDirectSendPayload(
       'Submission method': 'Direct send from site form',
       'Consent record': DIRECT_SEND_CONSENT_NOTE,
       'Consent recorded at': new Date().toISOString(),
+      'Email updates': marketingConsent ? UPDATE_CONSENT_NOTE : 'Not opted in.',
       _subject: compose.subject,
       _replyto: replyEmail,
       _template: 'table',
+      _captcha: 'false',
+      _autoresponse: DIRECT_SEND_AUTORESPONSE,
       _honey: honeypotValue || '',
     },
   };
@@ -237,6 +333,12 @@ async function copyComposeText(text) {
 
 function setStatus(statusNode, state, text) {
   statusNode.dataset.state = state;
+  statusNode.setAttribute('role', state === 'error' ? 'alert' : 'status');
+  statusNode.setAttribute(
+    'aria-live',
+    state === 'error' ? 'assertive' : 'polite',
+  );
+  statusNode.setAttribute('aria-atomic', 'true');
   statusNode.textContent = text;
 }
 
@@ -276,12 +378,16 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  const context =
-    CONTACT_CONTEXTS[form.dataset.contactContext] || CONTACT_CONTEXTS.support;
+  const contactSection =
+    form.closest('.contact-card') || form.parentElement || document;
+  const context = resolveContactContext(form);
   const topics = context.topics;
   const topicField = form.querySelector('#contactTopic');
   const reasonField = form.querySelector('#contactReason');
   const recipientNote = form.querySelector('[data-recipient-note]');
+  const contextNote = contactSection.querySelector(
+    '[data-contact-context-note]',
+  );
   const statusNode = form.querySelector('[data-contact-status]');
   const messageField = form.querySelector('#contactMessage');
   const replyField = form.querySelector('#contactReply');
@@ -290,14 +396,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const composeSummary = form.querySelector('[data-compose-summary]');
   const copyButton = form.querySelector('[data-compose-copy]');
   const directConsentField = form.querySelector('[data-direct-consent]');
+  const marketingConsentField = form.querySelector('[data-marketing-consent]');
   const honeypotField = form.querySelector('[data-contact-honey]');
   const actionButtons = form.querySelectorAll('[data-contact-action]');
+  const prefill = getContactPrefill();
   let currentCompose = null;
+  let isBusy = false;
+  let hasAppliedPrefillReason = false;
 
   if (
     !topicField ||
     !reasonField ||
-    !recipientNote ||
     !statusNode ||
     !messageField ||
     !replyField ||
@@ -345,16 +454,119 @@ document.addEventListener('DOMContentLoaded', () => {
     emailOptions.hidden = false;
   }
 
-  function setActionState(isBusy) {
-    actionButtons.forEach((button) => {
-      button.disabled = isBusy;
+  function setActionState(nextBusy) {
+    isBusy = Boolean(nextBusy);
 
+    actionButtons.forEach((button) => {
       if (isBusy) {
         button.setAttribute('aria-busy', 'true');
       } else {
         button.removeAttribute('aria-busy');
       }
     });
+
+    refreshFormState({ syncStatus: false });
+  }
+
+  function getFormState(requestedAction) {
+    const blockers = [];
+    const topic = topicField.value;
+    const reason = reasonField.value;
+    const message = messageField.value.trim();
+    const replyEmail = replyField.value.trim();
+    const name = nameField.value.trim();
+    let focusTarget = null;
+
+    if (context.requireName && name.length < MIN_NAME_LENGTH) {
+      blockers.push('your name');
+      focusTarget = focusTarget || nameField;
+    }
+
+    if (
+      (context.requireReplyEmail || requestedAction === 'direct') &&
+      !replyEmail
+    ) {
+      blockers.push('a reply email');
+      focusTarget = focusTarget || replyField;
+    } else if (replyEmail && !replyField.checkValidity()) {
+      blockers.push('a valid email address');
+      focusTarget = focusTarget || replyField;
+    }
+
+    if (!topic) {
+      blockers.push('a topic');
+      focusTarget = focusTarget || topicField;
+    }
+
+    if (!reason) {
+      blockers.push('a reason');
+      focusTarget = focusTarget || reasonField;
+    }
+
+    if (message.length < MIN_MESSAGE_LENGTH) {
+      blockers.push(`a message of at least ${MIN_MESSAGE_LENGTH} characters`);
+      focusTarget = focusTarget || messageField;
+    }
+
+    if (
+      requestedAction === 'direct' &&
+      directConsentField &&
+      !directConsentField.checked
+    ) {
+      blockers.push('the send-from-page confirmation');
+      focusTarget = focusTarget || directConsentField;
+    }
+
+    return {
+      valid: blockers.length === 0,
+      blockers,
+      focusTarget,
+      topic,
+      reason,
+      message,
+      replyEmail,
+      name,
+    };
+  }
+
+  function getReadinessMessage() {
+    const composeState = getFormState('compose');
+    const directState = getFormState('direct');
+
+    if (!composeState.valid) {
+      return `Complete ${joinRequirementList(composeState.blockers)} to keep going.`;
+    }
+
+    if (!directState.valid) {
+      return 'You can use your email app now, or confirm send-from-page if you want to send it here.';
+    }
+
+    return 'Ready to send.';
+  }
+
+  function refreshFormState({ syncStatus = true } = {}) {
+    const composeState = getFormState('compose');
+    const directState = getFormState('direct');
+
+    actionButtons.forEach((button) => {
+      const action =
+        button.dataset.contactAction === 'direct' ? 'direct' : 'compose';
+      const canUse =
+        action === 'direct' ? directState.valid : composeState.valid;
+
+      button.disabled = isBusy || !canUse;
+      button.setAttribute('aria-disabled', String(button.disabled));
+
+      if (!isBusy) {
+        button.removeAttribute('aria-busy');
+      }
+    });
+
+    if (syncStatus && !isBusy) {
+      setStatus(statusNode, 'idle', getReadinessMessage());
+    }
+
+    return { composeState, directState };
   }
 
   function updateTopicState() {
@@ -367,26 +579,59 @@ document.addEventListener('DOMContentLoaded', () => {
     const config = getTopicConfig(topics, topicField.value);
     reasonField.innerHTML = buildReasonOptions(config);
     reasonField.value = config.reasons[0][0];
-    recipientNote.textContent =
-      config.routeNote || `This goes to ${config.inboxLabel}.`;
-    setStatus(statusNode, 'idle', context.idleMessage);
+    if (
+      !hasAppliedPrefillReason &&
+      topicField.value === prefill.topic &&
+      config.reasons.some(([value]) => value === prefill.reason)
+    ) {
+      reasonField.value = prefill.reason;
+      hasAppliedPrefillReason = true;
+    }
+    if (recipientNote) {
+      recipientNote.textContent = '';
+    }
+    refreshFormState();
   }
 
-  if (!topicField.value) {
+  if (prefill.productLabel) {
+    if (contextNote) {
+      contextNote.hidden = false;
+      contextNote.textContent = `Currently about ${prefill.productLabel}. You can change the topic below if you need something else.`;
+    }
+    messageField.placeholder =
+      'What happened, what you expected, and what you need next.';
+  } else if (contextNote) {
+    contextNote.hidden = true;
+  }
+
+  if (prefill.topic && topics[prefill.topic]) {
+    topicField.value = prefill.topic;
+  } else if (prefill.productLabel && topics.product) {
+    topicField.value = 'product';
+    prefill.topic = 'product';
+  } else if (!topicField.value) {
     topicField.value = getDefaultTopicKey(topics);
   }
 
   topicField.addEventListener('change', updateTopicState);
   updateTopicState();
 
-  [reasonField, messageField, replyField, nameField].forEach((field) => {
-    field.addEventListener('input', () => {
-      if (!currentCompose) {
-        return;
+  const draftChangeHandlers = [
+    [reasonField, 'change'],
+    [messageField, 'input'],
+    [replyField, 'input'],
+    [nameField, 'input'],
+    [marketingConsentField, 'change'],
+    [directConsentField, 'change'],
+  ].filter(([field]) => Boolean(field));
+
+  draftChangeHandlers.forEach(([field, eventName]) => {
+    field.addEventListener(eventName, () => {
+      if (currentCompose) {
+        hideEmailOptions();
       }
 
-      hideEmailOptions();
-      setStatus(statusNode, 'idle', context.idleMessage);
+      refreshFormState();
     });
   });
 
@@ -396,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setStatus(
           statusNode,
           'error',
-          'Prepare the message first, then use copy if you need it.',
+          'Open an email draft first, then copy the details if you need them.',
         );
         return;
       }
@@ -415,16 +660,12 @@ document.addEventListener('DOMContentLoaded', () => {
           throw new Error('Copy failed');
         }
 
-        setStatus(
-          statusNode,
-          'success',
-          'Email details copied. Paste them into any mail app if you prefer.',
-        );
+        setStatus(statusNode, 'success', 'Email details copied.');
       } catch (error) {
         setStatus(
           statusNode,
           'error',
-          'Copy failed here. Use Gmail, Outlook, Yahoo, or the default mail app buttons instead.',
+          'Copy failed here. Use one of the email buttons instead.',
         );
       }
     });
@@ -440,72 +681,30 @@ document.addEventListener('DOMContentLoaded', () => {
           ? 'direct'
           : 'compose';
 
-    const topic = topicField.value;
-    const reason = reasonField.value;
+    const formState = getFormState(requestedAction);
+    const topic = formState.topic;
+    const reason = formState.reason;
     const config = getTopicConfig(topics, topic);
-    const message = messageField.value.trim();
-    const replyEmail = replyField.value.trim();
-    const name = nameField.value.trim();
-    const needsDirectReplyEmail = requestedAction === 'direct';
+    const message = formState.message;
+    const replyEmail = formState.replyEmail;
+    const name = formState.name;
+    const marketingConsent = Boolean(
+      marketingConsentField && marketingConsentField.checked,
+    );
 
-    if (context.requireName && !name) {
+    if (!formState.valid) {
       setStatus(
         statusNode,
         'error',
         requestedAction === 'direct'
-          ? 'Add your name before sending directly.'
-          : 'Add your name before using an email app.',
+          ? `Complete ${joinRequirementList(formState.blockers)} before sending here.`
+          : `Complete ${joinRequirementList(formState.blockers)} before opening your email app.`,
       );
-      nameField.focus();
-      return;
-    }
 
-    if ((context.requireReplyEmail || needsDirectReplyEmail) && !replyEmail) {
-      setStatus(
-        statusNode,
-        'error',
-        requestedAction === 'direct'
-          ? 'Add your email before sending directly so I can reply.'
-          : 'Add your email before using an email app.',
-      );
-      replyField.focus();
-      return;
-    }
+      if (formState.focusTarget) {
+        formState.focusTarget.focus();
+      }
 
-    if (replyEmail && !replyField.checkValidity()) {
-      setStatus(
-        statusNode,
-        'error',
-        requestedAction === 'direct'
-          ? 'Use a valid email address before sending directly.'
-          : 'Use a valid email address before using an email app.',
-      );
-      replyField.focus();
-      return;
-    }
-
-    if (!topic || !reason || message.length < 10) {
-      setStatus(
-        statusNode,
-        'error',
-        requestedAction === 'direct'
-          ? 'Pick a topic, pick a reason, and write a short message before sending directly.'
-          : 'Pick a topic, pick a reason, and write a short message before using an email app.',
-      );
-      return;
-    }
-
-    if (
-      requestedAction === 'direct' &&
-      directConsentField &&
-      !directConsentField.checked
-    ) {
-      setStatus(
-        statusNode,
-        'error',
-        'Confirm the direct-send notice before sending straight to my inbox.',
-      );
-      directConsentField.focus();
       return;
     }
 
@@ -517,16 +716,14 @@ document.addEventListener('DOMContentLoaded', () => {
       name,
       replyEmail,
       message,
+      marketingConsent,
+      prefill.productLabel,
     );
 
     if (requestedAction === 'compose') {
       showEmailOptions(compose);
 
-      setStatus(
-        statusNode,
-        'success',
-        'Your message is ready. Pick the email option you want below.',
-      );
+      setStatus(statusNode, 'success', 'Your email draft is ready below.');
       return;
     }
 
@@ -534,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'Direct send is not supported in this browser. Use Email App instead.',
+        'This browser cannot send from the page. Use My Email instead.',
       );
       return;
     }
@@ -547,15 +744,12 @@ document.addEventListener('DOMContentLoaded', () => {
       replyEmail,
       message,
       honeypotField ? honeypotField.value.trim() : '',
+      marketingConsent,
     );
 
     hideEmailOptions();
     setActionState(true);
-    setStatus(
-      statusNode,
-      'idle',
-      'Sending directly to the selected inbox. Your email app will not open.',
-    );
+    setStatus(statusNode, 'idle', 'Sending from this page...');
 
     try {
       await sendDirectMessage(directPayload);
@@ -563,17 +757,18 @@ document.addEventListener('DOMContentLoaded', () => {
       form.reset();
       updateTopicState();
       hideEmailOptions();
+      refreshFormState({ syncStatus: false });
       setStatus(
         statusNode,
         'success',
-        `Sent directly to ${compose.to}. No email app was opened. Watch for a reply at ${replyEmail}.`,
+        `Sent. Watch for a reply at ${replyEmail}.`,
       );
     } catch (error) {
       showEmailOptions(compose);
       setStatus(
         statusNode,
         'error',
-        `${error.message} If you need to keep moving, use Email App below instead.`,
+        `${error.message} You can use My Email below instead.`,
       );
     } finally {
       setActionState(false);

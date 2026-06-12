@@ -8,35 +8,6 @@
 
   root.classList.add('js-enhanced');
 
-  var reduceMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var finePointerQuery = window.matchMedia('(pointer: fine)');
-  var coarsePointerQuery = window.matchMedia('(pointer: coarse)');
-
-  function syncPointerClass() {
-    root.classList.toggle(
-      'coarse-pointer',
-      coarsePointerQuery.matches && !finePointerQuery.matches,
-    );
-  }
-
-  syncPointerClass();
-
-  if (typeof coarsePointerQuery.addEventListener === 'function') {
-    coarsePointerQuery.addEventListener('change', syncPointerClass);
-  } else if (typeof coarsePointerQuery.addListener === 'function') {
-    coarsePointerQuery.addListener(syncPointerClass);
-  }
-
-  if (typeof finePointerQuery.addEventListener === 'function') {
-    finePointerQuery.addEventListener('change', syncPointerClass);
-  } else if (typeof finePointerQuery.addListener === 'function') {
-    finePointerQuery.addListener(syncPointerClass);
-  }
-
-  function setRootVar(name, value) {
-    root.style.setProperty(name, value);
-  }
-
   function installProgressBar() {
     if (document.querySelector('.site-progress')) {
       return;
@@ -58,12 +29,11 @@
         document.documentElement.scrollHeight,
         body.scrollHeight,
       );
-      var visibleHeight = window.innerHeight;
-      var scrollable = Math.max(scrollHeight - visibleHeight, 0);
+      var scrollable = Math.max(scrollHeight - window.innerHeight, 0);
       var progress =
         scrollable === 0 ? 0 : Math.min(window.scrollY / scrollable, 1);
 
-      setRootVar('--scroll-progress', progress.toFixed(4));
+      root.style.setProperty('--scroll-progress', progress.toFixed(4));
     }
 
     function queueUpdate() {
@@ -79,407 +49,43 @@
     window.addEventListener('resize', queueUpdate);
   }
 
-  function setupReveal() {
-    var selectors = [
-      '.page-hero > *',
-      '.section-shell > .section-heading',
-      '.section-shell > .info-grid > *',
-      '.section-shell > .feature-grid > *',
-      '.section-shell > .plan-grid > *',
-      '.section-shell > .boundary-card',
-      '.split-layout > *',
-      '.support-grid > *',
-      '.contact-card',
-      '.page > .boundary-card',
-    ];
-    var seen = new Set();
-    var targets = [];
-
-    selectors.forEach(function (selector) {
-      document.querySelectorAll(selector).forEach(function (element) {
-        if (seen.has(element)) {
-          return;
-        }
-
-        seen.add(element);
-        targets.push(element);
-      });
-    });
-
-    targets.forEach(function (element, index) {
-      element.setAttribute('data-reveal', '');
-      element.style.setProperty(
-        '--reveal-delay',
-        String(Math.min((index % 7) * 55, 330)) + 'ms',
-      );
-    });
-
-    if (reduceMotionQuery.matches || !('IntersectionObserver' in window)) {
-      targets.forEach(function (element) {
-        element.classList.add('is-visible');
-      });
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.14,
-        rootMargin: '0px 0px -8% 0px',
-      },
-    );
-
-    targets.forEach(function (element) {
-      observer.observe(element);
-    });
-  }
-
-  function setupCardSpots() {
-    if (reduceMotionQuery.matches) {
-      return;
-    }
-
-    var cardSelector =
-      '.surface, .boundary-card, .contact-card, .feature-card, .info-card, .support-card, .policy-card, .release-card, .mini-card';
-    var cards = document.querySelectorAll(cardSelector);
-
-    function setupCoarseCardSpots() {
-      var driftFrame = 0;
-
-      function queueDrift() {
-        if (driftFrame) {
-          return;
-        }
-
-        driftFrame = window.requestAnimationFrame(function () {
-          driftFrame = 0;
-
-          cards.forEach(function (card, index) {
-            if (card.classList.contains('is-touch-active')) {
-              return;
-            }
-
-            var rect = card.getBoundingClientRect();
-
-            if (rect.bottom < 0 || rect.top > window.innerHeight) {
-              return;
-            }
-
-            var center = rect.top + rect.height * 0.5;
-            var ratio = Math.max(0, Math.min(center / window.innerHeight, 1));
-            var driftX = 24 + (index % 3) * 22 + (1 - ratio) * 8;
-            var driftY = 16 + ratio * 48;
-
-            card.style.setProperty('--spot-x', driftX.toFixed(2) + '%');
-            card.style.setProperty('--spot-y', driftY.toFixed(2) + '%');
-          });
-        });
-      }
-
-      cards.forEach(function (card, index) {
-        var resetTimer = 0;
-        var baseAlpha =
-          card.matches('.page-hero-copy, .hero-copy') ? '0.12' : '0.072';
-
-        card.style.setProperty('--spot-alpha', baseAlpha);
-        card.style.setProperty('--spot-x', String(26 + (index % 3) * 20) + '%');
-        card.style.setProperty('--spot-y', String(18 + (index % 4) * 10) + '%');
-
-        function setTouchSpot(clientX, clientY, alpha) {
-          var rect = card.getBoundingClientRect();
-          var nextX = ((clientX - rect.left) / rect.width) * 100;
-          var nextY = ((clientY - rect.top) / rect.height) * 100;
-          var clampedX = Math.max(8, Math.min(nextX, 92));
-          var clampedY = Math.max(8, Math.min(nextY, 92));
-
-          card.style.setProperty('--spot-alpha', alpha);
-          card.style.setProperty('--spot-x', clampedX.toFixed(2) + '%');
-          card.style.setProperty('--spot-y', clampedY.toFixed(2) + '%');
-        }
-
-        function restoreBaseGlow(delay) {
-          window.clearTimeout(resetTimer);
-
-          resetTimer = window.setTimeout(function () {
-            card.classList.remove('is-touch-active');
-            card.style.setProperty('--spot-alpha', baseAlpha);
-            queueDrift();
-          }, delay);
-        }
-
-        function handlePointerDown(event) {
-          if (
-            event.pointerType &&
-            event.pointerType !== 'touch' &&
-            event.pointerType !== 'pen'
-          ) {
-            return;
-          }
-
-          card.classList.add('is-touch-active');
-          setTouchSpot(event.clientX, event.clientY, '0.18');
-          restoreBaseGlow(320);
-        }
-
-        function handlePointerMove(event) {
-          if (
-            event.pointerType &&
-            event.pointerType !== 'touch' &&
-            event.pointerType !== 'pen'
-          ) {
-            return;
-          }
-
-          if (!card.classList.contains('is-touch-active')) {
-            return;
-          }
-
-          setTouchSpot(event.clientX, event.clientY, '0.16');
-        }
-
-        function handlePointerEnd() {
-          restoreBaseGlow(220);
-        }
-
-        function handleTouchStart(event) {
-          if (window.PointerEvent) {
-            return;
-          }
-
-          var touch = event.touches && event.touches[0];
-
-          if (!touch) {
-            return;
-          }
-
-          card.classList.add('is-touch-active');
-          setTouchSpot(touch.clientX, touch.clientY, '0.18');
-          restoreBaseGlow(320);
-        }
-
-        function handleTouchMove(event) {
-          if (window.PointerEvent || !card.classList.contains('is-touch-active')) {
-            return;
-          }
-
-          var touch = event.touches && event.touches[0];
-
-          if (!touch) {
-            return;
-          }
-
-          setTouchSpot(touch.clientX, touch.clientY, '0.16');
-        }
-
-        card.addEventListener('pointerdown', handlePointerDown, {
-          passive: true,
-        });
-        card.addEventListener('pointermove', handlePointerMove, {
-          passive: true,
-        });
-        card.addEventListener('pointerup', handlePointerEnd, {
-          passive: true,
-        });
-        card.addEventListener('pointercancel', handlePointerEnd, {
-          passive: true,
-        });
-
-        card.addEventListener('touchstart', handleTouchStart, {
-          passive: true,
-        });
-        card.addEventListener('touchmove', handleTouchMove, {
-          passive: true,
-        });
-        card.addEventListener('touchend', handlePointerEnd, {
-          passive: true,
-        });
-        card.addEventListener('touchcancel', handlePointerEnd, {
-          passive: true,
-        });
-      });
-
-      queueDrift();
-      window.addEventListener('scroll', queueDrift, { passive: true });
-      window.addEventListener('resize', queueDrift);
-    }
-
-    if (!finePointerQuery.matches) {
-      if (coarsePointerQuery.matches) {
-        setupCoarseCardSpots();
-      }
-
-      return;
-    }
-
-    var activeCard = null;
-    var globalFrame = 0;
-    var globalEvent = null;
-
-    function setCardSpot(card, event) {
-      var rect = card.getBoundingClientRect();
-      var nextX = ((event.clientX - rect.left) / rect.width) * 100;
-      var nextY = ((event.clientY - rect.top) / rect.height) * 100;
-
-      card.style.setProperty('--spot-alpha', '0.16');
-      card.style.setProperty('--spot-x', nextX.toFixed(2) + '%');
-      card.style.setProperty('--spot-y', nextY.toFixed(2) + '%');
-    }
-
-    function resetCardSpot(card) {
-      card.style.setProperty('--spot-alpha', '0.035');
-      card.style.setProperty('--spot-x', '50%');
-      card.style.setProperty('--spot-y', '50%');
-    }
-
-    function renderGlobalSpot() {
-      var event = globalEvent;
-      var target =
-        event && event.target && event.target.closest
-          ? event.target.closest(cardSelector)
-          : null;
-
-      globalFrame = 0;
-
-      if (!target) {
-        if (activeCard) {
-          resetCardSpot(activeCard);
-          activeCard = null;
-        }
-
+  function setupCopyCode() {
+    document.querySelectorAll('pre.copyable').forEach(function (pre) {
+      if (pre.querySelector('.copy-code')) {
         return;
       }
 
-      if (activeCard && activeCard !== target) {
-        resetCardSpot(activeCard);
-      }
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'copy-code';
+      button.textContent = 'Copy';
+      button.setAttribute('aria-label', 'Copy code to clipboard');
+      pre.appendChild(button);
 
-      activeCard = target;
-      setCardSpot(target, event);
-    }
+      button.addEventListener('click', function () {
+        var code = pre.querySelector('code');
+        var text = code ? code.textContent : pre.textContent;
 
-    function queueGlobalSpot(event) {
-      globalEvent = event;
-
-      if (globalFrame) {
-        return;
-      }
-
-      globalFrame = window.requestAnimationFrame(renderGlobalSpot);
-    }
-
-    document.addEventListener('pointermove', queueGlobalSpot, {
-      passive: true,
-    });
-    document.addEventListener('mousemove', queueGlobalSpot, { passive: true });
-    document.addEventListener('mouseleave', function () {
-      if (activeCard) {
-        resetCardSpot(activeCard);
-        activeCard = null;
-      }
-    });
-
-    document
-      .querySelectorAll('.page-hero-copy, .hero-copy')
-      .forEach(function (heroCard) {
-        heroCard.addEventListener(
-          'mousemove',
-          function (event) {
-            setCardSpot(heroCard, event);
-          },
-          { passive: true },
-        );
-
-        heroCard.addEventListener(
-          'pointermove',
-          function (event) {
-            setCardSpot(heroCard, event);
-          },
-          { passive: true },
-        );
-
-        heroCard.addEventListener('mouseenter', function () {
-          heroCard.style.setProperty('--spot-alpha', '0.16');
-        });
-
-        heroCard.addEventListener('pointerenter', function () {
-          heroCard.style.setProperty('--spot-alpha', '0.16');
-        });
-
-        heroCard.addEventListener('mouseleave', function () {
-          resetCardSpot(heroCard);
-        });
-
-        heroCard.addEventListener('pointerleave', function () {
-          resetCardSpot(heroCard);
-        });
-      });
-
-    cards.forEach(function (card) {
-      var frame = 0;
-      var spotX = 50;
-      var spotY = 50;
-
-      function render() {
-        frame = 0;
-        card.style.setProperty('--spot-x', spotX.toFixed(2) + '%');
-        card.style.setProperty('--spot-y', spotY.toFixed(2) + '%');
-      }
-
-      function queueRender(nextX, nextY) {
-        spotX = nextX;
-        spotY = nextY;
-
-        if (frame) {
+        if (!navigator.clipboard || !navigator.clipboard.writeText) {
           return;
         }
 
-        frame = window.requestAnimationFrame(render);
-      }
-
-      function handleEnter() {
-        card.style.setProperty('--spot-alpha', '0.16');
-      }
-
-      function handleMove(event) {
-        var rect = card.getBoundingClientRect();
-        var nextX = ((event.clientX - rect.left) / rect.width) * 100;
-        var nextY = ((event.clientY - rect.top) / rect.height) * 100;
-
-        queueRender(nextX, nextY);
-      }
-
-      function handleLeave() {
-        card.style.setProperty('--spot-alpha', '0.035');
-        queueRender(50, 50);
-      }
-
-      card.addEventListener('pointerenter', handleEnter);
-      card.addEventListener('mouseenter', handleEnter);
-
-      card.addEventListener('pointermove', handleMove, { passive: true });
-
-      card.addEventListener('mousemove', handleMove, { passive: true });
-
-      card.addEventListener('pointerleave', handleLeave);
-      card.addEventListener('mouseleave', handleLeave);
+        navigator.clipboard.writeText(text).then(function () {
+          button.textContent = 'Copied';
+          window.setTimeout(function () {
+            button.textContent = 'Copy';
+          }, 1500);
+        });
+      });
     });
   }
 
-  function setupQuickLinkState() {
+  function setupCurrentHashLink() {
     var links = Array.prototype.slice.call(
       document.querySelectorAll('.quick-links a[href^="#"]'),
     );
 
-    if (links.length === 0) {
+    if (!links.length || !('IntersectionObserver' in window)) {
       return;
     }
 
@@ -489,28 +95,6 @@
         return target ? { link: link, target: target } : null;
       })
       .filter(Boolean);
-
-    if (items.length === 0) {
-      return;
-    }
-
-    function markActive(activeTarget) {
-      items.forEach(function (item) {
-        var isActive = item.target === activeTarget;
-        item.link.classList.toggle('is-active', isActive);
-
-        if (isActive) {
-          item.link.setAttribute('aria-current', 'true');
-        } else {
-          item.link.removeAttribute('aria-current');
-        }
-      });
-    }
-
-    if (!('IntersectionObserver' in window)) {
-      markActive(items[0].target);
-      return;
-    }
 
     var observer = new IntersectionObserver(
       function (entries) {
@@ -522,26 +106,80 @@
             return right.intersectionRatio - left.intersectionRatio;
           });
 
-        if (visible.length > 0) {
-          markActive(visible[0].target);
+        if (!visible.length) {
+          return;
         }
+
+        items.forEach(function (item) {
+          var active = item.target === visible[0].target;
+          item.link.classList.toggle('is-active', active);
+          if (active) {
+            item.link.setAttribute('aria-current', 'true');
+          } else {
+            item.link.removeAttribute('aria-current');
+          }
+        });
       },
       {
-        threshold: [0.2, 0.45, 0.7],
-        rootMargin: '-18% 0px -52% 0px',
+        threshold: [0.22, 0.5, 0.75],
+        rootMargin: '-16% 0px -54% 0px',
       },
     );
 
     items.forEach(function (item) {
       observer.observe(item.target);
     });
+  }
 
-    markActive(items[0].target);
+  function scrollToInitialHash() {
+    if (!window.location.hash || window.location.hash.length < 2) {
+      return;
+    }
+
+    var id = window.location.hash.slice(1);
+
+    try {
+      id = decodeURIComponent(id);
+    } catch (error) {
+      return;
+    }
+
+    var target = document.getElementById(id);
+
+    if (!target) {
+      return;
+    }
+
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    function scroll() {
+      var header = document.querySelector('.site-header');
+      var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
+      var targetTop = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+      window.scrollTo(0, Math.max(targetTop, 0));
+    }
+
+    window.requestAnimationFrame(scroll);
+    window.setTimeout(scroll, 100);
+    window.setTimeout(scroll, 350);
+  }
+
+  function ready(callback) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', callback);
+      return;
+    }
+
+    callback();
   }
 
   installProgressBar();
   setupScrollProgress();
-  setupReveal();
-  setupCardSpots();
-  setupQuickLinkState();
+  ready(function () {
+    setupCopyCode();
+    setupCurrentHashLink();
+    scrollToInitialHash();
+  });
 })();

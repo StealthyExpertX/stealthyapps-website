@@ -3,45 +3,63 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Page not found — Stealthy Apps</title>
-  <meta name="robots" content="noindex">
-  <link rel="icon" href="/assets/stealthyapps-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=ux-audit-v8">
+  <title>Page not found - FillPro</title>
+  <meta name="description" content="The page is missing. Start at FillPro, privacy, support, contact, or the sitemap.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="theme-color" content="#0f766e">
+  <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/fillpro-logo.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v5">
 </head>
 <body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
   <header class="site-header">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="/">
-        <img class="brand-logo" src="/assets/stealthyapps-logo.svg" alt="Stealthy Apps logo" width="48" height="48" decoding="async">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="FillPro home">
+        <img class="brand-logo" src="/assets/fillpro-logo.svg" alt="" width="42" height="42" decoding="async">
         <span class="brand-lockup">
-          <span class="brand-title">Stealthy Apps</span>
-          <span class="brand-subtitle">Privacy-first apps and tools</span>
+          <span class="brand-title">FillPro</span>
+          <span class="brand-subtitle">Private form autofill</span>
         </span>
       </a>
+      <div class="nav-links">
+        <a href="/apps/fillpro/">Product</a>
+        <a href="/apps/fillpro/privacy/">Privacy</a>
+        <a href="/support/">Support</a>
+        <a href="/contact/">Contact</a>
+      </div>
     </nav>
   </header>
-  <main class="page">
-    <section class="page-hero">
-      <div class="surface page-hero-copy">
-        <div class="page-intro">
-          <p class="eyebrow">404</p>
-          <h1>That page isn't here.</h1>
-          <p class="lead">The link is broken or the page moved. The real pages are still easy to find from here.</p>
-        </div>
+
+  <main id="content" tabindex="-1" class="page">
+    <section class="section two-col">
+      <div class="page-intro">
+        <p class="eyebrow">404</p>
+        <h1>That page is not here.</h1>
+        <p class="lead">The useful FillPro pages are still close by: product, privacy, support, contact, and the full sitemap.</p>
         <div class="actions">
-          <a class="button primary" href="/">Home</a>
-          <a class="button" href="/apps/fillpro/">FillPro</a>
-          <a class="button" href="/about.html">About</a>
+          <a class="button primary" href="/apps/fillpro/">Open FillPro</a>
+          <a class="button" href="/support/">Get support</a>
+          <a class="button" href="/sitemap.html">View sitemap</a>
         </div>
+      </div>
+      <div class="card callout">
+        <h2>Looking for an old link?</h2>
+        <p>Older product, support, privacy, and contact aliases are still routed to their current FillPro pages.</p>
       </div>
     </section>
   </main>
+
   <footer>
     <div class="footer-inner">
-      <span>Privacy-first software by Karl.</span>
-      <span><a href="/">Home</a> | <a href="/#apps">Apps</a> | <a href="/contact.html">Contact</a></span>
+      <span>FillPro, built by Karl.</span>
+      <span><a href="/">Home</a> | <a href="/apps/fillpro/">Product</a> | <a href="/contact/">Contact</a></span>
     </div>
   </footer>
-  <script src="/site.js?v=hero-spotlight-v3" defer></script>
+  <script src="/site.js?v=fillpro-site-v5" defer></script>
 </body>
 </html>

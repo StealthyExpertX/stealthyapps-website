@@ -1,0 +1,61 @@
+{
+  "name": "FillPro - Private form autofill",
+  "short_name": "FillPro",
+  "description": "Private Chrome form autofill for job applications, signup forms, onboarding pages, and repeated business forms.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f8fb",
+  "theme_color": "#0f766e",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/assets/fillpro-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/fillpro-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/fillpro-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Open FillPro",
+      "short_name": "FillPro",
+      "description": "Private form autofill for Chrome.",
+      "url": "/apps/fillpro/?source=pwa",
+      "icons": [
+        {
+          "src": "/assets/fillpro-logo.svg",
+          "sizes": "any",
+          "type": "image/svg+xml"
+        }
+      ]
+    },
+    {
+      "name": "Support",
+      "short_name": "Support",
+      "description": "Get FillPro setup, compatibility, billing, and privacy help.",
+      "url": "/support/?source=pwa"
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Send a FillPro question or bug report.",
+      "url": "/contact/?source=pwa"
+    }
+  ]
+}

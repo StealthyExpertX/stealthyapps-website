@@ -3,25 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FillPro — Local-first autofill</title>
-  <meta name="description" content="FillPro is a private, local-only form autofill extension for Chrome. No tracking. No accounts. Skips passwords, payment fields, and one-time codes by design. Free tier with 3 profiles. Pro from $3.99/month with a 7-day free trial.">
-  <meta name="keywords" content="form autofill, chrome autofill, chrome extension, private autofill, fillpro, lastpass alternative, dashlane alternative, indie autofill extension, no tracking autofill, local-only autofill">
+  <title>FillPro - Chrome Form Filler for Job Applications and Repeated Forms</title>
+  <meta name="description" content="FillPro is a private Chrome form filler for job applications, signup forms, intake pages, and repeated business forms. Local profiles, smart rules, uploads, and 3 free profiles.">
+  <meta name="author" content="Karl">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="referrer" content="no-referrer">
-  <meta name="theme-color" content="#0b1a23">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta name="theme-color" content="#0f766e">
   <link rel="canonical" href="https://stealthyapps.com/apps/fillpro/">
   <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/styles.css?v=ux-audit-v8">
+  <link rel="apple-touch-icon" href="/assets/fillpro-logo.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="search" type="application/opensearchdescription+xml" title="FillPro" href="/opensearch.xml">
+  <link rel="alternate" type="text/markdown" title="FillPro product page (Markdown)" href="/apps/fillpro/index.md">
+  <link rel="alternate" type="text/plain" title="FillPro crawler index" href="/llms.txt">
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v5">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Stealthy Apps">
-  <meta property="og:title" content="FillPro — Local-first autofill">
-  <meta property="og:description" content="Local-only form autofill. No tracking, no accounts, no servers. Free tier with 3 profiles. Pro from $3.99/month, 7-day free trial.">
+  <meta property="og:site_name" content="FillPro">
+  <meta property="og:title" content="FillPro - Private Chrome Form Filler">
+  <meta property="og:description" content="Fill job applications, signup forms, onboarding pages, and repeated business forms from local profiles.">
   <meta property="og:url" content="https://stealthyapps.com/apps/fillpro/">
-  <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
+  <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-popup.png">
+  <meta property="og:locale" content="en_US">
+  <meta property="article:modified_time" content="2026-06-12T00:00:00Z">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="FillPro — Local-first autofill">
-  <meta name="twitter:description" content="Local-only autofill for Chrome. No tracking, no accounts.">
-  <meta name="twitter:image" content="https://stealthyapps.com/assets/fillpro-logo.svg">
+  <meta name="twitter:title" content="FillPro - Private Chrome Form Filler">
+  <meta name="twitter:description" content="Local profiles, smart rules, uploads, and honest privacy boundaries.">
+  <meta name="twitter:image" content="https://stealthyapps.com/assets/fillpro-popup.png">
 
   <script type="application/ld+json">
   {
@@ -29,16 +39,28 @@
     "@graph": [
       {
         "@type": "SoftwareApplication",
+        "@id": "https://stealthyapps.com/apps/fillpro/#software",
         "name": "FillPro",
         "applicationCategory": "BrowserApplication",
         "operatingSystem": "Chrome",
+        "softwareVersion": "1.0.0",
         "url": "https://stealthyapps.com/apps/fillpro/",
-        "image": "https://stealthyapps.com/assets/fillpro-logo.svg",
-        "description": "Private, local-only form autofill for Chrome. Skips passwords and payment fields by design.",
-        "publisher": { "@type": "Organization", "name": "Stealthy Apps" },
-        "author": { "@type": "Person", "name": "Karl" },
+        "image": "https://stealthyapps.com/assets/fillpro-popup.png",
+        "description": "Private Chrome form filler for job applications, signup forms, intake pages, and repeated business forms. Profiles, rules, and uploads stay local in the browser.",
+        "publisher": { "@type": "Organization", "name": "FillPro", "url": "https://stealthyapps.com/" },
+        "author": { "@type": "Person", "name": "Karl Davis" },
+        "featureList": [
+          "Local autofill profiles",
+          "Smart rules and custom fields",
+          "Resume and file upload matching",
+          "On-page picker",
+          "Undo last fill",
+          "Field-learning suggestions",
+          "Shadow DOM and same-origin iframe support",
+          "Split birthday and segmented phone field support"
+        ],
         "offers": [
-          { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free", "availability": "https://schema.org/InStock" },
+          { "@type": "Offer", "price": "0", "priceCurrency": "USD", "name": "Free" },
           { "@type": "Offer", "price": "3.99", "priceCurrency": "USD", "name": "Pro monthly" },
           { "@type": "Offer", "price": "29.99", "priceCurrency": "USD", "name": "Pro yearly" },
           { "@type": "Offer", "price": "39.99", "priceCurrency": "USD", "name": "Pro lifetime" }
@@ -47,8 +69,8 @@
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Stealthy Apps", "item": "https://stealthyapps.com/" },
-          { "@type": "ListItem", "position": 2, "name": "FillPro", "item": "https://stealthyapps.com/apps/fillpro/" }
+          { "@type": "ListItem", "position": 1, "name": "FillPro", "item": "https://stealthyapps.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Product", "item": "https://stealthyapps.com/apps/fillpro/" }
         ]
       },
       {
@@ -56,33 +78,23 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Does FillPro send my data anywhere?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. Profiles, smart rules, and uploads stay in your browser. There is no server in the loop for the autofill flow." }
+            "name": "What does FillPro do?",
+            "acceptedAnswer": { "@type": "Answer", "text": "FillPro fills repeated web forms from local profiles you save in the Chrome extension. It is useful for job applications, signup forms, demo requests, vendor intake, onboarding, QA profiles, and other repeated forms." }
           },
           {
             "@type": "Question",
-            "name": "Does FillPro fill passwords or credit card numbers?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. Passwords, payment fields, CVCs, SSNs, tax IDs, and one-time codes are skipped by design. Use a password manager and your browser's secure payment methods for those." }
+            "name": "Does FillPro keep data local?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. Profiles, smart rules, and uploads stay in extension-managed local browser storage unless you choose to export them." }
           },
           {
             "@type": "Question",
-            "name": "How is FillPro being released?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Chrome first. I only list support I can stand behind, and the public Chrome install link will appear on the site when it is live." }
+            "name": "Does FillPro work on Workday, Greenhouse, Lever, Ashby, and similar job sites?",
+            "acceptedAnswer": { "@type": "Answer", "text": "FillPro handles many accessible HTML fields on modern application platforms, including dynamic labels, same-origin iframes, Shadow DOM components, and custom fields. Some custom widgets, CAPTCHA, payment iframes, and browser-native PDF viewers remain out of scope." }
           },
           {
             "@type": "Question",
-            "name": "Is there a free version of FillPro?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. The free tier includes 3 saved profiles, Fill Page, the on-page picker, smart rules, and local uploads. Pro removes the profile cap and adds import/export and profile duplication." }
-          },
-          {
-            "@type": "Question",
-            "name": "How much does FillPro Pro cost?",
-            "acceptedAnswer": { "@type": "Answer", "text": "$3.99/month, $29.99/year, or $39.99 lifetime. There is a 7-day free Pro trial — no card required." }
-          },
-          {
-            "@type": "Question",
-            "name": "How is FillPro different from LastPass or Dashlane autofill?",
-            "acceptedAnswer": { "@type": "Answer", "text": "FillPro is autofill only — it does not store passwords or payment cards. It runs locally with no server, no account, and no analytics. Password managers fill credentials; FillPro fills the rest of the form (name, address, phone, custom fields, uploads, smart rules)." }
+            "name": "What is included in the free tier?",
+            "acceptedAnswer": { "@type": "Answer", "text": "The free tier includes 3 saved profiles, the main Fill Page workflow, smart rules, custom fields, local file upload matching, right-click capture, and the on-page picker." }
           }
         ]
       }
@@ -91,112 +103,210 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="/">
-        <img class="brand-logo" src="/assets/fillpro-logo.svg" alt="FillPro logo" width="48" height="48" decoding="async">
+        <img class="brand-logo" src="/assets/fillpro-logo.svg" alt="FillPro logo" width="42" height="42" decoding="async">
         <span class="brand-lockup">
           <span class="brand-title">FillPro</span>
-          <span class="brand-subtitle">Local-first form autofill</span>
+          <span class="brand-subtitle">Private form autofill</span>
         </span>
       </a>
       <div class="nav-links">
-        <a href="/">Stealthy Apps</a>
-        <a href="/#apps">Apps</a>
-        <a href="support.html">Support</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="changelog.html">Changelog</a>
+        <a href="/apps/fillpro/" aria-current="page">Product</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/apps/fillpro/privacy/">Privacy</a>
+        <a href="/support/">Support</a>
+        <a href="/contact/?topic=product&amp;product=FillPro">Contact</a>
       </div>
     </nav>
   </header>
 
-  <main class="page">
-    <section class="page-hero">
-      <div class="surface page-hero-copy">
-        <div class="page-intro">
-          <p class="eyebrow">FillPro</p>
-          <h1>Fill any web form in one click. Privately.</h1>
-          <p class="lead">Save your profile once. Click Fill Page on a job application, signup, checkout, or ticket form. FillPro does the boring part without sending your data anywhere.</p>
-        </div>
-        <div class="actions">
-          <a class="button primary" href="#features">See features</a>
-          <a class="button" href="#availability">Availability</a>
-          <a class="button" href="#pricing">Pricing</a>
-        </div>
-        <p class="small">Free includes 3 saved profiles. The Chrome Web Store install link will appear here when the listing is live.</p>
+  <main class="page" id="main-content" tabindex="-1">
+    <section class="hero">
+      <div class="hero-media" aria-hidden="true">
+        <img src="/assets/fillpro-popup.png" alt="" width="380" height="580" decoding="async">
       </div>
-
-      <article class="boundary-card mini-card">
-        <div class="page-intro">
-          <p class="eyebrow">Why people use it</p>
-          <h2>Why people keep FillPro around.</h2>
+      <div class="hero-content">
+        <p class="eyebrow">FillPro 1.0.0</p>
+        <h1>Private autofill for repeated forms.</h1>
+        <p class="lead">FillPro is a Chrome extension for repeated forms. Save a profile once, use it on job applications, signup pages, onboarding forms, demo requests, vendor intake, and the admin forms that keep coming back.</p>
+        <div class="actions">
+          <a class="button primary" href="#pricing">Start free</a>
+          <a class="button" href="#features">See features</a>
+          <a class="button" href="/contact/?topic=product&amp;reason=product_help&amp;product=FillPro">Ask me a question</a>
         </div>
-        <ul class="list-check">
-          <li><strong>Local-only.</strong> Profiles never leave your browser.</li>
-          <li><strong>Skips the dangerous fields.</strong> Passwords, CVCs, SSNs, and OTPs are all skipped by design.</li>
-          <li><strong>Works on real, weird, dynamic forms.</strong> Smart rules for the edge cases.</li>
-        </ul>
-      </article>
+        <p class="hero-note">Free includes 3 local profiles. Pro has a 3-day trial with no card required.</p>
+      </div>
     </section>
 
-    <section class="section-shell" id="features">
+    <section class="section" id="features">
       <div class="section-heading">
-        <p class="eyebrow">Features</p>
-        <h2>What FillPro actually does.</h2>
+        <p class="eyebrow">What it handles</p>
+        <h2>More than name, email, and phone.</h2>
+        <p>FillPro is built for the messy parts of everyday forms: repeated details, odd labels, local files, custom fields, modern frontend components, and the occasional form that needs a nudge.</p>
       </div>
-      <div class="info-grid">
+      <div class="feature-grid">
         <article class="feature-card">
-          <h3>Fill Page</h3>
-          <p>One click fills every safe field on the current page using your selected profile.</p>
-        </article>
-        <article class="feature-card">
-          <h3>On-page picker</h3>
-          <p>Click any field, pick which profile value to drop into it. Useful when forms are weird.</p>
+          <h3>Local profiles</h3>
+          <p>Keep separate profiles for personal details, work details, job applications, clients, or QA test data.</p>
         </article>
         <article class="feature-card">
           <h3>Smart rules</h3>
-          <p>Per-site overrides. "On this domain, my email is the work one." Local, scoped, simple.</p>
+          <p>Tell FillPro what to do when a site uses strange labels or internal field names.</p>
         </article>
         <article class="feature-card">
-          <h3>Custom fields</h3>
-          <p>Anything not in a default profile (LinkedIn URL, portfolio, dietary preference, T-shirt size) goes here.</p>
+          <h3>Uploads</h3>
+          <p>Match local files to upload fields for resumes, cover letters, CVs, portfolios, and similar documents.</p>
         </article>
         <article class="feature-card">
-          <h3>Local file uploads</h3>
-          <p>Attach your résumé, cover letter, or photo locally and FillPro will offer them on file inputs.</p>
+          <h3>Modern forms</h3>
+          <p>Supports common React, Vue, Angular, Material UI, Carbon, Shadow DOM, same-origin iframe, combobox, select, checkbox, radio, and textarea patterns.</p>
         </article>
         <article class="feature-card">
-          <h3>Right-click capture</h3>
-          <p>"Save current form as profile" via the context menu, no manual typing.</p>
+          <h3>Split fields</h3>
+          <p>Handles middle name, pronouns, split birthdays, segmented phone fields, and country/state/month dropdown aliases.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Safety rails</h3>
+          <p>Skips passwords, payment cards, CVCs, SSNs, tax IDs, government IDs, bank fields, and one-time codes by design.</p>
         </article>
       </div>
     </section>
 
-    <section id="availability" class="section-shell">
+    <section class="section two-col">
+      <div class="card callout">
+        <p class="eyebrow">Good fit</p>
+        <h2>Forms where your details repeat.</h2>
+        <ul class="list-check">
+          <li>Job applications and resume upload flows.</li>
+          <li>Business signup, demo, and lead forms.</li>
+          <li>Vendor, partner, and onboarding intake.</li>
+          <li>Support forms, admin forms, and QA test profiles.</li>
+        </ul>
+      </div>
+      <div class="card callout orange">
+        <p class="eyebrow">Not the job</p>
+        <h2>Things FillPro will not pretend to solve.</h2>
+        <ul class="list-check">
+          <li>No CAPTCHA bypassing.</li>
+          <li>No cross-origin payment iframe tricks.</li>
+          <li>No password manager replacement.</li>
+          <li>No browser-native PDF viewer autofill claims.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="compare">
       <div class="section-heading">
-        <p class="eyebrow">Availability</p>
-        <h2>Chrome first.</h2>
-        <p>FillPro is being released for Chrome first. I would rather support one browser properly than claim a bigger rollout before I can stand behind it.</p>
+        <p class="eyebrow">Comparison</p>
+        <h2>Why not just use browser autofill?</h2>
+        <p>Browser autofill is good at basic contact info. FillPro is for repeated profiles, odd fields, files, and work forms where the browser usually gives up.</p>
       </div>
-      <div class="info-grid">
-        <article class="info-card">
-          <h3>Chrome</h3>
-          <p>Primary Manifest V3 build. The public Chrome Web Store listing link will be added here when it is live.</p>
-          <p class="meta">Chrome listing in progress.</p>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">Feature</th>
+              <th scope="col">FillPro</th>
+              <th scope="col">Browser autofill</th>
+              <th scope="col">Password manager</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Built for non-login forms</th><td>Yes</td><td>Limited</td><td>Limited</td></tr>
+            <tr><th scope="row">Named profiles</th><td>Yes</td><td>Usually one identity</td><td>Account-based</td></tr>
+            <tr><th scope="row">Custom fields and smart rules</th><td>Yes</td><td>No</td><td>Limited</td></tr>
+            <tr><th scope="row">Resume and file uploads</th><td>Yes</td><td>No</td><td>No</td></tr>
+            <tr><th scope="row">Local-first data</th><td>Yes</td><td>Depends on browser sync</td><td>Cloud account</td></tr>
+            <tr><th scope="row">Passwords and payments</th><td>Skipped on purpose</td><td>Often mixed in</td><td>Main use case</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="competitive-edge">
+      <div class="section-heading">
+        <p class="eyebrow">Competitive edge</p>
+        <h2>Built around the stuff that makes form fillers get uninstalled.</h2>
+        <p>The pattern in public reviews is pretty consistent: people love saved typing, then complain when an extension misses modern fields, requires an account, gets too aggressive, or leaves support unclear. FillPro is designed around those failure points.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <h3>No forced account for free</h3>
+          <p>Create local profiles and fill forms without signing into a cloud workspace first.</p>
         </article>
-        <article class="info-card">
-          <h3>Release approach</h3>
-          <p>I keep support claims narrow on purpose. If it is listed here, it is something I can actually support right now.</p>
-          <p class="meta">Chrome first. Clear support boundaries.</p>
+        <article class="feature-card">
+          <h3>Modern field events</h3>
+          <p>FillPro focuses on React, Vue, Angular, Shadow DOM, comboboxes, masked fields, selects, radios, and file inputs instead of only old-school HTML forms.</p>
+        </article>
+        <article class="feature-card">
+          <h3>Not an auto-submit bot</h3>
+          <p>It fills fields you review. It does not submit applications for you, bypass CAPTCHA, or pretend automation risk does not exist.</p>
         </article>
       </div>
     </section>
 
-    <section id="pricing" class="section-shell">
+    <section class="section" id="alternatives">
+      <div class="section-heading">
+        <p class="eyebrow">Against alternatives</p>
+        <h2>Where FillPro should win.</h2>
+      </div>
+      <div class="table-scroll">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th scope="col">Alternative</th>
+              <th scope="col">What users want from it</th>
+              <th scope="col">FillPro response</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Basic form fillers</th>
+              <td>Fast profile filling, simple setup, low price.</td>
+              <td>Local profiles, 3-profile free tier, smart rules, file uploads, and a clearer privacy boundary.</td>
+            </tr>
+            <tr>
+              <th scope="row">Job application suites</th>
+              <td>Help with Workday-style repetition and resume uploads.</td>
+              <td>Job forms are a first-class use case, but FillPro avoids auto-submit claims and keeps profile data local.</td>
+            </tr>
+            <tr>
+              <th scope="row">Text expanders</th>
+              <td>Reuse repeated snippets and answers.</td>
+              <td>FillPro works at the field level: profile values, dropdowns, uploads, custom rules, and undo.</td>
+            </tr>
+            <tr>
+              <th scope="row">Password managers</th>
+              <td>Secure login and payment autofill.</td>
+              <td>FillPro deliberately does not compete there. It handles the non-login forms password managers often miss.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section two-col" id="privacy">
+      <div class="product-shot">
+        <img src="/assets/fillpro-popup.png" alt="FillPro popup showing a saved profile and fill controls" width="380" height="580" loading="lazy" decoding="async">
+      </div>
+      <div class="card">
+        <p class="eyebrow">Permissions</p>
+        <h2>Narrow by default. Optional when you ask for more.</h2>
+        <p>FillPro uses <code>activeTab</code>, <code>scripting</code>, <code>contextMenus</code>, <code>storage</code>, <code>alarms</code>, and <code>sidePanel</code>. There is no required broad host access.</p>
+        <p>Optional all-sites access exists only for the floating fill button and optional auto-fill setting. Both are off by default.</p>
+        <div class="actions">
+          <a class="button primary" href="/apps/fillpro/privacy/">Read privacy details</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="pricing">
       <div class="section-heading">
         <p class="eyebrow">Pricing</p>
-        <h2>Useful free. Paid only if you need more.</h2>
-        <p>Try Pro free for 7 days with no card required. Free is meant to be genuinely useful. Pro is for people who need more room, and it helps fund continued work without turning the free version into a nuisance.</p>
+        <h2>Start free. Upgrade when you need more profiles.</h2>
       </div>
       <div class="plan-grid">
         <article class="feature-card">
@@ -205,120 +315,55 @@
           <ul class="list-check">
             <li>3 saved profiles</li>
             <li>Fill Page and on-page picker</li>
-            <li>Smart rules</li>
+            <li>Smart rules and custom fields</li>
             <li>Local file uploads</li>
             <li>Right-click capture</li>
           </ul>
         </article>
         <article class="feature-card">
-          <h3>Pro <span class="release-badge">7-day trial</span></h3>
-          <p><strong>$3.99</strong>/month · <strong>$29.99</strong>/year · <strong>$39.99</strong> lifetime</p>
+          <h3>Pro</h3>
+          <p><strong>$3.99</strong>/month, <strong>$29.99</strong>/year, or <strong>$39.99</strong> lifetime</p>
           <ul class="list-check">
-            <li>Unlimited saved profiles</li>
-            <li>Import &amp; export profiles</li>
+            <li>More saved profiles</li>
             <li>Duplicate profiles</li>
-            <li>Priority support</li>
-            <li>Everything in Free</li>
+            <li>Import and export</li>
+            <li>Advanced repeat-use workflows</li>
+            <li>3-day trial, no card required</li>
           </ul>
-          <p class="small">Stripe handles billing through ExtensionPay. I never see your card. Pro helps fund maintenance and the rest of Stealthy Apps without changing how the free version works.</p>
         </article>
       </div>
     </section>
 
-    <section class="split-layout">
-      <article class="boundary-card">
-        <div class="page-intro">
-          <p class="eyebrow">How it works</p>
-          <h2>From saved profile to filled form.</h2>
-        </div>
-        <ol class="step-list">
-          <li><strong>Step 1:</strong> Save your profile in the popup (or right-click on a form to capture it).</li>
-          <li><strong>Step 2:</strong> Add custom fields, smart rules, or local uploads if you need them.</li>
-          <li><strong>Step 3:</strong> Click Fill Page or use the keyboard shortcut. Done.</li>
-        </ol>
-      </article>
-
-      <article class="boundary-card">
-        <div class="page-intro">
-          <p class="eyebrow">What FillPro skips</p>
-          <h2>By design.</h2>
-        </div>
+    <section class="section two-col">
+      <div class="card">
+        <p class="eyebrow">Current release</p>
+        <h2>Launch release: 1.0.0.</h2>
         <ul class="list-check">
-          <li>Passwords (use a password manager)</li>
-          <li>Credit card numbers, CVCs (use your browser's secure payment)</li>
-          <li>SSNs, tax IDs, government identifiers</li>
-          <li>One-time codes (2FA / OTP)</li>
-          <li>CAPTCHA / anti-bot challenges</li>
-          <li>Cross-origin payment iframes</li>
+          <li>Search-style combobox support for modern component libraries.</li>
+          <li>Split birthday and segmented phone field handling.</li>
+          <li>Country, state, and month dropdown aliases.</li>
+          <li>Middle name and pronouns profile fields.</li>
+          <li>Cleaner popup, plan, and upgrade UI.</li>
         </ul>
-      </article>
-    </section>
-
-    <section class="section-shell">
-      <div class="section-heading">
-        <p class="eyebrow">FAQ</p>
-        <h2>Common questions.</h2>
       </div>
-      <div class="info-grid">
-        <article class="info-card">
-          <h3>Does FillPro send my data anywhere?</h3>
-          <p>No. Profiles, rules, and uploads stay in your browser. The only network call FillPro makes is to ExtensionPay (Stripe) when you choose to upgrade.</p>
-        </article>
-        <article class="info-card">
-          <h3>How is this different from LastPass or Dashlane?</h3>
-          <p>Those are password managers that also do autofill. FillPro is autofill only and stores nothing remotely. They fill credentials; FillPro fills everything else (name, address, phone, custom fields, uploads, per-site rules).</p>
-        </article>
-        <article class="info-card">
-          <h3>What about Chrome's built-in autofill?</h3>
-          <p>Chrome autofill is fine for basic fields but tied to your Google account, doesn't handle custom fields, can't do per-site rules, and skips many dynamic forms. FillPro covers those.</p>
-        </article>
-        <article class="info-card">
-          <h3>Does it work on job application sites like Workday or Greenhouse?</h3>
-          <p>It works on most accessible HTML forms. Greenhouse, Lever, Ashby, and similar sites work well. Workday is trickier because of its custom widgets, but smart rules handle a lot of it and the rest can still be filled manually.</p>
-        </article>
-        <article class="info-card">
-          <h3>Can I export my profiles?</h3>
-          <p>Pro includes JSON import/export so you can move profiles between browsers or back them up.</p>
-        </article>
-        <article class="info-card">
-          <h3>What if I uninstall it?</h3>
-          <p>Extension storage gets removed by the browser. Export first if you want to keep your profiles.</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section-shell compact-section">
-      <div class="section-heading">
-        <p class="eyebrow">Need details?</p>
-        <h2>Support, privacy, and release notes.</h2>
-        <p>Everything public-facing for FillPro lives here: how support works, what data stays local, and what has shipped so far.</p>
-      </div>
-      <div class="info-grid">
-        <article class="info-card">
-          <h3>Privacy</h3>
-          <p>What stays local, what FillPro skips, and the small number of cases where anything leaves the browser.</p>
-          <p class="meta"><a href="privacy.html">Read the privacy policy →</a></p>
-        </article>
-        <article class="info-card">
-          <h3>Support</h3>
-          <p>Setup help, troubleshooting, billing questions, privacy questions, and direct contact in one place.</p>
-          <p class="meta"><a href="support.html">Open support →</a></p>
-        </article>
-        <article class="info-card">
-          <h3>Changelog</h3>
-          <p>Short release notes with the real changes and the real limits.</p>
-          <p class="meta"><a href="changelog.html">View changelog →</a></p>
-        </article>
+      <div class="card">
+        <p class="eyebrow">Support</p>
+        <h2>Send the form that did not work.</h2>
+        <p>If a page fills badly, the fastest fix is a clear report: site, field, what happened, and what you expected. Do not send passwords, payment details, or private IDs.</p>
+        <div class="actions">
+          <a class="button primary" href="/contact/?topic=product&amp;reason=bug&amp;product=FillPro">Report a site issue</a>
+          <a class="button" href="/support/">Open support</a>
+        </div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro by <a href="/">Stealthy Apps</a>. Local-first by design.</span>
-      <span><a href="/#apps">Apps</a> | <a href="privacy.html">Privacy</a> | <a href="support.html">Support</a> | <a href="changelog.html">Changelog</a> | <a href="support.html#contact">Contact</a></span>
+      <span>FillPro, built by Karl. Last updated <time datetime="2026-06-12">June 12, 2026</time>.</span>
+      <span><a href="/">Home</a> | <a href="/apps/fillpro/privacy/">Privacy</a> | <a href="/support/">Support</a> | <a href="/contact/">Contact</a> | <a href="/sitemap.html">Sitemap</a></span>
     </div>
   </footer>
-  <script src="/site.js?v=hero-spotlight-v3" defer></script>
+  <script src="/site.js?v=fillpro-site-v5" defer></script>
 </body>
 </html>

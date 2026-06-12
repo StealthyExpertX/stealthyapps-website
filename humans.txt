@@ -1,8 +1,10 @@
 /* TEAM */
 Maker: Karl
-Brand: Stealthy Apps
-Site: https://stealthyapps.com
+Site: https://stealthyapps.com/
+Product: FillPro
+Location: United States
 
 /* SITE */
-Stack: HTML, CSS, small vanilla JS. No analytics. No build step.
-Hosting: GitHub Pages
+Language: English
+Purpose: Public website for FillPro, a private Chrome form autofill extension.
+Last updated: 2026-06-12

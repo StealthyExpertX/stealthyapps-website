@@ -1,56 +1,25 @@
-# Stealthy Apps
+# FillPro Website
 
-Official website for [Stealthy Apps](https://stealthyapps.com) — a small independent software studio building private, practical browser tools.
+Public website for [FillPro](https://stealthyapps.com/), a private Chrome form autofill extension built by Karl.
 
-The current product is **FillPro**, a local-first form autofill extension for Chrome, Edge, Firefox, and other Chromium-based browsers.
+FillPro is the only public product on the site right now. The structure is ready for future tools later: each product can get its own canonical product page, privacy notes, support route, changelog entries, sitemap entry, and Markdown mirror.
 
-## Official links
+## Main Routes
 
-- Website: [stealthyapps.com](https://stealthyapps.com)
-- FillPro: [stealthyapps.com/apps/fillpro/](https://stealthyapps.com/apps/fillpro/)
-- Privacy: [stealthyapps.com/apps/fillpro/privacy.html](https://stealthyapps.com/apps/fillpro/privacy.html)
-- Support: [stealthyapps.com/apps/fillpro/support.html](https://stealthyapps.com/apps/fillpro/support.html)
-- Changelog: [stealthyapps.com/apps/fillpro/changelog.html](https://stealthyapps.com/apps/fillpro/changelog.html)
+- `/` - FillPro home
+- `/apps/fillpro/` - product page
+- `/apps/fillpro/privacy/` - privacy policy
+- `/support/` - support and troubleshooting
+- `/contact/` - contact form
+- `/changelog/` - release notes
+- `/about/` - maker/about page
+- `/sitemap.html` and `/sitemap.xml` - discovery routes
+- `/llms.txt` and `/llms-full.txt` - plain-text product corpus
 
-## What this site covers
+## Product Boundary
 
-- Product pages for current and future Stealthy Apps releases
-- FillPro pricing, feature overview, and browser support
-- Public privacy policy and support information
-- Release notes and product updates
+FillPro stores profiles locally in Chrome extension storage and skips passwords, payment cards, CVCs, government IDs, tax IDs, Social Security numbers, and one-time codes.
 
-## Product approach
+## Release
 
-Stealthy Apps is built around a simple idea: small tools should stay small.
-
-- No analytics or tracking scripts
-- No account wall for the core experience
-- Local-first storage wherever possible
-- Clear boundaries around what the product does and does not do
-
-## Current app
-
-### FillPro
-
-FillPro helps people save profile details once and fill normal web forms faster.
-It is designed for repetitive form-heavy work such as applications, signups, contact flows, and other standard browser-based forms.
-
-FillPro intentionally skips passwords, payment fields, one-time codes, and similar sensitive inputs.
-
-## Support and privacy
-
-If you need help, want to report an issue, or need a privacy answer, use the public FillPro support page:
-
-- [Support](https://stealthyapps.com/apps/fillpro/support.html)
-- [Privacy policy](https://stealthyapps.com/apps/fillpro/privacy.html)
-
-## About this repository
-
-This repository contains the public website source for Stealthy Apps and is published to GitHub Pages.
-Website updates are deployed automatically after changes are pushed to the `main` branch and the Pages workflow completes.
-
-## License
-
-Website content and branding are © Stealthy Apps. The repository is public for transparency and publishing, but the product code itself is maintained separately.
-
-Issues and public feedback are welcome.
+Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-12.

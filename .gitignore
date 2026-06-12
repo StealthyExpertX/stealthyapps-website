@@ -6,3 +6,4 @@ Thumbs.db
 # Local scratch
 .tmp/
 *.log
+node_modules/

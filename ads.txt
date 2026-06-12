@@ -1,0 +1,4 @@
+# FillPro does not run third-party ads on stealthyapps.com.
+#
+# Keep this file intentionally empty unless direct ad inventory is added.
+# Last updated: 2026-06-12

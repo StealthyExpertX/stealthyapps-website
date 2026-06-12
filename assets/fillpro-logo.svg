@@ -1,31 +1,36 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="FillPro logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="FillPro icon">
   <defs>
-    <linearGradient id="base" x1="156" y1="104" x2="868" y2="928" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#0f766e" />
-      <stop offset="0.54" stop-color="#155e75" />
-      <stop offset="1" stop-color="#0f172a" />
+    <linearGradient id="bg" x1="150" y1="92" x2="874" y2="932" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#11a69a"/>
+      <stop offset="0.48" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#0b2530"/>
     </linearGradient>
-    <linearGradient id="sheet" x1="310" y1="214" x2="720" y2="844" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#ffffff" />
-      <stop offset="1" stop-color="#dff7f3" />
+    <linearGradient id="card" x1="268" y1="176" x2="754" y2="840" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e5fbf7"/>
     </linearGradient>
-    <filter id="shadow" x="160" y="142" width="704" height="780" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="34" stdDeviation="36" flood-color="#020617" flood-opacity="0.35" />
+    <filter id="cardShadow" x="150" y="112" width="724" height="804" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="34" stdDeviation="34" flood-color="#031820" flood-opacity="0.34"/>
+    </filter>
+    <filter id="badgeShadow" x="500" y="500" width="370" height="370" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#031820" flood-opacity="0.28"/>
     </filter>
   </defs>
 
-  <rect width="1024" height="1024" rx="210" fill="url(#base)" />
-  <path d="M126 712C250 796 394 842 546 842c134 0 258-36 364-99v108c0 33-26 59-59 59H173c-33 0-59-26-59-59V720c4-3 8-6 12-8Z" fill="#052e34" opacity="0.34" />
+  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
+  <path d="M94 690c126 94 281 150 448 150 147 0 284-43 399-117v118c0 49-40 89-89 89H172c-49 0-89-40-89-89V703c4-4 7-8 11-13Z" fill="#041f27" opacity="0.28"/>
 
-  <g filter="url(#shadow)">
-    <rect x="258" y="176" width="508" height="668" rx="82" fill="url(#sheet)" />
-    <rect x="318" y="276" width="388" height="68" rx="34" fill="#0f766e" />
-    <rect x="318" y="404" width="306" height="48" rx="24" fill="#94a3b8" opacity="0.62" />
-    <rect x="318" y="500" width="388" height="48" rx="24" fill="#94a3b8" opacity="0.5" />
-    <rect x="318" y="596" width="228" height="48" rx="24" fill="#94a3b8" opacity="0.45" />
+  <g filter="url(#cardShadow)">
+    <rect x="242" y="148" width="520" height="708" rx="92" fill="url(#card)"/>
+    <rect x="316" y="246" width="372" height="84" rx="42" fill="#0f766e"/>
+    <rect x="316" y="386" width="318" height="54" rx="27" fill="#9fb0bd" opacity="0.64"/>
+    <rect x="316" y="500" width="372" height="54" rx="27" fill="#9fb0bd" opacity="0.52"/>
+    <rect x="316" y="614" width="236" height="54" rx="27" fill="#9fb0bd" opacity="0.44"/>
   </g>
 
-  <circle cx="682" cy="686" r="150" fill="#f8fafc" />
-  <circle cx="682" cy="686" r="126" fill="#16a34a" />
-  <path d="M610 684l48 48 100-118" fill="none" stroke="#f8fafc" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" />
+  <g filter="url(#badgeShadow)">
+    <circle cx="690" cy="698" r="156" fill="#f8fafc"/>
+    <circle cx="690" cy="698" r="124" fill="#16a34a"/>
+    <path d="M618 698l50 50 102-122" fill="none" stroke="#ffffff" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
 </svg>
