@@ -41,7 +41,7 @@ const DIRECT_SEND_CONSENT_NOTE =
 const UPDATE_CONSENT_NOTE =
   'Sender opted into occasional follow-up, release-note, or product-update emails related to this message and can opt out later.';
 const DIRECT_SEND_AUTORESPONSE =
-  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply as soon as possible. Please do not send passwords, payment details, government IDs, tax IDs, one-time codes, or private profile values.';
+  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply as soon as possible. Please keep passwords, payment details, government IDs, tax IDs, one-time codes, and private profile values out of support email.';
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 12;
 const KNOWN_PRODUCTS = {
@@ -104,7 +104,7 @@ const CONTACT_CONTEXTS = {
         inboxLabel: 'FillPro privacy inbox',
         reasons: [
           ['privacy_question', 'Privacy or policy question'],
-          ['local_data', 'Question about local data or deletion'],
+          ['local_data', 'Local data or deletion question'],
           ['compliance', 'Compliance or legal request'],
           ['other_privacy', 'Other privacy matter'],
         ],
@@ -157,7 +157,7 @@ function buildProductContext(form) {
         recipient: 'privacy',
         inboxLabel: `${productName} privacy inbox`,
         reasons: [
-          ['data_question', 'Question about stored or local data'],
+          ['data_question', 'Stored or local data question'],
           ['local_clear', 'How do I remove local data?'],
           ['policy', 'Privacy policy question'],
           ['compliance', 'Compliance or legal request'],
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (prefill.productLabel) {
     if (contextNote) {
       contextNote.hidden = false;
-      contextNote.textContent = `Currently about ${prefill.productLabel}. You can change the topic below if you need something else.`;
+      contextNote.textContent = `Currently set to ${prefill.productLabel}. You can change the topic below.`;
     }
     messageField.placeholder =
       'What happened, what you expected, and what you need next.';
@@ -731,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'This browser cannot send from the page. Use Email App instead.',
+        'This browser needs the Email App option.',
       );
       return;
     }

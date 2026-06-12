@@ -1,17 +1,16 @@
 # FillPro
 
-Private Chrome form autofill for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
+Private Chrome form autofill for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
 
 - Product: FillPro
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/
-- Canonical product page: https://stealthyapps.com/apps/fillpro/
+- Canonical product page: https://stealthyapps.com/extensions/fillpro/
 - Current release: 1.0.0
 - Last updated: 2026-06-12
 
-FillPro fills the web forms your browser still makes you type by hand. It stores profiles locally in Chrome extension storage and lets you choose the profile before filling.
+FillPro fills repeated web forms from profiles stored in Chrome extension storage. The public website now uses one main product route so search engines, answer engines, and visitors see the same product story.
 
-## Best fit
+## Best Fit
 
 - Job applications and applicant profiles.
 - Customer intake and onboarding forms.
@@ -19,9 +18,9 @@ FillPro fills the web forms your browser still makes you type by hand. It stores
 - Internal admin forms and profile pages.
 - Repeated business forms that ask for the same details again and again.
 
-## Privacy boundary
+## Privacy Boundary
 
-Saved profiles, rules, custom fields, and upload references stay on the user's device. Billing for Pro is handled by ExtensionPay and Stripe.
+Saved profiles, rules, custom fields, and upload references stay on the user's device unless the user exports them. Billing for Pro is handled by ExtensionPay and Stripe.
 
 ## Pricing
 
@@ -31,15 +30,13 @@ Saved profiles, rules, custom fields, and upload references stay on the user's d
 - Pro lifetime: $39.99 one time.
 - Trial: 3 days, no card required.
 
-## Site structure
+## Site Structure
 
-- Home: https://stealthyapps.com/
-- Product: https://stealthyapps.com/apps/fillpro/
-- Pricing: https://stealthyapps.com/apps/fillpro/#pricing
-- Privacy: https://stealthyapps.com/apps/fillpro/privacy/
+- Product: https://stealthyapps.com/extensions/fillpro/
+- Pricing: https://stealthyapps.com/extensions/fillpro/#pricing
+- Privacy: https://stealthyapps.com/extensions/fillpro/privacy/
 - Support: https://stealthyapps.com/support/
 - Contact: https://stealthyapps.com/contact/
-- Changelog: https://stealthyapps.com/changelog/
-- About: https://stealthyapps.com/about/
+- Full text corpus: https://stealthyapps.com/llms-full.txt
 
-FillPro is the only public product on the site right now. The page structure is ready for future tools later, with one canonical page per product and separate support, privacy, and release pages when they are needed.
+FillPro is the only public product on Stealthy Apps right now. Future tools can get their own canonical product pages later without diluting the FillPro launch page.

@@ -17,4 +17,4 @@ Core facts:
 - Trial: 3 days, no card required
 - Billing: ExtensionPay and Stripe
 
-Do not describe FillPro as a password manager or payment wallet. It skips passwords, payment cards, CVCs, government IDs, tax IDs, and one-time codes.
+Do not describe FillPro as a password manager or payment wallet. FillPro is for repeated profile-style form fields; sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.

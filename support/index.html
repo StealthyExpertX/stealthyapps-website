@@ -16,7 +16,7 @@
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="search" type="application/opensearchdescription+xml" title="FillPro" href="/opensearch.xml">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v14">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v15">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
@@ -33,18 +33,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why did FillPro skip a field?",
+        "name": "Why did a field need a custom rule?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "FillPro skips sensitive fields by design and may skip fields when a page uses unusual custom controls, cross-origin frames, or labels that do not clearly match a saved profile value."
+          "text": "FillPro focuses on repeated profile-style fields and may need a custom rule when a page uses unusual controls, cross-origin frames, or labels that do not clearly match a saved profile value."
         }
       },
       {
         "@type": "Question",
-        "name": "Does FillPro fill passwords or payment cards?",
+        "name": "How does FillPro handle sign-ins and payment fields?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. FillPro intentionally skips passwords, payment cards, CVCs, government IDs, tax IDs, and one-time codes."
+          "text": "FillPro focuses on repeated profile-style form fields. Browser autofill, password managers, payment wallets, and site controls should handle sign-ins, cards, CVCs, one-time codes, and protected identity details."
         }
       },
       {
@@ -52,7 +52,7 @@
         "name": "How do I report a bad fill?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Send the page type, field name, what happened, what you expected, and your browser version if you know it. Do not send sensitive values."
+          "text": "Send the page type, field name, what happened, what you expected, and your browser version if you know it. Keep sensitive values out of the report."
         }
       }
     ]
@@ -64,7 +64,7 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="/" aria-label="Stealthy Apps home">
+      <a class="brand" href="/extensions/fillpro/" aria-label="FillPro by Stealthy Apps">
         <img class="brand-logo" src="/assets/fillpro-logo.svg" alt="" width="42" height="42" decoding="async">
         <span class="brand-lockup">
           <span class="brand-title">Stealthy Apps</span>
@@ -72,9 +72,9 @@
         </span>
       </a>
       <div class="nav-links">
-        <a href="/apps/fillpro/">Product</a>
-        <a href="/apps/fillpro/#pricing">Pricing</a>
-        <a href="/apps/fillpro/privacy/">Privacy</a>
+        <a href="/extensions/fillpro/">Product</a>
+        <a href="/extensions/fillpro/#pricing">Pricing</a>
+        <a href="/extensions/fillpro/privacy/">Privacy</a>
         <a href="/support/" aria-current="page">Support</a>
         <a href="/contact/">Contact</a>
       </div>
@@ -85,16 +85,16 @@
     <section class="section two-col">
       <div class="page-intro">
         <p class="eyebrow">Support</p>
-        <h1>Fix the common stuff fast. Send the weird forms to Stealthy Apps.</h1>
-        <p class="lead">FillPro is built for the busy middle of the web: job applications, signup forms, intake pages, vendor forms, and repeat business forms. Some sites still need a sharper rule, and those reports are useful.</p>
+        <h1>Fix common form issues fast. Send unusual sites straight to Stealthy Apps.</h1>
+        <p class="lead">FillPro is built for the busy middle of the web: job applications, signup forms, intake pages, vendor forms, and repeat business forms. When a site uses unusual controls, a short report helps turn that case into a better rule.</p>
         <div class="actions">
           <a class="button primary" href="/contact/?topic=product&amp;reason=bug&amp;product=FillPro">Report a bad fill</a>
-          <a class="button" href="/apps/fillpro/privacy/">Check privacy</a>
+          <a class="button" href="/extensions/fillpro/privacy/">Check privacy</a>
         </div>
       </div>
       <div class="card callout">
-        <h2>FillPro will not fill everything.</h2>
-        <p>It intentionally avoids passwords, payment fields, CVCs, government IDs, tax IDs, and one-time codes. It also cannot reach fields inside cross-origin iframes because the browser blocks that for good security reasons.</p>
+        <h2>Use the right trusted tool for protected fields.</h2>
+        <p>FillPro is for repeated profile-style form fields. Browser autofill, password managers, payment wallets, and site controls should stay in charge of sign-ins, cards, one-time codes, and protected identity details.</p>
       </div>
     </section>
 
@@ -137,7 +137,7 @@
       <div class="card">
         <p class="eyebrow">Billing</p>
         <h2>Pro access, restore, cancel, refunds.</h2>
-        <p>Billing runs through ExtensionPay and Stripe. Do not send card details. For access or refund questions, send the purchase email, the plan, and what you expected to happen.</p>
+        <p>Billing runs through ExtensionPay and Stripe. For access or refund questions, send the purchase email, the plan, and what you expected to happen. Keep card details out of support email.</p>
         <div class="actions">
           <a class="button" href="/contact/?topic=billing&amp;reason=pricing&amp;product=FillPro">Ask about billing</a>
         </div>
@@ -147,7 +147,7 @@
         <h2>Local data stays local.</h2>
         <p>Your profiles live in Chrome extension storage on your device. To clear them, remove them inside FillPro or uninstall the extension. Support emails are separate and should stay light on private detail.</p>
         <div class="actions">
-          <a class="button" href="/apps/fillpro/privacy/">Read the privacy page</a>
+          <a class="button" href="/extensions/fillpro/privacy/">Read the privacy page</a>
         </div>
       </div>
     </section>
@@ -156,9 +156,9 @@
   <footer>
     <div class="footer-inner">
       <span>Stealthy Apps · FillPro. Last updated <time datetime="2026-06-12">June 12, 2026</time>.</span>
-      <span><a href="/">Home</a> | <a href="/apps/fillpro/">Product</a> | <a href="/apps/fillpro/privacy/">Privacy</a> | <a href="/contact/">Contact</a> | <a href="/sitemap.html">Sitemap</a></span>
+      <span><a href="/extensions/fillpro/">Product</a> | <a href="/extensions/fillpro/privacy/">Privacy</a> | <a href="/contact/">Contact</a> | <a href="/sitemap.html">Sitemap</a></span>
     </div>
   </footer>
-  <script src="/site.js?v=fillpro-site-v14" defer></script>
+  <script src="/site.js?v=fillpro-site-v15" defer></script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://stealthyapps.com/</loc>
+    <loc>https://stealthyapps.com/extensions/fillpro/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -12,37 +12,19 @@
     </image:image>
   </url>
   <url>
-    <loc>https://stealthyapps.com/apps/fillpro/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://stealthyapps.com/apps/fillpro/privacy/</loc>
+    <loc>https://stealthyapps.com/extensions/fillpro/privacy/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stealthyapps.com/support/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stealthyapps.com/contact/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stealthyapps.com/changelog/</loc>
-    <lastmod>2026-06-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://stealthyapps.com/about/</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -51,6 +33,6 @@
     <loc>https://stealthyapps.com/sitemap.html</loc>
     <lastmod>2026-06-12</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
+    <priority>0.3</priority>
   </url>
 </urlset>

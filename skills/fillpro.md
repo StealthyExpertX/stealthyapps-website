@@ -16,4 +16,4 @@ Privacy:
 
 - Profiles stay local in Chrome extension storage.
 - Billing is handled by ExtensionPay and Stripe.
-- FillPro skips passwords, payment cards, CVCs, IDs, tax IDs, and one-time codes.
+- Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.

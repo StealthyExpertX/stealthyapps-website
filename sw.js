@@ -2,18 +2,16 @@
  * Small same-origin cache for static pages and assets.
  */
 
-const VERSION = 'fillpro-site-v14-2026-06-12';
+const VERSION = 'fillpro-site-v15-2026-06-12';
 const CORE_ASSETS = [
   '/',
-  '/apps/fillpro/',
-  '/apps/fillpro/privacy/',
+  '/extensions/fillpro/',
+  '/extensions/fillpro/privacy/',
   '/support/',
   '/contact/',
-  '/about/',
-  '/changelog/',
-  '/styles.css?v=fillpro-site-v14',
-  '/site.js?v=fillpro-site-v14',
-  '/contact.js?v=fillpro-site-v14',
+  '/styles.css?v=fillpro-site-v15',
+  '/site.js?v=fillpro-site-v15',
+  '/contact.js?v=fillpro-site-v15',
   '/assets/fillpro-logo.svg',
   '/assets/fillpro-logo.png',
   '/assets/fillpro-popup.png',

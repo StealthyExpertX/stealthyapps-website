@@ -13,13 +13,12 @@ FillPro fills repeated web forms from local profiles stored in Chrome extension 
 
 ## Boundaries
 
-FillPro skips passwords, payment cards, CVCs, government IDs, tax IDs, Social Security numbers, and one-time codes. It is not a password manager, payment wallet, tax vault, identity vault, or authentication product.
+FillPro is for repeated profile-style form fields. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.
 
 ## Routes
 
-- Product: /apps/fillpro/
-- Pricing: /apps/fillpro/#pricing
-- Privacy: /apps/fillpro/privacy/
+- Product: /extensions/fillpro/
+- Pricing: /extensions/fillpro/#pricing
+- Privacy: /extensions/fillpro/privacy/
 - Support: /support/
 - Contact: /contact/
-- Changelog: /changelog/
