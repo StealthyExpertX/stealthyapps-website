@@ -1,6 +1,6 @@
 # About FillPro
 
-FillPro is built by Karl as a focused Chrome form filler for repeated web forms.
+FillPro is from Stealthy Apps as a focused Chrome form filler for repeated web forms.
 
 The product exists because normal browser autofill is good at basic contact details but often falls short on job applications, onboarding pages, intake forms, vendor signups, demo requests, and internal business forms.
 

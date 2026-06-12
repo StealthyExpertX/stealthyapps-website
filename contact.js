@@ -41,7 +41,7 @@ const DIRECT_SEND_CONSENT_NOTE =
 const UPDATE_CONSENT_NOTE =
   'Sender opted into occasional follow-up, release-note, or product-update emails related to this message and can opt out later.';
 const DIRECT_SEND_AUTORESPONSE =
-  'Thanks for writing in about FillPro. I got your message and will reply as soon as I can. Please do not send passwords, payment details, government IDs, tax IDs, one-time codes, or private profile values.';
+  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply as soon as possible. Please do not send passwords, payment details, government IDs, tax IDs, one-time codes, or private profile values.';
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 12;
 const KNOWN_PRODUCTS = {
@@ -731,7 +731,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        'This browser cannot send from the page. Use My Email instead.',
+        'This browser cannot send from the page. Use Email App instead.',
       );
       return;
     }
@@ -768,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setStatus(
         statusNode,
         'error',
-        `${error.message} You can use My Email below instead.`,
+        `${error.message} You can use Email App below instead.`,
       );
     } finally {
       setActionState(false);

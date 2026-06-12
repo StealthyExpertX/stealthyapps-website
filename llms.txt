@@ -13,7 +13,7 @@ Last updated: 2026-06-12
 ## Product facts
 
 - Product name: FillPro
-- Maker: Karl
+- Brand: Stealthy Apps
 - Current release: 1.0.0
 - Category: Chrome extension, browser autofill, productivity
 - Free tier: 3 saved profiles

@@ -12,7 +12,7 @@
   <Url type="text/html" method="get" template="https://stealthyapps.com/?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://stealthyapps.com/opensearch.xml"/>
   <moz:SearchForm>https://stealthyapps.com/</moz:SearchForm>
-  <Developer>Karl</Developer>
+  <Developer>Stealthy Apps</Developer>
   <Contact>support@stealthyapps.com</Contact>
   <Attribution>Search results from stealthyapps.com</Attribution>
   <SyndicationRight>open</SyndicationRight>

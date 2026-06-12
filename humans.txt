@@ -1,5 +1,5 @@
 /* TEAM */
-Maker: Karl
+Brand: Stealthy Apps
 Site: https://stealthyapps.com/
 Product: FillPro
 Location: United States

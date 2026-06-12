@@ -1,7 +1,7 @@
 # FillPro Public Site Notes
 
 - Product: FillPro
-- Maker: Karl
+- Brand: Stealthy Apps
 - Website: https://stealthyapps.com/
 - Canonical product page: https://stealthyapps.com/apps/fillpro/
 - Last reviewed: 2026-06-12

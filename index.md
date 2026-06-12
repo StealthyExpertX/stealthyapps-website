@@ -3,7 +3,7 @@
 Private Chrome form autofill for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
 
 - Product: FillPro
-- Maker: Karl
+- Brand: Stealthy Apps
 - Website: https://stealthyapps.com/
 - Canonical product page: https://stealthyapps.com/apps/fillpro/
 - Current release: 1.0.0

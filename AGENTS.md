@@ -3,7 +3,7 @@
 This file describes the public FillPro website for crawlers, assistants, and repository automation.
 
 - Product: FillPro
-- Maker: Karl
+- Brand: Stealthy Apps
 - Website: https://stealthyapps.com/
 - Canonical product route: /apps/fillpro/
 - Current release: 1.0.0

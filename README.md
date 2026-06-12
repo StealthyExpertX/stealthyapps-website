@@ -1,6 +1,6 @@
 # FillPro Website
 
-Public website for [FillPro](https://stealthyapps.com/), a private Chrome form autofill extension built by Karl.
+Public website for [FillPro](https://stealthyapps.com/), a private Chrome form autofill extension from Stealthy Apps.
 
 FillPro is the only public product on the site right now. The structure is ready for future tools later: each product can get its own canonical product page, privacy notes, support route, changelog entries, sitemap entry, and Markdown mirror.
 

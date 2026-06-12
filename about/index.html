@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>About FillPro - Built by Karl</title>
-  <meta name="description" content="FillPro is built by Karl as a focused, privacy-first Chrome form filler for people who repeat the same web forms all week.">
-  <meta name="author" content="Karl">
+  <title>About Stealthy Apps - Maker of FillPro</title>
+  <meta name="description" content="Stealthy Apps makes FillPro, a focused Chrome form filler for people who repeat the same web forms all week.">
+  <meta name="author" content="Stealthy Apps">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="referrer" content="no-referrer">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
@@ -17,12 +17,12 @@
   <link rel="search" type="application/opensearchdescription+xml" title="FillPro" href="/opensearch.xml">
   <link rel="alternate" type="text/markdown" title="About FillPro (Markdown)" href="/about/index.md">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v6">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-site-v7">
 
-  <meta property="og:type" content="profile">
-  <meta property="og:site_name" content="FillPro">
-  <meta property="og:title" content="About FillPro">
-  <meta property="og:description" content="A focused Chrome form filler built by Karl, with local storage and clear boundaries.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Stealthy Apps">
+  <meta property="og:title" content="About Stealthy Apps">
+  <meta property="og:description" content="Stealthy Apps makes FillPro, a focused Chrome form filler with local storage and clear boundaries.">
   <meta property="og:url" content="https://stealthyapps.com/about/">
   <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-popup.png">
   <meta property="article:modified_time" content="2026-06-12T00:00:00Z">
@@ -32,19 +32,20 @@
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Person",
-        "@id": "https://stealthyapps.com/about/#karl",
-        "name": "Karl Davis",
-        "url": "https://stealthyapps.com/about/",
-        "knowsAbout": ["browser extensions", "form autofill", "privacy-first software", "local-first tools"]
-      },
-      {
         "@type": "Organization",
         "@id": "https://stealthyapps.com/#organization",
-        "name": "FillPro",
+        "name": "Stealthy Apps",
         "url": "https://stealthyapps.com/",
-        "founder": { "@id": "https://stealthyapps.com/about/#karl" },
-        "logo": "https://stealthyapps.com/assets/fillpro-logo.svg"
+        "logo": "https://stealthyapps.com/assets/fillpro-logo.svg",
+        "knowsAbout": ["browser extensions", "form autofill", "privacy-first software", "local-first tools"],
+        "makesOffer": {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "SoftwareApplication",
+            "name": "FillPro",
+            "url": "https://stealthyapps.com/apps/fillpro/"
+          }
+        }
       }
     ]
   }
@@ -55,11 +56,11 @@
 
   <header class="site-header">
     <nav class="nav" aria-label="Primary navigation">
-      <a class="brand" href="/" aria-label="FillPro home">
+      <a class="brand" href="/" aria-label="Stealthy Apps home">
         <img class="brand-logo" src="/assets/fillpro-logo.svg" alt="" width="42" height="42" decoding="async">
         <span class="brand-lockup">
-          <span class="brand-title">FillPro</span>
-          <span class="brand-subtitle">Private form autofill</span>
+          <span class="brand-title">Stealthy Apps</span>
+          <span class="brand-subtitle">FillPro form autofill</span>
         </span>
       </a>
       <div class="nav-links">
@@ -76,8 +77,8 @@
     <section class="section two-col">
       <div class="page-intro">
         <p class="eyebrow">About</p>
-        <h1>FillPro is the form filler I wanted when browser autofill ran out of road.</h1>
-        <p class="lead">I am Karl. I build FillPro for the forms that ask for more than name, email, and address: job applications, onboarding pages, demos, vendor forms, and all the repeat typing that shows up in real work.</p>
+        <h1>Stealthy Apps makes focused browser tools.</h1>
+        <p class="lead">FillPro is the first public product: a Chrome form filler for job applications, onboarding pages, demo requests, vendor forms, and the repeat typing that shows up in real work.</p>
       </div>
       <div class="card callout">
         <h2>The promise is small on purpose.</h2>
@@ -93,15 +94,15 @@
       <div class="feature-grid">
         <article class="feature-card">
           <h3>Local by default</h3>
-          <p>Saved profiles, rules, and uploaded files stay in the extension storage on your device. I cannot read them from a server because they are not synced through one.</p>
+          <p>Saved profiles, rules, and uploaded files stay in extension storage on your device. Stealthy Apps cannot read them from a server because they are not synced through one.</p>
         </article>
         <article class="feature-card">
           <h3>Built for messy forms</h3>
           <p>Modern sites use React, Vue, Angular, Shadow DOM, custom dropdowns, segmented fields, and odd labels. FillPro is tuned around those rough edges.</p>
         </article>
         <article class="feature-card">
-          <h3>Support from the person building it</h3>
-          <p>If a site fills badly, the fix goes through me. A clear report can become a better rule, safer field detection, or a sharper product boundary.</p>
+          <h3>Support that feeds the product</h3>
+          <p>If a site fills badly, a clear report can become a better rule, safer field detection, or a sharper product boundary.</p>
         </article>
       </div>
     </section>
@@ -126,10 +127,10 @@
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro, built by Karl. Last updated <time datetime="2026-06-12">June 12, 2026</time>.</span>
+      <span>Stealthy Apps · FillPro. Last updated <time datetime="2026-06-12">June 12, 2026</time>.</span>
       <span><a href="/">Home</a> | <a href="/apps/fillpro/">Product</a> | <a href="/support/">Support</a> | <a href="/contact/">Contact</a> | <a href="/sitemap.html">Sitemap</a></span>
     </div>
   </footer>
-  <script src="/site.js?v=fillpro-site-v6" defer></script>
+  <script src="/site.js?v=fillpro-site-v7" defer></script>
 </body>
 </html>

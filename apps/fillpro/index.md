@@ -1,6 +1,6 @@
 # FillPro - Chrome form filler for repeated web forms
 
-> FillPro is a private Chrome form autofill extension built by Karl. It saves local profiles, fills repeated forms in a click, and skips passwords, payment cards, government IDs, tax IDs, and one-time codes by design.
+> FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves local profiles, fills repeated forms in a click, and skips passwords, payment cards, government IDs, tax IDs, and one-time codes by design.
 
 - Canonical URL: https://stealthyapps.com/apps/fillpro/
 - Current release: 1.0.0
