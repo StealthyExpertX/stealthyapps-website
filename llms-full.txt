@@ -24,7 +24,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
 - Field-learning suggestions.
-- Support for React, Vue, Angular, custom elements, Shadow DOM, same-origin iframes, comboboxes, custom selects, radios, checkboxes, textareas, segmented phone fields, split birthdays, country/state/month aliases, middle names, pronouns, and multilingual contact labels.
+- Support for React, Vue, Angular, custom elements, Shadow DOM, same-origin iframes, comboboxes, custom selects, ARIA radios and checkboxes, Google Forms-style controls, textareas, segmented phone fields, split birthdays, country/state/month aliases, middle names, pronouns, and multilingual contact labels.
 
 ## Best Fit
 

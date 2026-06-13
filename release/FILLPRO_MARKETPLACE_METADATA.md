@@ -54,7 +54,7 @@ Why people keep it:
 - Keep sign-ins and payment details with the browser, password manager, payment wallet, or site controls built for those flows
 
 Modern form support:
-FillPro is built for normal HTML forms and modern frontend patterns used by React, Vue, Angular, Material UI, Carbon-style fields, custom selects, comboboxes, Shadow DOM components, same-origin iframes, dynamic fields, split birthday fields, segmented phone fields, country and state aliases, contenteditable fields, and file inputs.
+FillPro is built for normal HTML forms and modern frontend patterns used by React, Vue, Angular, Material UI, Carbon-style fields, custom selects, comboboxes, Shadow DOM components, same-origin iframes, dynamic fields, split birthday fields, segmented phone fields, country and state aliases, contenteditable fields, ARIA radio and checkbox groups, Google Forms-style controls, and file inputs.
 
 Privacy and control:
 - Profile data stays in extension-managed browser storage
@@ -80,6 +80,8 @@ Chrome Web Store:
 - Screenshot 1: `fillpro-site/assets/marketplace/fillpro-screenshot-fill-page-1280x800.png`
 - Screenshot 2: `fillpro-site/assets/marketplace/fillpro-screenshot-profiles-1280x800.png`
 - Screenshot 3: `fillpro-site/assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png`
+- Screenshot 4: `fillpro-site/assets/marketplace/fillpro-screenshot-privacy-1280x800.png`
+- Screenshot 5: `fillpro-site/assets/marketplace/fillpro-screenshot-undo-1280x800.png`
 
 Website and social:
 - Product demo GIF: `fillpro-site/assets/fillpro-demo.gif`
@@ -99,6 +101,7 @@ Use:
 - "review before submit"
 - "modern form support"
 - "supports React, Vue, Angular, Shadow DOM, and same-origin frames"
+- "supports form-builder controls such as ARIA radio and checkbox groups"
 - "Chrome, Edge, and Firefox packages prepared"
 
 Avoid:

@@ -1036,7 +1036,7 @@ textarea:focus-visible {
   color: var(--premium-brand);
   font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -1290,7 +1290,7 @@ textarea:focus-visible {
   color: var(--premium-muted);
   font-size: 12px;
   font-weight: 850;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -1473,6 +1473,8 @@ textarea:focus-visible {
 
 /* FillPro launch route */
 .fillpro-launch {
+  --launch-display: "Aptos Display", "Segoe UI Variable Display", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --launch-text: "Aptos", "Segoe UI Variable Text", "Segoe UI", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --launch-page: #f7f9f7;
   --launch-paper: #ffffff;
   --launch-ink: #10231f;
@@ -1486,10 +1488,27 @@ textarea:focus-visible {
   --launch-gold: #d89a24;
   --launch-blue: #2563eb;
   --launch-shadow: 0 28px 72px rgba(16, 35, 31, 0.14);
+  position: relative;
   background:
-    linear-gradient(180deg, #ffffff 0, var(--launch-page) 360px, #eef5f1 100%);
+    linear-gradient(180deg, #fbfdfb 0, var(--launch-page) 420px, #eef5f1 100%);
   color: var(--launch-ink);
-  font: 16px/1.58 "Segoe UI Variable Text", "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font: 16px/1.58 var(--launch-text);
+  overflow-x: hidden;
+}
+
+.fillpro-launch::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(180deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(135deg, rgba(216, 154, 36, 0.08), transparent 38%),
+    linear-gradient(315deg, rgba(37, 99, 235, 0.065), transparent 42%);
+  -webkit-mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
+  mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
 }
 
 .fillpro-launch a {
@@ -1501,8 +1520,9 @@ textarea:focus-visible {
   top: 0;
   z-index: 42;
   border-bottom: 1px solid rgba(16, 35, 31, 0.1);
-  background: rgba(247, 249, 247, 0.9);
+  background: rgba(247, 249, 247, 0.88);
   backdrop-filter: blur(18px);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .launch-nav,
@@ -1541,6 +1561,7 @@ textarea:focus-visible {
 }
 
 .launch-brand strong {
+  font-family: var(--launch-display);
   font-size: 18px;
   line-height: 1.1;
 }
@@ -1587,11 +1608,26 @@ textarea:focus-visible {
 }
 
 .launch-hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
   align-items: center;
   gap: 42px;
   padding: 46px 0 56px;
+  overflow-x: hidden;
+}
+
+.launch-hero::before {
+  content: "";
+  position: absolute;
+  inset: 8px -26px auto auto;
+  width: min(52vw, 640px);
+  height: 360px;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0 1px, transparent 1px 16px);
+  opacity: 0.34;
+  transform: skewY(-4deg);
 }
 
 .launch-hero-copy {
@@ -1604,7 +1640,7 @@ textarea:focus-visible {
   color: var(--launch-brand-strong);
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0;
   line-height: 1.25;
   text-transform: uppercase;
 }
@@ -1615,14 +1651,15 @@ textarea:focus-visible {
 .launch-final h2 {
   margin: 0;
   color: var(--launch-ink);
+  font-family: var(--launch-display);
   font-weight: 900;
   letter-spacing: 0;
 }
 
 .launch-hero h1 {
   max-width: 780px;
-  font-size: 82px;
-  line-height: 0.94;
+  font-size: 78px;
+  line-height: 0.96;
 }
 
 .launch-lead {
@@ -1640,6 +1677,8 @@ textarea:focus-visible {
 }
 
 .launch-button {
+  position: relative;
+  overflow: hidden;
   min-height: 52px;
   display: inline-flex;
   align-items: center;
@@ -1653,6 +1692,21 @@ textarea:focus-visible {
   font-weight: 850;
   text-decoration: none;
   box-shadow: 0 8px 18px rgba(16, 35, 31, 0.05);
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease,
+    background-color 160ms ease;
+}
+
+.launch-button::after {
+  content: "";
+  position: absolute;
+  inset: -80% auto -80% -46%;
+  width: 44%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+  transform: translateX(-120%) rotate(18deg);
+  transition: transform 420ms ease;
 }
 
 .launch-button:hover,
@@ -1662,9 +1716,16 @@ textarea:focus-visible {
   transform: translateY(-1px);
 }
 
-.launch-button-primary {
+.launch-button:hover::after,
+.launch-button:focus-visible::after {
+  transform: translateX(420%) rotate(18deg);
+}
+
+.fillpro-launch .launch-button.launch-button-primary,
+.fillpro-launch .launch-button.launch-button-primary:visited {
   border-color: var(--launch-brand);
-  background: var(--launch-brand);
+  background:
+    linear-gradient(135deg, #0f766e, #0a5f59);
   color: #fff;
 }
 
@@ -1683,7 +1744,9 @@ textarea:focus-visible {
   padding: 13px 14px;
   border: 1px solid var(--launch-line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.82);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 251, 248, 0.82));
+  box-shadow: 0 10px 24px rgba(16, 35, 31, 0.045);
 }
 
 .launch-proof dt {
@@ -1707,11 +1770,21 @@ textarea:focus-visible {
 }
 
 .demo-shell {
+  position: relative;
   overflow: hidden;
   border: 1px solid rgba(16, 35, 31, 0.1);
   border-radius: 8px;
   background: var(--launch-dark);
   box-shadow: var(--launch-shadow);
+}
+
+.demo-shell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
 }
 
 .demo-chrome {
@@ -1775,7 +1848,8 @@ textarea:focus-visible {
   display: grid;
   place-items: center;
   padding: 14px;
-  background: rgba(255, 255, 255, 0.86);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(246, 250, 247, 0.9));
   color: var(--launch-soft);
   font-size: 14px;
   font-weight: 780;
@@ -1832,7 +1906,9 @@ textarea:focus-visible {
   padding: 24px;
   border: 1px solid var(--launch-line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.8);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(248, 251, 249, 0.86));
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 16px 34px rgba(16, 35, 31, 0.055);
 }
 
 .launch-use-grid p,
@@ -1879,6 +1955,8 @@ textarea:focus-visible {
 }
 
 .launch-band {
+  position: relative;
+  overflow: hidden;
   display: grid;
   gap: 30px;
   padding: 50px;
@@ -1886,6 +1964,22 @@ textarea:focus-visible {
   background:
     linear-gradient(135deg, #10231f 0, #0d1816 100%);
   color: #fff;
+}
+
+.launch-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px) 0 0 / 72px 72px,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px) 0 0 / 72px 72px,
+    linear-gradient(135deg, rgba(242, 193, 78, 0.18), transparent 36%);
+  opacity: 0.42;
+}
+
+.launch-band > * {
+  position: relative;
 }
 
 .launch-band .launch-kicker,
@@ -1938,7 +2032,7 @@ textarea:focus-visible {
   color: var(--launch-brand-strong);
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: 0.07em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -2032,7 +2126,7 @@ textarea:focus-visible {
   color: var(--launch-brand-strong);
   font-size: 12px;
   font-weight: 900;
-  letter-spacing: 0.06em;
+  letter-spacing: 0;
   text-transform: uppercase;
 }
 
@@ -2127,17 +2221,20 @@ textarea:focus-visible {
   .launch-links {
     width: 100%;
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 6px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    scrollbar-width: thin;
+    overflow-x: visible;
+    padding-bottom: 0;
+    scrollbar-width: none;
   }
 
   .launch-links a {
-    flex: 0 0 auto;
+    flex: 0 1 auto;
     justify-content: center;
+    min-height: 36px;
+    padding: 7px 8px;
+    font-size: 13px;
   }
 
   .launch-main {

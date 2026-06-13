@@ -19,7 +19,7 @@
   <link rel="alternate" type="text/plain" title="FillPro crawler index" href="/llms.txt">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="preload" href="/assets/fillpro-demo.gif" as="image">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v20">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v21">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
@@ -65,7 +65,8 @@
           "Undo last fill",
           "Right-click field capture",
           "Shadow DOM and same-origin iframe support",
-          "React, Vue, Angular, combobox, select, radio, checkbox, textarea, split phone, and split birthday support",
+          "React, Vue, Angular, combobox, select, ARIA radio and checkbox, textarea, split phone, and split birthday support",
+          "Google Forms-style form-builder control support",
           "Multilingual contact-form label support"
         ],
         "offers": [
@@ -80,8 +81,8 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What is FillPro best for?",
-            "acceptedAnswer": { "@type": "Answer", "text": "FillPro is best for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, onboarding flows, support forms, vendor forms, admin forms, QA profiles, and business workflows." }
+            "name": "Where does FillPro fit?",
+            "acceptedAnswer": { "@type": "Answer", "text": "FillPro fits repeated profile-style fields across job applications, signup pages, intake forms, demo requests, onboarding flows, support forms, vendor forms, admin forms, QA profiles, and business workflows." }
           },
           {
             "@type": "Question",
@@ -124,12 +125,12 @@
   <main id="main-content" class="launch-main" tabindex="-1">
     <section class="launch-hero" aria-labelledby="fillpro-title">
       <div class="launch-hero-copy">
-        <p class="launch-kicker">Version 1.0.0 - private browser autofill</p>
-        <h1 id="fillpro-title">Autofill the forms Chrome leaves behind.</h1>
-        <p class="launch-lead">FillPro keeps reusable profiles on your device and fills job applications, signup pages, intake forms, demo requests, support forms, and vendor workflows in one click. You review. Then you submit.</p>
+        <p class="launch-kicker">FillPro 1.0.0 - private browser autofill</p>
+        <h1 id="fillpro-title">Fill the forms that keep coming back.</h1>
+        <p class="launch-lead">Save the details you type again and again. FillPro keeps profiles on your device, fills the page when you ask, and leaves the final submit button to you.</p>
         <div class="launch-actions" aria-label="FillPro actions">
-          <a class="launch-button launch-button-primary" href="#pricing">Start free</a>
-          <a class="launch-button" href="#demo">Watch the demo</a>
+          <a class="launch-button launch-button-primary" href="#pricing">Start with 3 free profiles</a>
+          <a class="launch-button" href="#demo">See it fill a form</a>
         </div>
         <dl class="launch-proof" aria-label="Launch proof points">
           <div>
@@ -141,12 +142,12 @@
             <dd>profile storage</dd>
           </div>
           <div>
-            <dt>Undo</dt>
-            <dd>last fill</dd>
+            <dt>Rules</dt>
+            <dd>for odd labels</dd>
           </div>
           <div>
-            <dt>3</dt>
-            <dd>browser builds</dd>
+            <dt>Undo</dt>
+            <dd>before submit</dd>
           </div>
         </dl>
       </div>
@@ -160,40 +161,40 @@
           <img src="/assets/fillpro-demo.gif" alt="FillPro filling a vendor onboarding form from a local work profile" width="960" height="540" decoding="async">
         </div>
         <figcaption>
-          <strong>One click, visible changes.</strong>
-          <span>The demo shows a profile fill, a resume upload match, and the review-before-submit moment.</span>
+          <strong>Fast, but still under your control.</strong>
+          <span>The demo shows profile fields, a document match, and the review-before-submit moment.</span>
         </figcaption>
       </figure>
     </section>
 
     <section class="launch-strip" aria-label="Browser release status">
-      <span>Chrome Web Store copy ready</span>
-      <span>Edge Add-ons package ready</span>
-      <span>Firefox AMO package ready</span>
-      <span>Privacy page and support flow ready</span>
+      <span>Chrome, Edge, and Firefox packages</span>
+      <span>Modern form-builder controls</span>
+      <span>Local profiles and local rules</span>
+      <span>Support and privacy pages ready</span>
     </section>
 
     <section class="launch-section launch-editorial" id="fit">
       <div>
         <p class="launch-kicker">Where it wins</p>
-        <h2>Made for the repeat fields people actually resent typing.</h2>
+        <h2>Built around the form work people quietly hate.</h2>
       </div>
       <div class="launch-use-grid">
         <article>
           <h3>Job applications</h3>
-          <p>Names, contact details, work links, resumes, cover letters, profile answers, dropdowns, and custom questions.</p>
+          <p>Contact details, work links, resumes, cover letters, dropdowns, and profile questions.</p>
         </article>
         <article>
           <h3>Signup and trial pages</h3>
-          <p>New accounts, SaaS trials, business registrations, team onboarding, and profile setup forms.</p>
+          <p>Account setup, product trials, business registrations, onboarding, and profile forms.</p>
         </article>
         <article>
           <h3>Vendors and intake</h3>
-          <p>Company details, tax-adjacent admin fields, service descriptions, quote requests, partner forms, and procurement portals.</p>
+          <p>Company details, service descriptions, quote requests, partner forms, and procurement portals.</p>
         </article>
         <article>
           <h3>Support and admin</h3>
-          <p>Contact pages, support tickets, QA profiles, internal tools, CRM fields, and repeat business workflows.</p>
+          <p>Contact pages, support tickets, internal tools, CRM fields, test profiles, and repeat admin.</p>
         </article>
       </div>
     </section>
@@ -201,8 +202,8 @@
     <section class="launch-section launch-product" aria-labelledby="workflow-title">
       <div class="launch-product-copy">
         <p class="launch-kicker">The workflow</p>
-        <h2 id="workflow-title">A form filler should feel boring in the best way.</h2>
-        <p>Open the form, choose a profile, fill the page, glance at the result. FillPro does not try to take the final click away from you, and it does not need a cloud profile account before the first useful fill.</p>
+        <h2 id="workflow-title">The good version is almost uneventful.</h2>
+        <p>Open the form, choose a profile, fill the page, glance at the result. No cloud profile account before the first useful fill. No surprise submit.</p>
       </div>
       <div class="workflow-list" aria-label="FillPro workflow">
         <article>
@@ -240,7 +241,7 @@
         </article>
         <article>
           <h3>Complex layouts</h3>
-          <p>Shadow DOM, same-origin frames, modals, split phone fields, split birthday fields, country aliases, state aliases, radios, and checkboxes.</p>
+          <p>Shadow DOM, same-origin frames, modals, split phone fields, split birthday fields, country aliases, state aliases, ARIA radios, and checkboxes.</p>
         </article>
         <article>
           <h3>Files and profiles</h3>
@@ -373,6 +374,6 @@
     <span>Stealthy Apps - FillPro. Last updated <time datetime="2026-06-13">June 13, 2026</time>.</span>
     <span><a href="/fillpro/">FillPro</a> | <a href="/fillpro/privacy/">Privacy</a> | <a href="/contact/">Contact</a> | <a href="/support/">Support</a> | <a href="/sitemap.html">Sitemap</a></span>
   </footer>
-  <script src="/site.js?v=fillpro-launch-v20" defer></script>
+  <script src="/site.js?v=fillpro-launch-v21" defer></script>
 </body>
 </html>

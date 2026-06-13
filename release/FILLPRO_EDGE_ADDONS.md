@@ -33,6 +33,8 @@ Use the same core screenshots and promo art:
 - `fillpro-site/assets/marketplace/fillpro-screenshot-fill-page-1280x800.png`
 - `fillpro-site/assets/marketplace/fillpro-screenshot-profiles-1280x800.png`
 - `fillpro-site/assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png`
+- `fillpro-site/assets/marketplace/fillpro-screenshot-privacy-1280x800.png`
+- `fillpro-site/assets/marketplace/fillpro-screenshot-undo-1280x800.png`
 - `fillpro-site/assets/fillpro-og.png`
 - `fillpro-site/assets/fillpro-logo.png`
 

@@ -36,8 +36,13 @@ Required and recommended upload order:
 1. `fillpro-site/assets/marketplace/fillpro-screenshot-fill-page-1280x800.png`
 2. `fillpro-site/assets/marketplace/fillpro-screenshot-profiles-1280x800.png`
 3. `fillpro-site/assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png`
-4. `fillpro-site/assets/marketplace/fillpro-small-promo-440x280.png`
-5. `fillpro-site/assets/marketplace/fillpro-marquee-1400x560.png`
+4. `fillpro-site/assets/marketplace/fillpro-screenshot-privacy-1280x800.png`
+5. `fillpro-site/assets/marketplace/fillpro-screenshot-undo-1280x800.png`
+
+Promo images:
+
+- Small promo tile: `fillpro-site/assets/marketplace/fillpro-small-promo-440x280.png`
+- Marquee promo: `fillpro-site/assets/marketplace/fillpro-marquee-1400x560.png`
 
 ## Privacy Practices
 

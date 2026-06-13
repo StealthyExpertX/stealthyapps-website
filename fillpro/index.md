@@ -11,7 +11,7 @@ FillPro is a browser extension from Stealthy Apps for people who keep typing the
 - Trial: 3 days, no card required
 - Last updated: 2026-06-13
 
-## What FillPro is best for
+## Where FillPro fits
 
 FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor workflows, onboarding flows, support forms, admin tools, QA test profiles, and everyday business forms.
 
@@ -23,7 +23,7 @@ FillPro is built for repeated profile-style fields across job applications, sign
 - Resume, CV, cover letter, portfolio, and document upload matching.
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
-- Support for React, Vue, Angular, Shadow DOM, same-origin frames, comboboxes, selects, radios, checkboxes, textareas, split birthdays, segmented phones, country/state/month aliases, and multilingual contact labels.
+- Support for React, Vue, Angular, Shadow DOM, same-origin frames, comboboxes, selects, ARIA radios and checkboxes, Google Forms-style controls, textareas, split birthdays, segmented phones, country/state/month aliases, and multilingual contact labels.
 
 ## Competitive fit
 
