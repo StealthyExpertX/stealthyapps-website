@@ -349,6 +349,10 @@ p {
   padding: 34px 0;
 }
 
+.page > .section + .section {
+  padding-top: 18px;
+}
+
 .section-heading,
 .page-intro {
   display: grid;
@@ -365,8 +369,7 @@ p {
 .info-grid,
 .feature-grid,
 .support-grid,
-.policy-grid,
-.release-grid {
+.policy-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
@@ -383,6 +386,10 @@ p {
   gap: 18px;
 }
 
+.section.two-col {
+  align-items: start;
+}
+
 .card,
 .surface,
 .boundary-card,
@@ -391,7 +398,6 @@ p {
 .info-card,
 .support-card,
 .policy-card,
-.release-card,
 .mini-card,
 .mini-note,
 .preview-shell,
@@ -410,7 +416,6 @@ p {
 .info-card,
 .support-card,
 .policy-card,
-.release-card,
 .mini-card {
   padding: 24px;
 }
@@ -420,7 +425,6 @@ p {
 .info-card:hover,
 .support-card:hover,
 .policy-card:hover,
-.release-card:hover,
 .boundary-card:hover,
 .mini-card:hover,
 .surface:hover {
@@ -432,7 +436,6 @@ p {
 .info-card p,
 .support-card p,
 .policy-card p,
-.release-card p,
 .boundary-card p,
 .mini-card p {
   margin-top: 8px;
@@ -493,8 +496,7 @@ p {
 }
 
 .pill,
-.tag,
-.release-badge {
+.tag {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -812,7 +814,6 @@ textarea:focus-visible {
   .feature-grid,
   .support-grid,
   .policy-grid,
-  .release-grid,
   .stat-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -846,7 +847,6 @@ textarea:focus-visible {
   .feature-grid,
   .support-grid,
   .policy-grid,
-  .release-grid,
   .stat-row {
     grid-template-columns: 1fr;
   }
@@ -890,7 +890,6 @@ textarea:focus-visible {
   .info-card,
   .support-card,
   .policy-card,
-  .release-card,
   .mini-card {
     padding: 20px;
   }
@@ -1916,7 +1915,6 @@ textarea:focus-visible {
 .compare-lanes p,
 .price-card p,
 .section-heading-tight p,
-.release-panel p,
 .launch-faq-list p {
   color: var(--launch-soft);
 }
@@ -2085,51 +2083,6 @@ textarea:focus-visible {
   background: var(--launch-brand);
 }
 
-.release-panel {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
-  gap: 30px;
-  align-items: center;
-  padding: 34px;
-  border: 1px solid rgba(16, 35, 31, 0.12);
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 18px 48px rgba(16, 35, 31, 0.08);
-}
-
-.release-panel > div:first-child {
-  display: grid;
-  gap: 14px;
-}
-
-.release-links {
-  display: grid;
-  gap: 10px;
-}
-
-.release-links a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 54px;
-  padding: 13px 15px;
-  border: 1px solid var(--launch-line);
-  border-radius: 8px;
-  background: #f8fbf8;
-  color: var(--launch-ink);
-  font-weight: 840;
-  text-decoration: none;
-}
-
-.release-links a::after {
-  content: "Open";
-  color: var(--launch-brand-strong);
-  font-size: 12px;
-  font-weight: 900;
-  letter-spacing: 0;
-  text-transform: uppercase;
-}
-
 .launch-faq-list {
   display: grid;
   gap: 10px;
@@ -2190,8 +2143,7 @@ textarea:focus-visible {
 @media (max-width: 1060px) {
   .launch-hero,
   .launch-editorial,
-  .launch-product,
-  .release-panel {
+  .launch-product {
     grid-template-columns: 1fr;
   }
 
@@ -2272,8 +2224,7 @@ textarea:focus-visible {
     line-height: 1.04;
   }
 
-  .launch-band,
-  .release-panel {
+  .launch-band {
     padding: 24px;
   }
 }

@@ -5,7 +5,7 @@ Private Chrome form autofill for job applications, signup forms, intake pages, d
 - Product: FillPro
 - Brand: Stealthy Apps
 - Canonical product page: https://stealthyapps.com/fillpro/
-- Current release: 1.0.0
+- Current version: 1.0.0
 - Last updated: 2026-06-13
 
 FillPro fills repeated web forms from profiles stored in Chrome extension storage. The public website now uses one main product route so search engines, answer engines, and visitors see the same product story.

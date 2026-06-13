@@ -39,7 +39,7 @@ const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
 const DIRECT_SEND_CONSENT_NOTE =
   'Sender confirmed the on-page direct-send notice, agreed not to send sensitive information, and accepted responsibility for submitted content.';
 const UPDATE_CONSENT_NOTE =
-  'Sender opted into occasional follow-up, release-note, or product-update emails related to this message and can opt out later.';
+  'Sender opted into occasional follow-up or product-update emails related to this message and can opt out later.';
 const DIRECT_SEND_AUTORESPONSE =
   'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply as soon as possible. Please keep passwords, payment details, government IDs, tax IDs, one-time codes, and private profile values out of support email.';
 const MIN_NAME_LENGTH = 2;

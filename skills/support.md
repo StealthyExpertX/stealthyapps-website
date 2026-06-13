@@ -5,7 +5,7 @@ Last reviewed: 2026-06-13
 Support page: https://stealthyapps.com/support/
 Contact page: https://stealthyapps.com/contact/
 
-Good compatibility reports include:
+Good site reports include:
 
 - Page type or website.
 - Field label or field type.

@@ -1,6 +1,6 @@
 # Contact FillPro
 
-Use the contact page for FillPro support, billing, privacy questions, compatibility reports, business questions, and feature ideas.
+Use the contact page for FillPro support, billing, privacy questions, site reports, business questions, and feature ideas.
 
 Canonical contact page: https://stealthyapps.com/contact/
 

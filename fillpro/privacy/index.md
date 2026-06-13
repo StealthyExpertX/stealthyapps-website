@@ -19,7 +19,7 @@ FillPro stores saved profiles, custom fields, rules, and upload references local
 | Profiles and custom fields | Chrome extension storage | To fill forms the user chooses to fill | Delete the profile or uninstall the extension |
 | Saved file references and uploads | Device and extension storage | To match document upload fields | Remove the file from the profile or delete the profile |
 | License status | ExtensionPay and Stripe | To enable Pro features | Contact support for billing help |
-| Support messages | Email provider and support inbox | To answer questions or investigate site reports | Ask for the conversation to be deleted |
+| Support messages | Email provider and support email | To answer questions or investigate site reports | Ask for the conversation to be deleted |
 
 ## Sensitive Fields
 

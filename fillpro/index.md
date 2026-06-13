@@ -4,7 +4,7 @@ FillPro is a browser extension from Stealthy Apps for people who reuse the same 
 
 - Canonical URL: https://stealthyapps.com/fillpro/
 - Privacy: https://stealthyapps.com/fillpro/privacy/
-- Current release: 1.0.0
+- Current version: 1.0.0
 - Category: browser extension, productivity, form autofill
 - Free tier: 3 saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime

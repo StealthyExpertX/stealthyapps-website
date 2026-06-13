@@ -6,7 +6,7 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 - Brand: Stealthy Apps
 - Website: https://stealthyapps.com/fillpro/
 - Canonical product route: /fillpro/
-- Current release: 1.0.0
+- Current version: 1.0.0
 - Last reviewed: 2026-06-13
 
 ## Canonical Routes

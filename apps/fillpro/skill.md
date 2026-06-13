@@ -11,7 +11,7 @@ FillPro stores profiles locally and fills repeated web forms. It is best for job
 
 Core facts:
 
-- Current release: 1.0.0
+- Current version: 1.0.0
 - Free tier: 3 saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required

@@ -8,7 +8,7 @@ Last updated: 2026-06-13
 
 FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves reusable profiles in Chrome extension storage and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
 
-Current release: 1.0.0.
+Current version: 1.0.0.
 
 Canonical product page: https://stealthyapps.com/fillpro/
 
@@ -35,7 +35,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 - Internal admin forms and QA test profiles.
 - Repeated business forms that ask for the same details again and again.
 
-## Competitive Position
+## Where FillPro Fits
 
 FillPro is designed for structured profile data across many unrelated web forms.
 
@@ -75,15 +75,6 @@ Best report:
 - Browser and FillPro version if known.
 
 Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, full customer records, or private profile values.
-
-## Release 1.0.0
-
-- Improved handling for React, Vue, Angular, custom elements, Shadow DOM, and same-origin iframe forms.
-- Better support for comboboxes, searchable selects, segmented phone fields, split birthdays, country, state, and month aliases.
-- Added profile fields for middle name and pronouns.
-- Improved multilingual contact-form label support.
-- Cleaner popup, side panel, profile picker, pricing, and upgrade screens.
-- Expanded tests for component libraries, real-world form patterns, file uploads, monetization flows, and public web page audits.
 
 ## Canonical Routes
 
