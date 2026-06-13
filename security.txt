@@ -2,5 +2,5 @@
 Contact: mailto:support@stealthyapps.com
 Preferred-Languages: en
 Canonical: https://stealthyapps.com/.well-known/security.txt
-Policy: https://stealthyapps.com/extensions/fillpro/privacy/
+Policy: https://stealthyapps.com/fillpro/privacy/
 Expires: 2027-06-12T00:00:00Z

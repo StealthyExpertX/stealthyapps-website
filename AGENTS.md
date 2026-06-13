@@ -4,17 +4,17 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 
 - Product: FillPro
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/extensions/fillpro/
-- Canonical product route: /extensions/fillpro/
+- Website: https://stealthyapps.com/fillpro/
+- Canonical product route: /fillpro/
 - Current release: 1.0.0
-- Last reviewed: 2026-06-12
+- Last reviewed: 2026-06-13
 
 ## Canonical Routes
 
-- Home: /extensions/fillpro/
-- Product: /extensions/fillpro/
-- Pricing: /extensions/fillpro/#pricing
-- Privacy: /extensions/fillpro/privacy/
+- Home: /fillpro/
+- Product: /fillpro/
+- Pricing: /fillpro/#pricing
+- Privacy: /fillpro/privacy/
 - Support: /support/
 - Contact: /contact/
 - Sitemap: /sitemap.html

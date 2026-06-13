@@ -1,6 +1,6 @@
 # FillPro Privacy Notes
 
-Last reviewed: 2026-06-12
+Last reviewed: 2026-06-13
 
 FillPro stores profiles, rules, custom fields, and upload references locally in Chrome extension storage. It does not run a cloud profile service.
 

@@ -1,36 +1,40 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="FillPro icon">
   <defs>
-    <linearGradient id="bg" x1="150" y1="92" x2="874" y2="932" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#11a69a"/>
-      <stop offset="0.48" stop-color="#0f766e"/>
-      <stop offset="1" stop-color="#0b2530"/>
+    <linearGradient id="bg" x1="160" y1="96" x2="864" y2="928" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#14b8a6"/>
+      <stop offset="0.46" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#10231f"/>
     </linearGradient>
-    <linearGradient id="card" x1="268" y1="176" x2="754" y2="840" gradientUnits="userSpaceOnUse">
+    <linearGradient id="paper" x1="296" y1="176" x2="718" y2="788" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#ffffff"/>
-      <stop offset="1" stop-color="#e5fbf7"/>
+      <stop offset="1" stop-color="#e9fff8"/>
     </linearGradient>
-    <filter id="cardShadow" x="150" y="112" width="724" height="804" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="34" stdDeviation="34" flood-color="#031820" flood-opacity="0.34"/>
+    <linearGradient id="fill" x1="312" y1="244" x2="710" y2="620" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#10231f"/>
+      <stop offset="1" stop-color="#0f766e"/>
+    </linearGradient>
+    <filter id="mainShadow" x="128" y="108" width="768" height="820" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="34" stdDeviation="36" flood-color="#071714" flood-opacity="0.36"/>
     </filter>
-    <filter id="badgeShadow" x="500" y="500" width="370" height="370" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#031820" flood-opacity="0.28"/>
+    <filter id="badgeShadow" x="500" y="506" width="374" height="374" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#071714" flood-opacity="0.28"/>
     </filter>
   </defs>
 
-  <rect width="1024" height="1024" rx="220" fill="url(#bg)"/>
-  <path d="M94 690c126 94 281 150 448 150 147 0 284-43 399-117v118c0 49-40 89-89 89H172c-49 0-89-40-89-89V703c4-4 7-8 11-13Z" fill="#041f27" opacity="0.28"/>
+  <rect width="1024" height="1024" rx="218" fill="url(#bg)"/>
+  <path d="M96 690c116 86 266 139 429 139 151 0 292-45 407-122v137c0 49-40 89-89 89H181c-49 0-89-40-89-89V694l4-4Z" fill="#061d1a" opacity="0.22"/>
 
-  <g filter="url(#cardShadow)">
-    <rect x="242" y="148" width="520" height="708" rx="92" fill="url(#card)"/>
-    <rect x="316" y="246" width="372" height="84" rx="42" fill="#0f766e"/>
-    <rect x="316" y="386" width="318" height="54" rx="27" fill="#9fb0bd" opacity="0.64"/>
-    <rect x="316" y="500" width="372" height="54" rx="27" fill="#9fb0bd" opacity="0.52"/>
-    <rect x="316" y="614" width="236" height="54" rx="27" fill="#9fb0bd" opacity="0.44"/>
+  <g filter="url(#mainShadow)">
+    <rect x="246" y="150" width="532" height="718" rx="112" fill="url(#paper)"/>
+    <rect x="334" y="248" width="360" height="96" rx="48" fill="url(#fill)"/>
+    <rect x="334" y="400" width="282" height="64" rx="32" fill="#7d948d" opacity="0.34"/>
+    <rect x="334" y="524" width="354" height="64" rx="32" fill="#7d948d" opacity="0.24"/>
+    <rect x="334" y="648" width="226" height="64" rx="32" fill="#7d948d" opacity="0.22"/>
   </g>
 
   <g filter="url(#badgeShadow)">
-    <circle cx="690" cy="698" r="156" fill="#f8fafc"/>
-    <circle cx="690" cy="698" r="124" fill="#16a34a"/>
-    <path d="M618 698l50 50 102-122" fill="none" stroke="#ffffff" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="700" cy="704" r="156" fill="#effffb"/>
+    <circle cx="700" cy="704" r="114" fill="#12a174"/>
+    <path d="M637 706l44 44 91-108" fill="none" stroke="#ffffff" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

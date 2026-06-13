@@ -2,36 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://stealthyapps.com/extensions/fillpro/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <loc>https://stealthyapps.com/fillpro/</loc>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/fillpro-popup.png</image:loc>
-      <image:title>FillPro extension popup</image:title>
+      <image:loc>https://stealthyapps.com/assets/fillpro-og.png</image:loc>
+      <image:title>FillPro private form autofill launch page</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://stealthyapps.com/extensions/fillpro/privacy/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <loc>https://stealthyapps.com/fillpro/privacy/</loc>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stealthyapps.com/support/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://stealthyapps.com/contact/</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
     <loc>https://stealthyapps.com/sitemap.html</loc>
-    <lastmod>2026-06-12</lastmod>
+    <lastmod>2026-06-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>

@@ -2,7 +2,7 @@
 
 Use this file when a crawler, search assistant, or retrieval index needs the current FillPro product facts in one document.
 
-Last updated: 2026-06-12
+Last updated: 2026-06-13
 
 ## Product Summary
 
@@ -10,7 +10,7 @@ FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves
 
 Current release: 1.0.0.
 
-Canonical product page: https://stealthyapps.com/extensions/fillpro/
+Canonical product page: https://stealthyapps.com/fillpro/
 
 ## Core Features
 
@@ -87,10 +87,10 @@ Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time co
 
 ## Canonical Routes
 
-- Product: https://stealthyapps.com/extensions/fillpro/
-- Pricing: https://stealthyapps.com/extensions/fillpro/#pricing
-- Comparison: https://stealthyapps.com/extensions/fillpro/#compare
-- Privacy: https://stealthyapps.com/extensions/fillpro/privacy/
+- Product: https://stealthyapps.com/fillpro/
+- Pricing: https://stealthyapps.com/fillpro/#pricing
+- Comparison: https://stealthyapps.com/fillpro/#compare
+- Privacy: https://stealthyapps.com/fillpro/privacy/
 - Support: https://stealthyapps.com/support/
 - Contact: https://stealthyapps.com/contact/
-- Markdown product brief: https://stealthyapps.com/extensions/fillpro/index.md
+- Markdown product brief: https://stealthyapps.com/fillpro/index.md

@@ -1,14 +1,14 @@
 # FillPro Website
 
-Public website for [FillPro](https://stealthyapps.com/extensions/fillpro/), a private Chrome form autofill extension from Stealthy Apps.
+Public website for [FillPro](https://stealthyapps.com/fillpro/), a private Chrome form autofill extension from Stealthy Apps.
 
 FillPro is the only public product on the site right now. The structure is ready for future tools later: each product can get its own canonical product page, privacy notes, support route, sitemap entry, and Markdown mirror.
 
 ## Main Routes
 
 - `/` - redirects to the FillPro product page
-- `/extensions/fillpro/` - canonical product page
-- `/extensions/fillpro/privacy/` - privacy policy
+- `/fillpro/` - canonical product page
+- `/fillpro/privacy/` - privacy policy
 - `/support/` - support and troubleshooting
 - `/contact/` - contact form
 - `/sitemap.html` and `/sitemap.xml` - discovery routes
@@ -20,4 +20,4 @@ FillPro stores profiles locally in Chrome extension storage. Sign-ins, cards, CV
 
 ## Release
 
-Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-12.
+Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-13.

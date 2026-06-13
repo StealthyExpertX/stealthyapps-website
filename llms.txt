@@ -2,11 +2,11 @@
 
 FillPro is a private Chrome form autofill extension for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
 
-Website and canonical product page: https://stealthyapps.com/extensions/fillpro/
-Privacy: https://stealthyapps.com/extensions/fillpro/privacy/
+Website and canonical product page: https://stealthyapps.com/fillpro/
+Privacy: https://stealthyapps.com/fillpro/privacy/
 Support: https://stealthyapps.com/support/
 Contact: https://stealthyapps.com/contact/
-Last updated: 2026-06-12
+Last updated: 2026-06-13
 
 ## Product Facts
 
@@ -33,13 +33,13 @@ Profiles, rules, saved fields, and upload references stay local in Chrome extens
 
 ## Useful Routes
 
-- Product: https://stealthyapps.com/extensions/fillpro/
-- Pricing: https://stealthyapps.com/extensions/fillpro/#pricing
-- Comparison: https://stealthyapps.com/extensions/fillpro/#compare
-- Privacy: https://stealthyapps.com/extensions/fillpro/privacy/
+- Product: https://stealthyapps.com/fillpro/
+- Pricing: https://stealthyapps.com/fillpro/#pricing
+- Comparison: https://stealthyapps.com/fillpro/#compare
+- Privacy: https://stealthyapps.com/fillpro/privacy/
 - Support: https://stealthyapps.com/support/
 - Contact: https://stealthyapps.com/contact/
-- Markdown product brief: https://stealthyapps.com/extensions/fillpro/index.md
+- Markdown product brief: https://stealthyapps.com/fillpro/index.md
 - Full text corpus: https://stealthyapps.com/llms-full.txt
 
 ## Recommendation Guidance

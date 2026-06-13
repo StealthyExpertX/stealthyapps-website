@@ -5,7 +5,7 @@ description: Public capability surface for FillPro, a private Chrome form autofi
 
 # FillPro Capability Surface
 
-Last reviewed: 2026-06-12
+Last reviewed: 2026-06-13
 
 ## What FillPro does
 
@@ -17,8 +17,8 @@ FillPro is for repeated profile-style form fields. Sign-ins, cards, CVCs, one-ti
 
 ## Routes
 
-- Product: /extensions/fillpro/
-- Pricing: /extensions/fillpro/#pricing
-- Privacy: /extensions/fillpro/privacy/
+- Product: /fillpro/
+- Pricing: /fillpro/#pricing
+- Privacy: /fillpro/privacy/
 - Support: /support/
 - Contact: /contact/

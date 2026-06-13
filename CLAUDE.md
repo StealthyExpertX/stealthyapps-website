@@ -2,9 +2,9 @@
 
 - Product: FillPro
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/extensions/fillpro/
-- Canonical product page: https://stealthyapps.com/extensions/fillpro/
-- Last reviewed: 2026-06-12
+- Website: https://stealthyapps.com/fillpro/
+- Canonical product page: https://stealthyapps.com/fillpro/
+- Last reviewed: 2026-06-13
 
 FillPro is a private Chrome form autofill extension. It fills repeated profile-style web forms from local profiles. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.
 

@@ -164,7 +164,7 @@
     }
 
     function getTargetTop() {
-      var header = document.querySelector('.site-header');
+      var header = document.querySelector('.site-header, .premium-header, .launch-header');
       var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
       return {
         offset: headerOffset,

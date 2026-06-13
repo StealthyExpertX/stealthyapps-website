@@ -1,6 +1,6 @@
 # FillPro
 
-Last reviewed: 2026-06-12
+Last reviewed: 2026-06-13
 
 FillPro is a private Chrome form autofill extension for repeated web forms.
 
