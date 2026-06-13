@@ -1706,6 +1706,7 @@ textarea:focus-visible {
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
   transform: translateX(-120%) rotate(18deg);
   transition: transform 420ms ease;
+  pointer-events: none;
 }
 
 .launch-button:hover,
@@ -1726,6 +1727,25 @@ textarea:focus-visible {
   background:
     linear-gradient(135deg, #0f766e, #0a5f59);
   color: #fff;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .launch-hero .launch-button-primary::after,
+  .launch-final .launch-button-primary::after {
+    animation: launchCtaShine 5.4s ease-in-out 1.2s infinite;
+  }
+
+  @keyframes launchCtaShine {
+    0%,
+    62% {
+      transform: translateX(-120%) rotate(18deg);
+    }
+
+    74%,
+    100% {
+      transform: translateX(420%) rotate(18deg);
+    }
+  }
 }
 
 .launch-proof {
@@ -2194,7 +2214,7 @@ textarea:focus-visible {
   }
 
   .launch-hero {
-    gap: 28px;
+    gap: 22px;
     padding-top: 32px;
   }
 
@@ -2206,11 +2226,25 @@ textarea:focus-visible {
     font-size: 18px;
   }
 
-  .launch-proof,
   .launch-use-grid,
   .support-columns,
   .price-cards {
     grid-template-columns: 1fr;
+  }
+
+  .launch-proof {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .launch-proof div {
+    min-height: 64px;
+    padding: 10px 12px;
+  }
+
+  .launch-proof dt {
+    font-size: 17px;
   }
 
   .launch-section {

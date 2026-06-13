@@ -39,4 +39,4 @@ Saved profiles, rules, custom fields, and upload references stay on the user's d
 - Contact: https://stealthyapps.com/contact/
 - Full text corpus: https://stealthyapps.com/llms-full.txt
 
-FillPro is the only public product on Stealthy Apps right now. Future tools can get their own canonical product pages later without diluting the FillPro launch page.
+FillPro is the only public product on Stealthy Apps right now. Future tools can get their own canonical product pages later without diluting the FillPro page.

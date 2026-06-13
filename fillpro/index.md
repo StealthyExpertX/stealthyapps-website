@@ -37,7 +37,7 @@ FillPro is strongest when structured profile data has to move across many unrela
 
 ## Privacy and control
 
-Profiles, smart rules, custom fields, and upload references stay in browser extension storage unless the user exports them. The core fill flow uses active-tab access. Optional all-sites access is for optional floating-button and auto-fill behavior.
+Profiles, smart rules, custom fields, and upload references stay in browser extension storage unless the user exports them. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 ## Pricing
 
