@@ -6,7 +6,7 @@ Contact: https://stealthyapps.com/contact/?topic=privacy&reason=compliance
 Expires: 2027-06-12T00:00:00.000Z
 Preferred-Languages: en
 Canonical: https://stealthyapps.com/.well-known/security.txt
-Policy: https://stealthyapps.com/apps/fillpro/privacy/
+Policy: https://stealthyapps.com/fillpro/privacy/
 Acknowledgments: https://stealthyapps.com/about/
 
 # Scope: stealthyapps.com and the FillPro browser extension.

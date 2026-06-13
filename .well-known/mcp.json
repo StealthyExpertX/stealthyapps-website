@@ -2,7 +2,7 @@
   "$schema": "https://schema.modelcontextprotocol.io/registry/v1",
   "name": "fillpro",
   "title": "FillPro",
-  "description": "Private Chrome form autofill extension. Read-only public content endpoints for product, privacy, support, and release information.",
+  "description": "Private browser form autofill extension. Read-only public content endpoints for product, privacy, support, and release information.",
   "homepage": "https://stealthyapps.com/",
   "documentation": "https://stealthyapps.com/llms-full.txt",
   "openapi": "https://stealthyapps.com/.well-known/openapi.yaml",
@@ -11,11 +11,11 @@
   "products": [
     {
       "name": "FillPro",
-      "url": "https://stealthyapps.com/apps/fillpro/",
-      "platform": "Chrome",
+      "url": "https://stealthyapps.com/fillpro/",
+      "platform": "Chrome, Edge, Firefox",
       "category": "form-autofill",
-      "data_location": "local",
-      "privacy_policy": "https://stealthyapps.com/apps/fillpro/privacy/",
+      "data_location": "browser extension storage",
+      "privacy_policy": "https://stealthyapps.com/fillpro/privacy/",
       "free_tier": true,
       "pro_trial_days": 3,
       "pricing": [

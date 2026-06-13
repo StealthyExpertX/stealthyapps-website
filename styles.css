@@ -1763,8 +1763,7 @@ textarea:focus-visible {
 }
 
 .launch-nav,
-.launch-main,
-.launch-footer {
+.launch-main {
   width: min(1220px, calc(100% - 40px));
   margin: 0 auto;
 }
@@ -2417,8 +2416,12 @@ textarea:focus-visible {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 18px;
-  padding: 30px 0 48px;
+  width: 100%;
+  margin: 0;
+  padding: 30px max(20px, calc((100vw - 1220px) / 2)) 48px;
   border-top: 1px solid rgba(16, 35, 31, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(243, 248, 246, 0.98));
   color: var(--launch-muted);
   font-size: 14px;
 }
@@ -2452,8 +2455,7 @@ textarea:focus-visible {
 
 @media (max-width: 760px) {
   .launch-nav,
-  .launch-main,
-  .launch-footer {
+  .launch-main {
     width: min(100% - 28px, 1220px);
   }
 
