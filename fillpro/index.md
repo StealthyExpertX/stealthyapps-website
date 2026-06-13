@@ -24,7 +24,7 @@ Focused pages:
 
 ## Core product
 
-- Local profiles in browser extension storage.
+- Profiles saved inside the browser extension.
 - Popup, side panel, on-page profile picker, right-click fill, and keyboard shortcut.
 - Smart rules and custom fields for unusual labels.
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
@@ -44,7 +44,7 @@ FillPro is strongest when structured profile data has to move across many unrela
 
 ## Privacy and control
 
-Profiles, smart rules, custom fields, and upload references stay in browser extension storage unless the user exports them. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from FillPro settings.
 

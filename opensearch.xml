@@ -2,7 +2,7 @@
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
   <ShortName>FillPro</ShortName>
-  <LongName>FillPro - private Chrome form autofill</LongName>
+  <LongName>FillPro - private browser form autofill</LongName>
   <Description>Search FillPro product, pricing, privacy, support, and contact pages.</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <OutputEncoding>UTF-8</OutputEncoding>

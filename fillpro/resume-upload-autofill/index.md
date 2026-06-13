@@ -1,20 +1,20 @@
 # Resume Upload Autofill - FillPro
 
-Match resumes, CVs, cover letters, CSVs, spreadsheets, and documents to upload fields from local FillPro profiles.
+Match resumes, CVs, cover letters, CSVs, spreadsheets, and documents to upload fields from saved FillPro profiles.
 
 Canonical: https://stealthyapps.com/fillpro/resume-upload-autofill/
 Product: https://stealthyapps.com/fillpro/
 
 ## Keep the right resume ready for the next form.
 
-FillPro can store upload references inside a local profile and match them to reachable upload fields for resumes, CVs, cover letters, portfolios, documents, CSV files, and spreadsheets.
+FillPro can store upload references inside a saved profile and match them to reachable upload fields for resumes, CVs, cover letters, portfolios, documents, CSV files, and spreadsheets.
 
 ## Works best for
 
 - Resume and CV upload matching
 - Cover letter and portfolio file support
 - CSV and spreadsheet upload matching
-- Works with the selected local profile
+- Works with the selected saved profile
 
 ## Built for long forms
 

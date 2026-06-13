@@ -1,7 +1,7 @@
 {
   "name": "FillPro - Private form autofill",
   "short_name": "FillPro",
-  "description": "Private Chrome form autofill for job applications, signup forms, onboarding pages, and repeated business forms.",
+  "description": "Private browser form autofill for job applications, signup forms, onboarding pages, and repeated business forms.",
   "start_url": "/fillpro/?source=pwa",
   "scope": "/",
   "display": "standalone",
@@ -35,7 +35,7 @@
     {
       "name": "Open FillPro",
       "short_name": "FillPro",
-      "description": "Private form autofill for Chrome.",
+      "description": "Private form autofill for repeated web forms.",
       "url": "/fillpro/?source=pwa",
       "icons": [
         {

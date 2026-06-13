@@ -2,31 +2,36 @@
 
 Last updated: 2026-06-13
 
-FillPro stores saved profiles, custom fields, rules, and upload references locally in Chrome extension storage. It does not run a cloud profile account and does not collect form values on a server.
+FillPro is built for private, repeat form filling. The profiles you save for autofill stay inside the browser extension unless you export them, contact support, or choose Pro billing.
 
 ## Short Version
 
-- No account is required for the free extension.
-- Profiles stay in the browser extension on the user's device.
+- Core autofill does not need a FillPro cloud profile account.
+- Saved profiles stay in FillPro extension storage in your browser.
 - Profile values are not sold or shared for advertising.
-- Pro billing is handled by ExtensionPay and Stripe.
-- Support emails are separate from local extension data.
+- Exports, support emails, and Pro billing only happen when you choose them.
+- Support reports should stay short and should not include passwords, payment cards, one-time codes, IDs, customer records, or full profile values.
 
-## Data Map
+## What FillPro Saves
 
-| Data | Where it lives | Why it exists | How to remove it |
-| --- | --- | --- | --- |
-| Profiles and custom fields | Chrome extension storage | To fill forms the user chooses to fill | Delete the profile or uninstall the extension |
-| Saved file references and uploads | Device and extension storage | To match document upload fields | Remove the file from the profile or delete the profile |
-| License status | ExtensionPay and Stripe | To enable Pro features | Contact support for billing help |
-| Support messages | Email provider and support email | To answer questions or investigate site reports | Ask for the conversation to be deleted |
+FillPro may save profiles, custom fields, smart rules, and files you attach to a profile, such as a resume, CV, cover letter, document, CSV, or spreadsheet. Those saved items exist so FillPro can fill the forms you ask it to fill.
 
-## Sensitive Fields
+## What Can Leave the Extension
 
-FillPro is built for repeated profile-style form fields. Password managers, browser autofill, and payment wallets should remain the tools for sign-ins, payment cards, CVCs, one-time codes, and protected identity details.
+- Export: creates a file you control.
+- Support: sends the message and details you choose to include.
+- Pro billing: ExtensionPay and Stripe handle license and payment details.
 
-## Rights and Requests
+## Site Access
 
-Users can inspect and edit local profile data inside FillPro. Users can delete profiles inside FillPro, clear extension storage, or uninstall the extension. Local profile data is not stored remotely, so deletion happens on the device.
+The normal Fill Page action runs on the current page after you click it. The optional floating button asks for access to the current site because it needs to appear on that site. You can turn that off in FillPro settings.
+
+## Sign-Ins and Payments
+
+FillPro is for repeated profile fields around a form. Keep passwords, payment cards, CVCs, one-time codes, wallets, and protected identity details with your browser, password manager, wallet, or the site itself.
+
+## Your Controls
+
+Open FillPro to view, edit, export, or delete saved profiles. You can also clear extension storage in your browser or uninstall FillPro.
 
 Privacy contact: https://stealthyapps.com/contact/?topic=privacy&reason=privacy_question&product=FillPro

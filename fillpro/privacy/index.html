@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FillPro Privacy - Local Form Autofill Data</title>
-  <meta name="description" content="FillPro privacy policy: profiles, rules, and upload references stay in Chrome extension storage unless you export them.">
+  <title>FillPro Privacy - Clear Autofill Data Policy</title>
+  <meta name="description" content="FillPro does not run a cloud profile account for your form values. See what stays in the extension, what billing or support may use, and how to delete it.">
   <meta name="author" content="Stealthy Apps">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="referrer" content="no-referrer">
@@ -17,12 +17,12 @@
   <link rel="search" type="application/opensearchdescription+xml" title="FillPro" href="/opensearch.xml">
   <link rel="alternate" type="text/markdown" title="FillPro privacy (Markdown)" href="/fillpro/privacy/index.md">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v28">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v30">
 
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Stealthy Apps">
   <meta property="og:title" content="FillPro Privacy">
-  <meta property="og:description" content="Local profiles, clear controls, ExtensionPay and Stripe for Pro billing, and no server-side profile database.">
+  <meta property="og:description" content="A plain-language look at what FillPro saves, what stays in the extension, and what only leaves when you choose.">
   <meta property="og:url" content="https://stealthyapps.com/fillpro/privacy/">
   <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-og.png">
   <meta property="article:modified_time" content="2026-06-13T00:00:00Z">
@@ -48,7 +48,7 @@
   }
   </script>
 </head>
-<body>
+<body class="trust-page">
   <a class="skip-link" href="#content">Skip to content</a>
 
   <header class="site-header">
@@ -71,111 +71,109 @@
   </header>
 
   <main id="content" tabindex="-1" class="page">
-    <section class="section two-col">
+    <section class="section two-col privacy-hero">
       <div class="page-intro">
         <p class="eyebrow">Privacy</p>
-        <h1>FillPro keeps profile data on your device.</h1>
-        <p class="lead">Saved profiles, custom fields, rules, and upload references live in Chrome extension storage. FillPro does not run a cloud profile account or collect form values on a server.</p>
+        <h1>Your saved FillPro profiles stay in the extension.</h1>
+        <p class="lead">FillPro is built for private, repeat form filling. The details you save for autofill stay inside the browser extension unless you export them, contact support, or choose Pro billing.</p>
       </div>
-      <div class="card callout">
+      <div class="privacy-snapshot" aria-label="FillPro privacy snapshot">
         <h2>Short version</h2>
-        <ul class="list-check">
-          <li>No account is required for the free extension.</li>
-          <li>Profiles stay in the browser extension on your device.</li>
-          <li>Profile values are not sold or shared for advertising.</li>
-          <li>Pro payments are handled by ExtensionPay and Stripe.</li>
-          <li>Support emails are separate from local extension data.</li>
+        <ul>
+          <li><strong>No cloud profile account</strong><span>Core autofill works without sending your saved form profile to a FillPro server.</span></li>
+          <li><strong>No ad sale</strong><span>Profile values are not sold or shared for advertising.</span></li>
+          <li><strong>You choose what leaves</strong><span>Exports, support emails, and Pro billing happen only when you start them.</span></li>
         </ul>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Data map</p>
-        <h2>What is stored where.</h2>
+        <p class="eyebrow">What FillPro saves</p>
+        <h2>The extension only keeps what it needs to fill the profiles you create.</h2>
       </div>
-      <div class="table-scroll">
-        <table class="permissions-table">
-          <thead>
-            <tr>
-              <th>Data</th>
-              <th>Where it lives</th>
-              <th>Why it exists</th>
-              <th>How to remove it</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Profiles and custom fields</td>
-              <td>Chrome extension storage</td>
-              <td>To fill forms you choose to fill</td>
-              <td>Delete the profile in FillPro or uninstall the extension</td>
-            </tr>
-            <tr>
-              <td>Saved file references and uploads</td>
-              <td>Your device and Chrome extension storage</td>
-              <td>To match resume or document upload fields when you choose</td>
-              <td>Remove the file from the profile or delete the profile</td>
-            </tr>
-            <tr>
-              <td>License status</td>
-              <td>ExtensionPay and Stripe systems</td>
-              <td>To enable Pro after purchase</td>
-              <td>Contact support for billing help</td>
-            </tr>
-            <tr>
-              <td>Support messages</td>
-              <td>Your email provider and Stealthy Apps support email</td>
-              <td>To answer your question or investigate a site report</td>
-              <td>Ask for the conversation to be deleted</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="privacy-cards">
+        <article class="privacy-card">
+          <span>Profiles</span>
+          <h3>Names, contact details, work links, and custom fields.</h3>
+          <p>These stay inside FillPro so the extension can fill the forms you choose.</p>
+        </article>
+        <article class="privacy-card">
+          <span>Rules</span>
+          <h3>Small matching rules for unusual form labels.</h3>
+          <p>Rules stay with your profile and help FillPro recognize fields that a site labels in its own way.</p>
+        </article>
+        <article class="privacy-card">
+          <span>Uploads</span>
+          <h3>Files you attach to a profile, like a resume or CSV.</h3>
+          <p>If you add a file to a profile, FillPro keeps it with that profile so it can match the right upload field later. Remove it anytime.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section privacy-lanes">
+      <div class="section-heading">
+        <p class="eyebrow">What can leave the extension</p>
+        <h2>Only a few things leave FillPro, and they start with you.</h2>
+      </div>
+      <div class="privacy-lane-grid">
+        <article>
+          <h3>When you export</h3>
+          <p>Export creates a file you control. Treat that file like any other copy of your saved profile.</p>
+        </article>
+        <article>
+          <h3>When you contact support</h3>
+          <p>The contact form sends your message to Stealthy Apps support. A URL, field label, and short description are usually enough.</p>
+        </article>
+        <article>
+          <h3>When you buy Pro</h3>
+          <p>ExtensionPay and Stripe handle license and payment details. FillPro does not collect card numbers inside the extension.</p>
+        </article>
       </div>
     </section>
 
     <section class="section two-col">
-      <div class="card">
-        <p class="eyebrow">Sensitive fields</p>
-        <h2>Profile filling stays separate from sign-ins and payments.</h2>
-        <p>FillPro is built for repeated profile-style form fields. Password managers, browser autofill, and payment wallets should remain the tools for sign-ins, cards, CVCs, one-time codes, and protected identity details.</p>
+      <div class="card privacy-plain">
+        <p class="eyebrow">Site access</p>
+        <h2>Fill only the page you choose.</h2>
+        <p>The normal Fill Page action runs on the current page after you click it. The optional floating button asks for access to the current site because it needs to appear on that site. You can turn that off in FillPro settings.</p>
       </div>
-      <div class="card">
-        <p class="eyebrow">Website analytics</p>
-        <h2>No ad tracker is required for this site.</h2>
-        <p>The public website is static. It can show the product page, support page, privacy policy, sitemap, and contact form without third-party ad tracking.</p>
+      <div class="card privacy-plain">
+        <p class="eyebrow">Sign-ins and payments</p>
+        <h2>Keep sensitive flows with the tools made for them.</h2>
+        <p>Use FillPro for repeated profile fields around a form. Keep passwords, payment cards, CVCs, one-time codes, wallets, and protected identity details with your browser, password manager, wallet, or the site itself.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
-        <p class="eyebrow">Rights and requests</p>
-        <h2>Inspect, edit, export, or delete your data.</h2>
+        <p class="eyebrow">Your controls</p>
+        <h2>View, edit, export, or delete what you save.</h2>
       </div>
       <div class="policy-grid">
         <article class="policy-card">
-          <h3>Access</h3>
-          <p>Open FillPro and view your saved profiles. The profile data FillPro uses is visible inside the extension.</p>
+          <h3>View</h3>
+          <p>Open FillPro to see the profiles, custom fields, rules, and upload matches the extension uses.</p>
         </article>
         <article class="policy-card">
-          <h3>Deletion</h3>
-          <p>Delete profiles inside FillPro, clear extension storage, or uninstall the extension. Local profile data is not stored remotely, so deletion happens on the device.</p>
+          <h3>Edit</h3>
+          <p>Change saved values inside FillPro whenever a detail, resume, company field, or rule needs an update.</p>
         </article>
         <article class="policy-card">
-          <h3>Correction</h3>
-          <p>Edit saved values in FillPro. If a site matched a field incorrectly, send a short site report.</p>
+          <h3>Delete</h3>
+          <p>Delete a profile inside FillPro, clear the extension's storage in your browser, or uninstall FillPro.</p>
         </article>
         <article class="policy-card">
-          <h3>Portability</h3>
-          <p>Pro includes export for saved FillPro profile data you choose to export.</p>
+          <h3>Export</h3>
+          <p>Pro includes export for saved profile data you choose to move or back up yourself.</p>
         </article>
         <article class="policy-card">
-          <h3>Sale or sharing</h3>
-          <p>FillPro does not sell personal information and does not share local profile data for advertising.</p>
+          <h3>Support records</h3>
+          <p>If you email support, ask for the conversation to be deleted when the issue is finished.</p>
         </article>
         <article class="policy-card">
-          <h3>Contact</h3>
-          <p>Use the privacy topic on the contact page for privacy questions, support-email deletion requests, or billing-related data questions.</p>
+          <h3>Privacy questions</h3>
+          <p>Use the privacy topic on the contact page for privacy, support-email deletion, or billing-data questions.</p>
         </article>
       </div>
     </section>
@@ -183,19 +181,21 @@
     <section class="section two-col">
       <div class="card">
         <p class="eyebrow">Legal notes</p>
-        <h2>Plain-language policy details.</h2>
+        <h2>Policy details, without the fog.</h2>
         <ul class="dense-list">
           <li>Data controller: Stealthy Apps, publisher of FillPro, United States.</li>
-          <li>Lawful basis for local extension data: the product needs it to perform the autofill function you request.</li>
-          <li>Lawful basis for support messages: your request and any optional details you choose to send.</li>
+          <li>Saved profile details are used to fill the forms you ask FillPro to fill.</li>
+          <li>Support messages are used to answer your question or investigate the report you send.</li>
+          <li>The contact form may send your message through FormSubmit to reach the support inbox.</li>
+          <li>The public website is static and does not need third-party ad tracking to work.</li>
           <li>Children: FillPro is not directed at children under 13 in the United States or under 16 where GDPR consent rules apply.</li>
           <li>International transfers: support email you send may cross United States infrastructure.</li>
         </ul>
       </div>
       <div class="card">
         <p class="eyebrow">Need help?</p>
-        <h2>Ask without sending private form values.</h2>
-        <p>For privacy questions, send a short note with the topic and what you want done. Keep profile values and sensitive documents out of the message.</p>
+        <h2>Ask without sending private values.</h2>
+        <p>For privacy questions, send what you want done and the account or email involved. Leave out passwords, payment cards, tax IDs, one-time codes, customer records, and full profile values.</p>
         <div class="actions">
           <a class="button primary" href="/contact/?topic=privacy&amp;reason=privacy_question&amp;product=FillPro">Contact privacy</a>
           <a class="button" href="/support/">Open support</a>
@@ -206,10 +206,20 @@
 
   <footer>
     <div class="footer-inner">
-      <span>FillPro privacy. Last updated <time datetime="2026-06-13">June 13, 2026</time>.</span>
-      <span><a href="/fillpro/">Product</a> | <a href="/support/">Support</a> | <a href="/contact/">Contact</a> | <a href="/sitemap.html">Sitemap</a></span>
+      <div class="footer-copy">
+        <strong>FillPro by Stealthy Apps</strong>
+        <span>Privacy page updated <time datetime="2026-06-13">June 13, 2026</time>.</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/fillpro/">Product</a>
+        <a href="/fillpro/#pricing">Pricing</a>
+        <a href="/fillpro/privacy/" aria-current="page">Privacy</a>
+        <a href="/support/">Support</a>
+        <a href="/contact/">Contact</a>
+        <a href="/sitemap.html">Sitemap</a>
+      </nav>
     </div>
   </footer>
-  <script src="/site.js?v=fillpro-launch-v28" defer></script>
+  <script src="/site.js?v=fillpro-launch-v30" defer></script>
 </body>
 </html>

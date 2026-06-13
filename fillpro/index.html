@@ -4,11 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FillPro by Stealthy Apps - Private Autofill for Repeated Forms</title>
-  <meta name="description" content="Autofill forms, resumes, job applications. Local profiles. No account. Review before submit.">
+  <meta name="description" content="Autofill forms, resumes, and job applications with saved profiles. No account needed for core use. Review before submit.">
   <meta name="author" content="Stealthy Apps">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-NfR9ehZV3hFfmb8vK78jRAF3UUUQLx4NetqdaA/WUJw='; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-QZzKXMWgaZsTTEqgfVVwj6Ymuuv/7zFA5tNj3yQOFTc='; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="theme-color" content="#10231f">
   <link rel="canonical" href="https://stealthyapps.com/fillpro/">
   <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
@@ -19,19 +19,19 @@
   <link rel="alternate" type="text/plain" title="FillPro crawler index" href="/llms.txt">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="preload" href="/assets/fillpro-demo.gif" as="image">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v28">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v30">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
   <meta property="og:title" content="FillPro - Private Autofill for Repeated Forms">
-  <meta property="og:description" content="Autofill forms, resumes, job applications. Local profiles. No account. Review before submit.">
+  <meta property="og:description" content="Autofill forms, resumes, and job applications with saved profiles. No account needed for core use. Review before submit.">
   <meta property="og:url" content="https://stealthyapps.com/fillpro/">
   <meta property="og:image" content="https://stealthyapps.com/assets/fillpro-og.png">
   <meta property="og:locale" content="en_US">
   <meta property="article:modified_time" content="2026-06-13T00:00:00Z">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="FillPro - Private Form Autofill">
-  <meta name="twitter:description" content="Autofill forms, resumes, job applications. Local profiles. No account. Review before submit.">
+  <meta name="twitter:description" content="Autofill forms, resumes, and job applications with saved profiles. No account needed for core use. Review before submit.">
   <meta name="twitter:image" content="https://stealthyapps.com/assets/fillpro-og.png">
 
   <script type="application/ld+json">
@@ -54,11 +54,11 @@
         "softwareVersion": "1.0.0",
         "url": "https://stealthyapps.com/fillpro/",
         "image": "https://stealthyapps.com/assets/fillpro-og.png",
-        "description": "FillPro autofills repeated forms, resumes, and job applications from local browser profiles.",
+        "description": "FillPro autofills repeated forms, resumes, and job applications from saved browser extension profiles.",
         "publisher": { "@id": "https://stealthyapps.com/#organization" },
         "author": { "@id": "https://stealthyapps.com/#organization" },
         "featureList": [
-          "Local autofill profiles",
+          "Saved autofill profiles",
           "Smart rules and custom fields",
           "Resume, document, CSV, and spreadsheet upload matching",
           "On-page profile picker",
@@ -81,18 +81,18 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Where does FillPro fit?",
-            "acceptedAnswer": { "@type": "Answer", "text": "FillPro fits repeated profile-style fields across job applications, signup pages, intake forms, demo requests, onboarding flows, support forms, vendor forms, admin forms, QA profiles, and business workflows." }
+            "name": "What does FillPro fill?",
+            "acceptedAnswer": { "@type": "Answer", "text": "FillPro fills repeated profile fields such as names, contact details, company fields, work links, long answers, dropdowns, checkboxes, radios, textareas, and uploads like resumes or CSVs when the page exposes a normal form field FillPro can reach." }
           },
           {
             "@type": "Question",
-            "name": "Where does FillPro store profiles?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Saved profiles, smart rules, custom fields, and upload references stay in browser extension storage unless the user exports them." }
+            "name": "Does FillPro send saved profiles to a server?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. The core workflow uses profiles saved by the extension in the user's browser. FillPro does not run a cloud profile account for form values. Exports, support emails, and Pro billing only happen when the user chooses them." }
           },
           {
             "@type": "Question",
-            "name": "Does FillPro replace a password manager?",
-            "acceptedAnswer": { "@type": "Answer", "text": "No. FillPro works beside browser autofill, password managers, wallets, and site controls. Use FillPro for reusable profile fields around those flows." }
+            "name": "Does FillPro replace browser autofill or password managers?",
+            "acceptedAnswer": { "@type": "Answer", "text": "No. Sign-ins, payment cards, one-time codes, and wallets should stay with tools made for those jobs. FillPro handles the repeated profile fields around them." }
           }
         ]
       }
@@ -116,7 +116,8 @@
         <a href="#demo">Demo</a>
         <a href="#fit">Use cases</a>
         <a href="#pricing">Pricing</a>
-        <a href="/contact/?topic=product&amp;product=FillPro">Help</a>
+        <a href="/fillpro/privacy/">Privacy</a>
+        <a href="/support/">Support</a>
       </div>
     </nav>
   </header>
@@ -137,8 +138,8 @@
             <dd>profiles free</dd>
           </div>
           <div>
-            <dt>Local</dt>
-            <dd>profile storage</dd>
+            <dt>Private</dt>
+            <dd>saved profiles</dd>
           </div>
           <div>
             <dt>Rules</dt>
@@ -155,9 +156,9 @@
         <div class="demo-shell" aria-hidden="true">
           <div class="demo-chrome">
             <span></span><span></span><span></span>
-            <b>app.vendorportal.example/onboarding</b>
+            <b>FillPro demo / vendor onboarding</b>
           </div>
-          <img src="/assets/fillpro-demo.gif" alt="FillPro filling a vendor onboarding form from a local work profile" width="960" height="540" decoding="async">
+          <img src="/assets/fillpro-demo.gif" alt="FillPro filling a vendor onboarding form from a saved work profile" width="960" height="540" decoding="async">
         </div>
         <figcaption>
           <strong>Quick fill. Final review stays with you.</strong>
@@ -169,7 +170,7 @@
     <section class="launch-strip" aria-label="FillPro highlights">
       <span>Chrome, Edge, and Firefox</span>
       <span>No broad access on install</span>
-      <span>Local profiles and local rules</span>
+      <span>Saved profiles and smart rules</span>
       <span>Undo before submit</span>
     </section>
 
@@ -218,8 +219,8 @@
         </article>
         <article>
           <span>03</span>
-          <h3>Fix weird labels locally</h3>
-          <p>Add a smart rule when a site uses unusual wording. The fix stays in your browser.</p>
+          <h3>Fix weird labels once</h3>
+          <p>Add a smart rule when a site uses unusual wording. FillPro remembers it for the next similar form.</p>
         </article>
         <article>
           <span>04</span>
@@ -254,7 +255,7 @@
     <section class="launch-section" id="compare">
       <div class="section-heading-tight">
         <p class="launch-kicker">How it fits</p>
-        <h2>Clear job. Local profiles. Less fiddling.</h2>
+        <h2>Clear job. Saved profiles. Less fiddling.</h2>
         <p>FillPro is not trying to replace every browser tool. It handles the repeated profile data that sits between password managers, text expanders, browser autofill, and macro tools.</p>
       </div>
       <div class="compare-lanes" aria-label="FillPro comparison">
@@ -268,7 +269,7 @@
           <span>Password managers</span>
           <h3>Keep sign-ins there.</h3>
           <p>FillPro works beside them for the profile-style fields around the login or account setup flow.</p>
-          <p><a href="/fillpro/local-form-autofill/">Local form autofill</a></p>
+          <p><a href="/fillpro/local-form-autofill/">Private form autofill</a></p>
         </article>
         <article>
           <span>Text expanders</span>
@@ -299,7 +300,7 @@
             <li>3 saved profiles</li>
             <li>Fill Page, side panel, and on-page picker</li>
             <li>Smart rules and custom fields</li>
-            <li>Local upload matching</li>
+            <li>Upload matching</li>
             <li>Right-click field capture</li>
           </ul>
           <a class="launch-button launch-button-primary" href="/contact/?topic=product&amp;reason=product_help&amp;product=FillPro">Get FillPro</a>
@@ -315,7 +316,7 @@
             <li>Duplicate profiles for faster setup</li>
             <li>Import and export</li>
             <li>Advanced repeat-use workflows</li>
-            <li>Same local-first profile model</li>
+            <li>Same saved-profile model</li>
           </ul>
           <a class="launch-button" href="/contact/?topic=billing&amp;reason=pricing&amp;product=FillPro">Ask about Pro</a>
         </article>
@@ -324,29 +325,29 @@
 
     <section class="launch-section launch-faq" id="faq">
       <div class="section-heading-tight">
-        <p class="launch-kicker">Questions people ask before installing</p>
-        <h2>Plain answers.</h2>
+        <p class="launch-kicker">Before installing</p>
+        <h2>Straight answers.</h2>
       </div>
       <div class="faq-list launch-faq-list">
         <details open>
           <summary>What does FillPro fill?</summary>
-          <p>Profile details, custom fields, dropdowns, checkboxes, radios, textareas, contact fields, job-application fields, support fields, and local upload fields when the page exposes form controls FillPro can reach.</p>
+          <p>The repeat stuff: names, contact details, company fields, work links, long answers, dropdowns, checkboxes, radios, textareas, and uploads like resumes or CSVs when the page exposes a normal form field FillPro can reach.</p>
         </details>
         <details>
-          <summary>Does FillPro send my profile to a server?</summary>
-          <p>No cloud profile account is needed for the core workflow. Saved profiles, smart rules, custom fields, and upload references stay in browser extension storage unless you export them.</p>
+          <summary>Does FillPro send saved profiles to a server?</summary>
+          <p>No. The core workflow uses profiles saved by the extension in your browser. FillPro does not run a cloud profile account for your form values. Exports, support emails, and Pro billing only happen when you choose them.</p>
         </details>
         <details>
           <summary>What site access does it need?</summary>
-          <p>The normal Fill Page action works on the page you choose. The optional floating button asks for access to the current site only, and you can turn that access off from FillPro settings.</p>
+          <p>Fill Page runs on the page you are viewing after you click it. The optional floating button is a convenience feature; it asks for access to the current site and can be turned off from FillPro settings.</p>
         </details>
         <details>
-          <summary>Does it replace browser autofill or a password manager?</summary>
-          <p>No. Use FillPro for repeated profile-style fields around those flows. Keep sign-ins and payments with browser autofill, your password manager, your wallet, or the site controls built for them.</p>
+          <summary>Does it replace browser autofill or password managers?</summary>
+          <p>No. Keep sign-ins, payment cards, one-time codes, and wallets with tools made for those jobs. FillPro handles the repeated profile fields around them.</p>
         </details>
         <details>
           <summary>How do I report a bad fill?</summary>
-          <p>Send the page, the field label, what FillPro did, and what should have happened. That is enough to turn a bad match into a better rule or engine fix.</p>
+          <p>Send the URL, field label, what FillPro did, and what should have happened. Leave out private values. Good reports become regression tests and fixes.</p>
         </details>
       </div>
     </section>
@@ -362,9 +363,19 @@
   </main>
 
   <footer class="launch-footer">
-    <span>Stealthy Apps - FillPro. Last updated <time datetime="2026-06-13">June 13, 2026</time>.</span>
-    <span><a href="/fillpro/">FillPro</a> | <a href="/fillpro/privacy/">Privacy</a> | <a href="/contact/">Contact</a> | <a href="/support/">Support</a> | <a href="/sitemap.html">Sitemap</a></span>
+    <div class="footer-copy">
+      <strong>FillPro by Stealthy Apps</strong>
+      <span>Updated <time datetime="2026-06-13">June 13, 2026</time>.</span>
+    </div>
+    <nav class="footer-links" aria-label="Footer navigation">
+      <a href="/fillpro/">Product</a>
+      <a href="/fillpro/#pricing">Pricing</a>
+      <a href="/fillpro/privacy/">Privacy</a>
+      <a href="/support/">Support</a>
+      <a href="/contact/">Contact</a>
+      <a href="/sitemap.html">Sitemap</a>
+    </nav>
   </footer>
-  <script src="/site.js?v=fillpro-launch-v28" defer></script>
+  <script src="/site.js?v=fillpro-launch-v30" defer></script>
 </body>
 </html>

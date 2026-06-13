@@ -307,8 +307,8 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>Fill repeated forms in one click.</h1><p class="sub">Choose a local profile, fill the page, then review before submit.</p></div>
-      ${chromeFrame('vendorportal.example/onboarding', beforeAfter())}
+      <div><h1>Fill repeated forms in one click.</h1><p class="sub">Choose a saved profile, fill the page, then review before submit.</p></div>
+      ${chromeFrame('FillPro demo / vendor onboarding', beforeAfter())}
     </main>`,
   );
 
@@ -318,9 +318,9 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Local-first</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
       <div><h1>Separate profiles for real workflows.</h1><p class="sub">Work, personal admin, clients, vendors, and test profiles stay organized in the browser.</p></div>
-      ${chromeFrame('crm.example/demo-request', `
+      ${chromeFrame('FillPro demo / demo request', `
         <div class="grid2">
           <div class="panel">
             <h2>Saved profiles</h2>
@@ -382,7 +382,7 @@ async function renderStaticAssets(browser) {
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
       <div><h1>Profiles stay in your browser.</h1><p class="sub">No cloud profile account is needed for the core workflow. You choose when to export, upgrade, or contact support.</p></div>
       <div class="privacy-grid">
-        <div class="privacy-card"><strong>Local profiles</strong><span>Saved details and rules live in extension storage.</span></div>
+        <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>
         <div class="privacy-card"><strong>User-triggered fills</strong><span>FillPro runs after your click, shortcut, picker, or context menu action.</span></div>
         <div class="privacy-card"><strong>Review before submit</strong><span>FillPro fills fields. You decide when the form leaves the page.</span></div>
       </div>
@@ -396,7 +396,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Fast fill. Clean fallback.</h1><p class="sub">Undo the last fill before submitting, then fix odd labels with local smart rules.</p></div>
+      <div><h1>Fast fill. Clean fallback.</h1><p class="sub">Undo the last fill before submitting, then fix odd labels with saved smart rules.</p></div>
       ${chromeFrame('careers.example/apply', `
         <div class="grid2">
           <div class="form">
@@ -425,7 +425,7 @@ async function renderStaticAssets(browser) {
     `<main class="stage small-stage">
       <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
       <h1>Fill repeated forms faster.</h1>
-      <p class="sub" style="font-size:17px;">Local profiles. Smart rules. Undo before submit.</p>
+      <p class="sub" style="font-size:17px;">Saved profiles. Smart rules. Undo before submit.</p>
     </main>`,
   );
 
@@ -438,7 +438,7 @@ async function renderStaticAssets(browser) {
       <div>
         <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
         <h1 style="margin-top:26px;">Private autofill for forms you repeat.</h1>
-        <p class="sub">Profiles stay local. Fill when you ask. Review before submit.</p>
+        <p class="sub">Profiles stay in FillPro. Fill when you ask. Review before submit.</p>
       </div>
       ${chromeFrame('app.example/intake', beforeAfter())}
     </main>`,
@@ -453,7 +453,7 @@ async function renderStaticAssets(browser) {
       <div>
         <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
         <h1 style="margin-top:28px;">Private autofill for repeated forms</h1>
-        <p class="sub">Local profiles. Smart rules. Upload matching. Review before submit.</p>
+        <p class="sub">Saved profiles. Smart rules. Upload matching. Review before submit.</p>
       </div>
       <div class="panel" style="padding:30px;">
         <div class="button" style="height:70px;font-size:26px;">Fill Page</div>
@@ -480,7 +480,7 @@ async function renderStaticAssets(browser) {
     960,
     540,
     `<main class="stage small-stage" style="padding:28px;">
-      ${chromeFrame('vendorportal.example/onboarding', beforeAfter())}
+      ${chromeFrame('FillPro demo / vendor onboarding', beforeAfter())}
     </main>`,
   );
 }
@@ -511,7 +511,7 @@ async function renderDemoGif(browser) {
       output,
       960,
       540,
-      `<main class="stage small-stage" style="padding:28px;">${chromeFrame('vendorportal.example/onboarding', `<div class="form" style="width:540px;"><h2>Vendor onboarding</h2>${fields}</div>${popup('Work profile', 'Filling safe fields only')}`)}</main>`,
+      `<main class="stage small-stage" style="padding:28px;">${chromeFrame('FillPro demo / vendor onboarding', `<div class="form" style="width:540px;"><h2>Vendor onboarding</h2>${fields}</div>${popup('Work profile', 'Filling safe fields only')}`)}</main>`,
     );
   }
 

@@ -23,9 +23,9 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 
 ## Product Positioning
 
-FillPro is a private Chrome form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
+FillPro is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
 
-Profiles, rules, custom fields, and upload references stay local in Chrome extension storage. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+FillPro does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Pricing
 

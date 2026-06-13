@@ -6,5 +6,5 @@ Location: United States
 
 /* SITE */
 Language: English
-Purpose: Public website for FillPro, a private Chrome form autofill extension.
+Purpose: Public website for FillPro, a private browser form autofill extension.
 Last updated: 2026-06-13

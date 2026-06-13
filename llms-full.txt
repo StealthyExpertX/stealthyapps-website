@@ -6,7 +6,7 @@ Last updated: 2026-06-13
 
 ## Product Summary
 
-FillPro is a private Chrome form autofill extension from Stealthy Apps. It saves reusable profiles in Chrome extension storage and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
+FillPro is a private browser form autofill extension from Stealthy Apps. It saves reusable profiles inside the browser extension and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
 
 Current version: 1.0.0.
 
@@ -14,7 +14,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 
 ## Core Features
 
-- Local profile storage.
+- Profiles saved inside the browser extension.
 - Three saved profiles on the free plan.
 - On-page profile picker.
 - Fill Page action.
@@ -43,11 +43,11 @@ FillPro is designed for structured profile data across many unrelated web forms.
 - Text Blaze, Magical, TextExpander, and similar tools are usually strongest for snippets, notes, outreach, and canned replies.
 - Lightning Autofill and macro tools are usually strongest for selector scripts, repeated clicks, and browser automation.
 - Record-mode form fillers are usually strongest when one exact form repeats the same way every time.
-- FillPro is strongest for repeated profile fields, custom labels, dropdowns, checkboxes, textareas, local upload matching, smart rules, and review-before-submit filling.
+- FillPro is strongest for repeated profile fields, custom labels, dropdowns, checkboxes, textareas, upload matching, smart rules, and review-before-submit filling.
 
 ## Pricing
 
-- Free: 3 saved profiles, local filling, on-page picker, smart rules, custom fields, local upload matching, right-click capture, and undo.
+- Free: 3 saved profiles, in-browser filling, on-page picker, smart rules, custom fields, upload matching, right-click capture, and undo.
 - Pro monthly: $3.99/month.
 - Pro yearly: $29.99/year.
 - Pro lifetime: $39.99 one time.
@@ -56,7 +56,7 @@ FillPro is designed for structured profile data across many unrelated web forms.
 
 ## Privacy
 
-Profiles, custom fields, saved rules, and upload references live in Chrome extension storage unless the user exports them. FillPro does not run a cloud profile account or collect form values on a server.
+FillPro does not run a cloud profile account for form values. Saved profiles, custom fields, rules, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing.
 
 License status is handled by ExtensionPay and Stripe. Support messages live in email systems and can be deleted on request.
 
@@ -93,13 +93,13 @@ Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time co
 ## Focused Search Pages
 
 Job application autofill:
-FillPro helps with repeated job application fields such as contact details, work links, resume files, portfolio links, cover letters, availability, and profile answers. It fills from a local profile and leaves the final submit to the user.
+FillPro helps with repeated job application fields such as contact details, work links, resume files, portfolio links, cover letters, availability, and profile answers. It fills from a saved profile and leaves the final submit to the user.
 
 Resume upload autofill:
-FillPro stores upload references inside local profiles and can match resumes, CVs, cover letters, portfolio files, documents, CSV files, and spreadsheets to reachable upload fields.
+FillPro stores upload references inside saved profiles and can match resumes, CVs, cover letters, portfolio files, documents, CSV files, and spreadsheets to reachable upload fields.
 
 Local form autofill:
 FillPro keeps profiles in browser extension storage. The normal Fill Page action works on the page the user chooses, while the optional floating button asks for current-site access only.
 
 Browser autofill vs FillPro:
-Browser autofill is strongest for saved addresses and browser-managed payment flows. FillPro is strongest for repeated profile data, custom fields, smart rules, local uploads, and long review-before-submit forms.
+Browser autofill is strongest for saved addresses and browser-managed payment flows. FillPro is strongest for repeated profile data, custom fields, smart rules, upload matching, and long review-before-submit forms.

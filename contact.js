@@ -104,7 +104,7 @@ const CONTACT_CONTEXTS = {
         inboxLabel: 'FillPro privacy inbox',
         reasons: [
           ['privacy_question', 'Privacy or policy question'],
-          ['local_data', 'Local data or deletion question'],
+          ['saved_profiles', 'Saved profiles or deletion question'],
           ['compliance', 'Compliance or legal request'],
           ['other_privacy', 'Other privacy matter'],
         ],
@@ -157,8 +157,8 @@ function buildProductContext(form) {
         recipient: 'privacy',
         inboxLabel: `${productName} privacy inbox`,
         reasons: [
-          ['data_question', 'Stored or local data question'],
-          ['local_clear', 'How do I remove local data?'],
+          ['data_question', 'Saved profiles question'],
+          ['delete_saved_profiles', 'How do I remove saved profiles?'],
           ['policy', 'Privacy policy question'],
           ['compliance', 'Compliance or legal request'],
         ],

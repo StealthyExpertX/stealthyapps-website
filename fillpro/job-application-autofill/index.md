@@ -1,6 +1,6 @@
 # Job Application Autofill - FillPro
 
-Fill job applications faster with local profiles, resume uploads, smart rules, and review-before-submit control.
+Fill job applications faster with saved profiles, resume uploads, smart rules, and review-before-submit control.
 
 Canonical: https://stealthyapps.com/fillpro/job-application-autofill/
 Product: https://stealthyapps.com/fillpro/
@@ -11,7 +11,7 @@ FillPro handles the parts browser autofill usually misses: work links, profile a
 
 ## Works best for
 
-- Local profiles for work and personal applications
+- Saved profiles for work and personal applications
 - Resume, CV, cover letter, and portfolio upload matching
 - Smart rules for odd field labels
 - Review and undo before submit
@@ -22,7 +22,7 @@ Use FillPro when applications ask for the same contact details, resume files, po
 
 ## You still make the call
 
-FillPro fills from a local browser profile and leaves the final submit to you. Review the application, adjust odd fields, or undo the fill before sending.
+FillPro fills from a saved browser extension profile and leaves the final submit to you. Review the application, adjust odd fields, or undo the fill before sending.
 
 ## Why it is different from browser autofill
 

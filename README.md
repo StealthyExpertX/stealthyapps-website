@@ -1,6 +1,6 @@
 # FillPro Website
 
-Public website for [FillPro](https://stealthyapps.com/fillpro/), a private Chrome form autofill extension from Stealthy Apps.
+Public website for [FillPro](https://stealthyapps.com/fillpro/), a private browser form autofill extension from Stealthy Apps.
 
 FillPro is the only public product on the site right now. The structure is ready for future tools later: each product can get its own canonical product page, privacy notes, support route, sitemap entry, and Markdown mirror.
 
@@ -16,7 +16,7 @@ FillPro is the only public product on the site right now. The structure is ready
 
 ## Product Boundary
 
-FillPro stores profiles locally in Chrome extension storage. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+FillPro does not run a cloud profile account for form values. Saved profiles stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Release
 

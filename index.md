@@ -1,6 +1,6 @@
 # FillPro
 
-Private Chrome form autofill for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
+Private browser form autofill for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
 
 - Product: FillPro
 - Brand: Stealthy Apps
@@ -8,7 +8,7 @@ Private Chrome form autofill for job applications, signup forms, intake pages, d
 - Current version: 1.0.0
 - Last updated: 2026-06-13
 
-FillPro fills repeated web forms from profiles stored in Chrome extension storage. The public website now uses one main product route so search engines, answer engines, and visitors see the same product story.
+FillPro fills repeated web forms from profiles saved inside the browser extension. The public website uses one main product route so search engines, answer engines, and visitors see the same product story.
 
 ## Best Fit
 
@@ -20,7 +20,7 @@ FillPro fills repeated web forms from profiles stored in Chrome extension storag
 
 ## Privacy Boundary
 
-Saved profiles, rules, custom fields, and upload references stay on the user's device unless the user exports them. Billing for Pro is handled by ExtensionPay and Stripe.
+FillPro does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. Billing for Pro is handled by ExtensionPay and Stripe.
 
 ## Pricing
 

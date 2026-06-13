@@ -18,7 +18,7 @@ FillPro keeps reusable profiles in browser extension storage. The normal Fill Pa
 
 ## Privacy as a workflow feature
 
-Local profiles make FillPro useful before an account, team workspace, or sync setup. You can save separate profiles for work, personal admin, clients, vendors, or QA users.
+Saved profiles make FillPro useful before an account, team workspace, or sync setup. You can keep separate profiles for work, personal admin, clients, vendors, or QA users.
 
 ## Useful on messy forms
 
