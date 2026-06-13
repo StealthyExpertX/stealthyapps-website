@@ -20,7 +20,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 - Fill Page action.
 - Smart rules and custom fields.
 - Right-click field capture.
-- File upload matching for resumes, CVs, cover letters, portfolios, and business documents.
+- File upload matching for resumes, CVs, cover letters, portfolios, business documents, CSV files, and spreadsheets.
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
 - Field-learning suggestions.

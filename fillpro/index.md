@@ -1,6 +1,6 @@
-# FillPro - Private autofill for repeated forms
+# FillPro - Private autofill for repeat forms
 
-FillPro is a browser extension from Stealthy Apps for people who keep typing the same profile details into different web forms.
+FillPro is a browser extension from Stealthy Apps for people who reuse the same profile details across job applications, signup pages, intake forms, support forms, and business workflows.
 
 - Canonical URL: https://stealthyapps.com/fillpro/
 - Privacy: https://stealthyapps.com/fillpro/privacy/
@@ -20,7 +20,7 @@ FillPro is built for repeated profile-style fields across job applications, sign
 - Local profiles in browser extension storage.
 - Popup, side panel, on-page profile picker, right-click fill, and keyboard shortcut.
 - Smart rules and custom fields for unusual labels.
-- Resume, CV, cover letter, portfolio, and document upload matching.
+- Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
 - Support for React, Vue, Angular, Shadow DOM, same-origin frames, comboboxes, selects, ARIA radios and checkboxes, Google Forms-style controls, textareas, split birthdays, segmented phones, country/state/month aliases, and multilingual contact labels.

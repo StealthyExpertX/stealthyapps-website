@@ -42,7 +42,7 @@ Save the details you type again and again, then fill job applications, signup pa
 
 What it fills:
 - Names, contact details, addresses, company details, profile links, messages, dropdowns, radios, checkboxes, textareas, and custom fields
-- Resume, CV, cover letter, portfolio, and document upload fields
+- Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload fields
 - Repeated profile details across job applications, intake pages, registration pages, onboarding flows, support pages, and admin forms
 
 Why people keep it:
@@ -54,7 +54,7 @@ Why people keep it:
 - Keep sign-ins and payment details with the browser, password manager, payment wallet, or site controls built for those flows
 
 Modern form support:
-FillPro is built for normal HTML forms and modern frontend patterns used by React, Vue, Angular, Material UI, Carbon-style fields, custom selects, comboboxes, Shadow DOM components, same-origin iframes, dynamic fields, split birthday fields, segmented phone fields, country and state aliases, contenteditable fields, ARIA radio and checkbox groups, Google Forms-style controls, and file inputs.
+FillPro is built for normal HTML forms and modern frontend patterns used by React, Vue, Angular, Material UI, Carbon-style fields, custom selects, comboboxes, Shadow DOM components, same-origin iframes, dynamic fields, split birthday fields, segmented phone fields, country and state aliases, contenteditable fields, ARIA radio and checkbox groups, Google Forms-style controls, and file inputs including resume, document, CSV, and spreadsheet upload fields.
 
 Privacy and control:
 - Profile data stays in extension-managed browser storage

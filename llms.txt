@@ -25,7 +25,7 @@ FillPro fills repeated web forms from profiles stored in Chrome extension storag
 
 ## What It Handles
 
-FillPro supports local profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching, import/export for Pro users, and modern web forms built with React, Vue, Angular, Shadow DOM, same-origin frames, custom selects, comboboxes, segmented phone fields, split birthdays, ARIA radios and checkboxes, Google Forms-style controls, and textareas.
+FillPro supports local profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, import/export for Pro users, and modern web forms built with React, Vue, Angular, Shadow DOM, same-origin frames, custom selects, comboboxes, segmented phone fields, split birthdays, ARIA radios and checkboxes, Google Forms-style controls, and textareas.
 
 ## Privacy Boundary
 
