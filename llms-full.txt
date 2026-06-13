@@ -60,7 +60,7 @@ Profiles, custom fields, saved rules, and upload references live in Chrome exten
 
 License status is handled by ExtensionPay and Stripe. Support messages live in email systems and can be deleted on request.
 
-FillPro is built for repeated profile-style form fields. Password managers, browser autofill, and payment wallets should remain the tools for sign-ins, payment cards, CVCs, one-time codes, and protected identity details.
+FillPro is built for repeated profile-style form fields around sign-in, checkout, account, and intake flows. Password managers, browser autofill, payment wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Support
 
@@ -81,7 +81,25 @@ Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time co
 - Product: https://stealthyapps.com/fillpro/
 - Pricing: https://stealthyapps.com/fillpro/#pricing
 - Comparison: https://stealthyapps.com/fillpro/#compare
+- Job application autofill: https://stealthyapps.com/fillpro/job-application-autofill/
+- Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/
+- Local form autofill: https://stealthyapps.com/fillpro/local-form-autofill/
+- Browser autofill vs FillPro: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
 - Privacy: https://stealthyapps.com/fillpro/privacy/
 - Support: https://stealthyapps.com/support/
 - Contact: https://stealthyapps.com/contact/
 - Markdown product brief: https://stealthyapps.com/fillpro/index.md
+
+## Focused Search Pages
+
+Job application autofill:
+FillPro helps with repeated job application fields such as contact details, work links, resume files, portfolio links, cover letters, availability, and profile answers. It fills from a local profile and leaves the final submit to the user.
+
+Resume upload autofill:
+FillPro stores upload references inside local profiles and can match resumes, CVs, cover letters, portfolio files, documents, CSV files, and spreadsheets to reachable upload fields.
+
+Local form autofill:
+FillPro keeps profiles in browser extension storage. The normal Fill Page action works on the page the user chooses, while the optional floating button asks for current-site access only.
+
+Browser autofill vs FillPro:
+Browser autofill is strongest for saved addresses and browser-managed payment flows. FillPro is strongest for repeated profile data, custom fields, smart rules, local uploads, and long review-before-submit forms.

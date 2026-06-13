@@ -15,6 +15,13 @@ FillPro is a browser extension from Stealthy Apps for people who reuse the same 
 
 FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor workflows, onboarding flows, support forms, admin tools, QA test profiles, and everyday business forms.
 
+Focused pages:
+
+- Job application autofill: https://stealthyapps.com/fillpro/job-application-autofill/
+- Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/
+- Local form autofill: https://stealthyapps.com/fillpro/local-form-autofill/
+- Browser autofill vs FillPro: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
+
 ## Core product
 
 - Local profiles in browser extension storage.
