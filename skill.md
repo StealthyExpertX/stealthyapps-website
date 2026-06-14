@@ -5,7 +5,7 @@ description: Public capability surface for FillPro, a private browser form autof
 
 # FillPro Capability Surface
 
-Last reviewed: 2026-06-13
+Last reviewed: 2026-06-14
 
 ## What FillPro does
 

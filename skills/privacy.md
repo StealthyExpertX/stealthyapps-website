@@ -1,6 +1,6 @@
 # FillPro Privacy Notes
 
-Last reviewed: 2026-06-13
+Last reviewed: 2026-06-14
 
 FillPro does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing.
 

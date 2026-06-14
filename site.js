@@ -8,6 +8,130 @@
 
   root.classList.add('js-enhanced');
 
+  var THEME_KEY = 'fillpro-theme';
+  var THEMES = ['system', 'light', 'dark'];
+  var mediaDark =
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+  var themeButton = null;
+
+  function getStoredTheme() {
+    try {
+      var stored = window.localStorage.getItem(THEME_KEY);
+      return THEMES.indexOf(stored) >= 0 ? stored : 'system';
+    } catch (error) {
+      return 'system';
+    }
+  }
+
+  function resolvedTheme(theme) {
+    if (theme === 'system') {
+      return mediaDark && mediaDark.matches ? 'dark' : 'light';
+    }
+    return theme;
+  }
+
+  function setTheme(theme) {
+    var next = THEMES.indexOf(theme) >= 0 ? theme : 'system';
+    var resolved = resolvedTheme(next);
+
+    if (next === 'system') {
+      root.removeAttribute('data-theme');
+    } else {
+      root.setAttribute('data-theme', next);
+    }
+
+    root.setAttribute('data-theme-mode', next);
+    root.setAttribute('data-theme-resolved', resolved);
+
+    var metaTheme = document.querySelector('meta[name="theme-color"]');
+    if (metaTheme) {
+      metaTheme.setAttribute('content', resolved === 'dark' ? '#0e1715' : '#0f766e');
+    }
+
+    if (!themeButton) {
+      return;
+    }
+
+    var label =
+      next === 'system'
+        ? 'Theme: system'
+        : next === 'dark'
+          ? 'Theme: dark'
+          : 'Theme: light';
+    themeButton.setAttribute('aria-label', label + '. Switch theme.');
+    themeButton.setAttribute('title', label);
+    themeButton.dataset.theme = next;
+  }
+
+  function persistTheme(theme) {
+    try {
+      if (theme === 'system') {
+        window.localStorage.removeItem(THEME_KEY);
+      } else {
+        window.localStorage.setItem(THEME_KEY, theme);
+      }
+    } catch (error) {}
+    setTheme(theme);
+  }
+
+  function installThemeToggle() {
+    var nav = document.querySelector('.launch-links, .nav-links');
+    if (!nav || nav.querySelector('.theme-toggle')) {
+      return;
+    }
+
+    themeButton = document.createElement('button');
+    themeButton.type = 'button';
+    themeButton.className = 'theme-toggle';
+    themeButton.addEventListener('click', function () {
+      var current = getStoredTheme();
+      var next = current === 'system' ? 'dark' : current === 'dark' ? 'light' : 'system';
+      persistTheme(next);
+    });
+    nav.appendChild(themeButton);
+    setTheme(getStoredTheme());
+  }
+
+  function setupInteractiveBackdrop() {
+    var reduceMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      return;
+    }
+
+    var frame = 0;
+    var nextX = 50;
+    var nextY = 18;
+
+    function updatePointer() {
+      frame = 0;
+      root.style.setProperty('--pointer-x', nextX.toFixed(1) + '%');
+      root.style.setProperty('--pointer-y', nextY.toFixed(1) + '%');
+    }
+
+    window.addEventListener(
+      'pointermove',
+      function (event) {
+        nextX = Math.max(0, Math.min(100, (event.clientX / window.innerWidth) * 100));
+        nextY = Math.max(0, Math.min(100, (event.clientY / window.innerHeight) * 100));
+        if (!frame) {
+          frame = window.requestAnimationFrame(updatePointer);
+        }
+      },
+      { passive: true },
+    );
+  }
+
+  setTheme(getStoredTheme());
+  if (mediaDark && mediaDark.addEventListener) {
+    mediaDark.addEventListener('change', function () {
+      if (getStoredTheme() === 'system') {
+        setTheme('system');
+      }
+    });
+  }
+
   function installProgressBar() {
     if (document.querySelector('.site-progress')) {
       return;
@@ -229,6 +353,8 @@
   installProgressBar();
   setupScrollProgress();
   ready(function () {
+    installThemeToggle();
+    setupInteractiveBackdrop();
     setupCopyCode();
     setupCurrentHashLink();
     scrollToInitialHash();

@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v32';
+const CACHE_TOKEN = 'fillpro-launch-v33';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact', 'Sitemap'];
@@ -20,6 +20,8 @@ const STALE_COPY = [
   'vendorportal.example',
   'Questions people ask',
   'Plain answers',
+  '>Demo<',
+  'See it fill a form',
   '/apps/fillpro/',
   '/apps/fillpro/privacy',
 ];
@@ -164,6 +166,10 @@ function checkStyles() {
   const required = [
     [':focus-visible', 'focus-visible styles'],
     ['prefers-reduced-motion', 'reduced-motion support'],
+    ['data-theme="dark"', 'manual dark theme selectors'],
+    ['--pointer-x', 'interactive background variables'],
+    ['.theme-toggle', 'manual theme toggle styles'],
+    ['launchCtaShine 7.2s', 'premium CTA shine timing'],
     ['min-height: 46px', 'standard button tap target'],
     ['min-height: 52px', 'landing button tap target'],
     ['min-height: 34px', 'footer link tap target'],
@@ -174,6 +180,31 @@ function checkStyles() {
   ];
   for (const [needle, label] of required) {
     if (!css.includes(needle)) fail(`styles.css: missing ${label}`);
+  }
+}
+
+function checkSiteScript() {
+  const js = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
+  checked.accessibility += 1;
+  const required = [
+    ['fillpro-theme', 'theme localStorage key'],
+    ['data-theme-resolved', 'resolved theme marker'],
+    ['installThemeToggle', 'theme toggle installer'],
+    ['setupInteractiveBackdrop', 'interactive background setup'],
+    ['prefers-reduced-motion: reduce', 'reduced-motion guard in JS'],
+  ];
+  for (const [needle, label] of required) {
+    if (!js.includes(needle)) fail(`site.js: missing ${label}`);
+  }
+}
+
+function checkDemoGenerator() {
+  const renderer = fs.readFileSync(path.join(ROOT, 'scripts', 'render-fillpro-assets.js'), 'utf8');
+  if (/fillpro-demo-(poster|gif)[\s\S]+chromeFrame\(/.test(renderer)) {
+    fail('render-fillpro-assets.js: demo asset should not render a nested browser frame');
+  }
+  if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
+    fail('render-fillpro-assets.js: demo should show safe fill boundary and review moment');
   }
 }
 
@@ -221,6 +252,8 @@ for (const file of files) {
   checkNav(file, html);
 }
 checkStyles();
+checkSiteScript();
+checkDemoGenerator();
 checkCacheToken(files);
 checkIndexNowKey();
 

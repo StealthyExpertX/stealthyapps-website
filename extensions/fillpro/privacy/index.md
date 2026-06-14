@@ -1,6 +1,6 @@
 # FillPro Privacy
 
-Last updated: 2026-06-13
+Last updated: 2026-06-14
 
 The canonical privacy page is:
 

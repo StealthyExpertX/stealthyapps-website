@@ -245,6 +245,38 @@ const css = `
   .small-stage { padding: 28px 32px; }
   .small-stage h1 { font-size: 36px; }
   .marquee { grid-template-columns: 0.86fr 1.14fr; align-items: center; }
+  .demo-scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 22px;
+    align-items: center;
+    padding: 34px;
+    background:
+      radial-gradient(circle at 82% 18%, rgba(20, 184, 166, 0.16), transparent 260px),
+      linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 70px 70px,
+      linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 70px 70px,
+      linear-gradient(135deg, #fbfdfb, #eef8f4);
+  }
+  .demo-scene .form {
+    min-height: 420px;
+    box-shadow: 0 26px 70px rgba(16, 35, 31, 0.12);
+  }
+  .demo-scene .popup {
+    position: static;
+    width: 100%;
+    align-self: center;
+  }
+  .demo-note {
+    position: absolute;
+    left: 34px;
+    bottom: 24px;
+    color: #60726b;
+    font-size: 14px;
+    font-weight: 750;
+  }
 `;
 
 function chromeFrame(url, inner) {
@@ -290,6 +322,24 @@ function popup(title, detail) {
     </div>`;
 }
 
+function demoScene(values, note = 'Safe fields fill. Sensitive fields stay alone.') {
+  const fields = `
+    ${field(values[0], values[1])}
+    ${field(values[2], values[3])}
+    ${field(values[4], values[5])}
+    ${field(values[6], values[7])}
+    ${field(values[8], values[9])}`;
+  return `
+    <main class="demo-scene">
+      <div class="form">
+        <h2>Partner intake</h2>
+        ${fields}
+      </div>
+      ${popup('Work profile', values[9] ? 'Ready for review' : 'Filling repeated fields')}
+      <div class="demo-note">${note}</div>
+    </main>`;
+}
+
 async function renderHtml(browser, output, width, height, html) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body>${html}</body></html>`);
@@ -308,7 +358,7 @@ async function renderStaticAssets(browser) {
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
       <div><h1>Fill repeated forms in one click.</h1><p class="sub">Choose a saved profile, fill the page, then review before submit.</p></div>
-      ${chromeFrame('FillPro demo / vendor onboarding', beforeAfter())}
+      ${chromeFrame('Vendor onboarding', beforeAfter())}
     </main>`,
   );
 
@@ -320,7 +370,7 @@ async function renderStaticAssets(browser) {
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
       <div><h1>Separate profiles for real workflows.</h1><p class="sub">Work, personal admin, clients, vendors, and test profiles stay organized in the browser.</p></div>
-      ${chromeFrame('FillPro demo / demo request', `
+      ${chromeFrame('Demo request', `
         <div class="grid2">
           <div class="panel">
             <h2>Saved profiles</h2>
@@ -479,9 +529,18 @@ async function renderStaticAssets(browser) {
     path.join(assetsDir, 'fillpro-demo-poster.png'),
     960,
     540,
-    `<main class="stage small-stage" style="padding:28px;">
-      ${chromeFrame('FillPro demo / vendor onboarding', beforeAfter())}
-    </main>`,
+    demoScene([
+      'Full name',
+      'Alex Morgan',
+      'Work email',
+      'alex@example.com',
+      'Company',
+      'Stealthy Apps',
+      'Resume upload',
+      'alex-morgan-resume.pdf',
+      'Password',
+      '',
+    ], 'Review before submit. Passwords stay untouched.'),
   );
 }
 
@@ -489,21 +548,16 @@ async function renderDemoGif(browser) {
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fillpro-demo-'));
   const framePaths = [];
   const frames = [
-    ['Full name', '', 'Work email', '', 'Company', '', 'Resume upload', ''],
-    ['Full name', 'Alex Morgan', 'Work email', '', 'Company', '', 'Resume upload', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', '', 'Resume upload', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf'],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf'],
+    ['Full name', '', 'Work email', '', 'Company', '', 'Resume upload', '', 'Password', ''],
+    ['Full name', 'Alex Morgan', 'Work email', '', 'Company', '', 'Resume upload', '', 'Password', ''],
+    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', '', 'Resume upload', '', 'Password', ''],
+    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', '', 'Password', ''],
+    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf', 'Password', ''],
+    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf', 'Password', ''],
   ];
 
   for (let index = 0; index < frames.length; index += 1) {
     const values = frames[index];
-    const fields = `
-      ${field(values[0], values[1])}
-      ${field(values[2], values[3])}
-      ${field(values[4], values[5])}
-      ${field(values[6], values[7])}`;
     const output = path.join(tmp, `frame-${String(index).padStart(2, '0')}.png`);
     framePaths.push(output);
     await renderHtml(
@@ -511,7 +565,12 @@ async function renderDemoGif(browser) {
       output,
       960,
       540,
-      `<main class="stage small-stage" style="padding:28px;">${chromeFrame('FillPro demo / vendor onboarding', `<div class="form" style="width:540px;"><h2>Vendor onboarding</h2>${fields}</div>${popup('Work profile', 'Filling safe fields only')}`)}</main>`,
+      demoScene(
+        values,
+        index >= 4
+          ? 'Upload matched. Review before submit.'
+          : 'Pick a profile. Fill the repeated fields.',
+      ),
     );
   }
 

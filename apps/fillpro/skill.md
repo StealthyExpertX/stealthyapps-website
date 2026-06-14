@@ -5,7 +5,7 @@ description: Product notes for FillPro, a private browser form autofill extensio
 
 # FillPro
 
-Last reviewed: 2026-06-13
+Last reviewed: 2026-06-14
 
 FillPro saves profiles inside the browser extension and fills repeated web forms. It is best for job applications, signup forms, intake pages, onboarding pages, demo requests, vendor forms, internal admin forms, and profile pages.
 

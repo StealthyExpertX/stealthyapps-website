@@ -20,4 +20,4 @@ FillPro does not run a cloud profile account for form values. Saved profiles sta
 
 ## Release
 
-Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-13.
+Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-14.

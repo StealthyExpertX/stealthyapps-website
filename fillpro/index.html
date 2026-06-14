@@ -19,7 +19,7 @@
   <link rel="alternate" type="text/plain" title="FillPro crawler index" href="/llms.txt">
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="preload" href="/assets/fillpro-demo.gif" as="image">
-  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v32">
+  <link rel="stylesheet" href="/styles.css?v=fillpro-launch-v33">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
@@ -113,11 +113,11 @@
         </span>
       </a>
       <div class="launch-links">
-        <a href="#demo">Demo</a>
-        <a href="#fit">Use cases</a>
+        <a href="/fillpro/" aria-current="page">Product</a>
         <a href="#pricing">Pricing</a>
         <a href="/fillpro/privacy/">Privacy</a>
         <a href="/support/">Support</a>
+        <a href="/contact/?topic=product&amp;product=FillPro">Contact</a>
       </div>
     </nav>
   </header>
@@ -156,13 +156,13 @@
         <div class="demo-shell" aria-hidden="true">
           <div class="demo-chrome">
             <span></span><span></span><span></span>
-            <b>FillPro demo - vendor onboarding</b>
+          <b>Client intake form</b>
           </div>
           <img src="/assets/fillpro-demo.gif" alt="FillPro filling a vendor onboarding form from a saved work profile" width="960" height="540" decoding="async">
         </div>
         <figcaption>
-          <strong>Quick fill. Final review stays with you.</strong>
-          <span>The demo shows profile fields, a matched upload, and a form left ready for review.</span>
+          <strong>Fast fill. Review stays with you.</strong>
+          <span>The loop shows a profile pick, safe fields filled, an upload matched, and the form left for review.</span>
         </figcaption>
       </figure>
     </section>
@@ -343,15 +343,15 @@
       <div class="faq-list launch-faq-list">
         <details open>
           <summary>What does FillPro fill?</summary>
-          <p>Names, contact details, company fields, work links, long answers, dropdowns, checkboxes, radios, textareas, and uploads like resumes or CSVs when the page exposes a form field FillPro can reach.</p>
+          <p>Repeated profile fields: names, contact details, company info, work links, long answers, dropdowns, checkboxes, radios, textareas, and upload fields the page exposes to the extension.</p>
         </details>
         <details>
           <summary>Does FillPro send saved profiles to a server?</summary>
-          <p>No. The core workflow uses profiles saved by the extension in your browser. FillPro does not run a cloud profile account for your form values. Exports, support emails, and Pro billing only happen when you choose them.</p>
+          <p>No. The core fill workflow uses profiles saved inside the browser extension. Exports, support emails, and Pro billing only happen when you choose them.</p>
         </details>
         <details>
           <summary>What site access does it need?</summary>
-          <p>Fill Page runs on the page you are viewing after you click it. The optional floating button is a convenience feature; it asks for access to the current site and can be turned off from FillPro settings.</p>
+          <p>Fill Page runs on the page you choose after you click it. The optional floating button asks for the current site only and can be turned off in FillPro settings.</p>
         </details>
         <details>
           <summary>Does it replace browser autofill or password managers?</summary>
@@ -359,7 +359,7 @@
         </details>
         <details>
           <summary>How do I report a bad fill?</summary>
-          <p>Send the URL, field label, what FillPro did, and what should have happened. Leave out private values. Good reports become regression tests and fixes.</p>
+          <p>Send the page, field label, what happened, and what you expected. Keep the report short; good reports become regression tests.</p>
         </details>
       </div>
     </section>
@@ -388,6 +388,6 @@
       <a href="/sitemap.html">Sitemap</a>
     </nav>
   </footer>
-  <script src="/site.js?v=fillpro-launch-v32" defer></script>
+  <script src="/site.js?v=fillpro-launch-v33" defer></script>
 </body>
 </html>
