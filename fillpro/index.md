@@ -9,7 +9,7 @@ FillPro is a browser extension from Stealthy Apps for people who reuse the same 
 - Free tier: 3 saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required
-- Last updated: 2026-06-13
+- Last updated: 2026-06-14
 
 ## Where FillPro fits
 
@@ -24,7 +24,7 @@ Focused pages:
 
 ## Core product
 
-- Profiles saved inside the browser extension.
+- Profiles saved inside FillPro.
 - Popup, side panel, on-page profile picker, right-click fill, and keyboard shortcut.
 - Smart rules and custom fields for unusual labels.
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
@@ -40,22 +40,22 @@ FillPro is strongest when structured profile data has to move across many unrela
 - Password managers are strongest for sign-ins.
 - Text expanders are strongest for snippets.
 - Macro tools are strongest for scripted click flows.
-- FillPro is strongest for local saved profiles, smart field matching, uploads, modern form controls, and review-before-submit filling.
+- FillPro is strongest for saved profiles, smart field matching, uploads, modern form controls, and review-before-submit filling.
 
 ## Privacy and control
 
-FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay inside FillPro unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from FillPro settings.
 
 ## Pricing
 
-Free includes 3 saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, local upload matching, and right-click capture.
+Free includes 3 saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
 Pro adds more saved profiles, profile duplication, import, export, and advanced repeat-use workflows. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
 
 ## Support
 
-For site reports, send the page, field label, what happened, and what should have happened. Do not send passwords, payment details, private IDs, or customer records.
+For site reports, send the page, field label, what happened, and what should have happened. Leave passwords, payment details, private IDs, and customer records out.
 
 Support: https://stealthyapps.com/contact/?topic=product&product=FillPro

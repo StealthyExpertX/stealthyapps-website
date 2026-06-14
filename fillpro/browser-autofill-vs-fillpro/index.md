@@ -22,11 +22,11 @@ Best for saved names, addresses, phone numbers, and payment-wallet flows the bro
 
 ## FillPro
 
-Best for repeated profiles, job applications, intake forms, vendor forms, demo requests, local upload matching, custom fields, and review-before-submit filling.
+Best for repeated profiles, job applications, intake forms, vendor forms, demo requests, upload matching, custom fields, and review-before-submit filling.
 
 ## Use both
 
-FillPro is not trying to replace the browser. It fills the long-form gaps while sign-ins and payments stay with tools users already trust.
+FillPro does not replace the browser. It fills the long-form gaps while sign-ins and payments stay with tools users already trust.
 
 ## Related FillPro pages
 

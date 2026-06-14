@@ -13,4 +13,4 @@ Good site reports include:
 - What should have happened.
 - Browser and FillPro version if known.
 
-Do not send passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, full customer records, or private profile values.
+Leave passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, customer records, and saved profile values out of support messages.

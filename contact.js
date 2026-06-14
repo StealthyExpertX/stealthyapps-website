@@ -41,7 +41,7 @@ const DIRECT_SEND_CONSENT_NOTE =
 const UPDATE_CONSENT_NOTE =
   'Sender opted into occasional follow-up or product-update emails related to this message and can opt out later.';
 const DIRECT_SEND_AUTORESPONSE =
-  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply as soon as possible. Please keep passwords, payment details, government IDs, tax IDs, one-time codes, and private profile values out of support email.';
+  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 12;
 const KNOWN_PRODUCTS = {
@@ -53,7 +53,7 @@ const CONTACT_CONTEXTS = {
     subjectPrefix: 'FillPro',
     requireName: true,
     requireReplyEmail: true,
-    idleMessage: 'Complete the required fields to send your message.',
+    idleMessage: 'Add a name, email, and message to send.',
     topics: {
       general: {
         label: 'General',
@@ -115,7 +115,7 @@ const CONTACT_CONTEXTS = {
     subjectPrefix: 'Product',
     requireName: false,
     requireReplyEmail: false,
-    idleMessage: 'Complete the required fields to send your message.',
+    idleMessage: 'Add the requested details to send your message.',
     topics: {},
   },
 };
@@ -127,7 +127,7 @@ function buildProductContext(form) {
     subjectPrefix: productName,
     requireName: false,
     requireReplyEmail: false,
-    idleMessage: 'Complete the required fields to send your message.',
+    idleMessage: 'Add the requested details to send your message.',
     topics: {
       support: {
         label: 'Support',

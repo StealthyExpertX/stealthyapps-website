@@ -335,6 +335,9 @@ p {
 }
 
 .button {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
   display: inline-flex;
   min-height: 46px;
   align-items: center;
@@ -348,17 +351,54 @@ p {
   font-weight: 780;
   text-decoration: none;
   cursor: pointer;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72);
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 180ms ease,
+    color 160ms ease,
+    transform 180ms ease;
 }
 
-.button:hover {
+.button:hover,
+.button:focus-visible {
   border-color: #9fb0bd;
   box-shadow: 0 10px 24px rgba(18, 32, 42, 0.1);
+  transform: translateY(-1px);
 }
 
 .button.primary {
   border-color: var(--brand);
-  background: var(--brand);
+  background:
+    linear-gradient(135deg, var(--brand), var(--brand-dark));
   color: #fff;
+  box-shadow:
+    0 14px 28px rgba(15, 118, 110, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.button.primary::after {
+  content: "";
+  position: absolute;
+  inset: -90% auto -90% -42%;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.48), transparent);
+  transform: translateX(-130%) rotate(18deg);
+  transition: transform 560ms ease;
+  pointer-events: none;
+}
+
+.button.primary:hover,
+.button.primary:focus-visible {
+  border-color: var(--brand-dark);
+  box-shadow:
+    0 18px 34px rgba(15, 118, 110, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+.button.primary:hover::after,
+.button.primary:focus-visible::after {
+  transform: translateX(420%) rotate(18deg);
 }
 
 .hero .button {
@@ -371,6 +411,7 @@ p {
   border-color: #fff;
   background: #fff;
   color: var(--ink);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.22);
 }
 
 .button[disabled] {
@@ -493,7 +534,8 @@ p {
 
 .trust-page {
   background:
-    radial-gradient(circle at top right, rgba(15, 118, 110, 0.08), transparent 34rem),
+    linear-gradient(90deg, rgba(15, 118, 110, 0.035) 1px, transparent 1px) 0 0 / 88px 88px,
+    linear-gradient(180deg, rgba(15, 118, 110, 0.032) 1px, transparent 1px) 0 0 / 88px 88px,
     linear-gradient(180deg, #ffffff 0%, var(--page) 42%, #edf5f1 100%);
 }
 
@@ -1031,7 +1073,7 @@ textarea:focus-visible {
   .nav,
   main,
   .footer-inner {
-    width: min(var(--max), calc(100% - 28px));
+    width: min(var(--max), calc(100% - 40px));
   }
 
   .nav {
@@ -1740,10 +1782,11 @@ textarea:focus-visible {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 92px 92px,
-    linear-gradient(180deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 92px 92px,
-    linear-gradient(135deg, rgba(216, 154, 36, 0.08), transparent 38%),
-    linear-gradient(315deg, rgba(37, 99, 235, 0.065), transparent 42%);
+    linear-gradient(90deg, rgba(15, 118, 110, 0.058) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(180deg, rgba(15, 118, 110, 0.052) 1px, transparent 1px) 0 0 / 92px 92px,
+    repeating-linear-gradient(135deg, rgba(216, 154, 36, 0.08) 0 1px, transparent 1px 28px),
+    linear-gradient(135deg, rgba(216, 154, 36, 0.055), transparent 38%),
+    linear-gradient(315deg, rgba(37, 99, 235, 0.052), transparent 42%);
   -webkit-mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
 }
@@ -1947,6 +1990,14 @@ textarea:focus-visible {
   align-items: center;
 }
 
+.launch-action-note {
+  max-width: 260px;
+  color: var(--launch-muted);
+  font-size: 13px;
+  font-weight: 720;
+  line-height: 1.35;
+}
+
 .launch-button {
   position: relative;
   overflow: hidden;
@@ -1999,6 +2050,9 @@ textarea:focus-visible {
   background:
     linear-gradient(135deg, #0f766e, #0a5f59);
   color: #fff;
+  box-shadow:
+    0 16px 34px rgba(15, 118, 110, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -2202,6 +2256,31 @@ textarea:focus-visible {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8), 0 16px 34px rgba(16, 35, 31, 0.055);
 }
 
+.launch-card-icon {
+  width: 38px;
+  height: 38px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(223, 244, 239, 0.8));
+  color: var(--launch-brand-strong);
+  box-shadow:
+    0 12px 22px rgba(15, 118, 110, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.72);
+}
+
+.launch-card-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .launch-use-grid p,
 .workflow-list p,
 .compare-lanes p,
@@ -2401,7 +2480,7 @@ textarea:focus-visible {
   display: grid;
   justify-items: center;
   gap: 18px;
-  padding: 78px 20px 8px;
+  padding: 78px 20px 34px;
   border-top: 1px solid rgba(16, 35, 31, 0.1);
   text-align: center;
 }
@@ -2418,7 +2497,7 @@ textarea:focus-visible {
   gap: 18px;
   width: 100%;
   margin: 0;
-  padding: 30px max(20px, calc((100vw - 1220px) / 2)) 48px;
+  padding: 32px max(24px, calc((100vw - 1220px) / 2)) 50px;
   border-top: 1px solid rgba(16, 35, 31, 0.1);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(243, 248, 246, 0.98));
@@ -2456,7 +2535,7 @@ textarea:focus-visible {
 @media (max-width: 760px) {
   .launch-nav,
   .launch-main {
-    width: min(100% - 28px, 1220px);
+    width: min(100% - 40px, 1220px);
   }
 
   .launch-nav {
@@ -2568,9 +2647,16 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .button:hover,
+  .button:focus-visible,
   .launch-button:hover,
   .launch-button:focus-visible {
     transform: none;
+  }
+
+  .button.primary::after,
+  .launch-button::after {
+    transition: none;
   }
 
   .launch-demo-card img {

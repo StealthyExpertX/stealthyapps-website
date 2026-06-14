@@ -1,20 +1,20 @@
 # FillPro Privacy
 
-Last updated: 2026-06-13
+Last updated: 2026-06-14
 
-FillPro is built for private, repeat form filling. The profiles you save for autofill stay inside the browser extension unless you export them, contact support, or choose Pro billing.
+FillPro is built for private, repeat form filling. Profiles you create stay inside the browser extension unless you export them, contact support, or choose Pro billing.
 
 ## Short Version
 
 - Core autofill does not need a FillPro cloud profile account.
-- Saved profiles stay in FillPro extension storage in your browser.
+- Saved profiles stay inside FillPro.
 - Profile values are not sold or shared for advertising.
 - Exports, support emails, and Pro billing only happen when you choose them.
 - Support reports should stay short and should not include passwords, payment cards, one-time codes, IDs, customer records, or full profile values.
 
 ## What FillPro Saves
 
-FillPro may save profiles, custom fields, smart rules, and files you attach to a profile, such as a resume, CV, cover letter, document, CSV, or spreadsheet. Those saved items exist so FillPro can fill the forms you ask it to fill.
+FillPro may save profiles, custom fields, smart rules, and files you attach to a profile, such as a resume, CV, cover letter, document, CSV, or spreadsheet. Those saved items exist so FillPro can fill the forms you choose.
 
 ## What Can Leave the Extension
 

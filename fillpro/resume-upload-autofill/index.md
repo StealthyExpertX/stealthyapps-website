@@ -20,9 +20,9 @@ FillPro can store upload references inside a saved profile and match them to rea
 
 Upload matching is useful when applications, vendor portals, onboarding pages, intake forms, and admin tools ask for the same supporting files again and again.
 
-## Local by design
+## Private by design
 
-Upload references live in browser extension storage unless you export them. FillPro does not turn your resume library into a cloud account.
+Upload references stay with your saved FillPro profile unless you export them. FillPro does not turn your resume library into a cloud account.
 
 ## Review before submit
 

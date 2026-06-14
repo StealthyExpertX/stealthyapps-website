@@ -1,17 +1,17 @@
 # Local Form Autofill - FillPro
 
-Private local form autofill for repeated web forms. FillPro keeps profiles in browser storage and asks only for the page you choose.
+Private form autofill for repeated web forms. FillPro keeps profiles inside the extension and runs on the page you choose.
 
 Canonical: https://stealthyapps.com/fillpro/local-form-autofill/
 Product: https://stealthyapps.com/fillpro/
 
 ## Autofill repeated forms without a cloud profile account.
 
-FillPro keeps reusable profiles in browser extension storage. The normal Fill Page action works on the page you choose, while the optional floating button asks for current-site access only.
+FillPro keeps reusable profiles inside the extension. The normal Fill Page action works on the page you choose, while the optional floating button asks for current-site access only.
 
 ## Works best for
 
-- Profiles stay in browser extension storage
+- Profiles stay inside FillPro
 - No broad access on install
 - Optional current-site access for the floating button
 - Review-before-submit filling

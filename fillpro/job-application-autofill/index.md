@@ -22,11 +22,11 @@ Use FillPro when applications ask for the same contact details, resume files, po
 
 ## You still make the call
 
-FillPro fills from a saved browser extension profile and leaves the final submit to you. Review the application, adjust odd fields, or undo the fill before sending.
+FillPro fills from a saved profile and leaves the final submit to you. Review the application, adjust odd fields, or undo the fill before sending.
 
 ## Why it is different from browser autofill
 
-Browser autofill is good at saved addresses. FillPro is better for reusable work profiles, custom fields, local upload matching, and hiring forms that use modern web controls.
+Browser autofill is good at saved addresses. FillPro is better for reusable work profiles, custom fields, upload matching, and hiring forms that use modern web controls.
 
 ## Related FillPro pages
 
