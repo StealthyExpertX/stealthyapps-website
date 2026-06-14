@@ -70,7 +70,7 @@ When a user reports a bad fill:
 
 ## Payment Maintenance
 
-Billing uses ExtensionPay. Do not collect card details in the extension. Keep the mocked payment-state test passing for paid, trial, free, billing unavailable with cached Pro, and billing unavailable without cache.
+Billing uses ExtensionPay. Do not collect card details in the extension. Keep the mocked payment-state test passing for paid, trial, free, canceled billing, billing unavailable with cached Pro, and billing unavailable without cache.
 
 ## Website Maintenance
 

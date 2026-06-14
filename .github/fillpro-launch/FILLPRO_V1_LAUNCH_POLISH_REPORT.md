@@ -27,7 +27,7 @@ The local corpus now covers 109 fixtures: 9 hand-built regression cases plus 100
 
 ## 6. Monetization, Payments, and Support Edge Cases
 
-ExtensionPay remains the billing layer. FillPro does not collect card details in the extension. New mocked tests cover paid, trial, free, ExtensionPay unavailable with recent cached Pro, and ExtensionPay unavailable without cache. Recent known Pro status gets a short offline grace state so temporary billing outages do not feel like a downgrade.
+ExtensionPay remains the billing layer. FillPro does not collect card details in the extension. New mocked tests cover paid, trial, free, canceled billing, ExtensionPay unavailable with recent cached Pro, and ExtensionPay unavailable without cache. Recent known Pro status gets a short offline grace state so temporary billing outages do not feel like a downgrade.
 
 ## 7. CRO, ASO, SEO, Accessibility, and Retention
 
@@ -38,7 +38,7 @@ The safe growth strategy remains: natural keywords, accurate metadata, useful lo
 - Website audit: passed.
 - Extension release audit: passed.
 - Serialization tests: passed.
-- Payment-state tests: passed.
+- Payment-state tests: paid, trial, free, canceled, cached offline Pro, and unavailable billing passed.
 - Fill-engine Playwright tests: 22/22 passed.
 - Site corpus Playwright tests: 109/109 passed.
 - Chrome, Edge, and Firefox zips rebuilt at version 1.0.0.
