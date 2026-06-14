@@ -47,7 +47,7 @@ FillPro is designed for structured profile data across many unrelated web forms.
 
 ## Pricing
 
-- Free: 3 saved profiles, in-browser filling, on-page picker, smart rules, custom fields, upload matching, right-click capture, and undo.
+- Free: three saved profiles, in-browser filling, on-page picker, smart rules, custom fields, upload matching, right-click capture, and undo.
 - Pro monthly: $3.99/month.
 - Pro yearly: $29.99/year.
 - Pro lifetime: $39.99 one time.

@@ -14,7 +14,7 @@ From `D:\root\projects\PluginMassCreation`:
 cmd /c BUILD_FILLPRO_EXTENSION_RELEASE.bat
 ```
 
-That runs the release audit, serialization tests, mocked payment-state tests, fill-engine Playwright tests, 109 local site-corpus fixtures, multiplatform build, and zip audit.
+That runs the release audit, serialization tests, mocked payment-state tests, fill-engine Playwright tests, 1,009 local site-corpus fixtures, multiplatform build, and zip audit.
 
 The zip audit also checks that the Firefox package declares no data collection with:
 

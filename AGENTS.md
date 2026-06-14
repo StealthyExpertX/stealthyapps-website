@@ -29,7 +29,7 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 
 ## Pricing
 
-- Free: 3 saved profiles.
+- Free: three saved profiles.
 - Pro monthly: $3.99/month.
 - Pro yearly: $29.99/year.
 - Pro lifetime: $39.99 one time.

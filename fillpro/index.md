@@ -1,19 +1,19 @@
 # FillPro - Private autofill for repeat forms
 
-FillPro is a browser extension from Stealthy Apps for people who reuse the same profile details across job applications, signup pages, intake forms, support forms, and business workflows.
+FillPro is a browser extension from Stealthy Apps for people who keep seeing the same profile fields across job applications, signup pages, intake forms, support forms, and business workflows.
 
 - Canonical URL: https://stealthyapps.com/fillpro/
 - Privacy: https://stealthyapps.com/fillpro/privacy/
 - Current version: 1.0.0
 - Category: browser extension, productivity, form autofill
-- Free tier: 3 saved profiles
+- Free tier: three saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required
 - Last updated: 2026-06-14
 
 ## Where FillPro fits
 
-FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor workflows, onboarding flows, support forms, admin tools, QA test profiles, and everyday business forms.
+FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor workflows, onboarding flows, support forms, admin tools, QA test profiles, and everyday business forms. Save a profile once, fill the repeat fields, then review before submit.
 
 Focused pages:
 
@@ -21,6 +21,7 @@ Focused pages:
 - Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/
 - Local form autofill: https://stealthyapps.com/fillpro/local-form-autofill/
 - Browser autofill vs FillPro: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
+- Download pages: https://stealthyapps.com/fillpro/download/
 
 ## Core product
 
@@ -50,7 +51,7 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 
 ## Pricing
 
-Free includes 3 saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
+Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
 Pro adds more saved profiles, profile duplication, import, export, and advanced repeat-use workflows. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
 

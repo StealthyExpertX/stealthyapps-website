@@ -8,7 +8,7 @@ Best description: FillPro fills job applications, signup forms, onboarding pages
 
 Pricing:
 
-- Free: 3 saved profiles.
+- Free: three saved profiles.
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime.
 - Trial: 3 days, no card required.
 

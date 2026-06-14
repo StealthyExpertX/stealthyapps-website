@@ -15,7 +15,7 @@ Expected impact ranges are directional:
 - Website conversion: low-to-moderate lift from clearer CTA hierarchy, shorter benefit-first copy, visible privacy proof, and reduced friction. Unbounce's conversion benchmark work treats 6.6% as a broad landing-page median, while SaaS pages are lower; FillPro's no-account/no-card/free-first path is designed to improve visitor-to-install intent, not guarantee a fixed rate.
 - Trust and perceived quality: moderate lift from consistent nav, professional dark mode, reduced-motion support, stable footer spacing, and no awkward internal metadata on public pages.
 - Store performance: moderate lift from accurate metadata, 22 locales, strong screenshots/clip plan, no broad host permissions, AMO data-collection declaration, and real compatibility tests.
-- Rating protection: high practical value from 109 form fixtures, sensitive-field skips, upload regression coverage, support flow, and explicit payment-state tests.
+- Rating protection: high practical value from 1,009 form fixtures, sensitive-field skips, upload regression coverage, support flow, and explicit payment-state tests.
 
 Benchmark anchors used for this pass:
 
@@ -150,9 +150,10 @@ Production references:
 
 Implemented corpus:
 
-- 109 fixtures run in the release build.
-- 9 hand-built regressions plus 100 generated launch-pattern fixtures.
-- Categories: Jobs, Real Estate, Finance/Insurance, Ecommerce/Shipping, Travel, Education, Business Intake, Events/Surveys, Healthcare scheduling non-PHI, SaaS trials.
+- 1,009 fixtures run in the release build.
+- 9 hand-built regressions plus 1,000 generated launch-pattern fixtures.
+- The expansion covers 100 topics with 10 targets each: 5 popular targets and 5 less-covered targets per topic.
+- The targets are fixture and live-audit candidates, not verified live support claims until a visual/live audit confirms usable forms.
 
 This does not count as a normal FillPro failure:
 
@@ -275,7 +276,7 @@ Extension:
 - Payment-state tests pass.
 - Serialization tests pass.
 - Fill-engine Playwright tests pass.
-- 109-site corpus passes.
+- 1,009-fixture corpus passes.
 - Chrome, Edge, and Firefox zips rebuild cleanly.
 - Firefox zip declares `browser_specific_settings.gecko.data_collection_permissions.required = ["none"]`.
 
@@ -296,7 +297,7 @@ Store and docs:
 6. Add extension Appearance setting and first-class dark mode.
 7. Harden payment states: paid, trial, free, canceled, offline grace, unavailable billing.
 8. Add payment-state regression tests.
-9. Add 100 categorized form fixtures and fix every exposed issue.
+9. Add 1,000 categorized form fixtures across 100 topics and fix every exposed issue.
 10. Add Firefox no-data-collection declaration to the generated AMO package.
 11. Run full release build.
 12. Rebuild Chrome, Edge, and Firefox zips at version `1.0.0`.

@@ -255,6 +255,64 @@
     });
   }
 
+  function setupScrollReveals() {
+    var reduceMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      return;
+    }
+
+    var revealSelectors = [
+      '.launch-strip',
+      '.launch-demo-card',
+      '.launch-section',
+      '.launch-band',
+      '.launch-final',
+      '.launch-use-grid article',
+      '.workflow-list article',
+      '.support-columns article',
+      '.compare-lanes article',
+      '.price-card',
+      '.privacy-card',
+      '.privacy-lane-grid article',
+      '.support-card',
+      '.info-card',
+      '.policy-card',
+    ].join(',');
+    var items = Array.prototype.slice.call(
+      document.querySelectorAll(revealSelectors),
+    );
+    if (!items.length) {
+      return;
+    }
+
+    root.classList.add('reveal-ready');
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.16,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    );
+
+    items.forEach(function (item, index) {
+      item.classList.add('reveal-item');
+      item.style.setProperty('--reveal-delay', (index % 4) * 45 + 'ms');
+      observer.observe(item);
+    });
+  }
+
   var lastHashScrollToken = '';
 
   function scrollToInitialHash(force) {
@@ -357,6 +415,7 @@
     setupInteractiveBackdrop();
     setupCopyCode();
     setupCurrentHashLink();
+    setupScrollReveals();
     scrollToInitialHash();
   });
   window.setTimeout(scrollToInitialHash, 0);

@@ -252,8 +252,8 @@ const css = `
     display: grid;
     grid-template-columns: minmax(0, 1fr) 320px;
     gap: 22px;
-    align-items: center;
-    padding: 34px;
+    align-items: start;
+    padding: 32px 34px 34px;
     background:
       radial-gradient(circle at 82% 18%, rgba(20, 184, 166, 0.16), transparent 260px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 70px 70px,
@@ -261,8 +261,17 @@ const css = `
       linear-gradient(135deg, #fbfdfb, #eef8f4);
   }
   .demo-scene .form {
-    min-height: 420px;
+    gap: 9px;
+    min-height: 0;
+    padding: 20px 24px;
     box-shadow: 0 26px 70px rgba(16, 35, 31, 0.12);
+  }
+  .demo-scene .field {
+    gap: 5px;
+    font-size: 12px;
+  }
+  .demo-scene .box {
+    height: 42px;
   }
   .demo-scene .popup {
     position: static;
@@ -270,12 +279,15 @@ const css = `
     align-self: center;
   }
   .demo-note {
-    position: absolute;
-    left: 34px;
-    bottom: 24px;
-    color: #60726b;
+    margin-top: 12px;
+    padding: 10px 12px;
+    border: 1px solid rgba(15, 118, 110, 0.18);
+    border-radius: 8px;
+    background: rgba(15, 118, 110, 0.08);
+    color: #50655e;
     font-size: 14px;
-    font-weight: 750;
+    font-weight: 780;
+    line-height: 1.25;
   }
 `;
 
@@ -334,9 +346,9 @@ function demoScene(values, note = 'Safe fields fill. Sensitive fields stay alone
       <div class="form">
         <h2>Partner intake</h2>
         ${fields}
+        <div class="demo-note">${note}</div>
       </div>
       ${popup('Work profile', values[9] ? 'Ready for review' : 'Filling repeated fields')}
-      <div class="demo-note">${note}</div>
     </main>`;
 }
 

@@ -46,6 +46,12 @@
       ]
     },
     {
+      "name": "Download FillPro",
+      "short_name": "Download",
+      "description": "Choose the Chrome, Edge, or Firefox download page for FillPro.",
+      "url": "/fillpro/download/?source=pwa"
+    },
+    {
       "name": "Support",
       "short_name": "Support",
       "description": "Get FillPro setup, compatibility, billing, and privacy help.",

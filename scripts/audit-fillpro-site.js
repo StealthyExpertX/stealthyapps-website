@@ -4,10 +4,10 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v33';
+const CACHE_TOKEN = 'fillpro-launch-v34';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
-const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact', 'Sitemap'];
+const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const STALE_COPY = [
   'Local profiles',
   'Local-first',
@@ -111,6 +111,9 @@ function checkFooter(file, html) {
   if (!/class=["'][^"']*footer-links/.test(html)) fail(`${rel(file)}: footer missing footer-links`);
   for (const label of FOOTER_LINKS) {
     if (!new RegExp(`>${label}<`).test(html)) fail(`${rel(file)}: footer missing ${label}`);
+  }
+  if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(html)) {
+    fail(`${rel(file)}: footer should not expose sitemap link`);
   }
   if (/\|\s*<a\b|<\/a>\s*\|/i.test(html)) fail(`${rel(file)}: footer still uses pipe-separated links`);
 }
@@ -231,6 +234,13 @@ function checkIndexNowKey() {
 function checkStaleCopy(file, text) {
   for (const phrase of STALE_COPY) {
     if (text.includes(phrase)) fail(`${rel(file)}: stale phrase "${phrase}"`);
+  }
+  const visibleBody = text
+    .replace(/<head[\s\S]*?<\/head>/gi, ' ')
+    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style[\s\S]*?<\/style>/gi, ' ');
+  if (rel(file) === 'sitemap.html' && /XML sitemap|sitemap\.xml/i.test(visibleBody)) {
+    fail('sitemap.html: XML sitemap should not be user-facing');
   }
 }
 
