@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v34';
+const CACHE_TOKEN = 'fillpro-launch-v35';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -180,6 +180,13 @@ function checkStyles() {
     ['.launch-footer', 'landing footer rules'],
     ['width: 100%', 'full-width landing footer'],
     ['max(24px, calc((100vw - 1220px) / 2))', 'responsive landing footer padding'],
+    ['.browser-mark-chrome', 'Chrome browser badge styles'],
+    ['.browser-mark-edge', 'Edge browser badge styles'],
+    ['.browser-mark-firefox', 'Firefox browser badge styles'],
+    ['--browser-surface', 'matched browser badge surface token'],
+    ['--launch-icon-bg', 'launch feature icon surface token'],
+    ['body.fillpro-launch .browser-mark-chrome', 'dark launch browser badge override'],
+    ['body.fillpro-launch .launch-card-icon', 'dark launch card icon override'],
   ];
   for (const [needle, label] of required) {
     if (!css.includes(needle)) fail(`styles.css: missing ${label}`);
@@ -195,6 +202,9 @@ function checkSiteScript() {
     ['installThemeToggle', 'theme toggle installer'],
     ['setupInteractiveBackdrop', 'interactive background setup'],
     ['prefers-reduced-motion: reduce', 'reduced-motion guard in JS'],
+    ['.browser-download-card', 'browser card reveal coverage'],
+    ['.privacy-snapshot', 'privacy snapshot reveal coverage'],
+    ['.preview-card', 'shared preview reveal coverage'],
   ];
   for (const [needle, label] of required) {
     if (!js.includes(needle)) fail(`site.js: missing ${label}`);
