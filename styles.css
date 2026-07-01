@@ -30,6 +30,9 @@
 
 html {
   color-scheme: light;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
   scroll-behavior: smooth;
   scroll-padding-top: 92px;
 }
@@ -86,6 +89,7 @@ body {
   color: var(--ink);
   font: 16px/1.65 "Segoe UI Variable Text", "Segoe UI", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 0;
+  overflow-x: hidden;
   overflow-x: clip;
 }
 

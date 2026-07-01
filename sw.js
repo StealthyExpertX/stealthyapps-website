@@ -17,7 +17,7 @@ const CORE_ASSETS = [
   '/fillpro/browser-autofill-vs-fillpro/',
   '/support/',
   '/contact/',
-  '/styles.css?v=fillpro-launch-v35',
+  '/styles.css?v=fillpro-launch-v36',
   '/site.js?v=fillpro-launch-v35',
   '/contact.js?v=fillpro-launch-v35',
   '/assets/fillpro-logo.svg',
