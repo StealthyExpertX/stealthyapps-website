@@ -289,6 +289,92 @@ const css = `
     font-weight: 780;
     line-height: 1.25;
   }
+  .brand-stage {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #f8fffc;
+    background:
+      linear-gradient(115deg, rgba(94, 234, 221, 0.18), transparent 44%),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.07) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(180deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px) 0 0 / 64px 64px,
+      linear-gradient(135deg, #08231f 0%, #0f766e 54%, #05312d 100%);
+  }
+  .brand-stage::before,
+  .brand-stage::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+  .brand-stage::before {
+    inset: 0;
+    background:
+      linear-gradient(132deg, transparent 0 42%, rgba(255, 255, 255, 0.14) 42% 42.8%, transparent 42.8%),
+      linear-gradient(132deg, transparent 0 57%, rgba(242, 193, 78, 0.18) 57% 58.2%, transparent 58.2%);
+  }
+  .brand-stage::after {
+    right: -8%;
+    bottom: -22%;
+    width: 46%;
+    height: 82%;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 28px;
+    transform: rotate(-8deg);
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.22);
+  }
+  .brand-lockup {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-weight: 950;
+    letter-spacing: 0;
+  }
+  .brand-lockup img {
+    width: 86px;
+    height: 86px;
+    filter: drop-shadow(0 20px 28px rgba(0, 0, 0, 0.28));
+  }
+  .brand-lockup span {
+    font-size: 44px;
+  }
+  .promo-product {
+    position: absolute;
+    right: 42px;
+    bottom: 34px;
+    width: 278px;
+    display: grid;
+    gap: 10px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 12px;
+    background: rgba(248, 255, 252, 0.94);
+    box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+  }
+  .promo-product strong {
+    color: #10231f;
+    font-size: 18px;
+  }
+  .promo-line {
+    height: 18px;
+    border-radius: 999px;
+    background: #d9e8e2;
+  }
+  .promo-line.fill { background: linear-gradient(90deg, #5eeadd, #0f766e); }
+  .promo-marquee .brand-lockup img { width: 104px; height: 104px; }
+  .promo-marquee .brand-lockup span { font-size: 62px; }
+  .promo-marquee .promo-product {
+    right: 96px;
+    bottom: 56px;
+    width: 490px;
+    gap: 14px;
+    padding: 26px;
+    border-radius: 14px;
+  }
+  .promo-marquee .promo-product strong { font-size: 28px; }
+  .promo-marquee .promo-line { height: 24px; }
 `;
 
 function chromeFrame(url, inner) {
@@ -352,6 +438,25 @@ function demoScene(values, note = 'Safe fields fill. Sensitive fields stay alone
     </main>`;
 }
 
+function promoProduct(label = 'Fill Page') {
+  return `
+    <div class="promo-product">
+      <strong>${label}</strong>
+      <div class="promo-line fill" style="width:76%;"></div>
+      <div class="promo-line fill" style="width:92%;"></div>
+      <div class="promo-line" style="width:64%;"></div>
+      <div class="promo-line fill" style="width:86%;"></div>
+    </div>`;
+}
+
+function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile') {
+  return `
+    <main class="stage brand-stage ${stageClass}">
+      <div class="brand-lockup"><img src="${logoDataUrl}" alt=""><span>${label}</span></div>
+      ${promoProduct(productLabel)}
+    </main>`;
+}
+
 async function renderHtml(browser, output, width, height, html) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body>${html}</body></html>`);
@@ -379,7 +484,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-profiles-1280x800.png'),
     1280,
     800,
-    `<main class="stage">
+    `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
       <div><h1>Separate profiles for real workflows.</h1><p class="sub">Work, personal admin, clients, vendors, and test profiles stay organized in the browser.</p></div>
       ${chromeFrame('Demo request', `
@@ -484,11 +589,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-small-promo-440x280.png'),
     440,
     280,
-    `<main class="stage small-stage">
-      <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
-      <h1>Fill repeated forms faster.</h1>
-      <p class="sub" style="font-size:17px;">Saved profiles. Smart rules. Undo before submit.</p>
-    </main>`,
+    brandPromo('small-stage promo-small', 'FillPro', 'Fill Page'),
   );
 
   await renderHtml(
@@ -496,14 +597,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-marquee-1400x560.png'),
     1400,
     560,
-    `<main class="stage marquee">
-      <div>
-        <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
-        <h1 style="margin-top:26px;">Private autofill for forms you repeat.</h1>
-        <p class="sub">Profiles stay in FillPro. Fill when you ask. Review before submit.</p>
-      </div>
-      ${chromeFrame('app.example/intake', beforeAfter())}
-    </main>`,
+    brandPromo('marquee promo-marquee', 'FillPro', 'Saved profile'),
   );
 
   await renderHtml(
@@ -612,7 +706,8 @@ async function renderDemoGif(browser) {
 async function renderIcons() {
   const extensionSvg = path.join(projectRoot, 'fillpro', 'icons', 'icon-source.svg');
   for (const size of [16, 32, 48, 128, 256, 512]) {
-    await sharp(extensionSvg)
+    const source = size <= 32 ? Buffer.from(smallIconSvg()) : extensionSvg;
+    await sharp(source)
       .resize(size, size)
       .png()
       .toFile(path.join(projectRoot, 'fillpro', 'icons', `icon${size}.png`));
@@ -625,6 +720,21 @@ async function renderIcons() {
     .resize(512, 512)
     .png()
     .toFile(path.join(assetsDir, 'fillpro-logo.png'));
+}
+
+function smallIconSvg() {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+    <defs>
+      <linearGradient id="bg" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#20d6c2"/>
+        <stop offset="0.54" stop-color="#0f766e"/>
+        <stop offset="1" stop-color="#08231f"/>
+      </linearGradient>
+    </defs>
+    <rect x="132" y="132" width="760" height="760" rx="210" fill="url(#bg)"/>
+    <path d="M294 278c0-44 35-79 79-79h334c44 0 79 35 79 79s-35 79-79 79H456v124h214c42 0 76 34 76 76s-34 76-76 76H456v152c0 45-36 81-81 81s-81-36-81-81V278Z" fill="#f8fffc"/>
+    <path d="M206 214c77-54 174-83 290-83h222c96 0 174 78 174 174v64c-113-79-239-119-378-119-118 0-220 24-308 72V214Z" fill="#ffffff" opacity="0.15"/>
+  </svg>`;
 }
 
 (async () => {

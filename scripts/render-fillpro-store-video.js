@@ -10,13 +10,6 @@ const marketplaceDir = path.join(assetsDir, 'marketplace');
 const logoSvgPath = path.join(assetsDir, 'fillpro-logo.svg');
 const outputMp4 = path.join(marketplaceDir, 'fillpro-store-demo-22s.mp4');
 const outputThumb = path.join(marketplaceDir, 'fillpro-store-demo-22s-thumb.png');
-const storeScreenshots = [
-  ['00:00:11.5', 'fillpro-screenshot-fill-page-1280x800.png'],
-  ['00:00:14.2', 'fillpro-screenshot-modern-forms-1280x800.png'],
-  ['00:00:12.2', 'fillpro-screenshot-profiles-1280x800.png'],
-  ['00:00:17.0', 'fillpro-screenshot-privacy-1280x800.png'],
-  ['00:00:20.2', 'fillpro-screenshot-undo-1280x800.png'],
-];
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
   .toString('base64')}`;
@@ -643,26 +636,8 @@ async function renderFrames() {
       { stdio: 'inherit' },
     );
 
-    for (const [timestamp, fileName] of storeScreenshots) {
-      execFileSync(
-        'ffmpeg',
-        [
-          '-y',
-          '-ss',
-          timestamp,
-          '-i',
-          outputMp4,
-          '-filter_complex',
-          '[0:v]scale=1280:800:force_original_aspect_ratio=increase,crop=1280:800,boxblur=18:1,eq=brightness=0.06:saturation=0.86[bg];[0:v]scale=1280:720[fg];[bg][fg]overlay=0:40',
-          '-frames:v',
-          '1',
-          '-update',
-          '1',
-          path.join(marketplaceDir, fileName),
-        ],
-        { stdio: 'inherit' },
-      );
-    }
+    // Screenshots are rendered by render-fillpro-assets.js so each store image can
+    // be composed for a distinct proof point instead of being a cropped video frame.
   } finally {
     await browser.close();
     fs.rmSync(tmp, { recursive: true, force: true });
