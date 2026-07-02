@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v37';
+const CACHE_TOKEN = 'fillpro-launch-v38';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -213,6 +213,43 @@ function checkSiteScript() {
   }
 }
 
+function checkHeroScene() {
+  const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  if (!packageJson.dependencies || !packageJson.dependencies.three) {
+    fail('package.json: missing pinned self-hosted three dependency');
+  }
+
+  const vendorPath = path.join(ROOT, 'vendor', 'three.module.min.js');
+  const vendorCorePath = path.join(ROOT, 'vendor', 'three.core.min.js');
+  const licensePath = path.join(ROOT, 'vendor', 'three-LICENSE.txt');
+  if (!fs.existsSync(vendorPath)) fail('vendor/three.module.min.js: missing self-hosted Three.js module');
+  else if (fs.statSync(vendorPath).size < 300 * 1024) fail('vendor/three.module.min.js: suspiciously small');
+  if (!fs.existsSync(vendorCorePath)) fail('vendor/three.core.min.js: missing self-hosted Three.js core module');
+  else if (fs.statSync(vendorCorePath).size < 300 * 1024) fail('vendor/three.core.min.js: suspiciously small');
+  if (!fs.existsSync(licensePath)) fail('vendor/three-LICENSE.txt: missing Three.js license');
+
+  const heroScript = fs.readFileSync(path.join(ROOT, 'fillpro-hero-scene.js'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
+  const css = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
+  const required = [
+    [heroScript, "import * as THREE from './vendor/three.module.min.js';", 'hero script should use self-hosted Three.js'],
+    [heroScript, 'WebGLRenderer', 'hero script should create a WebGLRenderer'],
+    [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
+    [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
+    [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
+    [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
+    [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
+    [css, '.hero-3d-ready .hero-3d-canvas', 'styles should reveal hero 3D only after ready'],
+    [sw, '/fillpro-hero-scene.js', 'service worker should cache hero scene script'],
+    [sw, '/vendor/three.module.min.js', 'service worker should cache vendored Three.js module'],
+    [sw, '/vendor/three.core.min.js', 'service worker should cache vendored Three.js core module'],
+  ];
+  for (const [source, needle, label] of required) {
+    if (!source.includes(needle)) fail(label);
+  }
+}
+
 function checkPackageScripts() {
   const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const scripts = packageJson.scripts || {};
@@ -300,6 +337,7 @@ for (const file of files) {
 }
 checkStyles();
 checkSiteScript();
+checkHeroScene();
 checkPackageScripts();
 checkDemoGenerator();
 checkLaunchPage();

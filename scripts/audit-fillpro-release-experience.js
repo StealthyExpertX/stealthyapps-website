@@ -2,6 +2,7 @@ const fs = require('fs');
 const http = require('http');
 const path = require('path');
 const { chromium } = require('playwright');
+const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUT_DIR = path.join(ROOT, '.tmp', 'release-experience-audit');
@@ -112,6 +113,67 @@ async function auditPage(page, route, viewport, theme, errors) {
     fullPage: true,
   });
 
+  const pathname = new URL(route).pathname;
+  if (pathname === '/fillpro/') {
+    try {
+      await page.waitForFunction(
+        () => document.documentElement.classList.contains('hero-3d-ready'),
+        null,
+        { timeout: 5000 },
+      );
+      const canvas = page.locator('.hero-3d-canvas');
+      const canvasPath = path.join(OUT_DIR, `hero-3d-${viewport.name}-${theme}.png`);
+      await canvas.screenshot({ path: canvasPath });
+      const stats = await sharp(canvasPath).stats();
+      const alphaMean = stats.channels[3] ? stats.channels[3].mean : 255;
+      const colorDeviation = stats.channels
+        .slice(0, 3)
+        .reduce((sum, channel) => sum + channel.stdev, 0);
+      const pixelReport = await page.evaluate(() => {
+        const canvas = document.querySelector('.hero-3d-canvas');
+        const gl = canvas && (canvas.getContext('webgl2') || canvas.getContext('webgl'));
+        if (!gl) return { hasContext: false, nonblank: 0, varied: 0 };
+        const width = gl.drawingBufferWidth;
+        const height = gl.drawingBufferHeight;
+        const colors = [];
+        for (let y = 1; y < 9; y += 1) {
+          for (let x = 1; x < 17; x += 1) {
+            const px = new Uint8Array(4);
+            gl.readPixels(
+              Math.floor((width * x) / 18),
+              Math.floor((height * y) / 10),
+              1,
+              1,
+              gl.RGBA,
+              gl.UNSIGNED_BYTE,
+              px,
+            );
+            if (px[3] > 0 || px[0] + px[1] + px[2] > 0) {
+              colors.push(`${px[0]},${px[1]},${px[2]},${px[3]}`);
+            }
+          }
+        }
+        return {
+          hasContext: true,
+          width,
+          height,
+          nonblank: colors.length,
+          varied: new Set(colors).size,
+        };
+      });
+      if (alphaMean < 0.5 || colorDeviation < 2) {
+        errors.push(`${route}: hero 3D canvas appears blank on ${viewport.name}/${theme}`);
+      }
+      if (!pixelReport.hasContext || pixelReport.nonblank < 4 || pixelReport.varied < 2) {
+        errors.push(
+          `${route}: hero 3D WebGL pixels look blank on ${viewport.name}/${theme}: ${JSON.stringify(pixelReport)}`,
+        );
+      }
+    } catch (error) {
+      errors.push(`${route}: hero 3D canvas check failed on ${viewport.name}/${theme}: ${error.message}`);
+    }
+  }
+
   const report = await page.evaluate(() => {
     const html = document.documentElement;
     const body = document.body;
@@ -185,6 +247,63 @@ async function auditPage(page, route, viewport, theme, errors) {
   }
 }
 
+async function imageMeanDifference(leftPath, rightPath) {
+  const left = await sharp(leftPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const right = await sharp(rightPath)
+    .resize(left.info.width, left.info.height, { fit: 'fill' })
+    .ensureAlpha()
+    .raw()
+    .toBuffer();
+  let diff = 0;
+  for (let index = 0; index < left.data.length; index += 4) {
+    diff += Math.abs(left.data[index] - right[index]);
+    diff += Math.abs(left.data[index + 1] - right[index + 1]);
+    diff += Math.abs(left.data[index + 2] - right[index + 2]);
+  }
+  return diff / (left.info.width * left.info.height * 3);
+}
+
+async function auditHeroSceneMotion(browser, origin, errors) {
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    deviceScaleFactor: 1,
+    reducedMotion: 'no-preference',
+  });
+  const page = await context.newPage();
+  try {
+    page.on('console', (message) => {
+      if (message.type() === 'error') {
+        errors.push(`/fillpro/: console error during hero 3D motion audit: ${message.text()}`);
+      }
+    });
+    page.on('pageerror', (error) => {
+      errors.push(`/fillpro/: page error during hero 3D motion audit: ${error.message}`);
+    });
+    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(
+      () => document.documentElement.classList.contains('hero-3d-ready'),
+      null,
+      { timeout: 5000 },
+    );
+    const canvas = page.locator('.hero-3d-canvas');
+    const before = path.join(OUT_DIR, 'hero-3d-motion-before.png');
+    const after = path.join(OUT_DIR, 'hero-3d-motion-after.png');
+    await canvas.screenshot({ path: before });
+    await page.mouse.move(1180, 190);
+    await page.waitForTimeout(450);
+    await canvas.screenshot({ path: after });
+    const meanDiff = await imageMeanDifference(before, after);
+    if (meanDiff < 0.35) {
+      errors.push(`/fillpro/: hero 3D scene did not show enough motion/interaction difference (${meanDiff.toFixed(3)})`);
+    }
+  } catch (error) {
+    errors.push(`/fillpro/: hero 3D motion audit failed: ${error.message}`);
+  } finally {
+    await page.close();
+    await context.close();
+  }
+}
+
 async function main() {
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -224,6 +343,7 @@ async function main() {
         await context.close();
       }
     }
+    await auditHeroSceneMotion(browser, server.origin, errors);
   } finally {
     await browser.close();
     await server.close();

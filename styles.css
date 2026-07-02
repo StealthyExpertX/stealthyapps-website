@@ -2442,12 +2442,38 @@ textarea:focus-visible {
 
 .launch-hero {
   position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(420px, 1.08fr);
   align-items: center;
   gap: 42px;
   padding: 38px 0 42px;
   overflow-x: hidden;
+}
+
+.hero-3d-canvas {
+  position: absolute;
+  inset: -68px -72px -44px auto;
+  z-index: -1;
+  width: min(76vw, 900px);
+  height: calc(100% + 112px);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
+.js-enhanced.hero-3d-ready .hero-3d-canvas {
+  opacity: 0.72;
+}
+
+:root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
+  opacity: 0.82;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
+    opacity: 0.82;
+  }
 }
 
 .launch-hero::before {
@@ -2464,6 +2490,8 @@ textarea:focus-visible {
 }
 
 .launch-hero-copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 20px;
 }
@@ -2665,6 +2693,8 @@ textarea:focus-visible {
 }
 
 .launch-demo-card {
+  position: relative;
+  z-index: 1;
   margin: 0;
   display: grid;
   gap: 12px;
@@ -3633,6 +3663,26 @@ textarea:focus-visible {
   .launch-hero {
     gap: 22px;
     padding-top: 32px;
+  }
+
+  .hero-3d-canvas {
+    inset: auto -118px 88px auto;
+    width: min(580px, 142vw);
+    height: 430px;
+  }
+
+  .js-enhanced.hero-3d-ready .hero-3d-canvas {
+    opacity: 0.28;
+  }
+
+  :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
+    opacity: 0.36;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
+      opacity: 0.36;
+    }
   }
 
   .launch-hero h1 {
