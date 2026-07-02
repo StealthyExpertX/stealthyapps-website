@@ -102,12 +102,14 @@ function checkRenderer() {
     'Save it once. Fill the next form.',
     'Less retyping on applications.',
     'Built for messy forms.',
-    'No cloud profile account.',
+    'Profiles stay in FillPro.',
     'Undo before you submit.',
     'careers.example/apply',
     'app.example/trial',
     'Upload matching',
-    'Report bad fills',
+    'Review stays yours',
+    'Send a quick report',
+    'Use your password manager',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);

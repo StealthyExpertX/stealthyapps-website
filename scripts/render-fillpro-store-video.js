@@ -56,18 +56,18 @@ const html = `<!doctype html>
   }
   .brand {
     position: absolute;
-    left: 54px;
-    top: 40px;
+    left: 58px;
+    top: 34px;
     display: flex;
     align-items: center;
     gap: 13px;
     font-weight: 900;
-    font-size: 25px;
+    font-size: 27px;
   }
   .brand img {
-    width: 54px;
-    height: 54px;
-    filter: drop-shadow(0 14px 18px rgba(15, 118, 110, 0.2));
+    width: 62px;
+    height: 62px;
+    filter: drop-shadow(0 16px 22px rgba(15, 118, 110, 0.24));
   }
   .version {
     position: absolute;
@@ -84,8 +84,8 @@ const html = `<!doctype html>
   .copy {
     position: absolute;
     left: 58px;
-    top: 132px;
-    width: 470px;
+    top: 126px;
+    width: 505px;
     z-index: 4;
   }
   .eyebrow {
@@ -98,14 +98,14 @@ const html = `<!doctype html>
   }
   h1 {
     margin: 0;
-    font: 950 61px/0.94 "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+    font: 950 70px/0.9 "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
     letter-spacing: 0;
   }
   .sub {
     margin: 18px 0 0;
     color: #43544e;
-    font-size: 21px;
-    line-height: 1.34;
+    font-size: 22px;
+    line-height: 1.28;
     font-weight: 650;
   }
   .proof {
@@ -115,26 +115,26 @@ const html = `<!doctype html>
     margin-top: 24px;
   }
   .proof span {
-    padding: 8px 11px;
+    padding: 10px 14px;
     border: 1px solid rgba(15, 118, 110, 0.16);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.76);
     color: #38524b;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 850;
   }
   .browser {
     position: absolute;
-    right: 54px;
-    top: 118px;
-    width: 640px;
-    height: 516px;
+    right: 38px;
+    top: 112px;
+    width: 668px;
+    height: 534px;
     overflow: hidden;
     border: 1px solid rgba(16, 35, 31, 0.13);
     border-radius: 10px;
     background: #ffffff;
     box-shadow:
-      0 42px 90px rgba(16, 35, 31, 0.18),
+      0 48px 100px rgba(16, 35, 31, 0.2),
       0 0 0 1px rgba(255, 255, 255, 0.72) inset;
   }
   .chrome {
@@ -162,12 +162,12 @@ const html = `<!doctype html>
   .page {
     position: relative;
     height: calc(100% - 44px);
-    padding: 26px;
+    padding: 28px;
     background: linear-gradient(180deg, #ffffff, #f8fbf8);
   }
   .form-title {
     margin: 0 0 18px;
-    font-size: 25px;
+    font-size: 28px;
     line-height: 1;
     font-weight: 930;
   }
@@ -190,7 +190,7 @@ const html = `<!doctype html>
     border-radius: 8px;
     background: #ffffff;
     color: #10231f;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 850;
   }
   .box.filled {
@@ -218,7 +218,7 @@ const html = `<!doctype html>
     position: absolute;
     right: 24px;
     top: 88px;
-    width: 286px;
+    width: 302px;
     display: grid;
     gap: 12px;
     padding: 18px;
@@ -284,15 +284,16 @@ const html = `<!doctype html>
   .review {
     position: absolute;
     right: 24px;
-    top: 376px;
-    width: 286px;
-    padding: 12px 14px;
+    top: 386px;
+    width: 302px;
+    padding: 13px 15px;
     border: 1px solid rgba(15, 118, 110, 0.18);
     border-radius: 8px;
-    background: rgba(15, 118, 110, 0.08);
-    color: #43544e;
+    background: linear-gradient(135deg, rgba(15, 118, 110, 0.11), rgba(255, 255, 255, 0.86));
+    color: #334741;
     font-size: 13px;
-    font-weight: 820;
+    font-weight: 850;
+    line-height: 1.28;
     opacity: var(--review-opacity, 0);
   }
   .cursor {
@@ -317,7 +318,7 @@ const html = `<!doctype html>
     left: 58px;
     bottom: 56px;
     display: grid;
-    grid-template-columns: repeat(3, 145px);
+    grid-template-columns: repeat(3, 154px);
     gap: 12px;
     opacity: var(--strip-opacity, 0);
   }
@@ -332,12 +333,12 @@ const html = `<!doctype html>
   .privacy-strip strong {
     display: block;
     margin-bottom: 5px;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 950;
   }
   .privacy-strip span {
     color: #4f625c;
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 650;
     line-height: 1.25;
   }
@@ -387,7 +388,7 @@ const html = `<!doctype html>
     </div>
   </section>
   <div class="privacy-strip" id="strip">
-    <div><strong>No cloud profile</strong><span>Core profiles stay in the extension.</span></div>
+    <div><strong>Profiles stay here</strong><span>Saved details stay inside FillPro unless exported.</span></div>
     <div><strong>Click to fill</strong><span>Runs when you ask on the page.</span></div>
     <div><strong>Undo ready</strong><span>Back out before submitting.</span></div>
   </div>
@@ -400,7 +401,7 @@ const html = `<!doctype html>
     ['Work email', 'alex@example.com'],
     ['Company', 'Stealthy Apps'],
     ['Resume upload', 'alex-morgan-resume.pdf'],
-    ['Password', ''],
+    ['Account password', ''],
   ];
   const modernFields = [
     ['Custom dropdown', 'Product operations'],
@@ -445,18 +446,18 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 11.8) return ['Private autofill', 'Save it once. Fill the next form.', 'Profile fields, uploads, and repeated details fill only when you ask.'];
-    if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from the same saved profile.'];
-    if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, checkboxes, long answers, and late fields get a cleaner pass.'];
-    if (t < 18.8) return ['Private by default', 'No cloud profile account.', 'Profiles, rules, and upload references stay in the extension unless you export them.'];
+    if (t < 11.8) return ['Private autofill', 'Save it once. Fill the next form.', 'Profiles, uploads, and repeated details fill when you ask.'];
+    if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
+    if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.'];
+    if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
     return ['Review and recover', 'Undo before you submit.', 'See what changed, back it out, or send a short report when a page needs a better rule.'];
   }
 
   function proofFor(t) {
-    if (t < 13.4) return ['Saved profiles', 'Upload matching', 'Sensitive fields skipped'];
+    if (t < 13.4) return ['Saved profiles', 'Upload matching', 'Review stays yours'];
     if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
-    if (t < 18.8) return ['No cloud account', 'Current-page access', 'Export when needed'];
-    return ['Review first', 'Undo ready', 'Report bad fills'];
+    if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
+    return ['Review first', 'Undo ready', 'Send a quick report'];
   }
 
   function formFor(t) {
@@ -506,7 +507,7 @@ const html = `<!doctype html>
     const active = activeField(t);
     return form.fields.map((field, index) => {
       const [label, value] = field;
-      const isPassword = label === 'Password';
+      const isPassword = label === 'Account password';
       const hasValue = index < filled && !isPassword;
       const className = [
         'field',
@@ -517,7 +518,7 @@ const html = `<!doctype html>
         hasValue ? 'filled' : '',
         isPassword ? 'skip' : '',
       ].join(' ');
-      const text = isPassword ? (t > 10.4 ? 'Skipped on purpose' : '') : (hasValue ? value : '');
+      const text = isPassword ? (t > 10.4 ? 'Use your password manager' : '') : (hasValue ? value : '');
       return '<div class="' + className + '"><span>' + label + '</span><div class="' + boxClass + '">' + text + '</div><div class="flash"></div></div>';
     }).join('');
   }

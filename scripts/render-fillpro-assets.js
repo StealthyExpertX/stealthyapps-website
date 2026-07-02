@@ -442,7 +442,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
-      <div><h1>Profiles stay in your browser.</h1><p class="sub">No cloud profile account is needed for the core workflow. You choose when to export, upgrade, or contact support.</p></div>
+      <div><h1>Profiles stay in FillPro.</h1><p class="sub">No account is needed for the core workflow. You choose when to export, upgrade, or contact support.</p></div>
       <div class="privacy-grid">
         <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>
         <div class="privacy-card"><strong>User-triggered fills</strong><span>FillPro runs after your click, shortcut, picker, or context menu action.</span></div>
