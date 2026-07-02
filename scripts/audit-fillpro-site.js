@@ -211,6 +211,17 @@ function checkSiteScript() {
   }
 }
 
+function checkPackageScripts() {
+  const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
+  const scripts = packageJson.scripts || {};
+  if (!scripts.test || !scripts.test.includes('audit-fillpro-release-experience.js')) {
+    fail('package.json: npm test must include the rendered release experience audit');
+  }
+  if (!scripts['test:experience'] || !scripts['test:experience'].includes('audit-fillpro-release-experience.js')) {
+    fail('package.json: missing test:experience script for release experience audit');
+  }
+}
+
 function checkDemoGenerator() {
   const renderer = fs.readFileSync(path.join(ROOT, 'scripts', 'render-fillpro-assets.js'), 'utf8');
   if (/fillpro-demo-(poster|gif)[\s\S]+chromeFrame\(/.test(renderer)) {
@@ -273,6 +284,7 @@ for (const file of files) {
 }
 checkStyles();
 checkSiteScript();
+checkPackageScripts();
 checkDemoGenerator();
 checkCacheToken(files);
 checkIndexNowKey();
