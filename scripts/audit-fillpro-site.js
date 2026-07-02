@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v36';
+const CACHE_TOKEN = 'fillpro-launch-v37';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -173,6 +173,8 @@ function checkStyles() {
     ['--pointer-x', 'interactive background variables'],
     ['.theme-toggle', 'manual theme toggle styles'],
     ['launchCtaShine 7.2s', 'premium CTA shine timing'],
+    ['.demo-signal', 'hero product-signal overlay'],
+    ['demoSignalSweep 7.2s', 'hero signal motion timing'],
     ['min-height: 46px', 'standard button tap target'],
     ['min-height: 52px', 'landing button tap target'],
     ['min-height: 34px', 'footer link tap target'],
@@ -232,6 +234,20 @@ function checkDemoGenerator() {
   }
 }
 
+function checkLaunchPage() {
+  const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const required = [
+    ['demo-signal', 'hero product-signal overlay'],
+    ['Profile picked', 'hero profile signal copy'],
+    ['Fields matched', 'hero field signal copy'],
+    ['Ready to review', 'hero review signal copy'],
+    ['profiles stay in FillPro', 'clean privacy proof wording'],
+  ];
+  for (const [needle, label] of required) {
+    if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);
+  }
+}
+
 function checkCacheToken(files) {
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
   if (!sw.includes(CACHE_TOKEN)) fail('sw.js: missing current cache token');
@@ -286,6 +302,7 @@ checkStyles();
 checkSiteScript();
 checkPackageScripts();
 checkDemoGenerator();
+checkLaunchPage();
 checkCacheToken(files);
 checkIndexNowKey();
 
