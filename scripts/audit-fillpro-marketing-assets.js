@@ -99,6 +99,15 @@ function checkRenderer() {
     'fillpro-screenshot-profiles-1280x800.png',
     'fillpro-screenshot-privacy-1280x800.png',
     'fillpro-screenshot-undo-1280x800.png',
+    'Save it once. Fill the next form.',
+    'Less retyping on applications.',
+    'Built for messy forms.',
+    'No cloud profile account.',
+    'Undo before you submit.',
+    'careers.example/apply',
+    'app.example/trial',
+    'Upload matching',
+    'Report bad fills',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);

@@ -11,11 +11,11 @@ const logoSvgPath = path.join(assetsDir, 'fillpro-logo.svg');
 const outputMp4 = path.join(marketplaceDir, 'fillpro-store-demo-22s.mp4');
 const outputThumb = path.join(marketplaceDir, 'fillpro-store-demo-22s-thumb.png');
 const storeScreenshots = [
-  ['00:00:01', 'fillpro-screenshot-fill-page-1280x800.png'],
-  ['00:00:06', 'fillpro-screenshot-modern-forms-1280x800.png'],
-  ['00:00:09', 'fillpro-screenshot-profiles-1280x800.png'],
-  ['00:00:12', 'fillpro-screenshot-privacy-1280x800.png'],
-  ['00:00:19', 'fillpro-screenshot-undo-1280x800.png'],
+  ['00:00:11.5', 'fillpro-screenshot-fill-page-1280x800.png'],
+  ['00:00:14.2', 'fillpro-screenshot-modern-forms-1280x800.png'],
+  ['00:00:12.2', 'fillpro-screenshot-profiles-1280x800.png'],
+  ['00:00:17.0', 'fillpro-screenshot-privacy-1280x800.png'],
+  ['00:00:20.2', 'fillpro-screenshot-undo-1280x800.png'],
 ];
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
@@ -373,7 +373,7 @@ const html = `<!doctype html>
     </div>
   </section>
   <section class="browser" aria-hidden="true">
-    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url">partner.example/intake</span></div>
+    <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url" id="url">partner.example/intake</span></div>
     <div class="page">
       <h2 class="form-title" id="formTitle">Partner intake</h2>
       <div id="fields"></div>
@@ -395,12 +395,19 @@ const html = `<!doctype html>
   <div class="footer-line"><span>Chrome / Edge / Firefox</span><span>stealthyapps.com/fillpro</span></div>
 </main>
 <script>
-  const fieldSet = [
+  const applicationFields = [
     ['Full name', 'Alex Morgan'],
     ['Work email', 'alex@example.com'],
     ['Company', 'Stealthy Apps'],
     ['Resume upload', 'alex-morgan-resume.pdf'],
     ['Password', ''],
+  ];
+  const modernFields = [
+    ['Custom dropdown', 'Product operations'],
+    ['Contact choice', 'Email'],
+    ['Checkbox', 'Remote-friendly'],
+    ['Long answer', 'Available after two weeks.'],
+    ['Late field', 'Filled after it appeared'],
   ];
 
   function clamp(value, min, max) {
@@ -438,11 +445,40 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 4.3) return ['Private autofill', 'Save the profile once.', 'Fill the next long form without retyping the same details.'];
-    if (t < 10.8) return ['One click', 'Choose a profile. Fill the page.', 'Names, contact fields, company details, uploads, selects, checkboxes, and long answers.'];
-    if (t < 15.6) return ['Review first', 'See every change first.', 'FillPro fills repeated details while sign-in and payment fields stay untouched.'];
-    if (t < 19.2) return ['Built for trust', 'No cloud profile account.', 'Profiles, rules, and upload references stay in the extension unless you export them.'];
-    return ['Ready for release', 'Chrome, Edge, and Firefox.', 'Start free with three profiles. Upgrade only after the workflow saves time.'];
+    if (t < 11.8) return ['Private autofill', 'Save it once. Fill the next form.', 'Profile fields, uploads, and repeated details fill only when you ask.'];
+    if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from the same saved profile.'];
+    if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, checkboxes, long answers, and late fields get a cleaner pass.'];
+    if (t < 18.8) return ['Private by default', 'No cloud profile account.', 'Profiles, rules, and upload references stay in the extension unless you export them.'];
+    return ['Review and recover', 'Undo before you submit.', 'See what changed, back it out, or send a short report when a page needs a better rule.'];
+  }
+
+  function proofFor(t) {
+    if (t < 13.4) return ['Saved profiles', 'Upload matching', 'Sensitive fields skipped'];
+    if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
+    if (t < 18.8) return ['No cloud account', 'Current-page access', 'Export when needed'];
+    return ['Review first', 'Undo ready', 'Report bad fills'];
+  }
+
+  function formFor(t) {
+    if (t >= 13.4 && t < 15.8) {
+      return {
+        title: 'Modern signup',
+        url: 'app.example/trial',
+        fields: modernFields,
+      };
+    }
+    if (t >= 15.8) {
+      return {
+        title: 'Private fill review',
+        url: 'partner.example/review',
+        fields: applicationFields,
+      };
+    }
+    return {
+      title: 'Job application',
+      url: 'careers.example/apply',
+      fields: applicationFields,
+    };
   }
 
   function activeField(t) {
@@ -455,6 +491,7 @@ const html = `<!doctype html>
   }
 
   function filledCount(t) {
+    if (t >= 13.4 && t < 15.8) return 5;
     if (t < 5.6) return 0;
     if (t < 6.7) return 1;
     if (t < 7.8) return 2;
@@ -464,9 +501,10 @@ const html = `<!doctype html>
   }
 
   function renderFields(t) {
+    const form = formFor(t);
     const filled = filledCount(t);
     const active = activeField(t);
-    return fieldSet.map((field, index) => {
+    return form.fields.map((field, index) => {
       const [label, value] = field;
       const isPassword = label === 'Password';
       const hasValue = index < filled && !isPassword;
@@ -489,6 +527,10 @@ const html = `<!doctype html>
     document.getElementById('eyebrow').textContent = eyebrow;
     document.getElementById('headline').textContent = headline;
     document.getElementById('subline').textContent = subline;
+    document.getElementById('proof').innerHTML = proofFor(t).map((item) => '<span>' + item + '</span>').join('');
+    const form = formFor(t);
+    document.getElementById('formTitle').textContent = form.title;
+    document.getElementById('url').textContent = form.url;
     document.getElementById('fields').innerHTML = renderFields(t);
 
     const panel = document.getElementById('panel');
@@ -502,7 +544,8 @@ const html = `<!doctype html>
     fillButton.style.setProperty('--shine', shine.toFixed(1) + '%');
 
     const review = document.getElementById('review');
-    const reviewOpacity = t < 10.6 ? 0 : t < 11.8 ? smooth((t - 10.6) / 1.2) : 1;
+    const reviewWindow = (t >= 10.4 && t < 13.2) || t >= 18.8;
+    const reviewOpacity = !reviewWindow ? 0 : t < 11.6 ? smooth((t - 10.4) / 1.2) : 1;
     review.style.setProperty('--review-opacity', reviewOpacity.toFixed(3));
 
     const strip = document.getElementById('strip');
@@ -523,6 +566,11 @@ const html = `<!doctype html>
       document.getElementById('profileMeta').textContent = '3 profiles included';
       document.getElementById('fillButton').textContent = 'Start free';
       document.getElementById('undoButton').textContent = 'Review first';
+    } else if (t >= 13.4 && t < 15.8) {
+      document.getElementById('profileName').textContent = 'Trial profile';
+      document.getElementById('profileMeta').textContent = 'Dropdowns, choices, long answers';
+      document.getElementById('fillButton').textContent = 'Fill modern form';
+      document.getElementById('undoButton').textContent = 'Undo fill';
     } else {
       document.getElementById('profileName').textContent = 'Work profile';
       document.getElementById('profileMeta').textContent = '12 fields, 1 upload, 2 smart rules';
