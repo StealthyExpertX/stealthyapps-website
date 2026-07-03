@@ -498,7 +498,7 @@ const html = `<!doctype html>
     <div><strong>Undo ready</strong><span>Back out before submitting.</span></div>
   </div>
   <section class="payoff-card" id="payoff" aria-hidden="true">
-    <p class="payoff-title" id="payoffTitle">Blank form to review-ready.</p>
+    <p class="payoff-title" id="payoffTitle">Blank form. Review-ready.</p>
     <p class="payoff-detail" id="payoffDetail">Watch repeated details and uploads fill while sign-in fields stay alone.</p>
     <div class="payoff-stats" id="payoffStats">
       <span><strong>4</strong>fields</span>
@@ -566,16 +566,18 @@ const html = `<!doctype html>
     if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 13.2) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
-    if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay local to your browser unless you export them.'];
-    return ['Free starter', 'Start free with three profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
+    if (t < 16) return ['Private by default', 'No cloud profile account.', 'Saved profiles, rules, and upload references stay in your browser unless you export them.'];
+    if (t < 18.8) return ['You stay in control', 'Review or undo before submit.', 'FillPro helps with repeat fields. You decide when to submit.'];
+    return ['Free starter', 'Start free with three profiles.', 'Fill a long form, review every field, and upgrade only if you need more profiles.'];
   }
 
   function proofFor(t) {
     if (t < 4.8) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
     if (t < 10.2) return ['Review first', 'Sign-in untouched', 'Undo ready'];
     if (t < 13.2) return ['Dropdowns', 'Checkboxes', 'Late fields'];
-    if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
-    return ['3 profiles free', 'Review first', 'No account for core use'];
+    if (t < 16) return ['No cloud profile', 'Current page', 'Export when needed'];
+    if (t < 18.8) return ['Review first', 'Undo ready', 'Sign-in untouched'];
+    return ['3 profiles free', 'Review first', 'No cloud profile'];
   }
 
   function formFor(t) {
@@ -645,10 +647,13 @@ const html = `<!doctype html>
     if (t < 13.2) {
       return ['Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
-    if (t < 18.8) {
-      return ['No account for core filling.', 'Profiles, rules, and upload references stay local unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
+    if (t < 16) {
+      return ['No cloud profile account.', 'Saved profiles, rules, and upload references stay in your browser unless exported.', ['Local', 'profiles'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
-    return ['Start free. Keep control.', 'Three profiles are included. Core filling needs no account.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
+    if (t < 18.8) {
+      return ['Review or undo before submit.', 'FillPro handles repeat fields; you decide when to submit.', ['Review', 'first'], ['Undo', 'ready'], ['Sign-in', 'untouched']];
+    }
+    return ['Start free. Keep control.', 'Three profiles are included. No cloud profile is needed to fill forms.', ['3', 'free'], ['No cloud', 'profile'], ['Review', 'first']];
   }
 
   function renderFields(t) {

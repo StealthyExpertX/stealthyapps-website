@@ -24,16 +24,16 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
 | Website first viewport | 91/100 | Clear promise, demo proof, CTA, and browser links. It reads as polished indie SaaS, not top studio luxury. |
 | Website full-page craft | 88/100 | Responsive and consistent, but the lower sections repeat card grids and the heavy headline style becomes monotonous. |
-| Three.js hero scene | 84/100 | It renders, moves, and supports the product story. It is still subtle background craft, not a jaw-dropping 3D product centerpiece. |
+| Three.js hero scene | 87/100 | It renders, moves, supports reduced motion, and now shows profile-to-field transfer pulses along the fill paths. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
 | Public copy and anti-AI feel | 91/100 | Much tighter after removing framework jargon from public copy. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 88/100 | Clear, consistent, and technically clean. They still share the same staged browser-frame language and do not yet feel like a high-budget creative campaign. |
-| Store demo video | 88/100 | Recut into a better story arc: hook, fill, review, upload, autofill gaps, privacy, free starter. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
+| Store demo video | 91/100 | Recut into a cleaner story arc: hook, fill, review, upload, autofill gaps, privacy, user control, free starter. The repeated trust scene was removed and stiff "core filling" wording is blocked. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
 | Logo/icon system | 90/100 | The large F/check mark is clear and consistent. The 16px/32px optical exports are improved, but icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
 | Accessibility / reduced motion | 95/100 | Strong local checks and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
-| Marketing QA evidence | 94/100 | Contact sheets, visual baselines, codec checks, and renderer guards exist. Missing: external target-user critique and live A/B data. |
-| Overall market-facing quality | 89/100 | Submit-ready and much stronger than most extension sites, but not honestly 100. The main blockers are live data, richer creative direction, and a more premium 3D/visual system. |
+| Marketing QA evidence | 95/100 | Contact sheets, visual baselines, codec checks, renderer guards, and product-specific 3D source guards exist. Missing: external target-user critique and live A/B data. |
+| Overall market-facing quality | 90/100 | Submit-ready and much stronger than most extension sites, but not honestly 100. The main blockers are live data, richer creative direction, and a more premium 3D/visual system. |
 
 ## Improvements Made In This Pass
 
@@ -42,6 +42,9 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Sharpened the 16px and 32px toolbar icon exports with brighter gradients and a simpler F geometry.
 - Regenerated the MP4, thumbnail, icon PNGs, screenshots, review sheets, and visual baseline.
 - Kept public product copy in buyer language instead of framework or ARIA language.
+- Added visible product-specific profile-to-field pulses to the WebGL hero so the motion explains FillPro instead of acting as generic decoration.
+- Split the store-video trust segment into two clearer beats: no cloud profile account, then review/undo before submit.
+- Added guards against the old "core filling" phrase and the awkward "form leaves the page" line.
 
 ## What Blocks A Real 100
 

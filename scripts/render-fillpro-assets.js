@@ -617,7 +617,7 @@ function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile
     ? `<div class="promo-copy">
         <div class="promo-kicker">Private autofill</div>
         <h1 class="promo-head">Fill repeat forms without handing over your data.</h1>
-        <div class="promo-proof"><span>3 profiles free</span><span>No account for core fill</span><span>Review before submit</span></div>
+        <div class="promo-proof"><span>3 profiles free</span><span>No cloud profile</span><span>Review before submit</span></div>
       </div>`
     : '';
   return `
@@ -719,12 +719,12 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
-      <div><h1>No account for core filling.</h1><p class="sub">Profiles, rules, and upload references stay local to your browser unless you export them.</p></div>
+      <div><h1>No cloud profile account.</h1><p class="sub">Saved profiles, rules, and upload references stay in your browser unless you export them.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
           <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay local.</span></div>
           <div class="privacy-card"><strong>Current-page action</strong><span>FillPro runs when you ask on the page you chose.</span></div>
-          <div class="privacy-card"><strong>Review before submit</strong><span>You decide when the form leaves the page.</span></div>
+          <div class="privacy-card"><strong>Review before submit</strong><span>You decide when to submit.</span></div>
         </div>
         <div class="privacy-ledger">
           <h2>What FillPro leaves alone</h2>

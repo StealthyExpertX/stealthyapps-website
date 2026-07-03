@@ -244,6 +244,8 @@ function checkHeroScene() {
     [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
     [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
     [heroScript, 'flowLines', 'hero scene should include profile-to-field flow lines'],
+    [heroScript, 'flowPulses', 'hero scene should include visible profile-to-field transfer pulses'],
+    [heroScript, 'curve.getPoint(progress)', 'hero transfer pulses should travel along the form-fill paths'],
     [heroScript, 'uploadChip', 'hero scene should include upload matching geometry'],
     [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
     [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
@@ -288,7 +290,7 @@ function checkLaunchPage() {
     ['Ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
-    ['No account for the core fill flow', 'clean privacy proof wording'],
+    ['No cloud profile account', 'clean privacy proof wording'],
     ['What to know before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {

@@ -247,7 +247,7 @@ function checkRenderer() {
     'payoff-card',
     'motion-rail',
     'Mute-safe captions',
-    'Blank form to review-ready.',
+    'Blank form. Review-ready.',
     'Save once. Fill the next long form.',
     'Pick a profile. Check every field before you submit.',
     'Fields fill while you watch.',
@@ -255,14 +255,16 @@ function checkRenderer() {
     'Sign-ins stay with your password manager.',
     'Applications with uploads.',
     'Fills what autofill misses.',
-    'No account for core filling.',
+    'No cloud profile account.',
+    'Review or undo before submit.',
+    'You decide when to submit.',
     'Start free with three profiles.',
     'Sign-in untouched',
     'careers.example/apply',
     'app.example/trial',
     'Upload matched',
     'Review before submit',
-    'No account for core use',
+    'No cloud profile',
     'Use your password manager',
   ];
   for (const needle of required) {
@@ -286,8 +288,14 @@ function checkRenderer() {
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);
   }
+  if (/core filling|core use/i.test(source)) {
+    fail(`${relativePath}: video should avoid stiff "core filling" account phrasing`);
+  }
   if (/Review everything before submit/i.test(source)) {
     fail(`${relativePath}: first-frame copy should use natural review phrasing`);
+  }
+  if (/form leaves the page/i.test(source)) {
+    fail(`${relativePath}: video should use plain submit language`);
   }
   if (/Less retyping on applications|Works on the messy forms too|Messy forms are part of the job|Start with three saved profiles/i.test(source)) {
     fail(`${relativePath}: video captions should stay specific and current`);
@@ -317,6 +325,7 @@ function checkStillRenderer() {
     'Fills what autofill misses.',
     'Undo the last fill before you submit.',
     'Fill repeat forms without handing over your data.',
+    'No cloud profile account.',
     'brandPromo',
     'promo-row',
     'alex-morgan.pdf',
@@ -330,6 +339,12 @@ function checkStillRenderer() {
   }
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first screenshot copy should not use stiff repeated-fields phrasing`);
+  }
+  if (/core filling|core fill|core use/i.test(source)) {
+    fail(`${relativePath}: still screenshots should avoid stiff "core" account phrasing`);
+  }
+  if (/form leaves the page/i.test(source)) {
+    fail(`${relativePath}: still screenshots should use plain submit language`);
   }
   if (/Review everything before submit/i.test(source)) {
     fail(`${relativePath}: first screenshot copy should use natural review phrasing`);

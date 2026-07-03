@@ -40,12 +40,12 @@
     },
     {
       "file": "assets/marketplace/fillpro-marquee-1400x560.png",
-      "bytes": 505015,
-      "sha256": "cfed8792c0491d596eceb347f3fd9c2ea58efcb4939abfddb5ad565b9b6e11cc",
+      "bytes": 504896,
+      "sha256": "202a934b0f34ca5867c673c8e32fb24799247a98a56d0ceba094a7baa7fe464e",
       "width": 1400,
       "height": 560,
-      "meanLuma": 115.08,
-      "meanColorSpread": 62.94
+      "meanLuma": 114.94,
+      "meanColorSpread": 62.9
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-fill-page-1280x800.png",
@@ -76,12 +76,12 @@
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-privacy-1280x800.png",
-      "bytes": 336850,
-      "sha256": "54b744210fc7d2be27504ae8e4190cdc0af68741b41692e47c21d90ab1e3987c",
+      "bytes": 335900,
+      "sha256": "a270aa29ce63d00759602766b8621e40e0ad1e5c26005632b71cbaa79cb8c7d4",
       "width": 1280,
       "height": 800,
-      "meanLuma": 43.8,
-      "meanColorSpread": 14.75
+      "meanLuma": 43.63,
+      "meanColorSpread": 14.76
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-undo-1280x800.png",
@@ -103,8 +103,8 @@
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s.mp4",
-      "bytes": 992972,
-      "sha256": "40bf27178dcb882d81bab4ecc60c16b6c253f006ffa2b4c2fab72e93adcd84d4"
+      "bytes": 1024216,
+      "sha256": "6b06e9b4d81ef76a843942cd1726267ae8597c0a44875aa8f2608233e5f0edd3"
     },
     {
       "file": "../fillpro/icons/icon16.png",

@@ -45,7 +45,7 @@ FillPro is strongest when structured profile data has to move across many unrela
 
 ## Privacy and control
 
-FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing. Fill Page uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from FillPro settings.
 

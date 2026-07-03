@@ -164,18 +164,53 @@ import * as THREE from './vendor/three.module.min.js';
   uploadLine.position.set(-0.08, -1.32, 0.33);
   group.add(uploadLine);
 
-  const flowLines = [
+  const flowCurves = [
     [new THREE.Vector3(1.54, 0.62, 0.32), new THREE.Vector3(0.72, 0.86, 0.34), new THREE.Vector3(-0.06, 1.02, 0.34)],
     [new THREE.Vector3(1.54, 0.2, 0.32), new THREE.Vector3(0.56, 0.14, 0.36), new THREE.Vector3(-0.06, 0.32, 0.36)],
     [new THREE.Vector3(1.54, -0.58, 0.32), new THREE.Vector3(0.58, -0.92, 0.36), new THREE.Vector3(-0.02, -1.3, 0.36)],
-  ].map((points, index) => {
+  ].map((points) => new THREE.CatmullRomCurve3(points));
+
+  const flowLines = flowCurves.map((curve, index) => {
     const line = new THREE.Mesh(
-      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 32, 0.014, 8, false),
+      new THREE.TubeGeometry(curve, 32, 0.014, 8, false),
       materialFlow.clone(),
     );
     line.material.opacity = 0.22 + index * 0.05;
     group.add(line);
     return line;
+  });
+
+  const pulseGeometry = new THREE.SphereGeometry(0.064, 14, 14);
+  const pulseGlowGeometry = new THREE.SphereGeometry(0.105, 14, 14);
+  const flowPulses = flowCurves.map((curve, index) => {
+    const pulseGroup = new THREE.Group();
+    const pulse = new THREE.Mesh(
+      pulseGeometry,
+      new THREE.MeshBasicMaterial({
+        color: index === 2 ? 0xf0c86b : 0x9ffcf0,
+        transparent: true,
+        opacity: 0.84,
+      }),
+    );
+    const glow = new THREE.Mesh(
+      pulseGlowGeometry,
+      new THREE.MeshBasicMaterial({
+        color: index === 2 ? 0xf0c86b : 0x4af4df,
+        transparent: true,
+        opacity: 0.18,
+        depthWrite: false,
+      }),
+    );
+    pulseGroup.add(glow, pulse);
+    pulseGroup.userData = {
+      curve,
+      offset: index * 0.27,
+      speed: 0.17 + index * 0.035,
+      glow,
+      pulse,
+    };
+    group.add(pulseGroup);
+    return pulseGroup;
   });
 
   const checkPath = new THREE.CatmullRomCurve3([
@@ -271,6 +306,14 @@ import * as THREE from './vendor/three.module.min.js';
 
     flowLines.forEach((line, index) => {
       line.material.opacity = 0.22 + Math.sin(seconds * 1.05 + index * 0.8) * 0.08;
+    });
+
+    flowPulses.forEach((pulse, index) => {
+      const progress = (seconds * pulse.userData.speed + pulse.userData.offset) % 1;
+      pulse.position.copy(pulse.userData.curve.getPoint(progress));
+      pulse.userData.pulse.material.opacity = 0.62 + Math.sin(seconds * 1.8 + index) * 0.18;
+      pulse.userData.glow.material.opacity = 0.16 + Math.sin(seconds * 1.8 + index) * 0.05;
+      pulse.scale.setScalar(0.9 + Math.sin(seconds * 2.2 + index) * 0.14);
     });
 
     for (let index = 0; index < particleOffsets.length; index += 1) {
