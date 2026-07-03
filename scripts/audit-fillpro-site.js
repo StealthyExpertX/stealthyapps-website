@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v38';
+const CACHE_TOKEN = 'fillpro-launch-v39';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -195,6 +195,11 @@ function checkStyles() {
     ['--launch-icon-bg', 'launch feature icon surface token'],
     ['body.fillpro-launch .browser-mark-chrome', 'dark launch browser badge override'],
     ['body.fillpro-launch .launch-card-icon', 'dark launch card icon override'],
+    ['.launch-review-rail', 'review-before-submit product proof section'],
+    ['reviewCardSweep 7.2s', 'review rail motion timing'],
+    ['.review-frame-actions button', 'review rail action affordances'],
+    ['scroll-padding-top: 104px', 'desktop sticky-header anchor offset'],
+    ['scroll-padding-top: 146px', 'mobile sticky-header anchor offset'],
   ];
   for (const [needle, label] of required) {
     if (!css.includes(needle)) fail(`styles.css: missing ${label}`);
@@ -291,6 +296,8 @@ function checkLaunchPage() {
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
     ['No cloud profile account', 'clean privacy proof wording'],
+    ['Check the fill before you send.', 'review-before-submit proof section'],
+    ['Undo snapshot saved', 'review/undo product proof copy'],
     ['What to know before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {

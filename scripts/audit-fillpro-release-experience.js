@@ -175,6 +175,34 @@ async function auditPage(page, route, viewport, theme, errors) {
     } catch (error) {
       errors.push(`${route}: hero 3D canvas check failed on ${viewport.name}/${theme}: ${error.message}`);
     }
+
+    try {
+      const reviewRail = page.locator('.launch-review-rail');
+      await reviewRail.scrollIntoViewIfNeeded();
+      await page.evaluate(() => {
+        const rail = document.querySelector('.launch-review-rail');
+        if (!rail) return;
+        const header = document.querySelector('.launch-header');
+        const headerHeight = header ? header.getBoundingClientRect().height : 0;
+        const top = rail.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+        window.scrollTo(0, Math.max(0, top));
+      });
+      await page.waitForTimeout(80);
+      const reviewPath = path.join(OUT_DIR, `review-rail-${viewport.name}-${theme}.png`);
+      await reviewRail.screenshot({ path: reviewPath });
+      const reviewStats = await sharp(reviewPath).stats();
+      const reviewAlphaMean = reviewStats.channels[3] ? reviewStats.channels[3].mean : 255;
+      const reviewColorDeviation = reviewStats.channels
+        .slice(0, 3)
+        .reduce((sum, channel) => sum + channel.stdev, 0);
+      if (reviewAlphaMean < 0.5 || reviewColorDeviation < 18) {
+        errors.push(
+          `${route}: review-before-submit section appears blank on ${viewport.name}/${theme} (${reviewColorDeviation.toFixed(2)})`,
+        );
+      }
+    } catch (error) {
+      errors.push(`${route}: review-before-submit section check failed on ${viewport.name}/${theme}: ${error.message}`);
+    }
   }
 
   const report = await page.evaluate(() => {
@@ -298,6 +326,34 @@ async function auditHeroSceneMotion(browser, origin, errors) {
     const meanDiff = await imageMeanDifference(before, after);
     if (meanDiff < 0.35) {
       errors.push(`/fillpro/: hero 3D scene did not show enough motion/interaction difference (${meanDiff.toFixed(3)})`);
+    }
+
+    const reviewRail = page.locator('.launch-review-rail');
+    await reviewRail.scrollIntoViewIfNeeded();
+    await page.evaluate(() => {
+      const rail = document.querySelector('.launch-review-rail');
+      if (!rail) return;
+      const header = document.querySelector('.launch-header');
+      const headerHeight = header ? header.getBoundingClientRect().height : 0;
+      const top = rail.getBoundingClientRect().top + window.scrollY - headerHeight - 24;
+      window.scrollTo(0, Math.max(0, top));
+    });
+    await page.waitForFunction(() => {
+      const rail = document.querySelector('.launch-review-rail');
+      if (!rail) return false;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+      if (!document.documentElement.classList.contains('reveal-ready')) return false;
+      return rail.classList.contains('is-visible') || Number.parseFloat(getComputedStyle(rail).opacity) > 0.98;
+    });
+    await page.waitForTimeout(700);
+    const reviewPath = path.join(OUT_DIR, 'review-rail-motion-light.png');
+    await reviewRail.screenshot({ path: reviewPath });
+    const reviewStats = await sharp(reviewPath).stats();
+    const reviewColorDeviation = reviewStats.channels
+      .slice(0, 3)
+      .reduce((sum, channel) => sum + channel.stdev, 0);
+    if (reviewColorDeviation < 18) {
+      errors.push(`/fillpro/: review-before-submit reveal capture appears blank (${reviewColorDeviation.toFixed(2)})`);
     }
   } catch (error) {
     errors.push(`/fillpro/: hero 3D motion audit failed: ${error.message}`);

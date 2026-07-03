@@ -22,10 +22,10 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Automated local release gate | 100/100 | The repeatable gate passes: extension tests, popup UI captures, fill-engine tests, 1009 corpus fixtures, site checks, marketing asset audit, visual baselines, and zip audit. |
 | Extension functional readiness | 96/100 | Strong for v1.0.0. Remaining risk is real-world browser/profile diversity and pages with hostile frames, anti-bot, or unusual enterprise controls. |
 | Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
-| Website first viewport | 91/100 | Clear promise, demo proof, CTA, and browser links. It reads as polished indie SaaS, not top studio luxury. |
-| Website full-page craft | 88/100 | Responsive and consistent, but the lower sections repeat card grids and the heavy headline style becomes monotonous. |
+| Website first viewport | 92/100 | Clear promise, demo proof, CTA, and browser links. It reads as polished indie SaaS, with better section landings and less sticky-header risk after this pass. |
+| Website full-page craft | 91/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface. Remaining gap is still top-studio creative art direction and live preference testing. |
 | Three.js hero scene | 87/100 | It renders, moves, supports reduced motion, and now shows profile-to-field transfer pulses along the fill paths. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
-| Public copy and anti-AI feel | 91/100 | Much tighter after removing framework jargon from public copy. Some sections are still very orderly and can feel engineered instead of lived-in. |
+| Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 91/100 | Clear, consistent, and technically clean. Screenshot 5 now has a distinct dark review/undo composition instead of repeating the first light browser-frame layout. The set is stronger, but still not a live-tested high-budget creative campaign. |
 | Store demo video | 91/100 | Recut into a cleaner story arc: hook, fill, review, upload, autofill gaps, privacy, user control, free starter. The repeated trust scene was removed and stiff "core filling" wording is blocked. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
 | Logo/icon system | 90/100 | The large F/check mark is clear and consistent. The 16px/32px optical exports are improved, but icon CTR is not proven and alternate concepts have not been tested. |
@@ -33,7 +33,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Accessibility / reduced motion | 95/100 | Strong local checks and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
 | Marketing QA evidence | 95/100 | Contact sheets, visual baselines, codec checks, renderer guards, and product-specific 3D source guards exist. Missing: external target-user critique and live A/B data. |
-| Overall market-facing quality | 90/100 | Submit-ready and much stronger than most extension sites, but not honestly 100. The main blockers are live data, richer creative direction, and a more premium 3D/visual system. |
+| Overall market-facing quality | 91/100 | Submit-ready and much stronger than most extension sites, with stronger below-fold product proof. It is still not honestly 100 without live CTR, retention, review, paid-conversion, and external critique data. |
 
 ## Improvements Made In This Pass
 
@@ -47,6 +47,10 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added guards against the old "core filling" phrase and the awkward "form leaves the page" line.
 - Rebuilt the undo/review marketplace screenshot into a darker, distinct control frame with the full Undo action visible.
 - Replaced technical modern-form chips like "Radios" and "Same-page sections" with buyer-facing field language.
+- Added a review-before-submit website section that breaks the repeated card-grid rhythm with a concrete product surface: changed fields, upload match, skipped password, undo snapshot, and final review action.
+- Added focused light/dark desktop/mobile screenshots and nonblank pixel checks for the review-before-submit section.
+- Fixed the proof-section mini browser dots so they no longer crowd the sample URL.
+- Added sticky-header scroll padding and section scroll margins so product sections land cleanly on mobile and desktop.
 
 ## What Blocks A Real 100
 
