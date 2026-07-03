@@ -20,9 +20,9 @@ FillPro keeps reusable profiles inside the extension. The normal Fill Page actio
 
 Saved profiles make FillPro useful before an account, team workspace, or sync setup. You can keep separate profiles for work, personal admin, clients, vendors, or QA users.
 
-## Useful on messy forms
+## Fills what autofill misses
 
-FillPro handles modern form controls such as dropdowns, checkboxes, radios, textareas, segmented phones, split birthdays, Shadow DOM, same-origin frames, and Google Forms-style controls when they are reachable.
+FillPro checks dropdowns, checkboxes, radios, textareas, upload fields, segmented phones, split birthdays, embedded same-page sections, and fields that appear after the page loads when they are reachable.
 
 ## Works beside trusted tools
 

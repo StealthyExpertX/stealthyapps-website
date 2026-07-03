@@ -254,7 +254,7 @@ function checkRenderer() {
     'Review before submit.',
     'Sign-ins stay with your password manager.',
     'Applications with uploads.',
-    'Messy forms are part of the job.',
+    'Fills what autofill misses.',
     'No account for core filling.',
     'Start free with three profiles.',
     'Sign-in untouched',
@@ -289,7 +289,7 @@ function checkRenderer() {
   if (/Review everything before submit/i.test(source)) {
     fail(`${relativePath}: first-frame copy should use natural review phrasing`);
   }
-  if (/Less retyping on applications|Works on the messy forms too|Start with three saved profiles/i.test(source)) {
+  if (/Less retyping on applications|Works on the messy forms too|Messy forms are part of the job|Start with three saved profiles/i.test(source)) {
     fail(`${relativePath}: video captions should stay specific and current`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
@@ -314,7 +314,7 @@ function checkStillRenderer() {
     'Save once. Fill the next long form.',
     'Pick a profile. Check every field before you submit.',
     'Keep each repeat job separate.',
-    'Messy forms are part of the job.',
+    'Fills what autofill misses.',
     'Undo the last fill before you submit.',
     'Fill repeat forms without handing over your data.',
     'brandPromo',
@@ -337,8 +337,11 @@ function checkStillRenderer() {
   if (/Fill repeated forms faster\./.test(source)) {
     fail(`${relativePath}: small promo should be brand-forward, not a text-heavy mini ad`);
   }
-  if (/real workflows|Clean fallback/i.test(source)) {
+  if (/real workflows|Clean fallback|Messy forms are part of the job/i.test(source)) {
     fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
+  }
+  if (/Google Forms-style|ARIA radios|ARIA checkboxes|React inputs|Vue fields|Angular forms|Shadow DOM/i.test(source)) {
+    fail(`${relativePath}: store screenshots should use buyer-facing field language, not framework jargon or third-party product phrasing`);
   }
   if (/promo-line/i.test(source)) {
     fail(`${relativePath}: promo tiles should use concrete product rows, not generic bars`);

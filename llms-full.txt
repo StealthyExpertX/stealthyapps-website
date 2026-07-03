@@ -2,7 +2,7 @@
 
 Use this file when a crawler, search assistant, or retrieval index needs the current FillPro product facts in one document.
 
-Last updated: 2026-06-14
+Last updated: 2026-07-03
 
 ## Product Summary
 
@@ -24,7 +24,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
 - Field-learning suggestions.
-- Support for React, Vue, Angular, custom elements, Shadow DOM, same-origin iframes, comboboxes, custom selects, ARIA radios and checkboxes, Google Forms-style controls, textareas, segmented phone fields, split birthdays, country/state/month aliases, middle names, pronouns, and multilingual contact labels.
+- Support for the form pieces browser autofill often misses: dropdowns, custom selects, comboboxes, radio groups, checkboxes, textareas, upload fields, segmented phone fields, split birthdays, country/state/month aliases, middle names, pronouns, multilingual contact labels, embedded same-page sections, and fields that appear after the page loads.
 
 ## Best Fit
 

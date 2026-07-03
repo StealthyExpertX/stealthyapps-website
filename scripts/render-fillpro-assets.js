@@ -686,27 +686,26 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
-      <div><h1>Messy forms are part of the job.</h1><p class="sub">Dropdowns, checkboxes, modals, uploads, and late fields get handled in one pass.</p></div>
+      <div><h1>Fills what autofill misses.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear late can still match from one profile.</p></div>
       ${chromeFrame('forms.example/team-intake', `
         <div class="grid2">
           <div class="form">
-            <h2>Google Forms-style page</h2>
+            <h2>Team intake form</h2>
             ${field('Full name', 'Alex Morgan')}
-            ${field('Work email', 'alex@example.com')}
             ${field('Preferred contact', 'Email')}
-            ${field('Product updates', 'Checked')}
+            ${field('Resume upload', 'alex-morgan.pdf')}
           </div>
           <div class="panel">
-            <h2>Covered patterns</h2>
+            <h2>Fields FillPro checks</h2>
             <div class="chips">
-              <span class="chip">ARIA radios</span>
-              <span class="chip">ARIA checkboxes</span>
-              <span class="chip">React inputs</span>
-              <span class="chip">Vue fields</span>
-              <span class="chip">Angular forms</span>
-              <span class="chip">Shadow DOM</span>
-              <span class="chip">Same-origin frames</span>
+              <span class="chip">Dropdowns</span>
+              <span class="chip">Checkboxes</span>
+              <span class="chip">Radios</span>
+              <span class="chip">Text areas</span>
               <span class="chip">File uploads</span>
+              <span class="chip">Late fields</span>
+              <span class="chip">Nearby labels</span>
+              <span class="chip">Same-page sections</span>
             </div>
           </div>
         </div>`)}

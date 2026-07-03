@@ -70,7 +70,7 @@ These are the categories that can be proven locally before store traffic exists.
 | Website conversion clarity | 96/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Mobile now reaches the product demo sooner, the page leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 97/100 | The first-run popup is focused, the preview appears sooner, dark-mode secondary actions no longer read as disabled, and light/dark/editor captures are repeatable. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 94/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use brighter F-only optical variants while 48+ keep the check badge. SVG parity, source safety, dimensions, edge padding, coverage, luma, and color spread are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
-| Store screenshots | 88/100 | Releaseable and clearer after this pass: promo tiles now show concrete product rows instead of generic bars, and the first three screenshots carry the product job, messy-form support, and profile organization. Remaining gap: the set still shares a similar staged visual language and has no store A/B evidence. |
+| Store screenshots | 90/100 | Releaseable and clearer after this pass: promo tiles show concrete product rows, the first three screenshots carry the product job, messy-form support, and profile organization, and screenshot 2 now uses buyer-facing field proof instead of framework jargon or third-party phrasing. Remaining gap: the set still shares a staged visual language and has no store A/B evidence. |
 | Store demo video | 92/100 | The 22-second muted MP4 reaches visible fill value near the two-second mark, uses a 2.4s action poster frame, uses calmer sign-in boundary copy, covers uploads and messy forms, and ends on a free-starter CTA. Remaining gap: it is still a generated product demo, not a live CTR-tested trailer with measured first-three-second retention. |
 | ASO/store metadata | 94/100 | Natural keyword coverage, 22 locales, narrow permission claims, accurate privacy language, and cleaner crawler text. Remaining gap is post-approval keyword/rank feedback. |
 | Competitive positioning | 92/100 | Stronger privacy/trust discipline than FormFiller and Fill Hero pages reviewed, with less overclaim risk. Remaining gap is store proof: installs, reviews, and retention. |
@@ -118,7 +118,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Replaced technical modern-form copy with more user-facing language and added audit guards against the old stiff first-frame phrasing.
 - Replaced the generic “real workflows” profile screenshot with “Keep each repeat job separate.”
 - Replaced “Fast fill. Clean fallback.” with a concrete undo promise: “Undo the last fill before you submit.”
-- Replaced “Works on the messy forms too” with “Messy forms are part of the job” across stills and video.
+- Replaced the older messy-form caption with the sharper “Fills what autofill misses” story across stills and video.
 - Rebuilt the marquee tile into a real benefit frame: “Fill repeat forms without handing over your data,” with short proof chips.
 - Recut the video middle so it reaches “Fields fill while you watch” earlier and no longer repeats the opening promise for half the runtime.
 - Faded the final payoff card out of the video close so the last frame lands on one clean free-starter CTA.
@@ -130,6 +130,9 @@ These are the categories that can be proven locally before store traffic exists.
 - Tightened the extension empty-state popup spacing so the product preview appears sooner after opening.
 - Reworked dark-mode profile secondary buttons so Edit, Duplicate, Default, and Delete read as active controls instead of disabled grey blocks.
 - Sharpened the generated 16px and 32px toolbar monogram icons with brighter color and larger F geometry, then regenerated the icon review sheet and visual baseline.
+- Reworked the modern-forms marketplace screenshot from framework/third-party language into plain field proof: dropdowns, checkboxes, radios, text areas, file uploads, late fields, nearby labels, and same-page sections.
+- Added a renderer guard so third-party form-builder phrasing, framework names, and ARIA jargon cannot return to the store screenshots unnoticed.
+- Reworded public product-page schema, local-autofill copy, and crawler summaries away from framework jargon and toward buyer-facing field support language: “Fills what autofill misses.”
 
 ## Why This Is Not Scored 100 In Every Market Category
 

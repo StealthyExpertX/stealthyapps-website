@@ -6,7 +6,7 @@ Website and canonical product page: https://stealthyapps.com/fillpro/
 Privacy: https://stealthyapps.com/fillpro/privacy/
 Support: https://stealthyapps.com/support/
 Contact: https://stealthyapps.com/contact/
-Last updated: 2026-06-14
+Last updated: 2026-07-03
 
 ## Product Facts
 
@@ -25,7 +25,7 @@ FillPro fills repeated web forms from profiles saved by the extension in the bro
 
 ## What It Handles
 
-FillPro supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, import/export for Pro users, and modern web forms built with React, Vue, Angular, Shadow DOM, same-origin frames, custom selects, comboboxes, segmented phone fields, split birthdays, ARIA radios and checkboxes, Google Forms-style controls, and textareas.
+FillPro supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, import/export for Pro users, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
 
 ## Privacy Boundary
 

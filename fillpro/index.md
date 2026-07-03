@@ -9,7 +9,7 @@ FillPro is a browser extension from Stealthy Apps for people who keep seeing the
 - Free tier: three saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required
-- Last updated: 2026-06-14
+- Last updated: 2026-07-03
 
 ## Where FillPro fits
 
@@ -31,7 +31,7 @@ Focused pages:
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
 - Undo last fill.
 - Import, export, and profile duplication for Pro users.
-- Support for React, Vue, Angular, Shadow DOM, same-origin frames, comboboxes, selects, ARIA radios and checkboxes, Google Forms-style controls, textareas, split birthdays, segmented phones, country/state/month aliases, and multilingual contact labels.
+- Support for the form pieces browser autofill often misses: dropdowns, custom selects, comboboxes, radio groups, checkboxes, textareas, upload fields, split birthdays, segmented phones, country/state/month aliases, multilingual contact labels, embedded same-page sections, and fields that appear after the page loads.
 
 ## Competitive fit
 

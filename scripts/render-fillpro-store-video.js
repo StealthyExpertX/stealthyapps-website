@@ -565,7 +565,7 @@ const html = `<!doctype html>
     if (t < 8.2) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
     if (t < 11.8) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 13.4) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
-    if (t < 15.8) return ['Modern forms', 'Messy forms are part of the job.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
+    if (t < 15.8) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
     if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay local to your browser unless you export them.'];
     return ['Free starter', 'Start free with three profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
@@ -643,7 +643,7 @@ const html = `<!doctype html>
       return ['Applications with uploads.', 'Name, email, company, and resume upload match from one profile.', ['Name', 'filled'], ['Resume', 'matched'], ['Sign-in', 'skipped']];
     }
     if (t < 15.8) {
-      return ['Messy forms are part of the job.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
+      return ['Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 18.8) {
       return ['No account for core filling.', 'Profiles, rules, and upload references stay local unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
