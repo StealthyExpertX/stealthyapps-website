@@ -633,7 +633,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
-      <div><h1>Profiles stay in FillPro.</h1><p class="sub">No account is needed for the core workflow. You choose when to export, upgrade, or contact support.</p></div>
+      <div><h1>No account for core filling.</h1><p class="sub">Profiles, rules, and upload references stay in the extension unless you export them.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
           <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>

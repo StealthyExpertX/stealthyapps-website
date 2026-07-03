@@ -6,7 +6,7 @@ Last updated: 2026-06-14
 
 ## Product Summary
 
-FillPro is a private browser form autofill extension from Stealthy Apps. It saves reusable profiles inside FillPro and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
+FillPro is a private browser form autofill extension from Stealthy Apps. It saves reusable profiles in the extension and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
 
 Current version: 1.0.0.
 
@@ -14,7 +14,7 @@ Canonical product page: https://stealthyapps.com/fillpro/
 
 ## Core Features
 
-- Profiles saved inside FillPro.
+- Profiles saved by the extension in the browser.
 - Three saved profiles on the free plan.
 - On-page profile picker.
 - Fill Page action.
@@ -56,7 +56,7 @@ FillPro is designed for structured profile data across many unrelated web forms.
 
 ## Privacy
 
-FillPro does not run a cloud profile account for form values. Saved profiles, custom fields, rules, and upload matches stay inside FillPro unless the user exports them, contacts support, or chooses Pro billing.
+FillPro does not run a cloud profile account for form values. Saved profiles, custom fields, rules, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing.
 
 License status is handled by ExtensionPay and Stripe. Support messages live in email systems and can be deleted on request.
 

@@ -15,13 +15,19 @@ const STALE_COPY = [
   'local profiles',
   'local data',
   'profile data on your device',
+  'saved inside the browser extension',
   'Chrome extension storage',
   'app.vendorportal.example',
   'vendorportal.example',
   'Questions people ask',
   'Plain answers',
+  'Direct answers before install',
   '>Demo<',
   'See it fill a form',
+  'profiles stay in FillPro',
+  'Profiles stay in FillPro',
+  'No surprise submit',
+  'Advanced repeat-use workflows',
   '/apps/fillpro/',
   '/apps/fillpro/privacy',
 ];
@@ -278,7 +284,10 @@ function checkLaunchPage() {
     ['Profile picked', 'hero profile signal copy'],
     ['Fields matched', 'hero field signal copy'],
     ['Ready to review', 'hero review signal copy'],
-    ['profiles stay in FillPro', 'clean privacy proof wording'],
+    ['Stop retyping the same form details.', 'human first-view headline'],
+    ['Start free', 'low-friction primary CTA'],
+    ['No account for the core fill flow', 'clean privacy proof wording'],
+    ['What to know before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);

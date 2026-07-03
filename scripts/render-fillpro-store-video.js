@@ -562,7 +562,7 @@ const html = `<!doctype html>
     if (t < 11.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
     if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 15.8) return ['Modern forms', 'Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
-    if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
+    if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay in the extension unless you export them.'];
     return ['Free starter', 'Start with three saved profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
 
@@ -641,7 +641,7 @@ const html = `<!doctype html>
       return ['Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 18.8) {
-      return ['Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
+      return ['No account for core filling.', 'Profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
     return ['Start free. Keep control.', 'Three profiles are included. Core filling needs no account.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
   }

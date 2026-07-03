@@ -17,6 +17,7 @@ This scorecard separates deterministic release readiness from market-facing crea
 Sources checked during this pass:
 
 - Chrome Web Store image guidance for screenshots and store assets
+- AppTweak 2025 screenshot guidance: first screenshots, short benefit captions, visible UI proof, dark-mode/localized variants, and A/B testing matter most.
 - AppScreens, App Store Screenshot Optimization Playbook for 2026
 - AppScreenshotStudio, First Three App Store Screenshots
 - Adapty, App Icon Design: Sizes and Specs
@@ -28,6 +29,10 @@ Sources checked during this pass:
 - Playwright best practices for controlled visual regression
 - Nielsen Norman Group research on concise, scannable, objective web copy
 - Baymard research on clear interactive states and low-friction hit areas
+- WCAG 2.2 contrast/focus/target expectations
+- Firefox Extension Workshop guidance on privacy consent and user trust
+- Exstats 2026 extension-launch benchmarks for realistic early install/review expectations
+- Reddit/r/AppStoreOptimization and r/chrome_extensions practitioner notes emphasizing screenshot conversion, narrow positioning, and store page view-to-install rate
 
 ## Current Scores After This Pass
 
@@ -38,15 +43,15 @@ Sources checked during this pass:
 | Extension technical QA | 100/100 | Serialization, payment states, release audit, fill engine, uploads, privacy boundaries, and package checks pass locally. |
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
 | QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, and popup UI state captures. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
-| Website visual craft | 92/100 | Clean, trustworthy, and above most extension sites. The first-viewport demo frame now has stronger depth and glass polish, but it is still more restrained product site than top-tier 3D agency launch. |
-| Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
+| Website visual craft | 94/100 | Clean, trustworthy, and above most extension sites. The first viewport now has a sharper human headline, clearer Start free CTA, better browser-link affordances, stronger dark/light consistency, and rendered proof. Remaining gap is live user preference data against alternate hero treatments. |
+| Website conversion clarity | 94/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. The page now leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 92/100 | The popup now keeps first-run focused on profile creation, tucks lower-frequency tools behind a drawer, and has repeatable light/dark/editor visual captures. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 91/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity and generated icon dimensions are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
-| Store screenshots | 90/100 | The first screenshot now uses a simpler user job: “Save once. Fill the next long form.” Screenshot 2 has less internal implementation language. Still generated product-frame creative rather than live-tested best-in-class store art. |
-| Store demo video | 90/100 | The opening frame now reads at thumbnail scale and the modern-form segment is less technical. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
-| ASO/store metadata | 91/100 | Natural keyword coverage, 22 locales, narrow permission claims, and accurate privacy language. Remaining gap is post-approval keyword/rank feedback. |
+| Store screenshots | 92/100 | The first screenshot uses a simple user job: “Save once. Fill the next long form.” The privacy screenshot now has a clearer thumbnail-safe promise: “No account for core filling.” Still generated product-frame creative rather than live-tested best-in-class store art. |
+| Store demo video | 92/100 | The opening frame reads at thumbnail scale, the privacy segment is clearer, and the 22-second muted MP4 is regenerated and baseline-locked. Still lacks tested first-three-second variants from live store traffic. |
+| ASO/store metadata | 92/100 | Natural keyword coverage, 22 locales, narrow permission claims, accurate privacy language, and cleaner crawler text. Remaining gap is post-approval keyword/rank feedback. |
 | Competitive positioning | 90/100 | Stronger privacy/trust discipline than FormFiller and Fill Hero pages reviewed. Less loud than Fill Hero and less store-CTA-forward than FormFiller. |
-| Market-facing creative certainty | 92/100 | Releaseable and professional, with clearer thumbnail copy and less stiff language. It is not provably 100 until store analytics show it beats alternatives. |
+| Market-facing creative certainty | 94/100 | Releaseable and professional, with clearer thumbnail copy, less stiff language, regenerated assets, review sheets, and locked visual baselines. It is not provably 100 until store analytics show it beats alternatives. |
 
 ## Changes Made In This Pass
 
@@ -62,6 +67,13 @@ Sources checked during this pass:
 - Moved lower-frequency popup utilities into a collapsed “More tools” drawer to reduce first-screen clutter.
 - Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
+- Reworked the product-page hero from “Fill the forms you keep seeing” to “Stop retyping the same form details” for a clearer, more human first impression.
+- Changed the first product-page CTA from “Download FillPro” to “Start free” while keeping the browser download route behind it.
+- Added explicit Open affordances to Chrome, Edge, and Firefox cards and verified they still fit mobile and dark mode.
+- Replaced generic “Direct answers” FAQ copy with “What to know before you install.”
+- Replaced old privacy wording in product copy, crawler files, skill files, and marketing renderers with clearer browser-extension wording.
+- Added audit guards against the old stiff privacy, FAQ, submit-control, and Pro-feature phrases so they cannot quietly return.
+- Recut the privacy screenshot and demo-video segment to use “No account for core filling,” then regenerated assets, review sheets, and baselines.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.
 - Added a more premium first-viewport demo treatment with desktop depth, glass highlight, stronger shadowing, and a flat mobile fallback.
 - Reworked the first screenshot and video opening again to a shorter, more scannable promise: “Save once. Fill the next long form.”

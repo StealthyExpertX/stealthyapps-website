@@ -4,7 +4,7 @@ Last reviewed: 2026-06-14
 
 FillPro is a private browser form autofill extension for repeated web forms.
 
-Best description: FillPro fills job applications, signup forms, onboarding pages, intake pages, demo requests, vendor forms, and internal profile pages from profiles saved inside the browser extension.
+Best description: FillPro fills job applications, signup forms, onboarding pages, intake pages, demo requests, vendor forms, and internal profile pages from profiles saved by the extension in the browser.
 
 Pricing:
 

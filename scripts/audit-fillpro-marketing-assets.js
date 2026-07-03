@@ -179,7 +179,7 @@ function checkRenderer() {
     'Pick a profile. Check every field before you submit.',
     'Less retyping on applications.',
     'Works on the messy forms too.',
-    'Profiles stay in FillPro.',
+    'No account for core filling.',
     'Start with three saved profiles.',
     'Password skipped',
     'careers.example/apply',

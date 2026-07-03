@@ -21,7 +21,7 @@ Last updated: 2026-06-14
 
 ## Best Description
 
-FillPro fills repeated web forms from profiles saved inside FillPro. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
+FillPro fills repeated web forms from profiles saved by the extension in the browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
 
 ## What It Handles
 
@@ -29,7 +29,7 @@ FillPro supports saved profiles, smart rules, custom fields, right-click field c
 
 ## Privacy Boundary
 
-FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay inside FillPro unless the user exports them, contacts support, or chooses Pro billing. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Useful Routes
 

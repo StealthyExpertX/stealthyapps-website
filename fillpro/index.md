@@ -13,7 +13,7 @@ FillPro is a browser extension from Stealthy Apps for people who keep seeing the
 
 ## Where FillPro fits
 
-FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor workflows, onboarding flows, support forms, admin tools, QA test profiles, and everyday business forms. Save a profile once, fill the repeat fields, then review before submit.
+FillPro is built for repeated profile-style fields across job applications, signup pages, intake forms, demo requests, vendor work, onboarding, support forms, admin tools, QA test profiles, and everyday business forms. Save a profile once, fill the repeat fields, then review before submit.
 
 Focused pages:
 
@@ -25,7 +25,7 @@ Focused pages:
 
 ## Core product
 
-- Profiles saved inside FillPro.
+- Profiles saved by the extension in the browser.
 - Popup, side panel, on-page profile picker, right-click fill, and keyboard shortcut.
 - Smart rules and custom fields for unusual labels.
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
@@ -45,7 +45,7 @@ FillPro is strongest when structured profile data has to move across many unrela
 
 ## Privacy and control
 
-FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay inside FillPro unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing. The core fill flow uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from FillPro settings.
 
@@ -53,7 +53,7 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 
 Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
-Pro adds more saved profiles, profile duplication, import, export, and advanced repeat-use workflows. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
+Pro adds more saved profiles, profile duplication, import, and export. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
 
 ## Support
 

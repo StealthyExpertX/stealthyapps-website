@@ -9,7 +9,7 @@ Last reviewed: 2026-06-14
 
 ## What FillPro does
 
-FillPro fills repeated web forms from profiles saved inside the browser extension. It is useful for job applications, signup forms, intake pages, onboarding, demo requests, vendor forms, internal admin forms, and profile pages.
+FillPro fills repeated web forms from profiles saved by the extension in the browser. It is useful for job applications, signup forms, intake pages, onboarding, demo requests, vendor forms, internal admin forms, and profile pages.
 
 ## Boundaries
 

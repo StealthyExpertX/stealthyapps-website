@@ -3005,7 +3005,7 @@ textarea:focus-visible {
   overflow: hidden;
   min-height: 96px;
   display: grid;
-  grid-template-columns: 46px minmax(0, 1fr);
+  grid-template-columns: 46px minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
   padding: 18px;
@@ -3065,6 +3065,33 @@ textarea:focus-visible {
   font-size: 13px;
   font-weight: 720;
   line-height: 1.25;
+}
+
+.browser-download-card em {
+  min-height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 11px;
+  border: 1px solid rgba(15, 118, 110, 0.16);
+  border-radius: 999px;
+  color: var(--launch-brand-strong);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    color 160ms ease,
+    transform 180ms ease;
+}
+
+.browser-download-card:hover em,
+.browser-download-card:focus-visible em {
+  border-color: rgba(15, 118, 110, 0.32);
+  background: rgba(15, 118, 110, 0.09);
+  transform: translateX(2px);
 }
 
 .browser-mark {
@@ -3161,6 +3188,11 @@ textarea:focus-visible {
   --browser-surface: linear-gradient(135deg, rgba(168, 139, 250, 0.12), rgba(240, 179, 93, 0.14));
 }
 
+:root[data-theme="dark"] body.fillpro-launch .browser-download-card em {
+  border-color: rgba(157, 231, 215, 0.18);
+  color: var(--launch-brand-strong);
+}
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) body.fillpro-launch .browser-mark {
     box-shadow:
@@ -3184,6 +3216,11 @@ textarea:focus-visible {
     --browser-ink: #f0b35d;
     --browser-line: rgba(240, 179, 93, 0.3);
     --browser-surface: linear-gradient(135deg, rgba(168, 139, 250, 0.12), rgba(240, 179, 93, 0.14));
+  }
+
+  :root:not([data-theme="light"]) body.fillpro-launch .browser-download-card em {
+    border-color: rgba(157, 231, 215, 0.18);
+    color: var(--launch-brand-strong);
   }
 }
 
