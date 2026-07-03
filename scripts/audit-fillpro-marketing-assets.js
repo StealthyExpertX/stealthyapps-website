@@ -123,10 +123,12 @@ function checkVideo(relativePath) {
     return;
   }
   const video = (data.streams || []).find((stream) => stream.codec_type === 'video');
+  const audio = (data.streams || []).find((stream) => stream.codec_type === 'audio');
   if (!video) {
     fail(`${relativePath}: no video stream`);
     return;
   }
+  if (audio) fail(`${relativePath}: should not rely on audio; the store demo must work muted`);
   const duration = Number(data.format?.duration || video.duration || 0);
   const fps = parseRate(video.avg_frame_rate);
   if (video.codec_name !== 'h264') fail(`${relativePath}: expected H.264, got ${video.codec_name}`);
@@ -150,15 +152,20 @@ function checkRenderer() {
     'const DURATION = 22;',
     'fillpro-store-demo-22s.mp4',
     'fillpro-store-demo-22s-thumb.png',
-    'Save it once. Fill the next form.',
+    'payoff-card',
+    'motion-rail',
+    'Mute-safe captions',
+    'Blank form to review-ready.',
+    'Fill the repeat fields.',
     'Less retyping on applications.',
     'Built for messy forms.',
     'Profiles stay in FillPro.',
     'Undo before you submit.',
+    'Password skipped',
     'careers.example/apply',
     'app.example/trial',
-    'Upload matching',
-    'Review stays yours',
+    'Upload matched',
+    'Review before submit',
     'Send a quick report',
     'Use your password manager',
   ];
