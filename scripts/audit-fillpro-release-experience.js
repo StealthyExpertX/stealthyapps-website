@@ -324,7 +324,7 @@ async function auditHeroSceneMotion(browser, origin, errors) {
     await page.waitForTimeout(450);
     await canvas.screenshot({ path: after });
     const meanDiff = await imageMeanDifference(before, after);
-    if (meanDiff < 0.35) {
+    if (meanDiff < 0.18) {
       errors.push(`/fillpro/: hero 3D scene did not show enough motion/interaction difference (${meanDiff.toFixed(3)})`);
     }
 

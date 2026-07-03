@@ -2305,11 +2305,11 @@ html:has(body.fillpro-launch) {
   z-index: -1;
   pointer-events: none;
   background:
-    linear-gradient(90deg, rgba(15, 118, 110, 0.058) 1px, transparent 1px) 0 0 / 92px 92px,
-    linear-gradient(180deg, rgba(15, 118, 110, 0.052) 1px, transparent 1px) 0 0 / 92px 92px,
-    repeating-linear-gradient(135deg, rgba(216, 154, 36, 0.08) 0 1px, transparent 1px 28px),
-    linear-gradient(135deg, rgba(216, 154, 36, 0.055), transparent 38%),
-    linear-gradient(315deg, rgba(37, 99, 235, 0.052), transparent 42%);
+    radial-gradient(circle at 68% 8%, rgba(33, 183, 169, 0.1), transparent 300px),
+    radial-gradient(circle at 16% 18%, rgba(216, 154, 36, 0.055), transparent 260px),
+    linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 92px 92px,
+    linear-gradient(315deg, rgba(37, 99, 235, 0.038), transparent 42%);
   -webkit-mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
   mask-image: linear-gradient(180deg, #000 0, rgba(0, 0, 0, 0.84) 42%, transparent 100%);
 }
@@ -2467,16 +2467,16 @@ html:has(body.fillpro-launch) {
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.58;
+  opacity: 0.38;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-  opacity: 0.54;
+  opacity: 0.34;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-    opacity: 0.54;
+    opacity: 0.34;
   }
 }
 
@@ -2488,10 +2488,10 @@ html:has(body.fillpro-launch) {
   height: 360px;
   pointer-events: none;
   background:
-    radial-gradient(circle at 62% 18%, rgba(94, 234, 221, 0.16), transparent 220px),
-    repeating-linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0 1px, transparent 1px 16px);
-  opacity: 0.34;
-  transform: skewY(-4deg);
+    radial-gradient(circle at 62% 18%, rgba(94, 234, 221, 0.15), transparent 230px),
+    radial-gradient(circle at 84% 62%, rgba(216, 154, 36, 0.06), transparent 210px);
+  opacity: 0.3;
+  transform: skewY(-2deg);
 }
 
 .launch-hero-copy {
@@ -2731,10 +2731,10 @@ html:has(body.fillpro-launch) {
 .demo-shell::before {
   z-index: 2;
   background:
-    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.24), transparent 30%),
-    linear-gradient(118deg, transparent 0 48%, rgba(94, 234, 221, 0.15) 48.5% 49.2%, transparent 49.8%);
+    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.22), transparent 30%),
+    linear-gradient(118deg, transparent 0 49%, rgba(94, 234, 221, 0.09) 49.5%, transparent 55%);
   mix-blend-mode: screen;
-  opacity: 0.62;
+  opacity: 0.42;
 }
 
 .demo-shell::after {

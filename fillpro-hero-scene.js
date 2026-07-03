@@ -26,7 +26,7 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.35));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
   if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
   }
@@ -44,27 +44,23 @@ import * as THREE from './vendor/three.module.min.js';
     return material;
   }
 
-  function cloneMaterial(material) {
-    return trackMaterial(material.clone());
-  }
-
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(27, 1, 0.1, 100);
-  camera.position.set(0, 0.05, 9.2);
+  const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
+  camera.position.set(0, 0.04, 8.7);
 
   const group = new THREE.Group();
-  group.position.set(0.88, -0.02, 0);
-  group.rotation.set(-0.05, -0.18, 0.018);
+  group.position.set(0.92, -0.02, 0);
+  group.rotation.set(-0.035, -0.13, 0.012);
   scene.add(group);
 
-  scene.add(new THREE.HemisphereLight(0xeafff8, 0x061a17, 1.2));
+  scene.add(new THREE.HemisphereLight(0xeafff8, 0x061a17, 1.12));
 
-  const key = new THREE.DirectionalLight(0xffffff, 1.8);
-  key.position.set(3.4, 4.2, 5.6);
+  const key = new THREE.DirectionalLight(0xffffff, 1.7);
+  key.position.set(3.4, 4.4, 5.8);
   scene.add(key);
 
-  const rim = new THREE.PointLight(0x57f1e1, 1.4, 10);
-  rim.position.set(-2.8, 1.4, 2.8);
+  const rim = new THREE.PointLight(0x63f4e7, 1.0, 10);
+  rim.position.set(-2.6, 1.2, 2.6);
   scene.add(rim);
 
   function roundedRectShape(width, height, radius) {
@@ -83,16 +79,28 @@ import * as THREE from './vendor/three.module.min.js';
     return shape;
   }
 
-  function transparentMaterial(color, opacity, roughness = 0.8) {
+  function makeGlassMaterial(color, opacity, roughness = 0.78) {
     return trackMaterial(
       new THREE.MeshStandardMaterial({
         color,
         roughness,
-        metalness: 0.05,
+        metalness: 0.03,
         transparent: true,
         opacity,
         depthWrite: false,
         side: THREE.DoubleSide,
+      }),
+    );
+  }
+
+  function makeLightMaterial(color, opacity) {
+    return trackMaterial(
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity,
+        depthWrite: false,
+        blending: THREE.AdditiveBlending,
       }),
     );
   }
@@ -102,6 +110,7 @@ import * as THREE from './vendor/three.module.min.js';
       new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 18),
     );
     const mesh = new THREE.Mesh(geometry, material);
+
     if (edgeOpacity > 0) {
       mesh.add(
         new THREE.LineSegments(
@@ -116,155 +125,74 @@ import * as THREE from './vendor/three.module.min.js';
         ),
       );
     }
+
     return mesh;
   }
-
-  const stageGlass = transparentMaterial(0xf7fffb, 0.13, 0.84);
-  const tealMist = transparentMaterial(0x68f5e7, 0.1, 0.86);
-  const inkGlass = transparentMaterial(0x0f302c, 0.11, 0.76);
-  const tealLine = trackMaterial(
-    new THREE.MeshBasicMaterial({
-      color: 0x72fff0,
-      transparent: true,
-      opacity: 0.18,
-      depthWrite: false,
-    }),
-  );
-  const goldLine = trackMaterial(
-    new THREE.MeshBasicMaterial({
-      color: 0xf3c75d,
-      transparent: true,
-      opacity: 0.16,
-      depthWrite: false,
-    }),
-  );
 
   const glassStage = new THREE.Group();
   group.add(glassStage);
 
-  const rearHalo = panel(5.7, 3.15, 0.3, tealMist, 0.06);
-  rearHalo.position.set(0.16, 0.18, -1.08);
-  rearHalo.rotation.z = -0.035;
-  glassStage.add(rearHalo);
+  const stageMaterial = makeGlassMaterial(0xf7fffb, 0.115, 0.86);
+  const depthMaterial = makeGlassMaterial(0x0f302c, 0.08, 0.82);
+  const mistMaterial = makeGlassMaterial(0x68f5e7, 0.085, 0.88);
+  const pathMaterial = makeLightMaterial(0x74fff0, 0.24);
+  const haloMaterial = makeLightMaterial(0x5eeadd, 0.095);
+  const goldMaterial = makeLightMaterial(0xf3c75d, 0.11);
 
-  const mainPlane = panel(5.25, 2.82, 0.28, stageGlass, 0.1);
-  mainPlane.position.set(0, 0, -0.55);
-  glassStage.add(mainPlane);
+  const mainStage = panel(5.7, 3.08, 0.34, stageMaterial, 0.085);
+  mainStage.position.set(0.08, 0.02, -0.78);
+  glassStage.add(mainStage);
 
-  const shadowPlane = panel(4.8, 2.48, 0.24, inkGlass, 0);
-  shadowPlane.position.set(0.18, -0.18, -0.85);
-  shadowPlane.rotation.z = 0.04;
-  glassStage.add(shadowPlane);
+  const depthShelf = panel(5.12, 2.52, 0.3, depthMaterial, 0);
+  depthShelf.position.set(0.3, -0.2, -1.05);
+  depthShelf.rotation.z = 0.018;
+  glassStage.add(depthShelf);
 
-  const fieldRails = [];
-  [-0.62, -0.22, 0.18, 0.58].forEach((y, index) => {
-    const rail = panel(2.95 - index * 0.14, 0.1, 0.05, cloneMaterial(tealMist), 0);
-    rail.material.opacity = 0.08 + index * 0.012;
-    rail.position.set(-0.54, y, -0.4 + index * 0.012);
-    glassStage.add(rail);
-    fieldRails.push(rail);
-  });
+  const softWash = panel(4.3, 2.0, 0.32, mistMaterial, 0);
+  softWash.position.set(0.88, 0.34, -1.22);
+  softWash.rotation.z = -0.025;
+  glassStage.add(softWash);
 
-  const profileSignal = panel(1.36, 0.62, 0.18, cloneMaterial(stageGlass), 0.12);
-  profileSignal.position.set(1.72, 0.62, -0.32);
-  profileSignal.rotation.set(0.02, -0.08, -0.025);
-  profileSignal.material.opacity = 0.16;
-  group.add(profileSignal);
-
-  const signalCore = panel(0.86, 0.18, 0.08, cloneMaterial(tealMist), 0);
-  signalCore.position.set(1.7, 0.64, -0.24);
-  signalCore.material.opacity = 0.22;
-  group.add(signalCore);
-
-  const reviewHalo = new THREE.Mesh(
-    trackGeometry(new THREE.TorusGeometry(1.55, 0.012, 8, 112)),
-    trackMaterial(
-      new THREE.MeshBasicMaterial({
-        color: 0x5eeadd,
-        transparent: true,
-        opacity: 0.11,
-        depthWrite: false,
-      }),
-    ),
+  const brandHalo = new THREE.Mesh(
+    trackGeometry(new THREE.TorusGeometry(1.92, 0.01, 8, 128)),
+    haloMaterial,
   );
-  reviewHalo.position.set(0.42, -0.16, -0.68);
-  reviewHalo.rotation.set(0.14, 0.08, -0.18);
-  group.add(reviewHalo);
+  brandHalo.position.set(0.72, -0.04, -0.62);
+  brandHalo.rotation.set(0.1, 0.08, -0.22);
+  group.add(brandHalo);
+
+  const anchorGlow = new THREE.Mesh(
+    trackGeometry(new THREE.TorusGeometry(0.72, 0.009, 8, 92, Math.PI * 0.52)),
+    goldMaterial,
+  );
+  anchorGlow.position.set(1.58, -0.92, -0.56);
+  anchorGlow.rotation.set(0.12, 0.04, -0.72);
+  group.add(anchorGlow);
 
   const singleFillCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(1.52, 0.53, -0.16),
-    new THREE.Vector3(0.88, 0.72, 0.02),
-    new THREE.Vector3(0.08, 0.38, 0.04),
-    new THREE.Vector3(-0.72, 0.1, -0.03),
+    new THREE.Vector3(1.9, 0.58, -0.16),
+    new THREE.Vector3(1.18, 0.76, 0.02),
+    new THREE.Vector3(0.18, 0.42, 0.05),
+    new THREE.Vector3(-0.82, 0.06, -0.04),
   ]);
 
   const singleFillPath = new THREE.Mesh(
-    trackGeometry(new THREE.TubeGeometry(singleFillCurve, 54, 0.009, 8, false)),
-    tealLine,
+    trackGeometry(new THREE.TubeGeometry(singleFillCurve, 62, 0.011, 8, false)),
+    pathMaterial,
   );
   group.add(singleFillPath);
 
   const pulse = new THREE.Group();
   const pulseCore = new THREE.Mesh(
-    trackGeometry(new THREE.SphereGeometry(0.045, 14, 14)),
-    trackMaterial(
-      new THREE.MeshBasicMaterial({
-        color: 0xa7fff4,
-        transparent: true,
-        opacity: 0.64,
-        depthWrite: false,
-      }),
-    ),
+    trackGeometry(new THREE.SphereGeometry(0.05, 16, 16)),
+    makeLightMaterial(0xb8fff7, 0.68),
   );
   const pulseGlow = new THREE.Mesh(
-    trackGeometry(new THREE.SphereGeometry(0.13, 14, 14)),
-    trackMaterial(
-      new THREE.MeshBasicMaterial({
-        color: 0x70fff0,
-        transparent: true,
-        opacity: 0.08,
-        depthWrite: false,
-      }),
-    ),
+    trackGeometry(new THREE.SphereGeometry(0.18, 16, 16)),
+    makeLightMaterial(0x70fff0, 0.105),
   );
   pulse.add(pulseGlow, pulseCore);
   group.add(pulse);
-
-  const goldAccent = new THREE.Mesh(
-    trackGeometry(new THREE.TorusGeometry(0.92, 0.012, 8, 86, Math.PI * 0.42)),
-    goldLine,
-  );
-  goldAccent.position.set(1.05, -0.92, -0.44);
-  goldAccent.rotation.set(0.18, 0.06, -0.68);
-  group.add(goldAccent);
-
-  function seededRandom(seed) {
-    const value = Math.sin(seed * 9301 + 49297) * 233280;
-    return value - Math.floor(value);
-  }
-
-  const nodeGeometry = trackGeometry(new THREE.SphereGeometry(0.018, 8, 8));
-  const nodeMaterial = trackMaterial(
-    new THREE.MeshBasicMaterial({
-      color: 0x20d6c2,
-      transparent: true,
-      opacity: 0.16,
-      depthWrite: false,
-    }),
-  );
-  const ambientNodes = new THREE.InstancedMesh(nodeGeometry, nodeMaterial, 14);
-  const nodeMatrix = new THREE.Matrix4();
-  const nodeOffsets = [];
-  for (let index = 0; index < 14; index += 1) {
-    nodeOffsets.push({
-      x: -2.35 + seededRandom(index + 1) * 4.65,
-      y: -1.22 + seededRandom(index + 21) * 2.52,
-      z: -1.05 + seededRandom(index + 41) * 0.46,
-      phase: seededRandom(index + 61) * Math.PI * 2,
-      speed: 0.08 + seededRandom(index + 81) * 0.11,
-    });
-  }
-  group.add(ambientNodes);
 
   let pointerX = 0;
   let pointerY = 0;
@@ -280,9 +208,11 @@ import * as THREE from './vendor/three.module.min.js';
     const height = Math.max(Math.floor(rect.height), 1);
     const drawingWidth = Math.floor(width * renderer.getPixelRatio());
     const drawingHeight = Math.floor(height * renderer.getPixelRatio());
+
     if (canvas.width !== drawingWidth || canvas.height !== drawingHeight) {
       renderer.setSize(width, height, false);
     }
+
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     isNarrow = width < 560;
@@ -295,47 +225,28 @@ import * as THREE from './vendor/three.module.min.js';
     }
 
     const seconds = time * 0.001;
-    pointerX += (targetX - pointerX) * 0.03;
-    pointerY += (targetY - pointerY) * 0.03;
+    pointerX += (targetX - pointerX) * 0.035;
+    pointerY += (targetY - pointerY) * 0.035;
 
-    const baseY = isNarrow ? -0.08 : -0.02;
-    group.scale.setScalar(isNarrow ? 0.82 : 1);
-    group.position.x = isNarrow ? 0.42 : 0.88;
-    group.position.y = baseY + Math.sin(seconds * 0.24) * 0.01;
-    group.rotation.y = (isNarrow ? -0.08 : -0.18) + pointerX * 0.045;
-    group.rotation.x = -0.05 - pointerY * 0.035;
+    group.scale.setScalar(isNarrow ? 0.74 : 1);
+    group.position.x = isNarrow ? 0.34 : 0.92;
+    group.position.y = (isNarrow ? -0.02 : -0.02) + Math.sin(seconds * 0.18) * 0.008;
+    group.rotation.y = (isNarrow ? -0.045 : -0.13) + pointerX * 0.04;
+    group.rotation.x = -0.035 - pointerY * 0.028;
 
-    glassStage.rotation.z = -0.002 + Math.sin(seconds * 0.16) * 0.004;
-    rearHalo.position.y = 0.18 + Math.sin(seconds * 0.2) * 0.012;
-    profileSignal.position.y = 0.62 + Math.cos(seconds * 0.3) * 0.01;
-    signalCore.position.y = 0.64 + Math.cos(seconds * 0.3) * 0.01;
-    reviewHalo.rotation.z = -0.18 + seconds * 0.035;
-    reviewHalo.material.opacity = 0.085 + Math.sin(seconds * 0.34) * 0.018;
-    goldAccent.rotation.z = -0.68 + Math.sin(seconds * 0.28) * 0.014;
+    glassStage.rotation.z = Math.sin(seconds * 0.14) * 0.003;
+    mainStage.material.opacity = 0.105 + Math.sin(seconds * 0.26) * 0.008;
+    softWash.material.opacity = 0.078 + Math.cos(seconds * 0.24) * 0.007;
+    brandHalo.rotation.z = -0.22 + seconds * 0.026;
+    brandHalo.material.opacity = 0.078 + Math.sin(seconds * 0.28) * 0.012;
+    anchorGlow.rotation.z = -0.72 + Math.sin(seconds * 0.22) * 0.012;
+    singleFillPath.material.opacity = 0.19 + Math.sin(seconds * 0.32) * 0.022;
 
-    fieldRails.forEach((rail, index) => {
-      rail.material.opacity = 0.075 + index * 0.012 + Math.sin(seconds * 0.42 + index) * 0.008;
-    });
-
-    singleFillPath.material.opacity = 0.13 + Math.sin(seconds * 0.36) * 0.022;
-
-    const progress = (seconds * 0.1) % 1;
+    const progress = (seconds * 0.115) % 1;
     pulse.position.copy(singleFillCurve.getPoint(progress));
-    pulseCore.material.opacity = 0.5 + Math.sin(seconds * 0.9) * 0.1;
-    pulseGlow.material.opacity = 0.06 + Math.sin(seconds * 0.9) * 0.02;
-    pulse.scale.setScalar(0.94 + Math.sin(seconds * 0.94) * 0.08);
-
-    for (let index = 0; index < nodeOffsets.length; index += 1) {
-      const point = nodeOffsets[index];
-      const drift = seconds * point.speed + point.phase;
-      nodeMatrix.makeTranslation(
-        point.x + Math.sin(drift) * 0.026,
-        point.y + Math.cos(drift * 0.88) * 0.024,
-        point.z,
-      );
-      ambientNodes.setMatrixAt(index, nodeMatrix);
-    }
-    ambientNodes.instanceMatrix.needsUpdate = true;
+    pulse.scale.setScalar(0.94 + Math.sin(seconds * 0.86) * 0.07);
+    pulseCore.material.opacity = 0.56 + Math.sin(seconds * 0.8) * 0.08;
+    pulseGlow.material.opacity = 0.082 + Math.sin(seconds * 0.8) * 0.018;
 
     renderer.render(scene, camera);
   }
@@ -345,6 +256,7 @@ import * as THREE from './vendor/three.module.min.js';
       render(0);
       return;
     }
+
     renderer.setAnimationLoop((time) => {
       if (isVisible) render(time);
     });

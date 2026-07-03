@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v42';
+const CACHE_TOKEN = 'fillpro-launch-v43';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -249,11 +249,10 @@ function checkHeroScene() {
     [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
     [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
     [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
-    [heroScript, 'profileSignal', 'hero scene should include one focused profile signal'],
+    [heroScript, 'brandHalo', 'hero scene should use one restrained brand halo'],
     [heroScript, 'singleFillPath', 'hero scene should include one readable fill path'],
     [heroScript, 'singleFillCurve.getPoint(progress)', 'hero transfer pulse should travel along one fill path'],
-    [heroScript, 'reviewHalo', 'hero scene should include one subtle depth/motion accent'],
-    [heroScript, 'ambientNodes', 'hero scene should keep ambient detail restrained'],
+    [heroScript, 'anchorGlow', 'hero scene should include one small warm accent'],
     [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
     [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
     [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],
@@ -273,6 +272,10 @@ function checkHeroScene() {
     ['uploadBadge', 'old upload badge clutter'],
     ['reviewBadge', 'old review badge clutter'],
     ['quietParticles', 'old particle-heavy scene'],
+    ['profileSignal', 'old profile-card clutter'],
+    ['fieldRails', 'old form-rail clutter'],
+    ['ambientNodes', 'old floating-node clutter'],
+    ['nodeOffsets', 'old floating-node animation'],
   ].forEach(([needle, label]) => {
     if (heroScript.includes(needle)) fail(`fillpro-hero-scene.js: remove ${label}`);
   });
