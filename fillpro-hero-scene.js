@@ -119,6 +119,83 @@ import * as THREE from './vendor/three.module.min.js';
     transparent: true,
     opacity: 0.36,
   });
+  const materialDepth = new THREE.MeshStandardMaterial({
+    color: 0xb7fff4,
+    roughness: 0.72,
+    metalness: 0.06,
+    transparent: true,
+    opacity: 0.14,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const materialSlateGlass = new THREE.MeshStandardMaterial({
+    color: 0x12352f,
+    roughness: 0.62,
+    metalness: 0.12,
+    transparent: true,
+    opacity: 0.24,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const materialSoftWhite = new THREE.MeshBasicMaterial({
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.28,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+
+  const depthPanels = [];
+  [
+    { x: 0.32, y: 0.26, z: -0.82, scale: 1.02, rotation: -0.018, material: materialDepth },
+    { x: 0.72, y: 0.08, z: -1.12, scale: 0.82, rotation: 0.035, material: materialSlateGlass },
+    { x: -0.18, y: 0.62, z: -1.28, scale: 0.62, rotation: -0.06, material: materialDepth.clone() },
+  ].forEach((panelConfig, index) => {
+    const panel = roundedPanel(4.5, 3.2, 0.2, panelConfig.material);
+    panel.position.set(panelConfig.x, panelConfig.y, panelConfig.z);
+    panel.rotation.z = panelConfig.rotation;
+    panel.scale.setScalar(panelConfig.scale);
+    panel.userData = { baseY: panelConfig.y, baseRotation: panelConfig.rotation };
+    if (index === 2) panel.material.opacity = 0.09;
+    group.add(panel);
+    depthPanels.push(panel);
+  });
+
+  const reviewStack = new THREE.Group();
+  reviewStack.position.set(-1.04, -0.9, 0.22);
+  reviewStack.rotation.set(0.04, -0.08, -0.018);
+  reviewStack.scale.setScalar(0.72);
+  group.add(reviewStack);
+
+  const reviewCardGeometry = new THREE.BoxGeometry(1.38, 0.3, 0.035);
+  const reviewCards = [];
+  for (let index = 0; index < 3; index += 1) {
+    const card = new THREE.Mesh(
+      reviewCardGeometry,
+      index === 0 ? materialFilled.clone() : materialSoftWhite.clone(),
+    );
+    card.material.opacity = index === 0 ? 0.28 : 0.22;
+    card.position.set(index * 0.1, index * 0.19, -index * 0.09);
+    card.rotation.z = -0.018 + index * 0.022;
+    reviewStack.add(card);
+    reviewCards.push(card);
+
+    const ruleLine = new THREE.Mesh(
+      new THREE.BoxGeometry(0.76 - index * 0.1, 0.035, 0.024),
+      index === 2 ? materialGold : materialInk,
+    );
+    ruleLine.position.set(-0.12, card.position.y, card.position.z + 0.03);
+    reviewStack.add(ruleLine);
+  }
+
+  const smartRuleChips = [];
+  for (let index = 0; index < 3; index += 1) {
+    const chip = roundedPanel(0.58, 0.18, 0.055, index === 1 ? materialGold : materialFilled);
+    chip.position.set(-1.48 + index * 0.56, 1.42, 0.46 - index * 0.04);
+    chip.scale.x = index === 2 ? 0.72 : 1;
+    group.add(chip);
+    smartRuleChips.push(chip);
+  }
 
   const mainPanel = roundedPanel(4.5, 3.2, 0.18, materialPanel);
   mainPanel.position.set(0.18, 0.1, -0.18);
@@ -163,6 +240,28 @@ import * as THREE from './vendor/three.module.min.js';
   );
   uploadLine.position.set(-0.08, -1.32, 0.33);
   group.add(uploadLine);
+
+  const cursorShape = new THREE.Shape();
+  cursorShape.moveTo(0, 0);
+  cursorShape.lineTo(0.34, -0.76);
+  cursorShape.lineTo(0.48, -0.44);
+  cursorShape.lineTo(0.8, -0.56);
+  cursorShape.lineTo(0.64, -0.22);
+  cursorShape.lineTo(0.9, -0.1);
+  cursorShape.closePath();
+  const cursor = new THREE.Mesh(
+    new THREE.ShapeGeometry(cursorShape),
+    new THREE.MeshStandardMaterial({
+      color: 0xf8fffc,
+      roughness: 0.5,
+      metalness: 0.14,
+      side: THREE.DoubleSide,
+    }),
+  );
+  cursor.position.set(2.74, -0.28, 0.56);
+  cursor.scale.setScalar(0.42);
+  cursor.rotation.set(0.04, -0.12, -0.12);
+  group.add(cursor);
 
   const flowCurves = [
     [new THREE.Vector3(1.54, 0.62, 0.32), new THREE.Vector3(0.72, 0.86, 0.34), new THREE.Vector3(-0.06, 1.02, 0.34)],
@@ -300,9 +399,27 @@ import * as THREE from './vendor/three.module.min.js';
       row.position.z = 0.08 + index * 0.018 + Math.sin(seconds * 1.1 + index) * 0.012;
     });
 
+    depthPanels.forEach((panel, index) => {
+      panel.rotation.z = panel.userData.baseRotation + Math.sin(seconds * 0.26 + index) * 0.018;
+      panel.position.y = panel.userData.baseY + Math.sin(seconds * 0.34 + index) * 0.026;
+    });
+
     profileBars.forEach((bar, index) => {
       bar.scale.x = (index === 0 ? 0.62 : 0.82 - index * 0.08) + Math.sin(seconds * 0.95 + index) * 0.025;
     });
+
+    reviewCards.forEach((card, index) => {
+      card.position.x = index * 0.1 + Math.sin(seconds * 0.74 + index) * 0.025;
+      card.position.z = -index * 0.09 + Math.cos(seconds * 0.62 + index) * 0.018;
+    });
+
+    smartRuleChips.forEach((chip, index) => {
+      chip.position.y = 1.42 + Math.sin(seconds * 0.88 + index) * 0.018;
+      chip.rotation.z = Math.sin(seconds * 0.52 + index) * 0.018;
+    });
+
+    cursor.position.x = 2.74 + Math.sin(seconds * 0.8) * 0.035;
+    cursor.position.y = -0.28 + Math.cos(seconds * 0.68) * 0.025;
 
     flowLines.forEach((line, index) => {
       line.material.opacity = 0.22 + Math.sin(seconds * 1.05 + index * 0.8) * 0.08;

@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v39';
+const CACHE_TOKEN = 'fillpro-launch-v40';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -252,6 +252,10 @@ function checkHeroScene() {
     [heroScript, 'flowPulses', 'hero scene should include visible profile-to-field transfer pulses'],
     [heroScript, 'curve.getPoint(progress)', 'hero transfer pulses should travel along the form-fill paths'],
     [heroScript, 'uploadChip', 'hero scene should include upload matching geometry'],
+    [heroScript, 'depthPanels', 'hero scene should include layered depth panels'],
+    [heroScript, 'reviewStack', 'hero scene should include a review stack proof object'],
+    [heroScript, 'smartRuleChips', 'hero scene should include smart-rule chip geometry'],
+    [heroScript, 'cursorShape', 'hero scene should include a fill-action cursor cue'],
     [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
     [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
     [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],

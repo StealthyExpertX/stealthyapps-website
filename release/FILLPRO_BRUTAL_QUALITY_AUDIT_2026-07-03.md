@@ -12,6 +12,7 @@ This is the harsher scorecard for product taste, marketing quality, and perceive
 - Landing-page conversion guidance: the first viewport should make the value clear within seconds, match the store promise, show proof near the CTA, and avoid visual clutter.
 - Web-writing guidance: users scan first. Short, concrete, objective copy beats broad claims and hype.
 - Icon guidance: small sizes need a clear silhouette, high contrast, one focal idea, and dark/light background resilience.
+- Current product-demo and extension-store practitioner research reinforces the same pattern: show the product behavior early, make the first screenshot/video seconds carry the promise, and keep 3D/motion tied to the user workflow instead of decoration.
 
 ## Current Brutal Scores
 
@@ -24,7 +25,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
 | Website first viewport | 92/100 | Clear promise, demo proof, CTA, and browser links. It reads as polished indie SaaS, with better section landings and less sticky-header risk after this pass. |
 | Website full-page craft | 91/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface. Remaining gap is still top-studio creative art direction and live preference testing. |
-| Three.js hero scene | 87/100 | It renders, moves, supports reduced motion, and now shows profile-to-field transfer pulses along the fill paths. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
+| Three.js hero scene | 89/100 | It renders, moves, supports reduced motion, and now shows layered form depth, profile-to-field transfer pulses, upload matching, smart-rule chips, a review stack, and a fill-action cursor. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 91/100 | Clear, consistent, and technically clean. Screenshot 5 now has a distinct dark review/undo composition instead of repeating the first light browser-frame layout. The set is stronger, but still not a live-tested high-budget creative campaign. |
 | Store demo video | 91/100 | Recut into a cleaner story arc: hook, fill, review, upload, autofill gaps, privacy, user control, free starter. The repeated trust scene was removed and stiff "core filling" wording is blocked. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
@@ -51,6 +52,8 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added focused light/dark desktop/mobile screenshots and nonblank pixel checks for the review-before-submit section.
 - Fixed the proof-section mini browser dots so they no longer crowd the sample URL.
 - Added sticky-header scroll padding and section scroll margins so product sections land cleanly on mobile and desktop.
+- Added more product-specific Three.js depth: layered panels, a review stack, smart-rule chips, and a cursor cue, then tuned the opacity after visual inspection so the scene did not muddy the hero caption.
+- Added hero-source audit guards so those 3D proof elements cannot be accidentally removed while still passing the site audit.
 
 ## What Blocks A Real 100
 
