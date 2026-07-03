@@ -9,6 +9,7 @@ This scorecard separates deterministic release readiness from market-facing crea
 - Store screenshots should make the first frames answer: what it does, why to believe it, and why it is worth installing now.
 - Each screenshot should carry one clear idea, visible UI proof, readable type, and enough negative space.
 - App icons need optical variants for tiny sizes; a full-size logo scaled down is not enough.
+- Responsive icon systems are intentional: the 16px and 32px toolbar marks may simplify details that are useful at 48px and larger.
 - Premium SaaS pages in 2026 lean toward clarity plus personality: focused conversion story, interactive proof, restrained motion, and sharp brand consistency.
 - Visual QA should be locked with repeatable baselines, not judged only by a one-time manual glance.
 - Store art has to survive thumbnail scanning. Long subcopy and internal implementation terms are treated as conversion drag unless they prove a user-facing benefit.
@@ -21,6 +22,8 @@ Sources checked during this pass:
 - Adapty, App Icon Design: Sizes and Specs
 - App Launchpad and AppTweak icon guidance on small-size clarity, contrast, and recognizability
 - UX Planet, Practical Guide to Icon Design
+- Apple Human Interface Guidelines note that thin strokes and sharp details lose crispness at small icon sizes
+- Chrome Web Store image guidance for simple, brand-consistent icons that work on light and dark backgrounds
 - SaaSFrame, 2026 SaaS Landing Page Trends
 - Playwright best practices for controlled visual regression
 - Nielsen Norman Group research on concise, scannable, objective web copy
@@ -38,7 +41,7 @@ Sources checked during this pass:
 | Website visual craft | 92/100 | Clean, trustworthy, and above most extension sites. The first-viewport demo frame now has stronger depth and glass polish, but it is still more restrained product site than top-tier 3D agency launch. |
 | Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 90/100 | The saved-profile card now has stronger hierarchy, a cleaner primary action, and less cramped secondary controls. Still constrained by the browser-popup surface and not yet validated by real user retention. |
-| Logo/icon system | 89/100 | 128/512 are solid; 16/32 now use simpler optical monograms so toolbar-scale recognition is stronger. Remaining gap is live store/search CTR testing against alternate icon variants. |
+| Logo/icon system | 91/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity and generated icon dimensions are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
 | Store screenshots | 90/100 | The first screenshot now uses a simpler user job: “Save once. Fill the next long form.” Screenshot 2 has less internal implementation language. Still generated product-frame creative rather than live-tested best-in-class store art. |
 | Store demo video | 90/100 | The opening frame now reads at thumbnail scale and the modern-form segment is less technical. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
 | ASO/store metadata | 91/100 | Natural keyword coverage, 22 locales, narrow permission claims, and accurate privacy language. Remaining gap is post-approval keyword/rank feedback. |
@@ -52,6 +55,8 @@ Sources checked during this pass:
 - Added more distinctive, still restrained visual depth to generated marketplace backgrounds.
 - Increased light-mode hero WebGL visibility so the product surface feels less flat.
 - Reworked 16px and 32px extension icons as cleaner monogram-only optical variants, keeping the checkmark for 48px and larger where it remains readable.
+- Rebuilt the master FillPro icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
+- Added an automated icon-system audit that blocks website/extension SVG drift and verifies generated icon dimensions from 16px through 1024px.
 - Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.

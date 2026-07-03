@@ -4,12 +4,14 @@ const path = require('path');
 const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
+const WORKSPACE = path.resolve(ROOT, '..');
 
 const failures = [];
 const checked = {
   images: 0,
   videos: 0,
   renderer: 0,
+  icons: 0,
 };
 
 function fail(message) {
@@ -42,6 +44,23 @@ async function checkImage(relativePath, width, height, options = {}) {
   }
   if (metadata.format !== 'png') fail(`${relativePath}: expected PNG, got ${metadata.format}`);
   if (options.maxMeanLuma || options.minColorSpread) await checkImageEnergy(relativePath, target, options);
+}
+
+async function checkAbsolutePng(label, absolutePath, width, height, options = {}) {
+  checked.icons += 1;
+  if (!fs.existsSync(absolutePath)) {
+    fail(`${label}: missing`);
+    return;
+  }
+  const metadata = await sharp(absolutePath).metadata();
+  if (metadata.width !== width || metadata.height !== height) {
+    fail(`${label}: expected ${width}x${height}, got ${metadata.width}x${metadata.height}`);
+  }
+  if (metadata.format !== 'png') fail(`${label}: expected PNG, got ${metadata.format}`);
+  if (options.minBytes) {
+    const stat = fs.statSync(absolutePath);
+    if (stat.size < options.minBytes) fail(`${label}: suspiciously small (${stat.size} bytes)`);
+  }
 }
 
 async function imageBuffer(relativePath) {
@@ -226,6 +245,35 @@ function checkStillRenderer() {
   }
 }
 
+async function checkIconSystem() {
+  const siteSvg = fs.readFileSync(filePath('assets/fillpro-logo.svg'), 'utf8').trim();
+  const extensionSvgPath = path.join(WORKSPACE, 'fillpro', 'icons', 'icon-source.svg');
+  if (!fs.existsSync(extensionSvgPath)) {
+    fail('fillpro/icons/icon-source.svg: missing');
+    return;
+  }
+  const extensionSvg = fs.readFileSync(extensionSvgPath, 'utf8').trim();
+  if (siteSvg !== extensionSvg) {
+    fail('FillPro logo mismatch: website SVG and extension source SVG must stay identical');
+  }
+  for (const size of [16, 32, 48, 128, 256, 512]) {
+    await checkAbsolutePng(
+      `fillpro/icons/icon${size}.png`,
+      path.join(WORKSPACE, 'fillpro', 'icons', `icon${size}.png`),
+      size,
+      size,
+      { minBytes: size <= 16 ? 200 : 500 },
+    );
+  }
+  await checkAbsolutePng(
+    'fillpro/icons/icon_master_1024.png',
+    path.join(WORKSPACE, 'fillpro', 'icons', 'icon_master_1024.png'),
+    1024,
+    1024,
+    { minBytes: 8 * 1024 },
+  );
+}
+
 async function main() {
   await checkImage('assets/fillpro-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
   await checkImage('assets/fillpro-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
@@ -253,6 +301,7 @@ async function main() {
   checkVideo('assets/marketplace/fillpro-store-demo-22s.mp4');
   checkRenderer();
   checkStillRenderer();
+  await checkIconSystem();
 
   if (failures.length) {
     console.error(`FillPro marketing asset audit failed with ${failures.length} issue(s):`);
@@ -261,7 +310,7 @@ async function main() {
   }
 
   console.log(
-    `FillPro marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.renderer} renderer.`,
+    `FillPro marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
   );
 }
 

@@ -822,21 +822,19 @@ async function renderIcons() {
 
 function smallIconSvg(size) {
   const isTiny = size <= 16;
-  const radius = isTiny ? 3.25 : 7;
-  const fPath = isTiny
-    ? 'M4.5 3.35h8.05v2.6H7.25v2.05h4.55v2.35H7.25v3.95H4.5V3.35Z'
-    : 'M8.25 6.45h15.6v4.65h-10v3.35h8.15v4.35h-8.15v7H8.25V6.45Z';
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" shape-rendering="geometricPrecision">
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
     <defs>
-      <linearGradient id="bg" x1="1" y1="1" x2="${size - 1}" y2="${size - 1}" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#20d6c2"/>
-        <stop offset="0.5" stop-color="#0f766e"/>
+      <linearGradient id="bg" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#23dcc8"/>
+        <stop offset="0.48" stop-color="#0f766e"/>
         <stop offset="1" stop-color="#08231f"/>
       </linearGradient>
     </defs>
-    <rect x="${isTiny ? 0.75 : 1.5}" y="${isTiny ? 0.75 : 1.5}" width="${size - (isTiny ? 1.5 : 3)}" height="${size - (isTiny ? 1.5 : 3)}" rx="${radius}" fill="url(#bg)"/>
-    <path d="M${isTiny ? 2.1 : 4.2} ${isTiny ? 1.5 : 3.1}h${isTiny ? 7.2 : 13.5}c-${isTiny ? 3.9 : 7.4} ${isTiny ? 1.05 : 2.1}-${isTiny ? 6.1 : 11.4} ${isTiny ? 3.6 : 7.3}-${isTiny ? 6.65 : 13.5} ${isTiny ? 7.2 : 14.2}c-${isTiny ? 0.7 : 1.2}-${isTiny ? 3.3 : 6.2}-${isTiny ? 0.45 : 0.9}-${isTiny ? 6.4 : 12} ${isTiny ? 0.55 : 1.2}-${isTiny ? 7.05 : 14.1}Z" fill="#ffffff" opacity="0.12"/>
-    <path d="${fPath}" fill="#f8fffc"/>
+    <rect x="2" y="2" width="28" height="28" rx="${isTiny ? 6 : 7.5}" fill="url(#bg)"/>
+    <path d="M5 3.5h10.8C9.2 5.4 5.6 10 5 17.4c-0.7-4.1-0.6-9.2 0-13.9Z" fill="#ffffff" opacity="0.13"/>
+    <rect x="8" y="7" width="5.8" height="18.4" rx="1.8" fill="#f8fffc"/>
+    <rect x="8" y="7" width="16.8" height="5.8" rx="2.1" fill="#f8fffc"/>
+    <rect x="8" y="14.9" width="13.2" height="5.2" rx="1.9" fill="#f8fffc"/>
   </svg>`;
 }
 

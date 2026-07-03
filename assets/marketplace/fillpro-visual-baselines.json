@@ -4,170 +4,170 @@
   "assets": [
     {
       "file": "assets/fillpro-logo.png",
-      "bytes": 53385,
-      "sha256": "fecb1d4b6ed20b2166ce10da09e028bf4c29b3e098d9749df94b83deea33274d",
+      "bytes": 65476,
+      "sha256": "6e6c78c343ae6f8970b4a4bfa567750bde6297786a7c6f7923c2a504cd13cb77",
       "width": 512,
       "height": 512,
-      "meanLuma": 82.4,
-      "meanColorSpread": 37.42
+      "meanLuma": 80.42,
+      "meanColorSpread": 38.29
     },
     {
       "file": "assets/fillpro-og.png",
-      "bytes": 328018,
-      "sha256": "4da5b11ddb39fa5cb75b8126eaae22a35c84138d6be75fb8efacfd9420c49f16",
+      "bytes": 328204,
+      "sha256": "69dbeb541239479da633a69701f101a1ba4d01de7572dcffecfa76d94ca83f4f",
       "width": 1200,
       "height": 630,
-      "meanLuma": 237.79,
+      "meanLuma": 237.78,
       "meanColorSpread": 9.89
     },
     {
       "file": "assets/fillpro-demo-poster.png",
-      "bytes": 135314,
-      "sha256": "a05739673279bd1d4002ab8776ba5b5ba9a3b6d16b7602737b56e866ee8456e5",
+      "bytes": 135466,
+      "sha256": "90bb80a216fb3cada028a44918ce0575814ed094b560a9e95d1484a0f4f8c5fb",
       "width": 960,
       "height": 540,
-      "meanLuma": 237.78,
+      "meanLuma": 237.77,
       "meanColorSpread": 9.24
     },
     {
       "file": "assets/marketplace/fillpro-small-promo-440x280.png",
-      "bytes": 80063,
-      "sha256": "928019552bd2b3900b4e3a19761cf511e94b0a61c47731479f8da4859b188215",
+      "bytes": 80996,
+      "sha256": "3472d2c4d23d9df37abe8521168f008b91ef7fb5e3c997223f29a2b34bda66d8",
       "width": 440,
       "height": 280,
-      "meanLuma": 133.93,
-      "meanColorSpread": 57.74
+      "meanLuma": 133.78,
+      "meanColorSpread": 57.79
     },
     {
       "file": "assets/marketplace/fillpro-marquee-1400x560.png",
-      "bytes": 515153,
-      "sha256": "0b34c66d17555e5f6c3c59955f0ff20c6d81626a88b32ba82ca0b1b489abb1ff",
+      "bytes": 516611,
+      "sha256": "2caee22eeb9ad653a812530c9c24cd392b58a7d5a2dd4cfd9986d1263e5b9411",
       "width": 1400,
       "height": 560,
-      "meanLuma": 102.35,
-      "meanColorSpread": 71.02
+      "meanLuma": 102.32,
+      "meanColorSpread": 71.04
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-fill-page-1280x800.png",
-      "bytes": 360996,
-      "sha256": "0b44d113079573060c5c402d8be737e6a3fe36344d6856757fcdccb9ebd9e68a",
+      "bytes": 361035,
+      "sha256": "39a0cff3d4c0dc684e9dc4ee0f3ffb157675490fb1145fe544b080075304c33f",
       "width": 1280,
       "height": 800,
-      "meanLuma": 227.43,
-      "meanColorSpread": 8.39
+      "meanLuma": 227.42,
+      "meanColorSpread": 8.4
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png",
-      "bytes": 355009,
-      "sha256": "a5d42e1e60b8c2ad7fe8d1697fd21ec15da3dfa02882d461deb9ac3e117687ef",
+      "bytes": 354682,
+      "sha256": "6e63e19620f692b09c561b3c769a1256bf0098bb58b1cbb51dbe7cf853b9999a",
       "width": 1280,
       "height": 800,
-      "meanLuma": 229.87,
+      "meanLuma": 229.86,
       "meanColorSpread": 7.44
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-profiles-1280x800.png",
-      "bytes": 251530,
-      "sha256": "85110f002581ff4732fc768b566582275d84e019bed069e7c94438bb82eede67",
+      "bytes": 252011,
+      "sha256": "1f65e1020c6d8d5ca96a3e6f3a629ede1d597dbb02b54fcb00c891a96ac80687",
       "width": 1280,
       "height": 800,
       "meanLuma": 122.7,
-      "meanColorSpread": 10.47
+      "meanColorSpread": 10.48
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-privacy-1280x800.png",
-      "bytes": 337679,
-      "sha256": "d8d691a45aee9d390ea598cb012538ec267dfa3f05b92c59dfff87a4fab1cd02",
+      "bytes": 338540,
+      "sha256": "94f1fb14e54bdf21305d5de42736a128c139cdb9ad1d0901314bc4f800520dd7",
       "width": 1280,
       "height": 800,
-      "meanLuma": 43.78,
+      "meanLuma": 43.77,
       "meanColorSpread": 14.76
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-undo-1280x800.png",
-      "bytes": 325217,
-      "sha256": "421e45ff142e4957c5941e6c5a0149f8d56749b4ed57e61ceea7c3ebdd733e55",
+      "bytes": 325021,
+      "sha256": "cd7824c439c12724e2ceef83c447a63948f0cb51c1aa926ad21133af35d9ba7b",
       "width": 1280,
       "height": 800,
-      "meanLuma": 230,
+      "meanLuma": 229.99,
       "meanColorSpread": 7.86
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s-thumb.png",
-      "bytes": 331727,
-      "sha256": "1a8775f646aae223ebb8b7c0a34f4d5960c96c633b09770cf8ce3a9063d54c9d",
+      "bytes": 332590,
+      "sha256": "1ba862a3507ae713152bf5de0564d0835aa69d201ce45745bb4cd0b08b3610db",
       "width": 1280,
       "height": 720,
-      "meanLuma": 224.41,
+      "meanLuma": 224.39,
       "meanColorSpread": 8.24
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s.mp4",
-      "bytes": 1051320,
-      "sha256": "29cb26cad1992f3f91f24d392a712f6349123c2174600428d8daeebf79692189"
+      "bytes": 1052520,
+      "sha256": "c036fb06ef77bb6d2fe043b2fd018a5f15a0f2885c8decab8ad076e330d805d6"
     },
     {
       "file": "../fillpro/icons/icon16.png",
-      "bytes": 727,
-      "sha256": "f9c66465ef1eef8fb926a9a73c21b9bc5b73b9e15c5f796f05d05616026575c8",
+      "bytes": 561,
+      "sha256": "85dd65820e5dc5dab673471d9f179f9bd4d6492eb0e3b7fcdbc949eaeb084da0",
       "width": 16,
       "height": 16,
-      "meanLuma": 125.96,
-      "meanColorSpread": 76.99
+      "meanLuma": 112.3,
+      "meanColorSpread": 65.82
     },
     {
       "file": "../fillpro/icons/icon32.png",
-      "bytes": 1339,
-      "sha256": "4b5684a77b73d2e394bfd9e032ae84cdfe70a420a3efcb37f41a2fecf2c08ae7",
+      "bytes": 1086,
+      "sha256": "bc92267015a55326e7c2b7729e5bf0b4623f3da3753d4ff9cb3e90873c2cdef3",
       "width": 32,
       "height": 32,
-      "meanLuma": 112.81,
-      "meanColorSpread": 69.53
+      "meanLuma": 105.47,
+      "meanColorSpread": 58.38
     },
     {
       "file": "../fillpro/icons/icon48.png",
-      "bytes": 2800,
-      "sha256": "f879d661000f2f43f77e6e3b5f5e01798f29b89a380b3210fb18825c30e9c22f",
+      "bytes": 3238,
+      "sha256": "c601bd79f60ca415bfd5a4307b335e147353924e6985995efe0a5c34d32cffdf",
       "width": 48,
       "height": 48,
-      "meanLuma": 82.65,
-      "meanColorSpread": 36.33
+      "meanLuma": 80.25,
+      "meanColorSpread": 37.2
     },
     {
       "file": "../fillpro/icons/icon128.png",
-      "bytes": 10750,
-      "sha256": "0d8a7bfca30e66db118fa4d46c8db06151efdb56557e3e7dd1d76d7a58986144",
+      "bytes": 13505,
+      "sha256": "b42ee0628c30ea5b5859ba4f1fab6fa4726ef06355eaf1babb5180d6022a3380",
       "width": 128,
       "height": 128,
-      "meanLuma": 82.28,
-      "meanColorSpread": 36.86
+      "meanLuma": 80.1,
+      "meanColorSpread": 37.56
     },
     {
       "file": "../fillpro/icons/icon256.png",
-      "bytes": 24002,
-      "sha256": "e48e4174d7c5dfeda73a5cdf0364abd971b46b715a0a2170d163c412c52a13d9",
+      "bytes": 29917,
+      "sha256": "36ffb977d0dfb12a7c909b7949f8bd7263221389dab866a04c70ad6869d0a047",
       "width": 256,
       "height": 256,
-      "meanLuma": 82.52,
-      "meanColorSpread": 37.32
+      "meanLuma": 80.36,
+      "meanColorSpread": 38.16
     },
     {
       "file": "../fillpro/icons/icon512.png",
-      "bytes": 53385,
-      "sha256": "fecb1d4b6ed20b2166ce10da09e028bf4c29b3e098d9749df94b83deea33274d",
+      "bytes": 65476,
+      "sha256": "6e6c78c343ae6f8970b4a4bfa567750bde6297786a7c6f7923c2a504cd13cb77",
       "width": 512,
       "height": 512,
-      "meanLuma": 82.4,
-      "meanColorSpread": 37.42
+      "meanLuma": 80.42,
+      "meanColorSpread": 38.29
     },
     {
       "file": "../fillpro/icons/icon_master_1024.png",
-      "bytes": 126435,
-      "sha256": "e3633fcb47ddcc2f2b6f2d20505bf732af428de8e17106a28c375e519a311475",
+      "bytes": 147574,
+      "sha256": "0f75b879ba420527eb495cf431c4e8c29a5287dc966894cae4d0928096c44f97",
       "width": 1024,
       "height": 1024,
-      "meanLuma": 82.58,
-      "meanColorSpread": 37.55
+      "meanLuma": 80.69,
+      "meanColorSpread": 38.51
     }
   ]
 }

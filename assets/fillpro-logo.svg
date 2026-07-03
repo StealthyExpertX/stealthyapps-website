@@ -1,33 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="FillPro icon">
   <defs>
-    <linearGradient id="bg" x1="146" y1="104" x2="880" y2="920" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#20d6c2"/>
-      <stop offset="0.48" stop-color="#0f766e"/>
-      <stop offset="1" stop-color="#08231f"/>
+    <linearGradient id="bg" x1="138" y1="112" x2="892" y2="912" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23dcc8"/>
+      <stop offset="0.44" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#071f1c"/>
     </linearGradient>
-    <linearGradient id="accent" x1="386" y1="638" x2="642" y2="692" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#f2c14e"/>
-      <stop offset="1" stop-color="#5eeadd"/>
+    <linearGradient id="badge" x1="596" y1="620" x2="832" y2="802" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5eeadd"/>
+      <stop offset="0.55" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#f2c14e"/>
     </linearGradient>
-    <filter id="shadow" x="76" y="82" width="884" height="884" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="tileShadow" x="74" y="82" width="876" height="876" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="34" stdDeviation="38" flood-color="#061d1a" flood-opacity="0.34"/>
     </filter>
-    <filter id="markShadow" x="202" y="190" width="680" height="616" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#061d1a" flood-opacity="0.22"/>
+    <filter id="markShadow" x="226" y="202" width="574" height="628" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#061d1a" flood-opacity="0.22"/>
+    </filter>
+    <filter id="badgeShadow" x="524" y="560" width="368" height="300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#061d1a" flood-opacity="0.3"/>
     </filter>
   </defs>
 
   <rect width="1024" height="1024" fill="none"/>
-  <g filter="url(#shadow)">
-    <rect x="128" y="128" width="768" height="768" rx="210" fill="url(#bg)"/>
-    <path d="M128 650c112 82 250 128 402 128 142 0 270-41 366-110v44c0 102-82 184-184 184H312c-102 0-184-82-184-184v-62Z" fill="#041815" opacity="0.22"/>
-    <path d="M226 176h300c-196 52-302 184-318 378-18-104-10-249 18-378Z" fill="#ffffff" opacity="0.13"/>
+
+  <g filter="url(#tileShadow)">
+    <rect x="128" y="128" width="768" height="768" rx="202" fill="url(#bg)"/>
+    <rect x="166" y="166" width="692" height="692" rx="176" fill="none" stroke="#ffffff" stroke-width="18" opacity="0.12"/>
+    <path d="M128 640c112 84 250 130 402 130 142 0 270-40 366-108v50c0 102-82 184-184 184H312c-102 0-184-82-184-184v-72Z" fill="#041815" opacity="0.24"/>
+    <path d="M224 178h304c-195 54-300 186-318 374-17-104-10-248 14-374Z" fill="#ffffff" opacity="0.14"/>
   </g>
 
-  <g filter="url(#markShadow)">
-    <path d="M288 278c0-42 34-76 76-76h326c42 0 76 34 76 76s-34 76-76 76H438v116h208c40 0 72 32 72 72s-32 72-72 72H438v164c0 42-34 76-76 76s-74-34-74-76V278Z" fill="#f8fffc"/>
-    <rect x="440" y="638" width="218" height="80" rx="40" fill="url(#accent)"/>
-    <path d="M610 680l82 82 182-214" fill="none" stroke="#f8fffc" stroke-width="76" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M610 680l82 82 182-214" fill="none" stroke="#0f766e" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+  <g filter="url(#markShadow)" fill="#f8fffc">
+    <rect x="292" y="248" width="158" height="532" rx="78"/>
+    <rect x="292" y="248" width="448" height="156" rx="78"/>
+    <rect x="292" y="452" width="350" height="136" rx="68"/>
+  </g>
+
+  <g filter="url(#badgeShadow)">
+    <rect x="566" y="594" width="282" height="226" rx="92" fill="#f8fffc"/>
+    <rect x="590" y="616" width="236" height="184" rx="76" fill="url(#badge)"/>
+    <path d="M638 706l66 66 128-152" fill="none" stroke="#ffffff" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M638 706l66 66 128-152" fill="none" stroke="#07433e" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity="0.72"/>
   </g>
 </svg>
