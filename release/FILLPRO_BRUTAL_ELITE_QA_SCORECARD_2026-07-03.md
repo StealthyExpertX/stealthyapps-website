@@ -87,6 +87,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Added icon optical gates for coverage, transparent edge padding, luma, and color spread in the marketing asset audit.
 - Added matching extension release-audit checks so packaged builds reject over-padded, washed-out, raster-embedded, or text-based icons.
 - Reworked the manual icon review sheet so 16px, 32px, and 48px icons are enlarged with nearest-neighbor scaling for a pixel-accurate toolbar review.
+- Cleaned one live-page Pro pricing duplicate and added a launch-page copy guard so import/export wording cannot repeat in the pricing card.
 - Added a Playwright popup UI audit for profile, empty, editor, light, and dark states.
 - Expanded the popup UI audit from 4 to 6 captures by adding empty-dark and editor-dark states.
 - Hid the plan card until a user has at least one profile, keeping first run focused on creating value before upgrade prompts.

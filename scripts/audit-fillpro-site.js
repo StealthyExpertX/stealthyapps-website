@@ -292,6 +292,13 @@ function checkLaunchPage() {
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);
   }
+  const proList = (html.match(/<article class="price-card price-card-featured">([\s\S]*?)<\/article>/) || [])[1] || '';
+  if (!proList.includes('Import and export backups')) {
+    fail('fillpro/index.html: Pro pricing should use concrete import/export backup copy');
+  }
+  if (/Import and export<\/li>[\s\S]*Import, export/i.test(proList)) {
+    fail('fillpro/index.html: Pro pricing repeats import/export copy');
+  }
 }
 
 function checkCacheToken(files) {
