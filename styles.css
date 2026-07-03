@@ -2699,6 +2699,7 @@ textarea:focus-visible {
   margin: 0;
   display: grid;
   gap: 12px;
+  perspective: 1200px;
 }
 
 .demo-shell {
@@ -2707,19 +2708,40 @@ textarea:focus-visible {
   border: 1px solid rgba(16, 35, 31, 0.1);
   border-radius: 8px;
   background: var(--launch-dark);
-  box-shadow: var(--launch-shadow);
+  box-shadow:
+    0 34px 70px rgba(16, 35, 31, 0.18),
+    0 10px 24px rgba(15, 118, 110, 0.08);
+  transform: rotateX(1.2deg) rotateY(-2.2deg) translateZ(0);
+  transform-origin: 54% 48%;
 }
 
+.demo-shell::before,
 .demo-shell::after {
   content: "";
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.22);
   border-radius: 8px;
 }
 
+.demo-shell::before {
+  z-index: 2;
+  background:
+    radial-gradient(circle at 22% 12%, rgba(255, 255, 255, 0.24), transparent 30%),
+    linear-gradient(118deg, transparent 0 48%, rgba(94, 234, 221, 0.15) 48.5% 49.2%, transparent 49.8%);
+  mix-blend-mode: screen;
+  opacity: 0.62;
+}
+
+.demo-shell::after {
+  z-index: 3;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+
 .demo-chrome {
+  position: relative;
+  z-index: 1;
   min-height: 44px;
   display: flex;
   align-items: center;
@@ -2748,6 +2770,9 @@ textarea:focus-visible {
 }
 
 .demo-shell img {
+  position: relative;
+  z-index: 1;
+  display: block;
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -2762,7 +2787,7 @@ textarea:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
-  z-index: 2;
+  z-index: 4;
   pointer-events: none;
 }
 
@@ -3718,6 +3743,10 @@ textarea:focus-visible {
 
   .demo-signal {
     display: none;
+  }
+
+  .demo-shell {
+    transform: none;
   }
 
   .launch-section {

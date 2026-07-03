@@ -32,7 +32,7 @@ Sources checked during this pass:
 | Extension technical QA | 100/100 | Serialization, payment states, release audit, fill engine, uploads, privacy boundaries, and package checks pass locally. |
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
 | QA evidence | 98/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
-| Website visual craft | 91/100 | Clean, trustworthy, and above most extension sites. Still more polished utility page than top-tier 3D agency launch. |
+| Website visual craft | 92/100 | Clean, trustworthy, and above most extension sites. The first-viewport demo frame now has stronger depth and glass polish, but it is still more restrained product site than top-tier 3D agency launch. |
 | Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 90/100 | The saved-profile card now has stronger hierarchy, a cleaner primary action, and less cramped secondary controls. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 89/100 | 128/512 are solid; 16/32 now use simpler optical monograms so toolbar-scale recognition is stronger. Remaining gap is live store/search CTR testing against alternate icon variants. |
@@ -52,6 +52,7 @@ Sources checked during this pass:
 - Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.
+- Added a more premium first-viewport demo treatment with desktop depth, glass highlight, stronger shadowing, and a flat mobile fallback.
 - Regenerated marketplace screenshots, promo images, video thumbnail, MP4, icon PNGs, and the review sheets.
 - Re-locked the 19-asset visual baseline after manual visual inspection.
 
