@@ -909,19 +909,35 @@ async function renderIcons() {
 
 function smallIconSvg(size) {
   const isTiny = size <= 16;
+  if (isTiny) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 16 16" shape-rendering="geometricPrecision">
+    <defs>
+      <linearGradient id="bg" x1="1" y1="1" x2="15" y2="15" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#28deca"/>
+        <stop offset="0.58" stop-color="#0f766e"/>
+        <stop offset="1" stop-color="#06443e"/>
+      </linearGradient>
+    </defs>
+    <rect x="1" y="1" width="14" height="14" rx="3.2" fill="url(#bg)"/>
+    <path d="M3 2.3h5.4C5.2 3.1 3.4 5.2 3.1 8.8c-0.35-1.9-0.35-4.3-0.1-6.5Z" fill="#ffffff" opacity="0.13"/>
+    <rect x="4.15" y="3.5" width="3" height="9.3" rx="0.85" fill="#f8fffc"/>
+    <rect x="4.15" y="3.5" width="8.5" height="3" rx="0.9" fill="#f8fffc"/>
+    <rect x="4.15" y="7.45" width="6.75" height="2.55" rx="0.82" fill="#f8fffc"/>
+  </svg>`;
+  }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
     <defs>
       <linearGradient id="bg" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#23dcc8"/>
-        <stop offset="0.48" stop-color="#0f766e"/>
-        <stop offset="1" stop-color="#08231f"/>
+        <stop offset="0.55" stop-color="#0d8b7d"/>
+        <stop offset="1" stop-color="#07544b"/>
       </linearGradient>
     </defs>
-    <rect x="2" y="2" width="28" height="28" rx="${isTiny ? 6 : 7.5}" fill="url(#bg)"/>
-    <path d="M5 3.5h10.8C9.2 5.4 5.6 10 5 17.4c-0.7-4.1-0.6-9.2 0-13.9Z" fill="#ffffff" opacity="0.13"/>
-    <rect x="8" y="7" width="5.8" height="18.4" rx="1.8" fill="#f8fffc"/>
-    <rect x="8" y="7" width="16.8" height="5.8" rx="2.1" fill="#f8fffc"/>
-    <rect x="8" y="14.9" width="13.2" height="5.2" rx="1.9" fill="#f8fffc"/>
+    <rect x="2" y="2" width="28" height="28" rx="7.5" fill="url(#bg)"/>
+    <path d="M5 3.5h11.2C9.2 5.3 5.7 9.8 5.1 17.4c-0.75-4.1-0.65-9.2-0.1-13.9Z" fill="#ffffff" opacity="0.14"/>
+    <rect x="7.4" y="6.6" width="6.4" height="19" rx="1.9" fill="#f8fffc"/>
+    <rect x="7.4" y="6.6" width="17.3" height="6.3" rx="2.2" fill="#f8fffc"/>
+    <rect x="7.4" y="14.5" width="14.3" height="5.5" rx="1.9" fill="#f8fffc"/>
   </svg>`;
 }
 
