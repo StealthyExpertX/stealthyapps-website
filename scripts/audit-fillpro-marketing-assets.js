@@ -249,12 +249,13 @@ function checkRenderer() {
     'Save once. Fill the next long form.',
     'Pick a profile. Check every field before you submit.',
     'Fields fill while you watch.',
-    'Password stays out of it.',
+    'Review before submit.',
+    'Sign-ins stay with your password manager.',
     'Applications with uploads.',
     'Messy forms are part of the job.',
     'No account for core filling.',
     'Start free with three profiles.',
-    'Password skipped',
+    'Sign-in untouched',
     'careers.example/apply',
     'app.example/trial',
     'Upload matched',
@@ -270,6 +271,9 @@ function checkRenderer() {
   }
   if (/Keep submit in your hands/i.test(source)) {
     fail(`${relativePath}: first-frame copy uses awkward submit phrasing`);
+  }
+  if (/Password stays out of it|Password skipped/i.test(source)) {
+    fail(`${relativePath}: video should use calmer sign-in boundary language`);
   }
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);
@@ -306,6 +310,8 @@ function checkStillRenderer() {
     'Undo the last fill before you submit.',
     'Fill repeat forms without handing over your data.',
     'brandPromo',
+    'promo-row',
+    'alex-morgan.pdf',
     'smallIconSvg',
   ];
   for (const needle of required) {
@@ -325,6 +331,9 @@ function checkStillRenderer() {
   }
   if (/real workflows|Clean fallback/i.test(source)) {
     fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
+  }
+  if (/promo-line/i.test(source)) {
+    fail(`${relativePath}: promo tiles should use concrete product rows, not generic bars`);
   }
 }
 

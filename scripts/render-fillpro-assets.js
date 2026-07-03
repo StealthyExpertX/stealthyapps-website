@@ -484,12 +484,40 @@ const css = `
     color: #10231f;
     font-size: 18px;
   }
-  .promo-line {
-    height: 18px;
-    border-radius: 999px;
-    background: #d9e8e2;
+  .promo-row {
+    min-height: 34px;
+    display: grid;
+    grid-template-columns: 58px minmax(0, 1fr);
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px;
+    border: 1px solid #d9e8e2;
+    border-radius: 8px;
+    background: #f8fbf8;
+    color: #60726b;
+    font-size: 12px;
+    font-weight: 850;
   }
-  .promo-line.fill { background: linear-gradient(90deg, #5eeadd, #0f766e); }
+  .promo-row b {
+    min-width: 0;
+    overflow: hidden;
+    color: #10231f;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .promo-cta {
+    min-height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0f766e, #0a5f59);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 950;
+    box-shadow: 0 16px 30px rgba(15, 118, 110, 0.22);
+  }
   .promo-marquee .brand-lockup img { width: 104px; height: 104px; }
   .promo-marquee .brand-lockup span { font-size: 62px; }
   .promo-marquee .brand-panel { transform: translateY(-2px); }
@@ -502,7 +530,14 @@ const css = `
     border-radius: 14px;
   }
   .promo-marquee .promo-product strong { font-size: 28px; }
-  .promo-marquee .promo-line { height: 24px; }
+  .promo-marquee .promo-row {
+    min-height: 48px;
+    grid-template-columns: 92px minmax(0, 1fr);
+    padding: 10px 13px;
+    font-size: 16px;
+  }
+  .promo-marquee .promo-row b { font-size: 17px; }
+  .promo-marquee .promo-cta { min-height: 54px; font-size: 19px; }
 `;
 
 function chromeFrame(url, inner) {
@@ -570,10 +605,10 @@ function promoProduct(label = 'Fill Page') {
   return `
     <div class="promo-product">
       <strong>${label}</strong>
-      <div class="promo-line fill" style="width:76%;"></div>
-      <div class="promo-line fill" style="width:92%;"></div>
-      <div class="promo-line" style="width:64%;"></div>
-      <div class="promo-line fill" style="width:86%;"></div>
+      <div class="promo-row"><span>Name</span><b>Alex Morgan</b></div>
+      <div class="promo-row"><span>Email</span><b>alex@example.com</b></div>
+      <div class="promo-row"><span>Resume</span><b>alex-morgan.pdf</b></div>
+      <div class="promo-cta">Fill Page</div>
     </div>`;
 }
 

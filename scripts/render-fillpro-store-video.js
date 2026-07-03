@@ -561,7 +561,7 @@ const html = `<!doctype html>
   function copyFor(t) {
     if (t < 4.4) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
     if (t < 8.2) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
-    if (t < 11.8) return ['Review', 'Password stays out of it.', 'Check the page, then submit when you are ready.'];
+    if (t < 11.8) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 13.4) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 15.8) return ['Modern forms', 'Messy forms are part of the job.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
     if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay local to your browser unless you export them.'];
@@ -569,8 +569,8 @@ const html = `<!doctype html>
   }
 
   function proofFor(t) {
-    if (t < 8.2) return ['4 fields filled', 'Upload matched', 'Password skipped'];
-    if (t < 13.4) return ['Review first', 'Password skipped', 'Undo ready'];
+    if (t < 8.2) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
+    if (t < 13.4) return ['Review first', 'Sign-in untouched', 'Undo ready'];
     if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
     if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
     return ['3 profiles free', 'Review first', 'No account for core use'];
@@ -631,7 +631,7 @@ const html = `<!doctype html>
       const count = filledCount(t);
       return [
         count < 4 ? 'Filling the repeat work.' : 'Ready to review.',
-        count < 4 ? 'Name, email, company, and upload fields fill from the selected profile.' : 'Password stays with the browser or password manager.',
+        count < 4 ? 'Name, email, company, and upload fields fill from the selected profile.' : 'Sign-ins stay with the browser or password manager.',
         [String(Math.min(count, 4)), 'fields'],
         [count >= 4 ? '1' : '0', 'upload'],
         ['0', 'passwords'],

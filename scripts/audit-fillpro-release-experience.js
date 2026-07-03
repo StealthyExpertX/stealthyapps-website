@@ -121,6 +121,9 @@ async function auditPage(page, route, viewport, theme, errors) {
         null,
         { timeout: 5000 },
       );
+      await page.locator('.launch-hero').screenshot({
+        path: path.join(OUT_DIR, `hero-visual-${viewport.name}-${theme}.png`),
+      });
       const canvas = page.locator('.hero-3d-canvas');
       const canvasPath = path.join(OUT_DIR, `hero-3d-${viewport.name}-${theme}.png`);
       await canvas.screenshot({ path: canvasPath });

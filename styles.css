@@ -2453,10 +2453,10 @@ textarea:focus-visible {
 
 .hero-3d-canvas {
   position: absolute;
-  inset: -68px -72px -44px auto;
+  inset: -48px -28px -34px auto;
   z-index: -1;
-  width: min(76vw, 900px);
-  height: calc(100% + 112px);
+  width: min(64vw, 780px);
+  height: calc(100% + 82px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 500ms ease;
@@ -3729,22 +3729,22 @@ textarea:focus-visible {
   }
 
   .hero-3d-canvas {
-    inset: auto -118px 88px auto;
-    width: min(580px, 142vw);
-    height: 430px;
+    inset: 490px -92px auto auto;
+    width: min(500px, 126vw);
+    height: 300px;
   }
 
   .js-enhanced.hero-3d-ready .hero-3d-canvas {
-    opacity: 0.28;
+    opacity: 0.16;
   }
 
   :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-    opacity: 0.36;
+    opacity: 0.22;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-      opacity: 0.36;
+      opacity: 0.22;
     }
   }
 
@@ -3764,18 +3764,7 @@ textarea:focus-visible {
   }
 
   .launch-proof {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-    margin-top: 4px;
-  }
-
-  .launch-proof div {
-    min-height: 64px;
-    padding: 10px 12px;
-  }
-
-  .launch-proof dt {
-    font-size: 17px;
+    display: none;
   }
 
   .demo-signal {
