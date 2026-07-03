@@ -156,7 +156,8 @@ function checkRenderer() {
     'motion-rail',
     'Mute-safe captions',
     'Blank form to review-ready.',
-    'Fill the repeat fields.',
+    'Fill the repeated fields.',
+    'Review everything before submit.',
     'Less retyping on applications.',
     'Built for messy forms.',
     'Profiles stay in FillPro.',
@@ -174,6 +175,9 @@ function checkRenderer() {
   }
   if (/slideshow|slide deck|stitched slides/i.test(source)) {
     fail(`${relativePath}: renderer should remain motion-first, not a stitched slideshow`);
+  }
+  if (/Keep submit in your hands/i.test(source)) {
+    fail(`${relativePath}: first-frame copy uses awkward submit phrasing`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -194,11 +198,15 @@ function checkStillRenderer() {
     'fillpro-screenshot-undo-1280x800.png',
     'fillpro-small-promo-440x280.png',
     'fillpro-marquee-1400x560.png',
+    'Review everything before submit.',
     'brandPromo',
     'smallIconSvg',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
+  }
+  if (/Keep submit in your hands/i.test(source)) {
+    fail(`${relativePath}: first screenshot copy uses awkward submit phrasing`);
   }
   if (/Fill repeated forms faster\./.test(source)) {
     fail(`${relativePath}: small promo should be brand-forward, not a text-heavy mini ad`);

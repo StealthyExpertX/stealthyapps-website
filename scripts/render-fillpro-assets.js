@@ -560,7 +560,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>From blank form to final review.</h1><p class="sub">Pick a saved profile. Fill the repeat fields. Keep submit in your hands.</p></div>
+      <div><h1>From blank form to final review.</h1><p class="sub">Pick a saved profile. Fill the repeated fields. Review everything before submit.</p></div>
       ${chromeFrame('Vendor onboarding', beforeAfter())}
     </main>`,
   );

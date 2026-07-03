@@ -559,7 +559,7 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 11.8) return ['Private autofill', 'From blank form to final review.', 'Pick a saved profile. Fill the repeat fields. Keep submit in your hands.'];
+    if (t < 11.8) return ['Private autofill', 'From blank form to final review.', 'Pick a saved profile. Fill the repeated fields. Review everything before submit.'];
     if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.'];
     if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
