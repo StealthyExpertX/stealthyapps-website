@@ -22,7 +22,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | --- | ---: | --- |
 | Automated local release gate | 100/100 | The repeatable gate passes: extension tests, popup UI captures, fill-engine tests, 1009 corpus fixtures, site checks, marketing asset audit, visual baselines, and zip audit. |
 | Extension functional readiness | 96/100 | Strong for v1.0.0. Remaining risk is real-world browser/profile diversity and pages with hostile frames, anti-bot, or unusual enterprise controls. |
-| Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
+| Extension popup visual craft | 92/100 | Cleaner after the editor stopped leading with warning copy and the free-plan block became a calmer profile meter. It is still constrained by the small browser-popup surface and not yet proven by real first-session retention. |
 | Website first viewport | 93/100 | Clear promise, demo proof, CTA, and browser links. The WebGL layer now supports the real product demo instead of competing with it. Remaining gap is live preference testing against alternate hero treatments. |
 | Website full-page craft | 92/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface and calming the first-viewport 3D layer. Remaining gap is still top-studio creative art direction and live preference testing. |
 | Three.js hero scene | 94/100 | Rebuilt from a busy product diagram into a restrained premium depth layer: one translucent glass stage, one profile signal, one readable fill path, and one soft review halo behind the actual demo. It now renders cleanly in light/dark desktop/mobile, has direct WebGL pixel proof, and respects reduced motion. Remaining gap: not yet A/B tested against a no-3D or real-UI-only hero. |
@@ -57,6 +57,8 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added hero-source audit guards for the simplified focal composition and WebGL cleanup, and guards that reject the old stacked-card, upload-badge, review-badge, particle-heavy scene.
 - Recut the store video/still opener from "Save once. Fill the next long form." to "Save your details once." with plainer follow-up copy.
 - Added distinct dark video scenes for review, privacy, and control, then fixed inherited text color so product-card titles stay readable in dark scenes.
+- Reworked the popup profile editor from warning-led copy into a compact setup strip: save only what repeats, blank fields are ignored, and sign-ins stay separate.
+- Softened the popup free-plan summary into a calmer "Free profiles" usage meter and added release-audit guards so the old warning-led editor copy does not return.
 
 ## What Blocks A Real 100
 
