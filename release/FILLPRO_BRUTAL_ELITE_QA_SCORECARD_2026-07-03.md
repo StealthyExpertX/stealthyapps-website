@@ -32,13 +32,13 @@ Sources checked during this pass:
 | QA evidence | 98/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 91/100 | Clean, trustworthy, and above most extension sites. Still more polished utility page than top-tier 3D agency launch. |
 | Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
-| Extension popup UI craft | 88/100 | Practical, readable, and safer than competitors. Still constrained and dense; not at the level of a bespoke paid SaaS app surface. |
+| Extension popup UI craft | 90/100 | The saved-profile card now has stronger hierarchy, a cleaner primary action, and less cramped secondary controls. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 87/100 | 128/512 are solid; 16/32 now use optical variants. Remaining gap is professional brand-testing and multiple search-result icon variants. |
 | Store screenshots | 88/100 | Improved hook and stronger first-frame promise. Still generated product-frame creative rather than live-tested best-in-class store art. |
 | Store demo video | 86/100 | Clearer first frame and better proof cards. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
 | ASO/store metadata | 91/100 | Natural keyword coverage, 22 locales, narrow permission claims, and accurate privacy language. Remaining gap is post-approval keyword/rank feedback. |
 | Competitive positioning | 90/100 | Stronger privacy/trust discipline than FormFiller and Fill Hero pages reviewed. Less loud than Fill Hero and less store-CTA-forward than FormFiller. |
-| Market-facing creative certainty | 89/100 | Releaseable and professional. Not provably 100 until store analytics show it beats alternatives. |
+| Market-facing creative certainty | 90/100 | Releaseable and professional. The product surface is cleaner after the popup pass, but it is not provably 100 until store analytics show it beats alternatives. |
 
 ## Changes Made In This Pass
 
@@ -48,6 +48,8 @@ Sources checked during this pass:
 - Increased light-mode hero WebGL visibility so the product surface feels less flat.
 - Added an optical 16px extension icon variant that keeps the toolbar mark clean.
 - Kept a 32px icon variant with the checkmark for stronger identity at extension-manager scale.
+- Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
+- Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Regenerated marketplace screenshots, promo images, video thumbnail, MP4, icon PNGs, and the review sheets.
 - Re-locked the 19-asset visual baseline after manual visual inspection.
 
