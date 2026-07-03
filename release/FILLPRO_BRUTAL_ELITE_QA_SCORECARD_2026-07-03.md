@@ -4,6 +4,8 @@ Updated: 2026-07-03
 
 This scorecard separates deterministic release readiness from market-facing creative quality. A local test can pass at 100/100. A logo, screenshot set, landing page, or video cannot honestly be called 100/100 until it wins with real store impressions, installs, retention, reviews, and paid conversion data.
 
+For the harsher cold-buyer scoring pass, see `FILLPRO_BRUTAL_QUALITY_AUDIT_2026-07-03.md`.
+
 ## Research Standard Used
 
 - Store screenshots should make the first frames answer: what it does, why to believe it, and why it is worth installing now.
@@ -133,6 +135,8 @@ These are the categories that can be proven locally before store traffic exists.
 - Reworked the modern-forms marketplace screenshot from framework/third-party language into plain field proof: dropdowns, checkboxes, radios, text areas, file uploads, late fields, nearby labels, and same-page sections.
 - Added a renderer guard so third-party form-builder phrasing, framework names, and ARIA jargon cannot return to the store screenshots unnoticed.
 - Reworded public product-page schema, local-autofill copy, and crawler summaries away from framework jargon and toward buyer-facing field support language: “Fills what autofill misses.”
+- Recut the store demo timing so sampled frames now show a distinct story arc: hook, fill, review, applications, autofill gaps, privacy, and free starter.
+- Reworked the 16px and 32px toolbar icon exports again with brighter color and simpler F geometry for clearer tiny-size scanning.
 
 ## Why This Is Not Scored 100 In Every Market Category
 

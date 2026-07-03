@@ -562,31 +562,31 @@ const html = `<!doctype html>
 
   function copyFor(t) {
     if (t < 1.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
-    if (t < 8.2) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
-    if (t < 11.8) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
-    if (t < 13.4) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
-    if (t < 15.8) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
+    if (t < 4.8) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
+    if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
+    if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
+    if (t < 13.2) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
     if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay local to your browser unless you export them.'];
     return ['Free starter', 'Start free with three profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
 
   function proofFor(t) {
-    if (t < 8.2) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
-    if (t < 13.4) return ['Review first', 'Sign-in untouched', 'Undo ready'];
-    if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
+    if (t < 4.8) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
+    if (t < 10.2) return ['Review first', 'Sign-in untouched', 'Undo ready'];
+    if (t < 13.2) return ['Dropdowns', 'Checkboxes', 'Late fields'];
     if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
     return ['3 profiles free', 'Review first', 'No account for core use'];
   }
 
   function formFor(t) {
-    if (t >= 13.4 && t < 15.8) {
+    if (t >= 10.2 && t < 13.2) {
       return {
         title: 'Modern signup',
         url: 'app.example/trial',
         fields: modernFields,
       };
     }
-    if (t >= 15.8) {
+    if (t >= 13.2) {
       return {
         title: 'Private fill review',
         url: 'partner.example/review',
@@ -610,7 +610,7 @@ const html = `<!doctype html>
   }
 
   function filledCount(t) {
-    if (t >= 13.4 && t < 15.8) return 5;
+    if (t >= 10.2 && t < 13.2) return 5;
     if (t < 1.55) return 0;
     if (t < 2.05) return 1;
     if (t < 2.65) return 2;
@@ -629,7 +629,7 @@ const html = `<!doctype html>
         ['0', 'passwords'],
       ];
     }
-    if (t < 11.8) {
+    if (t < 7.6) {
       const count = filledCount(t);
       return [
         count < 4 ? 'Filling the repeat work.' : 'Ready to review.',
@@ -639,10 +639,10 @@ const html = `<!doctype html>
         ['0', 'passwords'],
       ];
     }
-    if (t < 13.4) {
+    if (t < 10.2) {
       return ['Applications with uploads.', 'Name, email, company, and resume upload match from one profile.', ['Name', 'filled'], ['Resume', 'matched'], ['Sign-in', 'skipped']];
     }
-    if (t < 15.8) {
+    if (t < 13.2) {
       return ['Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 18.8) {

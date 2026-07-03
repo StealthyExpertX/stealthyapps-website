@@ -103,26 +103,26 @@
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s.mp4",
-      "bytes": 1035006,
-      "sha256": "4bec2ba3f4b50842d39b59cab2c978c87463d728316054f39c314f9dc47b14e4"
+      "bytes": 992972,
+      "sha256": "40bf27178dcb882d81bab4ecc60c16b6c253f006ffa2b4c2fab72e93adcd84d4"
     },
     {
       "file": "../fillpro/icons/icon16.png",
-      "bytes": 585,
-      "sha256": "c9cce5fedc7d043af43fba0e17a1f5530bdc643ad44b6cec57a39dcefff69139",
+      "bytes": 349,
+      "sha256": "3bc0f244050ddf1fb5097220c0548ad8af58405e7f60a05c522da89f65c0e8f1",
       "width": 16,
       "height": 16,
-      "meanLuma": 122.77,
-      "meanColorSpread": 74.65
+      "meanLuma": 139.62,
+      "meanColorSpread": 84.64
     },
     {
       "file": "../fillpro/icons/icon32.png",
-      "bytes": 1143,
-      "sha256": "c3727d786af6cbb3d112f8454f2c8c9a422fcd2ec95f1243f2233822be036937",
+      "bytes": 1013,
+      "sha256": "76b7eacc87cb0e39d86a07f0fc554fa9e49e5b95f64f465d511a03a78772eb86",
       "width": 32,
       "height": 32,
-      "meanLuma": 122,
-      "meanColorSpread": 72.41
+      "meanLuma": 129.17,
+      "meanColorSpread": 70.58
     },
     {
       "file": "../fillpro/icons/icon48.png",
