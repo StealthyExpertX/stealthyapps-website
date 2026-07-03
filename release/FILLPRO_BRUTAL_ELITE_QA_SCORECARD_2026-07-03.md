@@ -21,6 +21,9 @@ Sources checked during this pass:
 - App Launchpad 2026 app-store screenshot and preview guidance on silent video, real product interaction, and licensed/self-owned assets
 - SmoothCapture 2026 preview-video guidance on 20-25 second demos, strong poster frames, and avoiding blank/logo-only openings
 - yellowHEAD app-preview guidance on the first 3-5 seconds, muted viewing, brand clarity, and showing the product rather than a generic promo
+- Plasmo extension UX guidance on showing value in context and making pin/current-tab use obvious
+- AdoptKit Chrome-extension onboarding guidance on the install-to-first-use gap, tiny popup surfaces, and permission friction
+- Formbricks 2026 onboarding guidance on interactive first actions beating passive explanation for retention
 - AppTweak 2025 screenshot guidance: first screenshots, short benefit captions, visible UI proof, dark-mode/localized variants, and A/B testing matter most.
 - AppScreens, App Store Screenshot Optimization Playbook for 2026
 - AppScreenshotStudio, First Three App Store Screenshots
@@ -45,9 +48,9 @@ These are the categories that can be proven locally before store traffic exists.
 | Category | Score | Evidence |
 | --- | ---: | --- |
 | Website readiness | 100/100 | Site audit, metadata audit, rendered route checks, light/dark desktop/mobile screenshots, footer/nav consistency checks, JSON-LD checks, and visual baselines pass. |
-| Extension readiness | 100/100 | Serialization, payment states, popup UI states, release audit, fill engine, PDF/CSV/document upload tests, and 1009-site corpus all pass. |
+| Extension readiness | 100/100 | Serialization, payment states, 6 popup UI states, release audit, fill engine, PDF/CSV/document upload tests, and 1009-site corpus all pass. |
 | Store metadata / ASO readiness | 100/100 | Release docs, 22 locales, natural keyword coverage, accurate privacy claims, no broad host permission claim, screenshots, promo tiles, and video are aligned with the current product. |
-| Marketing asset QA evidence | 100/100 | 11 generated images, 1 H.264 MP4, 2 renderer audits, 7 icon checks, 19 locked visual baselines, and manual review sheets are current. |
+| Marketing asset QA evidence | 100/100 | 11 generated images, 1 H.264 MP4, 2 renderer audits, 7 icon checks, 19 locked visual baselines, 6 popup UI captures, and manual review sheets are current. |
 | Overall local release readiness | 100/100 | Full `npm run verify:fillpro-release` passed, then Chrome/Edge/Firefox zips were rebuilt at v1.0.0 and passed `AUDIT_FILLPRO_ZIPS.js`. |
 
 ## Current Scores After This Pass
@@ -58,10 +61,10 @@ These are the categories that can be proven locally before store traffic exists.
 | Website technical QA | 100/100 | Static audit, metadata, routes, responsive captures, light/dark checks, and CSP-sensitive scripts pass locally. |
 | Extension technical QA | 100/100 | Serialization, payment states, release audit, fill engine, uploads, privacy boundaries, and package checks pass locally. |
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
-| QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, and popup UI state captures. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
+| QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, and 6 popup UI state captures. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 95/100 | Clean, trustworthy, and above most extension sites. The first viewport now has a sharper human headline, clearer Start free CTA, better browser-link affordances, stronger dark/light consistency, and rendered proof. Remaining gap is live user preference data against alternate hero treatments. |
 | Website conversion clarity | 95/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. The page now leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
-| Extension popup UI craft | 92/100 | The popup now keeps first-run focused on profile creation, tucks lower-frequency tools behind a drawer, and has repeatable light/dark/editor visual captures. Still constrained by the browser-popup surface and not yet validated by real user retention. |
+| Extension popup UI craft | 94/100 | The popup now makes the first win clearer: a concrete saved-profile preview, one Create profile action, proof chips for save/fill/review, quieter secondary controls, and repeatable light/dark/editor captures. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 91/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity and generated icon dimensions are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
 | Store screenshots | 95/100 | The first three screenshots now carry the product job, messy-form support, and profile organization in concrete language. The privacy screenshot has a thumbnail-safe promise: “No account for core filling.” Remaining gap is live screenshot ordering/A-B evidence. |
 | Store demo video | 95/100 | The 22-second muted MP4 now reaches visible filling by frame 3, shows password-skip review by frame 4, covers uploads and messy forms, and ends on a cleaner free-starter CTA. Still lacks live first-three-second variant data. |
@@ -79,9 +82,14 @@ These are the categories that can be proven locally before store traffic exists.
 - Rebuilt the master FillPro icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
 - Added an automated icon-system audit that blocks website/extension SVG drift and verifies generated icon dimensions from 16px through 1024px.
 - Added a Playwright popup UI audit for profile, empty, editor, light, and dark states.
+- Expanded the popup UI audit from 4 to 6 captures by adding empty-dark and editor-dark states.
 - Hid the plan card until a user has at least one profile, keeping first run focused on creating value before upgrade prompts.
 - Moved lower-frequency popup utilities into a collapsed “More tools” drawer to reduce first-screen clutter.
 - Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
+- Reworked the empty popup preview from grey skeleton bars into real example fields plus a Fill Page action.
+- Replaced the loose right-click tip with tighter “Save once / Fill a page / Review first” proof chips.
+- Visually demoted profile secondary actions so the Fill Page action owns each profile card.
+- Replaced “unlocked” plan wording with plain Pro copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Reworked the product-page hero from “Fill the forms you keep seeing” to “Stop retyping the same form details” for a clearer, more human first impression.
 - Changed the first product-page CTA from “Download FillPro” to “Start free” while keeping the browser download route behind it.
