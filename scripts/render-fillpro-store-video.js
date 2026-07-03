@@ -563,14 +563,14 @@ const html = `<!doctype html>
     if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.'];
     if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
-    return ['Review and recover', 'Undo before you submit.', 'See what changed, back it out, or send a short report when a page needs a better rule.'];
+    return ['Free starter', 'Start with three saved profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
 
   function proofFor(t) {
     if (t < 13.4) return ['4 fields filled', 'Upload matched', 'Password skipped'];
     if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
     if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
-    return ['Review first', 'Undo ready', 'Send a quick report'];
+    return ['3 profiles free', 'Review first', 'No account for core use'];
   }
 
   function formFor(t) {
@@ -643,7 +643,7 @@ const html = `<!doctype html>
     if (t < 18.8) {
       return ['Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
-    return ['Start free. Keep control.', 'Three saved profiles are included. Review every fill before the form leaves the page.', ['3', 'profiles'], ['Undo', 'ready'], ['Review', 'first']];
+    return ['Start free. Keep control.', 'Three profiles are included. Core filling needs no account.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
   }
 
   function renderFields(t) {

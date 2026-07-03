@@ -160,13 +160,13 @@ function checkRenderer() {
     'Less retyping on applications.',
     'Built for messy forms.',
     'Profiles stay in FillPro.',
-    'Undo before you submit.',
+    'Start with three saved profiles.',
     'Password skipped',
     'careers.example/apply',
     'app.example/trial',
     'Upload matched',
     'Review before submit',
-    'Send a quick report',
+    'No account for core use',
     'Use your password manager',
   ];
   for (const needle of required) {
