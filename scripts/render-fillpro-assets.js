@@ -822,24 +822,21 @@ async function renderIcons() {
 
 function smallIconSvg(size) {
   const isTiny = size <= 16;
-  const stroke = isTiny ? 2.2 : 2.6;
-  const radius = isTiny ? 3 : 6;
+  const radius = isTiny ? 3.25 : 7;
   const fPath = isTiny
-    ? 'M5 4h7.6v2.4H7.7v2.1h4.4v2.2H7.7V14H5V4Z'
-    : 'M9.5 7.6h14v4.2h-9v3.4h7.5v4h-7.5v6.1h-5V7.6Z';
-  const checkPath = isTiny ? 'M10.2 12.1l1.5 1.5 3.2-3.9' : 'M19.5 23.5l2.6 2.5 5.7-7';
+    ? 'M4.5 3.35h8.05v2.6H7.25v2.05h4.55v2.35H7.25v3.95H4.5V3.35Z'
+    : 'M8.25 6.45h15.6v4.65h-10v3.35h8.15v4.35h-8.15v7H8.25V6.45Z';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" shape-rendering="geometricPrecision">
     <defs>
       <linearGradient id="bg" x1="1" y1="1" x2="${size - 1}" y2="${size - 1}" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#20d6c2"/>
-        <stop offset="0.56" stop-color="#0f766e"/>
+        <stop offset="0.5" stop-color="#0f766e"/>
         <stop offset="1" stop-color="#08231f"/>
       </linearGradient>
     </defs>
-    <rect x="${isTiny ? 1 : 2}" y="${isTiny ? 1 : 2}" width="${size - (isTiny ? 2 : 4)}" height="${size - (isTiny ? 2 : 4)}" rx="${radius}" fill="url(#bg)"/>
+    <rect x="${isTiny ? 0.75 : 1.5}" y="${isTiny ? 0.75 : 1.5}" width="${size - (isTiny ? 1.5 : 3)}" height="${size - (isTiny ? 1.5 : 3)}" rx="${radius}" fill="url(#bg)"/>
+    <path d="M${isTiny ? 2.1 : 4.2} ${isTiny ? 1.5 : 3.1}h${isTiny ? 7.2 : 13.5}c-${isTiny ? 3.9 : 7.4} ${isTiny ? 1.05 : 2.1}-${isTiny ? 6.1 : 11.4} ${isTiny ? 3.6 : 7.3}-${isTiny ? 6.65 : 13.5} ${isTiny ? 7.2 : 14.2}c-${isTiny ? 0.7 : 1.2}-${isTiny ? 3.3 : 6.2}-${isTiny ? 0.45 : 0.9}-${isTiny ? 6.4 : 12} ${isTiny ? 0.55 : 1.2}-${isTiny ? 7.05 : 14.1}Z" fill="#ffffff" opacity="0.12"/>
     <path d="${fPath}" fill="#f8fffc"/>
-    ${isTiny ? '' : `<path d="${checkPath}" fill="none" stroke="#f8fffc" stroke-width="${stroke + 1.5}" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="${checkPath}" fill="none" stroke="#0a5f59" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round"/>`}
   </svg>`;
 }
 
