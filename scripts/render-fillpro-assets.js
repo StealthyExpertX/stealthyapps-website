@@ -222,8 +222,18 @@ const css = `
     font-size: 14px;
   }
   .privacy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .privacy-proof {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 18px;
+    min-height: 332px;
+  }
+  .privacy-proof .privacy-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
   .privacy-card {
-    min-height: 150px;
+    min-height: 136px;
     display: grid;
     align-content: end;
     gap: 10px;
@@ -232,6 +242,50 @@ const css = `
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
+  }
+  .privacy-proof .privacy-card {
+    min-height: 86px;
+    align-content: center;
+  }
+  .privacy-card strong { font-size: 18px; }
+  .privacy-card span {
+    color: rgba(255, 255, 255, 0.76);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.32;
+  }
+  .privacy-ledger {
+    display: grid;
+    gap: 12px;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at 92% 8%, rgba(94, 234, 221, 0.16), transparent 160px),
+      rgba(255, 255, 255, 0.07);
+  }
+  .privacy-ledger h2 {
+    margin: 0 0 2px;
+    color: #fff;
+    font-size: 25px;
+  }
+  .privacy-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 50px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.84);
+    font-size: 15px;
+    font-weight: 780;
+  }
+  .privacy-row strong {
+    color: #5eeadd;
+    white-space: nowrap;
   }
   .dark {
     background:
@@ -548,10 +602,19 @@ async function renderStaticAssets(browser) {
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
       <div><h1>Profiles stay in FillPro.</h1><p class="sub">No account is needed for the core workflow. You choose when to export, upgrade, or contact support.</p></div>
-      <div class="privacy-grid">
-        <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>
-        <div class="privacy-card"><strong>User-triggered fills</strong><span>FillPro runs after your click, shortcut, picker, or context menu action.</span></div>
-        <div class="privacy-card"><strong>Review before submit</strong><span>FillPro fills fields. You decide when the form leaves the page.</span></div>
+      <div class="privacy-proof">
+        <div class="privacy-grid">
+          <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>
+          <div class="privacy-card"><strong>Current-page action</strong><span>FillPro runs when you ask on the page you chose.</span></div>
+          <div class="privacy-card"><strong>Review before submit</strong><span>You decide when the form leaves the page.</span></div>
+        </div>
+        <div class="privacy-ledger">
+          <h2>What FillPro keeps out of the flow</h2>
+          <div class="privacy-row"><span>Passwords</span><strong>Use your manager</strong></div>
+          <div class="privacy-row"><span>Cards and CVCs</span><strong>Use the site wallet</strong></div>
+          <div class="privacy-row"><span>Final submit</span><strong>Always yours</strong></div>
+          <div class="privacy-row"><span>Support reports</span><strong>Send only what helps</strong></div>
+        </div>
       </div>
     </main>`,
   );

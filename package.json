@@ -3,6 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "review:marketing": "node scripts/render-fillpro-review-sheets.js",
     "test": "node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-release-experience.js",
     "test:experience": "node scripts/audit-fillpro-release-experience.js",
     "test:marketing": "node scripts/audit-fillpro-marketing-assets.js",
