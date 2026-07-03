@@ -27,25 +27,27 @@ import * as THREE from './vendor/three.module.min.js';
 
   renderer.setClearColor(0x000000, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+  if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+  }
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-  camera.position.set(0, 0.15, 9);
+  const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 100);
+  camera.position.set(0, 0.12, 9.4);
 
   const group = new THREE.Group();
-  group.position.set(0.78, -0.08, 0);
-  group.rotation.set(-0.08, -0.32, 0.04);
+  group.position.set(0.92, -0.02, 0);
+  group.rotation.set(-0.06, -0.24, 0.02);
   scene.add(group);
 
-  const ambient = new THREE.HemisphereLight(0xdffff7, 0x08231f, 1.8);
-  scene.add(ambient);
+  scene.add(new THREE.HemisphereLight(0xe9fff9, 0x061c19, 1.5));
 
-  const key = new THREE.DirectionalLight(0xffffff, 2.4);
-  key.position.set(3.4, 4.2, 5.2);
+  const key = new THREE.DirectionalLight(0xffffff, 2.1);
+  key.position.set(3.2, 4.4, 5.2);
   scene.add(key);
 
-  const rim = new THREE.PointLight(0x20d6c2, 3.6, 12);
-  rim.position.set(-2.6, 1.8, 2.8);
+  const rim = new THREE.PointLight(0x4af4df, 2.1, 11);
+  rim.position.set(-2.7, 1.7, 2.6);
   scene.add(rim);
 
   function roundedRectShape(width, height, radius) {
@@ -64,301 +66,189 @@ import * as THREE from './vendor/three.module.min.js';
     return shape;
   }
 
-  function roundedPanel(width, height, radius, material) {
-    const geometry = new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 20);
+  function transparentMaterial(color, opacity, roughness = 0.76) {
+    return new THREE.MeshStandardMaterial({
+      color,
+      roughness,
+      metalness: 0.08,
+      transparent: true,
+      opacity,
+      depthWrite: false,
+      side: THREE.DoubleSide,
+    });
+  }
+
+  function panel(width, height, radius, material, edgeOpacity = 0.1) {
+    const geometry = new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 18);
     const mesh = new THREE.Mesh(geometry, material);
-    const edge = new THREE.LineSegments(
-      new THREE.EdgesGeometry(geometry),
-      new THREE.LineBasicMaterial({
-        color: 0x9de7d7,
-        transparent: true,
-        opacity: 0.24,
-      }),
-    );
-    mesh.add(edge);
+    if (edgeOpacity > 0) {
+      mesh.add(
+        new THREE.LineSegments(
+          new THREE.EdgesGeometry(geometry),
+          new THREE.LineBasicMaterial({
+            color: 0xbaf7ec,
+            transparent: true,
+            opacity: edgeOpacity,
+          }),
+        ),
+      );
+    }
     return mesh;
   }
 
-  const materialPanel = new THREE.MeshStandardMaterial({
-    color: 0xf7fffb,
-    roughness: 0.82,
-    metalness: 0.08,
+  const glass = transparentMaterial(0xf9fffc, 0.18, 0.82);
+  const tealGlass = transparentMaterial(0x62f5e5, 0.12, 0.84);
+  const tealAccent = new THREE.MeshBasicMaterial({
+    color: 0x5eeadd,
     transparent: true,
-    opacity: 0.84,
-    side: THREE.DoubleSide,
+    opacity: 0.22,
+    depthWrite: false,
   });
-  const materialFilled = new THREE.MeshStandardMaterial({
-    color: 0x20d6c2,
-    roughness: 0.58,
-    metalness: 0.18,
-    transparent: true,
-    opacity: 0.82,
-    side: THREE.DoubleSide,
-  });
-  const materialInk = new THREE.MeshStandardMaterial({
-    color: 0x10231f,
-    roughness: 0.7,
-    metalness: 0.1,
-    transparent: true,
-    opacity: 0.82,
-    side: THREE.DoubleSide,
-  });
-  const materialGold = new THREE.MeshStandardMaterial({
+  const goldAccent = new THREE.MeshBasicMaterial({
     color: 0xf2c14e,
-    roughness: 0.42,
-    metalness: 0.28,
-  });
-  const materialGlow = new THREE.MeshBasicMaterial({
-    color: 0x5eeadd,
     transparent: true,
-    opacity: 0.34,
-    side: THREE.DoubleSide,
-  });
-  const materialFlow = new THREE.MeshBasicMaterial({
-    color: 0x5eeadd,
-    transparent: true,
-    opacity: 0.36,
-  });
-  const materialDepth = new THREE.MeshStandardMaterial({
-    color: 0xb7fff4,
-    roughness: 0.72,
-    metalness: 0.06,
-    transparent: true,
-    opacity: 0.14,
+    opacity: 0.22,
     depthWrite: false,
-    side: THREE.DoubleSide,
-  });
-  const materialSlateGlass = new THREE.MeshStandardMaterial({
-    color: 0x12352f,
-    roughness: 0.62,
-    metalness: 0.12,
-    transparent: true,
-    opacity: 0.24,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-  });
-  const materialSoftWhite = new THREE.MeshBasicMaterial({
-    color: 0xffffff,
-    transparent: true,
-    opacity: 0.28,
-    depthWrite: false,
-    side: THREE.DoubleSide,
   });
 
-  const depthPanels = [];
+  const heroCardStack = new THREE.Group();
+  group.add(heroCardStack);
+
+  const ambientCards = [];
   [
-    { x: 0.32, y: 0.26, z: -0.82, scale: 1.02, rotation: -0.018, material: materialDepth },
-    { x: 0.72, y: 0.08, z: -1.12, scale: 0.82, rotation: 0.035, material: materialSlateGlass },
-    { x: -0.18, y: 0.62, z: -1.28, scale: 0.62, rotation: -0.06, material: materialDepth.clone() },
-  ].forEach((panelConfig, index) => {
-    const panel = roundedPanel(4.5, 3.2, 0.2, panelConfig.material);
-    panel.position.set(panelConfig.x, panelConfig.y, panelConfig.z);
-    panel.rotation.z = panelConfig.rotation;
-    panel.scale.setScalar(panelConfig.scale);
-    panel.userData = { baseY: panelConfig.y, baseRotation: panelConfig.rotation };
-    if (index === 2) panel.material.opacity = 0.09;
-    group.add(panel);
-    depthPanels.push(panel);
+    { x: 0.08, y: 0.18, z: -0.72, scale: 1.06, rot: -0.04, opacity: 0.13 },
+    { x: 0.46, y: 0.02, z: -1.02, scale: 0.9, rot: 0.055, opacity: 0.09 },
+    { x: -0.34, y: 0.48, z: -1.22, scale: 0.72, rot: -0.095, opacity: 0.07 },
+  ].forEach((card) => {
+    const mesh = panel(4.8, 3.4, 0.26, tealGlass.clone(), 0.08);
+    mesh.material.opacity = card.opacity;
+    mesh.position.set(card.x, card.y, card.z);
+    mesh.rotation.z = card.rot;
+    mesh.scale.setScalar(card.scale);
+    mesh.userData = { baseY: card.y, baseRot: card.rot };
+    heroCardStack.add(mesh);
+    ambientCards.push(mesh);
   });
 
-  const reviewStack = new THREE.Group();
-  reviewStack.position.set(-1.04, -0.9, 0.22);
-  reviewStack.rotation.set(0.04, -0.08, -0.018);
-  reviewStack.scale.setScalar(0.72);
-  group.add(reviewStack);
+  const mainFormCard = panel(4.6, 3.16, 0.24, glass, 0.11);
+  mainFormCard.position.set(-0.06, 0.04, -0.46);
+  mainFormCard.rotation.z = 0.012;
+  heroCardStack.add(mainFormCard);
 
-  const reviewCardGeometry = new THREE.BoxGeometry(1.38, 0.3, 0.035);
-  const reviewCards = [];
-  for (let index = 0; index < 3; index += 1) {
-    const card = new THREE.Mesh(
-      reviewCardGeometry,
-      index === 0 ? materialFilled.clone() : materialSoftWhite.clone(),
-    );
-    card.material.opacity = index === 0 ? 0.28 : 0.22;
-    card.position.set(index * 0.1, index * 0.19, -index * 0.09);
-    card.rotation.z = -0.018 + index * 0.022;
-    reviewStack.add(card);
-    reviewCards.push(card);
+  const profileDock = panel(1.24, 1.82, 0.22, tealGlass.clone(), 0.08);
+  profileDock.position.set(2.18, 0.1, -0.38);
+  profileDock.rotation.set(0.02, -0.08, -0.02);
+  profileDock.material.opacity = 0.1;
+  group.add(profileDock);
 
-    const ruleLine = new THREE.Mesh(
-      new THREE.BoxGeometry(0.76 - index * 0.1, 0.035, 0.024),
-      index === 2 ? materialGold : materialInk,
-    );
-    ruleLine.position.set(-0.12, card.position.y, card.position.z + 0.03);
-    reviewStack.add(ruleLine);
-  }
+  const uploadBadge = panel(1.16, 0.34, 0.12, glass.clone(), 0.08);
+  uploadBadge.position.set(-0.58, -1.34, -0.22);
+  uploadBadge.material.opacity = 0.14;
+  group.add(uploadBadge);
 
-  const smartRuleChips = [];
-  for (let index = 0; index < 3; index += 1) {
-    const chip = roundedPanel(0.58, 0.18, 0.055, index === 1 ? materialGold : materialFilled);
-    chip.position.set(-1.48 + index * 0.56, 1.42, 0.46 - index * 0.04);
-    chip.scale.x = index === 2 ? 0.72 : 1;
-    group.add(chip);
-    smartRuleChips.push(chip);
-  }
+  const reviewBadge = panel(1.34, 0.44, 0.13, glass.clone(), 0.08);
+  reviewBadge.position.set(1.06, -1.24, -0.16);
+  reviewBadge.rotation.z = -0.03;
+  reviewBadge.material.opacity = 0.13;
+  group.add(reviewBadge);
 
-  const mainPanel = roundedPanel(4.5, 3.2, 0.18, materialPanel);
-  mainPanel.position.set(0.18, 0.1, -0.18);
-  group.add(mainPanel);
-
-  const profilePanel = roundedPanel(1.55, 1.95, 0.18, materialInk);
-  profilePanel.position.set(2.18, 0.08, 0.18);
-  group.add(profilePanel);
-
-  const rowGeometry = new THREE.BoxGeometry(2.9, 0.12, 0.028);
-  const shortGeometry = new THREE.BoxGeometry(1.42, 0.1, 0.026);
-  const rows = [];
-  for (let index = 0; index < 7; index += 1) {
-    const row = new THREE.Mesh(rowGeometry, index < 4 ? materialFilled : materialPanel);
-    row.position.set(-0.58, 1.08 - index * 0.37, 0.08 + index * 0.018);
-    row.scale.x = index === 2 ? 0.76 : index === 5 ? 0.64 : 1;
-    group.add(row);
-    rows.push(row);
-
-    const label = new THREE.Mesh(shortGeometry, materialInk);
-    label.position.set(-1.42, row.position.y + 0.15, row.position.z + 0.012);
-    label.scale.x = index % 2 ? 0.66 : 0.48;
-    group.add(label);
-  }
-
-  const profileBars = [];
-  for (let index = 0; index < 4; index += 1) {
-    const bar = new THREE.Mesh(shortGeometry, index === 0 ? materialGold : materialFilled);
-    bar.position.set(2.18, 0.74 - index * 0.34, 0.34);
-    bar.scale.x = index === 0 ? 0.62 : 0.82 - index * 0.08;
-    profilePanel.add(bar);
-    profileBars.push(bar);
-  }
-
-  const uploadChip = roundedPanel(1.12, 0.34, 0.08, materialPanel);
-  uploadChip.position.set(-0.2, -1.32, 0.28);
-  group.add(uploadChip);
-
-  const uploadLine = new THREE.Mesh(
-    new THREE.BoxGeometry(0.72, 0.055, 0.022),
-    materialGold,
-  );
-  uploadLine.position.set(-0.08, -1.32, 0.33);
-  group.add(uploadLine);
-
-  const cursorShape = new THREE.Shape();
-  cursorShape.moveTo(0, 0);
-  cursorShape.lineTo(0.34, -0.76);
-  cursorShape.lineTo(0.48, -0.44);
-  cursorShape.lineTo(0.8, -0.56);
-  cursorShape.lineTo(0.64, -0.22);
-  cursorShape.lineTo(0.9, -0.1);
-  cursorShape.closePath();
-  const cursor = new THREE.Mesh(
-    new THREE.ShapeGeometry(cursorShape),
-    new THREE.MeshStandardMaterial({
-      color: 0xf8fffc,
-      roughness: 0.5,
-      metalness: 0.14,
-      side: THREE.DoubleSide,
+  const confidenceRing = new THREE.Mesh(
+    new THREE.TorusGeometry(1.98, 0.012, 8, 112),
+    new THREE.MeshBasicMaterial({
+      color: 0x5eeadd,
+      transparent: true,
+      opacity: 0.16,
+      depthWrite: false,
     }),
   );
-  cursor.position.set(2.74, -0.28, 0.56);
-  cursor.scale.setScalar(0.42);
-  cursor.rotation.set(0.04, -0.12, -0.12);
-  group.add(cursor);
+  confidenceRing.position.set(0.42, -0.1, -0.6);
+  confidenceRing.rotation.set(0.16, 0.1, -0.24);
+  group.add(confidenceRing);
+
+  const goldArc = new THREE.Mesh(
+    new THREE.TorusGeometry(1.16, 0.014, 8, 84, Math.PI * 0.46),
+    goldAccent,
+  );
+  goldArc.position.set(1.6, -1.18, -0.28);
+  goldArc.rotation.set(0.2, 0.06, -0.62);
+  group.add(goldArc);
 
   const flowCurves = [
-    [new THREE.Vector3(1.54, 0.62, 0.32), new THREE.Vector3(0.72, 0.86, 0.34), new THREE.Vector3(-0.06, 1.02, 0.34)],
-    [new THREE.Vector3(1.54, 0.2, 0.32), new THREE.Vector3(0.56, 0.14, 0.36), new THREE.Vector3(-0.06, 0.32, 0.36)],
-    [new THREE.Vector3(1.54, -0.58, 0.32), new THREE.Vector3(0.58, -0.92, 0.36), new THREE.Vector3(-0.02, -1.3, 0.36)],
+    [new THREE.Vector3(1.84, 0.52, -0.18), new THREE.Vector3(0.64, 0.92, 0.02), new THREE.Vector3(-0.34, 0.56, -0.02)],
+    [new THREE.Vector3(1.82, 0.12, -0.18), new THREE.Vector3(0.55, 0.18, 0.03), new THREE.Vector3(-0.38, 0.08, -0.01)],
+    [new THREE.Vector3(1.72, -0.42, -0.18), new THREE.Vector3(0.36, -0.82, 0.02), new THREE.Vector3(-0.58, -1.3, -0.02)],
   ].map((points) => new THREE.CatmullRomCurve3(points));
 
   const flowLines = flowCurves.map((curve, index) => {
-    const line = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, 32, 0.014, 8, false),
-      materialFlow.clone(),
+    const mesh = new THREE.Mesh(
+      new THREE.TubeGeometry(curve, 42, 0.01, 8, false),
+      index === 2 ? goldAccent.clone() : tealAccent.clone(),
     );
-    line.material.opacity = 0.22 + index * 0.05;
-    group.add(line);
-    return line;
+    mesh.material.opacity = index === 2 ? 0.16 : 0.18;
+    group.add(mesh);
+    return mesh;
   });
 
-  const pulseGeometry = new THREE.SphereGeometry(0.064, 14, 14);
-  const pulseGlowGeometry = new THREE.SphereGeometry(0.105, 14, 14);
+  const pulseGeometry = new THREE.SphereGeometry(0.052, 14, 14);
+  const glowGeometry = new THREE.SphereGeometry(0.105, 14, 14);
   const flowPulses = flowCurves.map((curve, index) => {
-    const pulseGroup = new THREE.Group();
-    const pulse = new THREE.Mesh(
+    const pulse = new THREE.Group();
+    const color = index === 2 ? 0xf2c14e : 0x9ffcf0;
+    const core = new THREE.Mesh(
       pulseGeometry,
       new THREE.MeshBasicMaterial({
-        color: index === 2 ? 0xf0c86b : 0x9ffcf0,
+        color,
         transparent: true,
-        opacity: 0.84,
-      }),
-    );
-    const glow = new THREE.Mesh(
-      pulseGlowGeometry,
-      new THREE.MeshBasicMaterial({
-        color: index === 2 ? 0xf0c86b : 0x4af4df,
-        transparent: true,
-        opacity: 0.18,
+        opacity: 0.72,
         depthWrite: false,
       }),
     );
-    pulseGroup.add(glow, pulse);
-    pulseGroup.userData = {
+    const glow = new THREE.Mesh(
+      glowGeometry,
+      new THREE.MeshBasicMaterial({
+        color,
+        transparent: true,
+        opacity: 0.1,
+        depthWrite: false,
+      }),
+    );
+    pulse.add(glow, core);
+    pulse.userData = {
       curve,
-      offset: index * 0.27,
-      speed: 0.17 + index * 0.035,
+      offset: index * 0.3,
+      speed: 0.13 + index * 0.02,
+      core,
       glow,
-      pulse,
     };
-    group.add(pulseGroup);
-    return pulseGroup;
+    group.add(pulse);
+    return pulse;
   });
-
-  const checkPath = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(1.58, -1.17, 0.34),
-    new THREE.Vector3(1.92, -1.46, 0.38),
-    new THREE.Vector3(2.68, -0.72, 0.4),
-  ]);
-  const check = new THREE.Mesh(
-    new THREE.TubeGeometry(checkPath, 16, 0.035, 8, false),
-    new THREE.MeshStandardMaterial({
-      color: 0xf8fffc,
-      roughness: 0.36,
-      metalness: 0.18,
-    }),
-  );
-  group.add(check);
-
-  const halo = new THREE.Mesh(
-    new THREE.TorusGeometry(0.66, 0.012, 8, 72),
-    materialGlow,
-  );
-  halo.position.set(2.2, -1.12, 0.22);
-  halo.rotation.set(0.16, 0.12, -0.18);
-  group.add(halo);
 
   function seededRandom(seed) {
     const value = Math.sin(seed * 9301 + 49297) * 233280;
     return value - Math.floor(value);
   }
 
-  const particleGeometry = new THREE.SphereGeometry(0.026, 8, 8);
+  const particleGeometry = new THREE.SphereGeometry(0.02, 8, 8);
   const particleMaterial = new THREE.MeshBasicMaterial({
     color: 0x20d6c2,
     transparent: true,
-    opacity: 0.54,
+    opacity: 0.28,
+    depthWrite: false,
   });
-  const particles = new THREE.InstancedMesh(particleGeometry, particleMaterial, 84);
+  const quietParticles = new THREE.InstancedMesh(particleGeometry, particleMaterial, 36);
   const particleMatrix = new THREE.Matrix4();
   const particleOffsets = [];
-  for (let index = 0; index < 84; index += 1) {
+  for (let index = 0; index < 36; index += 1) {
     particleOffsets.push({
-      x: -2.9 + seededRandom(index + 1) * 5.9,
-      y: -1.72 + seededRandom(index + 21) * 3.55,
-      z: -0.88 + seededRandom(index + 41) * 0.78,
+      x: -2.65 + seededRandom(index + 1) * 5.15,
+      y: -1.52 + seededRandom(index + 21) * 3.02,
+      z: -1.12 + seededRandom(index + 41) * 0.54,
       phase: seededRandom(index + 61) * Math.PI * 2,
-      speed: 0.18 + seededRandom(index + 81) * 0.32,
+      speed: 0.12 + seededRandom(index + 81) * 0.18,
     });
   }
-  group.add(particles);
+  group.add(quietParticles);
 
   let pointerX = 0;
   let pointerY = 0;
@@ -386,64 +276,48 @@ import * as THREE from './vendor/three.module.min.js';
     }
 
     const seconds = time * 0.001;
-    pointerX += (targetX - pointerX) * 0.045;
-    pointerY += (targetY - pointerY) * 0.045;
+    pointerX += (targetX - pointerX) * 0.035;
+    pointerY += (targetY - pointerY) * 0.035;
 
-    group.rotation.y = -0.32 + pointerX * 0.15 + Math.sin(seconds * 0.32) * 0.025;
-    group.rotation.x = -0.08 - pointerY * 0.09 + Math.cos(seconds * 0.28) * 0.016;
-    group.position.y = -0.08 + Math.sin(seconds * 0.55) * 0.035;
-    halo.rotation.z = seconds * 0.22;
-    check.scale.setScalar(1 + Math.sin(seconds * 1.2) * 0.018);
+    group.rotation.y = -0.24 + pointerX * 0.08 + Math.sin(seconds * 0.24) * 0.012;
+    group.rotation.x = -0.06 - pointerY * 0.055 + Math.cos(seconds * 0.2) * 0.01;
+    group.position.y = -0.02 + Math.sin(seconds * 0.38) * 0.018;
+    heroCardStack.rotation.z = Math.sin(seconds * 0.18) * 0.006;
+    profileDock.position.y = 0.1 + Math.cos(seconds * 0.42) * 0.014;
+    uploadBadge.position.y = -1.34 + Math.sin(seconds * 0.48) * 0.012;
+    reviewBadge.position.y = -1.24 + Math.cos(seconds * 0.44) * 0.012;
+    confidenceRing.rotation.z = seconds * 0.09;
+    confidenceRing.material.opacity = 0.13 + Math.sin(seconds * 0.58) * 0.025;
+    goldArc.rotation.z = -0.62 + Math.sin(seconds * 0.34) * 0.025;
 
-    rows.forEach((row, index) => {
-      row.position.z = 0.08 + index * 0.018 + Math.sin(seconds * 1.1 + index) * 0.012;
+    ambientCards.forEach((card, index) => {
+      card.position.y = card.userData.baseY + Math.sin(seconds * 0.24 + index) * 0.016;
+      card.rotation.z = card.userData.baseRot + Math.cos(seconds * 0.21 + index) * 0.008;
     });
-
-    depthPanels.forEach((panel, index) => {
-      panel.rotation.z = panel.userData.baseRotation + Math.sin(seconds * 0.26 + index) * 0.018;
-      panel.position.y = panel.userData.baseY + Math.sin(seconds * 0.34 + index) * 0.026;
-    });
-
-    profileBars.forEach((bar, index) => {
-      bar.scale.x = (index === 0 ? 0.62 : 0.82 - index * 0.08) + Math.sin(seconds * 0.95 + index) * 0.025;
-    });
-
-    reviewCards.forEach((card, index) => {
-      card.position.x = index * 0.1 + Math.sin(seconds * 0.74 + index) * 0.025;
-      card.position.z = -index * 0.09 + Math.cos(seconds * 0.62 + index) * 0.018;
-    });
-
-    smartRuleChips.forEach((chip, index) => {
-      chip.position.y = 1.42 + Math.sin(seconds * 0.88 + index) * 0.018;
-      chip.rotation.z = Math.sin(seconds * 0.52 + index) * 0.018;
-    });
-
-    cursor.position.x = 2.74 + Math.sin(seconds * 0.8) * 0.035;
-    cursor.position.y = -0.28 + Math.cos(seconds * 0.68) * 0.025;
 
     flowLines.forEach((line, index) => {
-      line.material.opacity = 0.22 + Math.sin(seconds * 1.05 + index * 0.8) * 0.08;
+      line.material.opacity = (index === 2 ? 0.14 : 0.16) + Math.sin(seconds * 0.64 + index) * 0.025;
     });
 
     flowPulses.forEach((pulse, index) => {
       const progress = (seconds * pulse.userData.speed + pulse.userData.offset) % 1;
       pulse.position.copy(pulse.userData.curve.getPoint(progress));
-      pulse.userData.pulse.material.opacity = 0.62 + Math.sin(seconds * 1.8 + index) * 0.18;
-      pulse.userData.glow.material.opacity = 0.16 + Math.sin(seconds * 1.8 + index) * 0.05;
-      pulse.scale.setScalar(0.9 + Math.sin(seconds * 2.2 + index) * 0.14);
+      pulse.userData.core.material.opacity = 0.5 + Math.sin(seconds * 1.25 + index) * 0.14;
+      pulse.userData.glow.material.opacity = 0.08 + Math.sin(seconds * 1.25 + index) * 0.03;
+      pulse.scale.setScalar(0.9 + Math.sin(seconds * 1.4 + index) * 0.1);
     });
 
     for (let index = 0; index < particleOffsets.length; index += 1) {
       const point = particleOffsets[index];
       const drift = seconds * point.speed + point.phase;
       particleMatrix.makeTranslation(
-        point.x + Math.sin(drift) * 0.08,
-        point.y + Math.cos(drift * 0.9) * 0.06,
-        point.z + Math.sin(drift * 0.7) * 0.04,
+        point.x + Math.sin(drift) * 0.045,
+        point.y + Math.cos(drift * 0.88) * 0.04,
+        point.z + Math.sin(drift * 0.7) * 0.03,
       );
-      particles.setMatrixAt(index, particleMatrix);
+      quietParticles.setMatrixAt(index, particleMatrix);
     }
-    particles.instanceMatrix.needsUpdate = true;
+    quietParticles.instanceMatrix.needsUpdate = true;
 
     renderer.render(scene, camera);
   }
@@ -476,6 +350,11 @@ import * as THREE from './vendor/three.module.min.js';
     },
     { passive: true },
   );
+
+  window.addEventListener('pagehide', () => {
+    renderer.setAnimationLoop(null);
+    renderer.dispose();
+  });
 
   if ('ResizeObserver' in window) {
     const observer = new ResizeObserver(() => {

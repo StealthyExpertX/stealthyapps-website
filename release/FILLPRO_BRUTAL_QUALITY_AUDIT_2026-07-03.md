@@ -23,18 +23,18 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Automated local release gate | 100/100 | The repeatable gate passes: extension tests, popup UI captures, fill-engine tests, 1009 corpus fixtures, site checks, marketing asset audit, visual baselines, and zip audit. |
 | Extension functional readiness | 96/100 | Strong for v1.0.0. Remaining risk is real-world browser/profile diversity and pages with hostile frames, anti-bot, or unusual enterprise controls. |
 | Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
-| Website first viewport | 92/100 | Clear promise, demo proof, CTA, and browser links. It reads as polished indie SaaS, with better section landings and less sticky-header risk after this pass. |
-| Website full-page craft | 91/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface. Remaining gap is still top-studio creative art direction and live preference testing. |
-| Three.js hero scene | 89/100 | It renders, moves, supports reduced motion, and now shows layered form depth, profile-to-field transfer pulses, upload matching, smart-rule chips, a review stack, and a fill-action cursor. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
+| Website first viewport | 93/100 | Clear promise, demo proof, CTA, and browser links. The WebGL layer now supports the real product demo instead of competing with it. Remaining gap is live preference testing against alternate hero treatments. |
+| Website full-page craft | 92/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface and calming the first-viewport 3D layer. Remaining gap is still top-studio creative art direction and live preference testing. |
+| Three.js hero scene | 92/100 | Rebuilt from a busy product diagram into a restrained premium depth layer: translucent glass cards, subtle transfer ribbons, small pulses, and quiet particles behind the actual demo. It now renders cleanly in light/dark desktop/mobile and respects reduced motion. Remaining gap: not yet A/B tested against a no-3D or real-UI-only hero. |
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
-| Store screenshots | 91/100 | Clear, consistent, and technically clean. Screenshot 5 now has a distinct dark review/undo composition instead of repeating the first light browser-frame layout. The set is stronger, but still not a live-tested high-budget creative campaign. |
-| Store demo video | 91/100 | Recut into a cleaner story arc: hook, fill, review, upload, autofill gaps, privacy, user control, free starter. The repeated trust scene was removed and stiff "core filling" wording is blocked. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
+| Store screenshots | 92/100 | Clear, consistent, and technically clean. Screenshot 1 now opens with plainer human wording and Screenshot 5 has a distinct dark review/undo composition. The set is stronger, but still not a live-tested high-budget creative campaign. |
+| Store demo video | 93/100 | Recut into a more varied story arc with a stronger opening, dark review/privacy/control beats, visible fill value near the start, and fixed dark-scene product-card contrast. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
 | Logo/icon system | 90/100 | The large F/check mark is clear and consistent. The 16px/32px optical exports are improved, but icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
 | Accessibility / reduced motion | 95/100 | Strong local checks and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
-| Marketing QA evidence | 95/100 | Contact sheets, visual baselines, codec checks, renderer guards, and product-specific 3D source guards exist. Missing: external target-user critique and live A/B data. |
-| Overall market-facing quality | 91/100 | Submit-ready and much stronger than most extension sites, with stronger below-fold product proof. It is still not honestly 100 without live CTR, retention, review, paid-conversion, and external critique data. |
+| Marketing QA evidence | 96/100 | Contact sheets, visual baselines, codec checks, renderer guards, 3D screenshot checks, and source guards exist. Missing: external target-user critique and live A/B data. |
+| Overall market-facing quality | 92/100 | Submit-ready and much stronger than most extension sites, with calmer 3D direction and more varied store media. It is still not honestly 100 without live CTR, retention, review, paid-conversion, and external critique data. |
 
 ## Improvements Made In This Pass
 
@@ -52,8 +52,11 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added focused light/dark desktop/mobile screenshots and nonblank pixel checks for the review-before-submit section.
 - Fixed the proof-section mini browser dots so they no longer crowd the sample URL.
 - Added sticky-header scroll padding and section scroll margins so product sections land cleanly on mobile and desktop.
-- Added more product-specific Three.js depth: layered panels, a review stack, smart-rule chips, and a cursor cue, then tuned the opacity after visual inspection so the scene did not muddy the hero caption.
-- Added hero-source audit guards so those 3D proof elements cannot be accidentally removed while still passing the site audit.
+- Rebuilt the Three.js hero again after visual review showed the old layer was too complex and competed with the real demo card.
+- Replaced the busy dark panel/checkmark/product-diagram layer with a calmer premium support layer: translucent glass cards, subtle transfer ribbons, small pulses, and quiet particles.
+- Added hero-source audit guards for the simplified focal composition: hero card stack, main form card, profile dock, upload badge, review badge, confidence ring, quiet particles, flow lines, pulses, and WebGL cleanup.
+- Recut the store video/still opener from "Save once. Fill the next long form." to "Save your details once." with plainer follow-up copy.
+- Added distinct dark video scenes for review, privacy, and control, then fixed inherited text color so product-card titles stay readable in dark scenes.
 
 ## What Blocks A Real 100
 
@@ -66,7 +69,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - No real paid conversion or refund data.
 - No clean-profile browser matrix across Chrome, Edge, Firefox, Brave, and Vivaldi on separate machines.
 - No localized screenshot/video variants for the highest-value non-English markets.
-- The 3D hero is polished but not a premium centerpiece comparable to top venture-backed product pages.
+- The 3D hero is now tasteful as a support layer, but the site still lacks post-launch evidence that this hero beats a simpler real-UI-only treatment.
 
 ## Next Highest-Leverage Work
 

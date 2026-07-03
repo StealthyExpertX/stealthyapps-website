@@ -45,11 +45,34 @@ const html = `<!doctype html>
     height: 720px;
     overflow: hidden;
     isolation: isolate;
+    --scene-shift: 0px;
+    --mark-a-x: 0px;
+    --mark-a-y: 0px;
+    --mark-b-x: 0px;
+    --mark-b-y: 0px;
     background:
       radial-gradient(circle at var(--x, 72%) var(--y, 16%), rgba(20, 184, 166, 0.2), transparent 310px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.052) 1px, transparent 1px) 0 0 / 74px 74px,
       linear-gradient(180deg, rgba(15, 118, 110, 0.048) 1px, transparent 1px) 0 0 / 74px 74px,
       linear-gradient(135deg, #fbfdfb, #eef8f4 58%, #f8f4e9);
+  }
+  .frame.scene-review,
+  .frame.scene-private,
+  .frame.scene-control {
+    color: #f8fffc;
+    background:
+      radial-gradient(circle at var(--x, 70%) var(--y, 16%), rgba(94, 234, 221, 0.2), transparent 330px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.058) 1px, transparent 1px) 0 0 / 74px 74px,
+      linear-gradient(180deg, rgba(255, 255, 255, 0.052) 1px, transparent 1px) 0 0 / 74px 74px,
+      linear-gradient(135deg, #081b18 0%, #0d2c27 52%, #113a33 100%);
+  }
+  .frame.scene-start {
+    background:
+      radial-gradient(circle at 78% 18%, rgba(94, 234, 221, 0.26), transparent 330px),
+      radial-gradient(circle at 8% 78%, rgba(242, 193, 78, 0.18), transparent 310px),
+      linear-gradient(90deg, rgba(15, 118, 110, 0.052) 1px, transparent 1px) 0 0 / 74px 74px,
+      linear-gradient(180deg, rgba(15, 118, 110, 0.048) 1px, transparent 1px) 0 0 / 74px 74px,
+      linear-gradient(135deg, #fbfdfb, #e5f6f1 56%, #f7efd9);
   }
   .frame::before,
   .frame::after {
@@ -76,6 +99,68 @@ const html = `<!doctype html>
     box-shadow: 0 42px 120px rgba(16, 35, 31, 0.1);
     transform: rotate(-7deg) translateY(var(--plate-y, 0px));
   }
+  .kinetic-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.84;
+  }
+  .kinetic-layer span {
+    position: absolute;
+    display: block;
+    border: 1px solid rgba(15, 118, 110, 0.13);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 30px 80px rgba(16, 35, 31, 0.08);
+  }
+  .kinetic-layer span:nth-child(1) {
+    right: 228px;
+    top: 74px;
+    width: 198px;
+    height: 82px;
+    border-radius: 18px;
+    transform: translate3d(var(--mark-a-x), var(--mark-a-y), 0) rotate(-7deg);
+  }
+  .kinetic-layer span:nth-child(2) {
+    left: 430px;
+    bottom: 76px;
+    width: 260px;
+    height: 92px;
+    border-radius: 22px;
+    transform: translate3d(var(--mark-b-x), var(--mark-b-y), 0) rotate(8deg);
+  }
+  .scene-review .kinetic-layer span,
+  .scene-private .kinetic-layer span,
+  .scene-control .kinetic-layer span {
+    border-color: rgba(94, 234, 221, 0.14);
+    background: rgba(94, 234, 221, 0.06);
+    box-shadow: 0 40px 110px rgba(0, 0, 0, 0.24);
+  }
+  .scene-ribbon {
+    position: absolute;
+    left: 58px;
+    top: 96px;
+    z-index: 5;
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 12px;
+    border: 1px solid rgba(15, 118, 110, 0.17);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: #0f766e;
+    font-size: 12px;
+    font-weight: 950;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+  .scene-review .scene-ribbon,
+  .scene-private .scene-ribbon,
+  .scene-control .scene-ribbon {
+    border-color: rgba(94, 234, 221, 0.2);
+    background: rgba(94, 234, 221, 0.1);
+    color: #5eeadd;
+  }
   .brand {
     position: absolute;
     z-index: 4;
@@ -86,6 +171,11 @@ const html = `<!doctype html>
     gap: 13px;
     font-weight: 900;
     font-size: 27px;
+  }
+  .scene-review .brand,
+  .scene-private .brand,
+  .scene-control .brand {
+    color: #f8fffc;
   }
   .brand img {
     width: 62px;
@@ -105,6 +195,13 @@ const html = `<!doctype html>
     font-size: 14px;
     font-weight: 850;
   }
+  .scene-review .version,
+  .scene-private .version,
+  .scene-control .version {
+    border-color: rgba(94, 234, 221, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(248, 255, 252, 0.86);
+  }
   .copy {
     position: absolute;
     left: 58px;
@@ -122,6 +219,11 @@ const html = `<!doctype html>
     letter-spacing: 0.08em;
     text-transform: uppercase;
   }
+  .scene-review .eyebrow,
+  .scene-private .eyebrow,
+  .scene-control .eyebrow {
+    color: #5eeadd;
+  }
   h1 {
     margin: 0;
     font: 950 70px/0.9 "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
@@ -133,6 +235,11 @@ const html = `<!doctype html>
     font-size: 22px;
     line-height: 1.28;
     font-weight: 650;
+  }
+  .scene-review .sub,
+  .scene-private .sub,
+  .scene-control .sub {
+    color: rgba(248, 255, 252, 0.78);
   }
   .proof {
     display: flex;
@@ -148,6 +255,13 @@ const html = `<!doctype html>
     color: #38524b;
     font-size: 15px;
     font-weight: 850;
+  }
+  .scene-review .proof span,
+  .scene-private .proof span,
+  .scene-control .proof span {
+    border-color: rgba(94, 234, 221, 0.2);
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(248, 255, 252, 0.9);
   }
   .browser {
     position: absolute;
@@ -167,6 +281,14 @@ const html = `<!doctype html>
       translate3d(var(--browser-x, 0px), var(--browser-y, 0px), 0)
       scale(var(--browser-scale, 1));
     transform-origin: 72% 50%;
+  }
+  .scene-review .browser,
+  .scene-private .browser,
+  .scene-control .browser {
+    border-color: rgba(94, 234, 221, 0.16);
+    box-shadow:
+      0 54px 120px rgba(0, 0, 0, 0.34),
+      0 0 0 1px rgba(255, 255, 255, 0.08) inset;
   }
   .chrome {
     height: 44px;
@@ -195,9 +317,11 @@ const html = `<!doctype html>
     height: calc(100% - 44px);
     padding: 28px;
     background: linear-gradient(180deg, #ffffff, #f8fbf8);
+    color: #10231f;
   }
   .form-title {
     margin: 0 0 18px;
+    color: #10231f;
     font-size: 28px;
     line-height: 1;
     font-weight: 930;
@@ -459,6 +583,11 @@ const html = `<!doctype html>
     font-weight: 800;
     opacity: 0.86;
   }
+  .scene-review .footer-line,
+  .scene-private .footer-line,
+  .scene-control .footer-line {
+    color: rgba(248, 255, 252, 0.66);
+  }
   .fade {
     transition: none;
   }
@@ -466,8 +595,10 @@ const html = `<!doctype html>
 </head>
 <body>
 <main class="frame">
+  <div class="kinetic-layer" aria-hidden="true"><span></span><span></span></div>
   <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
   <div class="version">v1.0.0</div>
+  <div class="scene-ribbon" id="sceneRibbon">Private autofill</div>
   <section class="copy">
     <p class="eyebrow" id="eyebrow">Private autofill</p>
     <h1 id="headline">Save the profile once.</h1>
@@ -561,7 +692,7 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 1.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
+    if (t < 1.8) return ['Private autofill', 'Save your details once.', 'Pick a profile, fill the page, then review before you submit.'];
     if (t < 4.8) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
     if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
@@ -578,6 +709,26 @@ const html = `<!doctype html>
     if (t < 16) return ['No cloud profile', 'Current page', 'Export when needed'];
     if (t < 18.8) return ['Review first', 'Undo ready', 'Sign-in untouched'];
     return ['3 profiles free', 'Review first', 'No cloud profile'];
+  }
+
+  function sceneFor(t) {
+    if (t < 4.8) return 'scene-fill';
+    if (t < 7.6) return 'scene-review';
+    if (t < 10.2) return 'scene-upload';
+    if (t < 13.2) return 'scene-modern';
+    if (t < 16) return 'scene-private';
+    if (t < 18.8) return 'scene-control';
+    return 'scene-start';
+  }
+
+  function ribbonFor(t) {
+    if (t < 4.8) return 'One click fill';
+    if (t < 7.6) return 'Review first';
+    if (t < 10.2) return 'Resume upload';
+    if (t < 13.2) return 'Modern controls';
+    if (t < 16) return 'Saved here';
+    if (t < 18.8) return 'Undo ready';
+    return 'Free starter';
   }
 
   function formFor(t) {
@@ -679,6 +830,10 @@ const html = `<!doctype html>
   }
 
   window.renderFillProFrame = function renderFillProFrame(t) {
+    const frame = document.querySelector('.frame');
+    frame.className = 'frame ' + sceneFor(t);
+    document.getElementById('sceneRibbon').textContent = ribbonFor(t);
+
     const [eyebrow, headline, subline] = copyFor(t);
     document.getElementById('eyebrow').textContent = eyebrow;
     document.getElementById('headline').textContent = headline;
@@ -726,12 +881,16 @@ const html = `<!doctype html>
     cursor.style.setProperty('--cursor-y', y.toFixed(1) + 'px');
     cursor.style.setProperty('--cursor-opacity', opacity.toFixed(3));
 
-    document.querySelector('.frame').style.setProperty('--x', (62 + Math.sin(t * 0.55) * 12).toFixed(1) + '%');
-    document.querySelector('.frame').style.setProperty('--y', (16 + Math.cos(t * 0.45) * 8).toFixed(1) + '%');
-    document.querySelector('.frame').style.setProperty('--plate-y', (Math.sin(t * 0.45) * 10).toFixed(1) + 'px');
-    document.querySelector('.frame').style.setProperty('--browser-scale', (t < 1.1 ? 1.028 : t > 18.8 ? 1.01 : 1).toFixed(3));
-    document.querySelector('.frame').style.setProperty('--browser-x', (t > 13.4 && t < 15.8 ? '-10px' : '0px'));
-    document.querySelector('.frame').style.setProperty('--browser-y', (t > 18.8 ? '-6px' : '0px'));
+    frame.style.setProperty('--x', (62 + Math.sin(t * 0.55) * 12).toFixed(1) + '%');
+    frame.style.setProperty('--y', (16 + Math.cos(t * 0.45) * 8).toFixed(1) + '%');
+    frame.style.setProperty('--plate-y', (Math.sin(t * 0.45) * 10).toFixed(1) + 'px');
+    frame.style.setProperty('--mark-a-x', (Math.sin(t * 0.72) * 16).toFixed(1) + 'px');
+    frame.style.setProperty('--mark-a-y', (Math.cos(t * 0.64) * 10).toFixed(1) + 'px');
+    frame.style.setProperty('--mark-b-x', (Math.cos(t * 0.5) * 18).toFixed(1) + 'px');
+    frame.style.setProperty('--mark-b-y', (Math.sin(t * 0.58) * 12).toFixed(1) + 'px');
+    frame.style.setProperty('--browser-scale', (t < 1.1 ? 1.028 : t > 18.8 ? 1.01 : 1).toFixed(3));
+    frame.style.setProperty('--browser-x', (t > 13.4 && t < 15.8 ? '-10px' : '0px'));
+    frame.style.setProperty('--browser-y', (t > 18.8 ? '-6px' : '0px'));
     document.getElementById('progressRail').style.setProperty('--progress', ((t / ${DURATION}) * 100).toFixed(2) + '%');
 
     if (t > 18.8) {

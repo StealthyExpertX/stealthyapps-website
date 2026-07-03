@@ -248,8 +248,8 @@ function checkRenderer() {
     'motion-rail',
     'Mute-safe captions',
     'Blank form. Review-ready.',
-    'Save once. Fill the next long form.',
-    'Pick a profile. Check every field before you submit.',
+    'Save your details once.',
+    'Pick a profile, fill the page, then review before you submit.',
     'Fields fill while you watch.',
     'Review before submit.',
     'Sign-ins stay with your password manager.',
@@ -266,6 +266,11 @@ function checkRenderer() {
     'Review before submit',
     'No cloud profile',
     'Use your password manager',
+    'sceneFor',
+    'scene-ribbon',
+    'kinetic-layer',
+    'scene-private',
+    'scene-control',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
@@ -287,6 +292,12 @@ function checkRenderer() {
   }
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);
+  }
+  if (/Save once\. Fill the next long form\./i.test(source)) {
+    fail(`${relativePath}: first-frame headline should avoid the old repetitive launch line`);
+  }
+  if (!/sceneFor\(t\)/.test(source) || !/scene-private/.test(source) || !/scene-control/.test(source)) {
+    fail(`${relativePath}: video needs distinct scene art direction, not one repeated composition`);
   }
   if (/core filling|core use/i.test(source)) {
     fail(`${relativePath}: video should avoid stiff "core filling" account phrasing`);
@@ -319,8 +330,8 @@ function checkStillRenderer() {
     'fillpro-screenshot-undo-1280x800.png',
     'fillpro-small-promo-440x280.png',
     'fillpro-marquee-1400x560.png',
-    'Save once. Fill the next long form.',
-    'Pick a profile. Check every field before you submit.',
+    'Save your details once.',
+    'Pick a profile, fill the page, then review before you submit.',
     'Keep each repeat job separate.',
     'Fills what autofill misses.',
     'Undo before you submit.',
@@ -343,6 +354,9 @@ function checkStillRenderer() {
   }
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first screenshot copy should not use stiff repeated-fields phrasing`);
+  }
+  if (/Save once\. Fill the next long form\./i.test(source)) {
+    fail(`${relativePath}: first screenshot headline should avoid the old repetitive launch line`);
   }
   if (/core filling|core fill|core use/i.test(source)) {
     fail(`${relativePath}: still screenshots should avoid stiff "core" account phrasing`);
