@@ -25,16 +25,33 @@ const css = `
     color: #10231f;
     font-family: "Aptos", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
     background:
+      radial-gradient(circle at 84% 10%, rgba(94, 234, 221, 0.2), transparent 240px),
+      radial-gradient(circle at 12% 92%, rgba(242, 193, 78, 0.13), transparent 260px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 78px 78px,
       linear-gradient(180deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 78px 78px,
       linear-gradient(135deg, #fbfdfb, #edf7f3 54%, #f8f4e9);
   }
   .stage {
+    position: relative;
+    isolation: isolate;
     width: 100%;
     height: 100%;
     padding: 54px 64px;
     display: grid;
     gap: 26px;
+  }
+  .stage::before {
+    content: "";
+    position: absolute;
+    inset: 34px 42px;
+    z-index: -1;
+    pointer-events: none;
+    border: 1px solid rgba(15, 118, 110, 0.1);
+    border-radius: 18px;
+    background:
+      linear-gradient(132deg, transparent 0 42%, rgba(15, 118, 110, 0.08) 42% 42.6%, transparent 42.6%),
+      linear-gradient(132deg, transparent 0 58%, rgba(242, 193, 78, 0.12) 58% 58.7%, transparent 58.7%);
+    opacity: 0.9;
   }
   .topline {
     display: flex;
@@ -80,11 +97,20 @@ const css = `
     font-weight: 650;
   }
   .browser {
+    position: relative;
     overflow: hidden;
     border: 1px solid rgba(16, 35, 31, 0.12);
     border-radius: 8px;
     background: #ffffff;
     box-shadow: 0 30px 80px rgba(16, 35, 31, 0.16);
+  }
+  .browser::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0.28), transparent 26%, transparent 68%, rgba(94, 234, 221, 0.1));
+    mix-blend-mode: screen;
   }
   .chrome {
     height: 48px;
@@ -293,6 +319,12 @@ const css = `
       linear-gradient(180deg, rgba(255,255,255,0.06) 1px, transparent 1px) 0 0 / 70px 70px,
       linear-gradient(135deg, #10231f, #0d1816);
     color: #fff;
+  }
+  .dark::before {
+    border-color: rgba(94, 234, 221, 0.12);
+    background:
+      linear-gradient(132deg, transparent 0 42%, rgba(94, 234, 221, 0.11) 42% 42.7%, transparent 42.7%),
+      linear-gradient(132deg, transparent 0 58%, rgba(242, 193, 78, 0.13) 58% 58.8%, transparent 58.8%);
   }
   .dark h1, .dark .sub { color: #fff; }
   .dark .sub { opacity: 0.74; }
@@ -528,7 +560,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>Fill repeated forms in one click.</h1><p class="sub">Choose a saved profile, fill the page, then review before submit.</p></div>
+      <div><h1>From blank form to final review.</h1><p class="sub">Pick a saved profile. Fill the repeat fields. Keep submit in your hands.</p></div>
       ${chromeFrame('Vendor onboarding', beforeAfter())}
     </main>`,
   );
@@ -769,11 +801,14 @@ async function renderDemoGif(browser) {
 async function renderIcons() {
   const extensionSvg = path.join(projectRoot, 'fillpro', 'icons', 'icon-source.svg');
   for (const size of [16, 32, 48, 128, 256, 512]) {
-    const source = size <= 32 ? Buffer.from(smallIconSvg()) : extensionSvg;
-    await sharp(source)
-      .resize(size, size)
-      .png()
-      .toFile(path.join(projectRoot, 'fillpro', 'icons', `icon${size}.png`));
+    if (size <= 32) {
+      await sharp(Buffer.from(smallIconSvg(size))).png().toFile(path.join(projectRoot, 'fillpro', 'icons', `icon${size}.png`));
+    } else {
+      await sharp(extensionSvg)
+        .resize(size, size)
+        .png()
+        .toFile(path.join(projectRoot, 'fillpro', 'icons', `icon${size}.png`));
+    }
   }
   await sharp(extensionSvg)
     .resize(1024, 1024)
@@ -785,18 +820,26 @@ async function renderIcons() {
     .toFile(path.join(assetsDir, 'fillpro-logo.png'));
 }
 
-function smallIconSvg() {
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+function smallIconSvg(size) {
+  const isTiny = size <= 16;
+  const stroke = isTiny ? 2.2 : 2.6;
+  const radius = isTiny ? 3 : 6;
+  const fPath = isTiny
+    ? 'M5 4h7.6v2.4H7.7v2.1h4.4v2.2H7.7V14H5V4Z'
+    : 'M9.5 7.6h14v4.2h-9v3.4h7.5v4h-7.5v6.1h-5V7.6Z';
+  const checkPath = isTiny ? 'M10.2 12.1l1.5 1.5 3.2-3.9' : 'M19.5 23.5l2.6 2.5 5.7-7';
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" shape-rendering="geometricPrecision">
     <defs>
-      <linearGradient id="bg" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
+      <linearGradient id="bg" x1="1" y1="1" x2="${size - 1}" y2="${size - 1}" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#20d6c2"/>
-        <stop offset="0.54" stop-color="#0f766e"/>
+        <stop offset="0.56" stop-color="#0f766e"/>
         <stop offset="1" stop-color="#08231f"/>
       </linearGradient>
     </defs>
-    <rect x="132" y="132" width="760" height="760" rx="210" fill="url(#bg)"/>
-    <path d="M294 278c0-44 35-79 79-79h334c44 0 79 35 79 79s-35 79-79 79H456v124h214c42 0 76 34 76 76s-34 76-76 76H456v152c0 45-36 81-81 81s-81-36-81-81V278Z" fill="#f8fffc"/>
-    <path d="M206 214c77-54 174-83 290-83h222c96 0 174 78 174 174v64c-113-79-239-119-378-119-118 0-220 24-308 72V214Z" fill="#ffffff" opacity="0.15"/>
+    <rect x="${isTiny ? 1 : 2}" y="${isTiny ? 1 : 2}" width="${size - (isTiny ? 2 : 4)}" height="${size - (isTiny ? 2 : 4)}" rx="${radius}" fill="url(#bg)"/>
+    <path d="${fPath}" fill="#f8fffc"/>
+    ${isTiny ? '' : `<path d="${checkPath}" fill="none" stroke="#f8fffc" stroke-width="${stroke + 1.5}" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="${checkPath}" fill="none" stroke="#0a5f59" stroke-width="${stroke}" stroke-linecap="round" stroke-linejoin="round"/>`}
   </svg>`;
 }
 

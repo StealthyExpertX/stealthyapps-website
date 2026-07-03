@@ -2463,7 +2463,7 @@ textarea:focus-visible {
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.72;
+  opacity: 0.86;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
@@ -2484,8 +2484,9 @@ textarea:focus-visible {
   height: 360px;
   pointer-events: none;
   background:
+    radial-gradient(circle at 62% 18%, rgba(94, 234, 221, 0.16), transparent 220px),
     repeating-linear-gradient(135deg, rgba(15, 118, 110, 0.12) 0 1px, transparent 1px 16px);
-  opacity: 0.34;
+  opacity: 0.46;
   transform: skewY(-4deg);
 }
 

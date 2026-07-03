@@ -559,7 +559,7 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 11.8) return ['Private autofill', 'Fill the repeat fields.', 'Pick a saved profile, fill the page, then review before submit.'];
+    if (t < 11.8) return ['Private autofill', 'From blank form to final review.', 'Pick a saved profile. Fill the repeat fields. Keep submit in your hands.'];
     if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.'];
     if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
@@ -617,8 +617,8 @@ const html = `<!doctype html>
   function payoffFor(t) {
     if (t < 4.4) {
       return [
-        'Blank form to review-ready.',
-        'Watch repeated details and uploads fill while sign-in fields stay alone.',
+        'Blank form. Clean review.',
+        'Repeated details and uploads fill while sign-in fields stay alone.',
         ['4', 'fields'],
         ['1', 'upload'],
         ['0', 'passwords'],
@@ -643,7 +643,7 @@ const html = `<!doctype html>
     if (t < 18.8) {
       return ['Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
-    return ['Undo before submit.', 'Back out a fill, review what changed, or send a short report when a page needs a better rule.', ['Review', 'first'], ['Undo', 'ready'], ['Report', 'fast']];
+    return ['Start free. Keep control.', 'Three saved profiles are included. Review every fill before the form leaves the page.', ['3', 'profiles'], ['Undo', 'ready'], ['Review', 'first']];
   }
 
   function renderFields(t) {
