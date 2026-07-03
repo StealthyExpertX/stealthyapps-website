@@ -318,7 +318,7 @@ const html = `<!doctype html>
     padding: 13px 15px;
     border: 1px solid rgba(15, 118, 110, 0.18);
     border-radius: 8px;
-    background: linear-gradient(135deg, rgba(15, 118, 110, 0.11), rgba(255, 255, 255, 0.86));
+    background: linear-gradient(135deg, rgba(237, 248, 244, 0.98), rgba(255, 255, 255, 0.98));
     color: #334741;
     font-size: 13px;
     font-weight: 850;
@@ -336,7 +336,7 @@ const html = `<!doctype html>
     padding: 18px 20px;
     border: 1px solid rgba(15, 118, 110, 0.15);
     border-radius: 14px;
-    background: rgba(255, 255, 255, 0.86);
+    background: rgba(255, 255, 255, 0.97);
     box-shadow:
       0 28px 70px rgba(16, 35, 31, 0.14),
       0 0 0 1px rgba(255, 255, 255, 0.78) inset;
@@ -429,7 +429,7 @@ const html = `<!doctype html>
     padding: 13px;
     border: 1px solid rgba(16, 35, 31, 0.11);
     border-radius: 10px;
-    background: rgba(255, 255, 255, 0.78);
+    background: rgba(255, 255, 255, 0.96);
     box-shadow: 0 18px 38px rgba(16, 35, 31, 0.08);
   }
   .privacy-strip strong {

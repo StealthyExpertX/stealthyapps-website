@@ -3,10 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "baseline:marketing": "node scripts/audit-fillpro-visual-baselines.js --write",
     "review:marketing": "node scripts/render-fillpro-review-sheets.js",
-    "test": "node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-release-experience.js",
+    "test": "node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js && node scripts/audit-fillpro-release-experience.js",
     "test:experience": "node scripts/audit-fillpro-release-experience.js",
-    "test:marketing": "node scripts/audit-fillpro-marketing-assets.js",
+    "test:marketing": "node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js",
     "test:site": "node scripts/audit-fillpro-site.js"
   },
   "devDependencies": {
