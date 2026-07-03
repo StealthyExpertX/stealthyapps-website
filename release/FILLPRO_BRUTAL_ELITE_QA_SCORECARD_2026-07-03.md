@@ -37,10 +37,10 @@ Sources checked during this pass:
 | Website technical QA | 100/100 | Static audit, metadata, routes, responsive captures, light/dark checks, and CSP-sensitive scripts pass locally. |
 | Extension technical QA | 100/100 | Serialization, payment states, release audit, fill engine, uploads, privacy boundaries, and package checks pass locally. |
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
-| QA evidence | 98/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
+| QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, and popup UI state captures. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 92/100 | Clean, trustworthy, and above most extension sites. The first-viewport demo frame now has stronger depth and glass polish, but it is still more restrained product site than top-tier 3D agency launch. |
 | Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
-| Extension popup UI craft | 90/100 | The saved-profile card now has stronger hierarchy, a cleaner primary action, and less cramped secondary controls. Still constrained by the browser-popup surface and not yet validated by real user retention. |
+| Extension popup UI craft | 92/100 | The popup now keeps first-run focused on profile creation, tucks lower-frequency tools behind a drawer, and has repeatable light/dark/editor visual captures. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 91/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity and generated icon dimensions are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
 | Store screenshots | 90/100 | The first screenshot now uses a simpler user job: “Save once. Fill the next long form.” Screenshot 2 has less internal implementation language. Still generated product-frame creative rather than live-tested best-in-class store art. |
 | Store demo video | 90/100 | The opening frame now reads at thumbnail scale and the modern-form segment is less technical. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
@@ -57,6 +57,9 @@ Sources checked during this pass:
 - Reworked 16px and 32px extension icons as cleaner monogram-only optical variants, keeping the checkmark for 48px and larger where it remains readable.
 - Rebuilt the master FillPro icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
 - Added an automated icon-system audit that blocks website/extension SVG drift and verifies generated icon dimensions from 16px through 1024px.
+- Added a Playwright popup UI audit for profile, empty, editor, light, and dark states.
+- Hid the plan card until a user has at least one profile, keeping first run focused on creating value before upgrade prompts.
+- Moved lower-frequency popup utilities into a collapsed “More tools” drawer to reduce first-screen clutter.
 - Polished the extension popup empty state with a small saved-profile preview and clearer first-profile copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.
