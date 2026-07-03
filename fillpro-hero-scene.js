@@ -114,6 +114,11 @@ import * as THREE from './vendor/three.module.min.js';
     opacity: 0.34,
     side: THREE.DoubleSide,
   });
+  const materialFlow = new THREE.MeshBasicMaterial({
+    color: 0x5eeadd,
+    transparent: true,
+    opacity: 0.36,
+  });
 
   const mainPanel = roundedPanel(4.5, 3.2, 0.18, materialPanel);
   mainPanel.position.set(0.18, 0.1, -0.18);
@@ -147,6 +152,31 @@ import * as THREE from './vendor/three.module.min.js';
     profilePanel.add(bar);
     profileBars.push(bar);
   }
+
+  const uploadChip = roundedPanel(1.12, 0.34, 0.08, materialPanel);
+  uploadChip.position.set(-0.2, -1.32, 0.28);
+  group.add(uploadChip);
+
+  const uploadLine = new THREE.Mesh(
+    new THREE.BoxGeometry(0.72, 0.055, 0.022),
+    materialGold,
+  );
+  uploadLine.position.set(-0.08, -1.32, 0.33);
+  group.add(uploadLine);
+
+  const flowLines = [
+    [new THREE.Vector3(1.54, 0.62, 0.32), new THREE.Vector3(0.72, 0.86, 0.34), new THREE.Vector3(-0.06, 1.02, 0.34)],
+    [new THREE.Vector3(1.54, 0.2, 0.32), new THREE.Vector3(0.56, 0.14, 0.36), new THREE.Vector3(-0.06, 0.32, 0.36)],
+    [new THREE.Vector3(1.54, -0.58, 0.32), new THREE.Vector3(0.58, -0.92, 0.36), new THREE.Vector3(-0.02, -1.3, 0.36)],
+  ].map((points, index) => {
+    const line = new THREE.Mesh(
+      new THREE.TubeGeometry(new THREE.CatmullRomCurve3(points), 32, 0.014, 8, false),
+      materialFlow.clone(),
+    );
+    line.material.opacity = 0.22 + index * 0.05;
+    group.add(line);
+    return line;
+  });
 
   const checkPath = new THREE.CatmullRomCurve3([
     new THREE.Vector3(1.58, -1.17, 0.34),
@@ -237,6 +267,10 @@ import * as THREE from './vendor/three.module.min.js';
 
     profileBars.forEach((bar, index) => {
       bar.scale.x = (index === 0 ? 0.62 : 0.82 - index * 0.08) + Math.sin(seconds * 0.95 + index) * 0.025;
+    });
+
+    flowLines.forEach((line, index) => {
+      line.material.opacity = 0.22 + Math.sin(seconds * 1.05 + index * 0.8) * 0.08;
     });
 
     for (let index = 0; index < particleOffsets.length; index += 1) {

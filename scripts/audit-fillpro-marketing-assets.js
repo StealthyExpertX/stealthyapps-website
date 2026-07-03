@@ -240,6 +240,8 @@ function checkRenderer() {
     'const HEIGHT = 720;',
     'const FPS = 24;',
     'const DURATION = 22;',
+    'const FIRST_FILL_BEFORE_SECONDS = 3;',
+    'const POSTER_FRAME_SECONDS = 2.4;',
     'fillpro-store-demo-22s.mp4',
     'fillpro-store-demo-22s-thumb.png',
     'payoff-card',
@@ -274,6 +276,12 @@ function checkRenderer() {
   }
   if (/Password stays out of it|Password skipped/i.test(source)) {
     fail(`${relativePath}: video should use calmer sign-in boundary language`);
+  }
+  if (!/if \(t < 2\.05\) return 1;/.test(source)) {
+    fail(`${relativePath}: first filled field should appear near the 2-second mark`);
+  }
+  if (!/String\(POSTER_FRAME_SECONDS\)/.test(source)) {
+    fail(`${relativePath}: poster thumbnail should render from the early value frame`);
   }
   if (/Fill the repeated fields/i.test(source)) {
     fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);

@@ -19,6 +19,8 @@ const HEIGHT = 720;
 const FPS = 24;
 const DURATION = 22;
 const FRAMES = FPS * DURATION;
+const FIRST_FILL_BEFORE_SECONDS = 3;
+const POSTER_FRAME_SECONDS = 2.4;
 // Mute-safe captions: every important claim must be visible without voiceover.
 
 const html = `<!doctype html>
@@ -538,13 +540,13 @@ const html = `<!doctype html>
   }
 
   function cursorPath(t) {
-    if (t < 1.2) return [1040, 462, 1];
-    if (t < 2.7) {
-      const p = smooth((t - 1.2) / 1.5);
+    if (t < 0.4) return [1040, 462, 1];
+    if (t < 1.1) {
+      const p = smooth((t - 0.4) / 0.7);
       return [mix(1040, 1008, p), mix(462, 356, p), 1];
     }
-    if (t < 4.2) {
-      const p = smooth((t - 2.7) / 1.5);
+    if (t < 1.8) {
+      const p = smooth((t - 1.1) / 0.7);
       return [mix(1008, 928, p), mix(356, 418, p), 1];
     }
     if (t < 13.6) {
@@ -559,7 +561,7 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 4.4) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
+    if (t < 1.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
     if (t < 8.2) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
     if (t < 11.8) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 13.4) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
@@ -599,26 +601,26 @@ const html = `<!doctype html>
   }
 
   function activeField(t) {
-    if (t < 4.4) return -1;
-    if (t < 5.2) return 0;
-    if (t < 6.0) return 1;
-    if (t < 6.9) return 2;
-    if (t < 8.0) return 3;
+    if (t < 1.55) return -1;
+    if (t < 2.05) return 0;
+    if (t < 2.65) return 1;
+    if (t < 3.35) return 2;
+    if (t < 4.15) return 3;
     return -1;
   }
 
   function filledCount(t) {
     if (t >= 13.4 && t < 15.8) return 5;
-    if (t < 4.4) return 0;
-    if (t < 5.2) return 1;
-    if (t < 6.0) return 2;
-    if (t < 6.9) return 3;
-    if (t < 8.0) return 4;
+    if (t < 1.55) return 0;
+    if (t < 2.05) return 1;
+    if (t < 2.65) return 2;
+    if (t < 3.35) return 3;
+    if (t < 4.15) return 4;
     return 4;
   }
 
   function payoffFor(t) {
-    if (t < 4.4) {
+    if (t < 1.8) {
       return [
         'Blank form. Clean review.',
         'Repeated details and uploads fill while sign-in fields stay alone.',
@@ -689,13 +691,13 @@ const html = `<!doctype html>
     document.getElementById('fields').innerHTML = renderFields(t);
 
     const panel = document.getElementById('panel');
-    const panelOpacity = t < 1.4 ? 0 : t < 2.5 ? smooth((t - 1.4) / 1.1) : 1;
+    const panelOpacity = t < 0.45 ? 0 : t < 1.2 ? smooth((t - 0.45) / 0.75) : 1;
     panel.style.setProperty('--panel-opacity', panelOpacity.toFixed(3));
     panel.style.setProperty('--panel-y', (12 - 12 * panelOpacity).toFixed(2) + 'px');
     panel.style.setProperty('--panel-scale', (0.98 + 0.02 * panelOpacity).toFixed(3));
 
     const fillButton = document.getElementById('fillButton');
-    const shine = t > 3.1 && t < 4.4 ? mix(-120, 420, smooth((t - 3.1) / 1.3)) : -120;
+    const shine = t > 0.9 && t < 1.8 ? mix(-120, 420, smooth((t - 0.9) / 0.9)) : -120;
     fillButton.style.setProperty('--shine', shine.toFixed(1) + '%');
 
     const review = document.getElementById('review');
@@ -796,7 +798,7 @@ async function renderFrames() {
       [
         '-y',
         '-ss',
-        '00:00:02.8',
+        String(POSTER_FRAME_SECONDS),
         '-i',
         outputMp4,
         '-frames:v',

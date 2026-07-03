@@ -94,17 +94,17 @@
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s-thumb.png",
-      "bytes": 332251,
-      "sha256": "a1cb493492798d04a9c91a5208dca9f39488f24672da06d211ddeac9bfd12a28",
+      "bytes": 333173,
+      "sha256": "24917589596d3a2bf16bbfe8af418a08cd643020ddf79831a6be5c3acbaad0b8",
       "width": 1280,
       "height": 720,
-      "meanLuma": 224.38,
-      "meanColorSpread": 8.25
+      "meanLuma": 224.67,
+      "meanColorSpread": 8.56
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s.mp4",
-      "bytes": 1049525,
-      "sha256": "b0737d7830ea43cc07947c53e080d589dcbadce5ab94e46c352a5fc4877c521e"
+      "bytes": 1037464,
+      "sha256": "32c841eda6722b1ae096524be3fd7b1a40bebeaf4a5267bc80cf003a1d7aebac"
     },
     {
       "file": "../fillpro/icons/icon16.png",

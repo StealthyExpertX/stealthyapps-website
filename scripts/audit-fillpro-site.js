@@ -243,6 +243,8 @@ function checkHeroScene() {
     [heroScript, 'WebGLRenderer', 'hero script should create a WebGLRenderer'],
     [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
     [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
+    [heroScript, 'flowLines', 'hero scene should include profile-to-field flow lines'],
+    [heroScript, 'uploadChip', 'hero scene should include upload matching geometry'],
     [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
     [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
     [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
