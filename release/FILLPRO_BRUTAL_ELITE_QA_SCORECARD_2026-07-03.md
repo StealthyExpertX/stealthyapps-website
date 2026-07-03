@@ -29,6 +29,9 @@ Sources checked during this pass:
 - AppScreenshotStudio, First Three App Store Screenshots
 - Adapty, App Icon Design: Sizes and Specs
 - App Launchpad and AppTweak icon guidance on small-size clarity, contrast, and recognizability
+- Adapty 2026 app-icon guidance on store-specific sizing, contrast, and conversion testing
+- AppDrift 2026 icon guidance on keeping the icon, screenshots, title, and description in one visual story
+- Chrome extension icon guidance that manifest icons must ship as PNGs and include toolbar/store sizes
 - UX Planet, Practical Guide to Icon Design
 - Apple Human Interface Guidelines note that thin strokes and sharp details lose crispness at small icon sizes
 - Chrome Web Store image guidance for simple, brand-consistent icons that work on light and dark backgrounds
@@ -49,8 +52,8 @@ These are the categories that can be proven locally before store traffic exists.
 | --- | ---: | --- |
 | Website readiness | 100/100 | Site audit, metadata audit, rendered route checks, light/dark desktop/mobile screenshots, footer/nav consistency checks, JSON-LD checks, and visual baselines pass. |
 | Extension readiness | 100/100 | Serialization, payment states, 6 popup UI states, release audit, fill engine, PDF/CSV/document upload tests, and 1009-site corpus all pass. |
-| Store metadata / ASO readiness | 100/100 | Release docs, 22 locales, natural keyword coverage, accurate privacy claims, no broad host permission claim, screenshots, promo tiles, and video are aligned with the current product. |
-| Marketing asset QA evidence | 100/100 | 11 generated images, 1 H.264 MP4, 2 renderer audits, 7 icon checks, 19 locked visual baselines, 6 popup UI captures, and manual review sheets are current. |
+| Store metadata / ASO readiness | 100/100 | Release docs, 22 locales, natural keyword coverage, accurate privacy claims, no broad host permission claim, screenshots, promo tiles, icon PNGs, and video are aligned with the current product. |
+| Marketing asset QA evidence | 100/100 | 11 generated images, 1 H.264 MP4, 2 renderer audits, 7 icon checks with optical metrics, 19 locked visual baselines, 6 popup UI captures, and manual review sheets are current. |
 | Overall local release readiness | 100/100 | Full `npm run verify:fillpro-release` passed, then Chrome/Edge/Firefox zips were rebuilt at v1.0.0 and passed `AUDIT_FILLPRO_ZIPS.js`. |
 
 ## Current Scores After This Pass
@@ -61,11 +64,11 @@ These are the categories that can be proven locally before store traffic exists.
 | Website technical QA | 100/100 | Static audit, metadata, routes, responsive captures, light/dark checks, and CSP-sensitive scripts pass locally. |
 | Extension technical QA | 100/100 | Serialization, payment states, release audit, fill engine, uploads, privacy boundaries, and package checks pass locally. |
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
-| QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, and 6 popup UI state captures. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
+| QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, 19 locked visual assets, 6 popup UI state captures, and icon optics gates in both release and marketing audits. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 95/100 | Clean, trustworthy, and above most extension sites. The first viewport now has a sharper human headline, clearer Start free CTA, better browser-link affordances, stronger dark/light consistency, and rendered proof. Remaining gap is live user preference data against alternate hero treatments. |
 | Website conversion clarity | 95/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. The page now leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 94/100 | The popup now makes the first win clearer: a concrete saved-profile preview, one Create profile action, proof chips for save/fill/review, quieter secondary controls, and repeatable light/dark/editor captures. Still constrained by the browser-popup surface and not yet validated by real user retention. |
-| Logo/icon system | 91/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity and generated icon dimensions are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
+| Logo/icon system | 93/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use F-only optical variants while 48+ keep the check badge. SVG parity, source safety, dimensions, edge padding, coverage, luma, and color spread are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
 | Store screenshots | 95/100 | The first three screenshots now carry the product job, messy-form support, and profile organization in concrete language. The privacy screenshot has a thumbnail-safe promise: “No account for core filling.” Remaining gap is live screenshot ordering/A-B evidence. |
 | Store demo video | 95/100 | The 22-second muted MP4 now reaches visible filling by frame 3, shows password-skip review by frame 4, covers uploads and messy forms, and ends on a cleaner free-starter CTA. Still lacks live first-three-second variant data. |
 | ASO/store metadata | 94/100 | Natural keyword coverage, 22 locales, narrow permission claims, accurate privacy language, and cleaner crawler text. Remaining gap is post-approval keyword/rank feedback. |
@@ -81,6 +84,9 @@ These are the categories that can be proven locally before store traffic exists.
 - Reworked 16px and 32px extension icons as cleaner monogram-only optical variants, keeping the checkmark for 48px and larger where it remains readable.
 - Rebuilt the master FillPro icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
 - Added an automated icon-system audit that blocks website/extension SVG drift and verifies generated icon dimensions from 16px through 1024px.
+- Added icon optical gates for coverage, transparent edge padding, luma, and color spread in the marketing asset audit.
+- Added matching extension release-audit checks so packaged builds reject over-padded, washed-out, raster-embedded, or text-based icons.
+- Reworked the manual icon review sheet so 16px, 32px, and 48px icons are enlarged with nearest-neighbor scaling for a pixel-accurate toolbar review.
 - Added a Playwright popup UI audit for profile, empty, editor, light, and dark states.
 - Expanded the popup UI audit from 4 to 6 captures by adding empty-dark and editor-dark states.
 - Hid the plan card until a user has at least one profile, keeping first run focused on creating value before upgrade prompts.

@@ -34,9 +34,11 @@ function labelSvg(width, height, title, subtitle = '') {
   `);
 }
 
-async function tileFromImage({ file, title, subtitle, width, height }) {
+async function tileFromImage({ file, title, subtitle, width, height, pixelated = false }) {
+  const resizeOptions = { fit: 'contain', background: '#f8fbf8' };
+  if (pixelated) resizeOptions.kernel = sharp.kernel.nearest;
   const image = await sharp(file)
-    .resize(width, height - 82, { fit: 'contain', background: '#f8fbf8' })
+    .resize(width, height - 82, resizeOptions)
     .extend({
       top: 0,
       bottom: 0,
@@ -119,12 +121,12 @@ async function renderMarketingSheet() {
 
 async function renderIconSheet() {
   const items = [
-    ['16px', 'Toolbar optical mark', extensionIcon('icon16.png')],
-    ['32px', 'Toolbar optical mark', extensionIcon('icon32.png')],
-    ['48px', 'Extension manager', extensionIcon('icon48.png')],
-    ['128px', 'Store icon', extensionIcon('icon128.png')],
-    ['512px', 'Master preview', asset('fillpro-logo.png')],
-  ].map(([title, subtitle, file]) => ({ title, subtitle, file }));
+    { title: '16px', subtitle: 'Toolbar optical mark', file: extensionIcon('icon16.png'), pixelated: true },
+    { title: '32px', subtitle: 'Toolbar optical mark', file: extensionIcon('icon32.png'), pixelated: true },
+    { title: '48px', subtitle: 'Extension manager', file: extensionIcon('icon48.png'), pixelated: true },
+    { title: '128px', subtitle: 'Store icon', file: extensionIcon('icon128.png') },
+    { title: '512px', subtitle: 'Master preview', file: asset('fillpro-logo.png') },
+  ];
 
   await contactSheet(items, path.join(OUT_DIR, 'icon-scale-sheet-current.png'), {
     columns: 5,

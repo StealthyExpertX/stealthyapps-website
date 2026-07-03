@@ -61,6 +61,77 @@ async function checkAbsolutePng(label, absolutePath, width, height, options = {}
     const stat = fs.statSync(absolutePath);
     if (stat.size < options.minBytes) fail(`${label}: suspiciously small (${stat.size} bytes)`);
   }
+  if (options.optics) {
+    await checkIconOptics(label, absolutePath, options.optics);
+  }
+}
+
+async function checkIconOptics(label, absolutePath, options = {}) {
+  const { data, info } = await sharp(absolutePath)
+    .ensureAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+  let minX = info.width;
+  let minY = info.height;
+  let maxX = -1;
+  let maxY = -1;
+  let alphaPixels = 0;
+  let opaquePixels = 0;
+  let lumaTotal = 0;
+  let colorSpreadTotal = 0;
+
+  for (let y = 0; y < info.height; y += 1) {
+    for (let x = 0; x < info.width; x += 1) {
+      const index = (y * info.width + x) * 4;
+      const red = data[index];
+      const green = data[index + 1];
+      const blue = data[index + 2];
+      const alpha = data[index + 3];
+      if (alpha > 16) {
+        minX = Math.min(minX, x);
+        minY = Math.min(minY, y);
+        maxX = Math.max(maxX, x);
+        maxY = Math.max(maxY, y);
+        alphaPixels += 1;
+      }
+      if (alpha > 180) {
+        opaquePixels += 1;
+        lumaTotal += 0.2126 * red + 0.7152 * green + 0.0722 * blue;
+        colorSpreadTotal += Math.max(red, green, blue) - Math.min(red, green, blue);
+      }
+    }
+  }
+
+  if (!alphaPixels || maxX < minX || maxY < minY) {
+    fail(`${label}: icon has no visible pixels`);
+    return;
+  }
+
+  const width = maxX - minX + 1;
+  const height = maxY - minY + 1;
+  const coverage = (width * height) / (info.width * info.height);
+  const minEdge = Math.min(minX, minY, info.width - 1 - maxX, info.height - 1 - maxY);
+  const meanLuma = opaquePixels ? lumaTotal / opaquePixels : 0;
+  const meanColorSpread = opaquePixels ? colorSpreadTotal / opaquePixels : 0;
+  const minCoverage = options.minCoverage ?? 0.52;
+  const maxCoverage = options.maxCoverage ?? 0.9;
+  const minEdgePadding = options.minEdgePadding ?? 1;
+  const minColorSpread = options.minColorSpread ?? 45;
+  const minMeanLuma = options.minMeanLuma ?? 90;
+  const maxMeanLuma = options.maxMeanLuma ?? 210;
+
+  if (coverage < minCoverage || coverage > maxCoverage) {
+    fail(`${label}: visible bounds coverage ${coverage.toFixed(2)} outside ${minCoverage}-${maxCoverage}`);
+  }
+  if (minEdge < minEdgePadding) {
+    fail(`${label}: needs at least ${minEdgePadding}px transparent edge padding, got ${minEdge}px`);
+  }
+  if (meanColorSpread < minColorSpread) {
+    fail(`${label}: color spread too low for toolbar/store browse visibility (${meanColorSpread.toFixed(1)})`);
+  }
+  if (meanLuma < minMeanLuma || meanLuma > maxMeanLuma) {
+    fail(`${label}: mean luma ${meanLuma.toFixed(1)} outside ${minMeanLuma}-${maxMeanLuma}`);
+  }
 }
 
 async function imageBuffer(relativePath) {
@@ -268,13 +339,38 @@ async function checkIconSystem() {
   if (siteSvg !== extensionSvg) {
     fail('FillPro logo mismatch: website SVG and extension source SVG must stay identical');
   }
+  for (const [label, source] of [
+    ['assets/fillpro-logo.svg', siteSvg],
+    ['fillpro/icons/icon-source.svg', extensionSvg],
+  ]) {
+    if (/<text|<image|<foreignObject|href=|data:image/i.test(source)) {
+      fail(`${label}: logo source should stay self-owned vector paths, not text, raster embeds, or remote assets`);
+    }
+    if (!/aria-label="FillPro icon"/.test(source)) {
+      fail(`${label}: missing FillPro icon aria label`);
+    }
+  }
   for (const size of [16, 32, 48, 128, 256, 512]) {
+    const isToolbar = size <= 32;
+    const optics = isToolbar
+      ? {
+          minCoverage: 0.68,
+          maxCoverage: 0.9,
+          minEdgePadding: size === 16 ? 1 : 2,
+          minColorSpread: 55,
+        }
+      : {
+          minCoverage: 0.58,
+          maxCoverage: 0.78,
+          minEdgePadding: Math.max(3, Math.floor(size * 0.06)),
+          minColorSpread: 50,
+        };
     await checkAbsolutePng(
       `fillpro/icons/icon${size}.png`,
       path.join(WORKSPACE, 'fillpro', 'icons', `icon${size}.png`),
       size,
       size,
-      { minBytes: size <= 16 ? 200 : 500 },
+      { minBytes: size <= 16 ? 200 : 500, optics },
     );
   }
   await checkAbsolutePng(
@@ -282,7 +378,15 @@ async function checkIconSystem() {
     path.join(WORKSPACE, 'fillpro', 'icons', 'icon_master_1024.png'),
     1024,
     1024,
-    { minBytes: 8 * 1024 },
+    {
+      minBytes: 8 * 1024,
+      optics: {
+        minCoverage: 0.58,
+        maxCoverage: 0.78,
+        minEdgePadding: 60,
+        minColorSpread: 50,
+      },
+    },
   );
 }
 
