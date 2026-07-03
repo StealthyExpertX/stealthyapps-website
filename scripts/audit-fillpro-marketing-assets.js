@@ -323,9 +323,13 @@ function checkStillRenderer() {
     'Pick a profile. Check every field before you submit.',
     'Keep each repeat job separate.',
     'Fills what autofill misses.',
-    'Undo the last fill before you submit.',
+    'Undo before you submit.',
+    'Review changes. Roll back in one click.',
     'Fill repeat forms without handing over your data.',
     'No cloud profile account.',
+    'Tricky fields',
+    'Choice buttons',
+    'Grouped sections',
     'brandPromo',
     'promo-row',
     'alex-morgan.pdf',
@@ -357,6 +361,9 @@ function checkStillRenderer() {
   }
   if (/Google Forms-style|ARIA radios|ARIA checkboxes|React inputs|Vue fields|Angular forms|Shadow DOM/i.test(source)) {
     fail(`${relativePath}: store screenshots should use buyer-facing field language, not framework jargon or third-party product phrasing`);
+  }
+  if (/Same-page sections|<span class="chip">Radios<\/span>|If a page labels a field oddly/i.test(source)) {
+    fail(`${relativePath}: store screenshots should avoid technical or cramped fallback wording`);
   }
   if (/promo-line/i.test(source)) {
     fail(`${relativePath}: promo tiles should use concrete product rows, not generic bars`);

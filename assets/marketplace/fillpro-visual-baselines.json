@@ -58,11 +58,11 @@
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png",
-      "bytes": 323107,
-      "sha256": "5c47a3aad6237846fdbf192811621f16827aaf63dac1e87289347bbc37bb3029",
+      "bytes": 323392,
+      "sha256": "c51895379335a4a18f1712fd278961f65751467d0d73f18e86d95bd6a646e876",
       "width": 1280,
       "height": 800,
-      "meanLuma": 230.59,
+      "meanLuma": 230.71,
       "meanColorSpread": 7.07
     },
     {
@@ -85,12 +85,12 @@
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-undo-1280x800.png",
-      "bytes": 338222,
-      "sha256": "5533dbdb686053be16b20c712c9ec8b931323fb634b3f8f71a53512a134b6034",
+      "bytes": 272454,
+      "sha256": "4f232901adffd2428b199aac38b20e2a95339ab9608738a5ca51c6f4f472bad2",
       "width": 1280,
       "height": 800,
-      "meanLuma": 228.97,
-      "meanColorSpread": 7.96
+      "meanLuma": 137.01,
+      "meanColorSpread": 11.56
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s-thumb.png",

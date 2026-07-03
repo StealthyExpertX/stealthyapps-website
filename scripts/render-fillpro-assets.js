@@ -313,6 +313,111 @@ const css = `
     color: #5eeadd;
     white-space: nowrap;
   }
+  .review-proof {
+    display: grid;
+    grid-template-columns: 1fr 0.86fr;
+    gap: 18px;
+    min-height: 332px;
+  }
+  .review-form {
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    background:
+      radial-gradient(circle at 82% 14%, rgba(94, 234, 221, 0.14), transparent 190px),
+      rgba(255, 255, 255, 0.08);
+  }
+  .review-form h2,
+  .review-stack h2 {
+    margin: 0 0 14px;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1.08;
+  }
+  .review-row {
+    display: grid;
+    grid-template-columns: 112px 1fr;
+    align-items: center;
+    gap: 14px;
+    min-height: 46px;
+    margin-bottom: 10px;
+    padding: 0 13px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .review-row span {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    font-weight: 820;
+  }
+  .review-row strong {
+    color: #fff;
+    font-size: 15px;
+    font-weight: 900;
+  }
+  .review-stack {
+    display: grid;
+    align-content: stretch;
+    gap: 9px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.07);
+  }
+  .review-card {
+    min-height: 62px;
+    display: grid;
+    align-content: center;
+    gap: 5px;
+    padding: 13px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .review-card strong {
+    color: #fff;
+    font-size: 18px;
+  }
+  .review-card span {
+    color: rgba(255, 255, 255, 0.72);
+    font-weight: 740;
+    line-height: 1.28;
+  }
+  .review-card.accent {
+    border-color: rgba(94, 234, 221, 0.34);
+    background: rgba(94, 234, 221, 0.11);
+  }
+  .review-proof-light .review-form,
+  .review-proof-light .review-stack {
+    border-color: #d8e3de;
+    background:
+      radial-gradient(circle at 84% 16%, rgba(20, 184, 166, 0.12), transparent 180px),
+      #ffffff;
+  }
+  .review-proof-light .review-form h2,
+  .review-proof-light .review-stack h2 {
+    color: #10231f;
+  }
+  .review-proof-light .review-row,
+  .review-proof-light .review-card {
+    border-color: #d8e3de;
+    background: #f8fbf8;
+  }
+  .review-proof-light .review-row span,
+  .review-proof-light .review-card span {
+    color: #60726b;
+  }
+  .review-proof-light .review-row strong,
+  .review-proof-light .review-card strong {
+    color: #10231f;
+  }
+  .review-proof-light .review-card.accent {
+    border-color: rgba(15, 118, 110, 0.3);
+    background: #edf8f4;
+  }
   .dark {
     background:
       linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px) 0 0 / 70px 70px,
@@ -696,16 +801,16 @@ async function renderStaticAssets(browser) {
             ${field('Resume upload', 'alex-morgan.pdf')}
           </div>
           <div class="panel">
-            <h2>Fields FillPro checks</h2>
+            <h2>Tricky fields</h2>
             <div class="chips">
               <span class="chip">Dropdowns</span>
               <span class="chip">Checkboxes</span>
-              <span class="chip">Radios</span>
+              <span class="chip">Choice buttons</span>
               <span class="chip">Text areas</span>
               <span class="chip">File uploads</span>
               <span class="chip">Late fields</span>
               <span class="chip">Nearby labels</span>
-              <span class="chip">Same-page sections</span>
+              <span class="chip">Grouped sections</span>
             </div>
           </div>
         </div>`)}
@@ -742,24 +847,24 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-undo-1280x800.png'),
     1280,
     800,
-    `<main class="stage">
+    `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Undo the last fill before you submit.</h1><p class="sub">If a page labels a field oddly, roll back and add a smart rule.</p></div>
+      <div><h1>Undo before you submit.</h1><p class="sub">Review changes. Roll back in one click.</p></div>
       ${chromeFrame('careers.example/apply', `
-        <div class="grid2">
-          <div class="form">
-            <h2>Application details</h2>
-            ${field('First name', 'Alex')}
-            ${field('Last name', 'Morgan')}
-            ${field('Portfolio', 'https://stealthyapps.com')}
-            ${field('Cover letter', 'cover-letter.pdf')}
+        <div class="review-proof review-proof-light">
+          <div class="review-form">
+            <h2>Review before submit</h2>
+            <div class="review-row"><span>First name</span><strong>Alex</strong></div>
+            <div class="review-row"><span>Last name</span><strong>Morgan</strong></div>
+            <div class="review-row"><span>Portfolio</span><strong>https://stealthyapps.com</strong></div>
+            <div class="review-row"><span>Resume</span><strong>alex-morgan.pdf</strong></div>
           </div>
-          <div class="panel">
-            <h2>After a fill</h2>
-            <div class="cardline"><span>Fields changed</span><strong>8</strong></div>
-            <div class="cardline"><span>Upload matched</span><span class="check">Ready</span></div>
-            <div class="cardline"><span>Undo snapshot</span><span class="check">Saved</span></div>
-            <div class="button" style="margin-top:18px;">Undo last fill</div>
+          <div class="review-stack">
+            <h2>After FillPro runs</h2>
+            <div class="review-card accent"><strong>8 fields changed</strong><span>Repeat details filled from the selected profile.</span></div>
+            <div class="review-card"><strong>Upload matched</strong><span>Resume field is ready for review.</span></div>
+            <div class="review-card"><strong>Undo snapshot saved</strong><span>Roll back the fill without reloading the page.</span></div>
+            <div class="button" style="margin-top:6px; width:100%;">Undo last fill</div>
           </div>
         </div>`)}
     </main>`,

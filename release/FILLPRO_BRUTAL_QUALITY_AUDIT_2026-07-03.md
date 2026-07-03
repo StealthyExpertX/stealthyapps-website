@@ -26,7 +26,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Website full-page craft | 88/100 | Responsive and consistent, but the lower sections repeat card grids and the heavy headline style becomes monotonous. |
 | Three.js hero scene | 87/100 | It renders, moves, supports reduced motion, and now shows profile-to-field transfer pulses along the fill paths. It is more product-specific, but still not a jaw-dropping 3D product centerpiece. |
 | Public copy and anti-AI feel | 91/100 | Much tighter after removing framework jargon from public copy. Some sections are still very orderly and can feel engineered instead of lived-in. |
-| Store screenshots | 88/100 | Clear, consistent, and technically clean. They still share the same staged browser-frame language and do not yet feel like a high-budget creative campaign. |
+| Store screenshots | 91/100 | Clear, consistent, and technically clean. Screenshot 5 now has a distinct dark review/undo composition instead of repeating the first light browser-frame layout. The set is stronger, but still not a live-tested high-budget creative campaign. |
 | Store demo video | 91/100 | Recut into a cleaner story arc: hook, fill, review, upload, autofill gaps, privacy, user control, free starter. The repeated trust scene was removed and stiff "core filling" wording is blocked. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
 | Logo/icon system | 90/100 | The large F/check mark is clear and consistent. The 16px/32px optical exports are improved, but icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
@@ -45,6 +45,8 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added visible product-specific profile-to-field pulses to the WebGL hero so the motion explains FillPro instead of acting as generic decoration.
 - Split the store-video trust segment into two clearer beats: no cloud profile account, then review/undo before submit.
 - Added guards against the old "core filling" phrase and the awkward "form leaves the page" line.
+- Rebuilt the undo/review marketplace screenshot into a darker, distinct control frame with the full Undo action visible.
+- Replaced technical modern-form chips like "Radios" and "Same-page sections" with buyer-facing field language.
 
 ## What Blocks A Real 100
 
