@@ -177,10 +177,12 @@ function checkRenderer() {
     'Blank form to review-ready.',
     'Save once. Fill the next long form.',
     'Pick a profile. Check every field before you submit.',
-    'Less retyping on applications.',
-    'Works on the messy forms too.',
+    'Fields fill while you watch.',
+    'Password stays out of it.',
+    'Applications with uploads.',
+    'Messy forms are part of the job.',
     'No account for core filling.',
-    'Start with three saved profiles.',
+    'Start free with three profiles.',
     'Password skipped',
     'careers.example/apply',
     'app.example/trial',
@@ -204,6 +206,9 @@ function checkRenderer() {
   if (/Review everything before submit/i.test(source)) {
     fail(`${relativePath}: first-frame copy should use natural review phrasing`);
   }
+  if (/Less retyping on applications|Works on the messy forms too|Start with three saved profiles/i.test(source)) {
+    fail(`${relativePath}: video captions should stay specific and current`);
+  }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
   }
@@ -225,6 +230,10 @@ function checkStillRenderer() {
     'fillpro-marquee-1400x560.png',
     'Save once. Fill the next long form.',
     'Pick a profile. Check every field before you submit.',
+    'Keep each repeat job separate.',
+    'Messy forms are part of the job.',
+    'Undo the last fill before you submit.',
+    'Fill repeat forms without handing over your data.',
     'brandPromo',
     'smallIconSvg',
   ];
@@ -242,6 +251,9 @@ function checkStillRenderer() {
   }
   if (/Fill repeated forms faster\./.test(source)) {
     fail(`${relativePath}: small promo should be brand-forward, not a text-heavy mini ad`);
+  }
+  if (/real workflows|Clean fallback/i.test(source)) {
+    fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
   }
 }
 

@@ -426,6 +426,47 @@ const css = `
   .brand-lockup span {
     font-size: 44px;
   }
+  .brand-panel {
+    display: grid;
+    gap: 26px;
+    align-content: center;
+  }
+  .promo-copy {
+    display: grid;
+    gap: 18px;
+    max-width: 610px;
+  }
+  .promo-kicker {
+    color: #5eeadd;
+    font-size: 16px;
+    font-weight: 950;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .promo-head {
+    margin: 0;
+    color: #f8fffc;
+    font-size: 46px;
+    line-height: 1.04;
+    font-weight: 950;
+  }
+  .promo-proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .promo-proof span {
+    min-height: 42px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.11);
+    color: rgba(248, 255, 252, 0.9);
+    font-size: 15px;
+    font-weight: 850;
+  }
   .promo-product {
     position: absolute;
     right: 42px;
@@ -451,6 +492,7 @@ const css = `
   .promo-line.fill { background: linear-gradient(90deg, #5eeadd, #0f766e); }
   .promo-marquee .brand-lockup img { width: 104px; height: 104px; }
   .promo-marquee .brand-lockup span { font-size: 62px; }
+  .promo-marquee .brand-panel { transform: translateY(-2px); }
   .promo-marquee .promo-product {
     right: 96px;
     bottom: 56px;
@@ -536,9 +578,19 @@ function promoProduct(label = 'Fill Page') {
 }
 
 function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile') {
+  const marqueeCopy = stageClass.includes('promo-marquee')
+    ? `<div class="promo-copy">
+        <div class="promo-kicker">Private autofill</div>
+        <h1 class="promo-head">Fill repeat forms without handing over your data.</h1>
+        <div class="promo-proof"><span>3 profiles free</span><span>No account for core fill</span><span>Review before submit</span></div>
+      </div>`
+    : '';
   return `
     <main class="stage brand-stage ${stageClass}">
-      <div class="brand-lockup"><img src="${logoDataUrl}" alt=""><span>${label}</span></div>
+      <div class="brand-panel">
+        <div class="brand-lockup"><img src="${logoDataUrl}" alt=""><span>${label}</span></div>
+        ${marqueeCopy}
+      </div>
       ${promoProduct(productLabel)}
     </main>`;
 }
@@ -572,7 +624,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
-      <div><h1>Separate profiles for real workflows.</h1><p class="sub">Work, personal admin, clients, vendors, and test profiles stay organized in the browser.</p></div>
+      <div><h1>Keep each repeat job separate.</h1><p class="sub">Work, client, vendor, and QA profiles stay easy to pick before each fill.</p></div>
       ${chromeFrame('Demo request', `
         <div class="grid2">
           <div class="panel">
@@ -599,7 +651,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
-      <div><h1>Works on the messy forms too.</h1><p class="sub">It covers dropdowns, checkboxes, modals, uploads, and fields that appear late.</p></div>
+      <div><h1>Messy forms are part of the job.</h1><p class="sub">Dropdowns, checkboxes, modals, uploads, and late fields get handled in one pass.</p></div>
       ${chromeFrame('forms.example/team-intake', `
         <div class="grid2">
           <div class="form">
@@ -633,19 +685,19 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
-      <div><h1>No account for core filling.</h1><p class="sub">Profiles, rules, and upload references stay in the extension unless you export them.</p></div>
+      <div><h1>No account for core filling.</h1><p class="sub">Profiles, rules, and upload references stay local to your browser unless you export them.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay inside the extension.</span></div>
+          <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay local.</span></div>
           <div class="privacy-card"><strong>Current-page action</strong><span>FillPro runs when you ask on the page you chose.</span></div>
           <div class="privacy-card"><strong>Review before submit</strong><span>You decide when the form leaves the page.</span></div>
         </div>
         <div class="privacy-ledger">
-          <h2>What FillPro keeps out of the flow</h2>
+          <h2>What FillPro leaves alone</h2>
           <div class="privacy-row"><span>Passwords</span><strong>Use your manager</strong></div>
-          <div class="privacy-row"><span>Cards and CVCs</span><strong>Use the site wallet</strong></div>
-          <div class="privacy-row"><span>Final submit</span><strong>Always yours</strong></div>
-          <div class="privacy-row"><span>Support reports</span><strong>Send only what helps</strong></div>
+          <div class="privacy-row"><span>Cards and checkout fields</span><strong>Use the site wallet</strong></div>
+          <div class="privacy-row"><span>Submit button</span><strong>Always yours</strong></div>
+          <div class="privacy-row"><span>Support reports</span><strong>Only what you send</strong></div>
         </div>
       </div>
     </main>`,
@@ -658,7 +710,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Fast fill. Clean fallback.</h1><p class="sub">Undo the last fill before submitting, then fix odd labels with saved smart rules.</p></div>
+      <div><h1>Undo the last fill before you submit.</h1><p class="sub">If a page labels a field oddly, roll back and add a smart rule.</p></div>
       ${chromeFrame('careers.example/apply', `
         <div class="grid2">
           <div class="form">
@@ -692,7 +744,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-marquee-1400x560.png'),
     1400,
     560,
-    brandPromo('marquee promo-marquee', 'FillPro', 'Saved profile'),
+    brandPromo('marquee promo-marquee', 'FillPro', 'Work profile ready'),
   );
 
   await renderHtml(

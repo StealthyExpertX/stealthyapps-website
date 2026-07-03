@@ -559,15 +559,18 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 11.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
-    if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
-    if (t < 15.8) return ['Modern forms', 'Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
-    if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay in the extension unless you export them.'];
-    return ['Free starter', 'Start with three saved profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
+    if (t < 4.4) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
+    if (t < 8.2) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
+    if (t < 11.8) return ['Review', 'Password stays out of it.', 'Check the page, then submit when you are ready.'];
+    if (t < 13.4) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
+    if (t < 15.8) return ['Modern forms', 'Messy forms are part of the job.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
+    if (t < 18.8) return ['Private by default', 'No account for core filling.', 'Profiles, rules, and upload references stay local to your browser unless you export them.'];
+    return ['Free starter', 'Start free with three profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
 
   function proofFor(t) {
-    if (t < 13.4) return ['4 fields filled', 'Upload matched', 'Password skipped'];
+    if (t < 8.2) return ['4 fields filled', 'Upload matched', 'Password skipped'];
+    if (t < 13.4) return ['Review first', 'Password skipped', 'Undo ready'];
     if (t < 15.8) return ['Dropdowns', 'Checkboxes', 'Late fields'];
     if (t < 18.8) return ['No account needed', 'Current-page access', 'Export when needed'];
     return ['3 profiles free', 'Review first', 'No account for core use'];
@@ -638,10 +641,10 @@ const html = `<!doctype html>
       return ['Applications with uploads.', 'Name, email, company, and resume upload match from one profile.', ['Name', 'filled'], ['Resume', 'matched'], ['Sign-in', 'skipped']];
     }
     if (t < 15.8) {
-      return ['Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
+      return ['Messy forms are part of the job.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 18.8) {
-      return ['No account for core filling.', 'Profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
+      return ['No account for core filling.', 'Profiles, rules, and upload references stay local unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
     return ['Start free. Keep control.', 'Three profiles are included. Core filling needs no account.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
   }
@@ -705,7 +708,7 @@ const html = `<!doctype html>
     strip.style.setProperty('--strip-opacity', stripOpacity.toFixed(3));
 
     const payoff = document.getElementById('payoff');
-    const payoffOpacity = t > 19.8 ? 1 - smooth((t - 19.8) / 1.4) * 0.24 : 1;
+    const payoffOpacity = t > 18.8 ? 1 - smooth((t - 18.8) / 0.45) : 1;
     payoff.style.setProperty('--payoff-opacity', payoffOpacity.toFixed(3));
     payoff.style.setProperty('--payoff-y', (Math.sin(t * 1.1) * 2).toFixed(2) + 'px');
     payoff.style.setProperty('--payoff-scale', (t < 1 ? (0.985 + smooth(t) * 0.015) : 1).toFixed(3));
