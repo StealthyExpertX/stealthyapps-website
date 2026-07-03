@@ -11,6 +11,7 @@ This scorecard separates deterministic release readiness from market-facing crea
 - App icons need optical variants for tiny sizes; a full-size logo scaled down is not enough.
 - Premium SaaS pages in 2026 lean toward clarity plus personality: focused conversion story, interactive proof, restrained motion, and sharp brand consistency.
 - Visual QA should be locked with repeatable baselines, not judged only by a one-time manual glance.
+- Store art has to survive thumbnail scanning. Long subcopy and internal implementation terms are treated as conversion drag unless they prove a user-facing benefit.
 
 Sources checked during this pass:
 
@@ -22,6 +23,8 @@ Sources checked during this pass:
 - UX Planet, Practical Guide to Icon Design
 - SaaSFrame, 2026 SaaS Landing Page Trends
 - Playwright best practices for controlled visual regression
+- Nielsen Norman Group research on concise, scannable, objective web copy
+- Baymard research on clear interactive states and low-friction hit areas
 
 ## Current Scores After This Pass
 
@@ -36,11 +39,11 @@ Sources checked during this pass:
 | Website conversion clarity | 92/100 | Clear hero, pricing, privacy proof, and low-friction CTAs. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 90/100 | The saved-profile card now has stronger hierarchy, a cleaner primary action, and less cramped secondary controls. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 89/100 | 128/512 are solid; 16/32 now use simpler optical monograms so toolbar-scale recognition is stronger. Remaining gap is live store/search CTR testing against alternate icon variants. |
-| Store screenshots | 89/100 | Improved hook and cleaner first-frame copy. Still generated product-frame creative rather than live-tested best-in-class store art. |
-| Store demo video | 89/100 | Opening and closing frames now tell one clean install story with a stronger review-before-submit promise and free-tier CTA. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
+| Store screenshots | 90/100 | The first screenshot now uses a simpler user job: “Save once. Fill the next long form.” Screenshot 2 has less internal implementation language. Still generated product-frame creative rather than live-tested best-in-class store art. |
+| Store demo video | 90/100 | The opening frame now reads at thumbnail scale and the modern-form segment is less technical. Still lacks a premium live edit, sound design, dramatic pacing, or tested first-three-second variants. |
 | ASO/store metadata | 91/100 | Natural keyword coverage, 22 locales, narrow permission claims, and accurate privacy language. Remaining gap is post-approval keyword/rank feedback. |
 | Competitive positioning | 90/100 | Stronger privacy/trust discipline than FormFiller and Fill Hero pages reviewed. Less loud than Fill Hero and less store-CTA-forward than FormFiller. |
-| Market-facing creative certainty | 91/100 | Releaseable and professional. The video now closes on the install/payoff moment instead of a feature explanation, but it is not provably 100 until store analytics show it beats alternatives. |
+| Market-facing creative certainty | 92/100 | Releaseable and professional, with clearer thumbnail copy and less stiff language. It is not provably 100 until store analytics show it beats alternatives. |
 
 ## Changes Made In This Pass
 
@@ -53,7 +56,8 @@ Sources checked during this pass:
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.
 - Added a more premium first-viewport demo treatment with desktop depth, glass highlight, stronger shadowing, and a flat mobile fallback.
-- Rewrote the first screenshot and video opening subcopy to “Review everything before submit” and added an audit guard against the old awkward submit phrasing.
+- Reworked the first screenshot and video opening again to a shorter, more scannable promise: “Save once. Fill the next long form.”
+- Replaced technical modern-form copy with more user-facing language and added audit guards against the old stiff first-frame phrasing.
 - Regenerated marketplace screenshots, promo images, video thumbnail, MP4, icon PNGs, and the review sheets.
 - Re-locked the 19-asset visual baseline after manual visual inspection.
 

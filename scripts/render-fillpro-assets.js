@@ -475,7 +475,7 @@ function beforeAfter() {
   return `
     <div class="grid2">
       <div class="form">
-        <h2>Vendor onboarding</h2>
+        <h2>Client onboarding</h2>
         ${field('Full name')}
         ${field('Work email')}
         ${field('Company')}
@@ -560,8 +560,8 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>From blank form to final review.</h1><p class="sub">Pick a saved profile. Fill the repeated fields. Review everything before submit.</p></div>
-      ${chromeFrame('Vendor onboarding', beforeAfter())}
+      <div><h1>Save once. Fill the next long form.</h1><p class="sub">Pick a profile. Check every field before you submit.</p></div>
+      ${chromeFrame('client.example/onboarding', beforeAfter())}
     </main>`,
   );
 
@@ -599,7 +599,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
-      <div><h1>Handles more than basic inputs.</h1><p class="sub">Built for form builders, framework controls, modals, Shadow DOM, and same-origin frames.</p></div>
+      <div><h1>Works on the messy forms too.</h1><p class="sub">It covers dropdowns, checkboxes, modals, uploads, and fields that appear late.</p></div>
       ${chromeFrame('forms.example/team-intake', `
         <div class="grid2">
           <div class="form">
@@ -770,7 +770,7 @@ async function renderDemoGif(browser) {
         values,
         index >= 4
           ? 'Upload matched. Review before submit.'
-          : 'Pick a profile. Fill the repeated fields.',
+          : 'Pick a profile. Check the filled fields.',
       ),
     );
   }

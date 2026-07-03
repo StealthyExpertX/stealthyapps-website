@@ -559,9 +559,9 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 11.8) return ['Private autofill', 'From blank form to final review.', 'Pick a saved profile. Fill the repeated fields. Review everything before submit.'];
+    if (t < 11.8) return ['Private autofill', 'Save once. Fill the next long form.', 'Pick a profile. Check every field before you submit.'];
     if (t < 13.4) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
-    if (t < 15.8) return ['Modern forms', 'Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.'];
+    if (t < 15.8) return ['Modern forms', 'Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.'];
     if (t < 18.8) return ['Private by default', 'Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless you export them.'];
     return ['Free starter', 'Start with three saved profiles.', 'Fill the next long form, review every field, and upgrade only when you need more profiles.'];
   }
@@ -638,7 +638,7 @@ const html = `<!doctype html>
       return ['Applications with uploads.', 'Name, email, company, and resume upload match from one profile.', ['Name', 'filled'], ['Resume', 'matched'], ['Sign-in', 'skipped']];
     }
     if (t < 15.8) {
-      return ['Built for messy forms.', 'Dropdowns, choices, long answers, and late fields get a cleaner pass.', ['ARIA', 'choices'], ['Same', 'frames'], ['File', 'inputs']];
+      return ['Works on the messy forms too.', 'Dropdowns, checkboxes, uploads, and late fields get handled in one pass.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 18.8) {
       return ['Profiles stay in FillPro.', 'Saved profiles, rules, and upload references stay in the extension unless exported.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];

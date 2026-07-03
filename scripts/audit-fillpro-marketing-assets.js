@@ -156,10 +156,10 @@ function checkRenderer() {
     'motion-rail',
     'Mute-safe captions',
     'Blank form to review-ready.',
-    'Fill the repeated fields.',
-    'Review everything before submit.',
+    'Save once. Fill the next long form.',
+    'Pick a profile. Check every field before you submit.',
     'Less retyping on applications.',
-    'Built for messy forms.',
+    'Works on the messy forms too.',
     'Profiles stay in FillPro.',
     'Start with three saved profiles.',
     'Password skipped',
@@ -178,6 +178,12 @@ function checkRenderer() {
   }
   if (/Keep submit in your hands/i.test(source)) {
     fail(`${relativePath}: first-frame copy uses awkward submit phrasing`);
+  }
+  if (/Fill the repeated fields/i.test(source)) {
+    fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);
+  }
+  if (/Review everything before submit/i.test(source)) {
+    fail(`${relativePath}: first-frame copy should use natural review phrasing`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -198,7 +204,8 @@ function checkStillRenderer() {
     'fillpro-screenshot-undo-1280x800.png',
     'fillpro-small-promo-440x280.png',
     'fillpro-marquee-1400x560.png',
-    'Review everything before submit.',
+    'Save once. Fill the next long form.',
+    'Pick a profile. Check every field before you submit.',
     'brandPromo',
     'smallIconSvg',
   ];
@@ -207,6 +214,12 @@ function checkStillRenderer() {
   }
   if (/Keep submit in your hands/i.test(source)) {
     fail(`${relativePath}: first screenshot copy uses awkward submit phrasing`);
+  }
+  if (/Fill the repeated fields/i.test(source)) {
+    fail(`${relativePath}: first screenshot copy should not use stiff repeated-fields phrasing`);
+  }
+  if (/Review everything before submit/i.test(source)) {
+    fail(`${relativePath}: first screenshot copy should use natural review phrasing`);
   }
   if (/Fill repeated forms faster\./.test(source)) {
     fail(`${relativePath}: small promo should be brand-forward, not a text-heavy mini ad`);
