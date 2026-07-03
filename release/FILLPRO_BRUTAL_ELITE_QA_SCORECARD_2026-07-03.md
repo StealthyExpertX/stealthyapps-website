@@ -68,7 +68,7 @@ These are the categories that can be proven locally before store traffic exists.
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
 | QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, focused review-section captures in both themes/viewports, 19 locked visual assets, 6 popup UI state captures, and icon optics gates in both release and marketing audits. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 98/100 | Clean, trustworthy, and above most extension sites. The first viewport is sharper, mobile demo proof lands earlier, browser links are clearer, dark/light consistency is stronger, the lower page has distinct review-before-submit proof, and the 3D layer now supports the real demo instead of competing with it. Remaining gap is live user preference data against alternate hero treatments. |
-| Website 3D/hero scene craft | 95/100 | WebGL renders, is pixel-checked, respects reduced motion, has desktop/mobile hero-section screenshots, and was rebuilt from a busy duplicate product diagram into a calmer support layer with translucent glass depth, transfer ribbons, small pulses, a confidence ring, and restrained particles. Remaining gap is live preference testing against no-3D and real-UI-only hero treatments. |
+| Website 3D/hero scene craft | 96/100 | WebGL renders, is pixel-checked, respects reduced motion, has desktop/mobile hero-section screenshots, and was rebuilt from a busy duplicate product diagram into a calmer support layer with one translucent glass stage, one profile signal, one fill path, one pulse, and one soft review halo. Remaining gap is live preference testing against no-3D and real-UI-only hero treatments. |
 | Website conversion clarity | 97/100 | Clear hero, pricing, privacy proof, low-friction CTAs, and a stronger pre-submit control proof section. Mobile reaches product proof sooner, the page leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 97/100 | The first-run popup is focused, the preview appears sooner, dark-mode secondary actions no longer read as disabled, and light/dark/editor captures are repeatable. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 94/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32 use brighter F-only optical variants while 48+ keep the check badge. SVG parity, source safety, dimensions, edge padding, coverage, luma, and color spread are now audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
@@ -128,7 +128,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Added QA guards that fail if the old generic screenshot/video phrases return.
 - Regenerated marketplace screenshots, promo images, video thumbnail, MP4, icon PNGs, and the review sheets.
 - Re-locked the 19-asset visual baseline after manual visual inspection.
-- Added product-specific profile-to-field flow lines, visible transfer pulses, and an upload chip to the Three.js hero scene, then locked the hero audit to require the product-specific motion.
+- Added product-specific profile-to-field motion to the Three.js hero scene, then replaced the heavier multi-object version with a single-path composition after visual review.
 - Recut the store demo timing so the first visible fill arrives near two seconds, moved the poster thumbnail to the 2.4-second value frame, and added renderer guards against slower first-fill timing returning.
 - Tightened the extension empty-state popup spacing so the product preview appears sooner after opening.
 - Reworked dark-mode profile secondary buttons so Edit, Duplicate, Default, and Delete read as active controls instead of disabled grey blocks.
@@ -144,8 +144,8 @@ These are the categories that can be proven locally before store traffic exists.
 - Added focused review-section screenshots and nonblank pixel checks in light/dark desktop/mobile release audits.
 - Fixed sticky-header section landing with scroll padding and margins, and cleaned the product proof mini-browser dots so they no longer crowd the sample URL.
 - Rebuilt the Three.js hero after visual review showed the previous product-diagram layer was too busy and competed with the actual demo card.
-- Replaced the protruding dark panel/checkmark look with a quieter glass-depth system: translucent card stack, transfer ribbons, small pulses, upload/review accents, confidence ring, and restrained particles.
-- Updated hero-source guards so the audit now requires the simplified focal composition and WebGL cleanup instead of rewarding extra clutter.
+- Replaced the protruding dark panel/checkmark look with a quieter glass-depth system: one stage, one profile signal, one fill path, one pulse, and one review halo.
+- Updated hero-source guards so the audit now requires the simplified focal composition, rejects the old stacked-card/badge/particle clutter, and checks WebGL cleanup.
 - Recut the first marketplace screenshot and video opener to “Save your details once.” with plainer support copy.
 - Added varied dark review/privacy/control video scenes and fixed inherited text color so browser-form titles stay readable in those scenes.
 - Re-rendered marketplace stills, MP4, thumbnail, review sheets, and the 19-asset visual baseline after manual visual inspection.

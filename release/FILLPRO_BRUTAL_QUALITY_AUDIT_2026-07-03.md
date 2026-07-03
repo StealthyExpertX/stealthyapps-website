@@ -25,7 +25,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Extension popup visual craft | 90/100 | Clean, useful, and not embarrassing. It is still constrained by the small browser-popup surface and does not yet feel like a premium standalone app. |
 | Website first viewport | 93/100 | Clear promise, demo proof, CTA, and browser links. The WebGL layer now supports the real product demo instead of competing with it. Remaining gap is live preference testing against alternate hero treatments. |
 | Website full-page craft | 92/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface and calming the first-viewport 3D layer. Remaining gap is still top-studio creative art direction and live preference testing. |
-| Three.js hero scene | 92/100 | Rebuilt from a busy product diagram into a restrained premium depth layer: translucent glass cards, subtle transfer ribbons, small pulses, and quiet particles behind the actual demo. It now renders cleanly in light/dark desktop/mobile and respects reduced motion. Remaining gap: not yet A/B tested against a no-3D or real-UI-only hero. |
+| Three.js hero scene | 94/100 | Rebuilt from a busy product diagram into a restrained premium depth layer: one translucent glass stage, one profile signal, one readable fill path, and one soft review halo behind the actual demo. It now renders cleanly in light/dark desktop/mobile, has direct WebGL pixel proof, and respects reduced motion. Remaining gap: not yet A/B tested against a no-3D or real-UI-only hero. |
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 92/100 | Clear, consistent, and technically clean. Screenshot 1 now opens with plainer human wording and Screenshot 5 has a distinct dark review/undo composition. The set is stronger, but still not a live-tested high-budget creative campaign. |
 | Store demo video | 93/100 | Recut into a more varied story arc with a stronger opening, dark review/privacy/control beats, visible fill value near the start, and fixed dark-scene product-card contrast. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
@@ -43,7 +43,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Sharpened the 16px and 32px toolbar icon exports with brighter gradients and a simpler F geometry.
 - Regenerated the MP4, thumbnail, icon PNGs, screenshots, review sheets, and visual baseline.
 - Kept public product copy in buyer language instead of framework or ARIA language.
-- Added visible product-specific profile-to-field pulses to the WebGL hero so the motion explains FillPro instead of acting as generic decoration.
+- Simplified the WebGL hero so the motion explains FillPro with one profile-to-field path instead of multiple competing proof objects.
 - Split the store-video trust segment into two clearer beats: no cloud profile account, then review/undo before submit.
 - Added guards against the old "core filling" phrase and the awkward "form leaves the page" line.
 - Rebuilt the undo/review marketplace screenshot into a darker, distinct control frame with the full Undo action visible.
@@ -53,8 +53,8 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Fixed the proof-section mini browser dots so they no longer crowd the sample URL.
 - Added sticky-header scroll padding and section scroll margins so product sections land cleanly on mobile and desktop.
 - Rebuilt the Three.js hero again after visual review showed the old layer was too complex and competed with the real demo card.
-- Replaced the busy dark panel/checkmark/product-diagram layer with a calmer premium support layer: translucent glass cards, subtle transfer ribbons, small pulses, and quiet particles.
-- Added hero-source audit guards for the simplified focal composition: hero card stack, main form card, profile dock, upload badge, review badge, confidence ring, quiet particles, flow lines, pulses, and WebGL cleanup.
+- Replaced the busy dark panel/checkmark/product-diagram layer with a calmer premium support layer: one glass stage, one profile signal, one fill path, one pulse, and one soft review halo.
+- Added hero-source audit guards for the simplified focal composition and WebGL cleanup, and guards that reject the old stacked-card, upload-badge, review-badge, particle-heavy scene.
 - Recut the store video/still opener from "Save once. Fill the next long form." to "Save your details once." with plainer follow-up copy.
 - Added distinct dark video scenes for review, privacy, and control, then fixed inherited text color so product-card titles stay readable in dark scenes.
 

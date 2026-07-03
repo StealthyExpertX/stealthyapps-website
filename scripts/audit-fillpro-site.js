@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v41';
+const CACHE_TOKEN = 'fillpro-launch-v42';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -248,16 +248,14 @@ function checkHeroScene() {
     [heroScript, 'WebGLRenderer', 'hero script should create a WebGLRenderer'],
     [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
     [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
-    [heroScript, 'heroCardStack', 'hero scene should have one clear focal card stack'],
-    [heroScript, 'mainFormCard', 'hero scene should center the form surface'],
-    [heroScript, 'profileDock', 'hero scene should include one focused profile dock'],
-    [heroScript, 'flowLines', 'hero scene should include restrained profile-to-field flow lines'],
-    [heroScript, 'flowPulses', 'hero scene should include restrained profile-to-field transfer pulses'],
-    [heroScript, 'curve.getPoint(progress)', 'hero transfer pulses should travel along the form-fill paths'],
-    [heroScript, 'uploadBadge', 'hero scene should include upload matching proof without clutter'],
-    [heroScript, 'reviewBadge', 'hero scene should include a compact review proof object'],
-    [heroScript, 'confidenceRing', 'hero scene should include one subtle depth/motion accent'],
-    [heroScript, 'quietParticles', 'hero scene should keep ambient particles restrained'],
+    [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
+    [heroScript, 'profileSignal', 'hero scene should include one focused profile signal'],
+    [heroScript, 'singleFillPath', 'hero scene should include one readable fill path'],
+    [heroScript, 'singleFillCurve.getPoint(progress)', 'hero transfer pulse should travel along one fill path'],
+    [heroScript, 'reviewHalo', 'hero scene should include one subtle depth/motion accent'],
+    [heroScript, 'ambientNodes', 'hero scene should keep ambient detail restrained'],
+    [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
+    [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
     [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],
     [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
     [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
@@ -270,6 +268,14 @@ function checkHeroScene() {
   for (const [source, needle, label] of required) {
     if (!source.includes(needle)) fail(label);
   }
+  [
+    ['heroCardStack', 'old stacked card scene'],
+    ['uploadBadge', 'old upload badge clutter'],
+    ['reviewBadge', 'old review badge clutter'],
+    ['quietParticles', 'old particle-heavy scene'],
+  ].forEach(([needle, label]) => {
+    if (heroScript.includes(needle)) fail(`fillpro-hero-scene.js: remove ${label}`);
+  });
 }
 
 function checkPackageScripts() {
@@ -297,9 +303,8 @@ function checkLaunchPage() {
   const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
   const required = [
     ['demo-signal', 'hero product-signal overlay'],
-    ['Profile picked', 'hero profile signal copy'],
-    ['Fields matched', 'hero field signal copy'],
-    ['Ready to review', 'hero review signal copy'],
+    ['Work profile filled', 'hero profile signal copy'],
+    ['ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
     ['No cloud profile account', 'clean privacy proof wording'],
