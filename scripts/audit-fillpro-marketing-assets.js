@@ -248,8 +248,10 @@ function checkRenderer() {
     'motion-rail',
     'Mute-safe captions',
     'Blank form. Review-ready.',
+    'Built for long forms',
     'Fill a long form in one click.',
     'Choose a saved profile, fill the repeat fields, then review before you submit.',
+    'Watch it fill',
     'Watch the repeat fields fill.',
     'Fields fill while you watch.',
     'Review before submit.',
@@ -302,6 +304,12 @@ function checkRenderer() {
   }
   if (/Pick a profile, fill the page, then review before you submit\./i.test(source)) {
     fail(`${relativePath}: video opener should avoid generic pick-fill-review phrasing`);
+  }
+  if (/return \['One click fill', 'Fill a long form in one click\./i.test(source)) {
+    fail(`${relativePath}: video poster should not repeat "one click" in both eyebrow and ribbon`);
+  }
+  if (/if \(t < 4\.8\) return 'One click fill';/i.test(source)) {
+    fail(`${relativePath}: video ribbon should stay short and avoid duplicating the opener eyebrow`);
   }
   if (!/sceneFor\(t\)/.test(source) || !/scene-private/.test(source) || !/scene-control/.test(source)) {
     fail(`${relativePath}: video needs distinct scene art direction, not one repeated composition`);

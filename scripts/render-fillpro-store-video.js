@@ -692,8 +692,8 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 1.8) return ['One click fill', 'Fill a long form in one click.', 'Choose a saved profile, fill the repeat fields, then review before you submit.'];
-    if (t < 4.8) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
+    if (t < 1.8) return ['Built for long forms', 'Fill a long form in one click.', 'Choose a saved profile, fill the repeat fields, then review before you submit.'];
+    if (t < 4.8) return ['Watch it fill', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
     if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 13.2) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
@@ -722,7 +722,7 @@ const html = `<!doctype html>
   }
 
   function ribbonFor(t) {
-    if (t < 4.8) return 'One click fill';
+    if (t < 4.8) return 'One click';
     if (t < 7.6) return 'Review first';
     if (t < 10.2) return 'Resume upload';
     if (t < 13.2) return 'Modern controls';
