@@ -29,7 +29,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 92/100 | Clear, consistent, and technically clean. Screenshot 1 now opens with plainer human wording and Screenshot 5 has a distinct dark review/undo composition. The set is stronger, but still not a live-tested high-budget creative campaign. |
 | Store demo video | 93/100 | Recut into a more varied story arc with a stronger opening, dark review/privacy/control beats, visible fill value near the start, and fixed dark-scene product-card contrast. Still a generated product demo, not a live-captured/pro-edited trailer with tested retention. |
-| Logo/icon system | 90/100 | The large F/check mark is clear and consistent. The 16px/32px optical exports are improved, but icon CTR is not proven and alternate concepts have not been tested. |
+| Logo/icon system | 92/100 | The large F/check mark is clear and consistent. The 16px, 32px, and 48px exports now use badge-free optical monograms, so toolbar and extension-manager surfaces do not shrink the check mark into fuzzy detail. Remaining gap: icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
 | Accessibility / reduced motion | 95/100 | Strong local checks and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
@@ -59,6 +59,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Added distinct dark video scenes for review, privacy, and control, then fixed inherited text color so product-card titles stay readable in dark scenes.
 - Reworked the popup profile editor from warning-led copy into a compact setup strip: save only what repeats, blank fields are ignored, and sign-ins stay separate.
 - Softened the popup free-plan summary into a calmer "Free profiles" usage meter and added release-audit guards so the old warning-led editor copy does not return.
+- Recut the 48px extension-manager icon as a badge-free monogram, updated renderer/audit guards to keep 16px/32px/48px optical, and rebuilt the Chrome, Edge, and Firefox packages.
 
 ## What Blocks A Real 100
 

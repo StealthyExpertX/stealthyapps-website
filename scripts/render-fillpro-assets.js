@@ -992,7 +992,7 @@ async function renderDemoGif(browser) {
 async function renderIcons() {
   const extensionSvg = path.join(projectRoot, 'fillpro', 'icons', 'icon-source.svg');
   for (const size of [16, 32, 48, 128, 256, 512]) {
-    if (size <= 32) {
+    if (size <= 48) {
       await sharp(Buffer.from(smallIconSvg(size))).png().toFile(path.join(projectRoot, 'fillpro', 'icons', `icon${size}.png`));
     } else {
       await sharp(extensionSvg)

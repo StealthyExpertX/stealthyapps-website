@@ -345,6 +345,7 @@ function checkStillRenderer() {
     'promo-row',
     'alex-morgan.pdf',
     'smallIconSvg',
+    'size <= 48',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
@@ -407,11 +408,11 @@ async function checkIconSystem() {
     }
   }
   for (const size of [16, 32, 48, 128, 256, 512]) {
-    const isToolbar = size <= 32;
-    const optics = isToolbar
+    const isCompactIcon = size <= 48;
+    const optics = isCompactIcon
       ? {
-          minCoverage: 0.68,
-          maxCoverage: 0.9,
+          minCoverage: size === 48 ? 0.72 : 0.68,
+          maxCoverage: size === 48 ? 0.84 : 0.9,
           minEdgePadding: size === 16 ? 1 : 2,
           minColorSpread: 55,
         }

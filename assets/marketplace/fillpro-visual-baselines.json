@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-03",
+  "updated": "2026-07-07",
   "note": "Update this file only after rerendering assets, running npm run review:marketing, and visually approving the contact sheets.",
   "assets": [
     {
@@ -126,12 +126,12 @@
     },
     {
       "file": "../fillpro/icons/icon48.png",
-      "bytes": 3238,
-      "sha256": "c601bd79f60ca415bfd5a4307b335e147353924e6985995efe0a5c34d32cffdf",
+      "bytes": 1557,
+      "sha256": "b50995967234284a650dfd00de807b8e2c1b5b4970c65533f696291a997353cb",
       "width": 48,
       "height": 48,
-      "meanLuma": 80.25,
-      "meanColorSpread": 37.2
+      "meanLuma": 127.89,
+      "meanColorSpread": 68.62
     },
     {
       "file": "../fillpro/icons/icon128.png",
