@@ -172,6 +172,60 @@ async function auditPage(page, route, viewport, theme, errors) {
           `${route}: hero 3D WebGL pixels look blank on ${viewport.name}/${theme}: ${JSON.stringify(pixelReport)}`,
         );
       }
+
+      const framingReport = await page.evaluate(() => {
+        const canvas = document.querySelector('.hero-3d-canvas');
+        const demo = document.querySelector('.launch-demo-card');
+        const copy = document.querySelector('.launch-hero-copy');
+        if (!canvas || !demo || !copy) return { ok: false };
+
+        const rect = (element) => {
+          const bounds = element.getBoundingClientRect();
+          return {
+            left: bounds.left,
+            top: bounds.top,
+            right: bounds.right,
+            bottom: bounds.bottom,
+            width: bounds.width,
+            height: bounds.height,
+          };
+        };
+        const overlapArea = (a, b) => {
+          const width = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
+          const height = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
+          return width * height;
+        };
+
+        const canvasRect = rect(canvas);
+        const demoRect = rect(demo);
+        const copyRect = rect(copy);
+        const demoArea = demoRect.width * demoRect.height || 1;
+        return {
+          ok: true,
+          canvasOpacity: Number.parseFloat(window.getComputedStyle(canvas).opacity) || 0,
+          demoOverlapRatio: overlapArea(canvasRect, demoRect) / demoArea,
+          copyToDemoOverlap: overlapArea(canvasRect, copyRect) / Math.max(overlapArea(canvasRect, demoRect), 1),
+        };
+      });
+      if (!framingReport.ok) {
+        errors.push(`${route}: hero 3D framing elements are missing on ${viewport.name}/${theme}`);
+      } else {
+        if (framingReport.canvasOpacity < 0.08) {
+          errors.push(
+            `${route}: hero 3D layer is too faint to be a useful product visual on ${viewport.name}/${theme} (${framingReport.canvasOpacity.toFixed(2)})`,
+          );
+        }
+        if (framingReport.demoOverlapRatio < 0.45) {
+          errors.push(
+            `${route}: hero 3D layer is not anchored to the product demo on ${viewport.name}/${theme} (${framingReport.demoOverlapRatio.toFixed(2)})`,
+          );
+        }
+        if (framingReport.copyToDemoOverlap > 0.55) {
+          errors.push(
+            `${route}: hero 3D layer is competing with the hero copy on ${viewport.name}/${theme} (${framingReport.copyToDemoOverlap.toFixed(2)})`,
+          );
+        }
+      }
     } catch (error) {
       errors.push(`${route}: hero 3D canvas check failed on ${viewport.name}/${theme}: ${error.message}`);
     }
