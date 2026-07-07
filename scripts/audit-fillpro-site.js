@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v47';
+const CACHE_TOKEN = 'fillpro-launch-v48';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -259,6 +259,8 @@ function checkHeroScene() {
     [heroScript, 'studioPlate', 'hero scene should use one calm studio plate'],
     [heroScript, 'formDepthStack', 'hero scene should use product-relevant form depth'],
     [heroScript, 'profileDock', 'hero scene should show one compact profile control'],
+    [heroScript, 'tokenMaterial', 'hero scene should use a visible beveled brand token instead of a duplicate form window'],
+    [heroScript, 'markMaterial', 'hero scene should render a simple brand mark on the token'],
     [heroScript, 'guidedFillPath', 'hero scene should include one readable fill path'],
     [heroScript, 'guidedFillCurve.getPoint(progress, cursorPoint)', 'hero fill cursor should travel along one fill path without per-frame allocations'],
     [heroScript, 'safeSkipRail', 'hero scene should imply sensitive-field review without scary copy'],
@@ -271,6 +273,9 @@ function checkHeroScene() {
     [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
     [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
     [css, '.hero-3d-ready .hero-3d-canvas', 'styles should reveal hero 3D only after ready'],
+    [css, 'mask-image: linear-gradient(90deg, transparent 0 68%', 'styles should mask hero 3D to the product edge instead of covering copy'],
+    [css, 'mix-blend-mode: multiply', 'light theme should blend the hero render into the product edge'],
+    [css, 'mix-blend-mode: screen', 'dark theme should blend the hero render into the product edge'],
     [sw, '/fillpro-hero-scene.js', 'service worker should cache hero scene script'],
     [sw, '/vendor/three.module.min.js', 'service worker should cache vendored Three.js module'],
     [sw, '/vendor/three.core.min.js', 'service worker should cache vendored Three.js core module'],
@@ -287,6 +292,10 @@ function checkHeroScene() {
     ['fieldRails', 'old form-rail clutter'],
     ['ambientNodes', 'old floating-node clutter'],
     ['nodeOffsets', 'old floating-node animation'],
+    ['productWindow', 'old duplicate browser-window hero object'],
+    ['productFace', 'old duplicate browser-window face'],
+    ['chromeBar', 'old duplicate browser chrome'],
+    ['fillRows', 'old duplicate form-row stack'],
   ].forEach(([needle, label]) => {
     if (heroScript.includes(needle)) fail(`fillpro-hero-scene.js: remove ${label}`);
   });

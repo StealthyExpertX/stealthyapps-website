@@ -108,12 +108,12 @@
     },
     {
       "file": "../fillpro/icons/icon16.png",
-      "bytes": 459,
-      "sha256": "7361ef78578c0284061f6d9e6496a37da3fe789d89d0cc8f60272df31a4d0751",
+      "bytes": 293,
+      "sha256": "a9dd083b4535cb60c0b85f75aa35bf2bb7327ef88bfee5d82a23e1e06a454544",
       "width": 16,
       "height": 16,
-      "meanLuma": 136.82,
-      "meanColorSpread": 78.49
+      "meanLuma": 129.5,
+      "meanColorSpread": 75.54
     },
     {
       "file": "../fillpro/icons/icon32.png",

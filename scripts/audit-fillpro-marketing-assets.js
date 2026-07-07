@@ -425,6 +425,9 @@ function checkStillRenderer() {
   if (/Tricky fields|Fields browser autofill often misses|<div class="chips">[\s\S]*Choice buttons|Grouped sections/i.test(source)) {
     fail(`${relativePath}: modern-form screenshot should use a product-proof field grid, not pill-heavy template copy`);
   }
+  if (/stroke="#ffffff" stroke-width="1" opacity="0\.16"|<rect x="1" y="1" width="14" height="14" rx="3"/i.test(source)) {
+    fail(`${relativePath}: 16px toolbar icon should use the pixel-cut optical mark, not the old stroked rounded rect`);
+  }
   if (/chromeFrame\('Demo request'/i.test(source)) {
     fail(`${relativePath}: profile screenshot should use a realistic URL-like browser label`);
   }

@@ -2510,25 +2510,30 @@ html:has(body.fillpro-launch) {
 .hero-3d-canvas {
   position: absolute;
   inset: -34px -68px -40px auto;
-  z-index: 0;
+  z-index: 2;
   width: min(54vw, 660px);
   height: calc(100% + 68px);
   pointer-events: none;
   opacity: 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0 68%, rgba(0, 0, 0, 0.22) 78%, #000 88%);
+  mask-image: linear-gradient(90deg, transparent 0 68%, rgba(0, 0, 0, 0.22) 78%, #000 88%);
+  mix-blend-mode: multiply;
   transition: opacity 500ms ease;
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.3;
+  opacity: 0.42;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-  opacity: 0.34;
+  opacity: 0.46;
+  mix-blend-mode: screen;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-    opacity: 0.34;
+    opacity: 0.46;
+    mix-blend-mode: screen;
   }
 }
 
@@ -4141,21 +4146,27 @@ html:has(body.fillpro-launch) {
 
   .hero-3d-canvas {
       inset: 512px -118px auto auto;
+      z-index: 0;
       width: min(400px, 108vw);
       height: 232px;
+      -webkit-mask-image: none;
+      mask-image: none;
+      mix-blend-mode: normal;
     }
 
   .js-enhanced.hero-3d-ready .hero-3d-canvas {
-      opacity: 0.1;
+      opacity: 0.16;
     }
 
   :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-      opacity: 0.12;
+      opacity: 0.18;
+      mix-blend-mode: normal;
     }
 
     @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-        opacity: 0.12;
+        opacity: 0.18;
+        mix-blend-mode: normal;
       }
     }
 

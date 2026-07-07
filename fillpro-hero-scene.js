@@ -27,15 +27,16 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.15));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.18));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 0.96;
+  renderer.toneMappingExposure = 0.98;
   if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
   }
 
   const trackedGeometries = [];
   const trackedMaterials = [];
+  const themeMaterials = [];
 
   function trackGeometry(geometry) {
     trackedGeometries.push(geometry);
@@ -48,22 +49,22 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(20, 1, 0.1, 100);
-  camera.position.set(0, 0.04, 9.4);
+  const camera = new THREE.PerspectiveCamera(22, 1, 0.1, 100);
+  camera.position.set(0, 0.1, 8.4);
 
   const group = new THREE.Group();
-  group.position.set(0.22, -0.04, 0);
-  group.rotation.set(-0.035, -0.06, 0.008);
+  group.position.set(0.26, -0.03, 0);
+  group.rotation.set(-0.035, -0.05, 0.006);
   scene.add(group);
 
-  scene.add(new THREE.HemisphereLight(0xf8fffb, 0x071916, 0.96));
+  scene.add(new THREE.HemisphereLight(0xf8fffb, 0x071916, 0.86));
 
-  const key = new THREE.DirectionalLight(0xffffff, 1.18);
-  key.position.set(3.2, 4.4, 5.8);
+  const key = new THREE.DirectionalLight(0xffffff, 1.12);
+  key.position.set(3.4, 4.6, 5.4);
   scene.add(key);
 
-  const rim = new THREE.PointLight(0x72fff1, 0.26, 7);
-  rim.position.set(-2.4, 1.0, 2.5);
+  const rim = new THREE.PointLight(0x72fff1, 0.22, 7);
+  rim.position.set(-2.6, 1.1, 2.7);
   scene.add(rim);
 
   function roundedRectShape(width, height, radius) {
@@ -86,7 +87,7 @@ import * as THREE from './vendor/three.module.min.js';
     return trackMaterial(
       new THREE.MeshStandardMaterial({
         color,
-        roughness: options.roughness ?? 0.76,
+        roughness: options.roughness ?? 0.78,
         metalness: options.metalness ?? 0.02,
         transparent: options.opacity !== undefined,
         opacity: options.opacity ?? 1,
@@ -103,6 +104,7 @@ import * as THREE from './vendor/three.module.min.js';
         transparent: true,
         opacity,
         depthWrite: false,
+        side: THREE.DoubleSide,
         blending: THREE.AdditiveBlending,
       }),
     );
@@ -120,15 +122,34 @@ import * as THREE from './vendor/three.module.min.js';
     return material;
   }
 
-  function extrudedPanel(width, height, radius, depth, material, edgeOpacity = 0.05) {
+  function themedLineMaterial(lightColor, darkColor, options = {}) {
+    const material = trackMaterial(
+      new THREE.LineBasicMaterial({
+        color: lightColor,
+        transparent: true,
+        opacity: options.opacity ?? 0.12,
+        depthWrite: false,
+      }),
+    );
+    themeMaterials.push({
+      material,
+      lightColor,
+      darkColor,
+      lightOpacity: options.opacity,
+      darkOpacity: options.darkOpacity,
+    });
+    return material;
+  }
+
+  function extrudedPanel(width, height, radius, depth, material, edgeOpacity = 0.04) {
     const geometry = trackGeometry(
       new THREE.ExtrudeGeometry(roundedRectShape(width, height, radius), {
         depth,
         bevelEnabled: true,
-        bevelSize: Math.min(radius * 0.2, 0.028),
-        bevelThickness: Math.min(depth * 0.34, 0.022),
+        bevelSize: Math.min(radius * 0.2, 0.025),
+        bevelThickness: Math.min(depth * 0.34, 0.02),
         bevelSegments: 3,
-        curveSegments: 16,
+        curveSegments: 14,
       }),
     );
     geometry.center();
@@ -138,13 +159,10 @@ import * as THREE from './vendor/three.module.min.js';
       mesh.add(
         new THREE.LineSegments(
           trackGeometry(new THREE.EdgesGeometry(geometry, 18)),
-          trackMaterial(
-            new THREE.LineBasicMaterial({
-              color: 0xbdfbf2,
-              transparent: true,
-              opacity: edgeOpacity,
-            }),
-          ),
+          themedLineMaterial(0x8adfd4, 0x9de7d7, {
+            opacity: edgeOpacity,
+            darkOpacity: edgeOpacity * 1.35,
+          }),
         ),
       );
     }
@@ -152,184 +170,162 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   function flatPanel(width, height, radius, material, edgeOpacity = 0) {
-    const geometry = trackGeometry(new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 16));
+    const geometry = trackGeometry(new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 14));
     const mesh = new THREE.Mesh(geometry, material);
     if (edgeOpacity > 0) {
       mesh.add(
         new THREE.LineSegments(
           trackGeometry(new THREE.EdgesGeometry(geometry, 18)),
-          trackMaterial(
-            new THREE.LineBasicMaterial({
-              color: 0x8adfd4,
-              transparent: true,
-              opacity: edgeOpacity,
-            }),
-          ),
+          themedLineMaterial(0x7edbd0, 0x9de7d7, {
+            opacity: edgeOpacity,
+            darkOpacity: edgeOpacity * 1.4,
+          }),
         ),
       );
     }
     return mesh;
   }
 
-  const themeMaterials = [];
-
-  const studioPlateMaterial = themedMaterial(0xf6fffb, 0x143a34, {
-    opacity: 0.24,
-    darkOpacity: 0.3,
-    roughness: 0.82,
+  const studioMaterial = themedMaterial(0xf6fffb, 0x12352f, {
+    opacity: 0.22,
+    darkOpacity: 0.34,
+    roughness: 0.84,
     depthWrite: false,
     side: THREE.DoubleSide,
   });
-  const windowShellMaterial = themedMaterial(0xffffff, 0xeafff8, {
-    opacity: 0.52,
-    darkOpacity: 0.46,
-    roughness: 0.72,
-    depthWrite: false,
-  });
-  const screenMaterial = themedMaterial(0xf7fffb, 0xf3fffa, {
-    opacity: 0.58,
+  const glassMaterial = themedMaterial(0xffffff, 0xeafff8, {
+    opacity: 0.54,
     darkOpacity: 0.5,
-    roughness: 0.86,
+    roughness: 0.76,
     depthWrite: false,
   });
-  const chromeMaterial = themedMaterial(0x0f2925, 0x0a211e, {
-    opacity: 0.58,
-    darkOpacity: 0.7,
-    roughness: 0.52,
+  const markMaterial = themedMaterial(0xffffff, 0xf8fffd, {
+    opacity: 0.9,
+    darkOpacity: 0.9,
+    roughness: 0.62,
     depthWrite: false,
   });
-  const fieldMaterial = themedMaterial(0xe8f8f3, 0xdff8f0, {
+  const fieldMaterial = themedMaterial(0xebfaf6, 0xdef8f0, {
     opacity: 0.62,
     darkOpacity: 0.56,
     roughness: 0.88,
     depthWrite: false,
   });
-  const fillMaterial = lightMaterial(0x33d9c5, 0.18);
-  const actionMaterial = themedMaterial(0x0f766e, 0x139888, {
-    opacity: 0.62,
-    darkOpacity: 0.6,
-    roughness: 0.6,
+  const actionMaterial = themedMaterial(0x0f766e, 0x15a090, {
+    opacity: 0.68,
+    darkOpacity: 0.64,
+    roughness: 0.58,
     depthWrite: false,
   });
-  const mutedMaterial = themedMaterial(0xf0f4ef, 0x173b35, {
-    opacity: 0.32,
-    darkOpacity: 0.28,
+  const tokenMaterial = themedMaterial(0x0b7f76, 0x19b7a5, {
+    opacity: 0.88,
+    darkOpacity: 0.76,
+    roughness: 0.54,
+    depthWrite: false,
+  });
+  const mutedMaterial = themedMaterial(0xf1f5ef, 0x173b35, {
+    opacity: 0.34,
+    darkOpacity: 0.3,
     roughness: 0.9,
     depthWrite: false,
   });
-  const pathMaterial = lightMaterial(0x68fff0, 0.16);
-  const warmGlintMaterial = lightMaterial(0xf0bd58, 0.055);
-  const shadowMaterial = lightMaterial(0x061d1a, 0.042);
+  const pathMaterial = lightMaterial(0x68fff0, 0.18);
+  const cursorMaterial = lightMaterial(0xc7fff8, 0.58);
+  const warmGlintMaterial = lightMaterial(0xf0bd58, 0.058);
+  const shadowMaterial = lightMaterial(0x061d1a, 0.048);
 
   const glassStage = new THREE.Group();
   group.add(glassStage);
 
-  const studioPlate = extrudedPanel(4.8, 2.48, 0.34, 0.06, studioPlateMaterial, 0.028);
-  studioPlate.position.set(0.28, 0, -0.7);
-  studioPlate.rotation.set(0.008, -0.014, 0.004);
+  const studioPlate = extrudedPanel(5.3, 2.86, 0.34, 0.055, studioMaterial, 0.026);
+  studioPlate.position.set(0.28, 0, -0.72);
+  studioPlate.rotation.set(0.006, -0.012, 0.004);
   glassStage.add(studioPlate);
 
-  const contactShadow = new THREE.Mesh(trackGeometry(new THREE.CircleGeometry(1, 72)), shadowMaterial);
-  contactShadow.scale.set(2.15, 0.36, 1);
-  contactShadow.position.set(0.34, -1.1, -0.5);
-  glassStage.add(contactShadow);
+  const studioShadow = new THREE.Mesh(trackGeometry(new THREE.CircleGeometry(1, 72)), shadowMaterial);
+  studioShadow.scale.set(2.35, 0.34, 1);
+  studioShadow.position.set(0.36, -1.06, -0.46);
+  glassStage.add(studioShadow);
 
   const formDepthStack = new THREE.Group();
-  formDepthStack.position.set(-0.1, 0.08, -0.18);
-  formDepthStack.rotation.set(0.012, -0.026, 0.005);
+  formDepthStack.position.set(-0.34, 0.02, -0.12);
+  formDepthStack.rotation.set(0.012, -0.036, 0.004);
   group.add(formDepthStack);
 
-  const productWindow = extrudedPanel(2.94, 1.86, 0.15, 0.095, windowShellMaterial, 0.045);
-  productWindow.position.set(0, 0, -0.06);
-  formDepthStack.add(productWindow);
+  const fieldChips = [];
 
-  const productFace = flatPanel(2.66, 1.56, 0.1, screenMaterial, 0.018);
-  productFace.position.set(0, -0.02, 0.032);
-  formDepthStack.add(productFace);
+  function createFieldChip(width, y, offset, active) {
+    const chip = new THREE.Group();
+    chip.position.set(offset, y, 0.05);
 
-  const chromeBar = flatPanel(2.66, 0.18, 0.08, chromeMaterial, 0);
-  chromeBar.position.set(0, 0.61, 0.066);
-  formDepthStack.add(chromeBar);
+    const base = flatPanel(width, 0.17, 0.044, active ? fieldMaterial : mutedMaterial, active ? 0.018 : 0.012);
+    chip.add(base);
 
-  const dotGeometry = trackGeometry(new THREE.CircleGeometry(0.036, 18));
-  const dotMaterial = themedMaterial(0xb7c7c1, 0x90aaa1, {
-    opacity: 0.68,
-    darkOpacity: 0.54,
-    roughness: 0.7,
-    depthWrite: false,
-    side: THREE.DoubleSide,
-  });
-  [-1.12, -1.0, -0.88].forEach((x) => {
-    const dot = new THREE.Mesh(dotGeometry, dotMaterial);
-    dot.position.set(x, 0.61, 0.086);
-    formDepthStack.add(dot);
-  });
+    if (active) {
+      const fill = flatPanel(width * 0.52, 0.052, 0.022, lightMaterial(0x31ddc8, 0.18), 0);
+      fill.position.set(-width * 0.18, 0, 0.031);
+      chip.add(fill);
+      fieldChips.push(fill);
+    }
 
-  const fillRows = [];
-  [
-    { y: 0.3, fill: 1.02 },
-    { y: 0.03, fill: 1.18 },
-    { y: -0.24, fill: 0.96 },
-  ].forEach((row, index) => {
-    const base = flatPanel(1.92, 0.15, 0.036, fieldMaterial, 0.018);
-    base.position.set(-0.12, row.y, 0.095 + index * 0.002);
-    formDepthStack.add(base);
+    formDepthStack.add(chip);
+    return chip;
+  }
 
-    const fill = flatPanel(row.fill, 0.052, 0.022, fillMaterial, 0);
-    fill.position.set(-1.02 + row.fill / 2, row.y, 0.126 + index * 0.002);
-    formDepthStack.add(fill);
-    fillRows.push(fill);
-  });
+  createFieldChip(1.62, 0.36, -0.16, true);
+  createFieldChip(1.86, 0.1, -0.02, true);
+  createFieldChip(1.44, -0.16, -0.22, true);
 
-  const safeSkipRail = flatPanel(1.92, 0.16, 0.036, mutedMaterial, 0.016);
-  safeSkipRail.position.set(-0.12, -0.53, 0.095);
-  formDepthStack.add(safeSkipRail);
+  const safeSkipRail = createFieldChip(1.74, -0.45, -0.08, false);
+  const safeSkipAccent = flatPanel(0.17, 0.052, 0.022, warmGlintMaterial, 0);
+  safeSkipAccent.position.set(-0.68, 0, 0.034);
+  safeSkipRail.add(safeSkipAccent);
 
   const profileDock = new THREE.Group();
-  profileDock.position.set(1.04, -0.03, 0.12);
-  profileDock.rotation.set(0.01, -0.04, -0.012);
-  profileDock.scale.setScalar(0.82);
+  profileDock.position.set(1.36, -0.12, 0.06);
+  profileDock.rotation.set(0.03, -0.12, -0.05);
+  profileDock.scale.setScalar(0.9);
   group.add(profileDock);
 
-  const profileCard = extrudedPanel(1.08, 0.9, 0.13, 0.09, windowShellMaterial, 0.055);
-  profileDock.add(profileCard);
+  const dockShell = extrudedPanel(1.04, 1.04, 0.16, 0.12, tokenMaterial, 0.07);
+  profileDock.add(dockShell);
 
-  const logoTile = flatPanel(0.2, 0.2, 0.048, actionMaterial, 0.025);
-  logoTile.position.set(-0.33, 0.24, 0.085);
-  profileDock.add(logoTile);
+  const markSpine = flatPanel(0.2, 0.62, 0.04, markMaterial, 0);
+  markSpine.position.set(-0.2, 0, 0.095);
+  profileDock.add(markSpine);
 
-  const profileLine = flatPanel(0.54, 0.07, 0.024, fieldMaterial, 0);
-  profileLine.position.set(0.12, 0.25, 0.09);
-  profileDock.add(profileLine);
+  const markTop = flatPanel(0.56, 0.18, 0.045, markMaterial, 0);
+  markTop.position.set(0.02, 0.22, 0.098);
+  profileDock.add(markTop);
 
-  const profileField = flatPanel(0.82, 0.2, 0.05, fieldMaterial, 0.022);
-  profileField.position.set(0, -0.02, 0.092);
-  profileDock.add(profileField);
+  const markMid = flatPanel(0.42, 0.16, 0.044, markMaterial, 0);
+  markMid.position.set(-0.04, -0.04, 0.101);
+  profileDock.add(markMid);
 
-  const profileButton = flatPanel(0.82, 0.2, 0.05, actionMaterial, 0);
-  profileButton.position.set(0, -0.31, 0.098);
-  profileDock.add(profileButton);
-
-  const warmGlint = flatPanel(0.66, 0.06, 0.026, warmGlintMaterial, 0);
-  warmGlint.position.set(0.88, -0.74, 0.08);
-  warmGlint.rotation.z = -0.13;
-  group.add(warmGlint);
+  const dockNotch = flatPanel(0.18, 0.18, 0.044, glassMaterial, 0.014);
+  dockNotch.position.set(0.28, -0.28, 0.104);
+  profileDock.add(dockNotch);
 
   const guidedFillCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.82, -0.18, 0.08),
-    new THREE.Vector3(0.42, 0.0, 0.15),
-    new THREE.Vector3(0.04, 0.16, 0.18),
-    new THREE.Vector3(-0.68, 0.3, 0.16),
+    new THREE.Vector3(0.92, -0.22, 0.11),
+    new THREE.Vector3(0.5, -0.02, 0.18),
+    new THREE.Vector3(0.08, 0.16, 0.19),
+    new THREE.Vector3(-0.8, 0.36, 0.15),
   ]);
 
   const guidedFillPath = new THREE.Mesh(
-    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 44, 0.007, 8, false)),
+    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 44, 0.008, 8, false)),
     pathMaterial,
   );
   group.add(guidedFillPath);
 
-  const fillCursor = flatPanel(0.13, 0.048, 0.018, lightMaterial(0xc7fff8, 0.58), 0);
+  const fillCursor = flatPanel(0.14, 0.052, 0.018, cursorMaterial, 0);
   group.add(fillCursor);
+
+  const warmGlint = flatPanel(0.64, 0.058, 0.026, warmGlintMaterial, 0);
+  warmGlint.position.set(0.86, -0.76, 0.08);
+  warmGlint.rotation.z = -0.13;
+  group.add(warmGlint);
 
   let pointerX = 0;
   let pointerY = 0;
@@ -358,9 +354,10 @@ import * as THREE from './vendor/three.module.min.js';
         material.opacity = isDarkMode && darkOpacity !== undefined ? darkOpacity : lightOpacity;
       }
     });
-    shadowMaterial.opacity = isDarkMode ? 0.052 : 0.036;
-    pathMaterial.opacity = isDarkMode ? 0.16 : 0.11;
-    warmGlintMaterial.opacity = isDarkMode ? 0.07 : 0.045;
+    shadowMaterial.opacity = isDarkMode ? 0.056 : 0.04;
+    pathMaterial.opacity = isDarkMode ? 0.17 : 0.12;
+    warmGlintMaterial.opacity = isDarkMode ? 0.075 : 0.05;
+    cursorMaterial.opacity = isDarkMode ? 0.62 : 0.52;
   }
 
   function resize() {
@@ -391,29 +388,29 @@ import * as THREE from './vendor/three.module.min.js';
     pointerX += (targetX - pointerX) * 0.035;
     pointerY += (targetY - pointerY) * 0.035;
 
-    group.scale.setScalar(isNarrow ? 0.5 : 0.68);
-    group.position.x = isNarrow ? 0.12 : 0.22;
-    group.position.y = -0.04 + Math.sin(floatTime * 0.14) * 0.006;
-    group.rotation.y = (isNarrow ? -0.018 : -0.06) + pointerX * 0.014;
-    group.rotation.x = -0.035 - pointerY * 0.012;
+    group.scale.setScalar(isNarrow ? 0.52 : 0.72);
+    group.position.x = isNarrow ? 0.12 : 0.4;
+    group.position.y = -0.035 + Math.sin(floatTime * 0.12) * 0.004;
+    group.rotation.y = (isNarrow ? -0.02 : -0.052) + pointerX * 0.012;
+    group.rotation.x = -0.035 - pointerY * 0.009;
 
-    studioPlate.rotation.z = 0.005 + Math.sin(floatTime * 0.1) * 0.002;
-    contactShadow.material.opacity = (isDarkMode ? 0.048 : 0.035) + Math.sin(floatTime * 0.18) * 0.003;
-    formDepthStack.position.y = 0.08 + Math.sin(floatTime * 0.13) * 0.004;
-    profileDock.position.y = -0.03 + Math.cos(floatTime * 0.12) * 0.005;
-    warmGlint.material.opacity = (isDarkMode ? 0.065 : 0.045) + Math.sin(floatTime * 0.24) * 0.007;
-    guidedFillPath.material.opacity = (isDarkMode ? 0.15 : 0.11) + Math.sin(floatTime * 0.22) * 0.008;
+    studioPlate.rotation.z = 0.004 + Math.sin(floatTime * 0.08) * 0.0015;
+    studioShadow.material.opacity = (isDarkMode ? 0.052 : 0.038) + Math.sin(floatTime * 0.16) * 0.002;
+    formDepthStack.position.y = 0.02 + Math.sin(floatTime * 0.13) * 0.003;
+    profileDock.position.y = -0.05 + Math.cos(floatTime * 0.11) * 0.004;
+    warmGlint.material.opacity = (isDarkMode ? 0.07 : 0.048) + Math.sin(floatTime * 0.22) * 0.005;
+    guidedFillPath.material.opacity = (isDarkMode ? 0.16 : 0.115) + Math.sin(floatTime * 0.2) * 0.006;
 
-    fillRows.forEach((fill, index) => {
-      fill.material.opacity = (isDarkMode ? 0.18 : 0.15) + Math.sin(floatTime * 0.3 + index * 0.55) * 0.012;
+    fieldChips.forEach((fill, index) => {
+      fill.material.opacity = (isDarkMode ? 0.18 : 0.15) + Math.sin(floatTime * 0.26 + index * 0.52) * 0.008;
     });
-    safeSkipRail.material.opacity = isDarkMode ? 0.24 : 0.28;
+    safeSkipRail.children[0].material.opacity = isDarkMode ? 0.28 : 0.32;
 
-    const progress = reduceMotion ? 0.72 : (seconds * 0.075) % 1;
+    const progress = reduceMotion ? 0.74 : (seconds * 0.064) % 1;
     guidedFillCurve.getPoint(progress, cursorPoint);
     fillCursor.position.copy(cursorPoint);
-    fillCursor.rotation.z = -0.04 + Math.sin(floatTime * 0.42) * 0.012;
-    fillCursor.material.opacity = reduceMotion ? 0.5 : 0.5 + Math.sin(floatTime * 0.54) * 0.045;
+    fillCursor.rotation.z = -0.04 + Math.sin(floatTime * 0.34) * 0.008;
+    fillCursor.material.opacity = reduceMotion ? 0.52 : 0.52 + Math.sin(floatTime * 0.46) * 0.035;
 
     renderer.render(scene, camera);
   }

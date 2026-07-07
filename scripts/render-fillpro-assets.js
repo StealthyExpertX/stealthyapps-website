@@ -1107,16 +1107,13 @@ function smallIconSvg(size) {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 16 16" shape-rendering="crispEdges">
     <defs>
       <linearGradient id="bg" x1="1" y1="1" x2="15" y2="15" gradientUnits="userSpaceOnUse">
-        <stop offset="0" stop-color="#32e6d2"/>
-        <stop offset="0.54" stop-color="#0f8d80"/>
-        <stop offset="1" stop-color="#084b45"/>
+        <stop offset="0" stop-color="#38ead6"/>
+        <stop offset="0.5" stop-color="#0f8d80"/>
+        <stop offset="1" stop-color="#06443f"/>
       </linearGradient>
     </defs>
-    <rect x="1" y="1" width="14" height="14" rx="3" fill="url(#bg)"/>
-    <rect x="2" y="2" width="12" height="12" rx="2" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.16"/>
-    <rect x="4" y="4" width="3" height="9" rx="1" fill="#fbfffd"/>
-    <rect x="4" y="4" width="9" height="3" rx="1" fill="#fbfffd"/>
-    <rect x="4" y="8" width="7" height="3" rx="1" fill="#fbfffd"/>
+    <path d="M3 1H13V2H14V3H15V13H14V14H13V15H3V14H2V13H1V3H2V2H3V1Z" fill="url(#bg)"/>
+    <path d="M4 4H13V7H7V9H12V12H7V13H4V4Z" fill="#fbfffd"/>
   </svg>`;
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
