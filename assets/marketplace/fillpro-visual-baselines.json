@@ -108,30 +108,30 @@
     },
     {
       "file": "../fillpro/icons/icon16.png",
-      "bytes": 349,
-      "sha256": "3bc0f244050ddf1fb5097220c0548ad8af58405e7f60a05c522da89f65c0e8f1",
+      "bytes": 459,
+      "sha256": "7361ef78578c0284061f6d9e6496a37da3fe789d89d0cc8f60272df31a4d0751",
       "width": 16,
       "height": 16,
-      "meanLuma": 139.62,
-      "meanColorSpread": 84.64
+      "meanLuma": 136.82,
+      "meanColorSpread": 78.49
     },
     {
       "file": "../fillpro/icons/icon32.png",
-      "bytes": 1013,
-      "sha256": "76b7eacc87cb0e39d86a07f0fc554fa9e49e5b95f64f465d511a03a78772eb86",
+      "bytes": 1607,
+      "sha256": "35894285895936daf842451d7c95d0ed23b08069535723f166fe93412f407ec1",
       "width": 32,
       "height": 32,
-      "meanLuma": 129.17,
-      "meanColorSpread": 70.58
+      "meanLuma": 117.19,
+      "meanColorSpread": 66.64
     },
     {
       "file": "../fillpro/icons/icon48.png",
-      "bytes": 1557,
-      "sha256": "b50995967234284a650dfd00de807b8e2c1b5b4970c65533f696291a997353cb",
+      "bytes": 2812,
+      "sha256": "06ea237b6a27af6e44527c23c857eed13717e3e128a87a1304b7b0739428fa72",
       "width": 48,
       "height": 48,
-      "meanLuma": 127.89,
-      "meanColorSpread": 68.62
+      "meanLuma": 114.95,
+      "meanColorSpread": 64.74
     },
     {
       "file": "../fillpro/icons/icon128.png",

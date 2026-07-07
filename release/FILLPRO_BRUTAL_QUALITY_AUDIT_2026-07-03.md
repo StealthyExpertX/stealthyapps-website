@@ -29,7 +29,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 92/100 | Clear, consistent, and technically clean. Screenshot 1 now leads with a direct one-click outcome, its 1280x800 crop was fixed so the proof UI fits, and Screenshot 5 has a distinct dark review/undo composition. The set is releaseable, but still not a live-tested high-budget creative campaign with proven ordering, localization, or CTR lift. |
 | Store demo video | 94/100 | Recut into a more varied story arc with a sharper first-frame promise, exact timestamp QA frames, a cleaner blank-form opener, corrected first-three-second proof timing, dark review/privacy/control beats, visible fill value near the start, fixed dark-scene product-card contrast, and a later poster frame that shows the upload actually matched before claiming it. Still a generated product demo, not a live-captured/pro-edited trailer with tested first-three-second retention. |
-| Logo/icon system | 92/100 | The large F/check mark is clear and consistent. The 16px, 32px, and 48px exports now use badge-free optical monograms, so toolbar and extension-manager surfaces do not shrink the check mark into fuzzy detail. Remaining gap: icon CTR is not proven and alternate concepts have not been tested. |
+| Logo/icon system | 93/100 | The large F/check mark is clear and consistent. The 16px, 32px, and 48px exports now use badge-free optical monograms, and the manifest declares the 32px icon so high-DPI/Windows toolbar contexts do not have to resample another size. Remaining gap: icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
 | Accessibility / reduced motion | 96/100 | Strong local checks, clearer theme-toggle state labels, dark-mode visual fixes, and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
@@ -76,6 +76,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Moved the store-video poster frame from `2.4s` to `3.2s` so the thumbnail shows a complete reviewed state: four fields, one upload, and zero passwords.
 - Updated the video contact-sheet extractor to label the actual sampled timestamps instead of assuming equal 2.75-second intervals.
 - Re-locked the marketing visual baseline after manual review of the corrected MP4, thumbnail, and contact sheets.
+- Declared `icon32.png` in both root manifest icons and `action.default_icon`, added release/marketing audit guards for that high-DPI toolbar path, regenerated the 16/32/48 optical icon PNGs, refreshed the icon contact sheet, rebuilt Chrome/Edge/Firefox ZIPs, and re-locked the visual baseline after manual review.
 
 ## What Blocks A Real 100
 

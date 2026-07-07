@@ -439,6 +439,14 @@ async function checkIconSystem() {
       fail(`${label}: missing FillPro icon aria label`);
     }
   }
+  const manifestPath = path.join(WORKSPACE, 'fillpro', 'manifest.json');
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (manifest.icons?.['32'] !== 'icons/icon32.png') {
+    fail('fillpro/manifest.json: root icons should declare icon32.png for high-DPI/Windows surfaces');
+  }
+  if (manifest.action?.default_icon?.['32'] !== 'icons/icon32.png') {
+    fail('fillpro/manifest.json: action.default_icon should declare icon32.png so toolbar surfaces do not resample another size');
+  }
   for (const size of [16, 32, 48, 128, 256, 512]) {
     const isCompactIcon = size <= 48;
     const optics = isCompactIcon
