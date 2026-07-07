@@ -53,6 +53,44 @@ const css = `
       linear-gradient(132deg, transparent 0 58%, rgba(242, 193, 78, 0.12) 58% 58.7%, transparent 58.7%);
     opacity: 0.9;
   }
+  .shot-outcome::before {
+    background:
+      linear-gradient(132deg, transparent 0 41%, rgba(15, 118, 110, 0.08) 41% 41.6%, transparent 41.6%),
+      linear-gradient(132deg, transparent 0 58%, rgba(242, 193, 78, 0.12) 58% 58.7%, transparent 58.7%);
+  }
+  .shot-modern {
+    background:
+      radial-gradient(circle at 18% 16%, rgba(94, 234, 221, 0.22), transparent 250px),
+      radial-gradient(circle at 86% 78%, rgba(15, 118, 110, 0.1), transparent 280px),
+      linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 70px 70px,
+      linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 70px 70px,
+      linear-gradient(135deg, #fbfffd, #edf9f5 48%, #f7fbf8);
+  }
+  .shot-modern::before {
+    inset: 44px 58px;
+    border-color: rgba(15, 118, 110, 0.11);
+    background:
+      linear-gradient(90deg, transparent 0 70%, rgba(15, 118, 110, 0.07) 70% 70.5%, transparent 70.5%),
+      linear-gradient(0deg, transparent 0 64%, rgba(94, 234, 221, 0.1) 64% 64.5%, transparent 64.5%);
+    opacity: 0.85;
+  }
+  .shot-profiles::before {
+    inset: 38px 44px;
+    background:
+      radial-gradient(circle at 24% 72%, rgba(94, 234, 221, 0.12), transparent 220px),
+      linear-gradient(132deg, transparent 0 47%, rgba(94, 234, 221, 0.1) 47% 47.6%, transparent 47.6%),
+      linear-gradient(132deg, transparent 0 70%, rgba(242, 193, 78, 0.1) 70% 70.6%, transparent 70.6%);
+  }
+  .shot-privacy::before {
+    background:
+      radial-gradient(circle at 74% 18%, rgba(94, 234, 221, 0.12), transparent 240px),
+      linear-gradient(90deg, transparent 0 50%, rgba(94, 234, 221, 0.08) 50% 50.5%, transparent 50.5%);
+  }
+  .shot-undo::before {
+    background:
+      radial-gradient(circle at 18% 82%, rgba(242, 193, 78, 0.13), transparent 240px),
+      linear-gradient(132deg, transparent 0 64%, rgba(94, 234, 221, 0.08) 64% 64.7%, transparent 64.7%);
+  }
   .topline {
     display: flex;
     align-items: center;
@@ -273,6 +311,35 @@ const css = `
     color: #43544e;
     font-weight: 850;
     font-size: 14px;
+  }
+  .field-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .field-tile {
+    min-height: 74px;
+    display: grid;
+    align-content: center;
+    gap: 5px;
+    padding: 13px 14px;
+    border: 1px solid #d8e3de;
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 100% 0%, rgba(94, 234, 221, 0.11), transparent 70px),
+      #ffffff;
+  }
+  .field-tile strong {
+    color: #10231f;
+    font-size: 15px;
+    line-height: 1.1;
+  }
+  .field-tile span {
+    color: #60726b;
+    font-size: 12px;
+    font-weight: 750;
+    line-height: 1.25;
   }
   .privacy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
   .privacy-proof {
@@ -777,7 +844,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-fill-page-1280x800.png'),
     1280,
     800,
-    `<main class="stage first-shot">
+    `<main class="stage first-shot shot-outcome">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
       <div><h1>Fill a long form in one click.</h1><p class="sub">Choose a saved profile. Fill the repeat fields. Review before you submit.</p></div>
       ${chromeFrame('client.example/onboarding', beforeAfter())}
@@ -789,10 +856,10 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-profiles-1280x800.png'),
     1280,
     800,
-    `<main class="stage dark">
+    `<main class="stage dark shot-profiles">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
       <div><h1>Keep each repeat job separate.</h1><p class="sub">Work, client, vendor, and QA profiles stay easy to pick before each fill.</p></div>
-      ${chromeFrame('Demo request', `
+      ${chromeFrame('teams.example/demo-request', `
         <div class="grid2">
           <div class="panel">
             <h2>Saved profiles</h2>
@@ -816,7 +883,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-modern-forms-1280x800.png'),
     1280,
     800,
-    `<main class="stage">
+    `<main class="stage shot-modern">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
       <div><h1>Fills what autofill misses.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear late can still match from one profile.</p></div>
       ${chromeFrame('forms.example/team-intake', `
@@ -828,16 +895,12 @@ async function renderStaticAssets(browser) {
             ${field('Resume upload', 'alex-morgan.pdf')}
           </div>
           <div class="panel">
-            <h2>Tricky fields</h2>
-            <div class="chips">
-              <span class="chip">Dropdowns</span>
-              <span class="chip">Checkboxes</span>
-              <span class="chip">Choice buttons</span>
-              <span class="chip">Text areas</span>
-              <span class="chip">File uploads</span>
-              <span class="chip">Late fields</span>
-              <span class="chip">Nearby labels</span>
-              <span class="chip">Grouped sections</span>
+            <h2>Still covered</h2>
+            <div class="field-grid">
+              <div class="field-tile"><strong>Dropdowns</strong><span>choices matched from your profile</span></div>
+              <div class="field-tile"><strong>Checkboxes</strong><span>common preferences handled cleanly</span></div>
+              <div class="field-tile"><strong>Upload fields</strong><span>resume and document references</span></div>
+              <div class="field-tile"><strong>Late fields</strong><span>second pass catches what appears after load</span></div>
             </div>
           </div>
         </div>`)}
@@ -849,7 +912,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-privacy-1280x800.png'),
     1280,
     800,
-    `<main class="stage dark">
+    `<main class="stage dark shot-privacy">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
       <div><h1>No cloud profile account.</h1><p class="sub">Saved profiles, rules, and upload references stay in your browser unless you export them.</p></div>
       <div class="privacy-proof">
@@ -874,7 +937,7 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-undo-1280x800.png'),
     1280,
     800,
-    `<main class="stage dark">
+    `<main class="stage dark shot-undo">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
       <div><h1>Undo before you submit.</h1><p class="sub">Review changes. Roll back in one click.</p></div>
       ${chromeFrame('careers.example/apply', `

@@ -49,29 +49,29 @@
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-fill-page-1280x800.png",
-      "bytes": 339882,
-      "sha256": "39d0fbcdb7f0954356f0707ccc46fcdfb228eeafe924b4354c78cf5dc5f81b85",
+      "bytes": 339799,
+      "sha256": "2eef01c624f4a8b6295dc4afcabe57ab2de58ef344c1aa2d48c3d6a9f49529a1",
       "width": 1280,
       "height": 800,
-      "meanLuma": 228.56,
+      "meanLuma": 228.57,
       "meanColorSpread": 7.96
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png",
-      "bytes": 323392,
-      "sha256": "c51895379335a4a18f1712fd278961f65751467d0d73f18e86d95bd6a646e876",
+      "bytes": 344269,
+      "sha256": "89e51e7b2f056a5776af930f4c0bdd0e4983988dc6aa9ccfdd136dc672b700c3",
       "width": 1280,
       "height": 800,
-      "meanLuma": 230.71,
-      "meanColorSpread": 7.07
+      "meanLuma": 231.13,
+      "meanColorSpread": 8.35
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-profiles-1280x800.png",
-      "bytes": 247643,
-      "sha256": "2941df28b6b23b737d4d5b6cee0dd291930fec2478c9f16f3e914e5c2bb65442",
+      "bytes": 249353,
+      "sha256": "310b3abfd5fa21c0125f3e05afcad01605cc0271984f070d3c17b373518198c7",
       "width": 1280,
       "height": 800,
-      "meanLuma": 121.97,
+      "meanLuma": 122.04,
       "meanColorSpread": 10.54
     },
     {

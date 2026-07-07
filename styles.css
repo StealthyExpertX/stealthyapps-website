@@ -430,7 +430,7 @@ main[tabindex="-1"]:focus {
 .hero-media {
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -2509,26 +2509,26 @@ html:has(body.fillpro-launch) {
 
 .hero-3d-canvas {
   position: absolute;
-  inset: -38px -54px -44px auto;
-  z-index: -1;
-  width: min(58vw, 720px);
-  height: calc(100% + 74px);
+  inset: -34px -68px -40px auto;
+  z-index: 0;
+  width: min(54vw, 660px);
+  height: calc(100% + 68px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 500ms ease;
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.28;
+  opacity: 0.3;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-  opacity: 0.32;
+  opacity: 0.34;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-    opacity: 0.32;
+    opacity: 0.34;
   }
 }
 
@@ -4140,24 +4140,24 @@ html:has(body.fillpro-launch) {
   }
 
   .hero-3d-canvas {
-    inset: 510px -98px auto auto;
-    width: min(430px, 112vw);
-    height: 250px;
-  }
+      inset: 512px -118px auto auto;
+      width: min(400px, 108vw);
+      height: 232px;
+    }
 
   .js-enhanced.hero-3d-ready .hero-3d-canvas {
-    opacity: 0.1;
-  }
+      opacity: 0.1;
+    }
 
   :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-    opacity: 0.13;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-      opacity: 0.13;
+      opacity: 0.12;
     }
-  }
+
+    @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
+        opacity: 0.12;
+      }
+    }
 
   .launch-hero h1 {
     font-size: 42px;

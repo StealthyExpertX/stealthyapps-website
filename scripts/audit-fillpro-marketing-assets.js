@@ -364,9 +364,15 @@ function checkStillRenderer() {
     'Review changes. Roll back in one click.',
     'Fill repeat forms without handing over your data.',
     'No cloud profile account.',
-    'Tricky fields',
-    'Choice buttons',
-    'Grouped sections',
+    'shot-outcome',
+    'shot-modern',
+    'shot-profiles',
+    'shot-privacy',
+    'shot-undo',
+    'Still covered',
+    'field-grid',
+    'second pass catches what appears after load',
+    'teams.example/demo-request',
     'brandPromo',
     'promo-row',
     'alex-morgan.pdf',
@@ -411,6 +417,12 @@ function checkStillRenderer() {
   }
   if (/Same-page sections|<span class="chip">Radios<\/span>|If a page labels a field oddly/i.test(source)) {
     fail(`${relativePath}: store screenshots should avoid technical or cramped fallback wording`);
+  }
+  if (/Tricky fields|Fields browser autofill often misses|<div class="chips">[\s\S]*Choice buttons|Grouped sections/i.test(source)) {
+    fail(`${relativePath}: modern-form screenshot should use a product-proof field grid, not pill-heavy template copy`);
+  }
+  if (/chromeFrame\('Demo request'/i.test(source)) {
+    fail(`${relativePath}: profile screenshot should use a realistic URL-like browser label`);
   }
   if (/promo-line/i.test(source)) {
     fail(`${relativePath}: promo tiles should use concrete product rows, not generic bars`);
