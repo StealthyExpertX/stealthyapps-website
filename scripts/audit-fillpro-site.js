@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v43';
+const CACHE_TOKEN = 'fillpro-launch-v44';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -249,10 +249,11 @@ function checkHeroScene() {
     [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
     [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
     [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
-    [heroScript, 'brandHalo', 'hero scene should use one restrained brand halo'],
-    [heroScript, 'singleFillPath', 'hero scene should include one readable fill path'],
-    [heroScript, 'singleFillCurve.getPoint(progress)', 'hero transfer pulse should travel along one fill path'],
-    [heroScript, 'anchorGlow', 'hero scene should include one small warm accent'],
+    [heroScript, 'studioPlate', 'hero scene should use one calm studio plate'],
+    [heroScript, 'formDepthStack', 'hero scene should use product-relevant form depth'],
+    [heroScript, 'guidedFillPath', 'hero scene should include one readable fill path'],
+    [heroScript, 'guidedFillCurve.getPoint(progress)', 'hero transfer pulse should travel along one fill path'],
+    [heroScript, 'warmGlint', 'hero scene should include one small warm accent'],
     [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
     [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
     [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],

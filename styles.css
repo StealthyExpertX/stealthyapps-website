@@ -2467,16 +2467,16 @@ html:has(body.fillpro-launch) {
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.38;
+  opacity: 0.44;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-  opacity: 0.34;
+  opacity: 0.38;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-    opacity: 0.34;
+    opacity: 0.38;
   }
 }
 
