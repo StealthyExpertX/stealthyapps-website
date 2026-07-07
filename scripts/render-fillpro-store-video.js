@@ -20,7 +20,7 @@ const FPS = 24;
 const DURATION = 22;
 const FRAMES = FPS * DURATION;
 const FIRST_FILL_BEFORE_SECONDS = 3;
-const POSTER_FRAME_SECONDS = 3.2;
+const POSTER_FRAME_SECONDS = 4.55;
 // Mute-safe captions: every important claim must be visible without voiceover.
 
 const html = `<!doctype html>
@@ -456,10 +456,10 @@ const html = `<!doctype html>
     left: 58px;
     bottom: 92px;
     z-index: 5;
-    width: 465px;
+    width: 430px;
     display: grid;
-    gap: 12px;
-    padding: 18px 20px;
+    gap: 10px;
+    padding: 16px 18px;
     border: 1px solid rgba(15, 118, 110, 0.15);
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.97);
@@ -472,7 +472,7 @@ const html = `<!doctype html>
   .payoff-title {
     margin: 0;
     color: #10231f;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 950;
     line-height: 1.02;
   }
@@ -489,7 +489,7 @@ const html = `<!doctype html>
     gap: 8px;
   }
   .payoff-stats span {
-    min-height: 58px;
+    min-height: 52px;
     display: grid;
     align-content: center;
     gap: 2px;
@@ -497,12 +497,12 @@ const html = `<!doctype html>
     border-radius: 10px;
     background: #edf8f4;
     color: #10231f;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 820;
   }
   .payoff-stats strong {
     color: #0f766e;
-    font-size: 19px;
+    font-size: 18px;
     line-height: 1;
   }
   .motion-rail {
@@ -869,12 +869,13 @@ const html = `<!doctype html>
     review.style.setProperty('--review-opacity', reviewOpacity.toFixed(3));
 
     const strip = document.getElementById('strip');
-    const stripOpacity = t < 15.2 ? 0 : t < 16.4 ? smooth((t - 15.2) / 1.2) : 1;
+    const stripOpacity = 0;
     strip.style.setProperty('--strip-opacity', stripOpacity.toFixed(3));
 
     const payoff = document.getElementById('payoff');
-    const payoffIntro = t < 1.1 ? 0 : t < 1.8 ? smooth((t - 1.1) / 0.7) : 1;
-    const payoffOutro = t > 18.8 ? 1 - smooth((t - 18.8) / 0.45) : 1;
+    const payoffWindow = t < 4.8;
+    const payoffIntro = !payoffWindow || t < 1.1 ? 0 : t < 1.8 ? smooth((t - 1.1) / 0.7) : 1;
+    const payoffOutro = !payoffWindow ? 0 : t > 3.75 ? 1 - smooth((t - 3.75) / 0.45) : 1;
     const payoffOpacity = Math.min(payoffIntro, payoffOutro);
     payoff.style.display = payoffOpacity <= 0.01 ? 'none' : 'grid';
     payoff.style.setProperty('--payoff-opacity', payoffOpacity.toFixed(3));

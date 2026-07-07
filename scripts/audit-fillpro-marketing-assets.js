@@ -241,7 +241,7 @@ function checkRenderer() {
     'const FPS = 24;',
     'const DURATION = 22;',
     'const FIRST_FILL_BEFORE_SECONDS = 3;',
-    'const POSTER_FRAME_SECONDS = 3.2;',
+    'const POSTER_FRAME_SECONDS = 4.55;',
     'requestAnimationFrame(resolve)',
     'fillpro-store-demo-22s.mp4',
     'fillpro-store-demo-22s-thumb.png',
@@ -277,6 +277,7 @@ function checkRenderer() {
     'sceneFor',
     'scene-ribbon',
     'kinetic-layer',
+    'payoffWindow = t < 4.8',
     'scene-private',
     'scene-control',
   ];
@@ -285,6 +286,9 @@ function checkRenderer() {
   }
   if (/slideshow|slide deck|stitched slides/i.test(source)) {
     fail(`${relativePath}: renderer should remain motion-first, not a stitched slideshow`);
+  }
+  if (!/const payoffWindow = t < 4\.8;/.test(source)) {
+    fail(`${relativePath}: payoff card should stay in the opening proof only, not repeat through the whole video`);
   }
   if (/Keep submit in your hands/i.test(source)) {
     fail(`${relativePath}: first-frame copy uses awkward submit phrasing`);
