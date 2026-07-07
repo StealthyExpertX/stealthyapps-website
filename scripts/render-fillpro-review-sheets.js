@@ -7,6 +7,7 @@ const ROOT = path.resolve(__dirname, '..');
 const WORKSPACE = path.resolve(ROOT, '..');
 const OUT_DIR = path.join(ROOT, '.tmp', 'marketing-review');
 const FRAME_DIR = path.join(OUT_DIR, 'video-frames-current');
+const VIDEO_REVIEW_TIMES = [0, 3.2, 5.5, 8.25, 11, 13.75, 16.5, 19.25];
 
 const marketplace = (file) => path.join(ROOT, 'assets', 'marketplace', file);
 const asset = (file) => path.join(ROOT, 'assets', file);
@@ -139,8 +140,7 @@ async function renderIconSheet() {
 async function extractVideoFrames() {
   fs.rmSync(FRAME_DIR, { recursive: true, force: true });
   fs.mkdirSync(FRAME_DIR, { recursive: true });
-  const times = [0, 2.75, 5.5, 8.25, 11, 13.75, 16.5, 19.25];
-  times.forEach((time, index) => {
+  VIDEO_REVIEW_TIMES.forEach((time, index) => {
     execFileSync(
       'ffmpeg',
       [
@@ -168,7 +168,7 @@ async function renderVideoSheet() {
     .sort()
     .map((file, index) => ({
       title: `Frame ${index + 1}`,
-      subtitle: `${(index * 2.75).toFixed(2)}s`,
+      subtitle: `${VIDEO_REVIEW_TIMES[index].toFixed(2)}s`,
       file: path.join(FRAME_DIR, file),
     }));
 

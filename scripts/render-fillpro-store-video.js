@@ -20,7 +20,7 @@ const FPS = 24;
 const DURATION = 22;
 const FRAMES = FPS * DURATION;
 const FIRST_FILL_BEFORE_SECONDS = 3;
-const POSTER_FRAME_SECONDS = 2.4;
+const POSTER_FRAME_SECONDS = 3.2;
 // Mute-safe captions: every important claim must be visible without voiceover.
 
 const html = `<!doctype html>
@@ -693,7 +693,8 @@ const html = `<!doctype html>
 
   function copyFor(t) {
     if (t < 1.8) return ['Built for long forms', 'Fill a long form in one click.', 'Choose a saved profile, fill the repeat fields, then review before you submit.'];
-    if (t < 4.8) return ['Watch it fill', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
+    if (t < 2.75) return ['Watch it fill', 'Fields fill while you watch.', 'Name, email, company, and resume fill one by one.'];
+    if (t < 4.8) return ['Watch it fill', 'Ready to review.', 'Name, email, company, and upload matched from the selected profile.'];
     if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
     if (t < 13.2) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
@@ -703,6 +704,7 @@ const html = `<!doctype html>
   }
 
   function proofFor(t) {
+    if (t < 2.75) return ['Filling now', 'Review first', 'Sign-in untouched'];
     if (t < 4.8) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
     if (t < 10.2) return ['Review first', 'Sign-in untouched', 'Undo ready'];
     if (t < 13.2) return ['Dropdowns', 'Checkboxes', 'Late fields'];
@@ -754,31 +756,32 @@ const html = `<!doctype html>
   }
 
   function activeField(t) {
-    if (t < 1.55) return -1;
-    if (t < 2.05) return 0;
-    if (t < 2.65) return 1;
-    if (t < 3.35) return 2;
-    if (t < 4.15) return 3;
+    if (t < 1.25) return -1;
+    if (t < 1.65) return 0;
+    if (t < 2) return 1;
+    if (t < 2.35) return 2;
+    if (t < 2.75) return 3;
     return -1;
   }
 
   function filledCount(t) {
     if (t >= 10.2 && t < 13.2) return 5;
-    if (t < 1.55) return 0;
-    if (t < 2.05) return 1;
-    if (t < 2.65) return 2;
-    if (t < 3.35) return 3;
-    if (t < 4.15) return 4;
+    if (t < 1.25) return 0;
+    if (t < 1.65) return 1;
+    if (t < 2) return 2;
+    if (t < 2.35) return 3;
+    if (t < 2.75) return 4;
     return 4;
   }
 
   function payoffFor(t) {
-    if (t < 1.8) {
+    if (t < 2.75) {
+      const count = filledCount(t);
       return [
-        'Watch the repeat fields fill.',
-        'Name, email, company, and upload match from one saved profile.',
-        ['4', 'fields'],
-        ['1', 'upload'],
+        count === 0 ? 'Saved profile ready.' : 'Filling the repeat work.',
+        count === 0 ? 'The page stays blank until you choose the profile and fill.' : 'Fields fill one by one so the change is easy to follow.',
+        [String(Math.min(count, 4)), 'fields'],
+        [count >= 4 ? '1' : '0', 'upload'],
         ['0', 'passwords'],
       ];
     }

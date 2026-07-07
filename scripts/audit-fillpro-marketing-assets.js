@@ -241,7 +241,7 @@ function checkRenderer() {
     'const FPS = 24;',
     'const DURATION = 22;',
     'const FIRST_FILL_BEFORE_SECONDS = 3;',
-    'const POSTER_FRAME_SECONDS = 2.4;',
+    'const POSTER_FRAME_SECONDS = 3.2;',
     'requestAnimationFrame(resolve)',
     'fillpro-store-demo-22s.mp4',
     'fillpro-store-demo-22s-thumb.png',
@@ -255,7 +255,9 @@ function checkRenderer() {
     'Fill a long form in one click.',
     'Choose a saved profile, fill the repeat fields, then review before you submit.',
     'Watch it fill',
-    'Watch the repeat fields fill.',
+    'Saved profile ready.',
+    'Fields fill one by one so the change is easy to follow.',
+    'Ready to review.',
     'Fields fill while you watch.',
     'Review before submit.',
     'Sign-ins stay with your password manager.',
@@ -290,8 +292,14 @@ function checkRenderer() {
   if (/Password stays out of it|Password skipped/i.test(source)) {
     fail(`${relativePath}: video should use calmer sign-in boundary language`);
   }
-  if (!/if \(t < 2\.05\) return 1;/.test(source)) {
-    fail(`${relativePath}: first filled field should appear near the 2-second mark`);
+  if (!/if \(t < 1\.65\) return 1;/.test(source)) {
+    fail(`${relativePath}: first filled field should appear before the 2-second mark`);
+  }
+  if (!/if \(t < 2\.75\) return 4;/.test(source)) {
+    fail(`${relativePath}: upload should be filled before the poster frame`);
+  }
+  if (/if \(t < 4\.8\) return \['Watch it fill', 'Fields fill while you watch\.', 'Name, email, company, and upload match/i.test(source)) {
+    fail(`${relativePath}: video should not claim upload matched before the upload is filled`);
   }
   if (!/String\(POSTER_FRAME_SECONDS\)/.test(source)) {
     fail(`${relativePath}: poster thumbnail should render from the early value frame`);
