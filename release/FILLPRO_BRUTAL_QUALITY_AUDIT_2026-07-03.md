@@ -1,6 +1,6 @@
 # FillPro Brutal Quality Audit
 
-Updated: 2026-07-03
+Updated: 2026-07-07
 
 This is the harsher scorecard for product taste, marketing quality, and perceived buyer trust. It is intentionally lower than the automated release gate. Passing tests proves the build is releaseable. It does not prove the website, icon, screenshots, or video are the best in the market.
 
@@ -22,22 +22,28 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 | --- | ---: | --- |
 | Automated local release gate | 100/100 | The repeatable gate passes: extension tests, popup UI captures, fill-engine tests, 1009 corpus fixtures, site checks, marketing asset audit, visual baselines, and zip audit. |
 | Extension functional readiness | 96/100 | Strong for v1.0.0. Remaining risk is real-world browser/profile diversity and pages with hostile frames, anti-bot, or unusual enterprise controls. |
-| Extension popup visual craft | 92/100 | Cleaner after the editor stopped leading with warning copy and the free-plan block became a calmer profile meter. It is still constrained by the small browser-popup surface and not yet proven by real first-session retention. |
+| Extension popup visual craft | 93/100 | Cleaner after the editor stopped leading with warning copy, the free-plan block became a calmer profile meter, and the profile list/plan card were tightened so the first popup viewport no longer shows clipped upgrade copy or half-visible plan CTAs. It is still constrained by the small browser-popup surface and not yet proven by real first-session retention. |
 | Website first viewport | 94/100 | Clear promise, demo proof, CTA, and browser links. The WebGL layer is now a restrained product stage instead of a competing interface, and the diagonal background noise was reduced. Remaining gap is live preference testing against alternate hero treatments. |
 | Website full-page craft | 93/100 | Responsive, consistent, and less repetitive after adding a distinct review-before-submit product surface and calming the first-viewport 3D/background system. Remaining gap is still top-studio creative art direction and live preference testing. |
 | Three.js hero scene | 96/100 | Rebuilt again after visual review: the old profile card, rings, floating nodes, and duplicate product-diagram cues are gone. The scene is now a quiet studio backplate with product-relevant form depth, one readable fill path, one pulse, a soft contact shadow, and one small warm accent behind the actual demo. It renders cleanly in light/dark desktop/mobile, has direct WebGL pixel proof, and respects reduced motion. Remaining gap: not yet A/B tested against a no-3D or real-UI-only hero. |
 | Public copy and anti-AI feel | 92/100 | Tighter after removing framework jargon and shortening the new proof section headline. Some sections are still very orderly and can feel engineered instead of lived-in. |
 | Store screenshots | 92/100 | Clear, consistent, and technically clean. Screenshot 1 now leads with a direct one-click outcome, its 1280x800 crop was fixed so the proof UI fits, and Screenshot 5 has a distinct dark review/undo composition. The set is releaseable, but still not a live-tested high-budget creative campaign with proven ordering, localization, or CTR lift. |
-| Store demo video | 92/100 | Recut into a more varied story arc with a sharper first-frame promise, a mute-safe payoff card, dark review/privacy/control beats, visible fill value near the start, fixed dark-scene product-card contrast, and a less redundant poster/thumbnail opener. Still a generated product demo, not a live-captured/pro-edited trailer with tested first-three-second retention. |
+| Store demo video | 93/100 | Recut into a more varied story arc with a sharper first-frame promise, exact timestamp QA frames, a cleaner blank-form opener, delayed payoff detail, dark review/privacy/control beats, visible fill value near the start, fixed dark-scene product-card contrast, and a less redundant poster/thumbnail opener. Still a generated product demo, not a live-captured/pro-edited trailer with tested first-three-second retention. |
 | Logo/icon system | 92/100 | The large F/check mark is clear and consistent. The 16px, 32px, and 48px exports now use badge-free optical monograms, so toolbar and extension-manager surfaces do not shrink the check mark into fuzzy detail. Remaining gap: icon CTR is not proven and alternate concepts have not been tested. |
 | Store metadata / ASO | 92/100 | Natural keywords, 22 locales, accurate privacy claims, and v1.0.0 packaging are aligned. Ranking impact is unproven until indexed. |
 | Accessibility / reduced motion | 95/100 | Strong local checks and reduced-motion support. Manual assistive-tech testing is still not complete. |
 | Security / privacy / payments | 96/100 | Narrow permissions and browser-saved profile data are strong. Marketplace review and live billing edge cases still need real operational proof. |
-| Marketing QA evidence | 95/100 | Contact sheets, visual baselines, codec checks, renderer guards, 3D screenshot checks, source guards, and manual review exist. Missing: external target-user critique, live A/B data, and real store thumbnail/retention evidence. |
-| Overall market-facing quality | 91/100 | Submit-ready and much stronger than most extension sites, with calmer 3D direction and more varied store media. It is still not honestly 100 without live CTR, retention, review, paid-conversion, localization, and external critique data. |
+| Marketing QA evidence | 96/100 | Contact sheets, exact timestamp video-frame extraction, visual baselines, codec checks, renderer guards, 3D screenshot checks, source guards, and manual review exist. Missing: external target-user critique, live A/B data, and real store thumbnail/retention evidence. |
+| Overall market-facing quality | 92/100 | Submit-ready and much stronger than most extension sites, with calmer 3D direction, a less cluttered video opener, and a tighter first popup viewport. It is still not honestly 100 without live CTR, retention, review, paid-conversion, localization, and external critique data. |
 
 ## Improvements Made In This Pass
 
+- Tightened the popup profile list and free-profile summary so the first 360x580 popup viewport no longer cuts off plan copy or shows half-visible upgrade buttons.
+- Changed the popup plan summary from a constant upgrade pitch into a compact status panel; upgrade prompts still appear at the moment of need.
+- Added Playwright guards that fail if the plan summary text or visible plan actions are clipped in the default popup viewport.
+- Cleaned the store-video opener so the first exact frame shows one promise and a blank form instead of an early stats/payoff card competing for attention.
+- Added a repaint wait and hidden-default state to the store-video renderer so stale initial HTML cannot leak into the encoded first frame.
+- Fixed the manual video review-sheet extractor to pull exact timestamps instead of midpoint samples mislabeled as 0.00s.
 - Recut the store demo video timing so the contact-sheet frames now show distinct story beats instead of repeating "Fields fill while you watch."
 - Kept the final video arc focused: save once, fill, review, uploads, autofill gaps, privacy, free starter.
 - Sharpened the 16px and 32px toolbar icon exports with brighter gradients and a simpler F geometry.

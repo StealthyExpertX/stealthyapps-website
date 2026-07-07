@@ -139,18 +139,25 @@ async function renderIconSheet() {
 async function extractVideoFrames() {
   fs.rmSync(FRAME_DIR, { recursive: true, force: true });
   fs.mkdirSync(FRAME_DIR, { recursive: true });
-  execFileSync(
-    'ffmpeg',
-    [
-      '-y',
-      '-i',
-      marketplace('fillpro-store-demo-22s.mp4'),
-      '-vf',
-      'fps=1/2.75,scale=640:-1',
-      path.join(FRAME_DIR, 'frame-%02d.png'),
-    ],
-    { stdio: 'ignore' },
-  );
+  const times = [0, 2.75, 5.5, 8.25, 11, 13.75, 16.5, 19.25];
+  times.forEach((time, index) => {
+    execFileSync(
+      'ffmpeg',
+      [
+        '-y',
+        '-ss',
+        String(time),
+        '-i',
+        marketplace('fillpro-store-demo-22s.mp4'),
+        '-frames:v',
+        '1',
+        '-vf',
+        'scale=640:-1',
+        path.join(FRAME_DIR, `frame-${String(index + 1).padStart(2, '0')}.png`),
+      ],
+      { stdio: 'ignore' },
+    );
+  });
 }
 
 async function renderVideoSheet() {

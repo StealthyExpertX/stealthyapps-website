@@ -466,7 +466,7 @@ const html = `<!doctype html>
     box-shadow:
       0 28px 70px rgba(16, 35, 31, 0.14),
       0 0 0 1px rgba(255, 255, 255, 0.78) inset;
-    opacity: var(--payoff-opacity, 1);
+    opacity: var(--payoff-opacity, 0);
     transform: translate3d(0, var(--payoff-y, 0px), 0) scale(var(--payoff-scale, 1));
   }
   .payoff-title {
@@ -870,10 +870,13 @@ const html = `<!doctype html>
     strip.style.setProperty('--strip-opacity', stripOpacity.toFixed(3));
 
     const payoff = document.getElementById('payoff');
-    const payoffOpacity = t > 18.8 ? 1 - smooth((t - 18.8) / 0.45) : 1;
+    const payoffIntro = t < 1.1 ? 0 : t < 1.8 ? smooth((t - 1.1) / 0.7) : 1;
+    const payoffOutro = t > 18.8 ? 1 - smooth((t - 18.8) / 0.45) : 1;
+    const payoffOpacity = Math.min(payoffIntro, payoffOutro);
+    payoff.style.display = payoffOpacity <= 0.01 ? 'none' : 'grid';
     payoff.style.setProperty('--payoff-opacity', payoffOpacity.toFixed(3));
-    payoff.style.setProperty('--payoff-y', (Math.sin(t * 1.1) * 2).toFixed(2) + 'px');
-    payoff.style.setProperty('--payoff-scale', (t < 1 ? (0.985 + smooth(t) * 0.015) : 1).toFixed(3));
+    payoff.style.setProperty('--payoff-y', ((1 - payoffIntro) * 10 + Math.sin(t * 1.1) * 2).toFixed(2) + 'px');
+    payoff.style.setProperty('--payoff-scale', (0.985 + payoffIntro * 0.015).toFixed(3));
 
     const cursor = document.getElementById('cursor');
     const [x, y, opacity] = cursorPath(t);
@@ -928,6 +931,7 @@ async function renderFrames() {
     for (let frame = 0; frame < FRAMES; frame += 1) {
       const t = frame / FPS;
       await page.evaluate((time) => window.renderFillProFrame(time), t);
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(resolve)));
       await page.screenshot({
         path: path.join(tmp, `frame-${String(frame).padStart(4, '0')}.png`),
         type: 'png',
