@@ -52,15 +52,16 @@
       return;
     }
 
-    var label =
-      next === 'system'
-        ? 'Theme: system'
-        : next === 'dark'
-          ? 'Theme: dark'
-          : 'Theme: light';
-    themeButton.setAttribute('aria-label', label + '. Switch theme.');
-    themeButton.setAttribute('title', label);
+    var currentLabel =
+      next === 'system' ? 'system (' + resolved + ')' : next;
+    var nextTheme = next === 'system' ? 'dark' : next === 'dark' ? 'light' : 'system';
+    themeButton.setAttribute(
+      'aria-label',
+      'Current theme: ' + currentLabel + '. Switch to ' + nextTheme + ' theme.',
+    );
+    themeButton.setAttribute('title', 'Theme: ' + currentLabel + '. Next: ' + nextTheme + '.');
     themeButton.dataset.theme = next;
+    themeButton.dataset.resolvedTheme = resolved;
   }
 
   function persistTheme(theme) {

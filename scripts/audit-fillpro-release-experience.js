@@ -299,6 +299,17 @@ async function auditPage(page, route, viewport, theme, errors) {
       hasMain: Boolean(document.querySelector('main')),
       hasFooter: Boolean(document.querySelector('footer')),
       hasThemeToggle: Boolean(document.querySelector('.theme-toggle')),
+      themeToggle: (() => {
+        const button = document.querySelector('.theme-toggle');
+        return button
+          ? {
+              mode: button.dataset.theme || '',
+              resolved: button.dataset.resolvedTheme || '',
+              label: button.getAttribute('aria-label') || '',
+              title: button.getAttribute('title') || '',
+            }
+          : null;
+      })(),
       resolvedTheme: html.getAttribute('data-theme-resolved'),
       scrollWidth: Math.max(
         html.scrollWidth,
@@ -315,6 +326,26 @@ async function auditPage(page, route, viewport, theme, errors) {
   if (!report.hasMain) errors.push(`${route}: missing main`);
   if (!report.hasFooter) errors.push(`${route}: missing footer`);
   if (!report.hasThemeToggle) errors.push(`${route}: missing theme toggle`);
+  if (report.themeToggle) {
+    const expectedNextTheme = theme === 'dark' ? 'light' : 'system';
+    if (report.themeToggle.mode !== theme) {
+      errors.push(`${route}: theme toggle mode expected ${theme}, got ${report.themeToggle.mode || 'unset'}`);
+    }
+    if (report.themeToggle.resolved !== theme) {
+      errors.push(
+        `${route}: theme toggle resolved theme expected ${theme}, got ${report.themeToggle.resolved || 'unset'}`,
+      );
+    }
+    if (!report.themeToggle.label.includes(`Current theme: ${theme}`)) {
+      errors.push(`${route}: theme toggle label does not expose current ${theme} theme`);
+    }
+    if (!report.themeToggle.label.includes(`Switch to ${expectedNextTheme} theme`)) {
+      errors.push(`${route}: theme toggle label does not expose next ${expectedNextTheme} theme`);
+    }
+    if (!report.themeToggle.title.includes(`Next: ${expectedNextTheme}`)) {
+      errors.push(`${route}: theme toggle title does not expose next ${expectedNextTheme} theme`);
+    }
+  }
   if (report.resolvedTheme !== theme) {
     errors.push(`${route}: expected ${theme} theme, got ${report.resolvedTheme || 'unset'}`);
   }

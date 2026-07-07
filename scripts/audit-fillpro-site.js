@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v44';
+const CACHE_TOKEN = 'fillpro-launch-v45';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -178,6 +178,10 @@ function checkStyles() {
     ['data-theme="dark"', 'manual dark theme selectors'],
     ['--pointer-x', 'interactive background variables'],
     ['.theme-toggle', 'manual theme toggle styles'],
+    ['.theme-toggle[data-theme="system"]', 'system theme monitor icon'],
+    ['.theme-toggle[data-theme="light"]', 'light theme sun icon'],
+    ['.theme-toggle[data-theme="dark"]', 'dark theme moon icon'],
+    [':root[data-theme="dark"] .step-list li::before', 'dark step-list badge override'],
     ['launchCtaShine 7.2s', 'premium CTA shine timing'],
     ['.demo-signal', 'hero product-signal overlay'],
     ['demoSignalSweep 7.2s', 'hero signal motion timing'],
@@ -212,7 +216,10 @@ function checkSiteScript() {
   const required = [
     ['fillpro-theme', 'theme localStorage key'],
     ['data-theme-resolved', 'resolved theme marker'],
+    ['dataset.resolvedTheme', 'resolved theme toggle marker'],
     ['installThemeToggle', 'theme toggle installer'],
+    ['Current theme:', 'explicit theme toggle accessible label'],
+    ['Switch to', 'theme toggle next action label'],
     ['setupInteractiveBackdrop', 'interactive background setup'],
     ['prefers-reduced-motion: reduce', 'reduced-motion guard in JS'],
     ['.browser-download-card', 'browser card reveal coverage'],
@@ -251,9 +258,12 @@ function checkHeroScene() {
     [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
     [heroScript, 'studioPlate', 'hero scene should use one calm studio plate'],
     [heroScript, 'formDepthStack', 'hero scene should use product-relevant form depth'],
+    [heroScript, 'profileDock', 'hero scene should show one compact profile control'],
     [heroScript, 'guidedFillPath', 'hero scene should include one readable fill path'],
-    [heroScript, 'guidedFillCurve.getPoint(progress)', 'hero transfer pulse should travel along one fill path'],
+    [heroScript, 'guidedFillCurve.getPoint(progress, cursorPoint)', 'hero fill cursor should travel along one fill path without per-frame allocations'],
+    [heroScript, 'safeSkipRail', 'hero scene should imply sensitive-field review without scary copy'],
     [heroScript, 'warmGlint', 'hero scene should include one small warm accent'],
+    [heroScript, 'MutationObserver', 'hero scene should react to theme changes without a reload'],
     [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
     [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
     [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],

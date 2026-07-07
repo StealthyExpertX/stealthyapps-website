@@ -304,12 +304,18 @@ main,
 
 .theme-toggle::before {
   content: "";
+  position: absolute;
   width: 16px;
   height: 16px;
   border: 2px solid currentColor;
   border-radius: 999px;
-  box-shadow: inset -5px -3px 0 currentColor;
   opacity: 0.92;
+  transition:
+    border-radius 160ms ease,
+    box-shadow 160ms ease,
+    height 160ms ease,
+    transform 160ms ease,
+    width 160ms ease;
 }
 
 .theme-toggle::after {
@@ -335,24 +341,56 @@ main,
     transform 160ms ease;
 }
 
-:root[data-theme="light"] .theme-toggle::before {
-  box-shadow: inset 0 0 0 3px transparent;
+.theme-toggle[data-theme="system"]::before {
+  width: 18px;
+  height: 13px;
+  border-radius: 4px;
+  box-shadow: none;
+  transform: translateY(-3px);
 }
 
-:root[data-theme="light"] .theme-toggle::after {
-  opacity: 0.8;
-  transform: scale(1);
+.theme-toggle[data-theme="system"]::after {
+  width: 11px;
+  height: 6px;
+  border-right: 2px solid transparent;
+  border-bottom: 2px solid currentColor;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.88;
+  transform: translateY(7px) scale(1);
 }
 
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .theme-toggle::before {
-    box-shadow: inset 0 0 0 3px transparent;
-  }
+.theme-toggle[data-theme="light"]::before {
+  width: 14px;
+  height: 14px;
+  box-shadow: none;
+}
 
-  :root:not([data-theme="dark"]) .theme-toggle::after {
-    opacity: 0.8;
-    transform: scale(1);
-  }
+.theme-toggle[data-theme="light"]::after {
+  width: 3px;
+  height: 3px;
+  box-shadow:
+    0 -9px 0 currentColor,
+    0 9px 0 currentColor,
+    9px 0 0 currentColor,
+    -9px 0 0 currentColor;
+  opacity: 0.72;
+  transform: scale(0.9);
+}
+
+.theme-toggle[data-theme="dark"]::before {
+  box-shadow: inset -5px -3px 0 currentColor;
+}
+
+.theme-toggle[data-theme="dark"]::after {
+  width: 3px;
+  height: 3px;
+  background: currentColor;
+  box-shadow: 8px -7px 0 currentColor;
+  opacity: 0.72;
+  transform: translate(-3px, 1px) scale(1);
 }
 
 main {
@@ -1161,6 +1199,20 @@ p {
   color: #fff;
   font-size: 13px;
   font-weight: 800;
+}
+
+:root[data-theme="dark"] .step-list li::before {
+  border: 1px solid rgba(157, 231, 215, 0.26);
+  background: rgba(33, 183, 169, 0.18);
+  color: #9de7d7;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .step-list li::before {
+    border: 1px solid rgba(157, 231, 215, 0.26);
+    background: rgba(33, 183, 169, 0.18);
+    color: #9de7d7;
+  }
 }
 
 .small,

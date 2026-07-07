@@ -7,9 +7,10 @@ import * as THREE from './vendor/three.module.min.js';
 
   if (!root || !canvas || !hero) return;
 
-  const reduceMotion =
-    window.matchMedia &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const motionQuery = window.matchMedia
+    ? window.matchMedia('(prefers-reduced-motion: reduce)')
+    : { matches: false, addEventListener() {}, removeEventListener() {} };
+  let reduceMotion = motionQuery.matches;
 
   let renderer;
   try {
@@ -26,7 +27,9 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.25));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.35));
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.04;
   if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
     renderer.outputColorSpace = THREE.SRGBColorSpace;
   }
@@ -45,23 +48,23 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(26, 1, 0.1, 100);
-  camera.position.set(0, 0.04, 8.7);
+  const camera = new THREE.PerspectiveCamera(24, 1, 0.1, 100);
+  camera.position.set(0, 0.08, 8.6);
 
   const group = new THREE.Group();
-  group.position.set(0.92, -0.02, 0);
-  group.rotation.set(-0.035, -0.13, 0.012);
+  group.position.set(0.78, -0.02, 0);
+  group.rotation.set(-0.045, -0.11, 0.012);
   scene.add(group);
 
-  scene.add(new THREE.HemisphereLight(0xeafff8, 0x061a17, 1.12));
+  scene.add(new THREE.HemisphereLight(0xf4fffa, 0x071916, 1.15));
 
-  const key = new THREE.DirectionalLight(0xffffff, 1.7);
-  key.position.set(3.4, 4.4, 5.8);
+  const key = new THREE.DirectionalLight(0xffffff, 1.62);
+  key.position.set(3.8, 4.8, 5.4);
   scene.add(key);
 
-  const rim = new THREE.PointLight(0x63f4e7, 1.0, 10);
-  rim.position.set(-2.6, 1.2, 2.6);
-  scene.add(rim);
+  const softRim = new THREE.PointLight(0x76fff0, 0.78, 9);
+  softRim.position.set(-2.5, 1.2, 2.8);
+  scene.add(softRim);
 
   function roundedRectShape(width, height, radius) {
     const x = -width / 2;
@@ -79,21 +82,21 @@ import * as THREE from './vendor/three.module.min.js';
     return shape;
   }
 
-  function makeGlassMaterial(color, opacity, roughness = 0.78) {
+  function standardMaterial(color, options = {}) {
     return trackMaterial(
       new THREE.MeshStandardMaterial({
         color,
-        roughness,
-        metalness: 0.03,
-        transparent: true,
-        opacity,
-        depthWrite: false,
-        side: THREE.DoubleSide,
+        roughness: options.roughness ?? 0.72,
+        metalness: options.metalness ?? 0.02,
+        transparent: options.opacity !== undefined,
+        opacity: options.opacity ?? 1,
+        depthWrite: options.depthWrite ?? true,
+        side: options.side ?? THREE.FrontSide,
       }),
     );
   }
 
-  function makeLightMaterial(color, opacity) {
+  function lightMaterial(color, opacity) {
     return trackMaterial(
       new THREE.MeshBasicMaterial({
         color,
@@ -105,19 +108,48 @@ import * as THREE from './vendor/three.module.min.js';
     );
   }
 
-  function panel(width, height, radius, material, edgeOpacity = 0.08) {
+  function extrudedPanel(width, height, radius, depth, material, edgeOpacity = 0.08) {
+    const geometry = trackGeometry(
+      new THREE.ExtrudeGeometry(roundedRectShape(width, height, radius), {
+        depth,
+        bevelEnabled: true,
+        bevelSize: Math.min(radius * 0.25, 0.035),
+        bevelThickness: Math.min(depth * 0.38, 0.025),
+        bevelSegments: 4,
+        curveSegments: 18,
+      }),
+    );
+    geometry.center();
+
+    const mesh = new THREE.Mesh(geometry, material);
+    if (edgeOpacity > 0) {
+      const edge = new THREE.LineSegments(
+        trackGeometry(new THREE.EdgesGeometry(geometry, 18)),
+        trackMaterial(
+          new THREE.LineBasicMaterial({
+            color: 0xbefbf1,
+            transparent: true,
+            opacity: edgeOpacity,
+          }),
+        ),
+      );
+      mesh.add(edge);
+    }
+    return mesh;
+  }
+
+  function flatPanel(width, height, radius, material, edgeOpacity = 0) {
     const geometry = trackGeometry(
       new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 18),
     );
     const mesh = new THREE.Mesh(geometry, material);
-
     if (edgeOpacity > 0) {
       mesh.add(
         new THREE.LineSegments(
-          trackGeometry(new THREE.EdgesGeometry(geometry)),
+          trackGeometry(new THREE.EdgesGeometry(geometry, 18)),
           trackMaterial(
             new THREE.LineBasicMaterial({
-              color: 0xbff9ef,
+              color: 0x86d8cf,
               transparent: true,
               opacity: edgeOpacity,
             }),
@@ -125,86 +157,168 @@ import * as THREE from './vendor/three.module.min.js';
         ),
       );
     }
-
     return mesh;
+  }
+
+  const themeMaterials = [];
+  function themedMaterial(lightColor, darkColor, options = {}) {
+    const material = standardMaterial(lightColor, options);
+    themeMaterials.push({ material, lightColor, darkColor, lightOpacity: options.opacity, darkOpacity: options.darkOpacity });
+    return material;
   }
 
   const glassStage = new THREE.Group();
   group.add(glassStage);
 
-  const studioPlateMaterial = makeGlassMaterial(0xf7fffb, 0.105, 0.88);
-  const innerPlateMaterial = makeGlassMaterial(0x0f302c, 0.055, 0.84);
-  const fieldMaterial = makeGlassMaterial(0xe8fff8, 0.13, 0.9);
-  const fieldFillMaterial = makeLightMaterial(0x58dfcf, 0.19);
-  const pathMaterial = makeLightMaterial(0x74fff0, 0.25);
-  const warmGlintMaterial = makeLightMaterial(0xf3c75d, 0.12);
-  const shadowMaterial = makeLightMaterial(0x06231f, 0.055);
+  const studioPlateMaterial = themedMaterial(0xf5fffb, 0x12342f, {
+    opacity: 0.5,
+    darkOpacity: 0.45,
+    roughness: 0.78,
+    depthWrite: false,
+    side: THREE.DoubleSide,
+  });
+  const formShellMaterial = themedMaterial(0xffffff, 0xe7fff8, {
+    opacity: 0.84,
+    darkOpacity: 0.78,
+    roughness: 0.66,
+    depthWrite: false,
+  });
+  const formFaceMaterial = themedMaterial(0xf8fffc, 0xf6fffb, {
+    opacity: 0.9,
+    darkOpacity: 0.86,
+    roughness: 0.82,
+    depthWrite: false,
+  });
+  const headerMaterial = themedMaterial(0x0c2a25, 0x0a221f, {
+    opacity: 0.9,
+    darkOpacity: 0.92,
+    roughness: 0.5,
+    depthWrite: false,
+  });
+  const fieldMaterial = themedMaterial(0xe8fbf5, 0xe4f8f2, {
+    opacity: 0.94,
+    darkOpacity: 0.9,
+    roughness: 0.86,
+    depthWrite: false,
+  });
+  const actionMaterial = themedMaterial(0x0f766e, 0x129586, {
+    opacity: 0.96,
+    darkOpacity: 0.94,
+    roughness: 0.58,
+    depthWrite: false,
+  });
+  const mutedMaterial = themedMaterial(0xeef4ef, 0x173630, {
+    opacity: 0.58,
+    darkOpacity: 0.44,
+    roughness: 0.88,
+    depthWrite: false,
+  });
+  const pathMaterial = lightMaterial(0x68fff0, 0.3);
+  const warmGlintMaterial = lightMaterial(0xf0bd58, 0.13);
+  const shadowMaterial = lightMaterial(0x06231f, 0.07);
 
-  const studioPlate = panel(5.88, 3.18, 0.34, studioPlateMaterial, 0.075);
-  studioPlate.position.set(0.1, 0.02, -0.82);
+  const studioPlate = extrudedPanel(5.66, 3.08, 0.38, 0.1, studioPlateMaterial, 0.08);
+  studioPlate.position.set(0.08, 0.02, -0.76);
+  studioPlate.rotation.set(0.012, -0.02, 0.006);
   glassStage.add(studioPlate);
 
-  const innerPlate = panel(4.86, 2.42, 0.28, innerPlateMaterial, 0);
-  innerPlate.position.set(0.42, -0.18, -1.08);
-  innerPlate.rotation.z = 0.012;
-  glassStage.add(innerPlate);
-
   const contactShadow = new THREE.Mesh(
-    trackGeometry(new THREE.CircleGeometry(1, 80)),
+    trackGeometry(new THREE.CircleGeometry(1, 72)),
     shadowMaterial,
   );
-  contactShadow.scale.set(3.45, 0.72, 1);
-  contactShadow.position.set(0.78, -1.52, -0.72);
+  contactShadow.scale.set(3.05, 0.54, 1);
+  contactShadow.position.set(0.46, -1.47, -0.5);
   glassStage.add(contactShadow);
 
   const formDepthStack = new THREE.Group();
-  formDepthStack.position.set(0.34, 0.25, -0.42);
-  formDepthStack.rotation.set(0.02, -0.035, 0.012);
+  formDepthStack.position.set(-0.22, 0.14, -0.2);
+  formDepthStack.rotation.set(0.018, -0.04, 0.01);
   group.add(formDepthStack);
 
-  const fillBars = [];
-  const rowWidths = [2.08, 1.72, 2.26, 1.58];
-  rowWidths.forEach((width, index) => {
-    const rowY = 0.74 - index * 0.42;
-    const base = panel(2.72, 0.28, 0.07, fieldMaterial, 0.03);
-    base.position.set(-0.1, rowY, -0.08 + index * 0.012);
-    formDepthStack.add(base);
+  const formShell = extrudedPanel(3.54, 2.5, 0.18, 0.16, formShellMaterial, 0.1);
+  formShell.position.set(0, 0, -0.08);
+  formDepthStack.add(formShell);
 
-    const fill = panel(width, 0.11, 0.045, fieldFillMaterial, 0);
-    fill.position.set(-1.42 + width / 2, rowY, 0.015 + index * 0.012);
+  const formFace = flatPanel(3.25, 2.16, 0.13, formFaceMaterial, 0.04);
+  formFace.position.set(0, -0.05, 0.03);
+  formDepthStack.add(formFace);
+
+  const headerBar = flatPanel(3.25, 0.34, 0.12, headerMaterial, 0);
+  headerBar.position.set(0, 0.86, 0.07);
+  formDepthStack.add(headerBar);
+
+  const fieldRows = [];
+  const fillRows = [];
+  const rowData = [
+    { y: 0.46, fill: 1.62 },
+    { y: 0.1, fill: 1.42 },
+    { y: -0.26, fill: 1.75 },
+    { y: -0.62, fill: 1.08 },
+  ];
+  rowData.forEach((row, index) => {
+    const base = flatPanel(2.52, 0.2, 0.045, fieldMaterial, 0.045);
+    base.position.set(-0.08, row.y, 0.095 + index * 0.002);
+    formDepthStack.add(base);
+    fieldRows.push(base);
+
+    const fill = flatPanel(row.fill, 0.075, 0.032, lightMaterial(0x37d8c5, 0.35), 0);
+    fill.position.set(-1.34 + row.fill / 2, row.y, 0.13 + index * 0.002);
     formDepthStack.add(fill);
-    fillBars.push(fill);
+    fillRows.push(fill);
   });
 
-  const warmGlint = panel(0.78, 0.12, 0.055, warmGlintMaterial, 0);
-  warmGlint.position.set(1.42, -1.08, -0.18);
-  warmGlint.rotation.z = -0.16;
+  const safeSkipRail = flatPanel(2.52, 0.22, 0.045, mutedMaterial, 0.035);
+  safeSkipRail.position.set(-0.08, -0.98, 0.095);
+  formDepthStack.add(safeSkipRail);
+
+  const profileDock = new THREE.Group();
+  profileDock.position.set(1.54, 0.04, 0.12);
+  profileDock.rotation.set(0.012, -0.06, -0.012);
+  group.add(profileDock);
+
+  const profileCard = extrudedPanel(1.32, 1.34, 0.14, 0.12, formShellMaterial, 0.08);
+  profileDock.add(profileCard);
+
+  const logoTile = flatPanel(0.23, 0.23, 0.055, actionMaterial, 0.04);
+  logoTile.position.set(-0.43, 0.44, 0.1);
+  profileDock.add(logoTile);
+
+  const profileTitle = flatPanel(0.55, 0.07, 0.025, fieldMaterial, 0);
+  profileTitle.position.set(0.08, 0.45, 0.105);
+  profileDock.add(profileTitle);
+
+  const profileField = flatPanel(1.02, 0.28, 0.055, fieldMaterial, 0.035);
+  profileField.position.set(0, 0.12, 0.105);
+  profileDock.add(profileField);
+
+  const profileButton = flatPanel(1.02, 0.26, 0.055, actionMaterial, 0);
+  profileButton.position.set(0, -0.31, 0.115);
+  profileDock.add(profileButton);
+
+  const undoHint = flatPanel(0.84, 0.2, 0.05, mutedMaterial, 0);
+  undoHint.position.set(0, -0.69, 0.105);
+  profileDock.add(undoHint);
+
+  const warmGlint = flatPanel(0.72, 0.08, 0.035, warmGlintMaterial, 0);
+  warmGlint.position.set(1.15, -1.0, 0.08);
+  warmGlint.rotation.z = -0.13;
   group.add(warmGlint);
 
   const guidedFillCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(1.92, 0.58, -0.12),
-    new THREE.Vector3(1.26, 0.7, 0.02),
-    new THREE.Vector3(0.38, 0.5, 0.07),
-    new THREE.Vector3(-0.58, 0.12, 0.02),
+    new THREE.Vector3(1.16, 0.17, 0.08),
+    new THREE.Vector3(0.78, 0.34, 0.18),
+    new THREE.Vector3(0.26, 0.42, 0.2),
+    new THREE.Vector3(-0.88, 0.42, 0.18),
   ]);
 
   const guidedFillPath = new THREE.Mesh(
-    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 60, 0.011, 8, false)),
+    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 54, 0.009, 8, false)),
     pathMaterial,
   );
   group.add(guidedFillPath);
 
-  const pulse = new THREE.Group();
-  const pulseCore = new THREE.Mesh(
-    trackGeometry(new THREE.SphereGeometry(0.05, 16, 16)),
-    makeLightMaterial(0xb8fff7, 0.68),
-  );
-  const pulseGlow = new THREE.Mesh(
-    trackGeometry(new THREE.SphereGeometry(0.18, 16, 16)),
-    makeLightMaterial(0x70fff0, 0.105),
-  );
-  pulse.add(pulseGlow, pulseCore);
-  group.add(pulse);
+  const fillCursor = flatPanel(0.16, 0.055, 0.02, lightMaterial(0xc7fff8, 0.72), 0);
+  group.add(fillCursor);
 
   let pointerX = 0;
   let pointerY = 0;
@@ -213,6 +327,30 @@ import * as THREE from './vendor/three.module.min.js';
   let isVisible = true;
   let sizeNeedsUpdate = true;
   let isNarrow = false;
+  let isDarkMode = false;
+  const cursorPoint = new THREE.Vector3();
+
+  function currentThemeIsDark() {
+    const theme = root.dataset.theme;
+    const resolved = root.dataset.resolvedTheme;
+    if (resolved) return resolved === 'dark';
+    if (theme === 'dark') return true;
+    if (theme === 'light') return false;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+
+  function applyTheme() {
+    isDarkMode = currentThemeIsDark();
+    themeMaterials.forEach(({ material, lightColor, darkColor, lightOpacity, darkOpacity }) => {
+      material.color.set(isDarkMode ? darkColor : lightColor);
+      if (lightOpacity !== undefined) {
+        material.opacity = isDarkMode && darkOpacity !== undefined ? darkOpacity : lightOpacity;
+      }
+    });
+    shadowMaterial.opacity = isDarkMode ? 0.085 : 0.06;
+    pathMaterial.opacity = isDarkMode ? 0.34 : 0.27;
+    warmGlintMaterial.opacity = isDarkMode ? 0.16 : 0.115;
+  }
 
   function resize() {
     const rect = canvas.getBoundingClientRect();
@@ -234,47 +372,50 @@ import * as THREE from './vendor/three.module.min.js';
     if (sizeNeedsUpdate) {
       sizeNeedsUpdate = false;
       resize();
+      applyTheme();
     }
 
     const seconds = time * 0.001;
-    pointerX += (targetX - pointerX) * 0.035;
-    pointerY += (targetY - pointerY) * 0.035;
+    const floatTime = reduceMotion ? 0 : seconds;
+    pointerX += (targetX - pointerX) * 0.04;
+    pointerY += (targetY - pointerY) * 0.04;
 
-    group.scale.setScalar(isNarrow ? 0.74 : 1);
-    group.position.x = isNarrow ? 0.34 : 0.92;
-    group.position.y = (isNarrow ? -0.02 : -0.02) + Math.sin(seconds * 0.18) * 0.008;
-    group.rotation.y = (isNarrow ? -0.045 : -0.13) + pointerX * 0.04;
-    group.rotation.x = -0.035 - pointerY * 0.028;
+    group.scale.setScalar(isNarrow ? 0.76 : 1);
+    group.position.x = isNarrow ? 0.24 : 0.78;
+    group.position.y = -0.02 + Math.sin(floatTime * 0.18) * 0.008;
+    group.rotation.y = (isNarrow ? -0.035 : -0.11) + pointerX * 0.035;
+    group.rotation.x = -0.045 - pointerY * 0.026;
 
-    glassStage.rotation.z = Math.sin(seconds * 0.13) * 0.002;
-    studioPlate.material.opacity = 0.096 + Math.sin(seconds * 0.24) * 0.006;
-    innerPlate.material.opacity = 0.048 + Math.cos(seconds * 0.2) * 0.004;
-    contactShadow.material.opacity = 0.046 + Math.sin(seconds * 0.22) * 0.006;
-    formDepthStack.position.y = 0.25 + Math.sin(seconds * 0.16) * 0.01;
-    warmGlint.material.opacity = 0.09 + Math.sin(seconds * 0.3) * 0.018;
-    guidedFillPath.material.opacity = 0.19 + Math.sin(seconds * 0.32) * 0.022;
-    fillBars.forEach((fill, index) => {
-      fill.material.opacity = 0.145 + Math.sin(seconds * 0.42 + index * 0.74) * 0.018;
+    studioPlate.rotation.z = 0.006 + Math.sin(floatTime * 0.12) * 0.003;
+    contactShadow.material.opacity = (isDarkMode ? 0.08 : 0.055) + Math.sin(floatTime * 0.2) * 0.006;
+    formDepthStack.position.y = 0.14 + Math.sin(floatTime * 0.16) * 0.008;
+    profileDock.position.y = 0.04 + Math.cos(floatTime * 0.14) * 0.01;
+    warmGlint.material.opacity = (isDarkMode ? 0.14 : 0.095) + Math.sin(floatTime * 0.3) * 0.018;
+    guidedFillPath.material.opacity = (isDarkMode ? 0.31 : 0.24) + Math.sin(floatTime * 0.28) * 0.018;
+
+    fillRows.forEach((fill, index) => {
+      fill.material.opacity = 0.27 + Math.sin(floatTime * 0.38 + index * 0.65) * 0.025;
     });
+    safeSkipRail.material.opacity = isDarkMode ? 0.38 : 0.48;
 
-    const progress = (seconds * 0.115) % 1;
-    pulse.position.copy(guidedFillCurve.getPoint(progress));
-    pulse.scale.setScalar(0.94 + Math.sin(seconds * 0.86) * 0.07);
-    pulseCore.material.opacity = 0.56 + Math.sin(seconds * 0.8) * 0.08;
-    pulseGlow.material.opacity = 0.082 + Math.sin(seconds * 0.8) * 0.018;
+    const progress = reduceMotion ? 0.72 : (seconds * 0.105) % 1;
+    guidedFillCurve.getPoint(progress, cursorPoint);
+    fillCursor.position.copy(cursorPoint);
+    fillCursor.rotation.z = -0.04 + Math.sin(floatTime * 0.5) * 0.018;
+    fillCursor.material.opacity = reduceMotion ? 0.62 : 0.62 + Math.sin(floatTime * 0.72) * 0.08;
 
     renderer.render(scene, camera);
   }
 
-  function start() {
-    if (reduceMotion) {
-      render(0);
-      return;
-    }
+  function requestReducedFrame() {
+    if (reduceMotion) requestAnimationFrame(() => render(0));
+  }
 
+  function start() {
     renderer.setAnimationLoop((time) => {
-      if (isVisible) render(time);
+      if (isVisible && !reduceMotion) render(time);
     });
+    if (reduceMotion) render(0);
   }
 
   window.addEventListener(
@@ -283,6 +424,7 @@ import * as THREE from './vendor/three.module.min.js';
       const rect = hero.getBoundingClientRect();
       targetX = ((event.clientX - rect.left) / rect.width - 0.5) * 2;
       targetY = ((event.clientY - rect.top) / rect.height - 0.5) * 2;
+      requestReducedFrame();
     },
     { passive: true },
   );
@@ -291,24 +433,43 @@ import * as THREE from './vendor/three.module.min.js';
     'resize',
     () => {
       sizeNeedsUpdate = true;
-      if (reduceMotion) requestAnimationFrame(() => render(0));
+      requestReducedFrame();
     },
     { passive: true },
   );
 
-  window.addEventListener('pagehide', () => {
-    renderer.setAnimationLoop(null);
-    trackedGeometries.forEach((geometry) => geometry.dispose());
-    trackedMaterials.forEach((material) => material.dispose());
-    renderer.dispose();
-  });
+  const cleanupCallbacks = [];
+
+  if (motionQuery.addEventListener) {
+    const onMotionChange = () => {
+      reduceMotion = motionQuery.matches;
+      if (reduceMotion) {
+        renderer.setAnimationLoop(null);
+        render(0);
+      } else {
+        start();
+      }
+    };
+    motionQuery.addEventListener('change', onMotionChange);
+    cleanupCallbacks.push(() => motionQuery.removeEventListener('change', onMotionChange));
+  }
+
+  if ('MutationObserver' in window) {
+    const observer = new MutationObserver(() => {
+      applyTheme();
+      requestReducedFrame();
+    });
+    observer.observe(root, { attributes: true, attributeFilter: ['data-theme', 'data-resolved-theme'] });
+    cleanupCallbacks.push(() => observer.disconnect());
+  }
 
   if ('ResizeObserver' in window) {
     const observer = new ResizeObserver(() => {
       sizeNeedsUpdate = true;
-      if (reduceMotion) requestAnimationFrame(() => render(0));
+      requestReducedFrame();
     });
     observer.observe(canvas);
+    cleanupCallbacks.push(() => observer.disconnect());
   }
 
   if ('IntersectionObserver' in window) {
@@ -319,9 +480,19 @@ import * as THREE from './vendor/three.module.min.js';
       { threshold: 0.02 },
     );
     observer.observe(hero);
+    cleanupCallbacks.push(() => observer.disconnect());
   }
 
+  window.addEventListener('pagehide', () => {
+    renderer.setAnimationLoop(null);
+    cleanupCallbacks.forEach((callback) => callback());
+    trackedGeometries.forEach((geometry) => geometry.dispose());
+    trackedMaterials.forEach((material) => material.dispose());
+    renderer.dispose();
+  });
+
   requestAnimationFrame((time) => {
+    applyTheme();
     render(time);
     root.classList.add('hero-3d-ready');
     start();
