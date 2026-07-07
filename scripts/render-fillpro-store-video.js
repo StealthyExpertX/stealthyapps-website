@@ -692,7 +692,7 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 1.8) return ['Private autofill', 'Save your details once.', 'Pick a profile, fill the page, then review before you submit.'];
+    if (t < 1.8) return ['One click fill', 'Fill a long form in one click.', 'Choose a saved profile, fill the repeat fields, then review before you submit.'];
     if (t < 4.8) return ['One click', 'Fields fill while you watch.', 'Name, email, company, and upload match from the selected profile.'];
     if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
     if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
@@ -775,8 +775,8 @@ const html = `<!doctype html>
   function payoffFor(t) {
     if (t < 1.8) {
       return [
-        'Blank form. Clean review.',
-        'Repeated details and uploads fill while sign-in fields stay alone.',
+        'Watch the repeat fields fill.',
+        'Name, email, company, and upload match from one saved profile.',
         ['4', 'fields'],
         ['1', 'upload'],
         ['0', 'passwords'],

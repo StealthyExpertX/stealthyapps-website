@@ -72,16 +72,16 @@ These are the categories that can be proven locally before store traffic exists.
 | Website conversion clarity | 97/100 | Clear hero, pricing, privacy proof, low-friction CTAs, and a stronger pre-submit control proof section. Mobile reaches product proof sooner, the page leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 98/100 | The first-run popup is focused, the preview appears sooner, dark-mode secondary actions no longer read as disabled, and the editor now opens with a compact setup strip instead of warning-led copy. Light/dark/editor captures are repeatable. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 95/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32/48 now use brighter F-only optical variants while 128+ keep the check badge for store-scale recognition. SVG parity, source safety, dimensions, edge padding, coverage, luma, color spread, and the 48px optical export path are audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
-| Store screenshots | 93/100 | Releaseable and clearer after this pass: promo tiles show concrete product rows, the first screenshot now opens with plainer human copy, screenshot 2 uses buyer-facing field proof, and screenshot 5 has a darker review/undo composition instead of repeating the first light browser-frame layout. Remaining gap: no store A/B evidence yet. |
-| Store demo video | 94/100 | The 22-second muted MP4 reaches visible fill value near the two-second mark, uses a 2.4s action poster frame, has more varied light/dark story beats, fixes dark-scene product-card contrast, covers uploads and messy forms, splits privacy from review/undo control, and ends on a free-starter CTA. Remaining gap: it is still a generated product demo, not a live CTR-tested trailer with measured first-three-second retention. |
+| Store screenshots | 94/100 | Releaseable and clearer after this pass: promo tiles show concrete product rows, the first screenshot now leads with a direct one-click outcome and a corrected 1280x800 crop, screenshot 2 uses buyer-facing field proof, and screenshot 5 has a darker review/undo composition instead of repeating the first light browser-frame layout. Remaining gap: no store A/B evidence yet. |
+| Store demo video | 95/100 | The 22-second muted MP4 now opens on the direct one-click outcome, reaches visible fill value near the two-second mark, uses a 2.4s action poster frame, has more varied light/dark story beats, fixes dark-scene product-card contrast, covers uploads and messy forms, splits privacy from review/undo control, and ends on a free-starter CTA. Remaining gap: it is still a generated product demo, not a live CTR-tested trailer with measured first-three-second retention. |
 | ASO/store metadata | 94/100 | Natural keyword coverage, 22 locales, narrow permission claims, accurate privacy language, and cleaner crawler text. Remaining gap is post-approval keyword/rank feedback. |
 | Competitive positioning | 92/100 | Stronger privacy/trust discipline than FormFiller and Fill Hero pages reviewed, with less overclaim risk. Remaining gap is store proof: installs, reviews, and retention. |
-| Market-facing creative certainty | 96/100 | Professional and releaseable, with clearer first-three screenshot story, more distinct screenshot sequencing, faster video value proof, calmer 3D/background art direction, cleaner video trust/control beats, less stiff language, a stronger review-before-submit web proof section, regenerated assets, review sheets, and locked visual baselines. Still not elite-proof without live CTR, retention, paid conversion, and target-user creative critique. |
+| Market-facing creative certainty | 96/100 | Professional and releaseable, with clearer first-three screenshot story, more distinct screenshot sequencing, faster video value proof, corrected first-screenshot crop, calmer 3D/background art direction, cleaner video trust/control beats, less stiff language, a stronger review-before-submit web proof section, regenerated assets, review sheets, and locked visual baselines. Still not elite-proof without live CTR, retention, paid conversion, and target-user creative critique. |
 
 ## Changes Made In This Pass
 
-- Reworked the first marketplace screenshot headline from generic one-click language to a clearer outcome frame: “From blank form to final review.”
-- Updated the store video opening to match the stronger first-frame promise.
+- Reworked the first marketplace screenshot and store-video opener to the direct outcome frame: “Fill a long form in one click.”
+- Fixed the first screenshot crop after manual contact-sheet review showed the proof UI sitting too low in the 1280x800 frame.
 - Added more distinctive, still restrained visual depth to generated marketplace backgrounds.
 - Increased light-mode hero WebGL visibility so the product surface feels less flat.
 - Reworked 16px and 32px extension icons as cleaner monogram-only optical variants, keeping the checkmark for 48px and larger where it remains readable.
@@ -117,7 +117,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Recut the privacy screenshot and demo-video segment to use clearer no-cloud-profile wording, then regenerated assets, review sheets, and baselines.
 - Recut the final store-video scene so the last frame lands on the free starter offer, no-account trust cue, and Start free CTA instead of a recovery/support explanation.
 - Added a more premium first-viewport demo treatment with desktop depth, glass highlight, stronger shadowing, and a flat mobile fallback.
-- Reworked the first screenshot and video opening again to a shorter, more scannable promise: “Save once. Fill the next long form.”
+- Reworked the first screenshot and video opening again to a shorter, more scannable promise, now tightened to: “Fill a long form in one click.”
 - Replaced technical modern-form copy with more user-facing language and added audit guards against the old stiff first-frame phrasing.
 - Replaced the generic “real workflows” profile screenshot with “Keep each repeat job separate.”
 - Replaced “Fast fill. Clean fallback.” with a concrete undo promise, now tightened to “Undo before you submit.”
@@ -146,7 +146,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Rebuilt the Three.js hero after visual review showed the previous product-diagram layer was too busy and competed with the actual demo card.
 - Replaced the protruding dark panel/checkmark look, then tightened it again into a quieter studio system: one form-depth backplate, one guided fill path, one pulse, one soft contact shadow, and one small warm accent.
 - Updated hero-source guards so the audit now requires the calmer focal composition, rejects the old stacked-card/profile-card/form-rail/badge/node/particle clutter, and checks WebGL cleanup.
-- Recut the first marketplace screenshot and video opener to “Save your details once.” with plainer support copy.
+- Recut the first marketplace screenshot and video opener away from softer save-once language and locked the current direct one-click wording with renderer guards.
 - Added varied dark review/privacy/control video scenes and fixed inherited text color so browser-form titles stay readable in those scenes.
 - Re-rendered marketplace stills, MP4, thumbnail, review sheets, and the 19-asset visual baseline after manual visual inspection.
 - Reworked the popup profile editor into a shorter setup strip: "Save only what repeats" and "Sign-ins stay separate."

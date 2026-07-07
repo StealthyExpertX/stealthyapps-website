@@ -96,6 +96,33 @@ const css = `
     line-height: 1.35;
     font-weight: 650;
   }
+  .first-shot {
+    padding: 34px 64px 34px;
+    gap: 18px;
+  }
+  .first-shot h1 {
+    max-width: 820px;
+    font-size: 52px;
+  }
+  .first-shot .sub {
+    max-width: 620px;
+    font-size: 21px;
+  }
+  .first-shot .page {
+    min-height: 410px;
+    padding: 24px;
+  }
+  .first-shot .form {
+    gap: 11px;
+    padding: 20px;
+  }
+  .first-shot .box {
+    height: 42px;
+  }
+  .first-shot .popup {
+    top: 104px;
+    right: 48px;
+  }
   .browser {
     position: relative;
     overflow: hidden;
@@ -750,9 +777,9 @@ async function renderStaticAssets(browser) {
     path.join(marketplaceDir, 'fillpro-screenshot-fill-page-1280x800.png'),
     1280,
     800,
-    `<main class="stage">
+    `<main class="stage first-shot">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>Save your details once.</h1><p class="sub">Pick a profile, fill the page, then review before you submit.</p></div>
+      <div><h1>Fill a long form in one click.</h1><p class="sub">Choose a saved profile. Fill the repeat fields. Review before you submit.</p></div>
       ${chromeFrame('client.example/onboarding', beforeAfter())}
     </main>`,
   );
