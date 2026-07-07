@@ -69,7 +69,7 @@ These are not the local gate scores. These are cold-buyer, top-tier-market score
 - Recut the 48px extension-manager icon as a badge-free monogram, updated renderer/audit guards to keep 16px/32px/48px optical, and rebuilt the Chrome, Edge, and Firefox packages.
 - Reworked the shared theme toggle so system, light, and dark states have distinct monitor/sun/moon visuals plus current/next-action labels guarded by rendered route audits.
 - Fixed dark-mode step-list number badges so they no longer invert into stark white blocks on support-style pages.
-- Bumped the website cache token to `fillpro-launch-v45` so live browsers receive the updated CSS, theme control, and hero scene assets.
+- Bumped the website cache token to `fillpro-launch-v46` so live browsers receive the updated CSS, theme control, and hero scene assets.
 - Rebuilt the Three.js hero one more time into a simpler product-object render: one beveled studio plate, one form stack, one compact profile dock, one guided rectangular fill cursor, one safe-skip rail, one contact shadow, and one warm accent.
 - Removed per-frame theme lookups from the WebGL render loop, made fill-row material opacity independent per row, and added audit guards for the profile dock, safe-skip rail, theme reaction, and no-allocation fill cursor path.
 - Fixed a video trust mismatch where the early caption/proof could imply the upload had matched before the resume upload field was filled.

@@ -160,7 +160,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Recut the 48px extension-manager icon as a badge-free optical monogram, regenerated the icon review sheet, re-locked the visual baseline, and rebuilt Chrome, Edge, and Firefox packages.
 - Reworked the shared theme toggle so system/light/dark have distinct monitor/sun/moon visuals, current-theme labels, next-action labels, and rendered route guards.
 - Fixed dark-mode support-page step badges so they no longer show stark white number blocks.
-- Bumped the website cache token to `fillpro-launch-v45` for the updated CSS, JS, and service worker asset references.
+- Bumped the website cache token to `fillpro-launch-v46` for the updated CSS, JS, and service worker asset references.
 - Rebuilt the Three.js hero one more time after visual review: the support layer is now a simpler beveled product-object render with a form stack, compact profile dock, guided rectangular fill cursor, safe-skip rail, contact shadow, and one warm accent.
 - Tightened WebGL runtime quality by avoiding per-frame theme lookups and giving each animated fill row its own material opacity.
 - Fixed the store-video first-three-second proof timing so upload claims, proof chips, stats, and the resume upload field all agree.

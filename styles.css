@@ -2509,26 +2509,26 @@ html:has(body.fillpro-launch) {
 
 .hero-3d-canvas {
   position: absolute;
-  inset: -48px -28px -34px auto;
+  inset: -38px -54px -44px auto;
   z-index: -1;
-  width: min(64vw, 780px);
-  height: calc(100% + 82px);
+  width: min(58vw, 720px);
+  height: calc(100% + 74px);
   pointer-events: none;
   opacity: 0;
   transition: opacity 500ms ease;
 }
 
 .js-enhanced.hero-3d-ready .hero-3d-canvas {
-  opacity: 0.44;
+  opacity: 0.28;
 }
 
 :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-  opacity: 0.38;
+  opacity: 0.32;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-    opacity: 0.38;
+    opacity: 0.32;
   }
 }
 
@@ -4140,22 +4140,22 @@ html:has(body.fillpro-launch) {
   }
 
   .hero-3d-canvas {
-    inset: 490px -92px auto auto;
-    width: min(500px, 126vw);
-    height: 300px;
+    inset: 510px -98px auto auto;
+    width: min(430px, 112vw);
+    height: 250px;
   }
 
   .js-enhanced.hero-3d-ready .hero-3d-canvas {
-    opacity: 0.11;
+    opacity: 0.1;
   }
 
   :root[data-theme="dark"].hero-3d-ready .hero-3d-canvas {
-    opacity: 0.16;
+    opacity: 0.13;
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]).hero-3d-ready .hero-3d-canvas {
-      opacity: 0.16;
+      opacity: 0.13;
     }
   }
 
