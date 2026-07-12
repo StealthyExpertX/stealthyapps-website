@@ -52,3 +52,4 @@ Allow: /
 Sitemap: https://stealthyapps.com/sitemap-index.xml
 Sitemap: https://stealthyapps.com/sitemap.xml
 Sitemap: https://stealthyapps.com/sitemap-images.xml
+Sitemap: https://stealthyapps.com/sitemap-locales.xml

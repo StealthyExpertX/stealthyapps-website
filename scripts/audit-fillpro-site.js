@@ -7,6 +7,28 @@ const IGNORE_DIRS = new Set(['.git', 'node_modules']);
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
+const LOCALIZED_PAGES = {
+  'fillpro/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
+  'fillpro/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
+  'fillpro/fr/index.html': { lang: 'fr', hreflang: 'fr', phrase: 'Remplissage automatique de formulaires' },
+  'fillpro/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
+  'fillpro/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
+  'fillpro/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
+  'fillpro/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填写' },
+  'fillpro/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
+};
+const HREFLANG_URLS = {
+  en: 'https://stealthyapps.com/fillpro/',
+  de: 'https://stealthyapps.com/fillpro/de/',
+  es: 'https://stealthyapps.com/fillpro/es/',
+  fr: 'https://stealthyapps.com/fillpro/fr/',
+  'pt-BR': 'https://stealthyapps.com/fillpro/pt-br/',
+  ja: 'https://stealthyapps.com/fillpro/ja/',
+  ko: 'https://stealthyapps.com/fillpro/ko/',
+  'zh-CN': 'https://stealthyapps.com/fillpro/zh-cn/',
+  ru: 'https://stealthyapps.com/fillpro/ru/',
+  'x-default': 'https://stealthyapps.com/fillpro/',
+};
 const STALE_COPY = [
   'Local profiles',
   'Local-first',
@@ -115,8 +137,15 @@ function checkFooter(file, html) {
   checked.footers += 1;
   if (!/class=["'][^"']*footer-copy/.test(html)) fail(`${rel(file)}: footer missing footer-copy`);
   if (!/class=["'][^"']*footer-links/.test(html)) fail(`${rel(file)}: footer missing footer-links`);
-  for (const label of FOOTER_LINKS) {
-    if (!new RegExp(`>${label}<`).test(html)) fail(`${rel(file)}: footer missing ${label}`);
+  const fileRel = rel(file);
+  if (LOCALIZED_PAGES[fileRel]) {
+    for (const key of ['product', 'pricing', 'privacy', 'support', 'contact']) {
+      if (!new RegExp(`data-nav-key=["']${key}["']`).test(html)) fail(`${fileRel}: localized footer missing ${key}`);
+    }
+  } else {
+    for (const label of FOOTER_LINKS) {
+      if (!new RegExp(`>${label}<`).test(html)) fail(`${fileRel}: footer missing ${label}`);
+    }
   }
   if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(html)) {
     fail(`${rel(file)}: footer should not expose sitemap link`);
@@ -128,7 +157,9 @@ function checkNav(file, html) {
   if (!/<nav\b/i.test(html)) return;
   checked.navs += 1;
   const fileRel = rel(file);
+  const isLocalizedPage = Boolean(LOCALIZED_PAGES[fileRel]);
   const isPublicUtilityPage =
+    isLocalizedPage ||
     fileRel.startsWith('contact/') ||
     fileRel.startsWith('support/') ||
     fileRel.startsWith('fillpro/privacy/') ||
@@ -139,6 +170,12 @@ function checkNav(file, html) {
     fileRel === '404.html' ||
     fileRel === 'sitemap.html';
   if (!isPublicUtilityPage) return;
+  if (isLocalizedPage) {
+    for (const key of ['product', 'download', 'pricing', 'privacy', 'support', 'contact']) {
+      if (!new RegExp(`data-nav-key=["']${key}["']`).test(html)) fail(`${fileRel}: localized nav missing ${key}`);
+    }
+    return;
+  }
   for (const label of PUBLIC_NAV) {
     if (!new RegExp(`>${label}<`).test(html)) fail(`${fileRel}: nav missing ${label}`);
   }
@@ -190,6 +227,8 @@ function checkStyles() {
     ['min-height: 34px', 'footer link tap target'],
     ['clip-path: inset(50%)', 'non-overflow honeypot hiding'],
     ['.launch-footer', 'landing footer rules'],
+    ['.language-picker', 'localized language picker styles'],
+    ['.locale-price-grid', 'localized pricing layout'],
     ['width: 100%', 'full-width landing footer'],
     ['max(24px, calc((100vw - 1220px) / 2))', 'responsive landing footer padding'],
     ['.browser-mark-chrome', 'Chrome browser badge styles'],
@@ -319,6 +358,12 @@ function checkPackageScripts() {
   if (!scripts['test:experience'] || !scripts['test:experience'].includes('audit-fillpro-release-experience.js')) {
     fail('package.json: missing test:experience script for release experience audit');
   }
+  if (!scripts['generate:locales'] || !scripts['generate:locales'].includes('generate-fillpro-locales.js')) {
+    fail('package.json: missing localized page generator');
+  }
+  if (!scripts['submit:indexnow'] || !scripts['submit:indexnow'].includes('submit-indexnow.js')) {
+    fail('package.json: missing IndexNow submission command');
+  }
 }
 
 function checkDemoGenerator() {
@@ -382,6 +427,48 @@ function checkIndexNowKey() {
   }
 }
 
+function checkLocalization() {
+  const pages = {
+    'fillpro/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
+    ...LOCALIZED_PAGES,
+  };
+  for (const [fileRel, config] of Object.entries(pages)) {
+    const html = fs.readFileSync(path.join(ROOT, fileRel), 'utf8');
+    const canonical = HREFLANG_URLS[config.hreflang];
+    if (!html.includes(`<html lang="${config.lang}">`)) fail(`${fileRel}: html lang should be ${config.lang}`);
+    if (!html.includes(`<link rel="canonical" href="${canonical}">`)) fail(`${fileRel}: localized canonical mismatch`);
+    if (!html.includes(config.phrase)) fail(`${fileRel}: missing regional query phrase ${config.phrase}`);
+    for (const [hreflang, url] of Object.entries(HREFLANG_URLS)) {
+      if (!html.includes(`<link rel="alternate" hreflang="${hreflang}" href="${url}">`)) {
+        fail(`${fileRel}: missing reciprocal hreflang ${hreflang}`);
+      }
+    }
+    if (!html.includes('class="language-picker"')) fail(`${fileRel}: missing visible language picker`);
+    for (const url of Object.values(HREFLANG_URLS)) {
+      const pathOnly = new URL(url).pathname;
+      if (!html.includes(`href="${pathOnly}"`)) fail(`${fileRel}: language picker missing ${pathOnly}`);
+    }
+    if (fileRel !== 'fillpro/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
+      fail(`${fileRel}: JSON-LD inLanguage mismatch`);
+    }
+  }
+
+  const localeSitemap = fs.readFileSync(path.join(ROOT, 'sitemap-locales.xml'), 'utf8');
+  for (const [hreflang, url] of Object.entries(HREFLANG_URLS)) {
+    if (!localeSitemap.includes(`<xhtml:link rel="alternate" hreflang="${hreflang}" href="${url}"/>`)) {
+      fail(`sitemap-locales.xml: missing ${hreflang} alternate`);
+    }
+  }
+  for (const url of new Set(Object.values(HREFLANG_URLS))) {
+    if (!localeSitemap.includes(`<loc>${url}</loc>`)) fail(`sitemap-locales.xml: missing URL ${url}`);
+  }
+
+  const main = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  for (const type of ['WebSite', 'WebPage', 'SoftwareApplication', 'FAQPage']) {
+    if (!main.includes(`"@type": "${type}"`)) fail(`fillpro/index.html: entity graph missing ${type}`);
+  }
+}
+
 function checkStaleCopy(file, text) {
   for (const phrase of STALE_COPY) {
     if (text.includes(phrase)) fail(`${rel(file)}: stale phrase "${phrase}"`);
@@ -420,6 +507,7 @@ checkDemoGenerator();
 checkLaunchPage();
 checkAssetVersioning(files);
 checkIndexNowKey();
+checkLocalization();
 
 if (failures.length) {
   console.error(`FillPro site audit failed with ${failures.length} issue(s):`);

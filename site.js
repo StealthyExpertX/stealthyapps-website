@@ -13,6 +13,30 @@
   var mediaDark =
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var themeButton = null;
+  var THEME_COPY = {
+    en: { aria: 'Current theme: {current}. Switch to {next} theme.', title: 'Theme: {current}. Next: {next}.', system: 'system', light: 'light', dark: 'dark' },
+    de: { aria: 'Aktuelles Design: {current}. Wechseln zu: {next}.', title: 'Design: {current}. Als Nächstes: {next}.', system: 'System', light: 'hell', dark: 'dunkel' },
+    es: { aria: 'Tema actual: {current}. Cambiar a: {next}.', title: 'Tema: {current}. Siguiente: {next}.', system: 'sistema', light: 'claro', dark: 'oscuro' },
+    fr: { aria: 'Thème actuel : {current}. Passer au thème {next}.', title: 'Thème : {current}. Suivant : {next}.', system: 'système', light: 'clair', dark: 'sombre' },
+    'pt-br': { aria: 'Tema atual: {current}. Mudar para: {next}.', title: 'Tema: {current}. Próximo: {next}.', system: 'sistema', light: 'claro', dark: 'escuro' },
+    ja: { aria: '現在のテーマ: {current}。{next}テーマに切り替えます。', title: 'テーマ: {current}。次: {next}。', system: 'システム', light: 'ライト', dark: 'ダーク' },
+    ko: { aria: '현재 테마: {current}. {next} 테마로 전환합니다.', title: '테마: {current}. 다음: {next}.', system: '시스템', light: '라이트', dark: '다크' },
+    'zh-cn': { aria: '当前主题：{current}。切换到{next}主题。', title: '主题：{current}。下一个：{next}。', system: '跟随系统', light: '浅色', dark: '深色' },
+    ru: { aria: 'Текущая тема: {current}. Переключить на тему «{next}».', title: 'Тема: {current}. Следующая: {next}.', system: 'системная', light: 'светлая', dark: 'тёмная' },
+  };
+
+  function currentThemeCopy() {
+    var language = (root.getAttribute('lang') || 'en').toLowerCase();
+    if (THEME_COPY[language]) {
+      return THEME_COPY[language];
+    }
+    var base = language.split('-')[0];
+    return THEME_COPY[base] || THEME_COPY.en;
+  }
+
+  function formatThemeCopy(template, current, next) {
+    return template.replace('{current}', current).replace('{next}', next);
+  }
 
   function getStoredTheme() {
     try {
@@ -52,14 +76,12 @@
       return;
     }
 
+    var copy = currentThemeCopy();
     var currentLabel =
-      next === 'system' ? 'system (' + resolved + ')' : next;
+      next === 'system' ? copy.system + ' (' + copy[resolved] + ')' : copy[next];
     var nextTheme = next === 'system' ? 'dark' : next === 'dark' ? 'light' : 'system';
-    themeButton.setAttribute(
-      'aria-label',
-      'Current theme: ' + currentLabel + '. Switch to ' + nextTheme + ' theme.',
-    );
-    themeButton.setAttribute('title', 'Theme: ' + currentLabel + '. Next: ' + nextTheme + '.');
+    themeButton.setAttribute('aria-label', formatThemeCopy(copy.aria, currentLabel, copy[nextTheme]));
+    themeButton.setAttribute('title', formatThemeCopy(copy.title, currentLabel, copy[nextTheme]));
     themeButton.dataset.theme = next;
     themeButton.dataset.resolvedTheme = resolved;
   }

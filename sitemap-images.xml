@@ -18,5 +18,30 @@
       <image:title>FillPro logo</image:title>
       <image:caption>FillPro private form autofill logo.</image:caption>
     </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-fill-page-1280x800.png</image:loc>
+      <image:title>FillPro Fill Page workflow</image:title>
+      <image:caption>Choose a saved profile and autofill the current web form with FillPro.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-profiles-1280x800.png</image:loc>
+      <image:title>FillPro saved autofill profiles</image:title>
+      <image:caption>Create separate saved profiles for job applications, business forms, and repeated workflows.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png</image:loc>
+      <image:title>FillPro modern form support</image:title>
+      <image:caption>Autofill dropdowns, checkboxes, long answers, and modern web form controls.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-privacy-1280x800.png</image:loc>
+      <image:title>FillPro private autofill controls</image:title>
+      <image:caption>Saved profiles stay in the extension for the normal FillPro workflow.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-undo-1280x800.png</image:loc>
+      <image:title>FillPro review and undo</image:title>
+      <image:caption>Review filled fields and undo the last fill before submitting the form.</image:caption>
+    </image:image>
   </url>
 </urlset>

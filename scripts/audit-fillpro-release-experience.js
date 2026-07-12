@@ -20,7 +20,25 @@ const ROUTES = [
   '/fillpro/resume-upload-autofill/',
   '/fillpro/local-form-autofill/',
   '/fillpro/browser-autofill-vs-fillpro/',
+  '/fillpro/de/',
+  '/fillpro/es/',
+  '/fillpro/fr/',
+  '/fillpro/pt-br/',
+  '/fillpro/ja/',
+  '/fillpro/ko/',
+  '/fillpro/zh-cn/',
+  '/fillpro/ru/',
 ];
+const LOCALIZED_THEME_MARKERS = {
+  '/fillpro/de/': ['Aktuelles Design:', 'Wechseln zu:'],
+  '/fillpro/es/': ['Tema actual:', 'Cambiar a:'],
+  '/fillpro/fr/': ['Thème actuel :', 'Passer au thème'],
+  '/fillpro/pt-br/': ['Tema atual:', 'Mudar para:'],
+  '/fillpro/ja/': ['現在のテーマ:', 'テーマに切り替えます'],
+  '/fillpro/ko/': ['현재 테마:', '테마로 전환합니다'],
+  '/fillpro/zh-cn/': ['当前主题：', '切换到'],
+  '/fillpro/ru/': ['Текущая тема:', 'Переключить на тему'],
+};
 
 const CONTENT_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -315,14 +333,24 @@ async function auditPage(page, route, viewport, theme, errors) {
         `${route}: theme toggle resolved theme expected ${theme}, got ${report.themeToggle.resolved || 'unset'}`,
       );
     }
-    if (!report.themeToggle.label.includes(`Current theme: ${theme}`)) {
-      errors.push(`${route}: theme toggle label does not expose current ${theme} theme`);
-    }
-    if (!report.themeToggle.label.includes(`Switch to ${expectedNextTheme} theme`)) {
-      errors.push(`${route}: theme toggle label does not expose next ${expectedNextTheme} theme`);
-    }
-    if (!report.themeToggle.title.includes(`Next: ${expectedNextTheme}`)) {
-      errors.push(`${route}: theme toggle title does not expose next ${expectedNextTheme} theme`);
+    const localizedMarkers = LOCALIZED_THEME_MARKERS[pathname];
+    if (localizedMarkers) {
+      for (const marker of localizedMarkers) {
+        if (!report.themeToggle.label.includes(marker)) {
+          errors.push(`${route}: localized theme label missing ${marker}`);
+        }
+      }
+      if (!report.themeToggle.title.trim()) errors.push(`${route}: localized theme title is empty`);
+    } else {
+      if (!report.themeToggle.label.includes(`Current theme: ${theme}`)) {
+        errors.push(`${route}: theme toggle label does not expose current ${theme} theme`);
+      }
+      if (!report.themeToggle.label.includes(`Switch to ${expectedNextTheme} theme`)) {
+        errors.push(`${route}: theme toggle label does not expose next ${expectedNextTheme} theme`);
+      }
+      if (!report.themeToggle.title.includes(`Next: ${expectedNextTheme}`)) {
+        errors.push(`${route}: theme toggle title does not expose next ${expectedNextTheme} theme`);
+      }
     }
   }
   if (report.resolvedTheme !== theme) {

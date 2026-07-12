@@ -1584,6 +1584,70 @@ footer {
   text-decoration: none;
 }
 
+.language-picker {
+  flex: 1 1 100%;
+  min-width: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+
+.language-picker summary,
+.language-menu a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  color: var(--ink-soft);
+  font-weight: 740;
+  text-decoration: none;
+}
+
+.language-picker summary {
+  cursor: pointer;
+}
+
+.language-picker summary:hover,
+.language-picker summary:focus-visible,
+.language-menu a:hover,
+.language-menu a:focus-visible,
+.language-menu a[aria-current="page"] {
+  border-color: var(--line);
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.language-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.locale-price-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.locale-price-grid h3 {
+  margin-top: 8px;
+  font-size: clamp(30px, 5vw, 48px);
+}
+
+.locale-final {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.locale-final h2 {
+  max-width: 720px;
+}
+
 .button:focus-visible,
 .nav-links a:focus-visible,
 a:focus-visible,
@@ -1727,6 +1791,15 @@ textarea:focus-visible {
   .footer-links {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .locale-price-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .locale-final {
+    align-items: flex-start;
+    flex-direction: column;
   }
 }
 
@@ -4067,6 +4140,25 @@ html:has(body.fillpro-launch) {
 .launch-footer .footer-links a:hover,
 .launch-footer .footer-links a:focus-visible,
 .launch-footer .footer-links a[aria-current="page"] {
+  color: var(--launch-ink);
+}
+
+.launch-footer .language-picker {
+  border-top-color: var(--launch-line);
+}
+
+.launch-footer .language-picker summary,
+.launch-footer .language-menu a {
+  color: var(--launch-soft);
+}
+
+.launch-footer .language-picker summary:hover,
+.launch-footer .language-picker summary:focus-visible,
+.launch-footer .language-menu a:hover,
+.launch-footer .language-menu a:focus-visible,
+.launch-footer .language-menu a[aria-current="page"] {
+  border-color: var(--launch-line);
+  background: var(--launch-paper);
   color: var(--launch-ink);
 }
 

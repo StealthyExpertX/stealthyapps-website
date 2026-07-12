@@ -3,9 +3,11 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
+    "generate:locales": "node scripts/generate-fillpro-locales.js",
+    "submit:indexnow": "node scripts/submit-indexnow.js",
     "baseline:marketing": "node scripts/audit-fillpro-visual-baselines.js --write",
     "review:marketing": "node scripts/render-fillpro-review-sheets.js",
-    "test": "node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js && node scripts/audit-fillpro-release-experience.js",
+    "test": "node scripts/generate-fillpro-locales.js --check && node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js && node scripts/audit-fillpro-release-experience.js",
     "test:experience": "node scripts/audit-fillpro-release-experience.js",
     "test:marketing": "node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js",
     "test:site": "node scripts/audit-fillpro-site.js"

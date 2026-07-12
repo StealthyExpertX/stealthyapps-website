@@ -45,6 +45,17 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 - Markdown product brief: https://stealthyapps.com/fillpro/index.md
 - Full text corpus: https://stealthyapps.com/llms-full.txt
 
+## Regional Product Pages
+
+- German: https://stealthyapps.com/fillpro/de/
+- Spanish: https://stealthyapps.com/fillpro/es/
+- French: https://stealthyapps.com/fillpro/fr/
+- Brazilian Portuguese: https://stealthyapps.com/fillpro/pt-br/
+- Japanese: https://stealthyapps.com/fillpro/ja/
+- Korean: https://stealthyapps.com/fillpro/ko/
+- Simplified Chinese: https://stealthyapps.com/fillpro/zh-cn/
+- Russian: https://stealthyapps.com/fillpro/ru/
+
 ## Common Search Terms
 
 FillPro covers private browser form filling, Chrome form filling, saved-profile autofill, job application autofill, repeated forms, resume upload matching, and browser autofill gaps. The focused pages above give more detail for each use case.
