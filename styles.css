@@ -1457,6 +1457,61 @@ p {
   padding: 4px 0;
 }
 
+.related-guides {
+  display: grid;
+  align-content: start;
+  gap: 10px;
+  min-width: 0;
+}
+
+.related-guides h2 {
+  margin: 0 0 4px;
+}
+
+.related-guide-links {
+  display: grid;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.related-guide-links a {
+  display: grid;
+  gap: 4px;
+  min-height: 64px;
+  padding: 14px 4px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.related-guide-links a + a {
+  border-top: 1px solid var(--line);
+}
+
+.related-guide-links strong {
+  color: var(--accent-strong);
+  font-size: 15px;
+  line-height: 1.35;
+}
+
+.related-guide-links span {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.related-guide-links a:hover strong,
+.related-guide-links a:focus-visible strong {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+.related-guide-links a:focus-visible {
+  border-radius: 6px;
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .list-check li::before,
 .clean-list li::before,
 .dense-list li::before {

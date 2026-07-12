@@ -28,9 +28,8 @@ Best for repeated profiles, job applications, intake forms, vendor forms, demo r
 
 FillPro does not replace the browser. It fills the long-form gaps while sign-ins and payments stay with tools users already trust.
 
-## Related FillPro pages
+## See where FillPro helps
 
-- https://stealthyapps.com/fillpro/job-application-autofill/
-- https://stealthyapps.com/fillpro/resume-upload-autofill/
-- https://stealthyapps.com/fillpro/local-form-autofill/
-- https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
+- [Job application autofill](https://stealthyapps.com/fillpro/job-application-autofill/)
+- [Resume and file uploads](https://stealthyapps.com/fillpro/resume-upload-autofill/)
+- [Local form autofill](https://stealthyapps.com/fillpro/local-form-autofill/)

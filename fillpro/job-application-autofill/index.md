@@ -28,9 +28,8 @@ FillPro fills from a saved profile and leaves the final submit to you. Review th
 
 Browser autofill is good at saved addresses. FillPro is better for reusable work profiles, custom fields, upload matching, and hiring forms that use modern web controls.
 
-## Related FillPro pages
+## More about the FillPro workflow
 
-- https://stealthyapps.com/fillpro/job-application-autofill/
-- https://stealthyapps.com/fillpro/resume-upload-autofill/
-- https://stealthyapps.com/fillpro/local-form-autofill/
-- https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
+- [Resume and file uploads](https://stealthyapps.com/fillpro/resume-upload-autofill/)
+- [Local form autofill](https://stealthyapps.com/fillpro/local-form-autofill/)
+- [Browser autofill and FillPro](https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/)

@@ -265,6 +265,7 @@ function checkStyles() {
 
 function checkSiteScript() {
   const js = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
+  const contactJs = fs.readFileSync(path.join(ROOT, 'contact.js'), 'utf8');
   checked.accessibility += 1;
   const required = [
     ['fillpro-theme', 'theme localStorage key'],
@@ -283,6 +284,9 @@ function checkSiteScript() {
   ];
   for (const [needle, label] of required) {
     if (!js.includes(needle)) fail(`site.js: missing ${label}`);
+  }
+  if (!contactJs.includes('`${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`')) {
+    fail('contact.js: FillPro/product email subject suffix is missing');
   }
 }
 
@@ -435,15 +439,39 @@ function checkLaunchPage() {
   for (const [needle, label] of [
     ['data-fillpro-checkout', 'checkout plan state hook'],
     ['data-checkout-plan="yearly"', 'yearly checkout highlight target'],
-    ['Install FillPro to upgrade', 'checkout install handoff CTA'],
-    ['Payment opens inside FillPro.', 'checkout extension-driven payment boundary'],
+    ['data-checkout-action', 'checkout plan-aware install handoff CTA'],
+    ['Upgrade from the extension.', 'checkout extension-driven payment boundary'],
     ['ExtensionPay', 'checkout billing provider disclosure'],
-    ['Stripe handles the payment page', 'checkout Stripe handoff disclosure'],
+    ['Stripe handles card details', 'checkout Stripe handoff disclosure'],
   ]) {
     if (!checkoutHtml.includes(needle)) fail(`fillpro/checkout/index.html: missing ${label}`);
   }
   if (/stripe\.com|extensionpay\.com\/extension/i.test(checkoutHtml)) {
     fail('fillpro/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
+  }
+}
+
+function checkRelatedGuides() {
+  const guides = {
+    'fillpro/job-application-autofill/index.html': '/fillpro/job-application-autofill/',
+    'fillpro/resume-upload-autofill/index.html': '/fillpro/resume-upload-autofill/',
+    'fillpro/local-form-autofill/index.html': '/fillpro/local-form-autofill/',
+    'fillpro/browser-autofill-vs-fillpro/index.html': '/fillpro/browser-autofill-vs-fillpro/',
+  };
+
+  for (const [fileRel, selfHref] of Object.entries(guides)) {
+    const html = fs.readFileSync(path.join(ROOT, fileRel), 'utf8');
+    const block = (html.match(/<nav class="related-guides"[\s\S]*?<\/nav>/) || [])[0] || '';
+    if (!block) {
+      fail(`${fileRel}: missing contextual related guides`);
+      continue;
+    }
+    const hrefs = Array.from(block.matchAll(/<a href="([^"]+)"/g), (match) => match[1]);
+    if (hrefs.length !== 3) fail(`${fileRel}: related guides should contain exactly three links`);
+    if (hrefs.includes(selfHref)) fail(`${fileRel}: related guides must not link to the current page`);
+    if ((block.match(/<span>/g) || []).length !== 3) {
+      fail(`${fileRel}: each related guide needs a useful description`);
+    }
   }
 }
 
@@ -454,6 +482,9 @@ function checkAssetVersioning(files) {
   }
   if (/fillpro-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
     fail('sw.js: public preview/build numbering returned');
+  }
+  if (/caches\.match\(request\)[\s\S]{0,120}if \(cached\) return cached/.test(sw)) {
+    fail('sw.js: cache-first static assets can leave released CSS and JavaScript stale');
   }
   for (const file of files.filter((item) => item.endsWith('.html'))) {
     const html = fs.readFileSync(file, 'utf8');
@@ -550,6 +581,7 @@ checkHeroScene();
 checkPackageScripts();
 checkDemoGenerator();
 checkLaunchPage();
+checkRelatedGuides();
 checkAssetVersioning(files);
 checkIndexNowKey();
 checkLocalization();

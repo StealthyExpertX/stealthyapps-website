@@ -618,6 +618,7 @@ async function auditContactSubmission(browser, origin, errors) {
         reason: 'Question about FillPro',
         _replyto: 'release-test@example.com',
         _captcha: 'false',
+        _subject: 'Product: Question about FillPro | FillPro',
       };
       for (const [key, value] of Object.entries(expected)) {
         if (capturedPayload[key] !== value) {
@@ -692,8 +693,54 @@ async function auditContactSubmission(browser, origin, errors) {
     if (await page.locator('[data-email-options]').isHidden()) {
       errors.push('/contact/: email-app fallback stayed hidden after direct-send failure');
     }
+    const fallbackHref =
+      (await page.locator('[data-compose-link="default"]').getAttribute('href')) || '';
+    if (!decodeURIComponent(fallbackHref).includes('| FillPro')) {
+      errors.push('/contact/: email-app fallback subject is missing the FillPro suffix');
+    }
   } catch (error) {
     errors.push(`/contact/: submission audit failed: ${error.message}`);
+  } finally {
+    await page.close();
+    await context.close();
+  }
+}
+
+async function auditCheckoutPlanSelection(browser, origin, errors) {
+  const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+  const page = await context.newPage();
+  const expected = {
+    free: 'Install FillPro',
+    monthly: 'Install, then choose monthly',
+    yearly: 'Install, then choose yearly',
+    lifetime: 'Install, then choose lifetime',
+  };
+
+  try {
+    for (const [plan, action] of Object.entries(expected)) {
+      await page.goto(`${origin}/fillpro/checkout/?plan=${plan}`, {
+        waitUntil: 'networkidle',
+      });
+      const state = await page.evaluate(() => ({
+        selected: document.querySelector('[data-checkout-plan][aria-current="true"]')?.getAttribute('data-checkout-plan') || '',
+        action: document.querySelector('[data-checkout-action]')?.textContent?.trim() || '',
+      }));
+      if (state.selected !== plan || state.action !== action) {
+        errors.push(`/fillpro/checkout/: ${plan} selection regressed: ${JSON.stringify(state)}`);
+      }
+    }
+
+    await page.goto(`${origin}/fillpro/checkout/?plan=unknown`, {
+      waitUntil: 'networkidle',
+    });
+    const fallback = await page
+      .locator('[data-checkout-plan][aria-current="true"]')
+      .getAttribute('data-checkout-plan');
+    if (fallback !== 'yearly') {
+      errors.push('/fillpro/checkout/: invalid plan query did not fall back to yearly');
+    }
+  } catch (error) {
+    errors.push(`/fillpro/checkout/: plan interaction audit failed: ${error.message}`);
   } finally {
     await page.close();
     await context.close();
@@ -773,7 +820,8 @@ async function main() {
     await auditHeroSceneMotion(browser, server.origin, errors);
     await auditDemoPlayback(browser, server.origin, errors);
     await auditContactSubmission(browser, server.origin, errors);
-    checks += 4;
+    await auditCheckoutPlanSelection(browser, server.origin, errors);
+    checks += 5;
   } finally {
     await browser.close();
     await server.close();

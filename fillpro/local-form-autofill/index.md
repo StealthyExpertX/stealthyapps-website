@@ -28,9 +28,8 @@ FillPro checks dropdowns, checkboxes, radios, textareas, upload fields, segmente
 
 Keep sign-ins and payments with the browser, password manager, wallet, or site controls built for those flows. Use FillPro for the reusable profile fields around them.
 
-## Related FillPro pages
+## More about the FillPro workflow
 
-- https://stealthyapps.com/fillpro/job-application-autofill/
-- https://stealthyapps.com/fillpro/resume-upload-autofill/
-- https://stealthyapps.com/fillpro/local-form-autofill/
-- https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
+- [Job application autofill](https://stealthyapps.com/fillpro/job-application-autofill/)
+- [Resume and file uploads](https://stealthyapps.com/fillpro/resume-upload-autofill/)
+- [Browser autofill and FillPro](https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/)

@@ -249,7 +249,7 @@ function buildComposePayload(
   const subjectLabel =
     config.label === 'FillPro' ? 'Product' : config.label;
   const subjectPrefix = productLabel || context.subjectPrefix;
-  const subject = `${subjectPrefix} ${subjectLabel}: ${reasonLabel}`;
+  const subject = `${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`;
   const bodyLines = [
     `Topic: ${config.label}`,
     `Reason: ${reasonLabel}`,

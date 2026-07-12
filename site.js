@@ -160,10 +160,24 @@
     } catch (error) {}
 
     checkout.dataset.selectedPlan = selectedPlan;
+    var checkoutAction = checkout.querySelector('[data-checkout-action]');
+    if (checkoutAction) {
+      var actionLabels = {
+        free: 'Install FillPro',
+        monthly: 'Install, then choose monthly',
+        yearly: 'Install, then choose yearly',
+        lifetime: 'Install, then choose lifetime',
+      };
+      checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.yearly;
+    }
     document.querySelectorAll('[data-checkout-plan]').forEach(function (card) {
       var matches =
         (card.getAttribute('data-checkout-plan') || '').toLowerCase() === selectedPlan;
-      card.toggleAttribute('aria-current', matches);
+      if (matches) {
+        card.setAttribute('aria-current', 'true');
+      } else {
+        card.removeAttribute('aria-current');
+      }
     });
   }
 
