@@ -193,18 +193,6 @@ import * as THREE from './vendor/three.module.min.js';
     depthWrite: false,
     side: THREE.DoubleSide,
   });
-  const glassMaterial = themedMaterial(0xffffff, 0xeafff8, {
-    opacity: 0.54,
-    darkOpacity: 0.5,
-    roughness: 0.76,
-    depthWrite: false,
-  });
-  const markMaterial = themedMaterial(0xffffff, 0xf8fffd, {
-    opacity: 0.9,
-    darkOpacity: 0.9,
-    roughness: 0.62,
-    depthWrite: false,
-  });
   const fieldMaterial = themedMaterial(0xebfaf6, 0xdef8f0, {
     opacity: 0.62,
     darkOpacity: 0.56,
@@ -215,12 +203,6 @@ import * as THREE from './vendor/three.module.min.js';
     opacity: 0.68,
     darkOpacity: 0.64,
     roughness: 0.58,
-    depthWrite: false,
-  });
-  const tokenMaterial = themedMaterial(0x0b7f76, 0x19b7a5, {
-    opacity: 0.88,
-    darkOpacity: 0.76,
-    roughness: 0.54,
     depthWrite: false,
   });
   const mutedMaterial = themedMaterial(0xf1f5ef, 0x173b35, {
@@ -280,31 +262,6 @@ import * as THREE from './vendor/three.module.min.js';
   const safeSkipAccent = flatPanel(0.17, 0.052, 0.022, warmGlintMaterial, 0);
   safeSkipAccent.position.set(-0.68, 0, 0.034);
   safeSkipRail.add(safeSkipAccent);
-
-  const profileDock = new THREE.Group();
-  profileDock.position.set(1.36, -0.12, 0.06);
-  profileDock.rotation.set(0.03, -0.12, -0.05);
-  profileDock.scale.setScalar(0.9);
-  group.add(profileDock);
-
-  const dockShell = extrudedPanel(1.04, 1.04, 0.16, 0.12, tokenMaterial, 0.07);
-  profileDock.add(dockShell);
-
-  const markSpine = flatPanel(0.2, 0.62, 0.04, markMaterial, 0);
-  markSpine.position.set(-0.2, 0, 0.095);
-  profileDock.add(markSpine);
-
-  const markTop = flatPanel(0.56, 0.18, 0.045, markMaterial, 0);
-  markTop.position.set(0.02, 0.22, 0.098);
-  profileDock.add(markTop);
-
-  const markMid = flatPanel(0.42, 0.16, 0.044, markMaterial, 0);
-  markMid.position.set(-0.04, -0.04, 0.101);
-  profileDock.add(markMid);
-
-  const dockNotch = flatPanel(0.18, 0.18, 0.044, glassMaterial, 0.014);
-  dockNotch.position.set(0.28, -0.28, 0.104);
-  profileDock.add(dockNotch);
 
   const guidedFillCurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(0.92, -0.22, 0.11),
@@ -397,7 +354,6 @@ import * as THREE from './vendor/three.module.min.js';
     studioPlate.rotation.z = 0.004 + Math.sin(floatTime * 0.08) * 0.0015;
     studioShadow.material.opacity = (isDarkMode ? 0.052 : 0.038) + Math.sin(floatTime * 0.16) * 0.002;
     formDepthStack.position.y = 0.02 + Math.sin(floatTime * 0.13) * 0.003;
-    profileDock.position.y = -0.05 + Math.cos(floatTime * 0.11) * 0.004;
     warmGlint.material.opacity = (isDarkMode ? 0.07 : 0.048) + Math.sin(floatTime * 0.22) * 0.005;
     guidedFillPath.material.opacity = (isDarkMode ? 0.16 : 0.115) + Math.sin(floatTime * 0.2) * 0.006;
 

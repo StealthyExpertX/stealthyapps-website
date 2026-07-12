@@ -601,12 +601,12 @@ const html = `<!doctype html>
   <div class="scene-ribbon" id="sceneRibbon">Private autofill</div>
   <section class="copy">
     <p class="eyebrow" id="eyebrow">Private autofill</p>
-    <h1 id="headline">Save the profile once.</h1>
-    <p class="sub" id="subline">Fill the next long form without retyping the same details.</p>
+    <h1 id="headline">Fill the fields you keep retyping.</h1>
+    <p class="sub" id="subline">Choose a saved profile, fill the page, then review the result.</p>
     <div class="proof" id="proof">
       <span>Saved profiles</span>
       <span>Smart rules</span>
-      <span>Undo before submit</span>
+      <span>Undo the last fill</span>
     </div>
   </section>
   <section class="browser" aria-hidden="true">
@@ -624,7 +624,7 @@ const html = `<!doctype html>
     </div>
   </section>
   <div class="privacy-strip" id="strip">
-    <div><strong>Profiles stay here</strong><span>Saved details stay inside FillPro unless exported.</span></div>
+    <div><strong>Profiles stay here</strong><span>Saved details stay inside the extension unless exported.</span></div>
     <div><strong>Click to fill</strong><span>Runs when you ask on the page.</span></div>
     <div><strong>Undo ready</strong><span>Back out before submitting.</span></div>
   </div>
@@ -692,25 +692,25 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 1.8) return ['Built for long forms', 'Fill a long form in one click.', 'Choose a saved profile, fill the repeat fields, then review before you submit.'];
-    if (t < 2.75) return ['Watch it fill', 'Fields fill while you watch.', 'Name, email, company, and resume fill one by one.'];
-    if (t < 4.8) return ['Watch it fill', 'Ready to review.', 'Name, email, company, and upload matched from the selected profile.'];
-    if (t < 7.6) return ['Review', 'Review before submit.', 'Sign-ins stay with your password manager.'];
-    if (t < 10.2) return ['Applications', 'Applications with uploads.', 'Name, email, company, and resume upload match from one profile.'];
-    if (t < 13.2) return ['Modern forms', 'Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.'];
-    if (t < 16) return ['Private by default', 'No cloud profile account.', 'Saved profiles, rules, and upload references stay in your browser unless you export them.'];
-    if (t < 18.8) return ['You stay in control', 'Review or undo before submit.', 'FillPro helps with repeat fields. You decide when to submit.'];
-    return ['Free starter', 'Start free with three profiles.', 'Fill a long form, review every field, and upgrade only if you need more profiles.'];
+    if (t < 1.8) return ['A long form. Again.', 'Fill the fields you keep retyping.', 'Choose a saved profile, fill the page, then review the result.'];
+    if (t < 2.75) return ['Filling now', 'Filling your saved details.', 'Name, email, company, and resume fill one by one.'];
+    if (t < 4.8) return ['Ready to review', 'The form is filled. You stay in control.', 'Matched fields and the resume upload are ready to check.'];
+    if (t < 7.6) return ['Review', 'Review before you submit.', 'Passwords stay with your browser or password manager.'];
+    if (t < 10.2) return ['Applications', 'Less retyping on applications.', 'Name, email, company, and resume upload match from one profile.'];
+    if (t < 13.2) return ['Modern controls', 'More than names and email.', 'Fill dropdowns, checkboxes, uploads, and fields that appear after the page loads.'];
+    if (t < 16) return ['No account required', 'Your profiles stay in this browser.', 'Saved details, rules, and upload references stay here unless you export them.'];
+    if (t < 18.8) return ['You stay in control', 'Review or undo before you submit.', 'FillPro fills the page. You choose when to submit.'];
+    return ['Start free', 'Three profiles are included.', 'Upgrade only when you need more room.'];
   }
 
   function proofFor(t) {
-    if (t < 2.75) return ['Filling now', 'Review first', 'Sign-in untouched'];
-    if (t < 4.8) return ['4 fields filled', 'Upload matched', 'Sign-in untouched'];
-    if (t < 10.2) return ['Review first', 'Sign-in untouched', 'Undo ready'];
+    if (t < 2.75) return ['Filling now', 'Review first', 'Passwords skipped'];
+    if (t < 4.8) return ['4 fields filled', 'Upload matched', 'Passwords skipped'];
+    if (t < 10.2) return ['Review first', 'Passwords skipped', 'Undo ready'];
     if (t < 13.2) return ['Dropdowns', 'Checkboxes', 'Late fields'];
-    if (t < 16) return ['No cloud profile', 'Current page', 'Export when needed'];
-    if (t < 18.8) return ['Review first', 'Undo ready', 'Sign-in untouched'];
-    return ['3 profiles free', 'Review first', 'No cloud profile'];
+    if (t < 16) return ['No account', 'Current page', 'Export when needed'];
+    if (t < 18.8) return ['Review first', 'Undo ready', 'Passwords skipped'];
+    return ['3 profiles free', 'Review first', 'No account'];
   }
 
   function sceneFor(t) {
@@ -778,7 +778,7 @@ const html = `<!doctype html>
     if (t < 2.75) {
       const count = filledCount(t);
       return [
-        count === 0 ? 'Saved profile ready.' : 'Filling the repeat work.',
+        count === 0 ? 'Saved profile ready.' : 'Filling your saved details.',
         count === 0 ? 'The page stays blank until you choose the profile and fill.' : 'Fields fill one by one so the change is easy to follow.',
         [String(Math.min(count, 4)), 'fields'],
         [count >= 4 ? '1' : '0', 'upload'],
@@ -788,7 +788,7 @@ const html = `<!doctype html>
     if (t < 7.6) {
       const count = filledCount(t);
       return [
-        count < 4 ? 'Filling the repeat work.' : 'Ready to review.',
+        count < 4 ? 'Filling your saved details.' : 'Ready to review.',
         count < 4 ? 'Name, email, company, and upload fields fill from the selected profile.' : 'Sign-ins stay with the browser or password manager.',
         [String(Math.min(count, 4)), 'fields'],
         [count >= 4 ? '1' : '0', 'upload'],
@@ -802,12 +802,12 @@ const html = `<!doctype html>
       return ['Fills what autofill misses.', 'Dropdowns, checkboxes, uploads, and late fields can still match.', ['Choice', 'fields'], ['Same', 'frames'], ['File', 'inputs']];
     }
     if (t < 16) {
-      return ['No cloud profile account.', 'Saved profiles, rules, and upload references stay in your browser unless exported.', ['Local', 'profiles'], ['Click', 'to fill'], ['Export', 'when needed']];
+      return ['Your profiles stay in this browser.', 'Saved details, rules, and upload references stay here unless you export them.', ['No', 'account'], ['Click', 'to fill'], ['Export', 'when needed']];
     }
     if (t < 18.8) {
-      return ['Review or undo before submit.', 'FillPro handles repeat fields; you decide when to submit.', ['Review', 'first'], ['Undo', 'ready'], ['Sign-in', 'untouched']];
+      return ['Review or undo before submit.', 'FillPro fills the page; you decide when to submit.', ['Review', 'first'], ['Undo', 'ready'], ['Sign-in', 'untouched']];
     }
-    return ['Start free. Keep control.', 'Three profiles are included. No cloud profile is needed to fill forms.', ['3', 'free'], ['No cloud', 'profile'], ['Review', 'first']];
+    return ['Three profiles are included.', 'Start free and upgrade only when you need more room.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
   }
 
   function renderFields(t) {

@@ -1373,7 +1373,6 @@ pre.copyable .copy-code {
 }
 
 .context-note,
-.direct-panel,
 .compose-panel,
 [data-contact-status] {
   padding: 14px;
@@ -1382,31 +1381,17 @@ pre.copyable .copy-code {
   background: #fff;
 }
 
-.direct-panel {
-  border-left: 4px solid var(--blue);
-}
-
-.consent-check,
-.marketing-check {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 10px;
-  color: var(--ink-soft);
-}
-
-.consent-check input,
-.marketing-check input {
-  width: 32px;
-  height: 32px;
-  margin-top: 0;
-  accent-color: var(--brand);
+.contact-privacy-note {
+  margin: -2px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 :root[data-theme="dark"] .field input,
 :root[data-theme="dark"] .field select,
 :root[data-theme="dark"] .field textarea,
 :root[data-theme="dark"] .context-note,
-:root[data-theme="dark"] .direct-panel,
 :root[data-theme="dark"] .compose-panel,
 :root[data-theme="dark"] [data-contact-status] {
   background: rgba(20, 33, 30, 0.94);
@@ -1424,7 +1409,6 @@ pre.copyable .copy-code {
   :root:not([data-theme="light"]) .field select,
   :root:not([data-theme="light"]) .field textarea,
   :root:not([data-theme="light"]) .context-note,
-  :root:not([data-theme="light"]) .direct-panel,
   :root:not([data-theme="light"]) .compose-panel,
   :root:not([data-theme="light"]) [data-contact-status] {
     background: rgba(20, 33, 30, 0.94);
@@ -2720,40 +2704,6 @@ html:has(body.fillpro-launch) {
   }
 }
 
-.launch-proof {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
-  margin: 10px 0 0;
-}
-
-.launch-proof div {
-  min-height: 78px;
-  display: grid;
-  align-content: center;
-  gap: 2px;
-  padding: 13px 14px;
-  border: 1px solid var(--launch-line);
-  border-radius: 8px;
-  background:
-    var(--launch-panel-bg);
-  box-shadow: 0 10px 24px rgba(16, 35, 31, 0.045);
-}
-
-.launch-proof dt {
-  color: var(--launch-ink);
-  font-size: 18px;
-  font-weight: 900;
-  line-height: 1.1;
-}
-
-.launch-proof dd {
-  margin: 0;
-  color: var(--launch-soft);
-  font-size: 13px;
-  line-height: 1.3;
-}
-
 .launch-demo-card {
   position: relative;
   z-index: 1;
@@ -3210,6 +3160,13 @@ html:has(body.fillpro-launch) {
 
 .browser-mark svg circle:first-child {
   opacity: 0.7;
+}
+
+.browser-mark img {
+  width: 27px;
+  height: 27px;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 7px rgba(16, 35, 31, 0.14));
 }
 
 .browser-mark-chrome {
@@ -4183,10 +4140,6 @@ html:has(body.fillpro-launch) {
   .price-cards,
   .browser-download-grid {
     grid-template-columns: 1fr;
-  }
-
-  .launch-proof {
-    display: none;
   }
 
   .demo-signal {

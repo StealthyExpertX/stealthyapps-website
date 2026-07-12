@@ -816,7 +816,7 @@ function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile
     ? `<div class="promo-copy">
         <div class="promo-kicker">Private autofill</div>
         <h1 class="promo-head">Fill repeat forms without handing over your data.</h1>
-        <div class="promo-proof"><span>3 profiles free</span><span>No cloud profile</span><span>Review before submit</span></div>
+        <div class="promo-proof"><span>3 profiles free</span><span>No account</span><span>Review before submit</span></div>
       </div>`
     : '';
   return `
@@ -846,7 +846,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage first-shot shot-outcome">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
-      <div><h1>Fill a long form in one click.</h1><p class="sub">Choose a saved profile. Fill the repeat fields. Review before you submit.</p></div>
+      <div><h1>Fill the fields you keep retyping.</h1><p class="sub">Choose a saved profile, fill the page, then review before you submit.</p></div>
       ${chromeFrame('client.example/onboarding', beforeAfter())}
     </main>`,
   );
@@ -857,8 +857,8 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage dark shot-profiles">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Private by design</span></div>
-      <div><h1>Keep each repeat job separate.</h1><p class="sub">Work, client, vendor, and QA profiles stay easy to pick before each fill.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Separate profiles</span></div>
+      <div><h1>Keep work and client details separate.</h1><p class="sub">Choose the right profile before each fill without mixing one workflow into another.</p></div>
       ${chromeFrame('teams.example/demo-request', `
         <div class="grid2">
           <div class="panel">
@@ -884,8 +884,8 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage shot-modern">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
-      <div><h1>Fills what autofill misses.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear late can still match from one profile.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Dropdowns + uploads</span></div>
+      <div><h1>More than names and email.</h1><p class="sub">Fill dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
       ${chromeFrame('forms.example/team-intake', `
         <div class="grid2">
           <div class="form">
@@ -913,11 +913,11 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage dark shot-privacy">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Private by default</span></div>
-      <div><h1>No cloud profile account.</h1><p class="sub">Saved profiles, rules, and upload references stay in your browser unless you export them.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account required</span></div>
+      <div><h1>Your profiles stay in this browser.</h1><p class="sub">Saved details, rules, and upload references stay here unless you export them.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Saved profiles</strong><span>Details and rules stay local.</span></div>
+          <div class="privacy-card"><strong>Saved profiles</strong><span>Stay in this browser.</span></div>
           <div class="privacy-card"><strong>Current-page action</strong><span>FillPro runs when you ask on the page you chose.</span></div>
           <div class="privacy-card"><strong>Review before submit</strong><span>You decide when to submit.</span></div>
         </div>
@@ -939,7 +939,7 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark shot-undo">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Undo before you submit.</h1><p class="sub">Review changes. Roll back in one click.</p></div>
+      <div><h1>Changed your mind? Undo the fill.</h1><p class="sub">Roll the page back before you submit.</p></div>
       ${chromeFrame('careers.example/apply', `
         <div class="review-proof review-proof-light">
           <div class="review-form">

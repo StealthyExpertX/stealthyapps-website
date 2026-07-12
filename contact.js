@@ -36,10 +36,6 @@ const WEBMAIL_PROVIDERS = {
 };
 
 const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
-const DIRECT_SEND_CONSENT_NOTE =
-  'Sender confirmed the on-page direct-send notice, agreed not to send sensitive information, and accepted responsibility for submitted content.';
-const UPDATE_CONSENT_NOTE =
-  'Sender opted into occasional follow-up or product-update emails related to this message and can opt out later.';
 const DIRECT_SEND_AUTORESPONSE =
   'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
 const MIN_NAME_LENGTH = 2;
@@ -242,7 +238,6 @@ function buildComposePayload(
   name,
   replyEmail,
   message,
-  marketingConsent,
   productLabel,
 ) {
   const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
@@ -257,7 +252,6 @@ function buildComposePayload(
     `Name: ${name || 'Not provided'}`,
     `Reply email: ${replyEmail || 'Use the sender address from this message'}`,
     `Page: ${window.location.pathname}`,
-    `Email updates: ${marketingConsent ? UPDATE_CONSENT_NOTE : 'Not opted in.'}`,
     '',
     'Message:',
     message,
@@ -283,7 +277,6 @@ function buildDirectSendPayload(
   replyEmail,
   message,
   honeypotValue,
-  marketingConsent,
 ) {
   return {
     endpoint: `${DIRECT_SEND_URL_BASE}${encodeURIComponent(compose.to)}`,
@@ -296,9 +289,6 @@ function buildDirectSendPayload(
       message,
       details: compose.body,
       'Submission method': 'Direct send from site form',
-      'Consent record': DIRECT_SEND_CONSENT_NOTE,
-      'Consent recorded at': new Date().toISOString(),
-      'Email updates': marketingConsent ? UPDATE_CONSENT_NOTE : 'Not opted in.',
       _subject: compose.subject,
       _replyto: replyEmail,
       _template: 'table',
@@ -395,8 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const emailOptions = form.querySelector('[data-email-options]');
   const composeSummary = form.querySelector('[data-compose-summary]');
   const copyButton = form.querySelector('[data-compose-copy]');
-  const directConsentField = form.querySelector('[data-direct-consent]');
-  const marketingConsentField = form.querySelector('[data-marketing-consent]');
   const honeypotField = form.querySelector('[data-contact-honey]');
   const actionButtons = form.querySelectorAll('[data-contact-action]');
   const prefill = getContactPrefill();
@@ -508,15 +496,6 @@ document.addEventListener('DOMContentLoaded', () => {
       focusTarget = focusTarget || messageField;
     }
 
-    if (
-      requestedAction === 'direct' &&
-      directConsentField &&
-      !directConsentField.checked
-    ) {
-      blockers.push('the send-from-page confirmation');
-      focusTarget = focusTarget || directConsentField;
-    }
-
     return {
       valid: blockers.length === 0,
       blockers,
@@ -535,10 +514,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!composeState.valid) {
       return `Complete ${joinRequirementList(composeState.blockers)} to keep going.`;
-    }
-
-    if (!directState.valid) {
-      return 'You can use your email app now, or confirm send-from-page if you want to send it here.';
     }
 
     return 'Ready to send.';
@@ -621,8 +596,6 @@ document.addEventListener('DOMContentLoaded', () => {
     [messageField, 'input'],
     [replyField, 'input'],
     [nameField, 'input'],
-    [marketingConsentField, 'change'],
-    [directConsentField, 'change'],
   ].filter(([field]) => Boolean(field));
 
   draftChangeHandlers.forEach(([field, eventName]) => {
@@ -677,9 +650,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const requestedAction =
       event.submitter && event.submitter.dataset.contactAction
         ? event.submitter.dataset.contactAction
-        : directConsentField && directConsentField.checked
-          ? 'direct'
-          : 'compose';
+        : 'direct';
 
     const formState = getFormState(requestedAction);
     const topic = formState.topic;
@@ -688,10 +659,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const message = formState.message;
     const replyEmail = formState.replyEmail;
     const name = formState.name;
-    const marketingConsent = Boolean(
-      marketingConsentField && marketingConsentField.checked,
-    );
-
     if (!formState.valid) {
       setStatus(
         statusNode,
@@ -716,7 +683,6 @@ document.addEventListener('DOMContentLoaded', () => {
       name,
       replyEmail,
       message,
-      marketingConsent,
       prefill.productLabel,
     );
 
@@ -744,7 +710,6 @@ document.addEventListener('DOMContentLoaded', () => {
       replyEmail,
       message,
       honeypotField ? honeypotField.value.trim() : '',
-      marketingConsent,
     );
 
     hideEmailOptions();

@@ -251,28 +251,28 @@ function checkRenderer() {
     'motion-rail',
     'Mute-safe captions',
     'Blank form. Review-ready.',
-    'Built for long forms',
-    'Fill a long form in one click.',
-    'Choose a saved profile, fill the repeat fields, then review before you submit.',
-    'Watch it fill',
+    'A long form. Again.',
+    'Fill the fields you keep retyping.',
+    'Choose a saved profile, fill the page, then review the result.',
+    'Filling your saved details.',
     'Saved profile ready.',
     'Fields fill one by one so the change is easy to follow.',
     'Ready to review.',
-    'Fields fill while you watch.',
+    'The form is filled. You stay in control.',
     'Review before submit.',
-    'Sign-ins stay with your password manager.',
-    'Applications with uploads.',
-    'Fills what autofill misses.',
-    'No cloud profile account.',
-    'Review or undo before submit.',
-    'You decide when to submit.',
-    'Start free with three profiles.',
-    'Sign-in untouched',
+    'Passwords stay with your browser or password manager.',
+    'Less retyping on applications.',
+    'More than names and email.',
+    'Your profiles stay in this browser.',
+    'Review or undo before you submit.',
+    'You choose when to submit.',
+    'Three profiles are included.',
+    'No account',
     'careers.example/apply',
     'app.example/trial',
     'Upload matched',
     'Review before submit',
-    'No cloud profile',
+    'Saved details, rules, and upload references stay here unless you export them.',
     'Use your password manager',
     'sceneFor',
     'scene-ribbon',
@@ -338,8 +338,11 @@ function checkRenderer() {
   if (/form leaves the page/i.test(source)) {
     fail(`${relativePath}: video should use plain submit language`);
   }
-  if (/Less retyping on applications|Works on the messy forms too|Messy forms are part of the job|Start with three saved profiles/i.test(source)) {
+  if (/Works on the messy forms too|Messy forms are part of the job|Start with three saved profiles/i.test(source)) {
     fail(`${relativePath}: video captions should stay specific and current`);
+  }
+  if (/forms browsers leave unfinished|No cloud profile account|Filling the repeat work|Watch the repeated details fill|when it leaves the page/i.test(source)) {
+    fail(`${relativePath}: video contains stiff or synthetic marketing phrasing`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -360,14 +363,14 @@ function checkStillRenderer() {
     'fillpro-screenshot-undo-1280x800.png',
     'fillpro-small-promo-440x280.png',
     'fillpro-marquee-1400x560.png',
-    'Fill a long form in one click.',
-    'Choose a saved profile. Fill the repeat fields. Review before you submit.',
-    'Keep each repeat job separate.',
-    'Fills what autofill misses.',
-    'Undo before you submit.',
-    'Review changes. Roll back in one click.',
+    'Fill the fields you keep retyping.',
+    'Choose a saved profile, fill the page, then review before you submit.',
+    'Keep work and client details separate.',
+    'More than names and email.',
+    'Changed your mind? Undo the fill.',
+    'Roll the page back before you submit.',
     'Fill repeat forms without handing over your data.',
-    'No cloud profile account.',
+    'Your profiles stay in this browser.',
     'shot-outcome',
     'shot-modern',
     'shot-profiles',
@@ -415,6 +418,9 @@ function checkStillRenderer() {
   }
   if (/real workflows|Clean fallback|Messy forms are part of the job/i.test(source)) {
     fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
+  }
+  if (/forms browsers leave unfinished|No cloud profile account|repeat work|repeat fields/i.test(source)) {
+    fail(`${relativePath}: still marketing contains stiff or synthetic phrasing`);
   }
   if (/Google Forms-style|ARIA radios|ARIA checkboxes|React inputs|Vue fields|Angular forms|Shadow DOM/i.test(source)) {
     fail(`${relativePath}: store screenshots should use buyer-facing field language, not framework jargon or third-party product phrasing`);

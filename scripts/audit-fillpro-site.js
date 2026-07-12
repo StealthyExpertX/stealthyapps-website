@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v48';
+const CACHE_TOKEN = 'fillpro-launch-v49';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -258,9 +258,8 @@ function checkHeroScene() {
     [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
     [heroScript, 'studioPlate', 'hero scene should use one calm studio plate'],
     [heroScript, 'formDepthStack', 'hero scene should use product-relevant form depth'],
-    [heroScript, 'profileDock', 'hero scene should show one compact profile control'],
-    [heroScript, 'tokenMaterial', 'hero scene should use a visible beveled brand token instead of a duplicate form window'],
-    [heroScript, 'markMaterial', 'hero scene should render a simple brand mark on the token'],
+    [heroScript, 'fieldChips', 'hero scene should keep its depth cues tied to real form fields'],
+    [heroScript, 'fillCursor', 'hero scene should use one compact fill-progress accent'],
     [heroScript, 'guidedFillPath', 'hero scene should include one readable fill path'],
     [heroScript, 'guidedFillCurve.getPoint(progress, cursorPoint)', 'hero fill cursor should travel along one fill path without per-frame allocations'],
     [heroScript, 'safeSkipRail', 'hero scene should imply sensitive-field review without scary copy'],
@@ -296,6 +295,7 @@ function checkHeroScene() {
     ['productFace', 'old duplicate browser-window face'],
     ['chromeBar', 'old duplicate browser chrome'],
     ['fillRows', 'old duplicate form-row stack'],
+    ['profileDock', 'duplicate floating brand token'],
   ].forEach(([needle, label]) => {
     if (heroScript.includes(needle)) fail(`fillpro-hero-scene.js: remove ${label}`);
   });

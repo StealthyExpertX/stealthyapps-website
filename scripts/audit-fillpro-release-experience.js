@@ -448,6 +448,91 @@ async function auditHeroSceneMotion(browser, origin, errors) {
   }
 }
 
+async function auditContactSubmission(browser, origin, errors) {
+  const context = await browser.newContext({
+    viewport: { width: 1024, height: 900 },
+    reducedMotion: 'reduce',
+  });
+  const page = await context.newPage();
+  let capturedPayload = null;
+  const directSendPattern = 'https://formsubmit.co/ajax/**';
+
+  try {
+    await page.route(directSendPattern, async (route) => {
+      capturedPayload = route.request().postDataJSON();
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ success: 'true' }),
+      });
+    });
+
+    await page.goto(`${origin}/contact/?topic=product&product=FillPro`, {
+      waitUntil: 'networkidle',
+    });
+
+    const sendButton = page.getByRole('button', { name: 'Send message' });
+    if (!(await sendButton.isDisabled())) {
+      errors.push('/contact/: direct-send button should be disabled before required fields are complete');
+    }
+
+    await page.locator('#contactName').fill('Release Tester');
+    await page.locator('#contactReply').fill('release-test@example.com');
+    await page.locator('#contactMessage').fill('The company field did not fill on the example signup page.');
+    if (await sendButton.isDisabled()) {
+      errors.push('/contact/: direct-send button stayed disabled after valid fields were complete');
+      return;
+    }
+
+    await sendButton.click();
+    await page.locator('[data-contact-status][data-state="success"]').waitFor();
+
+    if (!capturedPayload) {
+      errors.push('/contact/: direct-send request was not made');
+    } else {
+      const expected = {
+        email: 'release-test@example.com',
+        name: 'Release Tester',
+        topic: 'FillPro',
+        reason: 'Question about FillPro',
+        _replyto: 'release-test@example.com',
+        _captcha: 'false',
+      };
+      for (const [key, value] of Object.entries(expected)) {
+        if (capturedPayload[key] !== value) {
+          errors.push(`/contact/: direct-send payload ${key} mismatch`);
+        }
+      }
+      if ('marketingConsent' in capturedPayload || 'directSendConsent' in capturedPayload) {
+        errors.push('/contact/: removed consent fields returned to the direct-send payload');
+      }
+    }
+
+    await page.unroute(directSendPattern);
+    await page.route(directSendPattern, async (route) => {
+      await route.fulfill({
+        status: 503,
+        contentType: 'application/json',
+        body: JSON.stringify({ message: 'Support form is temporarily unavailable.' }),
+      });
+    });
+
+    await page.locator('#contactName').fill('Release Tester');
+    await page.locator('#contactReply').fill('release-test@example.com');
+    await page.locator('#contactMessage').fill('Testing the email-app fallback after a send failure.');
+    await sendButton.click();
+    await page.locator('[data-contact-status][data-state="error"]').waitFor();
+    if (await page.locator('[data-email-options]').isHidden()) {
+      errors.push('/contact/: email-app fallback stayed hidden after direct-send failure');
+    }
+  } catch (error) {
+    errors.push(`/contact/: submission audit failed: ${error.message}`);
+  } finally {
+    await page.close();
+    await context.close();
+  }
+}
+
 async function main() {
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -488,6 +573,8 @@ async function main() {
       }
     }
     await auditHeroSceneMotion(browser, server.origin, errors);
+    await auditContactSubmission(browser, server.origin, errors);
+    checks += 2;
   } finally {
     await browser.close();
     await server.close();
