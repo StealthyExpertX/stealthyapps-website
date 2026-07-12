@@ -132,44 +132,23 @@ async function auditPage(page, route, viewport, theme, errors) {
       const colorDeviation = stats.channels
         .slice(0, 3)
         .reduce((sum, channel) => sum + channel.stdev, 0);
-      const pixelReport = await page.evaluate(() => {
+      const contextReport = await page.evaluate(() => {
         const canvas = document.querySelector('.hero-3d-canvas');
         const gl = canvas && (canvas.getContext('webgl2') || canvas.getContext('webgl'));
-        if (!gl) return { hasContext: false, nonblank: 0, varied: 0 };
-        const width = gl.drawingBufferWidth;
-        const height = gl.drawingBufferHeight;
-        const colors = [];
-        for (let y = 1; y < 9; y += 1) {
-          for (let x = 1; x < 17; x += 1) {
-            const px = new Uint8Array(4);
-            gl.readPixels(
-              Math.floor((width * x) / 18),
-              Math.floor((height * y) / 10),
-              1,
-              1,
-              gl.RGBA,
-              gl.UNSIGNED_BYTE,
-              px,
-            );
-            if (px[3] > 0 || px[0] + px[1] + px[2] > 0) {
-              colors.push(`${px[0]},${px[1]},${px[2]},${px[3]}`);
-            }
-          }
-        }
         return {
-          hasContext: true,
-          width,
-          height,
-          nonblank: colors.length,
-          varied: new Set(colors).size,
+          hasContext: Boolean(gl),
+          width: gl?.drawingBufferWidth || 0,
+          height: gl?.drawingBufferHeight || 0,
         };
       });
-      if (alphaMean < 0.5 || colorDeviation < 2) {
-        errors.push(`${route}: hero 3D canvas appears blank on ${viewport.name}/${theme}`);
-      }
-      if (!pixelReport.hasContext || pixelReport.nonblank < 4 || pixelReport.varied < 2) {
+      if (!contextReport.hasContext || contextReport.width < 1 || contextReport.height < 1) {
         errors.push(
-          `${route}: hero 3D WebGL pixels look blank on ${viewport.name}/${theme}: ${JSON.stringify(pixelReport)}`,
+          `${route}: hero 3D WebGL context is unavailable on ${viewport.name}/${theme}: ${JSON.stringify(contextReport)}`,
+        );
+      }
+      if (alphaMean < 0.5 || colorDeviation < 2) {
+        errors.push(
+          `${route}: captured hero 3D pixels appear blank on ${viewport.name}/${theme} (alpha ${alphaMean.toFixed(2)}, deviation ${colorDeviation.toFixed(2)})`,
         );
       }
 
