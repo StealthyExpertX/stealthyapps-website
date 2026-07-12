@@ -78,9 +78,10 @@ function hasMetaRefresh(html) {
 }
 
 function checkJsonLd(file, html) {
-  const csp = html.match(
-    /<meta[^>]+http-equiv=["']Content-Security-Policy["'][^>]+content=["']([^"']+)/i,
+  const cspMatch = html.match(
+    /<meta[^>]+http-equiv=["']Content-Security-Policy["'][^>]+content=(["'])([\s\S]*?)\1/i,
   );
+  const csp = cspMatch ? cspMatch[2] : '';
   const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
   for (const script of scripts) {
     if (!/type=["']application\/ld\+json["']/i.test(script[1])) continue;
@@ -90,9 +91,9 @@ function checkJsonLd(file, html) {
     } catch (error) {
       fail(`${rel(file)}: invalid JSON-LD (${error.message})`);
     }
-    if (csp && /script-src/.test(csp[1]) && !/script-src[^;]*'unsafe-inline'/.test(csp[1])) {
+    if (csp && /script-src/.test(csp) && !/script-src[^;]*'unsafe-inline'/.test(csp)) {
       const hash = crypto.createHash('sha256').update(script[2]).digest('base64');
-      if (!csp[1].includes(`'sha256-${hash}'`)) {
+      if (!csp.includes(`'sha256-${hash}'`)) {
         fail(`${rel(file)}: CSP missing JSON-LD hash ${hash}`);
       }
     }
@@ -330,7 +331,8 @@ function checkLaunchPage() {
     ['ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
-    ['No cloud profile account', 'clean privacy proof wording'],
+    ['No profile account required', 'clean privacy proof wording'],
+    ['See exactly what changes.', 'specific hero demo caption'],
     ['Check the fill before you send.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
     ['What to know before you install.', 'plain FAQ heading'],
