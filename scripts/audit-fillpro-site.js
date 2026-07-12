@@ -288,6 +288,42 @@ function checkSiteScript() {
   if (!contactJs.includes('`${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`')) {
     fail('contact.js: FillPro/product email subject suffix is missing');
   }
+
+  const home = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const checkout = fs.readFileSync(
+    path.join(ROOT, 'fillpro', 'checkout', 'index.html'),
+    'utf8',
+  );
+  const download = fs.readFileSync(
+    path.join(ROOT, 'fillpro', 'download', 'index.html'),
+    'utf8',
+  );
+  const edge = fs.readFileSync(
+    path.join(ROOT, 'fillpro', 'download', 'edge', 'index.html'),
+    'utf8',
+  );
+  const firefox = fs.readFileSync(
+    path.join(ROOT, 'fillpro', 'download', 'firefox', 'index.html'),
+    'utf8',
+  );
+  for (const [source, label] of [
+    [home, 'fillpro/index.html'],
+    [checkout, 'fillpro/checkout/index.html'],
+    [download, 'fillpro/download/index.html'],
+  ]) {
+    if (!/Edge[^<]{0,80}(?:coming soon|next)|(?:coming soon|next)[^<]{0,80}Edge/i.test(source)) {
+      fail(`${label}: Edge must be marked as part of the staggered post-Chrome launch`);
+    }
+    if (!/Firefox[^<]{0,80}(?:coming soon|next)|(?:coming soon|next)[^<]{0,80}Firefox/i.test(source)) {
+      fail(`${label}: Firefox must be marked as part of the staggered post-Chrome launch`);
+    }
+  }
+  if (!/Edge[^<]{0,80}coming soon|coming soon[^<]{0,80}Edge/i.test(edge)) {
+    fail('fillpro/download/edge/index.html: Edge must be marked coming soon');
+  }
+  if (!/Firefox[^<]{0,80}coming soon|coming soon[^<]{0,80}Firefox/i.test(firefox)) {
+    fail('fillpro/download/firefox/index.html: Firefox must be marked coming soon');
+  }
 }
 
 function checkHeroScene() {
