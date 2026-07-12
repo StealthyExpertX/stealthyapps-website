@@ -67,8 +67,13 @@ const CONTACT_CONTEXTS = {
         inboxLabel: 'FillPro product inbox',
         reasons: [
           ['product_help', 'Question about FillPro'],
+          ['site_report', 'A page did not fill correctly'],
           ['feature', 'Feature request'],
           ['bug', 'Something is not working'],
+          ['uninstall', 'I removed FillPro'],
+          ['chrome_store_link', 'Chrome launch notice'],
+          ['edge_store_link', 'Edge launch notice'],
+          ['firefox_store_link', 'Firefox launch notice'],
           ['idea', 'Future tool idea'],
         ],
       },
@@ -278,11 +283,17 @@ function buildDirectSendPayload(
   message,
   honeypotValue,
 ) {
+  const replyFields = replyEmail
+    ? {
+        email: replyEmail,
+        _replyto: replyEmail,
+      }
+    : {};
   return {
     endpoint: `${DIRECT_SEND_URL_BASE}${encodeURIComponent(compose.to)}`,
     body: {
       name: name || 'Not provided',
-      email: replyEmail,
+      ...replyFields,
       topic: config.label,
       reason: reasonLabel,
       page: window.location.href,
@@ -290,7 +301,6 @@ function buildDirectSendPayload(
       details: compose.body,
       'Submission method': 'Direct send from site form',
       _subject: compose.subject,
-      _replyto: replyEmail,
       _template: 'table',
       _captcha: 'false',
       _autoresponse: DIRECT_SEND_AUTORESPONSE,
@@ -370,7 +380,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const contactSection =
     form.closest('.contact-card') || form.parentElement || document;
-  const context = resolveContactContext(form);
+  const prefill = getContactPrefill();
+  const context = { ...resolveContactContext(form) };
+  const isUninstallFeedback = prefill.reason === 'uninstall';
+  if (isUninstallFeedback) {
+    context.requireName = false;
+    context.requireReplyEmail = false;
+    context.allowAnonymousDirect = true;
+  }
   const topics = context.topics;
   const topicField = form.querySelector('#contactTopic');
   const reasonField = form.querySelector('#contactReason');
@@ -387,7 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const copyButton = form.querySelector('[data-compose-copy]');
   const honeypotField = form.querySelector('[data-contact-honey]');
   const actionButtons = form.querySelectorAll('[data-contact-action]');
-  const prefill = getContactPrefill();
   let currentCompose = null;
   let isBusy = false;
   let hasAppliedPrefillReason = false;
@@ -471,7 +487,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (
-      (context.requireReplyEmail || requestedAction === 'direct') &&
+      (context.requireReplyEmail ||
+        (requestedAction === 'direct' && !context.allowAnonymousDirect)) &&
       !replyEmail
     ) {
       blockers.push('a reply email');
@@ -568,11 +585,21 @@ document.addEventListener('DOMContentLoaded', () => {
     refreshFormState();
   }
 
-  if (prefill.productLabel) {
+  if (isUninstallFeedback) {
     if (contextNote) {
       contextNote.hidden = false;
-      contextNote.textContent = `Currently set to ${prefill.productLabel}. You can change the topic below.`;
+      contextNote.textContent =
+        'What made you remove FillPro? One sentence is enough. Name and email are optional.';
     }
+    messageField.placeholder = 'What got in the way?';
+    nameField.required = false;
+    replyField.required = false;
+    const nameLabel = form.querySelector('[data-contact-name-label]');
+    const replyLabel = form.querySelector('[data-contact-reply-label]');
+    if (nameLabel) nameLabel.textContent = 'Name (optional)';
+    if (replyLabel) replyLabel.textContent = 'Reply email (optional)';
+  } else if (prefill.productLabel) {
+    if (contextNote) contextNote.hidden = true;
     messageField.placeholder =
       'What happened, what you expected, and what you need next.';
   } else if (contextNote) {

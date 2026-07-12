@@ -599,6 +599,49 @@ async function auditContactSubmission(browser, origin, errors) {
       }
     }
 
+    capturedPayload = null;
+    await page.goto(
+      `${origin}/contact/?topic=product&reason=uninstall&product=FillPro`,
+      { waitUntil: 'networkidle' },
+    );
+    const uninstallState = await page.evaluate(() => ({
+      reason: document.getElementById('contactReason')?.value || '',
+      reasonLabel:
+        document.querySelector('#contactReason option:checked')?.textContent?.trim() || '',
+      nameRequired: document.getElementById('contactName')?.required,
+      emailRequired: document.getElementById('contactReply')?.required,
+      note:
+        document.querySelector('[data-contact-context-note]')?.textContent?.trim() || '',
+    }));
+    if (
+      uninstallState.reason !== 'uninstall' ||
+      uninstallState.reasonLabel !== 'I removed FillPro'
+    ) {
+      errors.push('/contact/: uninstall feedback reason was not preselected');
+    }
+    if (uninstallState.nameRequired || uninstallState.emailRequired) {
+      errors.push('/contact/: uninstall feedback should allow an anonymous note');
+    }
+    if (!/Name and email are optional/.test(uninstallState.note)) {
+      errors.push('/contact/: uninstall feedback does not explain its optional fields');
+    }
+    await page
+      .locator('#contactMessage')
+      .fill('I could not fill the custom field on my application.');
+    if (await sendButton.isDisabled()) {
+      errors.push('/contact/: anonymous uninstall feedback stayed disabled');
+    } else {
+      await sendButton.click();
+      await page.locator('[data-contact-status][data-state="success"]').waitFor();
+      if (
+        capturedPayload?.reason !== 'I removed FillPro' ||
+        'email' in (capturedPayload || {}) ||
+        '_replyto' in (capturedPayload || {})
+      ) {
+        errors.push('/contact/: anonymous uninstall payload is incorrect');
+      }
+    }
+
     await page.unroute(directSendPattern);
     await page.route(directSendPattern, async (route) => {
       await route.fulfill({
@@ -608,6 +651,9 @@ async function auditContactSubmission(browser, origin, errors) {
       });
     });
 
+    await page.goto(`${origin}/contact/?topic=product&product=FillPro`, {
+      waitUntil: 'networkidle',
+    });
     await page.locator('#contactName').fill('Release Tester');
     await page.locator('#contactReply').fill('release-test@example.com');
     await page.locator('#contactMessage').fill('Testing the email-app fallback after a send failure.');

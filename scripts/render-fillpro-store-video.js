@@ -700,7 +700,7 @@ const html = `<!doctype html>
     if (t < 13.2) return ['Modern controls', 'More than names and email.', 'Fill dropdowns, checkboxes, uploads, and fields that appear after the page loads.'];
     if (t < 16) return ['No account required', 'Your profiles stay in this browser.', 'Saved details, rules, and upload references stay here unless you export them.'];
     if (t < 18.8) return ['You stay in control', 'Review or undo before you submit.', 'FillPro fills the page. You choose when to submit.'];
-    return ['Start free', 'Three profiles are included.', 'Upgrade only when you need more room.'];
+    return ['Start free', 'Three profiles are included.', 'Pro supports up to 500 profiles and backups.'];
   }
 
   function proofFor(t) {
@@ -807,7 +807,7 @@ const html = `<!doctype html>
     if (t < 18.8) {
       return ['Review or undo before submit.', 'FillPro fills the page; you decide when to submit.', ['Review', 'first'], ['Undo', 'ready'], ['Sign-in', 'untouched']];
     }
-    return ['Three profiles are included.', 'Start free and upgrade only when you need more room.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
+    return ['Three profiles are included.', 'Pro supports up to 500 profiles and backups.', ['3', 'free'], ['No', 'account'], ['Review', 'first']];
   }
 
   function renderFields(t) {
