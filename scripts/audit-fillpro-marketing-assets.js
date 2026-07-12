@@ -229,6 +229,40 @@ function checkVideo(relativePath) {
   if (fps < 23.5 || fps > 30.5) fail(`${relativePath}: expected 24-30fps, got ${fps.toFixed(2)}fps`);
 }
 
+function checkHeroVideo(relativePath) {
+  checked.videos += 1;
+  const target = assertFile(relativePath, 30 * 1024, 500 * 1024);
+  if (!target) return;
+  let data;
+  try {
+    data = JSON.parse(
+      execFileSync(
+        'ffprobe',
+        ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', target],
+        { encoding: 'utf8' },
+      ),
+    );
+  } catch (error) {
+    fail(`${relativePath}: ffprobe failed (${error.message})`);
+    return;
+  }
+  const video = (data.streams || []).find((stream) => stream.codec_type === 'video');
+  const audio = (data.streams || []).find((stream) => stream.codec_type === 'audio');
+  if (!video) {
+    fail(`${relativePath}: no video stream`);
+    return;
+  }
+  const duration = Number(data.format?.duration || video.duration || 0);
+  const fps = parseRate(video.avg_frame_rate);
+  if (audio) fail(`${relativePath}: hero demo should be mute-safe`);
+  if (video.codec_name !== 'h264') fail(`${relativePath}: expected H.264, got ${video.codec_name}`);
+  if (video.width !== 960 || video.height !== 540) {
+    fail(`${relativePath}: expected 960x540, got ${video.width}x${video.height}`);
+  }
+  if (duration < 1.5 || duration > 3) fail(`${relativePath}: expected 1.5-3 seconds, got ${duration.toFixed(2)}s`);
+  if (fps < 2.5 || fps > 4) fail(`${relativePath}: expected about 3fps, got ${fps.toFixed(2)}fps`);
+}
+
 function checkRenderer() {
   checked.renderer += 1;
   const relativePath = 'scripts/render-fillpro-store-video.js';
@@ -466,6 +500,7 @@ async function main() {
   await checkImage('assets/fillpro-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
   await checkImage('assets/fillpro-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
   await checkImage('assets/fillpro-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
+  checkHeroVideo('assets/fillpro-demo.mp4');
   await checkImage('assets/marketplace/fillpro-small-promo-440x280.png', 440, 280, {
     maxBytes: 1024 * 1024,
     maxMeanLuma: 190,

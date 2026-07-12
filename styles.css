@@ -3150,7 +3150,8 @@ html:has(body.fillpro-launch) {
   white-space: nowrap;
 }
 
-.demo-shell img {
+.demo-shell img,
+.demo-shell video {
   position: relative;
   z-index: 1;
   display: block;
@@ -3158,6 +3159,47 @@ html:has(body.fillpro-launch) {
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.demo-play-button {
+  position: absolute;
+  z-index: 5;
+  inset: 50% auto auto 50%;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #0b5f59;
+  box-shadow: 0 14px 34px rgba(3, 22, 19, 0.28);
+  transform: translate(-50%, -50%);
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  cursor: pointer;
+}
+
+.demo-play-button::before {
+  content: "";
+  position: absolute;
+  inset: 50% auto auto 52%;
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 13px solid currentColor;
+  transform: translate(-42%, -50%);
+}
+
+.demo-play-button:hover,
+.demo-play-button:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 18px 42px rgba(3, 22, 19, 0.34);
+  transform: translate(-50%, -50%) scale(1.06);
+}
+
+.demo-play-button:disabled {
+  opacity: 0.72;
+  cursor: wait;
 }
 
 .demo-signal {

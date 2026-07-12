@@ -1122,6 +1122,29 @@ async function renderDemoGif(browser) {
       ],
       { stdio: 'ignore' },
     );
+    execFileSync(
+      'ffmpeg',
+      [
+        '-y',
+        '-framerate',
+        '3',
+        '-i',
+        path.join(tmp, 'frame-%02d.png'),
+        '-an',
+        '-c:v',
+        'libx264',
+        '-preset',
+        'slow',
+        '-crf',
+        '22',
+        '-pix_fmt',
+        'yuv420p',
+        '-movflags',
+        '+faststart',
+        path.join(assetsDir, 'fillpro-demo.mp4'),
+      ],
+      { stdio: 'ignore' },
+    );
   } finally {
     for (const frame of framePaths) {
       fs.rmSync(frame, { force: true });

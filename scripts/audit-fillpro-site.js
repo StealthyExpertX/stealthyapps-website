@@ -374,10 +374,16 @@ function checkDemoGenerator() {
   if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
     fail('render-fillpro-assets.js: demo should show safe fill boundary and review moment');
   }
+  for (const marker of ['fillpro-demo.mp4', 'libx264', '+faststart']) {
+    if (!renderer.includes(marker)) {
+      fail(`render-fillpro-assets.js: hero demo renderer missing ${marker}`);
+    }
+  }
 }
 
 function checkLaunchPage() {
   const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
     ['demo-signal', 'hero product-signal overlay'],
     ['Work profile filled', 'hero profile signal copy'],
@@ -386,12 +392,23 @@ function checkLaunchPage() {
     ['Start free', 'low-friction primary CTA'],
     ['No account required', 'clean privacy proof wording'],
     ['See exactly what changes.', 'specific hero demo caption'],
+    ['data-fillpro-demo-poster', 'stable hero demo poster'],
+    ['demo-play-button', 'explicit hero demo play control'],
     ['Check the fill before you send.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
     ['What to know before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);
+  }
+  if (/<video\b[^>]*\bautoplay\b/i.test(html)) {
+    fail('fillpro/index.html: hero demo should not autoplay before user input');
+  }
+  if (/rel="preload"[^>]+fillpro-demo\.gif/i.test(html)) {
+    fail('fillpro/index.html: click-to-play demo should not preload the GIF');
+  }
+  if (!siteScript.includes("video.src = '/assets/fillpro-demo.mp4'")) {
+    fail('site.js: hero demo play control is not wired to the MP4');
   }
   const proList = (html.match(/<article class="price-card price-card-featured">([\s\S]*?)<\/article>/) || [])[1] || '';
   if (!proList.includes('Import and export backups')) {

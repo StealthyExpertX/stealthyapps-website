@@ -147,6 +147,48 @@
     });
   }
 
+  function setupDemoPlayback() {
+    var button = document.querySelector('.demo-play-button');
+    var poster = document.querySelector('[data-fillpro-demo-poster]');
+    if (!button || !poster) return;
+
+    button.addEventListener('click', function () {
+      if (button.disabled) return;
+      button.disabled = true;
+
+      var video = document.createElement('video');
+      video.width = 960;
+      video.height = 540;
+      video.muted = true;
+      video.defaultMuted = true;
+      video.loop = true;
+      video.playsInline = true;
+      video.preload = 'auto';
+      video.poster = '/assets/fillpro-demo-poster.png';
+      video.src = '/assets/fillpro-demo.mp4';
+
+      function restorePoster() {
+        if (video.isConnected) video.replaceWith(poster);
+        button.disabled = false;
+      }
+
+      video.addEventListener(
+        'playing',
+        function () {
+          button.remove();
+        },
+        { once: true },
+      );
+      video.addEventListener('error', restorePoster, { once: true });
+      poster.replaceWith(video);
+
+      var playback = video.play();
+      if (playback && typeof playback.catch === 'function') {
+        playback.catch(restorePoster);
+      }
+    });
+  }
+
   function setupInteractiveBackdrop() {
     var reduceMotion =
       window.matchMedia &&
@@ -337,7 +379,6 @@
 
     var revealSelectors = [
       '.launch-strip',
-      '.launch-demo-card',
       '.launch-section',
       '.launch-band',
       '.launch-final',
@@ -495,6 +536,7 @@
   setupScrollProgress();
   ready(function () {
     configureStoreLinks();
+    setupDemoPlayback();
     installThemeToggle();
     setupInteractiveBackdrop();
     setupCopyCode();

@@ -675,6 +675,36 @@ async function auditContactSubmission(browser, origin, errors) {
   }
 }
 
+async function auditDemoPlayback(browser, origin, errors) {
+  const context = await browser.newContext({
+    viewport: { width: 1280, height: 800 },
+    reducedMotion: 'reduce',
+  });
+  const page = await context.newPage();
+
+  try {
+    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    const button = page.getByRole('button', { name: 'Play the two-second FillPro demo' });
+    await button.click();
+    await page.locator('.demo-shell video').waitFor({ state: 'visible' });
+    await page.waitForFunction(() => {
+      const video = document.querySelector('.demo-shell video');
+      return Boolean(video && !video.paused && video.currentTime > 0);
+    });
+    if (await button.count()) {
+      errors.push('/fillpro/: demo play button remained after playback started');
+    }
+    await page.locator('.launch-demo-card').screenshot({
+      path: path.join(OUT_DIR, 'hero-demo-playing.png'),
+    });
+  } catch (error) {
+    errors.push(`/fillpro/: hero demo playback failed: ${error.message}`);
+  } finally {
+    await page.close();
+    await context.close();
+  }
+}
+
 async function main() {
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -716,8 +746,9 @@ async function main() {
     }
     await auditPointerGlow(browser, server.origin, errors);
     await auditHeroSceneMotion(browser, server.origin, errors);
+    await auditDemoPlayback(browser, server.origin, errors);
     await auditContactSubmission(browser, server.origin, errors);
-    checks += 3;
+    checks += 4;
   } finally {
     await browser.close();
     await server.close();
