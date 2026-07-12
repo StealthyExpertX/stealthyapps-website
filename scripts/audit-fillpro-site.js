@@ -295,6 +295,7 @@ function checkHeroScene() {
   if (!fs.existsSync(licensePath)) fail('vendor/three-LICENSE.txt: missing Three.js license');
 
   const heroScript = fs.readFileSync(path.join(ROOT, 'fillpro-hero-scene.js'), 'utf8');
+  const heroLoader = fs.readFileSync(path.join(ROOT, 'fillpro-hero-loader.js'), 'utf8');
   const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
   const css = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
@@ -316,19 +317,24 @@ function checkHeroScene() {
     [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
     [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
     [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],
+    [heroLoader, "import('./fillpro-hero-scene.js')", 'hero loader should import the scene on demand'],
+    [heroLoader, 'requestIdleCallback', 'hero loader should wait for idle time'],
+    [heroLoader, "'pointermove'", 'hero loader should react to real user intent'],
+    [heroLoader, '12000', 'hero loader should retain a late static-reader fallback'],
     [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
-    [html, 'type="module" src="/fillpro-hero-scene.js', 'FillPro page should load hero scene module'],
+    [html, 'type="module" src="/fillpro-hero-loader.js', 'FillPro page should load the progressive hero loader'],
     [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
     [css, '.hero-3d-ready .hero-3d-canvas', 'styles should reveal hero 3D only after ready'],
     [css, 'mask-image: linear-gradient(90deg, transparent 0 68%', 'styles should mask hero 3D to the product edge instead of covering copy'],
     [css, 'mix-blend-mode: multiply', 'light theme should blend the hero render into the product edge'],
     [css, 'mix-blend-mode: screen', 'dark theme should blend the hero render into the product edge'],
-    [sw, '/fillpro-hero-scene.js', 'service worker should cache hero scene script'],
-    [sw, '/vendor/three.module.min.js', 'service worker should cache vendored Three.js module'],
-    [sw, '/vendor/three.core.min.js', 'service worker should cache vendored Three.js core module'],
+    [sw, '/fillpro-hero-loader.js', 'service worker should cache the progressive hero loader'],
   ];
   for (const [source, needle, label] of required) {
     if (!source.includes(needle)) fail(label);
+  }
+  for (const eagerAsset of ["'/fillpro-hero-scene.js'", "'/vendor/three.module.min.js'", "'/vendor/three.core.min.js'"]) {
+    if (sw.includes(eagerAsset)) fail(`service worker should not eagerly cache ${eagerAsset}`);
   }
   [
     ['heroCardStack', 'old stacked card scene'],
@@ -429,7 +435,7 @@ function checkAssetVersioning(files) {
   }
   for (const file of files.filter((item) => item.endsWith('.html'))) {
     const html = fs.readFileSync(file, 'utf8');
-    if (/fillpro-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-scene\.js)\?v=/i.test(html)) {
+    if (/fillpro-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-(?:loader|scene)\.js)\?v=/i.test(html)) {
       fail(`${rel(file)}: public preview/build numbering returned`);
     }
   }

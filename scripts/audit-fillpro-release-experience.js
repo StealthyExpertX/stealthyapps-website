@@ -139,10 +139,11 @@ async function auditPage(page, route, viewport, theme, errors) {
   const pathname = new URL(route).pathname;
   if (pathname === '/fillpro/') {
     try {
+      await page.mouse.move(Math.max(12, viewport.width - 24), 120);
       await page.waitForFunction(
         () => document.documentElement.classList.contains('hero-3d-ready'),
         null,
-        { timeout: 5000 },
+        { timeout: 8000 },
       );
       await page.locator('.launch-hero').screenshot({
         path: path.join(OUT_DIR, `hero-visual-${viewport.name}-${theme}.png`),
@@ -492,10 +493,11 @@ async function auditHeroSceneMotion(browser, origin, errors) {
       errors.push(`/fillpro/: page error during hero 3D motion audit: ${error.message}`);
     });
     await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    await page.mouse.move(1120, 160);
     await page.waitForFunction(
       () => document.documentElement.classList.contains('hero-3d-ready'),
       null,
-      { timeout: 5000 },
+      { timeout: 8000 },
     );
     const canvas = page.locator('.hero-3d-canvas');
     const before = path.join(OUT_DIR, 'hero-3d-motion-before.png');
