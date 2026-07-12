@@ -62,6 +62,8 @@ FillPro is built for repeated profile-style form fields around sign-in, checkout
 
 ## Support
 
+Smart Rules guide: https://stealthyapps.com/fillpro/docs/smart-rules/
+
 FillPro support covers setup, form filling issues, billing, privacy, and safe site reports.
 
 Best report:

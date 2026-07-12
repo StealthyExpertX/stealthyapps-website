@@ -10,6 +10,13 @@
 
   var THEME_KEY = 'fillpro-theme';
   var THEMES = ['system', 'light', 'dark'];
+  // Add the approved marketplace URLs here once each listing is public.
+  // Every data-fillpro-store link on the site will switch automatically.
+  var FILLPRO_STORE_LINKS = {
+    chrome: '',
+    edge: '',
+    firefox: '',
+  };
   var mediaDark =
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var themeButton = null;
@@ -113,6 +120,31 @@
     });
     nav.appendChild(themeButton);
     setTheme(getStoredTheme());
+  }
+
+  function configureStoreLinks() {
+    document.querySelectorAll('[data-fillpro-store]').forEach(function (link) {
+      var store = (link.getAttribute('data-fillpro-store') || '').toLowerCase();
+      var url = FILLPRO_STORE_LINKS[store];
+      if (!url) {
+        link.dataset.storeState = 'pending';
+        return;
+      }
+
+      link.href = url;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      link.dataset.storeState = 'live';
+      var liveLabel = link.getAttribute('data-live-label');
+      if (liveLabel) link.textContent = liveLabel;
+    });
+
+    document.querySelectorAll('[data-store-live-copy]').forEach(function (node) {
+      var store = (node.getAttribute('data-store-live-copy') || '').toLowerCase();
+      if (!FILLPRO_STORE_LINKS[store]) return;
+      var liveText = node.getAttribute('data-live-text');
+      if (liveText) node.textContent = liveText;
+    });
   }
 
   function setupInteractiveBackdrop() {
@@ -293,6 +325,9 @@
   }
 
   function setupScrollReveals() {
+    if (!body.classList.contains('fillpro-launch')) {
+      return;
+    }
     var reduceMotion =
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -459,6 +494,7 @@
   installProgressBar();
   setupScrollProgress();
   ready(function () {
+    configureStoreLinks();
     installThemeToggle();
     setupInteractiveBackdrop();
     setupCopyCode();

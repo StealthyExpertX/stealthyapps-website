@@ -25,11 +25,9 @@ const css = `
     color: #10231f;
     font-family: "Aptos", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
     background:
-      radial-gradient(circle at 84% 10%, rgba(94, 234, 221, 0.2), transparent 240px),
-      radial-gradient(circle at 12% 92%, rgba(242, 193, 78, 0.13), transparent 260px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 78px 78px,
       linear-gradient(180deg, rgba(15, 118, 110, 0.055) 1px, transparent 1px) 0 0 / 78px 78px,
-      linear-gradient(135deg, #fbfdfb, #edf7f3 54%, #f8f4e9);
+      linear-gradient(135deg, #fbfdfb, #edf7f3 58%, #f6f2e8);
   }
   .stage {
     position: relative;
@@ -38,6 +36,7 @@ const css = `
     height: 100%;
     padding: 54px 64px;
     display: grid;
+    grid-template-rows: auto auto minmax(0, 1fr);
     gap: 26px;
   }
   .stage::before {
@@ -47,7 +46,7 @@ const css = `
     z-index: -1;
     pointer-events: none;
     border: 1px solid rgba(15, 118, 110, 0.1);
-    border-radius: 18px;
+    border-radius: 8px;
     background:
       linear-gradient(132deg, transparent 0 42%, rgba(15, 118, 110, 0.08) 42% 42.6%, transparent 42.6%),
       linear-gradient(132deg, transparent 0 58%, rgba(242, 193, 78, 0.12) 58% 58.7%, transparent 58.7%);
@@ -60,8 +59,6 @@ const css = `
   }
   .shot-modern {
     background:
-      radial-gradient(circle at 18% 16%, rgba(94, 234, 221, 0.22), transparent 250px),
-      radial-gradient(circle at 86% 78%, rgba(15, 118, 110, 0.1), transparent 280px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 70px 70px,
       linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 70px 70px,
       linear-gradient(135deg, #fbfffd, #edf9f5 48%, #f7fbf8);
@@ -77,19 +74,18 @@ const css = `
   .shot-profiles::before {
     inset: 38px 44px;
     background:
-      radial-gradient(circle at 24% 72%, rgba(94, 234, 221, 0.12), transparent 220px),
       linear-gradient(132deg, transparent 0 47%, rgba(94, 234, 221, 0.1) 47% 47.6%, transparent 47.6%),
       linear-gradient(132deg, transparent 0 70%, rgba(242, 193, 78, 0.1) 70% 70.6%, transparent 70.6%);
   }
   .shot-privacy::before {
     background:
-      radial-gradient(circle at 74% 18%, rgba(94, 234, 221, 0.12), transparent 240px),
-      linear-gradient(90deg, transparent 0 50%, rgba(94, 234, 221, 0.08) 50% 50.5%, transparent 50.5%);
+      linear-gradient(90deg, transparent 0 50%, rgba(94, 234, 221, 0.08) 50% 50.5%, transparent 50.5%),
+      linear-gradient(0deg, transparent 0 72%, rgba(242, 193, 78, 0.12) 72% 72.7%, transparent 72.7%);
   }
   .shot-undo::before {
     background:
-      radial-gradient(circle at 18% 82%, rgba(242, 193, 78, 0.13), transparent 240px),
-      linear-gradient(132deg, transparent 0 64%, rgba(94, 234, 221, 0.08) 64% 64.7%, transparent 64.7%);
+      linear-gradient(132deg, transparent 0 64%, rgba(94, 234, 221, 0.08) 64% 64.7%, transparent 64.7%),
+      linear-gradient(90deg, transparent 0 28%, rgba(242, 193, 78, 0.1) 28% 28.7%, transparent 28.7%);
   }
   .topline {
     display: flex;
@@ -161,6 +157,16 @@ const css = `
     top: 104px;
     right: 48px;
   }
+  .shot-undo {
+    padding: 34px 64px;
+    gap: 18px;
+  }
+  .shot-undo h1 {
+    font-size: 50px;
+  }
+  .shot-undo .sub {
+    font-size: 20px;
+  }
   .browser {
     position: relative;
     overflow: hidden;
@@ -168,6 +174,14 @@ const css = `
     border-radius: 8px;
     background: #ffffff;
     box-shadow: 0 30px 80px rgba(16, 35, 31, 0.16);
+  }
+  .stage > .browser {
+    min-height: 0;
+    height: 100%;
+  }
+  .stage > .browser .page {
+    min-height: 0;
+    height: calc(100% - 48px);
   }
   .browser::after {
     content: "";
@@ -220,6 +234,7 @@ const css = `
   }
   .form h2, .panel h2 {
     margin: 0 0 6px;
+    color: #10231f;
     font-size: 24px;
     line-height: 1.1;
   }
@@ -283,7 +298,7 @@ const css = `
     border-radius: 8px;
     background: #f8fbf8;
   }
-  .profile strong { font-size: 15px; }
+  .profile strong { color: #10231f; font-size: 15px; }
   .profile span { color: #60726b; font-size: 13px; }
   .cardline {
     display: flex;
@@ -327,7 +342,7 @@ const css = `
     border: 1px solid #d8e3de;
     border-radius: 8px;
     background:
-      radial-gradient(circle at 100% 0%, rgba(94, 234, 221, 0.11), transparent 70px),
+      linear-gradient(135deg, rgba(94, 234, 221, 0.08), transparent 56%),
       #ffffff;
   }
   .field-tile strong {
@@ -379,9 +394,9 @@ const css = `
     gap: 12px;
     padding: 22px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
+    border-radius: 8px;
     background:
-      radial-gradient(circle at 92% 8%, rgba(94, 234, 221, 0.16), transparent 160px),
+      linear-gradient(135deg, rgba(94, 234, 221, 0.1), transparent 48%),
       rgba(255, 255, 255, 0.07);
   }
   .privacy-ledger h2 {
@@ -418,9 +433,9 @@ const css = `
     overflow: hidden;
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
+    border-radius: 8px;
     background:
-      radial-gradient(circle at 82% 14%, rgba(94, 234, 221, 0.14), transparent 190px),
+      linear-gradient(135deg, rgba(94, 234, 221, 0.09), transparent 52%),
       rgba(255, 255, 255, 0.08);
   }
   .review-form h2,
@@ -458,7 +473,7 @@ const css = `
     gap: 9px;
     padding: 18px;
     border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 10px;
+    border-radius: 8px;
     background: rgba(255, 255, 255, 0.07);
   }
   .review-card {
@@ -488,7 +503,7 @@ const css = `
   .review-proof-light .review-stack {
     border-color: #d8e3de;
     background:
-      radial-gradient(circle at 84% 16%, rgba(20, 184, 166, 0.12), transparent 180px),
+      linear-gradient(135deg, rgba(20, 184, 166, 0.08), transparent 52%),
       #ffffff;
   }
   .review-proof-light .review-form h2,
@@ -529,7 +544,7 @@ const css = `
   .dark .sub { opacity: 0.74; }
   .small-stage { padding: 28px 32px; }
   .small-stage h1 { font-size: 36px; }
-  .marquee { grid-template-columns: 0.86fr 1.14fr; align-items: center; }
+  .marquee { grid-template-columns: 0.86fr 1.14fr; grid-template-rows: 1fr; align-items: center; }
   .demo-scene {
     position: relative;
     width: 100%;
@@ -540,7 +555,6 @@ const css = `
     align-items: start;
     padding: 32px 34px 34px;
     background:
-      radial-gradient(circle at 82% 18%, rgba(20, 184, 166, 0.16), transparent 260px),
       linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 70px 70px,
       linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 70px 70px,
       linear-gradient(135deg, #fbfdfb, #eef8f4);
@@ -578,6 +592,7 @@ const css = `
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    grid-template-rows: 1fr;
     color: #f8fffc;
     background:
       linear-gradient(115deg, rgba(94, 234, 221, 0.18), transparent 44%),
@@ -604,7 +619,7 @@ const css = `
     width: 46%;
     height: 82%;
     border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 28px;
+    border-radius: 8px;
     transform: rotate(-8deg);
     background:
       linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.04));
@@ -675,7 +690,7 @@ const css = `
     gap: 10px;
     padding: 18px;
     border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 12px;
+    border-radius: 8px;
     background: rgba(248, 255, 252, 0.94);
     box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
   }
@@ -726,7 +741,7 @@ const css = `
     width: 490px;
     gap: 14px;
     padding: 26px;
-    border-radius: 14px;
+    border-radius: 8px;
   }
   .promo-marquee .promo-product strong { font-size: 28px; }
   .promo-marquee .promo-row {
@@ -832,6 +847,42 @@ function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile
 async function renderHtml(browser, output, width, height, html) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body>${html}</body></html>`);
+  const clipped = await page.evaluate(() => {
+    const selector = [
+      '.browser',
+      '.button',
+      '.panel',
+      '.profile',
+      '.privacy-card',
+      '.privacy-ledger',
+      '.review-form',
+      '.review-stack',
+      '.review-card',
+      '.promo-product',
+      '.promo-row',
+      '.promo-cta',
+    ].join(',');
+    return Array.from(document.querySelectorAll(selector))
+      .map((node) => {
+        const rect = node.getBoundingClientRect();
+        return {
+          name: node.className,
+          left: Math.round(rect.left),
+          top: Math.round(rect.top),
+          right: Math.round(rect.right),
+          bottom: Math.round(rect.bottom),
+        };
+      })
+      .filter((rect) =>
+        rect.left < -1 ||
+        rect.top < -1 ||
+        rect.right > window.innerWidth + 1 ||
+        rect.bottom > window.innerHeight + 1
+      );
+  });
+  if (clipped.length) {
+    throw new Error(`Marketing render contains clipped UI in ${path.basename(output)}: ${JSON.stringify(clipped.slice(0, 5))}`);
+  }
   await page.screenshot({ path: output, type: 'png' });
   await page.close();
 }
@@ -845,9 +896,9 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage first-shot shot-outcome">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">v1.0.0</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account needed</span></div>
       <div><h1>Fill the fields you keep retyping.</h1><p class="sub">Choose a saved profile, fill the page, then review before you submit.</p></div>
-      ${chromeFrame('client.example/onboarding', beforeAfter())}
+      ${chromeFrame('apply.example.com/onboarding', beforeAfter())}
     </main>`,
   );
 
@@ -857,15 +908,15 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage dark shot-profiles">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro profiles</div><span class="pill">Separate profiles</span></div>
-      <div><h1>Keep work and client details separate.</h1><p class="sub">Choose the right profile before each fill without mixing one workflow into another.</p></div>
-      ${chromeFrame('teams.example/demo-request', `
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Up to 500 with Pro</span></div>
+      <div><h1>Keep each workflow in its own profile.</h1><p class="sub">Switch between work, applicant, client, and QA details without mixing them together.</p></div>
+      ${chromeFrame('forms.example.com/demo-request', `
         <div class="grid2">
           <div class="panel">
             <h2>Saved profiles</h2>
             <div class="profile"><strong>Work profile</strong><span>Contact, company, links, resume</span></div>
             <div class="profile"><strong>Vendor profile</strong><span>Business details and service copy</span></div>
-            <div class="profile"><strong>QA profile</strong><span>Repeat test data without random filler</span></div>
+            <div class="profile"><strong>QA profile</strong><span>Known test values for repeat checks</span></div>
           </div>
           <div class="panel">
             <h2>Smart rules</h2>
@@ -884,9 +935,9 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage shot-modern">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Dropdowns + uploads</span></div>
-      <div><h1>More than names and email.</h1><p class="sub">Fill dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
-      ${chromeFrame('forms.example/team-intake', `
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
+      <div><h1>Fill the controls basic autofill skips.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
+      ${chromeFrame('forms.example.com/team-intake', `
         <div class="grid2">
           <div class="form">
             <h2>Team intake form</h2>
@@ -895,12 +946,12 @@ async function renderStaticAssets(browser) {
             ${field('Resume upload', 'alex-morgan.pdf')}
           </div>
           <div class="panel">
-            <h2>Still covered</h2>
+            <h2>Built for the hard parts</h2>
             <div class="field-grid">
-              <div class="field-tile"><strong>Dropdowns</strong><span>choices matched from your profile</span></div>
-              <div class="field-tile"><strong>Checkboxes</strong><span>common preferences handled cleanly</span></div>
-              <div class="field-tile"><strong>Upload fields</strong><span>resume and document references</span></div>
-              <div class="field-tile"><strong>Late fields</strong><span>second pass catches what appears after load</span></div>
+              <div class="field-tile"><strong>Dropdowns</strong><span>Match choices from the active profile.</span></div>
+              <div class="field-tile"><strong>Checkboxes</strong><span>Handle clear yes, no, and preference fields.</span></div>
+              <div class="field-tile"><strong>Upload fields</strong><span>Match resumes, PDFs, CSVs, and spreadsheets.</span></div>
+              <div class="field-tile"><strong>Late fields</strong><span>Catch fields that appear after the first pass.</span></div>
             </div>
           </div>
         </div>`)}
@@ -914,19 +965,19 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark shot-privacy">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account required</span></div>
-      <div><h1>Your profiles stay in this browser.</h1><p class="sub">Saved details, rules, and upload references stay here unless you export them.</p></div>
+      <div><h1>Your profile stays with the extension.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Saved profiles</strong><span>Stay in this browser.</span></div>
-          <div class="privacy-card"><strong>Current-page action</strong><span>FillPro runs when you ask on the page you chose.</span></div>
-          <div class="privacy-card"><strong>Review before submit</strong><span>You decide when to submit.</span></div>
+          <div class="privacy-card"><strong>Profile storage</strong><span>Saved by the extension in your browser.</span></div>
+          <div class="privacy-card"><strong>Page access</strong><span>Runs on the page you choose.</span></div>
+          <div class="privacy-card"><strong>Final say</strong><span>You review and submit.</span></div>
         </div>
         <div class="privacy-ledger">
-          <h2>What FillPro leaves alone</h2>
-          <div class="privacy-row"><span>Passwords</span><strong>Use your manager</strong></div>
-          <div class="privacy-row"><span>Cards and checkout fields</span><strong>Use the site wallet</strong></div>
-          <div class="privacy-row"><span>Submit button</span><strong>Always yours</strong></div>
-          <div class="privacy-row"><span>Support reports</span><strong>Only what you send</strong></div>
+          <h2>Clear control at every step</h2>
+          <div class="privacy-row"><span>Fill action</span><strong>Your click</strong></div>
+          <div class="privacy-row"><span>Saved values</span><strong>Your profiles</strong></div>
+          <div class="privacy-row"><span>Form submission</span><strong>Your decision</strong></div>
+          <div class="privacy-row"><span>Support report</span><strong>Your choice</strong></div>
         </div>
       </div>
     </main>`,
@@ -939,8 +990,8 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark shot-undo">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Changed your mind? Undo the fill.</h1><p class="sub">Roll the page back before you submit.</p></div>
-      ${chromeFrame('careers.example/apply', `
+      <div><h1>Review the fill. Undo it if needed.</h1><p class="sub">Roll the last FillPro changes back without reloading the page.</p></div>
+      ${chromeFrame('careers.example.com/apply', `
         <div class="review-proof review-proof-light">
           <div class="review-form">
             <h2>Review before submit</h2>

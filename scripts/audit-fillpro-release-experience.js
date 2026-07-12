@@ -14,6 +14,11 @@ const VIEWPORTS = [
 const ROUTES = [
   '/fillpro/',
   '/fillpro/privacy/',
+  '/fillpro/docs/smart-rules/',
+  '/fillpro/download/',
+  '/fillpro/download/chrome/',
+  '/fillpro/download/edge/',
+  '/fillpro/download/firefox/',
   '/support/',
   '/contact/',
   '/fillpro/job-application-autofill/',

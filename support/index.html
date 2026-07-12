@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FillPro Support - Setup, Troubleshooting, Billing</title>
-  <meta name="description" content="FillPro support for setup, form filling issues, billing, privacy, and simple site reports.">
+  <title>FillPro Support - Setup, Smart Rules, Billing</title>
+  <meta name="description" content="Get help with FillPro setup, missed fields, Smart Rules, uploads, billing, and purchase recovery.">
   <meta name="author" content="Stealthy Apps">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-NtDNA75FsRI4sraWF5h3nRygH9sWVZT0OLGTv3cKBXM='; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; script-src 'self' 'sha256-XjrDGNrR4eBsRQm/6GZOo1b/qeqw/QDIA3eimZ3yePo='; style-src 'self'; img-src 'self' data:; connect-src 'self'; manifest-src 'self'; worker-src 'self'; form-action 'self'; upgrade-insecure-requests">
   <meta name="theme-color" content="#0f766e">
   <link rel="canonical" href="https://stealthyapps.com/support/">
   <link rel="icon" href="/assets/fillpro-logo.svg" type="image/svg+xml">
@@ -33,18 +33,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Why did a field need a custom rule?",
+        "name": "Why did FillPro miss a field?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "FillPro focuses on repeated profile-style fields and may need a custom rule when a page uses unusual controls, cross-origin frames, or labels that do not clearly match a saved profile value."
+          "text": "The field may be hidden, loaded after the page opens, or labeled in an unusual way. Open the form section, try again, then add a narrow Smart Rule if the label still needs help."
         }
       },
       {
         "@type": "Question",
-        "name": "How does FillPro work beside sign-in and payment tools?",
+        "name": "Where do I manage or restore Pro?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "FillPro focuses on repeated profile-style form fields. Browser autofill, password managers, payment wallets, and site controls should handle sign-ins and payments."
+          "text": "Open FillPro and use the plan card below your profiles. It shows Manage billing, Update billing, or Restore purchase when that action is available."
         }
       },
       {
@@ -85,29 +85,29 @@
     <section class="section two-col">
       <div class="page-intro">
         <p class="eyebrow">Support</p>
-        <h1>FillPro support that gets to the point.</h1>
-        <p class="lead">If a form fills badly, send the page, field label, and what should have happened. Try the quick checks below first; they fix the common misses.</p>
+        <h1>Need a hand with FillPro?</h1>
+        <p class="lead">Start with the quick checks below. If one field still misses, send the page, its label, and what you expected. You do not need to send the value itself.</p>
         <div class="actions">
-          <a class="button primary" href="/contact/?topic=product&amp;reason=bug&amp;product=FillPro">Report a form issue</a>
-          <a class="button" href="/fillpro/privacy/">Privacy</a>
+          <a class="button primary" href="/contact/?topic=product&amp;reason=bug&amp;product=FillPro">Report a page</a>
+          <a class="button" href="/fillpro/docs/smart-rules/">Smart Rules guide</a>
         </div>
       </div>
       <div class="card callout">
-        <h2>What FillPro is built for.</h2>
-        <p>Names, contact details, profile links, company fields, messages, uploads, dropdowns, checkboxes, and the repeated fields around everyday work forms.</p>
+        <h2>The fastest way to get a fix.</h2>
+        <p>Send the page URL, browser, field label, what happened, and what should have happened. Leave passwords, cards, and saved profile values out.</p>
       </div>
     </section>
 
     <section class="section">
       <div class="section-heading">
         <p class="eyebrow">Quick checks</p>
-        <h2>Try these before filing a report.</h2>
+        <h2>Five checks that solve most misses.</h2>
       </div>
       <ol class="step-list">
         <li>Open the page you want to fill, then open FillPro from the extension icon or side panel.</li>
         <li>Pick the correct profile before filling, especially if you use work, personal, and applicant profiles.</li>
         <li>If the site has tabs, accordions, or a multi-step form, open the section before filling it.</li>
-        <li>If a dropdown is searchable, click into it once and try FillPro again.</li>
+        <li>If a dropdown is searchable, open it once and try FillPro again.</li>
         <li>If the page changes after login or after a first step, refresh the page and run FillPro again.</li>
       </ol>
     </section>
@@ -115,37 +115,58 @@
     <section class="section">
       <div class="section-heading">
         <p class="eyebrow">Form support</p>
-        <h2>Where FillPro should work.</h2>
+        <h2>Help for the parts you use most.</h2>
       </div>
       <div class="support-grid">
         <article class="support-card">
-          <h3>Modern form pages</h3>
-          <p>Multi-step forms, searchable dropdowns, popups, date fields, fields that appear late, and pages that update while you type.</p>
+          <h3>Missed or wrong fields</h3>
+          <p>Multi-step pages, searchable dropdowns, popups, late-loading fields, and labels that need a Smart Rule.</p>
         </article>
         <article class="support-card">
-          <h3>Repeat work forms</h3>
-          <p>Job applications, intake forms, demo requests, vendor signups, customer onboarding, profile pages, and internal admin forms.</p>
+          <h3>Profiles and shortcuts</h3>
+          <p>Work, personal, and applicant profiles; default-profile fills; the side panel; site pauses; and the optional in-page button.</p>
         </article>
         <article class="support-card">
-          <h3>Files and profiles</h3>
-          <p>Resume-style uploads, CSVs, spreadsheets, saved profiles, custom fields, field-learning suggestions, import, export, and undo for the last fill.</p>
+          <h3>Uploads and backups</h3>
+          <p>Resume and cover-letter uploads, CSVs, spreadsheets, file matching, import, export, and undo for the last fill.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <p class="eyebrow">Common questions</p>
+        <h2>Short answers before you contact support.</h2>
+      </div>
+      <div class="support-faq-list">
+        <details>
+          <summary>Why did FillPro miss a field?</summary>
+          <p>The field may be hidden, loaded after the page opens, or labeled in an unusual way. Open the form section, try again, then add a narrow <a href="/fillpro/docs/smart-rules/">Smart Rule</a> if the label still needs help.</p>
+        </details>
+        <details>
+          <summary>Where do I manage or restore Pro?</summary>
+          <p>Open FillPro and use the plan card below your profiles. It shows <strong>Manage billing</strong>, <strong>Update billing</strong>, or <strong>Restore purchase</strong> when that action is available.</p>
+        </details>
+        <details>
+          <summary>How do I report a bad fill?</summary>
+          <p>Send the page type, field name, what happened, what you expected, and your browser version if you know it. Keep sensitive values out of the report.</p>
+        </details>
       </div>
     </section>
 
     <section class="section two-col">
       <div class="card">
         <p class="eyebrow">Billing</p>
-        <h2>Pro access, canceling, and refunds.</h2>
-        <p>For billing help, send the purchase email, the plan, and what you need changed. Keep card details out of support email.</p>
+        <h2>Pro access, canceling, and purchase recovery.</h2>
+        <p>Start with the plan card inside FillPro. If it cannot restore access, send the purchase email and plan name. Never send card details.</p>
         <div class="actions">
           <a class="button" href="/contact/?topic=billing&amp;reason=pricing&amp;product=FillPro">Ask about billing</a>
         </div>
       </div>
       <div class="card">
         <p class="eyebrow">Privacy</p>
-        <h2>Saved profiles stay in the extension.</h2>
-        <p>To clear profiles, remove them inside FillPro or uninstall the extension. Support email is separate, so keep reports short and leave private values out.</p>
+        <h2>Keep private values out of support mail.</h2>
+        <p>A page URL and field label are normally enough. Remove profiles inside FillPro when you no longer need them.</p>
         <div class="actions">
           <a class="button" href="/fillpro/privacy/">Read the privacy page</a>
         </div>

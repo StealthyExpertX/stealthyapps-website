@@ -41,6 +41,7 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 - Browser autofill comparison: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
 - Privacy: https://stealthyapps.com/fillpro/privacy/
 - Support: https://stealthyapps.com/support/
+- Smart Rules guide: https://stealthyapps.com/fillpro/docs/smart-rules/
 - Contact: https://stealthyapps.com/contact/
 - Markdown product brief: https://stealthyapps.com/fillpro/index.md
 - Full text corpus: https://stealthyapps.com/llms-full.txt

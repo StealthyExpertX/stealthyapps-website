@@ -241,108 +241,46 @@ function checkRenderer() {
     'const FPS = 24;',
     'const DURATION = 22;',
     'const FIRST_FILL_BEFORE_SECONDS = 3;',
-    'const POSTER_FRAME_SECONDS = 4.55;',
+    'const POSTER_FRAME_SECONDS = 5.2;',
     'requestAnimationFrame(resolve)',
     'fillpro-store-demo-22s.mp4',
     'fillpro-store-demo-22s-thumb.png',
-    'payoff-card',
-    'const payoffIntro',
-    'payoff.style.display = payoffOpacity <= 0.01 ?',
-    'motion-rail',
     'Mute-safe captions',
-    'Blank form. Review-ready.',
-    'A long form. Again.',
-    'Fill the fields you keep retyping.',
-    'Choose a saved profile, fill the page, then review the result.',
-    'Filling your saved details.',
-    'Saved profile ready.',
-    'Fields fill one by one so the change is easy to follow.',
-    'Ready to review.',
-    'The form is filled. You stay in control.',
-    'Review before submit.',
-    'Passwords stay with your browser or password manager.',
-    'Less retyping on applications.',
-    'More than names and email.',
-    'Your profiles stay in this browser.',
-    'Review or undo before you submit.',
-    'You choose when to submit.',
+    'A blank form.\\nOne profile.',
+    'Watch the repeat work disappear.',
+    'Check it. Undo it. Submit when ready.',
+    'Dropdowns and late fields included.',
     'Three profiles are included.',
+    'No cloud profile account.',
     'No account',
-    'careers.example/apply',
-    'app.example/trial',
-    'Upload matched',
-    'Review before submit',
-    'Saved details, rules, and upload references stay here unless you export them.',
+    'careers.example.com/apply',
+    'forms.example.com/team-intake',
+    'fields and the resume are ready to review',
+    'modern form controls are ready to review',
     'Use your password manager',
-    'sceneFor',
-    'scene-ribbon',
-    'kinetic-layer',
-    'payoffWindow = t < 4.8',
-    'scene-private',
-    'scene-control',
+    'No auto-submit',
+    'windowOpacity',
+    'cursorFor',
+    '--field-shine',
+    '--button-shine',
+    'validateFrame(page, time)',
+    'Video frame ${time.toFixed(2)}s failed layout QA',
+    'frame % FPS === 0',
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
   }
-  if (/slideshow|slide deck|stitched slides/i.test(source)) {
-    fail(`${relativePath}: renderer should remain motion-first, not a stitched slideshow`);
+  if (!/if \(t < 2\.8\) return 1;/.test(source)) {
+    fail(`${relativePath}: the first field should fill before the 3-second mark`);
   }
-  if (!/const payoffWindow = t < 4\.8;/.test(source)) {
-    fail(`${relativePath}: payoff card should stay in the opening proof only, not repeat through the whole video`);
-  }
-  if (/Keep submit in your hands/i.test(source)) {
-    fail(`${relativePath}: first-frame copy uses awkward submit phrasing`);
-  }
-  if (/Password stays out of it|Password skipped/i.test(source)) {
-    fail(`${relativePath}: video should use calmer sign-in boundary language`);
-  }
-  if (!/if \(t < 1\.65\) return 1;/.test(source)) {
-    fail(`${relativePath}: first filled field should appear before the 2-second mark`);
-  }
-  if (!/if \(t < 2\.75\) return 4;/.test(source)) {
-    fail(`${relativePath}: upload should be filled before the poster frame`);
-  }
-  if (/if \(t < 4\.8\) return \['Watch it fill', 'Fields fill while you watch\.', 'Name, email, company, and upload match/i.test(source)) {
-    fail(`${relativePath}: video should not claim upload matched before the upload is filled`);
+  if (!/if \(t < 5\.05\) return 4;/.test(source)) {
+    fail(`${relativePath}: the resume should be filled by the poster frame`);
   }
   if (!/String\(POSTER_FRAME_SECONDS\)/.test(source)) {
     fail(`${relativePath}: poster thumbnail should render from the early value frame`);
   }
-  if (/Fill the repeated fields/i.test(source)) {
-    fail(`${relativePath}: first-frame copy should not use stiff repeated-fields phrasing`);
-  }
-  if (/Save once\. Fill the next long form\./i.test(source)) {
-    fail(`${relativePath}: first-frame headline should avoid the old repetitive launch line`);
-  }
-  if (/Save your details once\./i.test(source)) {
-    fail(`${relativePath}: video opener should use the direct one-click outcome, not generic save-once copy`);
-  }
-  if (/Pick a profile, fill the page, then review before you submit\./i.test(source)) {
-    fail(`${relativePath}: video opener should avoid generic pick-fill-review phrasing`);
-  }
-  if (/return \['One click fill', 'Fill a long form in one click\./i.test(source)) {
-    fail(`${relativePath}: video poster should not repeat "one click" in both eyebrow and ribbon`);
-  }
-  if (/if \(t < 4\.8\) return 'One click fill';/i.test(source)) {
-    fail(`${relativePath}: video ribbon should stay short and avoid duplicating the opener eyebrow`);
-  }
-  if (!/sceneFor\(t\)/.test(source) || !/scene-private/.test(source) || !/scene-control/.test(source)) {
-    fail(`${relativePath}: video needs distinct scene art direction, not one repeated composition`);
-  }
-  if (/core filling|core use/i.test(source)) {
-    fail(`${relativePath}: video should avoid stiff "core filling" account phrasing`);
-  }
-  if (/Review everything before submit/i.test(source)) {
-    fail(`${relativePath}: first-frame copy should use natural review phrasing`);
-  }
-  if (/form leaves the page/i.test(source)) {
-    fail(`${relativePath}: video should use plain submit language`);
-  }
-  if (/Works on the messy forms too|Messy forms are part of the job|Start with three saved profiles/i.test(source)) {
-    fail(`${relativePath}: video captions should stay specific and current`);
-  }
-  if (/forms browsers leave unfinished|No cloud profile account|Filling the repeat work|Watch the repeated details fill|when it leaves the page/i.test(source)) {
-    fail(`${relativePath}: video contains stiff or synthetic marketing phrasing`);
+  if (/radial-gradient|payoff-card|kinetic-layer|sceneFor\(|class="version"|v1\.0\.0|Passwords skipped/i.test(source)) {
+    fail(`${relativePath}: old slideshow, orb, version-badge, or repetitive-boundary treatment returned`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -365,21 +303,21 @@ function checkStillRenderer() {
     'fillpro-marquee-1400x560.png',
     'Fill the fields you keep retyping.',
     'Choose a saved profile, fill the page, then review before you submit.',
-    'Keep work and client details separate.',
-    'More than names and email.',
-    'Changed your mind? Undo the fill.',
-    'Roll the page back before you submit.',
+    'Keep each workflow in its own profile.',
+    'Fill the controls basic autofill skips.',
+    'Review the fill. Undo it if needed.',
+    'Roll the last FillPro changes back without reloading the page.',
     'Fill repeat forms without handing over your data.',
-    'Your profiles stay in this browser.',
+    'Your profile stays with the extension.',
     'shot-outcome',
     'shot-modern',
     'shot-profiles',
     'shot-privacy',
     'shot-undo',
-    'Still covered',
+    'Built for the hard parts',
     'field-grid',
-    'second pass catches what appears after load',
-    'teams.example/demo-request',
+    'Catch fields that appear after the first pass.',
+    'forms.example.com/demo-request',
     'brandPromo',
     'promo-row',
     'alex-morgan.pdf',
@@ -388,6 +326,18 @@ function checkStillRenderer() {
   ];
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
+  }
+  if (source.includes('radial-gradient')) {
+    fail(`${relativePath}: marketing renderer should use structured geometry, not gradient orbs`);
+  }
+  if (!source.includes('.profile strong { color: #10231f;')) {
+    fail(`${relativePath}: light profile cards need an explicit dark text color inside dark compositions`);
+  }
+  if (!source.includes('color: #10231f;\n    font-size: 24px;')) {
+    fail(`${relativePath}: light form and panel headings need an explicit dark text color`);
+  }
+  if (!source.includes("const clipped = await page.evaluate")) {
+    fail(`${relativePath}: renderer should reject clipped marketing UI before writing screenshots`);
   }
   if (/Keep submit in your hands/i.test(source)) {
     fail(`${relativePath}: first screenshot copy uses awkward submit phrasing`);
