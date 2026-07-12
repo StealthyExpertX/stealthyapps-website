@@ -379,6 +379,90 @@ async function imageMeanDifference(leftPath, rightPath) {
   return diff / (left.info.width * left.info.height * 3);
 }
 
+async function auditPointerGlow(browser, origin, errors) {
+  const context = await browser.newContext({
+    viewport: { width: 1440, height: 1000 },
+    deviceScaleFactor: 1,
+    reducedMotion: 'no-preference',
+    hasTouch: false,
+    colorScheme: 'dark',
+  });
+  const page = await context.newPage();
+
+  try {
+    await page.addInitScript(() => {
+      window.localStorage.setItem('fillpro-theme', 'dark');
+    });
+    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+
+    const downloads = page.locator('.launch-downloads');
+    await downloads.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(350);
+    await page.mouse.move(260, 520);
+    await page.waitForTimeout(240);
+
+    const glowReport = await page.evaluate(() => {
+      const root = document.documentElement;
+      const glow = getComputedStyle(document.body, '::after');
+      const localSelectors = [
+        '.launch-downloads',
+        '.launch-section',
+        '.review-rail-stage',
+        '.trust-page .section',
+      ];
+      return {
+        active: root.classList.contains('pointer-glow-active'),
+        x: root.style.getPropertyValue('--pointer-x'),
+        y: root.style.getPropertyValue('--pointer-y'),
+        position: glow.position,
+        inset: [glow.top, glow.right, glow.bottom, glow.left],
+        opacity: Number.parseFloat(glow.opacity),
+        localPointerDecorations: localSelectors.filter((selector) => {
+          const element = document.querySelector(selector);
+          if (!element) return false;
+          const style = getComputedStyle(element, '::before');
+          return `${style.backgroundImage} ${style.maskImage}`.includes('--pointer-');
+        }),
+      };
+    });
+
+    if (!glowReport.active) errors.push('/fillpro/: pointer glow did not activate for a fine pointer');
+    if (glowReport.position !== 'fixed' || glowReport.inset.some((value) => value !== '0px')) {
+      errors.push(`/fillpro/: pointer glow is not viewport-wide (${JSON.stringify(glowReport)})`);
+    }
+    if (!/^260px$/.test(glowReport.x) || !/^520px$/.test(glowReport.y)) {
+      errors.push(`/fillpro/: pointer glow did not track viewport pixels (${glowReport.x}, ${glowReport.y})`);
+    }
+    if (glowReport.opacity < 0.99) errors.push('/fillpro/: pointer glow remained visually inactive');
+    if (glowReport.localPointerDecorations.length) {
+      errors.push(`/fillpro/: section-local pointer glow returned: ${glowReport.localPointerDecorations.join(', ')}`);
+    }
+
+    const downloadsLeft = path.join(OUT_DIR, 'pointer-glow-downloads-dark-left.png');
+    const downloadsRight = path.join(OUT_DIR, 'pointer-glow-downloads-dark-right.png');
+    await page.screenshot({ path: downloadsLeft });
+    await page.mouse.move(1180, 520);
+    await page.waitForTimeout(240);
+    await page.screenshot({ path: downloadsRight });
+    const pointerDiff = await imageMeanDifference(downloadsLeft, downloadsRight);
+    if (pointerDiff < 0.02) {
+      errors.push(`/fillpro/: pointer glow did not visibly follow the cursor (${pointerDiff.toFixed(3)})`);
+    }
+
+    const reviewRail = page.locator('.launch-review-rail');
+    await reviewRail.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(650);
+    await page.mouse.move(980, 500);
+    await page.waitForTimeout(240);
+    await page.screenshot({ path: path.join(OUT_DIR, 'pointer-glow-review-dark.png') });
+  } catch (error) {
+    errors.push(`/fillpro/: pointer glow audit failed: ${error.message}`);
+  } finally {
+    await page.close();
+    await context.close();
+  }
+}
+
 async function auditHeroSceneMotion(browser, origin, errors) {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
@@ -572,9 +656,10 @@ async function main() {
         await context.close();
       }
     }
+    await auditPointerGlow(browser, server.origin, errors);
     await auditHeroSceneMotion(browser, server.origin, errors);
     await auditContactSubmission(browser, server.origin, errors);
-    checks += 2;
+    checks += 3;
   } finally {
     await browser.close();
     await server.close();

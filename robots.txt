@@ -49,8 +49,6 @@ Allow: /
 User-agent: YouBot
 Allow: /
 
-Crawl-delay: 5
-
 Sitemap: https://stealthyapps.com/sitemap-index.xml
 Sitemap: https://stealthyapps.com/sitemap.xml
 Sitemap: https://stealthyapps.com/sitemap-images.xml

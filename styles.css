@@ -20,8 +20,8 @@
   --theme-toggle-bg: rgba(255, 255, 255, 0.86);
   --theme-toggle-border: rgba(15, 118, 110, 0.18);
   --theme-toggle-hover: rgba(15, 118, 110, 0.09);
-  --pointer-x: 50%;
-  --pointer-y: 18%;
+  --pointer-x: 50vw;
+  --pointer-y: 18vh;
 }
 
 * {
@@ -100,10 +100,58 @@ body::before {
   z-index: -2;
   pointer-events: none;
   background:
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(20, 184, 166, 0.1), transparent 28rem),
     linear-gradient(90deg, rgba(15, 118, 110, 0.035) 1px, transparent 1px) 0 0 / 88px 88px,
     linear-gradient(180deg, rgba(15, 118, 110, 0.03) 1px, transparent 1px) 0 0 / 88px 88px;
   opacity: 0.58;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 24rem at var(--pointer-x) var(--pointer-y),
+    rgba(15, 118, 110, 0.11) 0,
+    rgba(20, 184, 166, 0.055) 34%,
+    transparent 72%
+  );
+  mix-blend-mode: multiply;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+:root.pointer-glow-active body::after {
+  opacity: 1;
+}
+
+:root[data-theme="dark"] body::after {
+  background: radial-gradient(
+    circle 25rem at var(--pointer-x) var(--pointer-y),
+    rgba(94, 234, 221, 0.105) 0,
+    rgba(33, 183, 169, 0.052) 34%,
+    transparent 72%
+  );
+  mix-blend-mode: screen;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) body::after {
+    background: radial-gradient(
+      circle 25rem at var(--pointer-x) var(--pointer-y),
+      rgba(94, 234, 221, 0.105) 0,
+      rgba(33, 183, 169, 0.052) 34%,
+      transparent 72%
+    );
+    mix-blend-mode: screen;
+  }
+}
+
+@media (prefers-reduced-motion: reduce), (hover: none), (pointer: coarse) {
+  body::after {
+    display: none;
+  }
 }
 
 img,
@@ -736,10 +784,10 @@ p {
   height: 220px;
   pointer-events: none;
   background:
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(20, 184, 166, 0.16), transparent 58%),
     linear-gradient(90deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px) 0 0 / 38px 38px,
     linear-gradient(180deg, rgba(15, 118, 110, 0.07) 1px, transparent 1px) 0 0 / 38px 38px;
-  opacity: 0.42;
+  mask-image: radial-gradient(ellipse at center, #000 0 34%, transparent 76%);
+  opacity: 0.34;
   transform: skewY(-4deg);
 }
 
@@ -924,7 +972,7 @@ p {
 
 :root[data-theme="dark"] .trust-page {
   background:
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(33, 183, 169, 0.11), transparent 28rem),
+    radial-gradient(circle at 78% 10%, rgba(33, 183, 169, 0.075), transparent 28rem),
     linear-gradient(90deg, rgba(157, 231, 215, 0.045) 1px, transparent 1px) 0 0 / 88px 88px,
     linear-gradient(180deg, rgba(157, 231, 215, 0.035) 1px, transparent 1px) 0 0 / 88px 88px,
     linear-gradient(180deg, #0e1715 0%, #111d1a 48%, #0b1412 100%);
@@ -933,7 +981,7 @@ p {
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .trust-page {
     background:
-      radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(33, 183, 169, 0.11), transparent 28rem),
+      radial-gradient(circle at 78% 10%, rgba(33, 183, 169, 0.075), transparent 28rem),
       linear-gradient(90deg, rgba(157, 231, 215, 0.045) 1px, transparent 1px) 0 0 / 88px 88px,
       linear-gradient(180deg, rgba(157, 231, 215, 0.035) 1px, transparent 1px) 0 0 / 88px 88px,
       linear-gradient(180deg, #0e1715 0%, #111d1a 48%, #0b1412 100%);
@@ -2999,10 +3047,9 @@ html:has(body.fillpro-launch) {
   width: min(46vw, 520px);
   height: 230px;
   pointer-events: none;
-  background:
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(20, 184, 166, 0.14), transparent 58%),
-    repeating-linear-gradient(135deg, rgba(15, 118, 110, 0.11) 0 1px, transparent 1px 18px);
-  opacity: 0.32;
+  background: repeating-linear-gradient(135deg, rgba(15, 118, 110, 0.11) 0 1px, transparent 1px 18px);
+  mask-image: radial-gradient(ellipse at center, #000 0 30%, transparent 76%);
+  opacity: 0.24;
   transform: skewY(-4deg);
 }
 
@@ -3267,10 +3314,10 @@ html:has(body.fillpro-launch) {
   height: 210px;
   pointer-events: none;
   background:
-    radial-gradient(circle at var(--pointer-x) var(--pointer-y), rgba(37, 99, 235, 0.08), transparent 56%),
     linear-gradient(90deg, rgba(15, 118, 110, 0.07) 1px, transparent 1px) 0 0 / 42px 42px,
     linear-gradient(180deg, rgba(15, 118, 110, 0.06) 1px, transparent 1px) 0 0 / 42px 42px;
-  opacity: 0.26;
+  mask-image: radial-gradient(ellipse at center, #000 0 32%, transparent 78%);
+  opacity: 0.22;
   transform: skewY(4deg);
 }
 
@@ -3538,7 +3585,7 @@ html:has(body.fillpro-launch) {
   background:
     linear-gradient(90deg, rgba(15, 118, 110, 0.11) 1px, transparent 1px) 0 0 / 34px 34px,
     linear-gradient(180deg, rgba(15, 118, 110, 0.08) 1px, transparent 1px) 0 0 / 34px 34px;
-  mask-image: radial-gradient(circle at var(--pointer-x) var(--pointer-y), #000 0, transparent 68%);
+  mask-image: radial-gradient(circle at 50% 48%, #000 0, transparent 68%);
   opacity: 0.42;
 }
 
@@ -3672,15 +3719,6 @@ html:has(body.fillpro-launch) {
   border-color: rgba(15, 118, 110, 0.28);
   background:
     linear-gradient(90deg, rgba(15, 118, 110, 0.12), rgba(255, 255, 255, 0.84));
-}
-
-.review-result-card.is-active::after {
-  content: "";
-  position: absolute;
-  inset: -1px;
-  pointer-events: none;
-  background: linear-gradient(110deg, transparent 0 36%, rgba(255, 255, 255, 0.52) 47%, transparent 60% 100%);
-  transform: translateX(-120%);
 }
 
 .review-frame-actions {
@@ -4245,8 +4283,7 @@ html:has(body.fillpro-launch) {
   }
 
   .button.primary::after,
-  .launch-button::after,
-  .review-result-card.is-active::after {
+  .launch-button::after {
     transition: none;
     animation: none;
   }
@@ -4308,10 +4345,6 @@ html:has(body.fillpro-launch) {
     transform: translateY(-2px);
   }
 
-  .review-result-card.is-active::after {
-    animation: reviewCardSweep 7.2s ease-in-out infinite;
-  }
-
   .review-form-list div:hover,
   .review-result-card:hover,
   .review-frame-actions button:hover,
@@ -4319,17 +4352,5 @@ html:has(body.fillpro-launch) {
     border-color: rgba(15, 118, 110, 0.34);
     box-shadow: 0 12px 24px rgba(16, 35, 31, 0.08);
     transform: translateY(-1px);
-  }
-}
-
-@keyframes reviewCardSweep {
-  0%,
-  50% {
-    transform: translateX(-120%);
-  }
-
-  68%,
-  100% {
-    transform: translateX(120%);
   }
 }

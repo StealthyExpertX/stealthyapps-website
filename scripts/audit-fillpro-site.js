@@ -4,7 +4,6 @@ const crypto = require('crypto');
 
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
-const CACHE_TOKEN = 'fillpro-launch-v49';
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
@@ -201,13 +200,22 @@ function checkStyles() {
     ['body.fillpro-launch .browser-mark-chrome', 'dark launch browser badge override'],
     ['body.fillpro-launch .launch-card-icon', 'dark launch card icon override'],
     ['.launch-review-rail', 'review-before-submit product proof section'],
-    ['reviewCardSweep 7.2s', 'review rail motion timing'],
     ['.review-frame-actions button', 'review rail action affordances'],
     ['scroll-padding-top: 104px', 'desktop sticky-header anchor offset'],
     ['scroll-padding-top: 146px', 'mobile sticky-header anchor offset'],
   ];
   for (const [needle, label] of required) {
     if (!css.includes(needle)) fail(`styles.css: missing ${label}`);
+  }
+  const pointerUses = [...css.matchAll(/var\(--pointer-(?:x|y)\)/g)];
+  if (pointerUses.length !== 6) {
+    fail(`styles.css: pointer coordinates must be limited to the three page-wide glow gradients (found ${pointerUses.length} uses)`);
+  }
+  if (!/body::after\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?var\(--pointer-x\)[\s\S]*?var\(--pointer-y\)/.test(css)) {
+    fail('styles.css: page-wide pointer glow must stay fixed to the viewport');
+  }
+  if (css.includes('reviewCardSweep')) {
+    fail('styles.css: review-card sweep must stay removed so it cannot bleed across adjacent fields');
   }
 }
 
@@ -331,7 +339,7 @@ function checkLaunchPage() {
     ['ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
-    ['No profile account required', 'clean privacy proof wording'],
+    ['No account required', 'clean privacy proof wording'],
     ['See exactly what changes.', 'specific hero demo caption'],
     ['Check the fill before you send.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
@@ -349,13 +357,18 @@ function checkLaunchPage() {
   }
 }
 
-function checkCacheToken(files) {
+function checkAssetVersioning(files) {
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
-  if (!sw.includes(CACHE_TOKEN)) fail('sw.js: missing current cache token');
+  if (!sw.includes("const CACHE_NAME = 'fillpro-static-live';")) {
+    fail('sw.js: missing stable, non-numbered cache name');
+  }
+  if (/fillpro-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
+    fail('sw.js: public preview/build numbering returned');
+  }
   for (const file of files.filter((item) => item.endsWith('.html'))) {
     const html = fs.readFileSync(file, 'utf8');
-    if ((/styles\.css\?v=/.test(html) || /site\.js\?v=/.test(html)) && !html.includes(CACHE_TOKEN)) {
-      fail(`${rel(file)}: stale cache token`);
+    if (/fillpro-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-scene\.js)\?v=/i.test(html)) {
+      fail(`${rel(file)}: public preview/build numbering returned`);
     }
   }
 }
@@ -405,7 +418,7 @@ checkHeroScene();
 checkPackageScripts();
 checkDemoGenerator();
 checkLaunchPage();
-checkCacheToken(files);
+checkAssetVersioning(files);
 checkIndexNowKey();
 
 if (failures.length) {

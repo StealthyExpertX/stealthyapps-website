@@ -2,7 +2,7 @@
  * Small same-origin cache for static pages and assets.
  */
 
-const VERSION = 'fillpro-launch-v49-2026-07-12';
+const CACHE_NAME = 'fillpro-static-live';
 const CORE_ASSETS = [
   '/',
   '/fillpro/',
@@ -17,12 +17,12 @@ const CORE_ASSETS = [
   '/fillpro/browser-autofill-vs-fillpro/',
   '/support/',
   '/contact/',
-  '/styles.css?v=fillpro-launch-v49',
-  '/site.js?v=fillpro-launch-v49',
-  '/fillpro-hero-scene.js?v=fillpro-launch-v49',
+  '/styles.css',
+  '/site.js',
+  '/fillpro-hero-scene.js',
   '/vendor/three.module.min.js',
   '/vendor/three.core.min.js',
-  '/contact.js?v=fillpro-launch-v49',
+  '/contact.js',
   '/assets/browser-chrome.svg',
   '/assets/browser-edge.svg',
   '/assets/browser-firefox.svg',
@@ -38,7 +38,7 @@ const CORE_ASSETS = [
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
-      .open(VERSION)
+      .open(CACHE_NAME)
       .then((cache) => cache.addAll(CORE_ASSETS).catch(() => undefined))
       .then(() => self.skipWaiting()),
   );
@@ -51,7 +51,7 @@ self.addEventListener('activate', (event) => {
       .then((keys) =>
         Promise.all(
           keys
-            .filter((key) => key !== VERSION)
+            .filter((key) => key !== CACHE_NAME)
             .map((key) => caches.delete(key)),
         ),
       )
@@ -77,7 +77,7 @@ self.addEventListener('fetch', (event) => {
         .then((response) => {
           const copy = response.clone();
           caches
-            .open(VERSION)
+            .open(CACHE_NAME)
             .then((cache) => cache.put(request, copy))
             .catch(() => undefined);
           return response;
@@ -103,7 +103,7 @@ self.addEventListener('fetch', (event) => {
           ) {
             const copy = response.clone();
             caches
-              .open(VERSION)
+              .open(CACHE_NAME)
               .then((cache) => cache.put(request, copy))
               .catch(() => undefined);
           }

@@ -97,31 +97,45 @@
     var reduceMotion =
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion) {
+    var finePointer =
+      !window.matchMedia ||
+      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    if (reduceMotion || !finePointer) {
+      root.classList.remove('pointer-glow-active');
       return;
     }
 
     var frame = 0;
-    var nextX = 50;
-    var nextY = 18;
+    var nextX = window.innerWidth * 0.5;
+    var nextY = window.innerHeight * 0.18;
 
     function updatePointer() {
       frame = 0;
-      root.style.setProperty('--pointer-x', nextX.toFixed(1) + '%');
-      root.style.setProperty('--pointer-y', nextY.toFixed(1) + '%');
+      root.style.setProperty('--pointer-x', Math.round(nextX) + 'px');
+      root.style.setProperty('--pointer-y', Math.round(nextY) + 'px');
+      root.classList.add('pointer-glow-active');
+    }
+
+    function hidePointer() {
+      root.classList.remove('pointer-glow-active');
     }
 
     window.addEventListener(
       'pointermove',
       function (event) {
-        nextX = Math.max(0, Math.min(100, (event.clientX / window.innerWidth) * 100));
-        nextY = Math.max(0, Math.min(100, (event.clientY / window.innerHeight) * 100));
+        nextX = Math.max(0, Math.min(window.innerWidth, event.clientX));
+        nextY = Math.max(0, Math.min(window.innerHeight, event.clientY));
         if (!frame) {
           frame = window.requestAnimationFrame(updatePointer);
         }
       },
       { passive: true },
     );
+    document.documentElement.addEventListener('pointerleave', hidePointer, { passive: true });
+    window.addEventListener('blur', hidePointer);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) hidePointer();
+    });
   }
 
   setTheme(getStoredTheme());

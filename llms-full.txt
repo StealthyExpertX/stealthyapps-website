@@ -2,13 +2,11 @@
 
 Use this file when a crawler, search assistant, or retrieval index needs the current FillPro product facts in one document.
 
-Last updated: 2026-07-03
+Last updated: 2026-07-12
 
 ## Product Summary
 
 FillPro is a private browser form autofill extension from Stealthy Apps. It saves reusable profiles in the extension and fills repeated job applications, signup forms, intake pages, demo requests, onboarding forms, support forms, vendor forms, internal admin forms, and business workflows.
-
-Current version: 1.0.0.
 
 Canonical product page: https://stealthyapps.com/fillpro/
 
