@@ -80,6 +80,7 @@ Leave passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, c
 
 - Product: https://stealthyapps.com/fillpro/
 - Pricing: https://stealthyapps.com/fillpro/#pricing
+- Checkout handoff: https://stealthyapps.com/fillpro/checkout/
 - Comparison: https://stealthyapps.com/fillpro/#compare
 - Job application autofill: https://stealthyapps.com/fillpro/job-application-autofill/
 - Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/

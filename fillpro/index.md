@@ -21,6 +21,7 @@ Focused pages:
 - Local form autofill: https://stealthyapps.com/fillpro/local-form-autofill/
 - Browser autofill vs FillPro: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
 - Download pages: https://stealthyapps.com/fillpro/download/
+- Checkout handoff: https://stealthyapps.com/fillpro/checkout/
 
 ## Core product
 
@@ -53,6 +54,8 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
 Pro adds more saved profiles, profile duplication, import, and export. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
+
+Checkout starts from inside the extension so ExtensionPay can attach the license to the browser profile using FillPro. The website explains plans and points users to the right browser install page.
 
 ## Support
 

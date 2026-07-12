@@ -147,6 +147,26 @@
     });
   }
 
+  function setupCheckoutPlanState() {
+    var checkout = document.querySelector('[data-fillpro-checkout]');
+    if (!checkout) return;
+
+    var allowedPlans = ['free', 'monthly', 'yearly', 'lifetime'];
+    var selectedPlan = 'yearly';
+    try {
+      var params = new URLSearchParams(window.location.search);
+      var requested = (params.get('plan') || '').toLowerCase();
+      if (allowedPlans.indexOf(requested) >= 0) selectedPlan = requested;
+    } catch (error) {}
+
+    checkout.dataset.selectedPlan = selectedPlan;
+    document.querySelectorAll('[data-checkout-plan]').forEach(function (card) {
+      var matches =
+        (card.getAttribute('data-checkout-plan') || '').toLowerCase() === selectedPlan;
+      card.toggleAttribute('aria-current', matches);
+    });
+  }
+
   function setupDemoPlayback() {
     var button = document.querySelector('.demo-play-button');
     var poster = document.querySelector('[data-fillpro-demo-poster]');
@@ -199,6 +219,14 @@
     if (reduceMotion || !finePointer) {
       root.classList.remove('pointer-glow-active');
       return;
+    }
+
+    var glow = document.querySelector('.site-pointer-glow');
+    if (!glow) {
+      glow = document.createElement('div');
+      glow.className = 'site-pointer-glow';
+      glow.setAttribute('aria-hidden', 'true');
+      body.appendChild(glow);
     }
 
     var frame = 0;
@@ -536,6 +564,7 @@
   setupScrollProgress();
   ready(function () {
     configureStoreLinks();
+    setupCheckoutPlanState();
     setupDemoPlayback();
     installThemeToggle();
     setupInteractiveBackdrop();

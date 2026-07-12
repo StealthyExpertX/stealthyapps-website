@@ -13,6 +13,7 @@ const VIEWPORTS = [
 ];
 const ROUTES = [
   '/fillpro/',
+  '/fillpro/checkout/',
   '/fillpro/privacy/',
   '/fillpro/docs/smart-rules/',
   '/fillpro/download/',
@@ -229,6 +230,25 @@ async function auditPage(page, route, viewport, theme, errors) {
           );
         }
       }
+
+      const demoShellReport = await page.evaluate(() => {
+        const shell = document.querySelector('.demo-shell');
+        if (!shell) return { ok: false };
+        const style = getComputedStyle(shell);
+        return {
+          ok: true,
+          overflowX: style.overflowX,
+          overflowY: style.overflowY,
+          scrollbarWidth: style.scrollbarWidth || '',
+        };
+      });
+      if (!demoShellReport.ok) {
+        errors.push(`${route}: hero demo shell missing on ${viewport.name}/${theme}`);
+      } else if (demoShellReport.scrollbarWidth !== 'none' || demoShellReport.overflowY !== 'hidden') {
+        errors.push(
+          `${route}: hero demo shell scrollbar can become visible on ${viewport.name}/${theme}: ${JSON.stringify(demoShellReport)}`,
+        );
+      }
     } catch (error) {
       errors.push(`${route}: hero 3D canvas check failed on ${viewport.name}/${theme}: ${error.message}`);
     }
@@ -416,7 +436,8 @@ async function auditPointerGlow(browser, origin, errors) {
 
     const glowReport = await page.evaluate(() => {
       const root = document.documentElement;
-      const glow = getComputedStyle(document.body, '::after');
+      const glowElement = document.querySelector('.site-pointer-glow');
+      const glow = glowElement ? getComputedStyle(glowElement) : null;
       const localSelectors = [
         '.launch-downloads',
         '.launch-section',
@@ -425,11 +446,12 @@ async function auditPointerGlow(browser, origin, errors) {
       ];
       return {
         active: root.classList.contains('pointer-glow-active'),
+        hasGlowElement: Boolean(glowElement),
         x: root.style.getPropertyValue('--pointer-x'),
         y: root.style.getPropertyValue('--pointer-y'),
-        position: glow.position,
-        inset: [glow.top, glow.right, glow.bottom, glow.left],
-        opacity: Number.parseFloat(glow.opacity),
+        position: glow ? glow.position : '',
+        inset: glow ? [glow.top, glow.right, glow.bottom, glow.left] : [],
+        opacity: glow ? Number.parseFloat(glow.opacity) : 0,
         localPointerDecorations: localSelectors.filter((selector) => {
           const element = document.querySelector(selector);
           if (!element) return false;
@@ -440,6 +462,7 @@ async function auditPointerGlow(browser, origin, errors) {
     });
 
     if (!glowReport.active) errors.push('/fillpro/: pointer glow did not activate for a fine pointer');
+    if (!glowReport.hasGlowElement) errors.push('/fillpro/: pointer glow element was not installed');
     if (glowReport.position !== 'fixed' || glowReport.inset.some((value) => value !== '0px')) {
       errors.push(`/fillpro/: pointer glow is not viewport-wide (${JSON.stringify(glowReport)})`);
     }

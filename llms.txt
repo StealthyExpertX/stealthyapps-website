@@ -34,6 +34,7 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 
 - Product: https://stealthyapps.com/fillpro/
 - Pricing: https://stealthyapps.com/fillpro/#pricing
+- Checkout handoff: https://stealthyapps.com/fillpro/checkout/
 - Comparison: https://stealthyapps.com/fillpro/#compare
 - Job application autofill: https://stealthyapps.com/fillpro/job-application-autofill/
 - Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/

@@ -214,6 +214,7 @@ function checkStyles() {
     ['prefers-reduced-motion', 'reduced-motion support'],
     ['data-theme="dark"', 'manual dark theme selectors'],
     ['--pointer-x', 'interactive background variables'],
+    ['.site-pointer-glow', 'unclipped page-wide pointer glow layer'],
     ['.theme-toggle', 'manual theme toggle styles'],
     ['.theme-toggle[data-theme="system"]', 'system theme monitor icon'],
     ['.theme-toggle[data-theme="light"]', 'light theme sun icon'],
@@ -227,6 +228,7 @@ function checkStyles() {
     ['min-height: 34px', 'footer link tap target'],
     ['clip-path: inset(50%)', 'non-overflow honeypot hiding'],
     ['.launch-footer', 'landing footer rules'],
+    ['.checkout-grid', 'checkout plan grid'],
     ['.language-picker', 'localized language picker styles'],
     ['.locale-price-grid', 'localized pricing layout'],
     ['width: 100%', 'full-width landing footer'],
@@ -250,8 +252,11 @@ function checkStyles() {
   if (pointerUses.length !== 6) {
     fail(`styles.css: pointer coordinates must be limited to the three page-wide glow gradients (found ${pointerUses.length} uses)`);
   }
-  if (!/body::after\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?var\(--pointer-x\)[\s\S]*?var\(--pointer-y\)/.test(css)) {
+  if (!/\.site-pointer-glow\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?var\(--pointer-x\)[\s\S]*?var\(--pointer-y\)/.test(css)) {
     fail('styles.css: page-wide pointer glow must stay fixed to the viewport');
+  }
+  if (!/\.demo-shell\s*\{[\s\S]*?scrollbar-width:\s*none;/.test(css) || !css.includes('.demo-shell::-webkit-scrollbar')) {
+    fail('styles.css: hero demo shell must hide its internal scrollbar without hiding page scroll');
   }
   if (css.includes('reviewCardSweep')) {
     fail('styles.css: review-card sweep must stay removed so it cannot bleed across adjacent fields');
@@ -269,6 +274,8 @@ function checkSiteScript() {
     ['Current theme:', 'explicit theme toggle accessible label'],
     ['Switch to', 'theme toggle next action label'],
     ['setupInteractiveBackdrop', 'interactive background setup'],
+    ['site-pointer-glow', 'shared pointer glow node'],
+    ['setupCheckoutPlanState', 'checkout plan query support'],
     ['prefers-reduced-motion: reduce', 'reduced-motion guard in JS'],
     ['.browser-download-card', 'browser card reveal coverage'],
     ['.privacy-snapshot', 'privacy snapshot reveal coverage'],
@@ -325,7 +332,7 @@ function checkHeroScene() {
     [html, 'type="module" src="/fillpro-hero-loader.js', 'FillPro page should load the progressive hero loader'],
     [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
     [css, '.hero-3d-ready .hero-3d-canvas', 'styles should reveal hero 3D only after ready'],
-    [css, 'mask-image: linear-gradient(90deg, transparent 0 68%', 'styles should mask hero 3D to the product edge instead of covering copy'],
+    [css, 'mask-image: linear-gradient(90deg, transparent 0 62%', 'styles should use a softened hero 3D mask edge'],
     [css, 'mix-blend-mode: multiply', 'light theme should blend the hero render into the product edge'],
     [css, 'mix-blend-mode: screen', 'dark theme should blend the hero render into the product edge'],
     [sw, '/fillpro-hero-loader.js', 'service worker should cache the progressive hero loader'],
@@ -389,6 +396,7 @@ function checkDemoGenerator() {
 
 function checkLaunchPage() {
   const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const checkoutHtml = fs.readFileSync(path.join(ROOT, 'fillpro', 'checkout', 'index.html'), 'utf8');
   const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
     ['demo-signal', 'hero product-signal overlay'],
@@ -396,6 +404,7 @@ function checkLaunchPage() {
     ['ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
+    ['href="/fillpro/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
     ['No account required', 'clean privacy proof wording'],
     ['See exactly what changes.', 'specific hero demo caption'],
     ['data-fillpro-demo-poster', 'stable hero demo poster'],
@@ -422,6 +431,19 @@ function checkLaunchPage() {
   }
   if (/Import and export<\/li>[\s\S]*Import, export/i.test(proList)) {
     fail('fillpro/index.html: Pro pricing repeats import/export copy');
+  }
+  for (const [needle, label] of [
+    ['data-fillpro-checkout', 'checkout plan state hook'],
+    ['data-checkout-plan="yearly"', 'yearly checkout highlight target'],
+    ['Install FillPro to upgrade', 'checkout install handoff CTA'],
+    ['Payment opens inside FillPro.', 'checkout extension-driven payment boundary'],
+    ['ExtensionPay', 'checkout billing provider disclosure'],
+    ['Stripe handles the payment page', 'checkout Stripe handoff disclosure'],
+  ]) {
+    if (!checkoutHtml.includes(needle)) fail(`fillpro/checkout/index.html: missing ${label}`);
+  }
+  if (/stripe\.com|extensionpay\.com\/extension/i.test(checkoutHtml)) {
+    fail('fillpro/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
   }
 }
 

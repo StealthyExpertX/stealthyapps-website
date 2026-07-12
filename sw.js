@@ -6,6 +6,7 @@ const CACHE_NAME = 'fillpro-static-live';
 const CORE_ASSETS = [
   '/',
   '/fillpro/',
+  '/fillpro/checkout/',
   '/fillpro/download/',
   '/fillpro/download/chrome/',
   '/fillpro/download/edge/',
