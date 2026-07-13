@@ -218,6 +218,7 @@
     }
 
     function playVideo() {
+      setPlaybackState(true);
       var playback = video.play();
       if (playback && typeof playback.catch === 'function') {
         playback.catch(function () {

@@ -772,6 +772,7 @@ async function auditDemoPlayback(browser, origin, errors) {
     const playButton = page.getByRole('button', { name: 'Play the FillPro demo' });
     await playButton.click();
     await page.waitForFunction(() => !document.querySelector('.demo-shell video')?.paused);
+    await page.getByRole('button', { name: 'Pause the FillPro demo' }).waitFor();
     await page.locator('.launch-demo-card').screenshot({
       path: path.join(OUT_DIR, 'hero-demo-playing.png'),
     });
