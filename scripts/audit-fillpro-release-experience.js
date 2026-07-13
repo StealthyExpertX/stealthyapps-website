@@ -14,6 +14,7 @@ const VIEWPORTS = [
 const ROUTES = [
   '/fillpro/',
   '/fillpro/checkout/',
+  '/fillpro/changelog/',
   '/fillpro/privacy/',
   '/fillpro/docs/smart-rules/',
   '/fillpro/download/',

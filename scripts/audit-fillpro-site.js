@@ -515,6 +515,33 @@ function checkRelatedGuides() {
   }
 }
 
+function checkChangelog(files) {
+  const changelogRel = 'fillpro/changelog/index.html';
+  const changelog = fs.readFileSync(path.join(ROOT, changelogRel), 'utf8');
+  const versions = Array.from(
+    changelog.matchAll(/data-changelog-version="([^"]+)"/g),
+    (match) => match[1],
+  );
+  if (versions.length !== 1 || versions[0] !== '1.0.0') {
+    fail(`${changelogRel}: changelog must contain only the initial 1.0.0 release`);
+  }
+  if (!changelog.includes('Initial release')) {
+    fail(`${changelogRel}: missing initial-release label`);
+  }
+
+  const linkedFrom = files
+    .filter((file) => file.endsWith('.html') && rel(file) !== changelogRel)
+    .filter((file) =>
+      fs.readFileSync(file, 'utf8').includes('href="/fillpro/changelog/"'),
+    )
+    .map(rel);
+  if (linkedFrom.length !== 1 || linkedFrom[0] !== 'support/index.html') {
+    fail(
+      `${changelogRel}: changelog should be linked only from support/index.html, found ${linkedFrom.join(', ') || 'none'}`,
+    );
+  }
+}
+
 function checkAssetVersioning(files) {
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
   if (!sw.includes("const CACHE_NAME = 'fillpro-static-live';")) {
@@ -622,6 +649,7 @@ checkPackageScripts();
 checkDemoGenerator();
 checkLaunchPage();
 checkRelatedGuides();
+checkChangelog(files);
 checkAssetVersioning(files);
 checkIndexNowKey();
 checkLocalization();
