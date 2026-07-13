@@ -1180,6 +1180,19 @@ p {
   background: var(--green-soft);
 }
 
+.installed-extension-note {
+  margin: 0 0 18px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--brand);
+  background: var(--green-soft);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+[data-fillpro-installed="true"] [data-installed-action="installed"] {
+  cursor: default;
+}
+
 .support-faq-list {
   display: grid;
   border-top: 1px solid var(--line);

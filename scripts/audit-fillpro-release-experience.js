@@ -839,6 +839,53 @@ async function auditSmartRuleLab(browser, origin, errors) {
   }
 }
 
+async function auditInstalledExtensionState(browser, origin, errors) {
+  const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
+  try {
+    await page.addInitScript(() => {
+      window.chrome = {
+        runtime: {
+          sendMessage(extensionId, message, callback) {
+            callback(
+              extensionId === 'hklppjjdpnndpdahnfpjpamhefgcolai' &&
+                message?.action === 'getPublicInstallState'
+                ? { installed: true, version: '1.0.0' }
+                : undefined,
+            );
+          },
+        },
+      };
+    });
+    await page.goto(`${origin}/fillpro/checkout/?plan=yearly`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.fillproInstalled === 'true');
+    const report = await page.evaluate(() => ({
+      note: document.querySelector('[data-installed-note]')?.textContent?.trim() || '',
+      free: document.querySelector('[data-checkout-plan="free"] .launch-button')?.textContent?.trim() || '',
+      monthly: document.querySelector('[data-checkout-plan="monthly"] .launch-button')?.textContent?.trim() || '',
+      yearly: document.querySelector('[data-checkout-plan="yearly"] .launch-button')?.textContent?.trim() || '',
+      hero: document.querySelector('[data-checkout-action]')?.textContent?.trim() || '',
+      nav: Array.from(document.querySelectorAll('.launch-links a')).map((node) => node.textContent.trim()),
+      title: document.getElementById('checkout-title')?.textContent?.trim() || '',
+    }));
+    if (
+      !/FillPro is installed/.test(report.note) ||
+      report.free !== 'Already installed' ||
+      report.monthly !== 'Upgrade inside FillPro' ||
+      report.yearly !== 'Upgrade inside FillPro' ||
+      report.hero !== 'Upgrade inside FillPro' ||
+      report.nav.includes('Already installed') ||
+      report.title !== 'FillPro is installed. Choose Pro when you need it.'
+    ) {
+      errors.push(`/fillpro/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
+    }
+    await page.screenshot({ path: path.join(OUT_DIR, 'checkout-installed-extension-dark.png'), fullPage: true });
+  } catch (error) {
+    errors.push(`/fillpro/checkout/: installed-extension audit failed: ${error.message}`);
+  } finally {
+    await page.close();
+  }
+}
+
 async function main() {
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -884,7 +931,8 @@ async function main() {
     await auditContactSubmission(browser, server.origin, errors);
     await auditCheckoutPlanSelection(browser, server.origin, errors);
     await auditSmartRuleLab(browser, server.origin, errors);
-    checks += 6;
+    await auditInstalledExtensionState(browser, server.origin, errors);
+    checks += 7;
   } finally {
     await browser.close();
     await server.close();

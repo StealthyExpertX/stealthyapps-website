@@ -17,6 +17,12 @@
     edge: '',
     firefox: '',
   };
+  // Add the final Chrome and Edge store IDs here after marketplace approval.
+  var FILLPRO_EXTENSION_IDS = [
+    'hklppjjdpnndpdahnfpjpamhefgcolai',
+    'fjgpmpnjfpmjdckmachaolobhjekencl',
+    'gdnljemokcmlnglhlblafbolkhhcipld',
+  ];
   var mediaDark =
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var themeButton = null;
@@ -145,6 +151,63 @@
       var liveText = node.getAttribute('data-live-text');
       if (liveText) node.textContent = liveText;
     });
+  }
+
+  function applyInstalledExtensionState() {
+    root.dataset.fillproInstalled = 'true';
+    document.querySelectorAll('main a[href="/fillpro/download/"]').forEach(function (link) {
+      var card = link.closest('[data-checkout-plan]');
+      var checkout = link.closest('[data-fillpro-checkout]');
+      var selectedPlan = checkout?.dataset.selectedPlan || 'free';
+      var paidPlan = card
+        ? card.getAttribute('data-checkout-plan') !== 'free'
+        : link.hasAttribute('data-checkout-action') && selectedPlan !== 'free';
+      link.textContent = paidPlan ? 'Upgrade inside FillPro' : 'Already installed';
+      link.href = '/fillpro/docs/getting-started/';
+      link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
+      link.title = paidPlan
+        ? 'Open FillPro from the browser toolbar and choose Upgrade to Pro.'
+        : 'FillPro is installed in this browser.';
+    });
+    var checkout = document.querySelector('[data-fillpro-checkout]');
+    if (checkout && !checkout.querySelector('[data-installed-note]')) {
+      var checkoutTitle = checkout.querySelector('#checkout-title');
+      var checkoutLead = checkout.querySelector('.launch-lead');
+      if (checkoutTitle) checkoutTitle.textContent = 'FillPro is installed. Choose Pro when you need it.';
+      if (checkoutLead) checkoutLead.textContent = 'Open FillPro from the browser toolbar to start filling or choose monthly, yearly, or lifetime billing.';
+      var note = document.createElement('p');
+      note.className = 'installed-extension-note';
+      note.dataset.installedNote = 'true';
+      note.setAttribute('role', 'status');
+      note.textContent = 'FillPro is installed. Open it from the browser toolbar to start filling or choose a Pro plan.';
+      var grid = checkout.querySelector('.checkout-grid');
+      if (grid) grid.insertAdjacentElement('beforebegin', note);
+    }
+  }
+
+  function detectInstalledExtension() {
+    if (!window.chrome || !chrome.runtime || typeof chrome.runtime.sendMessage !== 'function') return;
+    var index = 0;
+    function tryNext() {
+      if (index >= FILLPRO_EXTENSION_IDS.length) return;
+      var extensionId = FILLPRO_EXTENSION_IDS[index++];
+      try {
+        chrome.runtime.sendMessage(
+          extensionId,
+          { action: 'getPublicInstallState' },
+          function (response) {
+            if (response && response.installed === true) {
+              applyInstalledExtensionState();
+              return;
+            }
+            tryNext();
+          },
+        );
+      } catch (error) {
+        tryNext();
+      }
+    }
+    tryNext();
   }
 
   function setupCheckoutPlanState() {
@@ -671,6 +734,7 @@
   ready(function () {
     configureStoreLinks();
     setupCheckoutPlanState();
+    detectInstalledExtension();
     setupDemoPlayback();
     installThemeToggle();
     setupInteractiveBackdrop();
