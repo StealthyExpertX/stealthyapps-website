@@ -750,30 +750,48 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
 async function auditDemoPlayback(browser, origin, errors) {
   const context = await browser.newContext({
     viewport: { width: 1280, height: 800 },
+    reducedMotion: 'no-preference',
+  });
+  const reducedContext = await browser.newContext({
+    viewport: { width: 1280, height: 800 },
     reducedMotion: 'reduce',
   });
   const page = await context.newPage();
+  const reducedPage = await reducedContext.newPage();
 
   try {
     await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
-    const button = page.getByRole('button', { name: 'Play the two-second FillPro demo' });
-    await button.click();
     await page.locator('.demo-shell video').waitFor({ state: 'visible' });
     await page.waitForFunction(() => {
       const video = document.querySelector('.demo-shell video');
       return Boolean(video && !video.paused && video.currentTime > 0);
     });
-    if (await button.count()) {
-      errors.push('/fillpro/: demo play button remained after playback started');
-    }
+    const pauseButton = page.getByRole('button', { name: 'Pause the FillPro demo' });
+    await pauseButton.click();
+    await page.waitForFunction(() => document.querySelector('.demo-shell video')?.paused);
+    const playButton = page.getByRole('button', { name: 'Play the FillPro demo' });
+    await playButton.click();
+    await page.waitForFunction(() => !document.querySelector('.demo-shell video')?.paused);
     await page.locator('.launch-demo-card').screenshot({
       path: path.join(OUT_DIR, 'hero-demo-playing.png'),
     });
+
+    await reducedPage.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    await reducedPage.locator('.demo-shell video').waitFor({ state: 'visible' });
+    const reducedState = await reducedPage.evaluate(() => ({
+      paused: document.querySelector('.demo-shell video')?.paused,
+      label: document.querySelector('.demo-play-button')?.getAttribute('aria-label'),
+    }));
+    if (!reducedState.paused || reducedState.label !== 'Play the FillPro demo') {
+      errors.push(`/fillpro/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
+    }
   } catch (error) {
     errors.push(`/fillpro/: hero demo playback failed: ${error.message}`);
   } finally {
     await page.close();
+    await reducedPage.close();
     await context.close();
+    await reducedContext.close();
   }
 }
 

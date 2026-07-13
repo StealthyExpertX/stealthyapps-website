@@ -456,14 +456,18 @@ function checkLaunchPage() {
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);
   }
-  if (/<video\b[^>]*\bautoplay\b/i.test(html)) {
-    fail('fillpro/index.html: hero demo should not autoplay before user input');
-  }
   if (/rel="preload"[^>]+fillpro-demo\.gif/i.test(html)) {
-    fail('fillpro/index.html: click-to-play demo should not preload the GIF');
+    fail('fillpro/index.html: hero demo should use the compact MP4, not preload the GIF');
   }
   if (!siteScript.includes("video.src = '/assets/fillpro-demo.mp4'")) {
-    fail('site.js: hero demo play control is not wired to the MP4');
+    fail('site.js: hero demo is not wired to the MP4');
+  }
+  if (
+    !siteScript.includes('video.autoplay = !reduceMotion') ||
+    !siteScript.includes('togglePlayback') ||
+    !siteScript.includes("isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo'")
+  ) {
+    fail('site.js: hero demo must autoplay, pause/resume on click, and respect reduced motion');
   }
   const proList = (html.match(/<article class="price-card price-card-featured">([\s\S]*?)<\/article>/) || [])[1] || '';
   if (!proList.includes('Import and export backups')) {

@@ -3228,16 +3228,16 @@ html:has(body.fillpro-launch) {
 .demo-play-button {
   position: absolute;
   z-index: 5;
-  inset: 50% auto auto 50%;
-  width: 54px;
-  height: 54px;
+  inset: 16px 16px auto auto;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.94);
   color: #0b5f59;
   box-shadow: 0 14px 34px rgba(3, 22, 19, 0.28);
-  transform: translate(-50%, -50%);
+  transform: none;
   transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
   cursor: pointer;
 }
@@ -3254,11 +3254,37 @@ html:has(body.fillpro-launch) {
   transform: translate(-42%, -50%);
 }
 
+.demo-play-button::after {
+  content: "";
+  display: none;
+}
+
+.demo-play-button[data-state="playing"]::before,
+.demo-play-button[data-state="playing"]::after {
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 4px;
+  height: 16px;
+  border: 0;
+  border-radius: 1px;
+  background: currentColor;
+  transform: translate(-50%, -50%);
+}
+
+.demo-play-button[data-state="playing"]::before {
+  left: 43%;
+}
+
+.demo-play-button[data-state="playing"]::after {
+  left: 57%;
+}
+
 .demo-play-button:hover,
 .demo-play-button:focus-visible {
   background: #ffffff;
   box-shadow: 0 18px 42px rgba(3, 22, 19, 0.34);
-  transform: translate(-50%, -50%) scale(1.06);
+  transform: scale(1.06);
 }
 
 .demo-play-button:disabled {

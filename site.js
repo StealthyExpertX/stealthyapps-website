@@ -186,41 +186,77 @@
     var poster = document.querySelector('[data-fillpro-demo-poster]');
     if (!button || !poster) return;
 
-    button.addEventListener('click', function () {
-      if (button.disabled) return;
-      button.disabled = true;
+    var reduceMotion =
+      window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var video = document.createElement('video');
+    video.width = 960;
+    video.height = 540;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.loop = true;
+    video.playsInline = true;
+    video.autoplay = !reduceMotion;
+    video.preload = 'auto';
+    video.poster = '/assets/fillpro-demo-poster.png';
+    video.src = '/assets/fillpro-demo.mp4';
+    video.setAttribute(
+      'aria-label',
+      'FillPro filling a vendor onboarding form from a saved work profile',
+    );
 
-      var video = document.createElement('video');
-      video.width = 960;
-      video.height = 540;
-      video.muted = true;
-      video.defaultMuted = true;
-      video.loop = true;
-      video.playsInline = true;
-      video.preload = 'auto';
-      video.poster = '/assets/fillpro-demo-poster.png';
-      video.src = '/assets/fillpro-demo.mp4';
-
-      function restorePoster() {
-        if (video.isConnected) video.replaceWith(poster);
-        button.disabled = false;
-      }
-
-      video.addEventListener(
-        'playing',
-        function () {
-          button.remove();
-        },
-        { once: true },
+    function setPlaybackState(isPlaying) {
+      button.dataset.state = isPlaying ? 'playing' : 'paused';
+      button.setAttribute(
+        'aria-label',
+        isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo',
       );
-      video.addEventListener('error', restorePoster, { once: true });
-      poster.replaceWith(video);
+      button.setAttribute(
+        'title',
+        isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo',
+      );
+    }
 
+    function playVideo() {
       var playback = video.play();
       if (playback && typeof playback.catch === 'function') {
-        playback.catch(restorePoster);
+        playback.catch(function () {
+          setPlaybackState(false);
+        });
       }
+    }
+
+    function togglePlayback(event) {
+      event?.preventDefault?.();
+      event?.stopPropagation?.();
+      if (video.paused) playVideo();
+      else video.pause();
+    }
+
+    video.addEventListener('playing', function () {
+      setPlaybackState(true);
     });
+    video.addEventListener('pause', function () {
+      setPlaybackState(false);
+    });
+    video.addEventListener(
+      'error',
+      function () {
+        if (video.isConnected) video.replaceWith(poster);
+        button.hidden = true;
+      },
+      { once: true },
+    );
+    video.addEventListener('click', togglePlayback);
+    button.addEventListener('click', togglePlayback);
+    poster.replaceWith(video);
+
+    if (reduceMotion) {
+      setPlaybackState(false);
+    } else {
+      setPlaybackState(true);
+      playVideo();
+    }
   }
 
   function setupInteractiveBackdrop() {
