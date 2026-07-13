@@ -1,11 +1,12 @@
 const fs = require('fs');
 const http = require('http');
+const os = require('os');
 const path = require('path');
 const { chromium } = require('playwright');
 const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
-const OUT_DIR = path.join(ROOT, '.tmp', 'release-experience-audit');
+const OUT_DIR = path.join(os.tmpdir(), `fillpro-release-experience-audit-${process.pid}`);
 const THEMES = ['light', 'dark'];
 const VIEWPORTS = [
   { name: 'desktop', width: 1440, height: 1000 },
@@ -868,13 +869,13 @@ async function auditInstalledExtensionState(browser, origin, errors) {
       title: document.getElementById('checkout-title')?.textContent?.trim() || '',
     }));
     if (
-      !/FillPro is installed/.test(report.note) ||
-      report.free !== 'Already installed' ||
-      report.monthly !== 'Upgrade inside FillPro' ||
-      report.yearly !== 'Upgrade inside FillPro' ||
-      report.hero !== 'Upgrade inside FillPro' ||
-      report.nav.includes('Already installed') ||
-      report.title !== 'FillPro is installed. Choose Pro when you need it.'
+      !/Already installed/.test(report.note) ||
+      report.free !== 'Get started' ||
+      report.monthly !== 'Choose this plan in FillPro' ||
+      report.yearly !== 'Choose this plan in FillPro' ||
+      report.hero !== 'Choose this plan in FillPro' ||
+      report.nav.includes('Get started') ||
+      report.title !== 'FillPro is ready. Pick the plan that works for you.'
     ) {
       errors.push(`/fillpro/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
     }
@@ -887,7 +888,7 @@ async function auditInstalledExtensionState(browser, origin, errors) {
 }
 
 async function main() {
-  fs.rmSync(OUT_DIR, { recursive: true, force: true });
+  fs.rmSync(OUT_DIR, { recursive: true, force: true, maxRetries: 8, retryDelay: 125 });
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const server = await startServer();

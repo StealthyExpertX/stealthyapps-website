@@ -324,11 +324,11 @@ function checkRenderer() {
     'fillpro-store-demo-22s-thumb.png',
     'Mute-safe captions',
     'A blank form.\\nOne profile.',
-    'Watch the repeat work disappear.',
+    'One click fills the repeated details.',
     'Check it. Undo it. Submit when ready.',
-    'Dropdowns and late fields included.',
+    'Works with dropdowns and fields that appear later.',
     'Three profiles are included.',
-    'No cloud profile account.',
+    'No FillPro account.',
     'No account',
     'careers.example.com/apply',
     'forms.example.com/team-intake',
@@ -446,7 +446,7 @@ function checkStillRenderer() {
   if (/real workflows|Clean fallback|Messy forms are part of the job/i.test(source)) {
     fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
   }
-  if (/forms browsers leave unfinished|No cloud profile account|repeat work|repeat fields/i.test(source)) {
+  if (/forms browsers leave unfinished|No cloud profile account|repeat work|repeat fields|late fields included/i.test(source)) {
     fail(`${relativePath}: still marketing contains stiff or synthetic phrasing`);
   }
   if (/Google Forms-style|ARIA radios|ARIA checkboxes|React inputs|Vue fields|Angular forms|Shadow DOM/i.test(source)) {

@@ -162,7 +162,7 @@
       var paidPlan = card
         ? card.getAttribute('data-checkout-plan') !== 'free'
         : link.hasAttribute('data-checkout-action') && selectedPlan !== 'free';
-      link.textContent = paidPlan ? 'Upgrade inside FillPro' : 'Already installed';
+      link.textContent = paidPlan ? 'Choose this plan in FillPro' : 'Get started';
       link.href = '/fillpro/docs/getting-started/';
       link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
       link.title = paidPlan
@@ -173,13 +173,13 @@
     if (checkout && !checkout.querySelector('[data-installed-note]')) {
       var checkoutTitle = checkout.querySelector('#checkout-title');
       var checkoutLead = checkout.querySelector('.launch-lead');
-      if (checkoutTitle) checkoutTitle.textContent = 'FillPro is installed. Choose Pro when you need it.';
-      if (checkoutLead) checkoutLead.textContent = 'Open FillPro from the browser toolbar to start filling or choose monthly, yearly, or lifetime billing.';
+      if (checkoutTitle) checkoutTitle.textContent = 'FillPro is ready. Pick the plan that works for you.';
+      if (checkoutLead) checkoutLead.textContent = 'Stay on the free plan, or add Pro for up to 500 profiles, backups, and profile duplication.';
       var note = document.createElement('p');
       note.className = 'installed-extension-note';
       note.dataset.installedNote = 'true';
       note.setAttribute('role', 'status');
-      note.textContent = 'FillPro is installed. Open it from the browser toolbar to start filling or choose a Pro plan.';
+      note.textContent = 'Already installed. Open FillPro from your browser toolbar to start filling or upgrade.';
       var grid = checkout.querySelector('.checkout-grid');
       if (grid) grid.insertAdjacentElement('beforebegin', note);
     }

@@ -49,6 +49,9 @@ const STALE_COPY = [
   'Profiles stay in FillPro',
   'No surprise submit',
   'Advanced repeat-use workflows',
+  'FillPro is installed. Choose Pro when you need it.',
+  'Powerful, but fussy.',
+  'Smart Rules, without the guesswork.',
   '/apps/fillpro/',
   '/apps/fillpro/privacy',
 ];

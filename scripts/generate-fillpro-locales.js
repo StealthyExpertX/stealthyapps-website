@@ -25,7 +25,7 @@ const locales = [
     ],
     pricingTitle: 'Drei Profile kostenlos. Mehr nur bei Bedarf.',
     freeTitle: 'Kostenlos', freeBody: '3 gespeicherte Profile, Smart Rules, benutzerdefinierte Felder, Upload-Zuordnung und Rückgängig-Funktion.',
-    proTitle: 'Pro', proBody: '3,99 US-Dollar pro Monat, 29,99 US-Dollar pro Jahr oder 39,99 US-Dollar einmalig. 3 Tage testen, ohne Karte.',
+    proTitle: 'Pro', proBody: '3,99 US-Dollar pro Monat, 29,99 US-Dollar pro Jahr oder 39,99 US-Dollar einmalig. 3 Tage testen, ohne Karte.', billingNames: ['monatlich', 'jährlich', 'einmalig'],
     faqTitle: 'Häufige Fragen',
     faqs: [
       ['Welche Formulare kann FillPro ausfüllen?', 'Bewerbungen, Registrierungen, Onboarding-, Lieferanten-, Support- und andere wiederkehrende Webformulare mit erreichbaren Formularfeldern.'],
@@ -52,7 +52,7 @@ const locales = [
     ],
     pricingTitle: 'Tres perfiles gratis. Amplía solo cuando los necesites.',
     freeTitle: 'Gratis', freeBody: '3 perfiles guardados, reglas inteligentes, campos personalizados, coincidencia de archivos y función de deshacer.',
-    proTitle: 'Pro', proBody: '3,99 USD al mes, 29,99 USD al año o 39,99 USD de pago único. Prueba de 3 días sin tarjeta.',
+    proTitle: 'Pro', proBody: '3,99 USD al mes, 29,99 USD al año o 39,99 USD de pago único. Prueba de 3 días sin tarjeta.', billingNames: ['mensual', 'anual', 'pago único'],
     faqTitle: 'Preguntas frecuentes',
     faqs: [
       ['¿Qué formularios puede rellenar FillPro?', 'Solicitudes de empleo, registros, incorporación, proveedores, soporte y otros formularios web repetitivos con campos accesibles.'],
@@ -79,7 +79,7 @@ const locales = [
     ],
     pricingTitle: 'Trois profils gratuits. Passez à Pro seulement si nécessaire.',
     freeTitle: 'Gratuit', freeBody: '3 profils enregistrés, règles intelligentes, champs personnalisés, association des fichiers et annulation.',
-    proTitle: 'Pro', proBody: '3,99 USD par mois, 29,99 USD par an ou 39,99 USD en paiement unique. Essai de 3 jours sans carte.',
+    proTitle: 'Pro', proBody: '3,99 USD par mois, 29,99 USD par an ou 39,99 USD en paiement unique. Essai de 3 jours sans carte.', billingNames: ['mensuel', 'annuel', 'à vie'],
     faqTitle: 'Questions fréquentes',
     faqs: [
       ['Quels formulaires FillPro peut-il remplir ?', 'Candidatures, inscriptions, intégration, fournisseurs, support et autres formulaires web répétitifs dont les champs sont accessibles.'],
@@ -106,7 +106,7 @@ const locales = [
     ],
     pricingTitle: 'Três perfis grátis. Mude para Pro só quando precisar.',
     freeTitle: 'Grátis', freeBody: '3 perfis salvos, regras inteligentes, campos personalizados, correspondência de arquivos e desfazer.',
-    proTitle: 'Pro', proBody: 'US$ 3,99 por mês, US$ 29,99 por ano ou US$ 39,99 em pagamento único. Teste de 3 dias sem cartão.',
+    proTitle: 'Pro', proBody: 'US$ 3,99 por mês, US$ 29,99 por ano ou US$ 39,99 em pagamento único. Teste de 3 dias sem cartão.', billingNames: ['mensal', 'anual', 'pagamento único'],
     faqTitle: 'Perguntas frequentes',
     faqs: [
       ['Quais formulários o FillPro preenche?', 'Candidaturas a vagas, cadastros, integração, fornecedores, suporte e outros formulários web repetitivos com campos acessíveis.'],
@@ -133,7 +133,7 @@ const locales = [
     ],
     pricingTitle: '3プロフィールまで無料。必要になったら Pro へ。',
     freeTitle: '無料', freeBody: '保存プロフィール3件、スマートルール、カスタム項目、ファイル照合、元に戻す機能。',
-    proTitle: 'Pro', proBody: '月額3.99米ドル、年額29.99米ドル、または買い切り39.99米ドル。カード不要の3日間トライアル。',
+    proTitle: 'Pro', proBody: '月額3.99米ドル、年額29.99米ドル、または買い切り39.99米ドル。カード不要の3日間トライアル。', billingNames: ['月額', '年額', '買い切り'],
     faqTitle: 'よくある質問',
     faqs: [
       ['どのフォームに使えますか？', '求人応募、登録、オンボーディング、取引先、サポートなど、アクセス可能な入力欄を持つ繰り返し使うWebフォームに対応します。'],
@@ -160,7 +160,7 @@ const locales = [
     ],
     pricingTitle: '프로필 3개는 무료. 더 필요할 때만 Pro로.',
     freeTitle: '무료', freeBody: '저장 프로필 3개, 스마트 규칙, 사용자 지정 필드, 파일 매칭, 되돌리기 기능.',
-    proTitle: 'Pro', proBody: '월 US$3.99, 연 US$29.99 또는 평생 US$39.99. 카드 없이 3일 체험.',
+    proTitle: 'Pro', proBody: '월 US$3.99, 연 US$29.99 또는 평생 US$39.99. 카드 없이 3일 체험.', billingNames: ['월간', '연간', '평생'],
     faqTitle: '자주 묻는 질문',
     faqs: [
       ['어떤 양식을 채울 수 있나요?', '입사 지원, 가입, 온보딩, 공급업체, 고객 지원 등 접근 가능한 입력 필드가 있는 반복 웹 양식에 사용할 수 있습니다.'],
@@ -187,7 +187,7 @@ const locales = [
     ],
     pricingTitle: '免费使用 3 个资料。需要更多时再升级。',
     freeTitle: '免费', freeBody: '3 个已保存资料、智能规则、自定义字段、文件匹配和撤销功能。',
-    proTitle: 'Pro', proBody: '每月 3.99 美元、每年 29.99 美元，或一次性 39.99 美元。3 天试用，无需银行卡。',
+    proTitle: 'Pro', proBody: '每月 3.99 美元、每年 29.99 美元，或一次性 39.99 美元。3 天试用，无需银行卡。', billingNames: ['月付', '年付', '终身'],
     faqTitle: '常见问题',
     faqs: [
       ['FillPro 可以填写哪些表单？', '可用于求职申请、注册、入职、供应商、支持等带有可访问字段的重复网页表单。'],
@@ -214,7 +214,7 @@ const locales = [
     ],
     pricingTitle: 'Три профиля бесплатно. Pro — только когда нужно больше.',
     freeTitle: 'Бесплатно', freeBody: '3 сохранённых профиля, умные правила, пользовательские поля, сопоставление файлов и отмена.',
-    proTitle: 'Pro', proBody: '3,99 доллара в месяц, 29,99 доллара в год или 39,99 доллара навсегда. Пробные 3 дня без карты.',
+    proTitle: 'Pro', proBody: '3,99 доллара в месяц, 29,99 доллара в год или 39,99 доллара навсегда. Пробные 3 дня без карты.', billingNames: ['ежемесячно', 'ежегодно', 'навсегда'],
     faqTitle: 'Частые вопросы',
     faqs: [
       ['Какие формы заполняет FillPro?', 'Заявки на работу, регистрации, онбординг, формы поставщиков, поддержки и другие повторяющиеся веб-формы с доступными полями.'],
@@ -288,9 +288,9 @@ function makeJsonLd(locale, canonical) {
         publisher: { '@id': 'https://stealthyapps.com/#organization' },
         offers: [
           { '@type': 'Offer', price: '0', priceCurrency: 'USD', name: locale.freeTitle },
-          { '@type': 'Offer', price: '3.99', priceCurrency: 'USD', name: `${locale.proTitle} monthly` },
-          { '@type': 'Offer', price: '29.99', priceCurrency: 'USD', name: `${locale.proTitle} yearly` },
-          { '@type': 'Offer', price: '39.99', priceCurrency: 'USD', name: `${locale.proTitle} lifetime` },
+          { '@type': 'Offer', price: '3.99', priceCurrency: 'USD', name: `${locale.proTitle} ${locale.billingNames[0]}` },
+          { '@type': 'Offer', price: '29.99', priceCurrency: 'USD', name: `${locale.proTitle} ${locale.billingNames[1]}` },
+          { '@type': 'Offer', price: '39.99', priceCurrency: 'USD', name: `${locale.proTitle} ${locale.billingNames[2]}` },
         ],
       },
       {

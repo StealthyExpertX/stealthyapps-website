@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12",
+  "updated": "2026-07-13",
   "note": "Update this file only after rerendering assets, running npm run review:marketing, and visually approving the contact sheets.",
   "assets": [
     {
@@ -94,17 +94,17 @@
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s-thumb.png",
-      "bytes": 327866,
-      "sha256": "cd01ea904d3bf73bfa05b00bcb8eaffb92b10f4b70117dbc4e41df16cbaaf2e0",
+      "bytes": 324203,
+      "sha256": "a543615ef2c001599ff73d1036e379e9be82be115e3e756c97395cab2ea339ce",
       "width": 1280,
       "height": 720,
-      "meanLuma": 227.94,
-      "meanColorSpread": 8
+      "meanLuma": 227.8,
+      "meanColorSpread": 8.02
     },
     {
       "file": "assets/marketplace/fillpro-store-demo-22s.mp4",
-      "bytes": 873728,
-      "sha256": "2bd5f2ebd961a77bf315c3955f0efeefe42f4b05c567e11d7361eabc4d352276"
+      "bytes": 876394,
+      "sha256": "2b3f3208f225e46556d3ee6efe0e4431ec7317205794d67dbfdaefaf1ba2371d"
     },
     {
       "file": "../fillpro/icons/icon16.png",

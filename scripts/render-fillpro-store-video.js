@@ -476,11 +476,11 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 2.2) return ['Ready when you are', 'A blank form.\\nOne profile.', 'Choose Fill Page and watch the details you reuse fall into place.', ['3 profiles free', 'No account']];
-    if (t < 7.7) return ['Filling now', 'Watch the repeat work disappear.', 'Name, email, company, and resume fill one by one.', ['One click', 'Upload matching']];
-    if (t < 12) return ['Ready to review', 'Check it. Undo it. Submit when ready.', 'FillPro changes the page. The final decision stays with you.', ['Undo ready', 'No auto-submit']];
-    if (t < 17) return ['Modern forms', 'Dropdowns and late fields included.', 'Fill the controls basic autofill usually leaves behind.', ['Dropdowns', 'Checkboxes', 'Late fields']];
-    return ['Start free', 'Three profiles are included.', 'No cloud profile account. Upgrade only when you need more profiles or backups.', ['3 profiles free', 'No account', 'Review first']];
+    if (t < 2.2) return ['Ready when you are', 'A blank form.\\nOne profile.', 'Choose Fill Page to add the details you saved.', ['3 profiles free', 'No account']];
+    if (t < 7.7) return ['Filling now', 'One click fills the repeated details.', 'Name, email, company, and resume fill one by one.', ['One click', 'Upload matching']];
+    if (t < 12) return ['Ready to review', 'Check it. Undo it. Submit when ready.', 'FillPro fills the page. You review and submit it.', ['Undo ready', 'No auto-submit']];
+    if (t < 17) return ['Modern form fields', 'Works with dropdowns and fields that appear later.', 'Fill the controls basic autofill often misses.', ['Dropdowns', 'Checkboxes', 'Dynamic fields']];
+    return ['Start free', 'Three profiles are included.', 'No FillPro account. Pro adds more profiles and backups.', ['3 profiles free', 'No account', 'Review first']];
   }
 
   function formFor(t) {
