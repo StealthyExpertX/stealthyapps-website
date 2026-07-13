@@ -4,6 +4,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
+const REMOTE_ORIGIN = (process.env.FILLPRO_AUDIT_ORIGIN || '').replace(/\/$/, '');
 const ROUTES = [
   '/fillpro/',
   '/fillpro/download/',
@@ -71,7 +72,9 @@ function isHeadlessGpuDiagnostic(text) {
 }
 
 async function main() {
-  const server = await startServer();
+  const server = REMOTE_ORIGIN
+    ? { origin: REMOTE_ORIGIN, close: async () => {} }
+    : await startServer();
   const browser = await chromium.launch();
   const failures = [];
   const observations = [];
@@ -179,7 +182,7 @@ async function main() {
     process.exit(1);
   }
   console.log(
-    `Clean-browser audit passed: ${observations.length} routes, no first-party console errors/warnings, CSP violations, deprecated APIs, unlabeled fields, missing field ids/names, failed requests, or overflow.`,
+    `Clean-browser audit passed against ${server.origin}: ${observations.length} routes, no first-party console errors/warnings, CSP violations, deprecated APIs, unlabeled fields, missing field ids/names, failed requests, or overflow.`,
   );
 }
 

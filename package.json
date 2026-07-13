@@ -11,7 +11,8 @@
     "test:experience": "node scripts/audit-fillpro-release-experience.js",
     "test:marketing": "node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js",
     "test:site": "node scripts/audit-fillpro-site.js",
-    "test:clean-browser": "node scripts/audit-fillpro-clean-browser.js"
+    "test:clean-browser": "node scripts/audit-fillpro-clean-browser.js",
+    "test:live-browser": "node scripts/audit-fillpro-clean-browser.js"
   },
   "devDependencies": {
     "playwright": "^1.59.1",
