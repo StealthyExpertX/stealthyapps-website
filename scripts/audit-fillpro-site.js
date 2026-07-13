@@ -301,6 +301,10 @@ function checkSiteScript() {
     path.join(ROOT, 'fillpro', 'download', 'index.html'),
     'utf8',
   );
+  const chrome = fs.readFileSync(
+    path.join(ROOT, 'fillpro', 'download', 'chrome', 'index.html'),
+    'utf8',
+  );
   const edge = fs.readFileSync(
     path.join(ROOT, 'fillpro', 'download', 'edge', 'index.html'),
     'utf8',
@@ -314,27 +318,33 @@ function checkSiteScript() {
     [checkout, 'fillpro/checkout/index.html'],
     [download, 'fillpro/download/index.html'],
   ]) {
-    if (!/Edge[^<]{0,80}(?:planned|follow)|(?:planned|follow)[^<]{0,80}Edge/i.test(source)) {
-      fail(`${label}: Edge availability must be stated quietly and accurately`);
+    if (!source.includes('Edge and Firefox coming soon.')) {
+      fail(`${label}: unreleased browsers need one concise availability note`);
     }
-    if (!/Firefox[^<]{0,80}(?:planned|follow)|(?:planned|follow)[^<]{0,80}Firefox/i.test(source)) {
-      fail(`${label}: Firefox availability must be stated quietly and accurately`);
+    if (/href="\/fillpro\/download\/(?:edge|firefox)\//i.test(source)) {
+      fail(`${label}: unreleased browser status must not look actionable`);
     }
   }
   for (const [source, label, browser] of [
+    [chrome, 'fillpro/download/chrome/index.html', 'Chrome'],
     [edge, 'fillpro/download/edge/index.html', 'Microsoft Edge'],
     [firefox, 'fillpro/download/firefox/index.html', 'Firefox'],
   ]) {
-    if (!source.includes('Listing pending')) {
-      fail(`${label}: ${browser} detail page must include one quiet pending status`);
+    if (!/<meta name="robots" content="noindex, follow">/.test(source)) {
+      fail(`${label}: unreleased ${browser} page must stay out of search indexes`);
     }
-    const pendingCount = (source.match(/Listing pending/g) || []).length;
-    if (pendingCount !== 1) {
-      fail(`${label}: ${browser} detail page must include exactly one pending status`);
+    const comingSoonCount = (source.match(/class="launch-lead">Coming soon\.<\/p>/g) || []).length;
+    if (comingSoonCount !== 1) {
+      fail(`${label}: unreleased ${browser} page must show exactly one visible Coming soon message`);
     }
-    if (/coming soon|launch notice|staggered/i.test(source)) {
-      fail(`${label}: ${browser} detail page repeats internal launch language`);
+    if (/reason=(?:chrome|edge|firefox)_store_link|data-fillpro-store=|class="launch-button/i.test(source)) {
+      fail(`${label}: unreleased ${browser} page must not present a fake store action`);
     }
+  }
+
+  const sitemapXml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
+  if (/fillpro\/download\/(?:edge|firefox)\//.test(sitemapXml)) {
+    fail('sitemap.xml: unreleased Edge and Firefox holding pages must not be indexed');
   }
 }
 
