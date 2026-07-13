@@ -18,7 +18,6 @@ import * as THREE from './vendor/three.module.min.js';
       canvas,
       antialias: true,
       alpha: true,
-      preserveDrawingBuffer: true,
       powerPreference: 'high-performance',
     });
   } catch (error) {
@@ -27,7 +26,7 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   renderer.setClearColor(0x000000, 0);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.18));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.05));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 0.98;
   if ('outputColorSpace' in renderer && THREE.SRGBColorSpace) {
@@ -148,8 +147,8 @@ import * as THREE from './vendor/three.module.min.js';
         bevelEnabled: true,
         bevelSize: Math.min(radius * 0.2, 0.025),
         bevelThickness: Math.min(depth * 0.34, 0.02),
-        bevelSegments: 3,
-        curveSegments: 14,
+        bevelSegments: 1,
+        curveSegments: 10,
       }),
     );
     geometry.center();
@@ -170,7 +169,7 @@ import * as THREE from './vendor/three.module.min.js';
   }
 
   function flatPanel(width, height, radius, material, edgeOpacity = 0) {
-    const geometry = trackGeometry(new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 14));
+    const geometry = trackGeometry(new THREE.ShapeGeometry(roundedRectShape(width, height, radius), 10));
     const mesh = new THREE.Mesh(geometry, material);
     if (edgeOpacity > 0) {
       mesh.add(
@@ -224,7 +223,7 @@ import * as THREE from './vendor/three.module.min.js';
   studioPlate.rotation.set(0.006, -0.012, 0.004);
   glassStage.add(studioPlate);
 
-  const studioShadow = new THREE.Mesh(trackGeometry(new THREE.CircleGeometry(1, 72)), shadowMaterial);
+  const studioShadow = new THREE.Mesh(trackGeometry(new THREE.CircleGeometry(1, 36)), shadowMaterial);
   studioShadow.scale.set(2.35, 0.34, 1);
   studioShadow.position.set(0.36, -1.06, -0.46);
   glassStage.add(studioShadow);
@@ -271,7 +270,7 @@ import * as THREE from './vendor/three.module.min.js';
   ]);
 
   const guidedFillPath = new THREE.Mesh(
-    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 44, 0.008, 8, false)),
+    trackGeometry(new THREE.TubeGeometry(guidedFillCurve, 30, 0.008, 6, false)),
     pathMaterial,
   );
   group.add(guidedFillPath);
@@ -292,6 +291,9 @@ import * as THREE from './vendor/three.module.min.js';
   let sizeNeedsUpdate = true;
   let isNarrow = false;
   let isDarkMode = false;
+  let pageVisible = document.visibilityState !== 'hidden';
+  let lastFrameTime = -Infinity;
+  const FRAME_INTERVAL_MS = 1000 / 30;
   const cursorPoint = new THREE.Vector3();
 
   function currentThemeIsDark() {
@@ -377,7 +379,15 @@ import * as THREE from './vendor/three.module.min.js';
 
   function start() {
     renderer.setAnimationLoop((time) => {
-      if (isVisible && !reduceMotion) render(time);
+      if (
+        pageVisible &&
+        isVisible &&
+        !reduceMotion &&
+        time - lastFrameTime >= FRAME_INTERVAL_MS
+      ) {
+        lastFrameTime = time;
+        render(time);
+      }
     });
     if (reduceMotion) render(0);
   }
@@ -403,6 +413,16 @@ import * as THREE from './vendor/three.module.min.js';
   );
 
   const cleanupCallbacks = [];
+
+  const onVisibilityChange = () => {
+    pageVisible = document.visibilityState !== 'hidden';
+    if (pageVisible) {
+      sizeNeedsUpdate = true;
+      lastFrameTime = -Infinity;
+    }
+  };
+  document.addEventListener('visibilitychange', onVisibilityChange);
+  cleanupCallbacks.push(() => document.removeEventListener('visibilitychange', onVisibilityChange));
 
   if (motionQuery.addEventListener) {
     const onMotionChange = () => {
@@ -455,10 +475,13 @@ import * as THREE from './vendor/three.module.min.js';
     renderer.dispose();
   });
 
-  requestAnimationFrame((time) => {
+  function revealScene() {
     applyTheme();
-    render(time);
+    render(performance.now());
     root.classList.add('hero-3d-ready');
     start();
-  });
+  }
+
+  renderer.compile(scene, camera);
+  revealScene();
 })();

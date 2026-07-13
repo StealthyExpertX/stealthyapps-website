@@ -5,6 +5,7 @@ FillPro is a private browser form autofill extension for job applications, signu
 Website and canonical product page: https://stealthyapps.com/fillpro/
 Privacy: https://stealthyapps.com/fillpro/privacy/
 Support: https://stealthyapps.com/support/
+Setup guide: https://stealthyapps.com/fillpro/docs/getting-started/
 Contact: https://stealthyapps.com/contact/
 Last updated: 2026-07-12
 

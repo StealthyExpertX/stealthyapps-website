@@ -16,6 +16,7 @@ const ROUTES = [
   '/fillpro/checkout/',
   '/fillpro/changelog/',
   '/fillpro/privacy/',
+  '/fillpro/docs/getting-started/',
   '/fillpro/docs/smart-rules/',
   '/fillpro/download/',
   '/fillpro/download/chrome/',
