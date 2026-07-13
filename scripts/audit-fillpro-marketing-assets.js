@@ -12,6 +12,7 @@ const checked = {
   videos: 0,
   renderer: 0,
   icons: 0,
+  captions: 0,
 };
 
 function fail(message) {
@@ -32,6 +33,48 @@ function assertFile(relativePath, minBytes = 1024, maxBytes = 25 * 1024 * 1024) 
   if (stat.size < minBytes) fail(`${relativePath}: suspiciously small (${stat.size} bytes)`);
   if (stat.size > maxBytes) fail(`${relativePath}: too large for a store asset (${stat.size} bytes)`);
   return target;
+}
+
+function checkLocalizedCaptions() {
+  const root = filePath('assets/marketplace/localized');
+  const manifestPath = path.join(root, 'caption-manifest.json');
+  if (!fs.existsSync(manifestPath)) {
+    fail('localized captions: manifest missing');
+    return;
+  }
+  const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+  if (manifest.durationSeconds !== 22 || manifest.locales.length !== 25) {
+    fail(`localized captions: expected 25 locales for a 22-second video, got ${JSON.stringify(manifest)}`);
+    return;
+  }
+  for (const locale of manifest.locales) {
+    const target = path.join(root, locale, 'fillpro-store-demo-22s.vtt');
+    if (!fs.existsSync(target)) {
+      fail(`localized captions: missing ${locale}`);
+      continue;
+    }
+    const text = fs.readFileSync(target, 'utf8');
+    const cueCount = (text.match(/-->/g) || []).length;
+    if (!text.startsWith('WEBVTT\n') || cueCount !== 5 || !text.includes('00:00:22.000')) {
+      fail(`localized captions: ${locale} has an invalid timeline`);
+    }
+    if (text.includes('\ufffd')) fail(`localized captions: ${locale} contains a replacement character`);
+    checked.captions += 1;
+  }
+}
+
+async function checkLocalizedScreenshots() {
+  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const names = ['fill-page', 'profiles', 'modern-forms', 'privacy', 'undo'];
+  for (const locale of locales) {
+    for (const name of names) {
+      await checkImage(
+        `assets/marketplace/localized/${locale}/fillpro-screenshot-${name}-1280x800.png`,
+        1280,
+        800,
+      );
+    }
+  }
 }
 
 async function checkImage(relativePath, width, height, options = {}) {
@@ -519,9 +562,11 @@ async function main() {
     'assets/marketplace/fillpro-screenshot-undo-1280x800.png',
   ];
   for (const screenshot of screenshots) await checkImage(screenshot, 1280, 800);
+  await checkLocalizedScreenshots();
   await checkScreenshotDistinctness(screenshots);
   await checkImage('assets/marketplace/fillpro-store-demo-22s-thumb.png', 1280, 720);
   checkVideo('assets/marketplace/fillpro-store-demo-22s.mp4');
+  checkLocalizedCaptions();
   checkRenderer();
   checkStillRenderer();
   await checkIconSystem();
@@ -533,7 +578,7 @@ async function main() {
   }
 
   console.log(
-    `FillPro marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
+    `FillPro marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
   );
 }
 

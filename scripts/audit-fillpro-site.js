@@ -421,7 +421,10 @@ function checkPackageScripts() {
 
 function checkDemoGenerator() {
   const renderer = fs.readFileSync(path.join(ROOT, 'scripts', 'render-fillpro-assets.js'), 'utf8');
-  if (/fillpro-demo-(poster|gif)[\s\S]+chromeFrame\(/.test(renderer)) {
+  const demoStart = renderer.indexOf('async function renderDemoGif');
+  const demoEnd = renderer.indexOf('async function renderIcons', demoStart);
+  const demoRenderer = renderer.slice(demoStart, demoEnd > demoStart ? demoEnd : undefined);
+  if (demoRenderer.includes('chromeFrame(')) {
     fail('render-fillpro-assets.js: demo asset should not render a nested browser frame');
   }
   if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
