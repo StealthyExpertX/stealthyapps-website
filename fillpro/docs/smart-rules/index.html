@@ -74,6 +74,7 @@
     <div class="docs-layout">
       <nav class="quick-links docs-toc" aria-label="On this page">
         <strong>On this page</strong>
+        <a href="#try-it">Try a rule</a>
         <a href="#first-rule">First rule</a>
         <a href="#matching">What FillPro matches</a>
         <a href="#values">Values and @fields</a>
@@ -83,6 +84,31 @@
       </nav>
 
       <div class="docs-content">
+        <section id="try-it" class="docs-section">
+          <p class="eyebrow">Try it here</p>
+          <h2>See what a Smart Rule does.</h2>
+          <p>A Smart Rule is a short note to FillPro: when a form uses these words, use this saved profile value. Change either box below to see whether the rule matches.</p>
+          <div class="rule-lab" data-smart-rule-lab>
+            <div class="rule-lab-presets" aria-label="Example rules">
+              <button type="button" class="button compact" data-rule-example="email">Work email</button>
+              <button type="button" class="button compact" data-rule-example="company">Employer</button>
+              <button type="button" class="button compact" data-rule-example="portfolio">Portfolio</button>
+            </div>
+            <div class="rule-lab-fields">
+              <label for="ruleLabLabel">Words shown on the form
+                <input id="ruleLabLabel" name="ruleLabLabel" type="text" value="Work email address" autocomplete="off">
+              </label>
+              <label for="ruleLabMatch">Your rule
+                <input id="ruleLabMatch" name="ruleLabMatch" type="text" value="work email" autocomplete="off" spellcheck="false">
+              </label>
+            </div>
+            <div class="rule-lab-flow" aria-hidden="true">
+              <span>Work email address</span><span>matches</span><span>@email</span>
+            </div>
+            <p class="rule-lab-result is-match" data-rule-result role="status" aria-live="polite">Match found. FillPro would use the email saved in this profile.</p>
+          </div>
+        </section>
+
         <section id="first-rule" class="docs-section">
           <p class="eyebrow">First rule</p>
           <h2>Start with the field label you can see.</h2>

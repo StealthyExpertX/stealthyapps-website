@@ -1097,6 +1097,89 @@ p {
   color: var(--muted);
 }
 
+.rule-lab {
+  margin-top: 24px;
+  padding: clamp(18px, 3vw, 28px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--paper);
+  box-shadow: var(--shadow);
+}
+
+.rule-lab-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.button.compact {
+  min-height: 40px;
+  padding: 8px 14px;
+}
+
+.rule-lab-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.rule-lab-fields label {
+  display: grid;
+  gap: 7px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.rule-lab-fields input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--page);
+  color: var(--ink);
+  font: inherit;
+}
+
+.rule-lab-fields input:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 2px;
+}
+
+.rule-lab-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.rule-lab-flow span:first-child,
+.rule-lab-flow span:last-child {
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--page);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.rule-lab-result {
+  margin: 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--orange);
+  background: var(--orange-soft);
+  color: var(--ink);
+}
+
+.rule-lab-result.is-match {
+  border-left-color: var(--brand);
+  background: var(--green-soft);
+}
+
 .support-faq-list {
   display: grid;
   border-top: 1px solid var(--line);
@@ -1184,6 +1267,11 @@ p {
 
   .docs-help-band .button {
     width: 100%;
+  }
+
+  .rule-lab-fields,
+  .rule-lab-flow {
+    grid-template-columns: 1fr;
   }
 }
 

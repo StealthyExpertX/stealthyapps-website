@@ -798,6 +798,47 @@ async function auditDemoPlayback(browser, origin, errors) {
   }
 }
 
+async function auditSmartRuleLab(browser, origin, errors) {
+  const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  const pageErrors = [];
+  page.on('console', (message) => {
+    if (message.type() === 'error') pageErrors.push(message.text());
+  });
+  page.on('pageerror', (error) => pageErrors.push(error.message));
+  try {
+    await page.goto(`${origin}/fillpro/docs/smart-rules/`, { waitUntil: 'networkidle' });
+    const label = page.locator('#ruleLabLabel');
+    const match = page.locator('#ruleLabMatch');
+    const result = page.locator('[data-rule-result]');
+    await label.fill('Business contact address');
+    await match.fill('work email');
+    if (!/No match/.test(await result.textContent())) {
+      errors.push('/fillpro/docs/smart-rules/: mismatch guidance did not appear');
+    }
+    await page.getByRole('button', { name: 'Portfolio' }).click();
+    const labelFocused = await label.evaluate((node) => document.activeElement === node);
+    if (!/Match found/.test(await result.textContent()) || !labelFocused) {
+      errors.push('/fillpro/docs/smart-rules/: preset did not update the example and return focus');
+    }
+    await label.fill('Work-email address');
+    await match.fill('/work.?email/i');
+    if (!/Match found/.test(await result.textContent())) {
+      errors.push('/fillpro/docs/smart-rules/: optional regex example did not match');
+    }
+    await match.fill('/[/');
+    if (!/not valid/.test(await result.textContent())) {
+      errors.push('/fillpro/docs/smart-rules/: invalid regex guidance did not appear');
+    }
+    if (pageErrors.length) {
+      errors.push(`/fillpro/docs/smart-rules/: console/page errors: ${pageErrors.join(' | ')}`);
+    }
+  } catch (error) {
+    errors.push(`/fillpro/docs/smart-rules/: interactive guide failed: ${error.message}`);
+  } finally {
+    await page.close();
+  }
+}
+
 async function main() {
   fs.rmSync(OUT_DIR, { recursive: true, force: true });
   fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -842,7 +883,8 @@ async function main() {
     await auditDemoPlayback(browser, server.origin, errors);
     await auditContactSubmission(browser, server.origin, errors);
     await auditCheckoutPlanSelection(browser, server.origin, errors);
-    checks += 5;
+    await auditSmartRuleLab(browser, server.origin, errors);
+    checks += 6;
   } finally {
     await browser.close();
     await server.close();

@@ -394,6 +394,61 @@
     });
   }
 
+  function setupSmartRuleLab() {
+    var lab = document.querySelector('[data-smart-rule-lab]');
+    if (!lab) return;
+
+    var labelInput = lab.querySelector('#ruleLabLabel');
+    var matchInput = lab.querySelector('#ruleLabMatch');
+    var result = lab.querySelector('[data-rule-result]');
+    var examples = {
+      email: ['Work email address', 'work email', 'the email saved in this profile'],
+      company: ['Current employer', 'current employer', 'the company saved in this profile'],
+      portfolio: ['Portfolio or personal website', 'portfolio', 'the portfolio URL saved in this profile'],
+    };
+    var valueDescription = examples.email[2];
+
+    function evaluateRule() {
+      var label = labelInput.value.trim();
+      var match = matchInput.value.trim();
+      var matched = false;
+
+      if (match.charAt(0) === '/' && match.lastIndexOf('/') > 0) {
+        var lastSlash = match.lastIndexOf('/');
+        try {
+          var expression = match.slice(1, lastSlash);
+          var flags = match.slice(lastSlash + 1).replace(/[^dgimsuvy]/g, '');
+          matched = expression.length <= 120 && new RegExp(expression, flags).test(label);
+        } catch (error) {
+          result.textContent = 'That regex is not valid yet. Plain text is easier for most rules.';
+          result.classList.remove('is-match');
+          return;
+        }
+      } else {
+        matched = Boolean(match) && label.toLocaleLowerCase().indexOf(match.toLocaleLowerCase()) !== -1;
+      }
+
+      result.textContent = matched
+        ? 'Match found. FillPro would use ' + valueDescription + '.'
+        : 'No match. Try a shorter, distinctive phrase from the form label.';
+      result.classList.toggle('is-match', matched);
+    }
+
+    lab.querySelectorAll('[data-rule-example]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var example = examples[button.getAttribute('data-rule-example')];
+        if (!example) return;
+        labelInput.value = example[0];
+        matchInput.value = example[1];
+        valueDescription = example[2];
+        evaluateRule();
+        labelInput.focus();
+      });
+    });
+    labelInput.addEventListener('input', evaluateRule);
+    matchInput.addEventListener('input', evaluateRule);
+  }
+
   function setupCurrentHashLink() {
     var links = Array.prototype.slice.call(
       document.querySelectorAll('.quick-links a[href^="#"]'),
@@ -620,6 +675,7 @@
     installThemeToggle();
     setupInteractiveBackdrop();
     setupCopyCode();
+    setupSmartRuleLab();
     setupCurrentHashLink();
     setupScrollReveals();
     scrollToInitialHash();
