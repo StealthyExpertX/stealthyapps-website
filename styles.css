@@ -3137,6 +3137,18 @@ html:has(body.fillpro-launch) {
   text-transform: uppercase;
 }
 
+.launch-store-status {
+  width: max-content;
+  margin: 2px 0 0;
+  padding: 5px 8px;
+  border: 1px solid var(--launch-line);
+  border-radius: 4px;
+  color: var(--launch-soft);
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1.2;
+}
+
 .launch-hero h1,
 .launch-section h2,
 .launch-band h2,

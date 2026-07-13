@@ -7,7 +7,14 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 - Website: https://stealthyapps.com/fillpro/
 - Canonical product route: /fillpro/
 - Current version: 1.0.0
-- Last reviewed: 2026-06-14
+- Last reviewed: 2026-07-13
+
+## Localization Parity
+
+- Treat user-facing copy and its localized versions as one change. Update every affected website locale and extension-store locale together.
+- When screenshot or video text changes, regenerate every affected localized screenshot and caption track in the same change.
+- Do not commit an English-only marketing update when a localized derivative exists.
+- Run the locale, caption, marketing-asset, and visual audits before committing. Generated localized files must match their source exactly.
 
 ## Canonical Routes
 

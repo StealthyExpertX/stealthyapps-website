@@ -3,6 +3,7 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const OUTPUT = path.join(ROOT, 'assets', 'marketplace', 'localized');
+const CHECK_ONLY = process.argv.includes('--check');
 const cues = {
   ar: ['نموذج فارغ. ملف شخصي محفوظ.', 'املأ بياناتك المتكررة وارفع سيرتك الذاتية بنقرة واحدة.', 'راجع النتيجة وتراجع عند الحاجة. أنت من يرسل النموذج.', 'يدعم القوائم ومربعات الاختيار والحقول التي تظهر لاحقًا.', 'ابدأ مجانًا مع 3 ملفات شخصية. لا يلزم حساب.'],
   cs: ['Prázdný formulář. Jeden uložený profil.', 'Vyplňte opakované údaje a nahrajte životopis jedním kliknutím.', 'Výsledek zkontrolujte. V případě potřeby změny vraťte. Formulář odesíláte vy.', 'Podporuje nabídky, zaškrtávací políčka i pole, která se objeví později.', 'Začněte zdarma se 3 profily. Bez účtu.'],
@@ -39,20 +40,37 @@ const times = [
   ['00:00:17.000', '00:00:22.000'],
 ];
 
-fs.mkdirSync(OUTPUT, { recursive: true });
+const staleFiles = [];
+if (!CHECK_ONLY) fs.mkdirSync(OUTPUT, { recursive: true });
 for (const [locale, lines] of Object.entries(cues)) {
   if (lines.length !== times.length || lines.some((line) => !line.trim())) {
     throw new Error(`${locale}: expected ${times.length} non-empty captions`);
   }
   const body = lines.map((line, index) => `${times[index][0]} --> ${times[index][1]}\n${line}`).join('\n\n');
   const localeDir = path.join(OUTPUT, locale);
-  fs.mkdirSync(localeDir, { recursive: true });
-  fs.writeFileSync(path.join(localeDir, 'fillpro-store-demo-22s.vtt'), `WEBVTT\n\n${body}\n`, 'utf8');
+  const outputPath = path.join(localeDir, 'fillpro-store-demo-22s.vtt');
+  const expected = `WEBVTT\n\n${body}\n`;
+  if (CHECK_ONLY) {
+    if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== expected) {
+      staleFiles.push(path.relative(ROOT, outputPath));
+    }
+  } else {
+    fs.mkdirSync(localeDir, { recursive: true });
+    fs.writeFileSync(outputPath, expected, 'utf8');
+  }
 }
 
-fs.writeFileSync(
-  path.join(OUTPUT, 'caption-manifest.json'),
-  `${JSON.stringify({ durationSeconds: 22, locales: Object.keys(cues) }, null, 2)}\n`,
-  'utf8',
-);
-console.log(`Generated ${Object.keys(cues).length} localized FillPro caption tracks.`);
+const manifestPath = path.join(OUTPUT, 'caption-manifest.json');
+const expectedManifest = `${JSON.stringify({ durationSeconds: 22, locales: Object.keys(cues) }, null, 2)}\n`;
+if (CHECK_ONLY) {
+  if (!fs.existsSync(manifestPath) || fs.readFileSync(manifestPath, 'utf8') !== expectedManifest) {
+    staleFiles.push(path.relative(ROOT, manifestPath));
+  }
+  if (staleFiles.length) {
+    throw new Error(`Localized video captions are stale:\n- ${staleFiles.join('\n- ')}\nRun npm run generate:captions.`);
+  }
+  console.log(`Verified ${Object.keys(cues).length} localized FillPro caption tracks.`);
+} else {
+  fs.writeFileSync(manifestPath, expectedManifest, 'utf8');
+  console.log(`Generated ${Object.keys(cues).length} localized FillPro caption tracks.`);
+}
