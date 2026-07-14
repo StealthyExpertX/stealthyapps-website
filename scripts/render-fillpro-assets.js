@@ -4,6 +4,7 @@ const os = require('os');
 const path = require('path');
 const { chromium } = require('playwright');
 const sharp = require('sharp');
+const localizedMarketplaceCopy = require('./fillpro-localized-marketplace-copy.json');
 
 const siteRoot = path.resolve(__dirname, '..');
 const projectRoot = path.resolve(siteRoot, '..');
@@ -762,38 +763,51 @@ function chromeFrame(url, inner) {
     </div>`;
 }
 
-function beforeAfter() {
+function beforeAfter(copy = {}) {
+  const labels = {
+    beforeTitle: 'Client onboarding',
+    afterTitle: 'After FillPro',
+    fullName: 'Full name',
+    workEmail: 'Work email',
+    company: 'Company',
+    resume: 'Resume upload',
+    workProfile: 'Work profile',
+    profileDetail: '12 fields, 1 upload, 2 smart rules',
+    fillPage: 'Fill Page',
+    undoLastFill: 'Undo last fill',
+    ...copy,
+  };
   return `
     <div class="grid2">
       <div class="form">
-        <h2>Client onboarding</h2>
-        ${field('Full name')}
-        ${field('Work email')}
-        ${field('Company')}
-        ${field('Resume upload')}
+        <h2>${labels.beforeTitle}</h2>
+        ${field(labels.fullName)}
+        ${field(labels.workEmail)}
+        ${field(labels.company)}
+        ${field(labels.resume)}
       </div>
       <div class="form">
-        <h2>After FillPro</h2>
-        ${field('Full name', 'Alex Morgan')}
-        ${field('Work email', 'alex@example.com')}
-        ${field('Company', 'Stealthy Apps')}
-        ${field('Resume upload', 'alex-morgan-resume.pdf')}
+        <h2>${labels.afterTitle}</h2>
+        ${field(labels.fullName, 'Alex Morgan')}
+        ${field(labels.workEmail, 'alex@example.com')}
+        ${field(labels.company, 'Stealthy Apps')}
+        ${field(labels.resume, 'alex-morgan-resume.pdf')}
       </div>
     </div>
-    ${popup('Work profile', '12 fields, 1 upload, 2 smart rules')}`;
+    ${popup(labels.workProfile, labels.profileDetail, labels)}`;
 }
 
 function field(label, value = '') {
   return `<div class="field"><span>${label}</span><div class="box${value ? ' filled' : ''}">${value}</div></div>`;
 }
 
-function popup(title, detail) {
+function popup(title, detail, copy = {}) {
   return `
     <div class="popup">
       <div class="popup-head"><img src="${logoDataUrl}" alt="">FillPro</div>
       <div class="profile"><strong>${title}</strong><span>${detail}</span></div>
-      <div class="button">Fill Page</div>
-      <div class="button ghost">Undo last fill</div>
+      <div class="button">${copy.fillPage || 'Fill Page'}</div>
+      <div class="button ghost">${copy.undoLastFill || 'Undo last fill'}</div>
     </div>`;
 }
 
@@ -1077,19 +1091,9 @@ async function renderStaticAssets(browser) {
   );
 }
 
-const localizedFirstScreenshotCopy = {
-  de: ['Kein Konto nötig', 'Füllen Sie wiederkehrende Felder aus.', 'Profil auswählen, Seite ausfüllen und das Ergebnis vor dem Absenden prüfen.', 'Ein eigenes Profil für jeden Ablauf.', 'Auch für Felder, die einfaches Autofill übersieht.', 'Ihre Profile bleiben in der Erweiterung.', 'Ausfüllung prüfen und bei Bedarf rückgängig machen.'],
-  es: ['Sin cuenta', 'Completa los campos que siempre repites.', 'Elige un perfil, completa la página y revisa el resultado antes de enviarlo.', 'Un perfil para cada tipo de formulario.', 'Completa los controles que el autocompletado básico omite.', 'Tus perfiles permanecen en la extensión.', 'Revisa el llenado y deshazlo si hace falta.'],
-  fr: ['Aucun compte requis', 'Remplissez les champs que vous retapez sans cesse.', 'Choisissez un profil, remplissez la page, puis vérifiez avant de l’envoyer.', 'Un profil pour chaque type de formulaire.', 'Remplissez ce que la saisie automatique ignore.', 'Vos profils restent dans l’extension.', 'Vérifiez le remplissage et annulez si nécessaire.'],
-  pt_BR: ['Sem precisar de conta', 'Preencha os campos que você sempre repete.', 'Escolha um perfil, preencha a página e revise antes de enviar.', 'Um perfil para cada tipo de formulário.', 'Preencha os controles que o preenchimento básico ignora.', 'Seus perfis ficam na extensão.', 'Revise o preenchimento e desfaça se precisar.'],
-  ja: ['アカウント不要', '繰り返し入力する項目をまとめて入力。', 'プロフィールを選び、ページを入力して、送信前に確認できます。', '用途ごとにプロフィールを分けて保存。', '基本の自動入力が見逃す項目にも対応。', 'プロフィールは拡張機能内に保存。', '入力結果を確認し、必要なら元に戻せます。'],
-  ko: ['계정 필요 없음', '반복해서 입력하는 필드를 한 번에 채우세요.', '프로필을 선택하고 페이지를 채운 다음 제출 전에 확인하세요.', '작업마다 프로필을 따로 저장하세요.', '기본 자동완성이 놓치는 항목도 채웁니다.', '프로필은 확장 프로그램 안에 보관됩니다.', '채운 내용을 확인하고 필요하면 실행 취소하세요.'],
-  ru: ['Аккаунт не нужен', 'Заполняйте поля, которые постоянно приходится вводить заново.', 'Выберите профиль, заполните страницу и проверьте результат перед отправкой.', 'Отдельный профиль для каждого сценария.', 'Заполняет элементы, которые пропускает обычное автозаполнение.', 'Ваши профили остаются в расширении.', 'Проверьте заполнение и при необходимости отмените его.'],
-  zh_CN: ['无需账户', '一次填写反复输入的字段。', '选择已保存的资料，填写页面，并在提交前检查结果。', '为每种流程单独保存资料。', '填写基础自动填充会漏掉的控件。', '您的资料保存在扩展程序中。', '检查填写结果，需要时可撤销。'],
-};
-
 async function renderLocalizedFirstScreenshots(browser) {
-  for (const [locale, copy] of Object.entries(localizedFirstScreenshotCopy)) {
+  for (const [locale, copy] of Object.entries(localizedMarketplaceCopy)) {
+    const ui = copy.ui;
     const localeDir = path.join(marketplaceDir, 'localized', locale);
     fs.mkdirSync(localeDir, { recursive: true });
     await renderHtml(
@@ -1098,17 +1102,17 @@ async function renderLocalizedFirstScreenshots(browser) {
       1280,
       800,
       `<main class="stage first-shot shot-outcome">
-        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">${copy[0]}</span></div>
-        <div><h1>${copy[1]}</h1><p class="sub">${copy[2]}</p></div>
-        ${chromeFrame('apply.example.com/onboarding', beforeAfter())}
+        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">${copy.badge}</span></div>
+        <div><h1>${copy.headline}</h1><p class="sub">${copy.intro}</p></div>
+        ${chromeFrame('apply.example.com/onboarding', beforeAfter(ui))}
       </main>`,
     );
 
     const localizedScenes = [
-      ['profiles', copy[3], `<div class="grid2"><div class="panel"><h2>Saved profiles</h2><div class="profile"><strong>Work profile</strong><span>Contact, company, links, resume</span></div><div class="profile"><strong>Applicant profile</strong><span>Job details and portfolio</span></div></div><div class="panel"><h2>Smart rules</h2><div class="cardline"><span>Work email</span><strong>@email</strong></div><div class="cardline"><span>Resume field</span><strong>resume.pdf</strong></div></div></div>`],
-      ['modern-forms', copy[4], `<div class="grid2"><div class="form"><h2>Team intake form</h2>${field('Full name', 'Alex Morgan')}${field('Preferred contact', 'Email')}${field('Resume upload', 'alex-morgan.pdf')}</div><div class="panel"><h2>Modern controls</h2><div class="field-grid"><div class="field-tile"><strong>Dropdowns</strong><span>Matched from the profile.</span></div><div class="field-tile"><strong>Checkboxes</strong><span>Clear choices filled.</span></div><div class="field-tile"><strong>Late fields</strong><span>Checked after page changes.</span></div></div></div></div>`],
-      ['privacy', copy[5], `<div class="privacy-proof"><div class="privacy-grid"><div class="privacy-card"><strong>Profile storage</strong><span>Saved by the extension.</span></div><div class="privacy-card"><strong>Page access</strong><span>Runs on the page you choose.</span></div><div class="privacy-card"><strong>Final say</strong><span>You review and submit.</span></div></div><div class="privacy-ledger"><h2>Clear control</h2><div class="privacy-row"><span>Fill action</span><strong>Your click</strong></div><div class="privacy-row"><span>Form submission</span><strong>Your decision</strong></div></div></div>`],
-      ['undo', copy[6], `<div class="review-proof review-proof-light"><div class="review-form"><h2>Review before submit</h2><div class="review-row"><span>First name</span><strong>Alex</strong></div><div class="review-row"><span>Portfolio</span><strong>stealthyapps.com</strong></div><div class="review-row"><span>Resume</span><strong>alex-morgan.pdf</strong></div></div><div class="review-stack"><div class="review-card accent"><strong>8 fields changed</strong><span>Ready for review.</span></div><div class="review-card"><strong>Undo snapshot saved</strong><span>Roll back without reloading.</span></div><div class="button" style="width:100%;">Undo last fill</div></div></div>`],
+      ['profiles', copy.profilesHeadline, `<div class="grid2"><div class="panel"><h2>${ui.savedProfiles}</h2><div class="profile"><strong>${ui.workProfile}</strong><span>${ui.profileContents}</span></div><div class="profile"><strong>${ui.applicantProfile}</strong><span>${ui.applicantContents}</span></div></div><div class="panel"><h2>${ui.smartRules}</h2><div class="cardline"><span>${ui.workEmail}</span><strong>@email</strong></div><div class="cardline"><span>${ui.resume}</span><strong>resume.pdf</strong></div></div></div>`],
+      ['modern-forms', copy.modernHeadline, `<div class="grid2"><div class="form"><h2>${ui.intakeForm}</h2>${field(ui.fullName, 'Alex Morgan')}${field(ui.preferredContact, ui.email)}${field(ui.resume, 'alex-morgan.pdf')}</div><div class="panel"><h2>${ui.modernControls}</h2><div class="field-grid"><div class="field-tile"><strong>${ui.dropdowns}</strong><span>${ui.matchedFromProfile}</span></div><div class="field-tile"><strong>${ui.checkboxes}</strong><span>${ui.matchedFromProfile}</span></div><div class="field-tile"><strong>${ui.lateFields}</strong><span>${ui.readyForReview}</span></div></div></div></div>`],
+      ['privacy', copy.privacyHeadline, `<div class="privacy-proof"><div class="privacy-grid"><div class="privacy-card"><strong>${ui.profileStorage}</strong><span>${ui.savedByExtension}</span></div><div class="privacy-card"><strong>${ui.pageAccess}</strong><span>${ui.runsOnChosenPage}</span></div><div class="privacy-card"><strong>${ui.finalSay}</strong><span>${ui.youReviewSubmit}</span></div></div><div class="privacy-ledger"><h2>${ui.clearControl}</h2><div class="privacy-row"><span>${ui.fillAction}</span><strong>${ui.yourClick}</strong></div><div class="privacy-row"><span>${ui.formSubmission}</span><strong>${ui.yourDecision}</strong></div></div></div>`],
+      ['undo', copy.undoHeadline, `<div class="review-proof review-proof-light"><div class="review-form"><h2>${ui.reviewBeforeSubmit}</h2><div class="review-row"><span>${ui.fullName}</span><strong>Alex Morgan</strong></div><div class="review-row"><span>${ui.portfolio}</span><strong>stealthyapps.com</strong></div><div class="review-row"><span>${ui.resume}</span><strong>alex-morgan.pdf</strong></div></div><div class="review-stack"><div class="review-card accent"><strong>${ui.fieldsChanged}</strong><span>${ui.readyForReview}</span></div><div class="review-card"><strong>${ui.undoAvailable}</strong><span>${ui.rollbackWithoutReload}</span></div><div class="button" style="width:100%;">${ui.undoLastFill}</div></div></div>`],
     ];
     for (const [slug, title, scene] of localizedScenes) {
       const proof = slug === 'privacy' ? scene : chromeFrame('forms.example.com/fill', scene);

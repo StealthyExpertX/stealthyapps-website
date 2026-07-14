@@ -16,8 +16,8 @@ FillPro is the only public product on the site right now. The structure is ready
 
 ## Product Boundary
 
-FillPro does not run a cloud profile account for form values. Saved profiles stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+FillPro does not run a cloud profile account for form values. Saved profiles stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Release
 
-Current website content is aligned to FillPro 1.0.0 and last updated on 2026-06-14.
+Current website content is aligned to FillPro 1.0.0 and last updated on 2026-07-13.

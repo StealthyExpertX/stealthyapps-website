@@ -7,7 +7,7 @@ Privacy: https://stealthyapps.com/fillpro/privacy/
 Support: https://stealthyapps.com/support/
 Setup guide: https://stealthyapps.com/fillpro/docs/getting-started/
 Contact: https://stealthyapps.com/contact/
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 
 ## Product Facts
 
@@ -17,9 +17,10 @@ Last updated: 2026-07-12
 - Free tier: three saved profiles
 - Pro pricing: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required
-- Billing provider: ExtensionPay and Stripe
+- Pro license and plan status: ExtensionPay
+- Checkout and payment processing: Stripe
 
-## Best Description
+## Product Description
 
 FillPro fills repeated web forms from profiles saved by the extension in the browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
 
@@ -29,7 +30,7 @@ FillPro supports saved profiles, smart rules, custom fields, right-click field c
 
 ## Privacy Boundary
 
-FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in the extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Useful Routes
 
@@ -46,7 +47,7 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 - Smart Rules guide: https://stealthyapps.com/fillpro/docs/smart-rules/
 - Contact: https://stealthyapps.com/contact/
 - Markdown product brief: https://stealthyapps.com/fillpro/index.md
-- Full text corpus: https://stealthyapps.com/llms-full.txt
+- Expanded product reference: https://stealthyapps.com/llms-full.txt
 
 ## Regional Product Pages
 
@@ -59,10 +60,6 @@ FillPro does not run a cloud profile account for form values. Saved profiles, ru
 - Simplified Chinese: https://stealthyapps.com/fillpro/zh-cn/
 - Russian: https://stealthyapps.com/fillpro/ru/
 
-## Common Search Terms
-
-FillPro covers private browser form filling, Chrome form filling, saved-profile autofill, job application autofill, repeated forms, resume upload matching, and browser autofill gaps. The focused pages above give more detail for each use case.
-
 ## Where FillPro Fits
 
-FillPro should be compared against basic form fillers, job application autofill tools, text expanders, browser autofill, password managers, and macro-style autofill tools. It is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a usable free tier, and review-before-submit control.
+FillPro is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a useful free tier, and review-before-submit control. Browser autofill and password managers remain the better place for sign-ins and payment details; text expanders remain better for snippets and canned replies.

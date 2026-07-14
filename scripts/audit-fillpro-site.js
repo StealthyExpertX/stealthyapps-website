@@ -14,7 +14,7 @@ const LOCALIZED_PAGES = {
   'fillpro/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
   'fillpro/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
   'fillpro/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
-  'fillpro/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填写' },
+  'fillpro/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填充' },
   'fillpro/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
 };
 const HREFLANG_URLS = {
@@ -595,6 +595,66 @@ function checkIndexNowKey() {
   }
 }
 
+function checkCrawlerSurfaces() {
+  const robots = fs.readFileSync(path.join(ROOT, 'robots.txt'), 'utf8');
+  for (const agent of [
+    'Googlebot',
+    'Bingbot',
+    'OAI-SearchBot',
+    'ChatGPT-User',
+    'ClaudeBot',
+    'Claude-User',
+    'Claude-SearchBot',
+    'PerplexityBot',
+    'Perplexity-User',
+  ]) {
+    const block = new RegExp(`User-agent: ${agent.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\r?\\nAllow: /`);
+    if (!block.test(robots)) fail(`robots.txt: ${agent} should be explicitly allowed`);
+  }
+  for (const sitemap of [
+    'sitemap-index.xml',
+    'sitemap.xml',
+    'sitemap-images.xml',
+    'sitemap-locales.xml',
+  ]) {
+    if (!robots.includes(`Sitemap: https://stealthyapps.com/${sitemap}`)) {
+      fail(`robots.txt: missing ${sitemap}`);
+    }
+  }
+
+  const llms = fs.readFileSync(path.join(ROOT, 'llms.txt'), 'utf8');
+  const llmsFull = fs.readFileSync(path.join(ROOT, 'llms-full.txt'), 'utf8');
+  const requiredRoutes = [
+    'https://stealthyapps.com/fillpro/',
+    'https://stealthyapps.com/fillpro/privacy/',
+    'https://stealthyapps.com/support/',
+    'https://stealthyapps.com/contact/',
+  ];
+  for (const route of requiredRoutes) {
+    if (!llms.includes(route)) fail(`llms.txt: missing ${route}`);
+    if (!llmsFull.includes(route)) fail(`llms-full.txt: missing ${route}`);
+  }
+  if (llms.trim().split(/\s+/).length > 1000) {
+    fail('llms.txt: keep the primary product index below 1,000 words');
+  }
+  for (const [file, source] of [
+    ['llms.txt', llms],
+    ['llms-full.txt', llmsFull],
+  ]) {
+    for (const risky of [
+      /rank(?:ed|ing)?\s*(?:#|number)?\s*1/i,
+      /guaranteed?\s+(?:ranking|citation|traffic)/i,
+      /unless .*choose(?:s)? Pro billing/i,
+      /License status is handled by ExtensionPay and Stripe/i,
+    ]) {
+      if (risky.test(source)) fail(`${file}: contains an unsupported or ambiguous crawler claim`);
+    }
+    if (!source.includes('not saved profile values') && !source.includes('Neither service receives saved profile values')) {
+      fail(`${file}: billing boundary should say saved profile values are not sent`);
+    }
+  }
+}
+
 function checkLocalization() {
   const pages = {
     'fillpro/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
@@ -677,6 +737,7 @@ checkRelatedGuides();
 checkChangelog(files);
 checkAssetVersioning(files);
 checkIndexNowKey();
+checkCrawlerSurfaces();
 checkLocalization();
 
 if (failures.length) {

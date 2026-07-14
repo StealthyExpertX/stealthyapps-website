@@ -1,6 +1,6 @@
 # FillPro
 
-Last reviewed: 2026-06-14
+Last reviewed: 2026-07-13
 
 FillPro is a private browser form autofill extension for repeated web forms.
 
@@ -15,6 +15,6 @@ Pricing:
 Privacy:
 
 - FillPro does not run a cloud profile account for form values.
-- Saved profiles stay inside the browser extension unless the user exports them, contacts support, or chooses Pro billing.
-- Billing is handled by ExtensionPay and Stripe.
+- Saved profiles stay inside the browser extension unless the user exports them or manually includes them in a support message.
+- ExtensionPay handles Pro license and plan status. Stripe handles checkout and payment processing; neither service receives saved profile values from FillPro.
 - Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.

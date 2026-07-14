@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const UPDATED_ISO = '2026-07-12';
+const UPDATED_ISO = '2026-07-13';
 const CHECK_ONLY = process.argv.includes('--check');
 
 const locales = [
@@ -32,7 +32,7 @@ const locales = [
       ['Funktioniert FillPro offline?', 'Ja. Der normale Ablauf mit gespeicherten Profilen funktioniert offline. Für Pro-Lizenzprüfungen, Support und Downloads ist eine Verbindung erforderlich.'],
       ['Ersetzt FillPro einen Passwortmanager?', 'Nein. Anmeldedaten, Karten und Einmalcodes bleiben bei den dafür vorgesehenen Browser- und Passwortmanager-Funktionen.'],
     ],
-    finalTitle: 'Das nächste lange Formular schneller erledigen.', finalCta: 'FillPro herunterladen', languageLabel: 'Sprache', skip: 'Zum Inhalt springen', updated: 'Aktualisiert', dateLabel: '12. Juli 2026',
+    finalTitle: 'Das nächste lange Formular schneller erledigen.', finalCta: 'FillPro herunterladen', languageLabel: 'Sprache', skip: 'Zum Inhalt springen', updated: 'Aktualisiert', dateLabel: '13. Juli 2026',
   },
   {
     slug: 'es', lang: 'es', hreflang: 'es', ogLocale: 'es_ES', languageName: 'Español',
@@ -59,7 +59,7 @@ const locales = [
       ['¿FillPro funciona sin conexión?', 'Sí. El flujo normal con perfiles guardados funciona sin conexión. La licencia Pro, el soporte y las descargas necesitan conexión.'],
       ['¿Sustituye a un gestor de contraseñas?', 'No. Los inicios de sesión, las tarjetas y los códigos de un solo uso siguen en las herramientas creadas para ellos.'],
     ],
-    finalTitle: 'Termina antes el próximo formulario largo.', finalCta: 'Descargar FillPro', languageLabel: 'Idioma', skip: 'Saltar al contenido', updated: 'Actualizado', dateLabel: '12 de julio de 2026',
+    finalTitle: 'Termina antes el próximo formulario largo.', finalCta: 'Descargar FillPro', languageLabel: 'Idioma', skip: 'Saltar al contenido', updated: 'Actualizado', dateLabel: '13 de julio de 2026',
   },
   {
     slug: 'fr', lang: 'fr', hreflang: 'fr', ogLocale: 'fr_FR', languageName: 'Français',
@@ -86,7 +86,7 @@ const locales = [
       ['FillPro fonctionne-t-il hors ligne ?', 'Oui. Le parcours normal avec les profils enregistrés fonctionne hors ligne. La licence Pro, le support et les téléchargements nécessitent une connexion.'],
       ['FillPro remplace-t-il un gestionnaire de mots de passe ?', 'Non. Les identifiants, cartes et codes à usage unique restent dans les outils conçus pour ces données.'],
     ],
-    finalTitle: 'Terminez plus vite votre prochain formulaire.', finalCta: 'Télécharger FillPro', languageLabel: 'Langue', skip: 'Aller au contenu', updated: 'Mis à jour', dateLabel: '12 juillet 2026',
+    finalTitle: 'Terminez plus vite votre prochain formulaire.', finalCta: 'Télécharger FillPro', languageLabel: 'Langue', skip: 'Aller au contenu', updated: 'Mis à jour', dateLabel: '13 juillet 2026',
   },
   {
     slug: 'pt-br', lang: 'pt-BR', hreflang: 'pt-BR', ogLocale: 'pt_BR', languageName: 'Português (Brasil)',
@@ -113,7 +113,7 @@ const locales = [
       ['O FillPro funciona offline?', 'Sim. O fluxo normal com perfis salvos funciona offline. Licença Pro, suporte e downloads precisam de conexão.'],
       ['O FillPro substitui um gerenciador de senhas?', 'Não. Logins, cartões e códigos de uso único continuam nas ferramentas criadas para esses dados.'],
     ],
-    finalTitle: 'Termine o próximo formulário longo mais rápido.', finalCta: 'Baixar FillPro', languageLabel: 'Idioma', skip: 'Pular para o conteúdo', updated: 'Atualizado', dateLabel: '12 de julho de 2026',
+    finalTitle: 'Termine o próximo formulário longo mais rápido.', finalCta: 'Baixar FillPro', languageLabel: 'Idioma', skip: 'Pular para o conteúdo', updated: 'Atualizado', dateLabel: '13 de julho de 2026',
   },
   {
     slug: 'ja', lang: 'ja', hreflang: 'ja', ogLocale: 'ja_JP', languageName: '日本語',
@@ -140,7 +140,7 @@ const locales = [
       ['オフラインでも使えますか？', 'はい。保存プロフィールを使う通常の入力はオフラインで動作します。Proライセンス確認、サポート、ダウンロードには接続が必要です。'],
       ['パスワード管理ツールの代わりになりますか？', 'いいえ。ログイン情報、カード、ワンタイムコードは、それらを扱うためのブラウザ機能やパスワード管理ツールに任せます。'],
     ],
-    finalTitle: '次の長いフォームを、もっと短時間で。', finalCta: 'FillPro をダウンロード', languageLabel: '言語', skip: '本文へ移動', updated: '更新日', dateLabel: '2026年7月12日',
+    finalTitle: '次の長いフォームを、もっと短時間で。', finalCta: 'FillPro をダウンロード', languageLabel: '言語', skip: '本文へ移動', updated: '更新日', dateLabel: '2026年7月13日',
   },
   {
     slug: 'ko', lang: 'ko', hreflang: 'ko', ogLocale: 'ko_KR', languageName: '한국어',
@@ -167,16 +167,16 @@ const locales = [
       ['오프라인에서도 작동하나요?', '예. 저장 프로필을 이용한 일반 입력은 오프라인에서 작동합니다. Pro 라이선스 확인, 지원, 다운로드에는 연결이 필요합니다.'],
       ['비밀번호 관리자를 대신하나요?', '아니요. 로그인, 카드, 일회용 코드는 해당 데이터를 위해 만든 브라우저 기능과 비밀번호 관리자에서 계속 처리합니다.'],
     ],
-    finalTitle: '다음 긴 양식을 더 빨리 끝내세요.', finalCta: 'FillPro 다운로드', languageLabel: '언어', skip: '본문으로 건너뛰기', updated: '업데이트', dateLabel: '2026년 7월 12일',
+    finalTitle: '다음 긴 양식을 더 빨리 끝내세요.', finalCta: 'FillPro 다운로드', languageLabel: '언어', skip: '본문으로 건너뛰기', updated: '업데이트', dateLabel: '2026년 7월 13일',
   },
   {
     slug: 'zh-cn', lang: 'zh-CN', hreflang: 'zh-CN', ogLocale: 'zh_CN', languageName: '简体中文',
-    title: '用 FillPro 自动填写表单',
-    description: 'FillPro 用已保存的资料自动填写求职申请、注册和重复网页表单。免费提供 3 个资料，无需账户，支持离线使用，提交前可检查或撤销。',
+    title: '用 FillPro 自动填充表单',
+    description: 'FillPro 使用已保存的个人资料填写求职申请、注册和常用网页表单。可免费保存 3 个资料，无需注册，也可离线使用，提交前可检查或撤销。',
     nav: ['产品', '下载', '价格', '隐私', '支持', '联系'],
-    kicker: '表单自动填写与自动填充',
+    kicker: '表单自动填充，资料保存在扩展程序中',
     h1: '不必在每个表单中重复输入相同资料。',
-    lead: 'FillPro 将可重复使用的资料保存在浏览器中。选择资料、填写页面，然后在提交前检查结果。',
+    lead: 'FillPro 将可重复使用的个人资料保存在浏览器扩展中。选择资料、填写页面，然后在提交前检查结果。',
     ctas: ['免费开始', '查看价格'],
     quickTitle: '更短的操作流程',
     quickItems: ['只需保存一次资料', '一键填写表单', '检查更改或撤销填写'],
@@ -194,7 +194,7 @@ const locales = [
       ['FillPro 可以离线使用吗？', '可以。使用已保存资料的日常填写可离线运行。Pro 许可证检查、支持和下载需要联网。'],
       ['FillPro 会替代密码管理器吗？', '不会。登录信息、银行卡和一次性验证码仍由专门处理这些数据的浏览器功能或密码管理器负责。'],
     ],
-    finalTitle: '更快完成下一个长表单。', finalCta: '下载 FillPro', languageLabel: '语言', skip: '跳到主要内容', updated: '更新日期', dateLabel: '2026年7月12日',
+    finalTitle: '更快完成下一个长表单。', finalCta: '下载 FillPro', languageLabel: '语言', skip: '跳到主要内容', updated: '更新日期', dateLabel: '2026年7月13日',
   },
   {
     slug: 'ru', lang: 'ru', hreflang: 'ru', ogLocale: 'ru_RU', languageName: 'Русский',
@@ -221,7 +221,7 @@ const locales = [
       ['FillPro работает офлайн?', 'Да. Обычное заполнение из сохранённых профилей работает офлайн. Для проверки Pro, поддержки и загрузок требуется подключение.'],
       ['FillPro заменяет менеджер паролей?', 'Нет. Логины, карты и одноразовые коды остаются в браузере и менеджере паролей, созданных для этих данных.'],
     ],
-    finalTitle: 'Закончите следующую длинную форму быстрее.', finalCta: 'Скачать FillPro', languageLabel: 'Язык', skip: 'Перейти к содержимому', updated: 'Обновлено', dateLabel: '12 июля 2026 г.',
+    finalTitle: 'Закончите следующую длинную форму быстрее.', finalCta: 'Скачать FillPro', languageLabel: 'Язык', skip: 'Перейти к содержимому', updated: 'Обновлено', dateLabel: '13 июля 2026 г.',
   },
 ];
 

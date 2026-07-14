@@ -63,7 +63,128 @@ function checkLocalizedCaptions() {
   }
 }
 
+function checkLocalizedScreenshotCopy() {
+  const sourcePath = filePath('scripts/fillpro-localized-marketplace-copy.json');
+  if (!fs.existsSync(sourcePath)) {
+    fail('localized screenshots: copy source missing');
+    return;
+  }
+  const copy = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const topLevelKeys = [
+    'badge',
+    'headline',
+    'intro',
+    'profilesHeadline',
+    'modernHeadline',
+    'privacyHeadline',
+    'undoHeadline',
+  ];
+  const uiKeys = [
+    'beforeTitle',
+    'afterTitle',
+    'workProfile',
+    'profileDetail',
+    'fillPage',
+    'undoLastFill',
+    'fullName',
+    'workEmail',
+    'company',
+    'resume',
+    'savedProfiles',
+    'profileContents',
+    'applicantProfile',
+    'applicantContents',
+    'smartRules',
+    'intakeForm',
+    'preferredContact',
+    'email',
+    'modernControls',
+    'dropdowns',
+    'checkboxes',
+    'lateFields',
+    'matchedFromProfile',
+    'readyForReview',
+    'profileStorage',
+    'savedByExtension',
+    'pageAccess',
+    'runsOnChosenPage',
+    'finalSay',
+    'youReviewSubmit',
+    'clearControl',
+    'fillAction',
+    'yourClick',
+    'formSubmission',
+    'yourDecision',
+    'reviewBeforeSubmit',
+    'portfolio',
+    'fieldsChanged',
+    'undoAvailable',
+    'rollbackWithoutReload',
+  ];
+  const untranslatedDefaults = new Set([
+    'Client onboarding',
+    'After FillPro',
+    'Work profile',
+    '12 fields, 1 upload, 2 smart rules',
+    'Fill Page',
+    'Undo last fill',
+    'Full name',
+    'Work email',
+    'Company',
+    'Resume upload',
+    'Saved profiles',
+    'Applicant profile',
+    'Smart rules',
+    'Team intake form',
+    'Preferred contact',
+    'Modern controls',
+    'Dropdowns',
+    'Checkboxes',
+    'Late fields',
+    'Matched from the profile.',
+    'Ready for review',
+    'Profile storage',
+    'Saved by the extension.',
+    'Page access',
+    'Runs on the page you choose.',
+    'Final say',
+    'You review and submit.',
+    'Clear control',
+    'Fill action',
+    'Your click',
+    'Form submission',
+    'Your decision',
+    'Review before submit',
+    '8 fields changed',
+    'Undo snapshot saved',
+    'Roll back without reloading.',
+  ]);
+
+  if (Object.keys(copy).sort().join(',') !== locales.slice().sort().join(',')) {
+    fail(`localized screenshots: expected copy for ${locales.join(', ')}`);
+  }
+  for (const locale of locales) {
+    const entry = copy[locale];
+    if (!entry || typeof entry !== 'object') continue;
+    for (const key of topLevelKeys) {
+      if (!String(entry[key] || '').trim()) fail(`localized screenshots: ${locale} missing ${key}`);
+    }
+    for (const key of uiKeys) {
+      const value = String(entry.ui?.[key] || '').trim();
+      if (!value) fail(`localized screenshots: ${locale} missing ui.${key}`);
+      if (untranslatedDefaults.has(value)) {
+        fail(`localized screenshots: ${locale} left ui.${key} in English`);
+      }
+    }
+    if (JSON.stringify(entry).includes('\ufffd')) {
+      fail(`localized screenshots: ${locale} contains a replacement character`);
+    }
+  }
+}
+
 async function checkLocalizedScreenshots() {
+  checkLocalizedScreenshotCopy();
   const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
   const names = ['fill-page', 'profiles', 'modern-forms', 'privacy', 'undo'];
   for (const locale of locales) {

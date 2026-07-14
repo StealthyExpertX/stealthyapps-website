@@ -1,8 +1,8 @@
-# FillPro - Full Plain-Text Corpus
+# FillPro Product Reference
 
-Use this file when a crawler, search assistant, or retrieval index needs the current FillPro product facts in one document.
+A consolidated plain-text reference for the current FillPro product, pricing, privacy boundaries, support routes, and regional pages.
 
-Last updated: 2026-07-12
+Last updated: 2026-07-13
 
 ## Product Summary
 
@@ -38,8 +38,8 @@ Canonical product page: https://stealthyapps.com/fillpro/
 FillPro is designed for structured profile data across many unrelated web forms.
 
 - Browser autofill and password managers are usually strongest for saved addresses, sign-ins, and payment flows.
-- Text Blaze, Magical, TextExpander, and similar tools are usually strongest for snippets, notes, outreach, and canned replies.
-- Lightning Autofill and macro tools are usually strongest for selector scripts, repeated clicks, and browser automation.
+- Text expanders are usually strongest for snippets, notes, outreach, and canned replies.
+- Macro and record-mode tools are usually strongest for selector scripts, repeated clicks, and browser automation.
 - Record-mode form fillers are usually strongest when one exact form repeats the same way every time.
 - FillPro is strongest for repeated profile fields, custom labels, dropdowns, checkboxes, textareas, upload matching, smart rules, and review-before-submit filling.
 
@@ -50,13 +50,14 @@ FillPro is designed for structured profile data across many unrelated web forms.
 - Pro yearly: $29.99/year.
 - Pro lifetime: $39.99 one time.
 - Trial: 3 days, no card required.
-- Billing provider: ExtensionPay and Stripe.
+- Pro license and plan status: ExtensionPay.
+- Checkout and payment processing: Stripe.
 
 ## Privacy
 
-FillPro does not run a cloud profile account for form values. Saved profiles, custom fields, rules, and upload matches stay in the extension unless the user exports them, contacts support, or chooses Pro billing.
+FillPro does not run a cloud profile account for form values. Saved profiles, custom fields, rules, and upload matches stay in the extension unless the user exports them or manually includes them in a support message.
 
-License status is handled by ExtensionPay and Stripe. Support messages live in email systems and can be deleted on request.
+Pro license and plan status is checked through ExtensionPay. Stripe handles checkout and payment details. Neither service receives saved profile values from FillPro. Support messages live in email systems and can be deleted on request.
 
 FillPro is built for repeated profile-style form fields around sign-in, checkout, account, and intake flows. Password managers, browser autofill, payment wallets, and site controls should keep handling the sensitive parts they are built for.
 
