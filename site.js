@@ -37,6 +37,26 @@
     'zh-cn': { aria: '当前主题：{current}。切换到{next}主题。', title: '主题：{current}。下一个：{next}。', system: '跟随系统', light: '浅色', dark: '深色' },
     ru: { aria: 'Текущая тема: {current}. Переключить на тему «{next}».', title: 'Тема: {current}. Следующая: {next}.', system: 'системная', light: 'светлая', dark: 'тёмная' },
   };
+  var INSTALLED_COPY = {
+    en: {
+      open: 'Open FillPro',
+      monthly: 'Choose monthly in FillPro',
+      yearly: 'Choose yearly in FillPro',
+      lifetime: 'Choose lifetime in FillPro',
+      installedTitle: 'FillPro is installed in this browser.',
+      checkoutTitle: 'FillPro is installed. Choose free or Pro.',
+      checkoutLead: 'Keep the free plan, or add Pro for up to 500 profiles, backups, and profile duplication.',
+      checkoutNote: 'Use the FillPro toolbar button to create a profile, fill a page, or manage Pro.',
+    },
+    de: { open: 'FillPro öffnen', installedTitle: 'FillPro ist in diesem Browser installiert.' },
+    es: { open: 'Abrir FillPro', installedTitle: 'FillPro está instalado en este navegador.' },
+    fr: { open: 'Ouvrir FillPro', installedTitle: 'FillPro est installé dans ce navigateur.' },
+    'pt-br': { open: 'Abrir o FillPro', installedTitle: 'O FillPro está instalado neste navegador.' },
+    ja: { open: 'FillPro を開く', installedTitle: 'FillPro はこのブラウザーにインストールされています。' },
+    ko: { open: 'FillPro 열기', installedTitle: '이 브라우저에 FillPro가 설치되어 있습니다.' },
+    'zh-cn': { open: '打开 FillPro', installedTitle: '此浏览器已安装 FillPro。' },
+    ru: { open: 'Открыть FillPro', installedTitle: 'FillPro установлен в этом браузере.' },
+  };
 
   function currentThemeCopy() {
     var language = (root.getAttribute('lang') || 'en').toLowerCase();
@@ -45,6 +65,16 @@
     }
     var base = language.split('-')[0];
     return THEME_COPY[base] || THEME_COPY.en;
+  }
+
+  function currentInstalledCopy() {
+    var language = (root.getAttribute('lang') || 'en').toLowerCase();
+    var base = language.split('-')[0];
+    return Object.assign(
+      {},
+      INSTALLED_COPY.en,
+      INSTALLED_COPY[language] || INSTALLED_COPY[base] || {},
+    );
   }
 
   function formatThemeCopy(template, current, next) {
@@ -153,7 +183,35 @@
     });
   }
 
-  function applyInstalledExtensionState() {
+  function sendInstalledExtensionAction(extensionId, link, message) {
+    if (!extensionId || !window.chrome || !chrome.runtime?.sendMessage) return;
+    var finished = false;
+    var fallback = link.href || '/fillpro/docs/getting-started/';
+    link.setAttribute('aria-busy', 'true');
+
+    var fallbackTimer = window.setTimeout(function () {
+      if (!finished) window.location.assign(fallback);
+    }, 1800);
+
+    try {
+      chrome.runtime.sendMessage(extensionId, message, function (response) {
+        finished = true;
+        window.clearTimeout(fallbackTimer);
+        link.removeAttribute('aria-busy');
+        var runtimeError = chrome.runtime.lastError;
+        if (!runtimeError && response?.ok) return;
+        window.location.assign(fallback);
+      });
+    } catch (error) {
+      finished = true;
+      window.clearTimeout(fallbackTimer);
+      link.removeAttribute('aria-busy');
+      window.location.assign(fallback);
+    }
+  }
+
+  function applyInstalledExtensionState(extensionId) {
+    var copy = currentInstalledCopy();
     root.dataset.fillproInstalled = 'true';
     document.querySelectorAll('main a[href="/fillpro/download/"]').forEach(function (link) {
       var card = link.closest('[data-checkout-plan]');
@@ -162,24 +220,38 @@
       var paidPlan = card
         ? card.getAttribute('data-checkout-plan') !== 'free'
         : link.hasAttribute('data-checkout-action') && selectedPlan !== 'free';
-      link.textContent = paidPlan ? 'Choose this plan in FillPro' : 'Get started';
+      var plan = card
+        ? card.getAttribute('data-checkout-plan')
+        : paidPlan
+          ? selectedPlan
+          : 'free';
+      link.textContent = paidPlan ? copy[plan] || copy.yearly : copy.open;
       link.href = '/fillpro/docs/getting-started/';
       link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
-      link.title = paidPlan
-        ? 'Open FillPro from the browser toolbar and choose Upgrade to Pro.'
-        : 'FillPro is installed in this browser.';
+      link.dataset.installedPlan = plan;
+      link.title = copy.installedTitle;
+      link.addEventListener('click', function (event) {
+        event.preventDefault();
+        sendInstalledExtensionAction(
+          extensionId,
+          link,
+          paidPlan
+            ? { action: 'openPublicPlan', plan: plan }
+            : { action: 'openPublicSurface' },
+        );
+      });
     });
     var checkout = document.querySelector('[data-fillpro-checkout]');
     if (checkout && !checkout.querySelector('[data-installed-note]')) {
       var checkoutTitle = checkout.querySelector('#checkout-title');
       var checkoutLead = checkout.querySelector('.launch-lead');
-      if (checkoutTitle) checkoutTitle.textContent = 'FillPro is ready. Pick the plan that works for you.';
-      if (checkoutLead) checkoutLead.textContent = 'Stay on the free plan, or add Pro for up to 500 profiles, backups, and profile duplication.';
+      if (checkoutTitle) checkoutTitle.textContent = copy.checkoutTitle;
+      if (checkoutLead) checkoutLead.textContent = copy.checkoutLead;
       var note = document.createElement('p');
       note.className = 'installed-extension-note';
       note.dataset.installedNote = 'true';
       note.setAttribute('role', 'status');
-      note.textContent = 'Already installed. Open FillPro from your browser toolbar to start filling or upgrade.';
+      note.textContent = copy.checkoutNote;
       var grid = checkout.querySelector('.checkout-grid');
       if (grid) grid.insertAdjacentElement('beforebegin', note);
     }
@@ -197,7 +269,7 @@
           { action: 'getPublicInstallState' },
           function (response) {
             if (response && response.installed === true) {
-              applyInstalledExtensionState();
+              applyInstalledExtensionState(extensionId);
               return;
             }
             tryNext();

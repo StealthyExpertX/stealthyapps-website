@@ -854,14 +854,20 @@ async function auditInstalledExtensionState(browser, origin, errors) {
   const page = await browser.newPage({ viewport: { width: 1440, height: 1000 } });
   try {
     await page.addInitScript(() => {
+      window.__fillProBridgeMessages = [];
       window.chrome = {
         runtime: {
+          lastError: null,
           sendMessage(extensionId, message, callback) {
+            window.__fillProBridgeMessages.push(message);
+            if (extensionId !== 'hklppjjdpnndpdahnfpjpamhefgcolai') {
+              callback(undefined);
+              return;
+            }
             callback(
-              extensionId === 'hklppjjdpnndpdahnfpjpamhefgcolai' &&
-                message?.action === 'getPublicInstallState'
+              message?.action === 'getPublicInstallState'
                 ? { installed: true, version: '1.0.0' }
-                : undefined,
+                : { ok: true, surface: 'action_popup' },
             );
           },
         },
@@ -879,17 +885,37 @@ async function auditInstalledExtensionState(browser, origin, errors) {
       title: document.getElementById('checkout-title')?.textContent?.trim() || '',
     }));
     if (
-      !/Already installed/.test(report.note) ||
-      report.free !== 'Get started' ||
-      report.monthly !== 'Choose this plan in FillPro' ||
-      report.yearly !== 'Choose this plan in FillPro' ||
-      report.hero !== 'Choose this plan in FillPro' ||
-      report.nav.includes('Get started') ||
-      report.title !== 'FillPro is ready. Pick the plan that works for you.'
+      !/toolbar button/.test(report.note) ||
+      report.free !== 'Open FillPro' ||
+      report.monthly !== 'Choose monthly in FillPro' ||
+      report.yearly !== 'Choose yearly in FillPro' ||
+      report.hero !== 'Choose yearly in FillPro' ||
+      report.nav.includes('Open FillPro') ||
+      report.title !== 'FillPro is installed. Choose free or Pro.'
     ) {
       errors.push(`/fillpro/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
     }
+    await page.locator('[data-checkout-plan="monthly"] .launch-button').click();
+    await page.locator('[data-checkout-plan="free"] .launch-button').click();
+    const bridgeMessages = await page.evaluate(() => window.__fillProBridgeMessages);
+    if (
+      !bridgeMessages.some(
+        (message) => message?.action === 'openPublicPlan' && message.plan === 'monthly',
+      ) ||
+      !bridgeMessages.some((message) => message?.action === 'openPublicSurface')
+    ) {
+      errors.push(`/fillpro/checkout/: installed CTA bridge regressed: ${JSON.stringify(bridgeMessages)}`);
+    }
     await page.screenshot({ path: path.join(OUT_DIR, 'checkout-installed-extension-dark.png'), fullPage: true });
+
+    await page.goto(`${origin}/fillpro/de/`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.fillproInstalled === 'true');
+    const germanActions = await page
+      .locator('main a[data-installed-action="installed"]')
+      .allTextContents();
+    if (!germanActions.length || germanActions.some((label) => label.trim() !== 'FillPro öffnen')) {
+      errors.push(`/fillpro/de/: installed CTA was not localized: ${JSON.stringify(germanActions)}`);
+    }
   } catch (error) {
     errors.push(`/fillpro/checkout/: installed-extension audit failed: ${error.message}`);
   } finally {
