@@ -145,7 +145,7 @@ function checkLocalizedScreenshotCopy() {
     'Matched from the profile.',
     'Ready for review',
     'Profile storage',
-    'Saved by the extension.',
+    'Stored by FillPro in your browser.',
     'Page access',
     'Runs on the page you choose.',
     'Final say',
@@ -193,6 +193,7 @@ async function checkLocalizedScreenshots() {
         `assets/marketplace/localized/${locale}/fillpro-screenshot-${name}-1280x800.png`,
         1280,
         800,
+        { requireOpaque: true },
       );
     }
   }
@@ -207,6 +208,9 @@ async function checkImage(relativePath, width, height, options = {}) {
     fail(`${relativePath}: expected ${width}x${height}, got ${metadata.width}x${metadata.height}`);
   }
   if (metadata.format !== 'png') fail(`${relativePath}: expected PNG, got ${metadata.format}`);
+  if (options.requireOpaque && metadata.hasAlpha) {
+    fail(`${relativePath}: store screenshots must be fully opaque`);
+  }
   if (options.maxMeanLuma || options.minColorSpread) await checkImageEnergy(relativePath, target, options);
 }
 
@@ -506,7 +510,7 @@ function checkStillRenderer() {
     'Review the fill. Undo it if needed.',
     'Roll the last FillPro changes back without reloading the page.',
     'Fill repeat forms without handing over your data.',
-    'Your profile stays with the extension.',
+    'Your saved details stay in FillPro.',
     'shot-outcome',
     'shot-modern',
     'shot-profiles',
@@ -682,7 +686,9 @@ async function main() {
     'assets/marketplace/fillpro-screenshot-privacy-1280x800.png',
     'assets/marketplace/fillpro-screenshot-undo-1280x800.png',
   ];
-  for (const screenshot of screenshots) await checkImage(screenshot, 1280, 800);
+  for (const screenshot of screenshots) {
+    await checkImage(screenshot, 1280, 800, { requireOpaque: true });
+  }
   await checkLocalizedScreenshots();
   await checkScreenshotDistinctness(screenshots);
   await checkImage('assets/marketplace/fillpro-store-demo-22s-thumb.png', 1280, 720);

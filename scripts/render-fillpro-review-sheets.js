@@ -137,6 +137,38 @@ async function renderIconSheet() {
   });
 }
 
+async function renderLocalizedSheet() {
+  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const screenshots = [
+    ['fill-page', 'Main promise'],
+    ['profiles', 'Profiles'],
+    ['modern-forms', 'Modern controls'],
+    ['privacy', 'Privacy'],
+    ['undo', 'Undo'],
+  ];
+  const items = locales.flatMap((locale) =>
+    screenshots.map(([slug, label]) => ({
+      title: `${locale} · ${label}`,
+      subtitle: `Localized store screenshot ${screenshots.findIndex(([value]) => value === slug) + 1}`,
+      file: marketplace(
+        path.join('localized', locale, `fillpro-screenshot-${slug}-1280x800.png`),
+      ),
+    })),
+  );
+
+  await contactSheet(
+    items,
+    path.join(OUT_DIR, 'localized-contact-sheet-current.png'),
+    {
+      columns: 5,
+      tileWidth: 300,
+      tileHeight: 270,
+      gap: 12,
+      padding: 18,
+    },
+  );
+}
+
 async function extractVideoFrames() {
   fs.rmSync(FRAME_DIR, { recursive: true, force: true });
   fs.mkdirSync(FRAME_DIR, { recursive: true });
@@ -183,6 +215,7 @@ async function renderVideoSheet() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   await renderMarketingSheet();
   await renderIconSheet();
+  await renderLocalizedSheet();
   await renderVideoSheet();
   console.log(`FillPro review sheets written to ${OUT_DIR}`);
 })().catch((error) => {

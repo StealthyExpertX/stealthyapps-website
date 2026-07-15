@@ -28,7 +28,7 @@ Upload references stay with your saved FillPro profile unless you export them. F
 
 FillPro matches saved profile files to normal upload fields it can reach, then leaves the final review and submit step to you.
 
-## More about the FillPro workflow
+## More ways to use FillPro
 
 - [Job application autofill](https://stealthyapps.com/fillpro/job-application-autofill/)
 - [Local form autofill](https://stealthyapps.com/fillpro/local-form-autofill/)

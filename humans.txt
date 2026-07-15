@@ -7,4 +7,4 @@ Location: United States
 /* SITE */
 Languages: English, German, Spanish, French, Brazilian Portuguese, Japanese, Korean, Simplified Chinese, Russian
 Purpose: Public website for FillPro, a private browser form autofill extension.
-Last updated: 2026-07-13
+Last updated: 2026-07-15

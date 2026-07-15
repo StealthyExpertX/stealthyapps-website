@@ -404,6 +404,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let currentCompose = null;
   let isBusy = false;
   let hasAppliedPrefillReason = false;
+  let hasInteracted = false;
 
   if (
     !topicField ||
@@ -552,7 +553,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (syncStatus && !isBusy) {
-      setStatus(statusNode, 'idle', getReadinessMessage());
+      setStatus(
+        statusNode,
+        'idle',
+        hasInteracted ? getReadinessMessage() : context.idleMessage,
+      );
     }
 
     return { composeState, directState };
@@ -612,7 +617,10 @@ document.addEventListener('DOMContentLoaded', () => {
     topicField.value = getDefaultTopicKey(topics);
   }
 
-  topicField.addEventListener('change', updateTopicState);
+  topicField.addEventListener('change', () => {
+    hasInteracted = true;
+    updateTopicState();
+  });
   updateTopicState();
 
   const draftChangeHandlers = [
@@ -624,6 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   draftChangeHandlers.forEach(([field, eventName]) => {
     field.addEventListener(eventName, () => {
+      hasInteracted = true;
       if (currentCompose) {
         hideEmailOptions();
       }
@@ -744,6 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
       await sendDirectMessage(directPayload);
 
       form.reset();
+      hasInteracted = false;
       updateTopicState();
       hideEmailOptions();
       refreshFormState({ syncStatus: false });

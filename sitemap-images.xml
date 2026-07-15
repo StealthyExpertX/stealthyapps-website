@@ -3,6 +3,7 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://stealthyapps.com/fillpro/</loc>
+    <lastmod>2026-07-15</lastmod>
     <image:image>
       <image:loc>https://stealthyapps.com/assets/fillpro-og.png</image:loc>
       <image:title>FillPro private form autofill launch art</image:title>
@@ -36,7 +37,7 @@
     <image:image>
       <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-privacy-1280x800.png</image:loc>
       <image:title>FillPro private autofill controls</image:title>
-      <image:caption>Saved profiles stay in the extension for the normal FillPro workflow.</image:caption>
+      <image:caption>FillPro keeps saved profiles in browser storage for the normal autofill workflow.</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://stealthyapps.com/assets/marketplace/fillpro-screenshot-undo-1280x800.png</image:loc>

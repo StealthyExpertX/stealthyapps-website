@@ -8,7 +8,7 @@ FillPro is a browser extension from Stealthy Apps for people who keep seeing the
 - Free tier: three saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Trial: 3 days, no card required
-- Last updated: 2026-07-13
+- Last updated: 2026-07-15
 
 ## Where FillPro fits
 
@@ -25,7 +25,7 @@ Focused pages:
 
 ## Core product
 
-- Profiles saved by the extension in the browser.
+- Profiles saved in FillPro's browser storage.
 - Popup, side panel, on-page profile picker, right-click fill, and keyboard shortcut.
 - Smart rules and custom fields for unusual labels.
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
@@ -45,7 +45,7 @@ FillPro is strongest when structured profile data has to move across many unrela
 
 ## Privacy and control
 
-FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in the extension unless the user exports them or manually includes them in a support message. Pro billing does not send saved profile values to ExtensionPay or Stripe. Fill Page uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+FillPro does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in FillPro's browser storage unless the user exports them or manually includes them in a support message. Pro billing does not send saved profile values to ExtensionPay or Stripe. Fill Page uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from FillPro settings.
 
@@ -53,7 +53,7 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 
 Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
-Pro adds more saved profiles, profile duplication, import, and export. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
+Pro adds up to 500 saved profiles, profile duplication, import, and export. Pro pricing is $3.99/month, $29.99/year, or $39.99 lifetime with a 3-day trial and no card required.
 
 Checkout starts from inside the extension so ExtensionPay can attach the license to the browser profile using FillPro. The website explains plans and points users to the right browser install page.
 

@@ -7,7 +7,7 @@ Privacy: https://stealthyapps.com/fillpro/privacy/
 Support: https://stealthyapps.com/support/
 Setup guide: https://stealthyapps.com/fillpro/docs/getting-started/
 Contact: https://stealthyapps.com/contact/
-Last updated: 2026-07-13
+Last updated: 2026-07-15
 
 ## Product Facts
 
@@ -22,7 +22,7 @@ Last updated: 2026-07-13
 
 ## Product Description
 
-FillPro fills repeated web forms from profiles saved by the extension in the browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
+FillPro fills repeated web forms from profiles saved in FillPro's browser storage. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
 
 ## What It Handles
 
@@ -30,7 +30,7 @@ FillPro supports saved profiles, smart rules, custom fields, right-click field c
 
 ## Privacy Boundary
 
-FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in the extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in FillPro's browser storage unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Useful Routes
 

@@ -861,6 +861,22 @@ function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile
 async function renderHtml(browser, output, width, height, html) {
   const page = await browser.newPage({ viewport: { width, height }, deviceScaleFactor: 1 });
   await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><style>${css}</style></head><body>${html}</body></html>`);
+  await page.evaluate(async () => {
+    if (document.fonts?.ready) await document.fonts.ready;
+    await Promise.all(
+      Array.from(document.images).map((image) =>
+        image.complete
+          ? Promise.resolve()
+          : new Promise((resolve) => {
+              image.addEventListener('load', resolve, { once: true });
+              image.addEventListener('error', resolve, { once: true });
+            }),
+      ),
+    );
+    await new Promise((resolve) =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve)),
+    );
+  });
   const clipped = await page.evaluate(() => {
     const selector = [
       '.browser',
@@ -979,10 +995,10 @@ async function renderStaticAssets(browser) {
     800,
     `<main class="stage dark shot-privacy">
       <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account required</span></div>
-      <div><h1>Your profile stays with the extension.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
+      <div><h1>Your saved details stay in FillPro.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Profile storage</strong><span>Saved by the extension in your browser.</span></div>
+          <div class="privacy-card"><strong>Profile storage</strong><span>Stored by FillPro in your browser.</span></div>
           <div class="privacy-card"><strong>Page access</strong><span>Runs on the page you choose.</span></div>
           <div class="privacy-card"><strong>Final say</strong><span>You review and submit.</span></div>
         </div>

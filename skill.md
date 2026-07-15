@@ -5,11 +5,11 @@ description: Public capability surface for FillPro, a private browser form autof
 
 # FillPro Capability Surface
 
-Last reviewed: 2026-06-14
+Last reviewed: 2026-07-15
 
 ## What FillPro does
 
-FillPro fills repeated web forms from profiles saved by the extension in the browser. It is useful for job applications, signup forms, intake pages, onboarding, demo requests, vendor forms, internal admin forms, and profile pages.
+FillPro fills repeated web forms from profiles saved in FillPro's browser storage. It is useful for job applications, signup forms, intake pages, onboarding, demo requests, vendor forms, internal admin forms, and profile pages.
 
 ## Boundaries
 

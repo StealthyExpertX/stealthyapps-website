@@ -675,6 +675,14 @@ p {
   cursor: not-allowed;
 }
 
+.button.primary[disabled] {
+  border-color: var(--line);
+  background: var(--panel);
+  color: var(--tx3);
+  box-shadow: none;
+  opacity: 1;
+}
+
 :root[data-theme="dark"] .button:not(.primary) {
   border-color: var(--line-strong);
   background: rgba(20, 33, 30, 0.94);

@@ -609,6 +609,11 @@ async function auditContactSubmission(browser, origin, errors) {
     if (!(await sendButton.isDisabled())) {
       errors.push('/contact/: direct-send button should be disabled before required fields are complete');
     }
+    const initialStatus =
+      (await page.locator('[data-contact-status]').textContent())?.trim() || '';
+    if (initialStatus !== 'Add a name, email, and message to send.') {
+      errors.push('/contact/: untouched form should show a calm setup prompt');
+    }
 
     await page.locator('#contactName').fill('Release Tester');
     await page.locator('#contactReply').fill('release-test@example.com');
