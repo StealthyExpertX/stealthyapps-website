@@ -236,13 +236,19 @@ async function auditPage(page, route, viewport, theme, errors) {
 
       const demoShellReport = await page.evaluate(() => {
         const shell = document.querySelector('.demo-shell');
-        if (!shell) return { ok: false };
+        const hero = document.querySelector('.launch-hero');
+        if (!shell || !hero) return { ok: false };
         const style = getComputedStyle(shell);
+        const heroStyle = getComputedStyle(hero);
         return {
           ok: true,
           overflowX: style.overflowX,
           overflowY: style.overflowY,
           scrollbarWidth: style.scrollbarWidth || '',
+          heroOverflowX: heroStyle.overflowX,
+          heroOverflowY: heroStyle.overflowY,
+          heroScrollHeight: hero.scrollHeight,
+          heroClientHeight: hero.clientHeight,
         };
       });
       if (!demoShellReport.ok) {
@@ -250,6 +256,10 @@ async function auditPage(page, route, viewport, theme, errors) {
       } else if (demoShellReport.scrollbarWidth !== 'none' || demoShellReport.overflowY !== 'hidden') {
         errors.push(
           `${route}: hero demo shell scrollbar can become visible on ${viewport.name}/${theme}: ${JSON.stringify(demoShellReport)}`,
+        );
+      } else if (['auto', 'scroll'].includes(demoShellReport.heroOverflowY)) {
+        errors.push(
+          `${route}: hero became an internal scroll container on ${viewport.name}/${theme}: ${JSON.stringify(demoShellReport)}`,
         );
       }
     } catch (error) {

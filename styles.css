@@ -3073,7 +3073,8 @@ html:has(body.fillpro-launch) {
   align-items: center;
   gap: 42px;
   padding: 38px 0 42px;
-  overflow-x: hidden;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .hero-3d-canvas {

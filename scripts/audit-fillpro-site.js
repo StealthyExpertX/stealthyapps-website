@@ -5,8 +5,8 @@ const crypto = require('crypto');
 const ROOT = path.resolve(__dirname, '..');
 const IGNORE_DIRS = new Set(['.git', 'node_modules']);
 const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
-const PUBLIC_NAV = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
-const FOOTER_LINKS = ['Product', 'Pricing', 'Privacy', 'Support', 'Contact'];
+const PUBLIC_NAV = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
+const FOOTER_LINKS = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const LOCALIZED_PAGES = {
   'fillpro/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
   'fillpro/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
@@ -142,7 +142,7 @@ function checkFooter(file, html) {
   if (!/class=["'][^"']*footer-links/.test(html)) fail(`${rel(file)}: footer missing footer-links`);
   const fileRel = rel(file);
   if (LOCALIZED_PAGES[fileRel]) {
-    for (const key of ['product', 'pricing', 'privacy', 'support', 'contact']) {
+    for (const key of ['product', 'download', 'pricing', 'privacy', 'support', 'contact']) {
       if (!new RegExp(`data-nav-key=["']${key}["']`).test(html)) fail(`${fileRel}: localized footer missing ${key}`);
     }
   } else {
@@ -694,6 +694,12 @@ function checkLocalization() {
   const main = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
   for (const type of ['WebSite', 'WebPage', 'SoftwareApplication', 'FAQPage']) {
     if (!main.includes(`"@type": "${type}"`)) fail(`fillpro/index.html: entity graph missing ${type}`);
+  }
+  if (!main.includes('"operatingSystem": "Google Chrome"')) {
+    fail('fillpro/index.html: structured data must match the current Chrome-first release');
+  }
+  if (main.includes('"operatingSystem": "Chrome, Microsoft Edge, Firefox"')) {
+    fail('fillpro/index.html: structured data must not present coming-soon browser stores as released');
   }
 }
 

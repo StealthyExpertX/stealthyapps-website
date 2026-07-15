@@ -281,7 +281,7 @@ function makeJsonLd(locale, canonical) {
         name: 'FillPro',
         url: 'https://stealthyapps.com/fillpro/',
         applicationCategory: 'BrowserApplication',
-        operatingSystem: 'Chrome, Microsoft Edge, Firefox',
+        operatingSystem: 'Google Chrome',
         softwareVersion: '1.0.0',
         description: locale.description,
         inLanguage: locale.lang,
@@ -405,6 +405,7 @@ ${alternateLinks()}
       <div class="footer-copy"><strong>FillPro by Stealthy Apps</strong><span>${escapeHtml(locale.updated)} <time datetime="${UPDATED_ISO}">${escapeHtml(locale.dateLabel)}</time>.</span></div>
       <nav class="footer-links" aria-label="Footer">
         <a data-nav-key="product" href="${localePath(locale)}">${escapeHtml(product)}</a>
+        <a data-nav-key="download" href="/fillpro/download/">${escapeHtml(download)}</a>
         <a data-nav-key="pricing" href="#pricing">${escapeHtml(pricing)}</a>
         <a data-nav-key="privacy" href="/fillpro/privacy/">${escapeHtml(privacy)}</a>
         <a data-nav-key="support" href="/support/">${escapeHtml(support)}</a>
