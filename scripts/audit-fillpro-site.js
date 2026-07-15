@@ -136,28 +136,30 @@ function checkImages(file, html) {
 }
 
 function checkFooter(file, html) {
-  if (!/<footer\b/i.test(html)) return;
+  const footer = (html.match(/<footer\b[\s\S]*?<\/footer>/i) || [])[0] || '';
+  if (!footer) return;
   checked.footers += 1;
-  if (!/class=["'][^"']*footer-copy/.test(html)) fail(`${rel(file)}: footer missing footer-copy`);
-  if (!/class=["'][^"']*footer-links/.test(html)) fail(`${rel(file)}: footer missing footer-links`);
+  if (!/class=["'][^"']*footer-copy/.test(footer)) fail(`${rel(file)}: footer missing footer-copy`);
+  if (!/class=["'][^"']*footer-links/.test(footer)) fail(`${rel(file)}: footer missing footer-links`);
   const fileRel = rel(file);
   if (LOCALIZED_PAGES[fileRel]) {
     for (const key of ['product', 'download', 'pricing', 'privacy', 'support', 'contact']) {
-      if (!new RegExp(`data-nav-key=["']${key}["']`).test(html)) fail(`${fileRel}: localized footer missing ${key}`);
+      if (!new RegExp(`data-nav-key=["']${key}["']`).test(footer)) fail(`${fileRel}: localized footer missing ${key}`);
     }
   } else {
     for (const label of FOOTER_LINKS) {
-      if (!new RegExp(`>${label}<`).test(html)) fail(`${fileRel}: footer missing ${label}`);
+      if (!new RegExp(`>${label}<`).test(footer)) fail(`${fileRel}: footer missing ${label}`);
     }
   }
-  if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(html)) {
+  if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(footer)) {
     fail(`${rel(file)}: footer should not expose sitemap link`);
   }
-  if (/\|\s*<a\b|<\/a>\s*\|/i.test(html)) fail(`${rel(file)}: footer still uses pipe-separated links`);
+  if (/\|\s*<a\b|<\/a>\s*\|/i.test(footer)) fail(`${rel(file)}: footer still uses pipe-separated links`);
 }
 
 function checkNav(file, html) {
-  if (!/<nav\b/i.test(html)) return;
+  const nav = (html.match(/<header\b[\s\S]*?<\/header>/i) || [])[0] || '';
+  if (!nav) return;
   checked.navs += 1;
   const fileRel = rel(file);
   const isLocalizedPage = Boolean(LOCALIZED_PAGES[fileRel]);
@@ -175,12 +177,12 @@ function checkNav(file, html) {
   if (!isPublicUtilityPage) return;
   if (isLocalizedPage) {
     for (const key of ['product', 'download', 'pricing', 'privacy', 'support', 'contact']) {
-      if (!new RegExp(`data-nav-key=["']${key}["']`).test(html)) fail(`${fileRel}: localized nav missing ${key}`);
+      if (!new RegExp(`data-nav-key=["']${key}["']`).test(nav)) fail(`${fileRel}: localized nav missing ${key}`);
     }
     return;
   }
   for (const label of PUBLIC_NAV) {
-    if (!new RegExp(`>${label}<`).test(html)) fail(`${fileRel}: nav missing ${label}`);
+    if (!new RegExp(`>${label}<`).test(nav)) fail(`${fileRel}: nav missing ${label}`);
   }
 }
 
