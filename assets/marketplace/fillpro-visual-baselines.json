@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-15",
+  "updated": "2026-08-23",
   "note": "Update this file only after rerendering assets, running npm run review:marketing, and visually approving the contact sheets.",
   "assets": [
     {
@@ -67,12 +67,12 @@
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-profiles-1280x800.png",
-      "bytes": 260550,
-      "sha256": "a7c3f6330284dd32042edc65b3a0f11eefb7da02781468fc850b5dff6798c099",
+      "bytes": 254452,
+      "sha256": "45ce04362613b50f6254fd0c8345fe4d9b5734fc36d13d652a668552fdee5e9f",
       "width": 1280,
       "height": 800,
-      "meanLuma": 121.98,
-      "meanColorSpread": 10.58
+      "meanLuma": 121.61,
+      "meanColorSpread": 11.05
     },
     {
       "file": "assets/marketplace/fillpro-screenshot-privacy-1280x800.png",

@@ -109,7 +109,7 @@ async function renderMarketingSheet() {
   const items = [
     ['Screenshot 1', 'Main promise', marketplace('fillpro-screenshot-fill-page-1280x800.png')],
     ['Screenshot 2', 'Modern controls', marketplace('fillpro-screenshot-modern-forms-1280x800.png')],
-    ['Screenshot 3', 'Profiles and rules', marketplace('fillpro-screenshot-profiles-1280x800.png')],
+    ['Screenshot 3', 'Capture a filled page', marketplace('fillpro-screenshot-profiles-1280x800.png')],
     ['Screenshot 4', 'Privacy proof', marketplace('fillpro-screenshot-privacy-1280x800.png')],
     ['Screenshot 5', 'Undo and recovery', marketplace('fillpro-screenshot-undo-1280x800.png')],
     ['Small promo', 'Chrome compact tile', marketplace('fillpro-small-promo-440x280.png')],

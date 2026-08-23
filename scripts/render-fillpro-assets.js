@@ -938,22 +938,22 @@ async function renderStaticAssets(browser) {
     1280,
     800,
     `<main class="stage dark shot-profiles">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Up to 500 with Pro</span></div>
-      <div><h1>Keep each workflow in its own profile.</h1><p class="sub">Switch between work, applicant, client, and QA details without mixing them together.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Save what you entered</span></div>
+      <div><h1>Turn a filled form into a reusable profile.</h1><p class="sub">Keep what you already entered, review it once, and use it on the next form.</p></div>
       ${chromeFrame('forms.example.com/demo-request', `
         <div class="grid2">
-          <div class="panel">
-            <h2>Saved profiles</h2>
-            <div class="profile"><strong>Work profile</strong><span>Contact, company, links, resume</span></div>
-            <div class="profile"><strong>Vendor profile</strong><span>Business details and service copy</span></div>
-            <div class="profile"><strong>QA profile</strong><span>Known test values for repeat checks</span></div>
+          <div class="form">
+            <h2>Form already filled</h2>
+            ${field('Full name', 'Alex Morgan')}
+            ${field('Work email', 'alex@example.com')}
+            ${field('Company', 'Stealthy Apps')}
           </div>
           <div class="panel">
-            <h2>Smart rules</h2>
-            <div class="cardline"><span>Applicant handle</span><strong>@github</strong></div>
-            <div class="cardline"><span>Primary inbox</span><strong>@email</strong></div>
-            <div class="cardline"><span>Resume field</span><strong>resume.pdf</strong></div>
-            <div class="button" style="margin-top:18px;">Fill with Work profile</div>
+            <h2>New FillPro profile</h2>
+            <div class="profile"><strong>Profile 3</strong><span>3 supported values found</span></div>
+            <div class="cardline"><span>Review first</span><strong>You choose what stays</strong></div>
+            <div class="cardline"><span>Next form</span><strong>Ready to reuse</strong></div>
+            <div class="button" style="margin-top:18px;">Save this filled page</div>
           </div>
         </div>`)}
     </main>`,
@@ -1125,7 +1125,7 @@ async function renderLocalizedFirstScreenshots(browser) {
     );
 
     const localizedScenes = [
-      ['profiles', copy.profilesHeadline, `<div class="grid2"><div class="panel"><h2>${ui.savedProfiles}</h2><div class="profile"><strong>${ui.workProfile}</strong><span>${ui.profileContents}</span></div><div class="profile"><strong>${ui.applicantProfile}</strong><span>${ui.applicantContents}</span></div></div><div class="panel"><h2>${ui.smartRules}</h2><div class="cardline"><span>${ui.workEmail}</span><strong>@email</strong></div><div class="cardline"><span>${ui.resume}</span><strong>resume.pdf</strong></div></div></div>`],
+      ['profiles', copy.captureHeadline, `<div class="grid2"><div class="form"><h2>${ui.filledPage}</h2>${field(ui.fullName, 'Alex Morgan')}${field(ui.workEmail, 'alex@example.com')}${field(ui.company, 'Stealthy Apps')}</div><div class="panel"><h2>${ui.newProfile}</h2><div class="profile"><strong>${ui.newProfile} 3</strong><span>${ui.reviewAndSave}</span></div><div class="button" style="margin-top:18px;">${ui.saveFilledPage}</div></div></div>`],
       ['modern-forms', copy.modernHeadline, `<div class="grid2"><div class="form"><h2>${ui.intakeForm}</h2>${field(ui.fullName, 'Alex Morgan')}${field(ui.preferredContact, ui.email)}${field(ui.resume, 'alex-morgan.pdf')}</div><div class="panel"><h2>${ui.modernControls}</h2><div class="field-grid"><div class="field-tile"><strong>${ui.dropdowns}</strong><span>${ui.matchedFromProfile}</span></div><div class="field-tile"><strong>${ui.checkboxes}</strong><span>${ui.matchedFromProfile}</span></div><div class="field-tile"><strong>${ui.lateFields}</strong><span>${ui.readyForReview}</span></div></div></div></div>`],
       ['privacy', copy.privacyHeadline, `<div class="privacy-proof"><div class="privacy-grid"><div class="privacy-card"><strong>${ui.profileStorage}</strong><span>${ui.savedByExtension}</span></div><div class="privacy-card"><strong>${ui.pageAccess}</strong><span>${ui.runsOnChosenPage}</span></div><div class="privacy-card"><strong>${ui.finalSay}</strong><span>${ui.youReviewSubmit}</span></div></div><div class="privacy-ledger"><h2>${ui.clearControl}</h2><div class="privacy-row"><span>${ui.fillAction}</span><strong>${ui.yourClick}</strong></div><div class="privacy-row"><span>${ui.formSubmission}</span><strong>${ui.yourDecision}</strong></div></div></div>`],
       ['undo', copy.undoHeadline, `<div class="review-proof review-proof-light"><div class="review-form"><h2>${ui.reviewBeforeSubmit}</h2><div class="review-row"><span>${ui.fullName}</span><strong>Alex Morgan</strong></div><div class="review-row"><span>${ui.portfolio}</span><strong>stealthyapps.com</strong></div><div class="review-row"><span>${ui.resume}</span><strong>alex-morgan.pdf</strong></div></div><div class="review-stack"><div class="review-card accent"><strong>${ui.fieldsChanged}</strong><span>${ui.readyForReview}</span></div><div class="review-card"><strong>${ui.undoAvailable}</strong><span>${ui.rollbackWithoutReload}</span></div><div class="button" style="width:100%;">${ui.undoLastFill}</div></div></div>`],
