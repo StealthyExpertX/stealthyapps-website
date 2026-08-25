@@ -1,3 +1,3 @@
 # Moved
 
-This page is now at [FillAhead](/fillahead/).
+This page is now at [Skip Retyping](/skip-retyping/).

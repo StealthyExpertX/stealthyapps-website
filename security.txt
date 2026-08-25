@@ -1,6 +1,6 @@
-# FillAhead security policy (fallback)
+# Skip Retyping security policy (fallback)
 Contact: mailto:support@stealthyapps.com
 Preferred-Languages: en
 Canonical: https://stealthyapps.com/.well-known/security.txt
-Policy: https://stealthyapps.com/fillahead/privacy/
+Policy: https://stealthyapps.com/skip-retyping/privacy/
 Expires: 2027-06-12T00:00:00Z

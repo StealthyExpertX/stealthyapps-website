@@ -10,7 +10,7 @@ const siteRoot = path.resolve(__dirname, '..');
 const projectRoot = path.resolve(siteRoot, '..');
 const assetsDir = path.join(siteRoot, 'assets');
 const marketplaceDir = path.join(assetsDir, 'marketplace');
-const logoSvgPath = path.join(assetsDir, 'fillahead-logo.svg');
+const logoSvgPath = path.join(assetsDir, 'skip-retyping-logo.svg');
 
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
@@ -785,13 +785,13 @@ function chromeFrame(url, inner) {
 
 function beforeAfter(copy = {}) {
   const labels = {
-    beforeTitle: 'Client onboarding',
-    afterTitle: 'After FillAhead',
+    beforeTitle: 'Job application',
+    afterTitle: 'After Skip Retyping',
     fullName: 'Full name',
-    workEmail: 'Work email',
-    company: 'Company',
+    workEmail: 'Email',
+    company: 'Phone',
     resume: 'Resume upload',
-    workProfile: 'Work profile',
+    workProfile: 'Job search profile',
     profileDetail: '12 fields, 1 upload, 2 smart rules',
     fillPage: 'Fill Page',
     undoLastFill: 'Undo last fill',
@@ -810,7 +810,7 @@ function beforeAfter(copy = {}) {
         <h2>${labels.afterTitle}</h2>
         ${field(labels.fullName, 'Alex Morgan')}
         ${field(labels.workEmail, 'alex@example.com')}
-        ${field(labels.company, 'Stealthy Apps')}
+        ${field(labels.company, '(207) 555-0148')}
         ${field(labels.resume, 'alex-morgan-resume.pdf')}
       </div>
     </div>
@@ -824,7 +824,7 @@ function field(label, value = '') {
 function popup(title, detail, copy = {}) {
   return `
     <div class="popup">
-      <div class="popup-head"><img src="${logoDataUrl}" alt="">FillAhead</div>
+      <div class="popup-head"><img src="${logoDataUrl}" alt="">Skip Retyping</div>
       <div class="profile"><strong>${title}</strong><span>${detail}</span></div>
       <div class="button">${copy.fillPage || 'Fill Page'}</div>
       <div class="button ghost">${copy.undoLastFill || 'Undo last fill'}</div>
@@ -841,11 +841,11 @@ function demoScene(values, note = 'Safe fields fill. Sensitive fields stay alone
   return `
     <main class="demo-scene">
       <div class="form">
-        <h2>Partner intake</h2>
+        <h2>Job application</h2>
         ${fields}
         <div class="demo-note">${note}</div>
       </div>
-      ${popup('Work profile', values[9] ? 'Ready for review' : 'Filling repeated fields')}
+      ${popup('Job search profile', values[7] ? 'Ready for review' : 'Filling application fields')}
     </main>`;
 }
 
@@ -860,7 +860,7 @@ function promoProduct(label = 'Fill Page') {
     </div>`;
 }
 
-function brandPromo(stageClass, label = 'FillAhead', productLabel = 'Saved profile') {
+function brandPromo(stageClass, label = 'Skip Retyping', productLabel = 'Saved profile') {
   const marqueeCopy = stageClass.includes('promo-marquee')
     ? `<div class="promo-copy">
         <div class="promo-kicker">Private autofill</div>
@@ -942,23 +942,23 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-screenshot-fill-page-1280x800.png'),
+    path.join(marketplaceDir, 'skip-retyping-screenshot-fill-page-1280x800.png'),
     1280,
     800,
     `<main class="stage first-shot shot-outcome">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">No account needed</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">No account needed</span></div>
       <div><h1>Fill the fields you keep retyping.</h1><p class="sub">Choose a saved profile, fill the page, then review before you submit.</p></div>
-      ${chromeFrame('apply.example.com/onboarding', beforeAfter())}
+      ${chromeFrame('careers.example.com/apply', beforeAfter())}
     </main>`,
   );
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-screenshot-profiles-1280x800.png'),
+    path.join(marketplaceDir, 'skip-retyping-screenshot-profiles-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-profiles">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Save what you entered</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">Save what you entered</span></div>
       <div><h1>Turn a filled form into a reusable profile.</h1><p class="sub">Keep what you already entered, review it once, and use it on the next form.</p></div>
       ${chromeFrame('forms.example.com/demo-request', `
         <div class="grid2">
@@ -969,7 +969,7 @@ async function renderStaticAssets(browser) {
             ${field('Company', 'Stealthy Apps')}
           </div>
           <div class="panel">
-            <h2>New FillAhead profile</h2>
+            <h2>New Skip Retyping profile</h2>
             <div class="profile"><strong>Profile 3</strong><span>3 supported values found</span></div>
             <div class="cardline"><span>Review first</span><strong>You choose what stays</strong></div>
             <div class="cardline"><span>Next form</span><strong>Ready to reuse</strong></div>
@@ -981,22 +981,22 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-screenshot-modern-forms-1280x800.png'),
+    path.join(marketplaceDir, 'skip-retyping-screenshot-modern-forms-1280x800.png'),
     1280,
     800,
     `<main class="stage shot-modern">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Modern form support</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">Modern form support</span></div>
       <div><h1>Fill more than basic text boxes.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
-      ${chromeFrame('forms.example.com/team-intake', `
+      ${chromeFrame('careers.example.com/apply/step-2', `
         <div class="grid2">
           <div class="form">
-            <h2>Team intake form</h2>
+            <h2>Application details</h2>
             ${field('Full name', 'Alex Morgan')}
-            ${field('Preferred contact', 'Email')}
+            ${field('Preferred location', 'Portland, Maine')}
             ${field('Resume upload', 'alex-morgan.pdf')}
           </div>
           <div class="panel">
-            <h2>Built for the hard parts</h2>
+            <h2>What Skip Retyping handles</h2>
             <div class="field-grid">
               <div class="field-tile"><strong>Dropdowns</strong><span>Match choices from the active profile.</span></div>
               <div class="field-tile"><strong>Checkboxes</strong><span>Handle clear yes, no, and preference fields.</span></div>
@@ -1010,15 +1010,15 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-screenshot-privacy-1280x800.png'),
+    path.join(marketplaceDir, 'skip-retyping-screenshot-privacy-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-privacy">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">No account required</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">No account required</span></div>
       <div><h1>Saved profiles stay in your browser.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Profile storage</strong><span>Stored by FillAhead in your browser.</span></div>
+          <div class="privacy-card"><strong>Profile storage</strong><span>Stored by Skip Retyping in your browser.</span></div>
           <div class="privacy-card"><strong>Page access</strong><span>Runs on the page you choose.</span></div>
           <div class="privacy-card"><strong>Final say</strong><span>You review and submit.</span></div>
         </div>
@@ -1035,12 +1035,12 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-screenshot-undo-1280x800.png'),
+    path.join(marketplaceDir, 'skip-retyping-screenshot-undo-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-undo">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Undo ready</span></div>
-      <div><h1>Review the fill. Undo it if needed.</h1><p class="sub">Roll the last FillAhead changes back without reloading the page.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">Undo ready</span></div>
+      <div><h1>Review the fill. Undo it if needed.</h1><p class="sub">Roll the last Skip Retyping changes back without reloading the page.</p></div>
       ${chromeFrame('careers.example.com/apply', `
         <div class="review-proof review-proof-light">
           <div class="review-form">
@@ -1051,7 +1051,7 @@ async function renderStaticAssets(browser) {
             <div class="review-row"><span>Resume</span><strong>alex-morgan.pdf</strong></div>
           </div>
           <div class="review-stack">
-            <h2>After FillAhead runs</h2>
+            <h2>After Skip Retyping runs</h2>
             <div class="review-card accent"><strong>8 fields changed</strong><span>Repeat details filled from the selected profile.</span></div>
             <div class="review-card"><strong>Upload matched</strong><span>Resume field is ready for review.</span></div>
             <div class="review-card"><strong>Undo snapshot saved</strong><span>Roll back the fill without reloading the page.</span></div>
@@ -1063,28 +1063,28 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-small-promo-440x280.png'),
+    path.join(marketplaceDir, 'skip-retyping-small-promo-440x280.png'),
     440,
     280,
-    brandPromo('small-stage promo-small', 'FillAhead', 'Fill Page'),
+    brandPromo('small-stage promo-small', 'Skip Retyping', 'Fill Page'),
   );
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillahead-marquee-1400x560.png'),
+    path.join(marketplaceDir, 'skip-retyping-marquee-1400x560.png'),
     1400,
     560,
-    brandPromo('marquee promo-marquee', 'FillAhead', 'Work profile ready'),
+    brandPromo('marquee promo-marquee', 'Skip Retyping', 'Work profile ready'),
   );
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillahead-og.png'),
+    path.join(assetsDir, 'skip-retyping-og.png'),
     1200,
     630,
     `<main class="stage marquee">
       <div>
-        <div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div>
+        <div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div>
         <h1 style="margin-top:28px;">Private autofill for repeated forms</h1>
         <p class="sub">Saved profiles. Smart rules. Upload matching. Review before submit.</p>
       </div>
@@ -1099,7 +1099,7 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillahead-popup.png'),
+    path.join(assetsDir, 'skip-retyping-popup.png'),
     760,
     540,
     `<main class="stage small-stage" style="padding:42px;">
@@ -1109,21 +1109,21 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillahead-demo-poster.png'),
+    path.join(assetsDir, 'skip-retyping-demo-poster.png'),
     960,
     540,
     demoScene([
       'Full name',
       'Alex Morgan',
-      'Work email',
+      'Email',
       'alex@example.com',
-      'Company',
-      'Stealthy Apps',
+      'Phone',
+      '(207) 555-0148',
       'Resume upload',
       'alex-morgan-resume.pdf',
-      'Password',
+      'Account password',
       '',
-    ], 'Review before submit. Passwords stay untouched.'),
+    ], 'Application fields filled. Password stays untouched.'),
   );
 }
 
@@ -1134,13 +1134,13 @@ async function renderLocalizedFirstScreenshots(browser) {
     fs.mkdirSync(localeDir, { recursive: true });
     await renderHtml(
       browser,
-      path.join(localeDir, 'fillahead-screenshot-fill-page-1280x800.png'),
+      path.join(localeDir, 'skip-retyping-screenshot-fill-page-1280x800.png'),
       1280,
       800,
       `<main class="stage first-shot shot-outcome">
-        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">${copy.badge}</span></div>
+        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">${copy.badge}</span></div>
         <div><h1>${copy.headline}</h1><p class="sub">${copy.intro}</p></div>
-        ${chromeFrame('apply.example.com/onboarding', beforeAfter(ui))}
+        ${chromeFrame('careers.example.com/apply', beforeAfter({ ...ui, workEmail: ui.email, company: ui.phone }))}
       </main>`,
     );
 
@@ -1154,25 +1154,25 @@ async function renderLocalizedFirstScreenshots(browser) {
       const proof = slug === 'privacy' ? scene : chromeFrame('forms.example.com/fill', scene);
       await renderHtml(
         browser,
-        path.join(localeDir, `fillahead-screenshot-${slug}-1280x800.png`),
+        path.join(localeDir, `skip-retyping-screenshot-${slug}-1280x800.png`),
         1280,
         800,
-        `<main class="stage ${slug === 'profiles' || slug === 'privacy' || slug === 'undo' ? 'dark' : ''}"><div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">FillAhead</span></div><div><h1>${title}</h1></div>${proof}</main>`,
+        `<main class="stage ${slug === 'profiles' || slug === 'privacy' || slug === 'undo' ? 'dark' : ''}"><div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">Skip Retyping</div><span class="pill">Skip Retyping</span></div><div><h1>${title}</h1></div>${proof}</main>`,
       );
     }
   }
 }
 
 async function renderDemoGif(browser) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fillahead-demo-'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'skip-retyping-demo-'));
   const framePaths = [];
   const frames = [
-    ['Full name', '', 'Work email', '', 'Company', '', 'Resume upload', '', 'Password', ''],
-    ['Full name', 'Alex Morgan', 'Work email', '', 'Company', '', 'Resume upload', '', 'Password', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', '', 'Resume upload', '', 'Password', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', '', 'Password', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf', 'Password', ''],
-    ['Full name', 'Alex Morgan', 'Work email', 'alex@example.com', 'Company', 'Stealthy Apps', 'Resume upload', 'alex-morgan-resume.pdf', 'Password', ''],
+    ['Full name', '', 'Email', '', 'Phone', '', 'Resume upload', '', 'Account password', ''],
+    ['Full name', 'Alex Morgan', 'Email', '', 'Phone', '', 'Resume upload', '', 'Account password', ''],
+    ['Full name', 'Alex Morgan', 'Email', 'alex@example.com', 'Phone', '', 'Resume upload', '', 'Account password', ''],
+    ['Full name', 'Alex Morgan', 'Email', 'alex@example.com', 'Phone', '(207) 555-0148', 'Resume upload', '', 'Account password', ''],
+    ['Full name', 'Alex Morgan', 'Email', 'alex@example.com', 'Phone', '(207) 555-0148', 'Resume upload', 'alex-morgan-resume.pdf', 'Account password', ''],
+    ['Full name', 'Alex Morgan', 'Email', 'alex@example.com', 'Phone', '(207) 555-0148', 'Resume upload', 'alex-morgan-resume.pdf', 'Account password', ''],
   ];
 
   for (let index = 0; index < frames.length; index += 1) {
@@ -1187,8 +1187,8 @@ async function renderDemoGif(browser) {
       demoScene(
         values,
         index >= 4
-          ? 'Upload matched. Review before submit.'
-          : 'Pick a profile. Check the filled fields.',
+          ? 'Application ready to review. Password stays untouched.'
+          : 'One click fills the details you already saved.',
       ),
     );
   }
@@ -1204,7 +1204,7 @@ async function renderDemoGif(browser) {
         path.join(tmp, 'frame-%02d.png'),
         '-vf',
         'split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer',
-        path.join(assetsDir, 'fillahead-demo.gif'),
+        path.join(assetsDir, 'skip-retyping-demo.gif'),
       ],
       { stdio: 'ignore' },
     );
@@ -1227,7 +1227,7 @@ async function renderDemoGif(browser) {
         'yuv420p',
         '-movflags',
         '+faststart',
-        path.join(assetsDir, 'fillahead-demo.mp4'),
+        path.join(assetsDir, 'skip-retyping-demo.mp4'),
       ],
       { stdio: 'ignore' },
     );
@@ -1258,22 +1258,22 @@ async function renderIcons() {
   await sharp(logoSvgPath)
     .resize(512, 512)
     .png()
-    .toFile(path.join(assetsDir, 'fillahead-logo.png'));
+    .toFile(path.join(assetsDir, 'skip-retyping-logo.png'));
 }
 
 function smallIconSvg(size) {
   const isTiny = size <= 16;
   if (isTiny) {
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 16 16" shape-rendering="crispEdges">
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
     <defs>
-      <linearGradient id="bg" x1="1" y1="1" x2="15" y2="15" gradientUnits="userSpaceOnUse">
+      <linearGradient id="bg" x1="2" y1="2" x2="30" y2="30" gradientUnits="userSpaceOnUse">
         <stop offset="0" stop-color="#38ead6"/>
         <stop offset="0.5" stop-color="#0f8d80"/>
         <stop offset="1" stop-color="#06443f"/>
       </linearGradient>
     </defs>
-    <path d="M3 1H13V2H14V3H15V13H14V14H13V15H3V14H2V13H1V3H2V2H3V1Z" fill="url(#bg)"/>
-    <path d="M4 4H13V7H7V9H12V12H7V13H4V4Z" fill="#fbfffd"/>
+    <rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="url(#bg)"/>
+    <path d="M23.5 10.5H13.5C11.3 10.5 9.5 12 9.5 14S11.3 17.5 13.5 17.5H18.5C20.7 17.5 22.5 19 22.5 21S20.7 24.5 18.5 24.5H8.5" fill="none" stroke="#fbfffd" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
   }
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 32 32" shape-rendering="geometricPrecision">
@@ -1287,9 +1287,7 @@ function smallIconSvg(size) {
     <rect x="2.5" y="2.5" width="27" height="27" rx="8" fill="url(#bg)"/>
     <rect x="3.55" y="3.55" width="24.9" height="24.9" rx="7" fill="none" stroke="#ffffff" stroke-width="1.15" opacity="0.18"/>
     <path d="M5.6 5.2h12.2C10.4 7 6.7 11.2 6 18.3C5.2 14 5.1 9.2 5.6 5.2Z" fill="#ffffff" opacity="0.15"/>
-    <rect x="8.5" y="7" width="6" height="18" rx="2" fill="#fbfffd"/>
-    <rect x="8.5" y="7" width="16.2" height="6" rx="2" fill="#fbfffd"/>
-    <rect x="8.5" y="14.6" width="13.1" height="5.2" rx="1.8" fill="#fbfffd"/>
+    <path d="M23.5 10.5H13.5C11.3 10.5 9.5 12 9.5 14S11.3 17.5 13.5 17.5H18.5C20.7 17.5 22.5 19 22.5 21S20.7 24.5 18.5 24.5H8.5" fill="none" stroke="#fbfffd" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>`;
 }
 

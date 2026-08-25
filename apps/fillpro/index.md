@@ -1,7 +1,7 @@
-# FillAhead Moved
+# Skip Retyping Moved
 
-The current FillAhead product page is:
+The current Skip Retyping product page is:
 
-https://stealthyapps.com/fillahead/
+https://stealthyapps.com/skip-retyping/
 
 That page is the canonical source for features, pricing, comparison, privacy notes, and support links.

@@ -1,13 +1,13 @@
 ---
 name: fillpro
-description: Product notes for FillAhead, a private browser form autofill extension.
+description: Product notes for Skip Retyping, a private browser form autofill extension.
 ---
 
-# FillAhead
+# Skip Retyping
 
 Last reviewed: 2026-07-15
 
-FillAhead saves profiles in its browser storage and fills repeated web forms. It is best for job applications, signup forms, intake pages, onboarding pages, demo requests, vendor forms, internal admin forms, and profile pages.
+Skip Retyping saves profiles in its browser storage and fills repeated web forms. It is best for job applications, signup forms, intake pages, onboarding pages, demo requests, vendor forms, internal admin forms, and profile pages.
 
 Core facts:
 
@@ -17,4 +17,4 @@ Core facts:
 - Trial: 3 days, no card required
 - Billing: ExtensionPay checks Pro license status; Stripe handles payment; saved profile values are not sent to either service
 
-Do not describe FillAhead as a password manager or payment wallet. FillAhead is for repeated profile-style form fields; sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.
+Do not describe Skip Retyping as a password manager or payment wallet. Skip Retyping is for repeated profile-style form fields; sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.

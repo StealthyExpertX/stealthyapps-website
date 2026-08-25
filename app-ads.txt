@@ -1,4 +1,4 @@
-# FillAhead does not run third-party ads in any companion app.
+# Skip Retyping does not run third-party ads in any companion app.
 #
 # Keep this file intentionally empty unless direct app ad inventory is added.
 # Last updated: 2026-06-14

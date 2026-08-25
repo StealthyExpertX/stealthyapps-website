@@ -1,25 +1,26 @@
 {
   "schemaVersion": 1,
   "authorityDate": "2026-08-25",
-  "brand": "FillAhead",
+  "brand": "Skip Retyping",
+  "shortName": "SkipTyping",
   "version": "1.0.0",
-  "storeTitle": "FillAhead: Autofill Forms with Saved Profiles",
-  "storeSummary": "Private form filler. Save 3 profiles in your browser. Fill repeat forms; skip passwords, cards, one-time codes, and government IDs.",
-  "website": "https://stealthyapps.com/fillahead/",
-  "privacy": "https://stealthyapps.com/fillahead/privacy/",
+  "storeTitle": "Autofill Forms & Form Filler - Skip Retyping",
+  "storeSummary": "Private form filler with 3 saved profiles in your browser. Fill forms; skip passwords, cards, one-time codes, and government IDs.",
+  "website": "https://stealthyapps.com/skip-retyping/",
+  "privacy": "https://stealthyapps.com/skip-retyping/privacy/",
   "support": "https://stealthyapps.com/support/",
-  "contact": "https://stealthyapps.com/contact/?topic=product&product=FillAhead",
+  "contact": "https://stealthyapps.com/contact/?topic=product&product=Skip%20Retyping",
   "freeProfiles": 3,
   "proProfiles": 500,
   "monthlyUsd": "3.99",
   "yearlyUsd": "29.99",
+  "lifetimeUsd": "39.99",
   "purchasablePlans": [
     "fillpro-monthly",
-    "fillpro-yearly"
-  ],
-  "legacyEntitlements": [
+    "fillpro-yearly",
     "fillpro-lifetime"
   ],
+  "legacyEntitlements": [],
   "billingProviders": [
     "ExtensionPay",
     "Stripe"

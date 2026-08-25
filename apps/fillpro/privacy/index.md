@@ -1,7 +1,7 @@
-# FillAhead Privacy Moved
+# Skip Retyping Privacy Moved
 
-The current FillAhead privacy policy is:
+The current Skip Retyping privacy policy is:
 
-https://stealthyapps.com/fillahead/privacy/
+https://stealthyapps.com/skip-retyping/privacy/
 
-That page is the canonical source for FillAhead privacy, saved profile handling, support-message handling, and billing-provider notes.
+That page is the canonical source for Skip Retyping privacy, saved profile handling, support-message handling, and billing-provider notes.

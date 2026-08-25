@@ -1,10 +1,10 @@
 /* TEAM */
 Brand: Stealthy Apps
 Site: https://stealthyapps.com/
-Product: FillAhead
+Product: Skip Retyping
 Location: United States
 
 /* SITE */
 Languages: English, German, Spanish, French, Brazilian Portuguese, Japanese, Korean, Simplified Chinese, Russian
-Purpose: Public website for FillAhead, a private browser form autofill extension.
+Purpose: Public website for Skip Retyping, a private browser form autofill extension.
 Last updated: 2026-08-24

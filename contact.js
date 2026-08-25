@@ -37,16 +37,16 @@ const WEBMAIL_PROVIDERS = {
 
 const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
 const DIRECT_SEND_AUTORESPONSE =
-  'Thanks for writing in about FillAhead. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
+  'Thanks for writing in about Skip Retyping. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 12;
 const KNOWN_PRODUCTS = {
-  fillpro: 'FillAhead',
+  fillpro: 'Skip Retyping',
 };
 
 const CONTACT_CONTEXTS = {
   general: {
-    subjectPrefix: 'FillAhead',
+    subjectPrefix: 'Skip Retyping',
     requireName: true,
     requireReplyEmail: true,
     idleMessage: 'Add a name, email, and message to send.',
@@ -54,7 +54,7 @@ const CONTACT_CONTEXTS = {
       general: {
         label: 'General',
         recipient: 'support',
-        inboxLabel: 'FillAhead inbox',
+        inboxLabel: 'Skip Retyping inbox',
         reasons: [
           ['question', 'General question'],
           ['feedback', 'Feedback'],
@@ -62,22 +62,22 @@ const CONTACT_CONTEXTS = {
         ],
       },
       product: {
-        label: 'FillAhead',
+        label: 'Skip Retyping',
         recipient: 'support',
-        inboxLabel: 'FillAhead product inbox',
+        inboxLabel: 'Skip Retyping product inbox',
         reasons: [
-          ['product_help', 'Question about FillAhead'],
+          ['product_help', 'Question about Skip Retyping'],
           ['site_report', 'A page did not fill correctly'],
           ['feature', 'Feature request'],
           ['bug', 'Something is not working'],
-          ['uninstall', 'I removed FillAhead'],
+          ['uninstall', 'I removed Skip Retyping'],
           ['idea', 'Future tool idea'],
         ],
       },
       business: {
         label: 'Business',
         recipient: 'support',
-        inboxLabel: 'FillAhead business inbox',
+        inboxLabel: 'Skip Retyping business inbox',
         reasons: [
           ['business', 'Business or partnership'],
           ['press', 'Press or media'],
@@ -88,7 +88,7 @@ const CONTACT_CONTEXTS = {
       billing: {
         label: 'Billing',
         recipient: 'support',
-        inboxLabel: 'FillAhead billing inbox',
+        inboxLabel: 'Skip Retyping billing inbox',
         reasons: [
           ['pro_access', 'Upgrade, access, or purchase issue'],
           ['restore', 'Restore purchase or subscription'],
@@ -99,7 +99,7 @@ const CONTACT_CONTEXTS = {
       privacy: {
         label: 'Privacy',
         recipient: 'privacy',
-        inboxLabel: 'FillAhead privacy inbox',
+        inboxLabel: 'Skip Retyping privacy inbox',
         reasons: [
           ['privacy_question', 'Privacy or policy question'],
           ['saved_profiles', 'Saved profiles or deletion question'],
@@ -249,7 +249,7 @@ function buildComposePayload(
 ) {
   const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
   const subjectLabel =
-    config.label === 'FillAhead' ? 'Product' : config.label;
+    config.label === 'Skip Retyping' ? 'Product' : config.label;
   const subjectPrefix = productLabel || context.subjectPrefix;
   const subject = `${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`;
   const bodyLines = [
@@ -596,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contextNote) {
       contextNote.hidden = false;
       contextNote.textContent =
-        'What made you remove FillAhead? One sentence is enough. Name and email are optional.';
+        'What made you remove Skip Retyping? One sentence is enough. Name and email are optional.';
     }
     messageField.placeholder = 'What got in the way?';
     nameField.required = false;

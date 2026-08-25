@@ -1,4 +1,4 @@
-# FillAhead Brutal Elite QA Scorecard
+# Skip Retyping Brutal Elite QA Scorecard
 
 Updated: 2026-07-07
 
@@ -68,7 +68,7 @@ These are the categories that can be proven locally before store traffic exists.
 | Security/privacy/payment readiness | 97/100 | Strong browser-saved-profile and narrow-permission posture. Remaining gap is live marketplace review and real billing edge cases after launch. |
 | QA evidence | 99/100 | Strong automated proof: 1009 fixture pages, 23 engine tests, 32 page renders, focused review-section captures in both themes/viewports, 19 locked visual assets, exact timestamp video contact sheets, 6 popup UI state captures, and icon optics gates in both release and marketing audits. The video review sheet now labels the actual sampled timestamps and the renderer guards against repeating the large payoff card through the full demo. Remaining gap is cloud/browser matrix proof across real Chrome/Edge/Firefox profiles. |
 | Website visual craft | 98/100 | Clean, trustworthy, and above most extension sites. The first viewport is sharper, mobile demo proof lands earlier, browser links are clearer, dark/light consistency is stronger, the lower page has distinct review-before-submit proof, and the 3D/background system is calmer and more deliberate. Remaining gap is live user preference data against alternate hero treatments. |
-| Website 3D/hero scene craft | 98/100 | WebGL renders, is pixel-checked, respects reduced motion, has desktop/mobile hero-section screenshots, reacts to theme changes, and was rebuilt from a busy duplicate product diagram into a restrained edge-depth layer: one beveled studio plate, a small abstract form stack, one beveled FillAhead brand token, one guided rectangular fill cursor, one safe-skip rail, a soft contact shadow, and one small warm accent. The canvas is masked to the product edge on desktop, stays quieter on mobile, and no longer reads as a second form UI behind the real demo. Rings, floating nodes, badge clutter, browser-window duplication, and extra diagonal treatments are gone. Remaining gap is live preference testing against no-3D and real-UI-only hero treatments. |
+| Website 3D/hero scene craft | 98/100 | WebGL renders, is pixel-checked, respects reduced motion, has desktop/mobile hero-section screenshots, reacts to theme changes, and was rebuilt from a busy duplicate product diagram into a restrained edge-depth layer: one beveled studio plate, a small abstract form stack, one beveled Skip Retyping brand token, one guided rectangular fill cursor, one safe-skip rail, a soft contact shadow, and one small warm accent. The canvas is masked to the product edge on desktop, stays quieter on mobile, and no longer reads as a second form UI behind the real demo. Rings, floating nodes, badge clutter, browser-window duplication, and extra diagonal treatments are gone. Remaining gap is live preference testing against no-3D and real-UI-only hero treatments. |
 | Website conversion clarity | 97/100 | Clear hero, pricing, privacy proof, low-friction CTAs, and a stronger pre-submit control proof section. Mobile reaches product proof sooner, the page leads with the exact pain, uses Start free as the first action, and keeps the FAQ heading plain. Remaining gap is real conversion data and tested alternate hero angles. |
 | Extension popup UI craft | 99/100 | The first-run popup is focused, the preview appears sooner, dark-mode secondary actions no longer read as disabled, the editor opens with a compact setup strip instead of warning-led copy, and the profile/plan first viewport no longer clips status copy or partial upgrade CTAs. Light/dark/editor captures are repeatable. Still constrained by the browser-popup surface and not yet validated by real user retention. |
 | Logo/icon system | 96/100 | The master mark is cleaner, more dimensional, and better matched to the marketing set. 16/32/48 now use F-only optical variants while 128+ keep the check badge for store-scale recognition, and `icon32.png` is declared in the manifest so toolbar/high-DPI contexts can use the intended asset. SVG parity, source safety, dimensions, edge padding, coverage, luma, color spread, manifest declarations, and optical exports are audited. Remaining gap is live store/search CTR testing against alternate icon variants. |
@@ -90,7 +90,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Added more distinctive, still restrained visual depth to generated marketplace backgrounds.
 - Increased light-mode hero WebGL visibility so the product surface feels less flat.
 - Reworked 16px and 32px extension icons as cleaner monogram-only optical variants, keeping the checkmark for 48px and larger where it remains readable.
-- Rebuilt the master FillAhead icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
+- Rebuilt the master Skip Retyping icon with a cleaner rounded-square silhouette, simpler F construction, and a more deliberate check badge.
 - Added an automated icon-system audit that blocks website/extension SVG drift and verifies generated icon dimensions from 16px through 1024px.
 - Added icon optical gates for coverage, transparent edge padding, luma, and color spread in the marketing asset audit.
 - Added matching extension release-audit checks so packaged builds reject over-padded, washed-out, raster-embedded, or text-based icons.
@@ -114,7 +114,7 @@ These are the categories that can be proven locally before store traffic exists.
 - Replaced “unlocked” plan wording with plain Pro copy.
 - Reworked saved-profile cards with a stronger status pill, clearer “saved fields” language, a larger Fill Page action, and tighter secondary controls.
 - Reworked the product-page hero from “Fill the forms you keep seeing” to “Stop retyping the same form details” for a clearer, more human first impression.
-- Changed the first product-page CTA from “Download FillAhead” to “Start free” while keeping the browser download route behind it.
+- Changed the first product-page CTA from “Download Skip Retyping” to “Start free” while keeping the browser download route behind it.
 - Added explicit Open affordances to Chrome, Edge, and Firefox cards and verified they still fit mobile and dark mode.
 - Replaced generic “Direct answers” FAQ copy with “What to know before you install.”
 - Replaced old privacy wording in product copy, crawler files, skill files, and marketing renderers with clearer browser-extension wording.
@@ -145,11 +145,11 @@ These are the categories that can be proven locally before store traffic exists.
 - Reworded public product-page schema, local-autofill copy, and crawler summaries away from framework jargon and toward buyer-facing field support language: “Fills what autofill misses.”
 - Recut the store demo timing so sampled frames now show a distinct story arc: hook, fill, review, applications, autofill gaps, privacy, review/undo control, and free starter.
 - Reworked the 16px toolbar icon into a pixel-cut optical mark with no tiny stroke, while keeping 32px and 48px as simpler badge-free monograms for clearer tiny-size scanning.
-- Added a distinct review-before-submit product section to the FillAhead page so the lower page shows changed fields, upload matching, skipped sensitive fields, undo, and final review without another generic card grid.
+- Added a distinct review-before-submit product section to the Skip Retyping page so the lower page shows changed fields, upload matching, skipped sensitive fields, undo, and final review without another generic card grid.
 - Added focused review-section screenshots and nonblank pixel checks in light/dark desktop/mobile release audits.
 - Fixed sticky-header section landing with scroll padding and margins, and cleaned the product proof mini-browser dots so they no longer crowd the sample URL.
 - Rebuilt the Three.js hero after visual review showed the previous product-diagram layer was too busy and competed with the actual demo card.
-- Replaced the protruding dark panel/checkmark look, then tightened it again into a quieter studio system: one beveled form-depth backplate, one edge-masked FillAhead brand token, one guided rectangular fill cursor, one safe-skip rail, one soft contact shadow, and one small warm accent.
+- Replaced the protruding dark panel/checkmark look, then tightened it again into a quieter studio system: one beveled form-depth backplate, one edge-masked Skip Retyping brand token, one guided rectangular fill cursor, one safe-skip rail, one soft contact shadow, and one small warm accent.
 - Updated hero-source guards so the audit now requires the calmer edge-depth composition, rejects the old stacked-card/profile-card/browser-window/form-rail/badge/node/particle clutter, and checks WebGL cleanup.
 - Recut the first marketplace screenshot and video opener away from softer save-once language and locked the current direct one-click wording with renderer guards.
 - Added varied dark review/privacy/control video scenes and fixed inherited text color so browser-form titles stay readable in those scenes.
@@ -160,8 +160,8 @@ These are the categories that can be proven locally before store traffic exists.
 - Recut the 48px extension-manager icon as a badge-free optical monogram, regenerated the icon review sheet, re-locked the visual baseline, and rebuilt Chrome, Edge, and Firefox packages.
 - Reworked the shared theme toggle so system/light/dark have distinct monitor/sun/moon visuals, current-theme labels, next-action labels, and rendered route guards.
 - Fixed dark-mode support-page step badges so they no longer show stark white number blocks.
-- Bumped the website cache token to `fillahead-launch-v48` for the updated CSS, JS, and service worker asset references.
-- Rebuilt the Three.js hero one more time after visual review: the support layer is now a simpler edge-depth render with an abstract form stack, a beveled FillAhead token, a guided rectangular fill cursor, safe-skip rail, contact shadow, and one warm accent.
+- Bumped the website cache token to `skip-retyping-launch-v48` for the updated CSS, JS, and service worker asset references.
+- Rebuilt the Three.js hero one more time after visual review: the support layer is now a simpler edge-depth render with an abstract form stack, a beveled Skip Retyping token, a guided rectangular fill cursor, safe-skip rail, contact shadow, and one warm accent.
 - Tightened WebGL runtime quality by avoiding per-frame theme lookups and giving each animated fill chip its own material opacity.
 - Fixed the store-video first-three-second proof timing so upload claims, proof chips, stats, and the resume upload field all agree.
 - Moved the video thumbnail/poster to `4.55s`, after the review-ready state is visible and the opening payoff card has faded out.

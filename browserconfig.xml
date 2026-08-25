@@ -2,10 +2,10 @@
 <browserconfig>
   <msapplication>
     <tile>
-      <square70x70logo src="/assets/fillahead-logo.png"/>
-      <square150x150logo src="/assets/fillahead-logo.png"/>
-      <wide310x150logo src="/assets/fillahead-logo.png"/>
-      <square310x310logo src="/assets/fillahead-logo.png"/>
+      <square70x70logo src="/assets/skip-retyping-logo.png"/>
+      <square150x150logo src="/assets/skip-retyping-logo.png"/>
+      <wide310x150logo src="/assets/skip-retyping-logo.png"/>
+      <square310x310logo src="/assets/skip-retyping-logo.png"/>
       <TileColor>#0f766e</TileColor>
     </tile>
   </msapplication>

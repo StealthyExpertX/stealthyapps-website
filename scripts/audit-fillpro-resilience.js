@@ -5,13 +5,13 @@ const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
 const ROUTES = [
-  '/fillahead/',
-  '/fillahead/checkout/',
-  '/fillahead/privacy/',
-  '/fillahead/terms/',
-  '/fillahead/refunds/',
-  '/fillahead/docs/getting-started/',
-  '/fillahead/docs/smart-rules/',
+  '/skip-retyping/',
+  '/skip-retyping/checkout/',
+  '/skip-retyping/privacy/',
+  '/skip-retyping/terms/',
+  '/skip-retyping/refunds/',
+  '/skip-retyping/docs/getting-started/',
+  '/skip-retyping/docs/smart-rules/',
   '/support/',
   '/contact/',
 ];
@@ -145,11 +145,11 @@ async function main() {
       if (report.footerLeft < -1 || report.footerRight > report.viewportWidth + 1) {
         failures.push(`${route}: footer exceeds the mobile viewport`);
       }
-      if (route === '/fillahead/') {
+      if (route === '/skip-retyping/') {
         const mode = await page.locator('html').getAttribute('data-theme-resolved');
-        if (mode !== 'dark') failures.push('/fillahead/: system dark theme was not honored');
+        if (mode !== 'dark') failures.push('/skip-retyping/: system dark theme was not honored');
         if (await page.locator('html').evaluate((node) => node.classList.contains('reveal-ready'))) {
-          failures.push('/fillahead/: reduced motion still enabled scroll reveals');
+          failures.push('/skip-retyping/: reduced motion still enabled scroll reveals');
         }
         await page.locator('.theme-toggle').click();
         await page.reload({ waitUntil: 'networkidle' });
@@ -157,7 +157,7 @@ async function main() {
           (await page.locator('html').getAttribute('data-theme-mode')) !== 'dark' ||
           (await page.locator('html').getAttribute('data-theme-resolved')) !== 'dark'
         ) {
-          failures.push('/fillahead/: explicit dark theme did not persist');
+          failures.push('/skip-retyping/: explicit dark theme did not persist');
         }
         await page.locator('.theme-toggle').click();
         await page.reload({ waitUntil: 'networkidle' });
@@ -165,11 +165,11 @@ async function main() {
           (await page.locator('html').getAttribute('data-theme-mode')) !== 'light' ||
           (await page.locator('html').getAttribute('data-theme-resolved')) !== 'light'
         ) {
-          failures.push('/fillahead/: explicit light theme did not persist');
+          failures.push('/skip-retyping/: explicit light theme did not persist');
         }
         await page.keyboard.press('Tab');
         if (!(await page.locator('.skip-link').evaluate((node) => node === document.activeElement))) {
-          failures.push('/fillahead/: skip link is not the first keyboard stop');
+          failures.push('/skip-retyping/: skip link is not the first keyboard stop');
         }
       }
       await page.close();
@@ -181,7 +181,7 @@ async function main() {
       viewport: { width: 390, height: 844 },
     });
     const noScriptPage = await noScript.newPage();
-    const response = await noScriptPage.goto(`${server.origin}/fillahead/`, { waitUntil: 'load' });
+    const response = await noScriptPage.goto(`${server.origin}/skip-retyping/`, { waitUntil: 'load' });
     if (!response?.ok()) failures.push('no-script: product page failed to load');
     const noScriptReport = await noScriptPage.evaluate(() => ({
       heading: document.querySelector('main h1')?.textContent?.trim() || '',
@@ -194,7 +194,7 @@ async function main() {
     await noScript.close();
 
     const textScale = await browser.newContext({ viewport: { width: 390, height: 844 } });
-    for (const route of ['/fillahead/', '/fillahead/privacy/', '/fillahead/terms/', '/fillahead/refunds/', '/support/']) {
+    for (const route of ['/skip-retyping/', '/skip-retyping/privacy/', '/skip-retyping/terms/', '/skip-retyping/refunds/', '/support/']) {
       const page = await textScale.newPage();
       await page.goto(`${server.origin}${route}`, { waitUntil: 'networkidle' });
       await page.addStyleTag({ url: `${server.origin}/_audit-text-scale.css` });
@@ -211,12 +211,12 @@ async function main() {
   }
 
   if (failures.length) {
-    console.error(`FillAhead resilience audit failed with ${failures.length} issue(s):`);
+    console.error(`Skip Retyping resilience audit failed with ${failures.length} issue(s):`);
     failures.forEach((failure) => console.error(`- ${failure}`));
     process.exit(1);
   }
   console.log(
-    `FillAhead website resilience audit passed: ${ROUTES.length} core routes at 320px/system dark/reduced motion, persisted theme, keyboard skip link, no-script fallback, and 200% text stress.`,
+    `Skip Retyping website resilience audit passed: ${ROUTES.length} core routes at 320px/system dark/reduced motion, persisted theme, keyboard skip link, no-script fallback, and 200% text stress.`,
   );
 }
 

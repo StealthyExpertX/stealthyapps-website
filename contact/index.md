@@ -1,6 +1,6 @@
-# Contact FillAhead
+# Contact Skip Retyping
 
-Use the contact page for FillAhead support, billing, privacy questions, site reports, business questions, and feature ideas.
+Use the contact page for Skip Retyping support, billing, privacy questions, site reports, business questions, and feature ideas.
 
 Canonical contact page: https://stealthyapps.com/contact/
 
@@ -8,14 +8,14 @@ Canonical contact page: https://stealthyapps.com/contact/
 
 - Page type or website.
 - Field label or field type.
-- What FillAhead did.
+- What Skip Retyping did.
 - What should have happened.
-- Browser and FillAhead version if known.
+- Browser and Skip Retyping version if known.
 
 Leave passwords, payment cards, CVCs, government IDs, tax IDs, one-time codes, customer records, and saved profile values out of the message.
 
 ## Common routes
 
-- Product support: https://stealthyapps.com/contact/?topic=product&reason=bug&product=FillAhead
-- Billing: https://stealthyapps.com/contact/?topic=billing&reason=pricing&product=FillAhead
-- Privacy: https://stealthyapps.com/contact/?topic=privacy&reason=privacy_question&product=FillAhead
+- Product support: https://stealthyapps.com/contact/?topic=product&reason=bug&product=Skip%20Retyping
+- Billing: https://stealthyapps.com/contact/?topic=billing&reason=pricing&product=Skip%20Retyping
+- Privacy: https://stealthyapps.com/contact/?topic=privacy&reason=privacy_question&product=Skip%20Retyping

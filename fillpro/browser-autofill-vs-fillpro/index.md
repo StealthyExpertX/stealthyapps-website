@@ -1,3 +1,3 @@
 # Moved
 
-This page is now at [FillAhead](/fillahead/browser-autofill-vs-fillahead/).
+This page is now at [Skip Retyping](/skip-retyping/browser-autofill-vs-skip-retyping/).

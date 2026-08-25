@@ -6,15 +6,15 @@ const { chromium } = require('playwright');
 const ROOT = path.resolve(__dirname, '..');
 const REMOTE_ORIGIN = (process.env.FILLPRO_AUDIT_ORIGIN || '').replace(/\/$/, '');
 const ROUTES = [
-  '/fillahead/',
-  '/fillahead/download/',
-  '/fillahead/#pricing',
-  '/fillahead/privacy/',
-  '/fillahead/terms/',
-  '/fillahead/refunds/',
+  '/skip-retyping/',
+  '/skip-retyping/download/',
+  '/skip-retyping/#pricing',
+  '/skip-retyping/privacy/',
+  '/skip-retyping/terms/',
+  '/skip-retyping/refunds/',
   '/support/',
   '/contact/',
-  '/fillahead/docs/getting-started/',
+  '/skip-retyping/docs/getting-started/',
 ];
 const CONTENT_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -139,10 +139,10 @@ async function main() {
       const response = await page.goto(`${server.origin}${route}`, { waitUntil: 'networkidle' });
       if (!response || !response.ok()) failures.push(`${route}: load failed`);
 
-      if (route === '/fillahead/') {
+      if (route === '/skip-retyping/') {
         await page.mouse.move(1180, 220);
         await page.waitForFunction(() => {
-          const poster = document.querySelector('[data-fillahead-demo-poster], .demo-shell video');
+          const poster = document.querySelector('[data-skip-retyping-demo-poster], .demo-shell video');
           return Boolean(poster && (poster.tagName === 'VIDEO' || (poster.complete && poster.naturalWidth > 0)));
         });
         await page.waitForTimeout(180);

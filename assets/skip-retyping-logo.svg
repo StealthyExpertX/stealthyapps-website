@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Skip Retyping icon">
+  <defs>
+    <linearGradient id="bg" x1="138" y1="112" x2="892" y2="912" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#23dcc8"/>
+      <stop offset="0.44" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#071f1c"/>
+    </linearGradient>
+    <linearGradient id="badge" x1="596" y1="620" x2="832" y2="802" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5eeadd"/>
+      <stop offset="0.55" stop-color="#0f766e"/>
+      <stop offset="1" stop-color="#f2c14e"/>
+    </linearGradient>
+    <filter id="tileShadow" x="74" y="82" width="876" height="876" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="34" stdDeviation="38" flood-color="#061d1a" flood-opacity="0.34"/>
+    </filter>
+    <filter id="markShadow" x="190" y="190" width="660" height="680" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#061d1a" flood-opacity="0.22"/>
+    </filter>
+    <filter id="badgeShadow" x="524" y="560" width="368" height="300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#061d1a" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" fill="none"/>
+
+  <g filter="url(#tileShadow)">
+    <rect x="128" y="128" width="768" height="768" rx="202" fill="url(#bg)"/>
+    <rect x="166" y="166" width="692" height="692" rx="176" fill="none" stroke="#ffffff" stroke-width="18" opacity="0.12"/>
+    <path d="M128 640c112 84 250 130 402 130 142 0 270-40 366-108v50c0 102-82 184-184 184H312c-102 0-184-82-184-184v-72Z" fill="#041815" opacity="0.24"/>
+    <path d="M224 178h304c-195 54-300 186-318 374-17-104-10-248 14-374Z" fill="#ffffff" opacity="0.14"/>
+  </g>
+
+  <g filter="url(#markShadow)" fill="none" stroke="#f8fffc" stroke-width="128" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M704 326H424c-72 0-130 52-130 116s58 116 130 116h164c72 0 130 52 130 116s-58 116-130 116H308"/>
+  </g>
+
+  <g filter="url(#badgeShadow)">
+    <rect x="566" y="594" width="282" height="226" rx="92" fill="#f8fffc"/>
+    <rect x="590" y="616" width="236" height="184" rx="76" fill="url(#badge)"/>
+    <path d="M638 706l66 66 128-152" fill="none" stroke="#ffffff" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M638 706l66 66 128-152" fill="none" stroke="#07433e" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" opacity="0.72"/>
+  </g>
+</svg>

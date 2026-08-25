@@ -3,7 +3,7 @@
   "note": "Update this file only after rerendering assets, running npm run review:marketing, and visually approving the contact sheets.",
   "assets": [
     {
-      "file": "assets/fillahead-logo.png",
+      "file": "assets/skip-retyping-logo.png",
       "bytes": 65476,
       "sha256": "6e6c78c343ae6f8970b4a4bfa567750bde6297786a7c6f7923c2a504cd13cb77",
       "width": 512,
@@ -12,7 +12,7 @@
       "meanColorSpread": 38.29
     },
     {
-      "file": "assets/fillahead-og.png",
+      "file": "assets/skip-retyping-og.png",
       "bytes": 279362,
       "sha256": "9faeac59453ee9be9baefb0f321abc749d9df6fa0920a4aeac74787278d2325b",
       "width": 1200,
@@ -21,7 +21,7 @@
       "meanColorSpread": 8.21
     },
     {
-      "file": "assets/fillahead-demo-poster.png",
+      "file": "assets/skip-retyping-demo-poster.png",
       "bytes": 109044,
       "sha256": "237f93dc46a1502194187465e05a377965ba98d0e66b2911ad184f1b8555dea5",
       "width": 960,
@@ -30,7 +30,7 @@
       "meanColorSpread": 7.76
     },
     {
-      "file": "assets/marketplace/fillahead-small-promo-440x280.png",
+      "file": "assets/marketplace/skip-retyping-small-promo-440x280.png",
       "bytes": 74911,
       "sha256": "fe21838c5c1387d689a08f37de6c8dcdfa95e83330833102822a6d9d71bbbc21",
       "width": 440,
@@ -39,7 +39,7 @@
       "meanColorSpread": 42.21
     },
     {
-      "file": "assets/marketplace/fillahead-marquee-1400x560.png",
+      "file": "assets/marketplace/skip-retyping-marquee-1400x560.png",
       "bytes": 504021,
       "sha256": "3d0fa91a03b01bddf43c24def82a222bdefe82ff1c2460b7351ea38edcb42447",
       "width": 1400,
@@ -48,7 +48,7 @@
       "meanColorSpread": 62.93
     },
     {
-      "file": "assets/marketplace/fillahead-screenshot-fill-page-1280x800.png",
+      "file": "assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png",
       "bytes": 277933,
       "sha256": "8d7f0c2b6f0ab61d0bf60166d12b2c229c8dbb71814441d9e95b9b45d6133b53",
       "width": 1280,
@@ -57,7 +57,7 @@
       "meanColorSpread": 6.63
     },
     {
-      "file": "assets/marketplace/fillahead-screenshot-modern-forms-1280x800.png",
+      "file": "assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png",
       "bytes": 307491,
       "sha256": "7f18709d567953c5627a72ed16684bb489600dcee1a9f195dcee6279ba6068d1",
       "width": 1280,
@@ -66,7 +66,7 @@
       "meanColorSpread": 7.47
     },
     {
-      "file": "assets/marketplace/fillahead-screenshot-profiles-1280x800.png",
+      "file": "assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png",
       "bytes": 254452,
       "sha256": "45ce04362613b50f6254fd0c8345fe4d9b5734fc36d13d652a668552fdee5e9f",
       "width": 1280,
@@ -75,7 +75,7 @@
       "meanColorSpread": 11.05
     },
     {
-      "file": "assets/marketplace/fillahead-screenshot-privacy-1280x800.png",
+      "file": "assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png",
       "bytes": 357450,
       "sha256": "5caf06d3c72ad4a62a3b16a7b8848c41c1f272f000757771abc6695617a6b8ed",
       "width": 1280,
@@ -84,7 +84,7 @@
       "meanColorSpread": 14.81
     },
     {
-      "file": "assets/marketplace/fillahead-screenshot-undo-1280x800.png",
+      "file": "assets/marketplace/skip-retyping-screenshot-undo-1280x800.png",
       "bytes": 281155,
       "sha256": "59f6666a4c4bdcbb5bd7433431a8b32d1cfbd736e7d491904777c8dc86ca93bc",
       "width": 1280,
@@ -93,7 +93,7 @@
       "meanColorSpread": 11.35
     },
     {
-      "file": "assets/marketplace/fillahead-store-demo-22s-thumb.png",
+      "file": "assets/marketplace/skip-retyping-store-demo-22s-thumb.png",
       "bytes": 324203,
       "sha256": "a543615ef2c001599ff73d1036e379e9be82be115e3e756c97395cab2ea339ce",
       "width": 1280,
@@ -102,12 +102,12 @@
       "meanColorSpread": 8.02
     },
     {
-      "file": "assets/marketplace/fillahead-store-demo-22s.mp4",
+      "file": "assets/marketplace/skip-retyping-store-demo-22s.mp4",
       "bytes": 876394,
       "sha256": "2b3f3208f225e46556d3ee6efe0e4431ec7317205794d67dbfdaefaf1ba2371d"
     },
     {
-      "file": "../fillahead/icons/icon16.png",
+      "file": "../skip-retyping/icons/icon16.png",
       "bytes": 293,
       "sha256": "a9dd083b4535cb60c0b85f75aa35bf2bb7327ef88bfee5d82a23e1e06a454544",
       "width": 16,
@@ -116,7 +116,7 @@
       "meanColorSpread": 75.54
     },
     {
-      "file": "../fillahead/icons/icon32.png",
+      "file": "../skip-retyping/icons/icon32.png",
       "bytes": 1607,
       "sha256": "35894285895936daf842451d7c95d0ed23b08069535723f166fe93412f407ec1",
       "width": 32,
@@ -125,7 +125,7 @@
       "meanColorSpread": 66.64
     },
     {
-      "file": "../fillahead/icons/icon48.png",
+      "file": "../skip-retyping/icons/icon48.png",
       "bytes": 2812,
       "sha256": "06ea237b6a27af6e44527c23c857eed13717e3e128a87a1304b7b0739428fa72",
       "width": 48,
@@ -134,7 +134,7 @@
       "meanColorSpread": 64.74
     },
     {
-      "file": "../fillahead/icons/icon128.png",
+      "file": "../skip-retyping/icons/icon128.png",
       "bytes": 13505,
       "sha256": "b42ee0628c30ea5b5859ba4f1fab6fa4726ef06355eaf1babb5180d6022a3380",
       "width": 128,
@@ -143,7 +143,7 @@
       "meanColorSpread": 37.56
     },
     {
-      "file": "../fillahead/icons/icon256.png",
+      "file": "../skip-retyping/icons/icon256.png",
       "bytes": 29917,
       "sha256": "36ffb977d0dfb12a7c909b7949f8bd7263221389dab866a04c70ad6869d0a047",
       "width": 256,
@@ -152,7 +152,7 @@
       "meanColorSpread": 38.16
     },
     {
-      "file": "../fillahead/icons/icon512.png",
+      "file": "../skip-retyping/icons/icon512.png",
       "bytes": 65476,
       "sha256": "6e6c78c343ae6f8970b4a4bfa567750bde6297786a7c6f7923c2a504cd13cb77",
       "width": 512,
@@ -161,7 +161,7 @@
       "meanColorSpread": 38.29
     },
     {
-      "file": "../fillahead/icons/icon_master_1024.png",
+      "file": "../skip-retyping/icons/icon_master_1024.png",
       "bytes": 147574,
       "sha256": "0f75b879ba420527eb495cf431c4e8c29a5287dc966894cae4d0928096c44f97",
       "width": 1024,

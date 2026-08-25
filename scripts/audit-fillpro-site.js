@@ -8,26 +8,26 @@ const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const LOCALIZED_PAGES = {
-  'fillahead/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
-  'fillahead/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
-  'fillahead/fr/index.html': { lang: 'fr', hreflang: 'fr', phrase: 'Remplissage automatique de formulaires' },
-  'fillahead/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
-  'fillahead/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
-  'fillahead/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
-  'fillahead/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填充' },
-  'fillahead/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
+  'skip-retyping/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
+  'skip-retyping/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
+  'skip-retyping/fr/index.html': { lang: 'fr', hreflang: 'fr', phrase: 'Remplissage automatique de formulaires' },
+  'skip-retyping/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
+  'skip-retyping/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
+  'skip-retyping/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
+  'skip-retyping/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填充' },
+  'skip-retyping/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
 };
 const HREFLANG_URLS = {
-  en: 'https://stealthyapps.com/fillahead/',
-  de: 'https://stealthyapps.com/fillahead/de/',
-  es: 'https://stealthyapps.com/fillahead/es/',
-  fr: 'https://stealthyapps.com/fillahead/fr/',
-  'pt-BR': 'https://stealthyapps.com/fillahead/pt-br/',
-  ja: 'https://stealthyapps.com/fillahead/ja/',
-  ko: 'https://stealthyapps.com/fillahead/ko/',
-  'zh-CN': 'https://stealthyapps.com/fillahead/zh-cn/',
-  ru: 'https://stealthyapps.com/fillahead/ru/',
-  'x-default': 'https://stealthyapps.com/fillahead/',
+  en: 'https://stealthyapps.com/skip-retyping/',
+  de: 'https://stealthyapps.com/skip-retyping/de/',
+  es: 'https://stealthyapps.com/skip-retyping/es/',
+  fr: 'https://stealthyapps.com/skip-retyping/fr/',
+  'pt-BR': 'https://stealthyapps.com/skip-retyping/pt-br/',
+  ja: 'https://stealthyapps.com/skip-retyping/ja/',
+  ko: 'https://stealthyapps.com/skip-retyping/ko/',
+  'zh-CN': 'https://stealthyapps.com/skip-retyping/zh-cn/',
+  ru: 'https://stealthyapps.com/skip-retyping/ru/',
+  'x-default': 'https://stealthyapps.com/skip-retyping/',
 };
 const STALE_COPY = [
   'Local profiles',
@@ -45,15 +45,15 @@ const STALE_COPY = [
   'Direct answers before install',
   '>Demo<',
   'See it fill a form',
-  'profiles stay in FillAhead',
-  'Profiles stay in FillAhead',
+  'profiles stay in Skip Retyping',
+  'Profiles stay in Skip Retyping',
   'No surprise submit',
   'Advanced repeat-use workflows',
-  'FillAhead is installed. Choose Pro when you need it.',
+  'Skip Retyping is installed. Choose Pro when you need it.',
   'Powerful, but fussy.',
   'Smart Rules, without the guesswork.',
-  '/apps/fillahead/',
-  '/apps/fillahead/privacy',
+  '/apps/skip-retyping/',
+  '/apps/skip-retyping/privacy',
 ];
 
 const failures = [];
@@ -152,14 +152,14 @@ function checkFooter(file, html) {
     }
   }
   const needsCommerceLinks =
-    fileRel.startsWith('fillahead/') ||
+    fileRel.startsWith('skip-retyping/') ||
     fileRel.startsWith('support/') ||
     fileRel.startsWith('contact/') ||
     fileRel === '404.html' ||
     fileRel === 'sitemap.html';
   if (needsCommerceLinks) {
-    if (!/href=["']\/fillahead\/terms\/["']/.test(footer)) fail(`${fileRel}: footer missing Terms`);
-    if (!/href=["']\/fillahead\/refunds\/["']/.test(footer)) fail(`${fileRel}: footer missing Refunds`);
+    if (!/href=["']\/skip-retyping\/terms\/["']/.test(footer)) fail(`${fileRel}: footer missing Terms`);
+    if (!/href=["']\/skip-retyping\/refunds\/["']/.test(footer)) fail(`${fileRel}: footer missing Refunds`);
   }
   if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(footer)) {
     fail(`${rel(file)}: footer should not expose sitemap link`);
@@ -177,13 +177,13 @@ function checkNav(file, html) {
     isLocalizedPage ||
     fileRel.startsWith('contact/') ||
     fileRel.startsWith('support/') ||
-    fileRel.startsWith('fillahead/privacy/') ||
-    fileRel.startsWith('fillahead/terms/') ||
-    fileRel.startsWith('fillahead/refunds/') ||
+    fileRel.startsWith('skip-retyping/privacy/') ||
+    fileRel.startsWith('skip-retyping/terms/') ||
+    fileRel.startsWith('skip-retyping/refunds/') ||
     fileRel.includes('/job-application-autofill/') ||
     fileRel.includes('/resume-upload-autofill/') ||
     fileRel.includes('/local-form-autofill/') ||
-    fileRel.includes('/browser-autofill-vs-fillahead/') ||
+    fileRel.includes('/browser-autofill-vs-skip-retyping/') ||
     fileRel === '404.html' ||
     fileRel === 'sitemap.html';
   if (!isPublicUtilityPage) return;
@@ -253,8 +253,8 @@ function checkStyles() {
     ['.browser-mark-firefox', 'Firefox browser badge styles'],
     ['--browser-surface', 'matched browser badge surface token'],
     ['--launch-icon-bg', 'launch feature icon surface token'],
-    ['body.fillahead-launch .browser-mark-chrome', 'dark launch browser badge override'],
-    ['body.fillahead-launch .launch-card-icon', 'dark launch card icon override'],
+    ['body.skip-retyping-launch .browser-mark-chrome', 'dark launch browser badge override'],
+    ['body.skip-retyping-launch .launch-card-icon', 'dark launch card icon override'],
     ['.launch-review-rail', 'review-before-submit product proof section'],
     ['.review-frame-actions button', 'review rail action affordances'],
     ['scroll-padding-top: 104px', 'desktop sticky-header anchor offset'],
@@ -279,7 +279,7 @@ function checkSiteScript() {
   const contactJs = fs.readFileSync(path.join(ROOT, 'contact.js'), 'utf8');
   checked.accessibility += 1;
   const required = [
-    ['fillahead-theme', 'theme localStorage key'],
+    ['skip-retyping-theme', 'theme localStorage key'],
     ['data-theme-resolved', 'resolved theme marker'],
     ['dataset.resolvedTheme', 'resolved theme toggle marker'],
     ['installThemeToggle', 'theme toggle installer'],
@@ -310,49 +310,49 @@ function checkSiteScript() {
     if (js.includes(forbidden)) fail(`site.js: obsolete motion effect returned: ${forbidden}`);
   }
   if (!contactJs.includes('`${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`')) {
-    fail('contact.js: FillAhead/product email subject suffix is missing');
+    fail('contact.js: Skip Retyping/product email subject suffix is missing');
   }
 
-  const home = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
+  const home = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'index.html'), 'utf8');
   const checkout = fs.readFileSync(
-    path.join(ROOT, 'fillahead', 'checkout', 'index.html'),
+    path.join(ROOT, 'skip-retyping', 'checkout', 'index.html'),
     'utf8',
   );
   const download = fs.readFileSync(
-    path.join(ROOT, 'fillahead', 'download', 'index.html'),
+    path.join(ROOT, 'skip-retyping', 'download', 'index.html'),
     'utf8',
   );
   const chrome = fs.readFileSync(
-    path.join(ROOT, 'fillahead', 'download', 'chrome', 'index.html'),
+    path.join(ROOT, 'skip-retyping', 'download', 'chrome', 'index.html'),
     'utf8',
   );
   const edge = fs.readFileSync(
-    path.join(ROOT, 'fillahead', 'download', 'edge', 'index.html'),
+    path.join(ROOT, 'skip-retyping', 'download', 'edge', 'index.html'),
     'utf8',
   );
   const firefox = fs.readFileSync(
-    path.join(ROOT, 'fillahead', 'download', 'firefox', 'index.html'),
+    path.join(ROOT, 'skip-retyping', 'download', 'firefox', 'index.html'),
     'utf8',
   );
   for (const [source, label, note] of [
-    [home, 'fillahead/index.html', 'Edge and Firefox coming soon.'],
-    [checkout, 'fillahead/checkout/index.html', 'Edge and Firefox coming soon.'],
-    [download, 'fillahead/download/index.html', 'Chrome, Edge, and Firefox coming soon.'],
+    [home, 'skip-retyping/index.html', 'Edge and Firefox coming soon.'],
+    [checkout, 'skip-retyping/checkout/index.html', 'Edge and Firefox coming soon.'],
+    [download, 'skip-retyping/download/index.html', 'Chrome, Edge, and Firefox coming soon.'],
   ]) {
     if (!source.includes(note)) {
       fail(`${label}: unreleased browsers need one concise availability note`);
     }
-    if (!/data-fillahead-store="chrome" hidden/.test(source)) {
+    if (!/data-skip-retyping-store="chrome" hidden/.test(source)) {
       fail(label + ': pending Chrome card must stay hidden until a real store URL exists');
     }
-    if (/href="\/fillahead\/download\/(?:edge|firefox)\//i.test(source)) {
+    if (/href="\/skip-retyping\/download\/(?:edge|firefox)\//i.test(source)) {
       fail(`${label}: unreleased browser status must not look actionable`);
     }
   }
   for (const [source, label, browser] of [
-    [chrome, 'fillahead/download/chrome/index.html', 'Chrome'],
-    [edge, 'fillahead/download/edge/index.html', 'Microsoft Edge'],
-    [firefox, 'fillahead/download/firefox/index.html', 'Firefox'],
+    [chrome, 'skip-retyping/download/chrome/index.html', 'Chrome'],
+    [edge, 'skip-retyping/download/edge/index.html', 'Microsoft Edge'],
+    [firefox, 'skip-retyping/download/firefox/index.html', 'Firefox'],
   ]) {
     if (!/<meta name="robots" content="noindex, follow">/.test(source)) {
       fail(`${label}: unreleased ${browser} page must stay out of search indexes`);
@@ -361,13 +361,13 @@ function checkSiteScript() {
     if (comingSoonCount !== 1) {
       fail(`${label}: unreleased ${browser} page must show exactly one visible Coming soon message`);
     }
-    if (/reason=(?:chrome|edge|firefox)_store_link|data-fillahead-store=|class="launch-button/i.test(source)) {
+    if (/reason=(?:chrome|edge|firefox)_store_link|data-skip-retyping-store=|class="launch-button/i.test(source)) {
       fail(`${label}: unreleased ${browser} page must not present a fake store action`);
     }
   }
 
   const sitemapXml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-  if (/fillahead\/download\/(?:edge|firefox)\//.test(sitemapXml)) {
+  if (/skip-retyping\/download\/(?:edge|firefox)\//.test(sitemapXml)) {
     fail('sitemap.xml: unreleased Edge and Firefox holding pages must not be indexed');
   }
 }
@@ -378,18 +378,18 @@ function checkProductHero() {
     fail('package.json: decorative Three.js must not ship on the product landing page');
   }
 
-  const html = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'index.html'), 'utf8');
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
   const css = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
   const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
-    [html, 'class="launch-demo-card"', 'FillAhead page should show the real product demo'],
-    [html, 'data-fillahead-demo-poster', 'FillAhead page should load the stable demo poster'],
-    [html, 'class="demo-play-button"', 'FillAhead demo should have a clear pause/play control'],
-    [siteScript, "video.src = '/assets/fillahead-demo.mp4'", 'demo should upgrade to the compact local MP4'],
+    [html, 'class="launch-demo-card"', 'Skip Retyping page should show the real product demo'],
+    [html, 'data-skip-retyping-demo-poster', 'Skip Retyping page should load the stable demo poster'],
+    [html, 'class="demo-play-button"', 'Skip Retyping demo should have a clear pause/play control'],
+    [siteScript, "video.src = '/assets/skip-retyping-demo.mp4'", 'demo should upgrade to the compact local MP4'],
     [css, 'scrollbar-width: none', 'demo shell should hide internal browser chrome scrollbars'],
     [css, 'prefers-reduced-motion: reduce', 'motion should respect reduced-motion preferences'],
-    [sw, '/assets/fillahead-demo-poster.png', 'service worker should cache the stable demo poster'],
+    [sw, '/assets/skip-retyping-demo-poster.png', 'service worker should cache the stable demo poster'],
   ];
   for (const [source, needle, label] of required) {
     if (!source.includes(needle)) fail(label);
@@ -440,7 +440,7 @@ function checkDemoGenerator() {
   if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
     fail('render-fillpro-assets.js: demo should show safe fill boundary and review moment');
   }
-  for (const marker of ['fillahead-demo.mp4', 'libx264', '+faststart']) {
+  for (const marker of ['skip-retyping-demo.mp4', 'libx264', '+faststart']) {
     if (!renderer.includes(marker)) {
       fail(`render-fillpro-assets.js: hero demo renderer missing ${marker}`);
     }
@@ -448,68 +448,72 @@ function checkDemoGenerator() {
 }
 
 function checkLaunchPage() {
-  const html = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
-  const checkoutHtml = fs.readFileSync(path.join(ROOT, 'fillahead', 'checkout', 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'index.html'), 'utf8');
+  const checkoutHtml = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'checkout', 'index.html'), 'utf8');
   const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
     ['demo-signal', 'hero product-signal overlay'],
     ['Work profile filled', 'hero profile signal copy'],
     ['ready to review', 'hero review signal copy'],
-    ['Stop retyping the same form details.', 'human first-view headline'],
+    ['Autofill forms from saved profiles.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
-    ['href="/fillahead/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
+    ['href="/skip-retyping/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
     ['No account required', 'clean privacy proof wording'],
     ['See exactly what changes.', 'specific hero demo caption'],
-    ['data-fillahead-demo-poster', 'stable hero demo poster'],
+    ['data-skip-retyping-demo-poster', 'stable hero demo poster'],
     ['demo-play-button', 'explicit hero demo play control'],
     ['Check the fill before you send.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
     ['Before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
-    if (!html.includes(needle)) fail(`fillahead/index.html: missing ${label}`);
+    if (!html.includes(needle)) fail(`skip-retyping/index.html: missing ${label}`);
   }
-  if (/rel="preload"[^>]+fillahead-demo\.gif/i.test(html)) {
-    fail('fillahead/index.html: hero demo should use the compact MP4, not preload the GIF');
+  if (/rel="preload"[^>]+skip-retyping-demo\.gif/i.test(html)) {
+    fail('skip-retyping/index.html: hero demo should use the compact MP4, not preload the GIF');
   }
-  if (!siteScript.includes("video.src = '/assets/fillahead-demo.mp4'")) {
+  if (!siteScript.includes("video.src = '/assets/skip-retyping-demo.mp4'")) {
     fail('site.js: hero demo is not wired to the MP4');
   }
   if (
     !siteScript.includes('video.autoplay = !reduceMotion') ||
     !siteScript.includes('togglePlayback') ||
-    !siteScript.includes("isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo'")
+    !siteScript.includes("isPlaying ? 'Pause the Skip Retyping demo' : 'Play the Skip Retyping demo'")
   ) {
     fail('site.js: hero demo must autoplay, pause/resume on click, and respect reduced motion');
   }
   const proList = (html.match(/<article class="price-card price-card-featured">([\s\S]*?)<\/article>/) || [])[1] || '';
   if (!proList.includes('Import backups; export stays available on every plan')) {
-    fail('fillahead/index.html: pricing must say that export stays free');
+    fail('skip-retyping/index.html: pricing must say that export stays free');
   }
-  if (/\$39\.99|data-checkout-plan="lifetime"|Three-day Pro trial|no card required/i.test(html)) {
-    fail('fillahead/index.html: legacy Lifetime or unverified trial claim returned');
+  if (/Three-day Pro trial|no card required/i.test(html)) {
+    fail('skip-retyping/index.html: unverified trial claim returned');
+  }
+  if (!/\$39\.99[\s\S]{0,500}lifetime|lifetime[\s\S]{0,500}\$39\.99/i.test(html)) {
+    fail('skip-retyping/index.html: lifetime pricing is missing or unclear');
   }
   for (const [needle, label] of [
-    ['data-fillahead-checkout', 'checkout plan state hook'],
+    ['data-skip-retyping-checkout', 'checkout plan state hook'],
     ['data-checkout-plan="yearly"', 'yearly checkout highlight target'],
+    ['data-checkout-plan="lifetime"', 'lifetime checkout target'],
     ['data-checkout-action', 'checkout plan-aware install handoff CTA'],
-    ['Checkout starts inside FillAhead.', 'checkout extension-driven payment boundary'],
+    ['Checkout starts inside Skip Retyping.', 'checkout extension-driven payment boundary'],
     ['ExtensionPay', 'checkout billing provider disclosure'],
     ['Stripe processes card details', 'checkout Stripe handoff disclosure'],
   ]) {
-    if (!checkoutHtml.includes(needle)) fail(`fillahead/checkout/index.html: missing ${label}`);
+    if (!checkoutHtml.includes(needle)) fail(`skip-retyping/checkout/index.html: missing ${label}`);
   }
   if (/stripe\.com|extensionpay\.com\/extension/i.test(checkoutHtml)) {
-    fail('fillahead/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
+    fail('skip-retyping/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
   }
 }
 
 function checkRelatedGuides() {
   const guides = {
-    'fillahead/job-application-autofill/index.html': '/fillahead/job-application-autofill/',
-    'fillahead/resume-upload-autofill/index.html': '/fillahead/resume-upload-autofill/',
-    'fillahead/local-form-autofill/index.html': '/fillahead/local-form-autofill/',
-    'fillahead/browser-autofill-vs-fillahead/index.html': '/fillahead/browser-autofill-vs-fillahead/',
+    'skip-retyping/job-application-autofill/index.html': '/skip-retyping/job-application-autofill/',
+    'skip-retyping/resume-upload-autofill/index.html': '/skip-retyping/resume-upload-autofill/',
+    'skip-retyping/local-form-autofill/index.html': '/skip-retyping/local-form-autofill/',
+    'skip-retyping/browser-autofill-vs-skip-retyping/index.html': '/skip-retyping/browser-autofill-vs-skip-retyping/',
   };
 
   for (const [fileRel, selfHref] of Object.entries(guides)) {
@@ -529,7 +533,7 @@ function checkRelatedGuides() {
 }
 
 function checkChangelog(files) {
-  const changelogRel = 'fillahead/changelog/index.html';
+  const changelogRel = 'skip-retyping/changelog/index.html';
   const changelog = fs.readFileSync(path.join(ROOT, changelogRel), 'utf8');
   const versions = Array.from(
     changelog.matchAll(/data-changelog-version="([^"]+)"/g),
@@ -546,7 +550,7 @@ function checkChangelog(files) {
     .filter((file) => file.endsWith('.html') && rel(file) !== changelogRel)
     .filter((file) => {
       const source = fs.readFileSync(file, 'utf8');
-      return !hasMetaRefresh(source) && source.includes('href="/fillahead/changelog/"');
+      return !hasMetaRefresh(source) && source.includes('href="/skip-retyping/changelog/"');
     })
     .map(rel);
   if (linkedFrom.length !== 1 || linkedFrom[0] !== 'support/index.html') {
@@ -561,7 +565,7 @@ function checkAssetVersioning(files) {
   if (!sw.includes("const CACHE_NAME = 'fillpro-static-live';")) {
     fail('sw.js: missing stable, non-numbered cache name');
   }
-  if (/fillahead-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
+  if (/skip-retyping-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
     fail('sw.js: public preview/build numbering returned');
   }
   if (/caches\.match\(request\)[\s\S]{0,120}if \(cached\) return cached/.test(sw)) {
@@ -569,7 +573,7 @@ function checkAssetVersioning(files) {
   }
   for (const file of files.filter((item) => item.endsWith('.html'))) {
     const html = fs.readFileSync(file, 'utf8');
-    if (/fillahead-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-(?:loader|scene)\.js)\?v=/i.test(html)) {
+    if (/skip-retyping-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-(?:loader|scene)\.js)\?v=/i.test(html)) {
       fail(`${rel(file)}: public preview/build numbering returned`);
     }
   }
@@ -614,10 +618,10 @@ function checkCrawlerSurfaces() {
   const llms = fs.readFileSync(path.join(ROOT, 'llms.txt'), 'utf8');
   const llmsFull = fs.readFileSync(path.join(ROOT, 'llms-full.txt'), 'utf8');
   const requiredRoutes = [
-    'https://stealthyapps.com/fillahead/',
-    'https://stealthyapps.com/fillahead/privacy/',
-    'https://stealthyapps.com/fillahead/terms/',
-    'https://stealthyapps.com/fillahead/refunds/',
+    'https://stealthyapps.com/skip-retyping/',
+    'https://stealthyapps.com/skip-retyping/privacy/',
+    'https://stealthyapps.com/skip-retyping/terms/',
+    'https://stealthyapps.com/skip-retyping/refunds/',
     'https://stealthyapps.com/support/',
     'https://stealthyapps.com/contact/',
   ];
@@ -648,7 +652,7 @@ function checkCrawlerSurfaces() {
 
 function checkLocalization() {
   const pages = {
-    'fillahead/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
+    'skip-retyping/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
     ...LOCALIZED_PAGES,
   };
   for (const [fileRel, config] of Object.entries(pages)) {
@@ -667,7 +671,7 @@ function checkLocalization() {
       const pathOnly = new URL(url).pathname;
       if (!html.includes(`href="${pathOnly}"`)) fail(`${fileRel}: language picker missing ${pathOnly}`);
     }
-    if (fileRel !== 'fillahead/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
+    if (fileRel !== 'skip-retyping/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
       fail(`${fileRel}: JSON-LD inLanguage mismatch`);
     }
   }
@@ -682,26 +686,26 @@ function checkLocalization() {
     if (!localeSitemap.includes(`<loc>${url}</loc>`)) fail(`sitemap-locales.xml: missing URL ${url}`);
   }
 
-  const main = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
+  const main = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'index.html'), 'utf8');
   for (const type of ['WebSite', 'WebPage', 'SoftwareApplication', 'FAQPage']) {
-    if (!main.includes(`"@type": "${type}"`)) fail(`fillahead/index.html: entity graph missing ${type}`);
+    if (!main.includes(`"@type": "${type}"`)) fail(`skip-retyping/index.html: entity graph missing ${type}`);
   }
   if (!main.includes('"operatingSystem": "Google Chrome"')) {
-    fail('fillahead/index.html: structured data must match the current Chrome-first release');
+    fail('skip-retyping/index.html: structured data must match the current Chrome-first release');
   }
   if (main.includes('"operatingSystem": "Chrome, Microsoft Edge, Firefox"')) {
-    fail('fillahead/index.html: structured data must not present coming-soon browser stores as released');
+    fail('skip-retyping/index.html: structured data must not present coming-soon browser stores as released');
   }
 }
 
 
 function checkCommercePolicies() {
   const routes = {
-    terms: 'fillahead/terms/index.html',
-    refunds: 'fillahead/refunds/index.html',
-    privacy: 'fillahead/privacy/index.html',
-    home: 'fillahead/index.html',
-    checkout: 'fillahead/checkout/index.html',
+    terms: 'skip-retyping/terms/index.html',
+    refunds: 'skip-retyping/refunds/index.html',
+    privacy: 'skip-retyping/privacy/index.html',
+    home: 'skip-retyping/index.html',
+    checkout: 'skip-retyping/checkout/index.html',
   };
   const source = {};
   for (const [key, fileRel] of Object.entries(routes)) {
@@ -737,22 +741,22 @@ function checkCommercePolicies() {
   }
 
   const limitedUse =
-    'The use of information received from Google APIs by FillAhead adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.';
+    'The use of information received from Google APIs by Skip Retyping adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.';
   if (!source.privacy.includes(limitedUse)) {
     fail(routes.privacy + ': missing Chrome Web Store Limited Use disclosure');
   }
 
   for (const [key, fileRel] of [['home', routes.home], ['checkout', routes.checkout]]) {
     const html = source[key];
-    if (!html.includes('href="/fillahead/terms/"')) fail(fileRel + ': pricing surface missing Terms link');
-    if (!html.includes('href="/fillahead/refunds/"')) fail(fileRel + ': pricing surface missing Refunds link');
+    if (!html.includes('href="/skip-retyping/terms/"')) fail(fileRel + ': pricing surface missing Terms link');
+    if (!html.includes('href="/skip-retyping/refunds/"')) fail(fileRel + ': pricing surface missing Refunds link');
     if (!/renew(?:s|al)/i.test(html)) fail(fileRel + ': pricing surface must disclose renewal');
     if (!/14-day/i.test(html)) fail(fileRel + ': pricing surface must disclose refund window');
   }
 
   for (const fileRel of ['sitemap.xml', 'sitemap.html', 'llms.txt', 'llms-full.txt']) {
     const html = fs.readFileSync(path.join(ROOT, fileRel), 'utf8');
-    for (const route of ['/fillahead/terms/', '/fillahead/refunds/']) {
+    for (const route of ['/skip-retyping/terms/', '/skip-retyping/refunds/']) {
       if (!html.includes(route)) fail(fileRel + ': missing ' + route);
     }
   }
@@ -798,7 +802,7 @@ function checkPublicIdentityAndRedirects(files) {
   const publicIdentityFiles = files.filter((file) => {
     const fileRel = rel(file);
     return (
-      fileRel.startsWith('fillahead/') ||
+      fileRel.startsWith('skip-retyping/') ||
       fileRel.startsWith('support/') ||
       fileRel.startsWith('contact/') ||
       ['index.html', 'index.md', 'llms.txt', 'llms-full.txt', 'humans.txt', 'site.js', 'manifest.webmanifest', 'opensearch.xml', 'sitemap.xml', 'sitemap-index.xml', 'sitemap-images.xml', 'sitemap-locales.xml'].includes(fileRel)
@@ -849,7 +853,7 @@ function checkPublicIdentityAndRedirects(files) {
   for (const file of legacyPages) {
     const source = fs.readFileSync(file, 'utf8');
     const target = (source.match(/data-redirect-target=["']([^"']+)["']/i) || [])[1] || '';
-    if (!target || !/^\/(?:fillahead|support|contact)(?:\/|$)/.test(target)) {
+    if (!target || !/^\/(?:skip-retyping|support|contact)(?:\/|$)/.test(target)) {
       fail(`${rel(file)}: legacy page is missing a safe canonical redirect target`);
     }
     if (!/<meta name="robots" content="noindex, follow">/.test(source)) {
@@ -894,11 +898,11 @@ checkCommercePolicies();
 checkPublicIdentityAndRedirects(files);
 
 if (failures.length) {
-  console.error(`FillAhead site audit failed with ${failures.length} issue(s):`);
+  console.error(`Skip Retyping site audit failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
 console.log(
-  `FillAhead site audit passed: ${checked.html} HTML, ${checked.jsonLd} JSON-LD, ${checked.images} images, ${checked.footers} footers, ${checked.navs} navs, ${checked.metadata} metadata groups, ${checked.accessibility} CSS/accessibility suite.`,
+  `Skip Retyping site audit passed: ${checked.html} HTML, ${checked.jsonLd} JSON-LD, ${checked.images} images, ${checked.footers} footers, ${checked.navs} navs, ${checked.metadata} metadata groups, ${checked.accessibility} CSS/accessibility suite.`,
 );

@@ -1,8 +1,8 @@
 {
-  "name": "FillAhead - Private form autofill",
-  "short_name": "FillAhead",
+  "name": "Skip Retyping - Private form autofill",
+  "short_name": "Skip Retyping",
   "description": "Private browser form autofill for job applications, signup forms, onboarding pages, and repeated business forms.",
-  "start_url": "/fillahead/?source=pwa",
+  "start_url": "/skip-retyping/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
@@ -13,19 +13,19 @@
   "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "/assets/fillahead-logo.png",
+      "src": "/assets/skip-retyping-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/fillahead-logo.png",
+      "src": "/assets/skip-retyping-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/fillahead-logo.svg",
+      "src": "/assets/skip-retyping-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -33,34 +33,34 @@
   ],
   "shortcuts": [
     {
-      "name": "Open FillAhead",
-      "short_name": "FillAhead",
+      "name": "Open Skip Retyping",
+      "short_name": "Skip Retyping",
       "description": "Private form autofill for repeated web forms.",
-      "url": "/fillahead/?source=pwa",
+      "url": "/skip-retyping/?source=pwa",
       "icons": [
         {
-          "src": "/assets/fillahead-logo.svg",
+          "src": "/assets/skip-retyping-logo.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
       ]
     },
     {
-      "name": "Download FillAhead",
+      "name": "Download Skip Retyping",
       "short_name": "Download",
-      "description": "Choose the Chrome, Edge, or Firefox download page for FillAhead.",
-      "url": "/fillahead/download/?source=pwa"
+      "description": "Choose the Chrome, Edge, or Firefox download page for Skip Retyping.",
+      "url": "/skip-retyping/download/?source=pwa"
     },
     {
       "name": "Support",
       "short_name": "Support",
-      "description": "Get FillAhead setup, compatibility, billing, and privacy help.",
+      "description": "Get Skip Retyping setup, compatibility, billing, and privacy help.",
       "url": "/support/?source=pwa"
     },
     {
       "name": "Contact",
       "short_name": "Contact",
-      "description": "Send a FillAhead question or bug report.",
+      "description": "Send a Skip Retyping question or bug report.",
       "url": "/contact/?source=pwa"
     }
   ]

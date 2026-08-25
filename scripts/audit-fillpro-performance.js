@@ -5,9 +5,9 @@ const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
 const ROUTES = [
-  '/fillahead/',
-  '/fillahead/checkout/',
-  '/fillahead/docs/getting-started/',
+  '/skip-retyping/',
+  '/skip-retyping/checkout/',
+  '/skip-retyping/docs/getting-started/',
 ];
 const SAMPLE_COUNT = 3;
 const CONTENT_TYPES = {
@@ -83,22 +83,22 @@ async function measureRoute(browser, origin, route) {
     await cdp.send('Emulation.setCPUThrottlingRate', { rate: 4 });
 
     await page.addInitScript(() => {
-      window.__fillaheadPerformance = { cls: 0, lcp: 0, layoutShifts: [], longTasks: [] };
+      window.__skipRetypingPerformance = { cls: 0, lcp: 0, layoutShifts: [], longTasks: [] };
       if (!window.PerformanceObserver) return;
       const supported = PerformanceObserver.supportedEntryTypes || [];
       if (supported.includes('largest-contentful-paint')) {
         new PerformanceObserver((list) => {
           const entries = list.getEntries();
           const latest = entries[entries.length - 1];
-          if (latest) window.__fillaheadPerformance.lcp = latest.startTime;
+          if (latest) window.__skipRetypingPerformance.lcp = latest.startTime;
         }).observe({ type: 'largest-contentful-paint', buffered: true });
       }
       if (supported.includes('layout-shift')) {
         new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
             if (!entry.hadRecentInput) {
-              window.__fillaheadPerformance.cls += entry.value;
-              window.__fillaheadPerformance.layoutShifts.push({
+              window.__skipRetypingPerformance.cls += entry.value;
+              window.__skipRetypingPerformance.layoutShifts.push({
                 value: entry.value,
                 sources: Array.from(entry.sources || []).map((source) => {
                   const node = source.node;
@@ -122,7 +122,7 @@ async function measureRoute(browser, origin, route) {
       if (supported.includes('longtask')) {
         new PerformanceObserver((list) => {
           for (const entry of list.getEntries()) {
-            window.__fillaheadPerformance.longTasks.push({
+            window.__skipRetypingPerformance.longTasks.push({
               duration: entry.duration,
               startTime: entry.startTime,
               attribution: Array.from(entry.attribution || []).map((item) => ({
@@ -143,7 +143,7 @@ async function measureRoute(browser, origin, route) {
     await page.waitForTimeout(1200);
 
     const metrics = await page.evaluate(() => {
-      const state = window.__fillaheadPerformance || {
+      const state = window.__skipRetypingPerformance || {
         cls: 0,
         lcp: 0,
         layoutShifts: [],
@@ -276,13 +276,13 @@ async function main() {
   }
 
   if (failures.length) {
-    console.error('FillAhead performance audit failed with ' + failures.length + ' issue(s):');
+    console.error('Skip Retyping performance audit failed with ' + failures.length + ' issue(s):');
     failures.forEach((failure) => console.error('- ' + failure));
     console.error(JSON.stringify(reports, null, 2));
     process.exit(1);
   }
   const summary = reports.map((report) => Object.assign({ route: report.route }, report.metrics));
-  console.log('FillAhead throttled performance audit passed: ' + JSON.stringify(summary));
+  console.log('Skip Retyping throttled performance audit passed: ' + JSON.stringify(summary));
 }
 
 main().catch((error) => {

@@ -5,6 +5,7 @@
   "scripts": {
     "generate:locales": "node scripts/generate-fillpro-locales.js",
     "generate:captions": "node scripts/generate-fillpro-video-captions.js",
+    "refresh:csp": "node scripts/refresh-jsonld-csp-hashes.js",
     "submit:indexnow": "node scripts/submit-indexnow.js",
     "baseline:marketing": "node scripts/audit-fillpro-visual-baselines.js --write",
     "review:marketing": "node scripts/render-fillpro-review-sheets.js",

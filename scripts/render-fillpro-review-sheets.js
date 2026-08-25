@@ -7,7 +7,7 @@ const ROOT = path.resolve(__dirname, '..');
 const WORKSPACE = path.resolve(ROOT, '..');
 const OUT_DIR = path.join(ROOT, '.tmp', 'marketing-review');
 const FRAME_DIR = path.join(OUT_DIR, 'video-frames-current');
-const VIDEO_REVIEW_TIMES = [0, 3.2, 5.5, 8.25, 11, 13.75, 16.5, 19.25];
+const VIDEO_REVIEW_TIMES = [0, 0.8, 2.6, 4.8, 8.4, 12.9, 15.5, 18.6, 21.2];
 
 const marketplace = (file) => path.join(ROOT, 'assets', 'marketplace', file);
 const asset = (file) => path.join(ROOT, 'assets', file);
@@ -114,14 +114,14 @@ async function writeReviewCopy(input, output, width = 1200) {
 
 async function renderMarketingSheet() {
   const items = [
-    ['Screenshot 1', 'Main promise', marketplace('fillahead-screenshot-fill-page-1280x800.png')],
-    ['Screenshot 2', 'Modern controls', marketplace('fillahead-screenshot-modern-forms-1280x800.png')],
-    ['Screenshot 3', 'Capture a filled page', marketplace('fillahead-screenshot-profiles-1280x800.png')],
-    ['Screenshot 4', 'Privacy proof', marketplace('fillahead-screenshot-privacy-1280x800.png')],
-    ['Screenshot 5', 'Undo and recovery', marketplace('fillahead-screenshot-undo-1280x800.png')],
-    ['Small promo', 'Chrome compact tile', marketplace('fillahead-small-promo-440x280.png')],
-    ['Marquee', 'Large feature tile', marketplace('fillahead-marquee-1400x560.png')],
-    ['Video thumbnail', 'Poster frame', marketplace('fillahead-store-demo-22s-thumb.png')],
+    ['Screenshot 1', 'Main promise', marketplace('skip-retyping-screenshot-fill-page-1280x800.png')],
+    ['Screenshot 2', 'Modern controls', marketplace('skip-retyping-screenshot-modern-forms-1280x800.png')],
+    ['Screenshot 3', 'Capture a filled page', marketplace('skip-retyping-screenshot-profiles-1280x800.png')],
+    ['Screenshot 4', 'Privacy proof', marketplace('skip-retyping-screenshot-privacy-1280x800.png')],
+    ['Screenshot 5', 'Undo and recovery', marketplace('skip-retyping-screenshot-undo-1280x800.png')],
+    ['Small promo', 'Chrome compact tile', marketplace('skip-retyping-small-promo-440x280.png')],
+    ['Marquee', 'Large feature tile', marketplace('skip-retyping-marquee-1400x560.png')],
+    ['Video thumbnail', 'Poster frame', marketplace('skip-retyping-store-demo-22s-thumb.png')],
   ].map(([title, subtitle, file]) => ({ title, subtitle, file }));
 
   const output = path.join(OUT_DIR, 'marketing-contact-sheet-current.png');
@@ -138,7 +138,7 @@ async function renderIconSheet() {
     { title: '32px', subtitle: 'Toolbar optical mark', file: extensionIcon('icon32.png'), pixelated: true },
     { title: '48px', subtitle: 'Extension manager', file: extensionIcon('icon48.png'), pixelated: true },
     { title: '128px', subtitle: 'Store icon', file: extensionIcon('icon128.png') },
-    { title: '512px', subtitle: 'Master preview', file: asset('fillahead-logo.png') },
+    { title: '512px', subtitle: 'Master preview', file: asset('skip-retyping-logo.png') },
   ];
 
   const output = path.join(OUT_DIR, 'icon-scale-sheet-current.png');
@@ -165,7 +165,7 @@ async function renderLocalizedSheet() {
       title: `${locale} · ${label}`,
       subtitle: `Localized store screenshot ${screenshots.findIndex(([value]) => value === slug) + 1}`,
       file: marketplace(
-        path.join('localized', locale, `fillahead-screenshot-${slug}-1280x800.png`),
+        path.join('localized', locale, `skip-retyping-screenshot-${slug}-1280x800.png`),
       ),
     })),
   );
@@ -200,7 +200,7 @@ async function extractVideoFrames() {
         '-ss',
         String(time),
         '-i',
-        marketplace('fillahead-store-demo-22s.mp4'),
+        marketplace('skip-retyping-store-demo-22s.mp4'),
         '-frames:v',
         '1',
         '-vf',
@@ -239,7 +239,7 @@ async function renderVideoSheet() {
   await renderIconSheet();
   await renderLocalizedSheet();
   await renderVideoSheet();
-  console.log(`FillAhead review sheets written to ${OUT_DIR}`);
+  console.log(`Skip Retyping review sheets written to ${OUT_DIR}`);
 })().catch((error) => {
   console.error(error);
   process.exit(1);

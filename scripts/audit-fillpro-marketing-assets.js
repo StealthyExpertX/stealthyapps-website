@@ -48,7 +48,7 @@ function checkLocalizedCaptions() {
     return;
   }
   for (const locale of manifest.locales) {
-    const target = path.join(root, locale, 'fillahead-store-demo-22s.vtt');
+    const target = path.join(root, locale, 'skip-retyping-store-demo-22s.vtt');
     if (!fs.existsSync(target)) {
       fail(`localized captions: missing ${locale}`);
       continue;
@@ -95,6 +95,7 @@ function checkLocalizedScreenshotCopy() {
     'fullName',
     'workEmail',
     'company',
+    'phone',
     'resume',
     'savedProfiles',
     'profileContents',
@@ -129,7 +130,7 @@ function checkLocalizedScreenshotCopy() {
   ];
   const untranslatedDefaults = new Set([
     'Client onboarding',
-    'After FillAhead',
+    'After Skip Retyping',
     'Work profile',
     '12 fields, 1 upload, 2 smart rules',
     'Fill Page',
@@ -137,11 +138,12 @@ function checkLocalizedScreenshotCopy() {
     'Full name',
     'Work email',
     'Company',
+    'Phone',
     'Resume upload',
     'Saved profiles',
     'Applicant profile',
     'Smart rules',
-    'Team intake form',
+    'Job application',
     'Preferred contact',
     'Modern controls',
     'Dropdowns',
@@ -150,7 +152,7 @@ function checkLocalizedScreenshotCopy() {
     'Matched from the profile.',
     'Ready for review',
     'Profile storage',
-    'Stored by FillAhead in your browser.',
+    'Stored by Skip Retyping in your browser.',
     'Page access',
     'Runs on the page you choose.',
     'Final say',
@@ -195,7 +197,7 @@ async function checkLocalizedScreenshots() {
   for (const locale of locales) {
     for (const name of names) {
       await checkImage(
-        `assets/marketplace/localized/${locale}/fillahead-screenshot-${name}-1280x800.png`,
+        `assets/marketplace/localized/${locale}/skip-retyping-screenshot-${name}-1280x800.png`,
         1280,
         800,
         { requireOpaque: true },
@@ -447,23 +449,26 @@ function checkRenderer() {
     'const HEIGHT = 720;',
     'const FPS = 24;',
     'const DURATION = 22;',
-    'const FIRST_FILL_BEFORE_SECONDS = 3;',
-    'const POSTER_FRAME_SECONDS = 5.2;',
+    'const FIRST_FILL_BEFORE_SECONDS = 1.25;',
+    'const POSTER_FRAME_SECONDS = 3.75;',
     'requestAnimationFrame(resolve)',
-    'fillahead-store-demo-22s.mp4',
-    'fillahead-store-demo-22s-thumb.png',
+    'skip-retyping-store-demo-22s.mp4',
+    'skip-retyping-store-demo-22s-thumb.png',
     'Mute-safe captions',
-    'A blank form.\\nOne profile.',
-    'Fill repeat details in one click.',
-    'Check it. Undo it. Submit when ready.',
-    'Works with dropdowns and fields that appear later.',
-    'Start with 3 profiles free.',
-    'No FillAhead account.',
-    'No account',
+    'Another job\\\\napplication?',
+    'Fill the details you already saved.',
+    'One click.\\\\nDetails filled.',
+    'Your name, email, phone, and saved resume are ready to check.',
+    'Review first.\\\\nSubmit yourself.',
+    'It keeps up\\\\nwith the form.',
+    'Start free.\\\\nLifetime Pro: $39.99.',
+    'Every Pro plan adds up to 500 profiles, duplication, and backup imports.',
+    'One payment',
+    'Monthly + yearly available',
     'careers.example.com/apply',
-    'forms.example.com/team-intake',
-    'fields and the resume are ready to review',
-    'modern form controls are ready to review',
+    'careers.example.com/apply/step-2',
+    'fields and your resume are ready to review',
+    'application details are ready to review',
     'Use your password manager',
     'No auto-submit',
     'windowOpacity',
@@ -477,17 +482,20 @@ function checkRenderer() {
   for (const needle of required) {
     if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
   }
-  if (!/if \(t < 2\.8\) return 1;/.test(source)) {
-    fail(`${relativePath}: the first field should fill before the 3-second mark`);
+  if (!/if \(t < 1\.2\) return 1;/.test(source)) {
+    fail(`${relativePath}: the first field should fill during the opening hook`);
   }
-  if (!/if \(t < 5\.05\) return 4;/.test(source)) {
-    fail(`${relativePath}: the resume should be filled by the poster frame`);
+  if (!/if \(t < 2\.55\) return 4;/.test(source)) {
+    fail(`${relativePath}: the resume should be filled before the first proof scene`);
   }
   if (!/String\(POSTER_FRAME_SECONDS\)/.test(source)) {
     fail(`${relativePath}: poster thumbnail should render from the early value frame`);
   }
   if (/radial-gradient|payoff-card|kinetic-layer|sceneFor\(|class="version"|v1\.0\.0|Passwords skipped/i.test(source)) {
     fail(`${relativePath}: old slideshow, orb, version-badge, or repetitive-boundary treatment returned`);
+  }
+  if (/Client intake|Partner intake|Team intake|team-intake/i.test(source)) {
+    fail(`${relativePath}: unrelated intake copy returned to the job-application story`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -501,20 +509,20 @@ function checkStillRenderer() {
   if (!target) return;
   const source = fs.readFileSync(target, 'utf8');
   const required = [
-    'fillahead-screenshot-fill-page-1280x800.png',
-    'fillahead-screenshot-modern-forms-1280x800.png',
-    'fillahead-screenshot-profiles-1280x800.png',
-    'fillahead-screenshot-privacy-1280x800.png',
-    'fillahead-screenshot-undo-1280x800.png',
-    'fillahead-small-promo-440x280.png',
-    'fillahead-marquee-1400x560.png',
+    'skip-retyping-screenshot-fill-page-1280x800.png',
+    'skip-retyping-screenshot-modern-forms-1280x800.png',
+    'skip-retyping-screenshot-profiles-1280x800.png',
+    'skip-retyping-screenshot-privacy-1280x800.png',
+    'skip-retyping-screenshot-undo-1280x800.png',
+    'skip-retyping-small-promo-440x280.png',
+    'skip-retyping-marquee-1400x560.png',
     'Fill the fields you keep retyping.',
     'Choose a saved profile, fill the page, then review before you submit.',
     'Turn a filled form into a reusable profile.',
     'Save this filled page',
     'Fill more than basic text boxes.',
     'Review the fill. Undo it if needed.',
-    'Roll the last FillAhead changes back without reloading the page.',
+    'Roll the last Skip Retyping changes back without reloading the page.',
     'Fill repeat forms from saved profiles.',
     'Stored in your browser',
     'Saved profiles stay in your browser.',
@@ -523,10 +531,12 @@ function checkStillRenderer() {
     'shot-profiles',
     'shot-privacy',
     'shot-undo',
-    'Built for the hard parts',
+    'What Skip Retyping handles',
     'field-grid',
     'Catch fields that appear after the first pass.',
     'forms.example.com/demo-request',
+    'careers.example.com/apply',
+    "values[7] ? 'Ready for review' : 'Filling application fields'",
     'brandPromo',
     'promo-row',
     'alex-morgan.pdf',
@@ -587,6 +597,9 @@ function checkStillRenderer() {
   if (/Same-page sections|<span class="chip">Radios<\/span>|If a page labels a field oddly/i.test(source)) {
     fail(`${relativePath}: store screenshots should avoid technical or cramped fallback wording`);
   }
+  if (/Client intake|Partner intake|Team intake|team-intake/i.test(source)) {
+    fail(`${relativePath}: unrelated intake copy returned to the marketing assets`);
+  }
   if (/Tricky fields|Fields browser autofill often misses|<div class="chips">[\s\S]*Choice buttons|Grouped sections/i.test(source)) {
     fail(`${relativePath}: modern-form screenshot should use a product-proof field grid, not pill-heavy template copy`);
   }
@@ -607,8 +620,8 @@ function checkReviewRenderer() {
   if (!target) return;
   const source = fs.readFileSync(target, 'utf8');
   for (const needle of [
-    'fillahead-small-promo-440x280.png',
-    'fillahead-marquee-1400x560.png',
+    'skip-retyping-small-promo-440x280.png',
+    'skip-retyping-marquee-1400x560.png',
     'marketing-contact-sheet-current-review.jpg',
     'localized-contact-sheet-current-review.jpg',
     'video-contact-sheet-current-review.jpg',
@@ -619,7 +632,7 @@ function checkReviewRenderer() {
 }
 
 async function checkIconSystem() {
-  const siteSvg = fs.readFileSync(filePath('assets/fillahead-logo.svg'), 'utf8').trim();
+  const siteSvg = fs.readFileSync(filePath('assets/skip-retyping-logo.svg'), 'utf8').trim();
   const extensionSvgPath = path.join(WORKSPACE, 'fillpro', 'icons', 'icon-source.svg');
   if (!fs.existsSync(extensionSvgPath)) {
     fail('fillpro/icons/icon-source.svg: missing');
@@ -627,17 +640,17 @@ async function checkIconSystem() {
   }
   const extensionSvg = fs.readFileSync(extensionSvgPath, 'utf8').trim();
   if (siteSvg !== extensionSvg) {
-    fail('FillAhead logo mismatch: website SVG and extension source SVG must stay identical');
+    fail('Skip Retyping logo mismatch: website SVG and extension source SVG must stay identical');
   }
   for (const [label, source] of [
-    ['assets/fillahead-logo.svg', siteSvg],
+    ['assets/skip-retyping-logo.svg', siteSvg],
     ['fillpro/icons/icon-source.svg', extensionSvg],
   ]) {
     if (/<text|<image|<foreignObject|href=|data:image/i.test(source)) {
       fail(`${label}: logo source should stay self-owned vector paths, not text, raster embeds, or remote assets`);
     }
-    if (!/aria-label="FillAhead icon"/.test(source)) {
-      fail(`${label}: missing FillAhead icon aria label`);
+    if (!/aria-label="Skip Retyping icon"/.test(source)) {
+      fail(`${label}: missing Skip Retyping icon aria label`);
     }
   }
   const manifestPath = path.join(WORKSPACE, 'fillpro', 'manifest.json');
@@ -689,34 +702,34 @@ async function checkIconSystem() {
 }
 
 async function main() {
-  await checkImage('assets/fillahead-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
-  await checkImage('assets/fillahead-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
-  await checkImage('assets/fillahead-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
-  checkHeroVideo('assets/fillahead-demo.mp4');
-  await checkImage('assets/marketplace/fillahead-small-promo-440x280.png', 440, 280, {
+  await checkImage('assets/skip-retyping-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
+  await checkImage('assets/skip-retyping-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
+  await checkImage('assets/skip-retyping-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
+  checkHeroVideo('assets/skip-retyping-demo.mp4');
+  await checkImage('assets/marketplace/skip-retyping-small-promo-440x280.png', 440, 280, {
     maxBytes: 1024 * 1024,
     maxMeanLuma: 190,
     minColorSpread: 35,
   });
-  await checkImage('assets/marketplace/fillahead-marquee-1400x560.png', 1400, 560, {
+  await checkImage('assets/marketplace/skip-retyping-marquee-1400x560.png', 1400, 560, {
     maxBytes: 2 * 1024 * 1024,
     maxMeanLuma: 190,
     minColorSpread: 35,
   });
   const screenshots = [
-    'assets/marketplace/fillahead-screenshot-fill-page-1280x800.png',
-    'assets/marketplace/fillahead-screenshot-modern-forms-1280x800.png',
-    'assets/marketplace/fillahead-screenshot-profiles-1280x800.png',
-    'assets/marketplace/fillahead-screenshot-privacy-1280x800.png',
-    'assets/marketplace/fillahead-screenshot-undo-1280x800.png',
+    'assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png',
+    'assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png',
+    'assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png',
+    'assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png',
+    'assets/marketplace/skip-retyping-screenshot-undo-1280x800.png',
   ];
   for (const screenshot of screenshots) {
     await checkImage(screenshot, 1280, 800, { requireOpaque: true });
   }
   await checkLocalizedScreenshots();
   await checkScreenshotDistinctness(screenshots);
-  await checkImage('assets/marketplace/fillahead-store-demo-22s-thumb.png', 1280, 720);
-  checkVideo('assets/marketplace/fillahead-store-demo-22s.mp4');
+  await checkImage('assets/marketplace/skip-retyping-store-demo-22s-thumb.png', 1280, 720);
+  checkVideo('assets/marketplace/skip-retyping-store-demo-22s.mp4');
   checkLocalizedCaptions();
   checkRenderer();
   checkStillRenderer();
@@ -724,13 +737,13 @@ async function main() {
   await checkIconSystem();
 
   if (failures.length) {
-    console.error(`FillAhead marketing asset audit failed with ${failures.length} issue(s):`);
+    console.error(`Skip Retyping marketing asset audit failed with ${failures.length} issue(s):`);
     for (const failure of failures) console.error(`- ${failure}`);
     process.exit(1);
   }
 
   console.log(
-    `FillAhead marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
+    `Skip Retyping marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
   );
 }
 

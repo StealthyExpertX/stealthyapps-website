@@ -1,7 +1,7 @@
-# FillAhead Moved
+# Skip Retyping Moved
 
-Stealthy Apps is focused on FillAhead right now.
+Stealthy Apps is focused on Skip Retyping right now.
 
 The current product page is:
 
-https://stealthyapps.com/fillahead/
+https://stealthyapps.com/skip-retyping/

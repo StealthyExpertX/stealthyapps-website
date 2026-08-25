@@ -1,4 +1,4 @@
-# FillAhead robots.txt
+# Skip Retyping robots.txt
 # Canonical: https://stealthyapps.com/robots.txt
 
 User-agent: *

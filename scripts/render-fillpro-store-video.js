@@ -7,9 +7,9 @@ const { chromium } = require('playwright');
 const siteRoot = path.resolve(__dirname, '..');
 const assetsDir = path.join(siteRoot, 'assets');
 const marketplaceDir = path.join(assetsDir, 'marketplace');
-const logoSvgPath = path.join(assetsDir, 'fillahead-logo.svg');
-const outputMp4 = path.join(marketplaceDir, 'fillahead-store-demo-22s.mp4');
-const outputThumb = path.join(marketplaceDir, 'fillahead-store-demo-22s-thumb.png');
+const logoSvgPath = path.join(assetsDir, 'skip-retyping-logo.svg');
+const outputMp4 = path.join(marketplaceDir, 'skip-retyping-store-demo-22s.mp4');
+const outputThumb = path.join(marketplaceDir, 'skip-retyping-store-demo-22s-thumb.png');
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
   .toString('base64')}`;
@@ -19,8 +19,8 @@ const HEIGHT = 720;
 const FPS = 24;
 const DURATION = 22;
 const FRAMES = FPS * DURATION;
-const FIRST_FILL_BEFORE_SECONDS = 3;
-const POSTER_FRAME_SECONDS = 5.2;
+const FIRST_FILL_BEFORE_SECONDS = 1.25;
+const POSTER_FRAME_SECONDS = 3.75;
 // Mute-safe captions: every important claim is visible without voiceover.
 
 const html = `<!doctype html>
@@ -125,7 +125,7 @@ const html = `<!doctype html>
   .stage.is-dark .eyebrow { color: #5eeadd; }
   h1 {
     margin: 0;
-    max-width: 9.5ch;
+    max-width: 12ch;
     font: 930 58px/0.96 "Aptos Display", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
     letter-spacing: 0;
     white-space: pre-line;
@@ -422,13 +422,13 @@ const html = `<!doctype html>
 </head>
 <body>
 <main class="stage" id="stage">
-  <div class="brand"><img src="${logoDataUrl}" alt=""><span>FillAhead</span></div>
-  <div class="top-note" id="topNote">Private autofill</div>
+  <div class="brand"><img src="${logoDataUrl}" alt=""><span>Skip Retyping</span></div>
+  <div class="top-note" id="topNote">Job application autofill</div>
   <section class="copy" id="copy">
-    <p class="eyebrow" id="eyebrow">Ready when you are</p>
-    <h1 id="headline">A blank form.\nOne profile.</h1>
-    <p class="sub" id="subline">Choose Fill Page and watch the details you reuse fall into place.</p>
-    <div class="proof" id="proof"><span>3 profiles free</span><span>No account</span></div>
+    <p class="eyebrow" id="eyebrow">Job application</p>
+    <h1 id="headline">Another job\napplication?</h1>
+    <p class="sub" id="subline">Fill the details you already saved.</p>
+    <div class="proof" id="proof"><span>3 profiles free</span><span>Stored in your browser</span></div>
   </section>
   <section class="browser" id="browser" aria-hidden="true">
     <div class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="url" id="url">careers.example.com/apply</span></div>
@@ -437,8 +437,8 @@ const html = `<!doctype html>
       <div id="fields"></div>
       <div class="result" id="result"><strong id="resultCount">4</strong><span id="resultText">fields and the resume are ready to review</span></div>
       <aside class="extension-panel" id="panel">
-        <div class="panel-head"><img src="${logoDataUrl}" alt=""><span>FillAhead</span></div>
-        <div class="profile"><strong id="profileName">Work profile</strong><span id="profileMeta">9 saved fields · 2 rules · 1 file</span></div>
+        <div class="panel-head"><img src="${logoDataUrl}" alt=""><span>Skip Retyping</span></div>
+        <div class="profile"><strong id="profileName">Job search profile</strong><span id="profileMeta">12 saved fields · 2 rules · 1 file</span></div>
         <div class="fill-button" id="fillButton">Fill Page</div>
         <div class="undo-button" id="undoButton">Undo last fill</div>
       </aside>
@@ -446,23 +446,23 @@ const html = `<!doctype html>
   </section>
   <aside class="floating-note" id="floatingNote"><strong id="noteTitle">Ready to review</strong><span id="noteText">You decide when the form is submitted.</span></aside>
   <div class="cursor" id="cursor"></div>
-  <div class="footer-line"><span>Chrome · Edge · Firefox</span><span>stealthyapps.com/fillahead</span></div>
+  <div class="footer-line"><span>Chrome · Edge · Firefox</span><span>stealthyapps.com/skip-retyping</span></div>
   <div class="progress"><span id="progress"></span></div>
 </main>
 <script>
   const applicationFields = [
     ['Full name', 'Alex Morgan', 'text'],
-    ['Work email', 'alex@example.com', 'text'],
-    ['Company', 'Stealthy Apps', 'text'],
+    ['Email', 'alex@example.com', 'text'],
+    ['Phone', '(207) 555-0148', 'text'],
     ['Resume upload', 'alex-morgan-resume.pdf', 'file'],
     ['Account password', '', 'boundary'],
   ];
   const modernFields = [
-    ['Team', 'Product operations', 'select'],
-    ['Preferred contact', 'Email', 'select'],
-    ['Remote-friendly', 'Checked', 'check'],
-    ['Start window', 'Available in two weeks', 'text'],
-    ['Late field', 'Filled after it appeared', 'late'],
+    ['Preferred location', 'Portland, Maine', 'select'],
+    ['Open to remote work', 'Checked', 'check'],
+    ['Available to start', 'In two weeks', 'text'],
+    ['Portfolio', 'stealthyapps.com', 'text'],
+    ['Additional question', 'Filled when it appeared', 'late'],
   ];
 
   function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
@@ -476,38 +476,38 @@ const html = `<!doctype html>
   }
 
   function copyFor(t) {
-    if (t < 2.2) return ['Ready when you are', 'A blank form.\\nOne profile.', 'Choose Fill Page to add the details you saved.', ['3 profiles free', 'No account']];
-    if (t < 7.7) return ['Filling now', 'Fill repeat details in one click.', 'Name, email, company, and your saved resume, all from one profile.', ['One click', 'Upload matching']];
-    if (t < 12) return ['Ready to review', 'Check it. Undo it. Submit when ready.', 'FillAhead fills the page. You review and submit it.', ['Undo ready', 'No auto-submit']];
-    if (t < 17) return ['Modern form fields', 'Works with dropdowns and fields that appear later.', 'Dropdowns, checkboxes, and late-loading fields are handled too.', ['Dropdowns', 'Checkboxes', 'Dynamic fields']];
-    return ['Start free', 'Start with 3 profiles free.', 'No FillAhead account. Pro adds more profiles and backup imports.', ['3 profiles free', 'No account', 'Review first']];
+    if (t < 3.2) return ['Job application', 'Another job\\napplication?', 'Fill the details you already saved.', ['3 profiles free', 'Stored in your browser']];
+    if (t < 8) return ['Filled in seconds', 'One click.\\nDetails filled.', 'Your name, email, phone, and saved resume are ready to check.', ['One click', 'Upload matching']];
+    if (t < 12.6) return ['You stay in control', 'Review first.\\nSubmit yourself.', 'See what changed, undo the fill, and leave passwords to your password manager.', ['Undo ready', 'No auto-submit']];
+    if (t < 17.2) return ['Application step two', 'It keeps up\\nwith the form.', 'Dropdowns, checkboxes, and fields that appear after the page loads.', ['Dropdowns', 'Checkboxes', 'Late fields']];
+    return ['Choose what fits', 'Start free.\\nLifetime Pro: $39.99.', 'Every Pro plan adds up to 500 profiles, duplication, and backup imports.', ['One payment', 'Monthly + yearly available']];
   }
 
   function formFor(t) {
-    if (t >= 12 && t < 17) {
-      return { title: 'Team intake', url: 'forms.example.com/team-intake', fields: modernFields };
+    if (t >= 12.6 && t < 17.2) {
+      return { title: 'Application details', url: 'careers.example.com/apply/step-2', fields: modernFields };
     }
     return { title: 'Job application', url: 'careers.example.com/apply', fields: applicationFields };
   }
 
   function filledCount(t) {
-    if (t < 2.05) return 0;
-    if (t < 2.8) return 1;
-    if (t < 3.55) return 2;
-    if (t < 4.3) return 3;
-    if (t < 5.05) return 4;
-    if (t >= 12 && t < 12.8) return 0;
-    if (t >= 12.8 && t < 13.35) return 1;
-    if (t >= 13.35 && t < 13.9) return 2;
-    if (t >= 13.9 && t < 14.45) return 3;
-    if (t >= 14.45 && t < 15) return 4;
-    if (t >= 15 && t < 17) return 5;
+    if (t < 0.75) return 0;
+    if (t < 1.2) return 1;
+    if (t < 1.65) return 2;
+    if (t < 2.1) return 3;
+    if (t < 2.55) return 4;
+    if (t >= 12.6 && t < 13.05) return 0;
+    if (t >= 13.05 && t < 13.55) return 1;
+    if (t >= 13.55 && t < 14.05) return 2;
+    if (t >= 14.05 && t < 14.55) return 3;
+    if (t >= 14.55 && t < 15.05) return 4;
+    if (t >= 15.05 && t < 17.2) return 5;
     return 4;
   }
 
   function activeField(t) {
-    if (t >= 2.05 && t < 5.05) return Math.min(3, Math.floor((t - 2.05) / 0.75));
-    if (t >= 12.8 && t < 15.55) return Math.min(4, Math.floor((t - 12.8) / 0.55));
+    if (t >= 0.75 && t < 2.55) return Math.min(3, Math.floor((t - 0.75) / 0.45));
+    if (t >= 13.05 && t < 15.55) return Math.min(4, Math.floor((t - 13.05) / 0.5));
     return -1;
   }
 
@@ -530,24 +530,24 @@ const html = `<!doctype html>
   }
 
   function cursorFor(t) {
-    if (t < 0.8) return [1090, 430, 0];
-    if (t < 1.55) {
-      const p = smooth((t - 0.8) / 0.75);
-      return [mix(1090, 1082, p), mix(430, 372, p), 1];
+    if (t < 0.12) return [1110, 430, 0];
+    if (t < 0.62) {
+      const p = smooth((t - 0.12) / 0.5);
+      return [mix(1110, 1082, p), mix(430, 372, p), 1];
     }
-    if (t < 2.25) return [1082, 372, 1];
-    if (t < 9.8) return [mix(1082, 1050, smooth((t - 2.25) / 7.55)), mix(372, 470, smooth((t - 2.25) / 7.55)), 0.76];
-    if (t < 11.4) {
-      const p = smooth((t - 9.8) / 1.6);
+    if (t < 1.05) return [1082, 372, 1];
+    if (t < 9.6) return [mix(1082, 1050, smooth((t - 1.05) / 8.55)), mix(372, 470, smooth((t - 1.05) / 8.55)), 0.76];
+    if (t < 11.2) {
+      const p = smooth((t - 9.6) / 1.6);
       return [mix(1050, 1080, p), mix(470, 425, p), 1];
     }
-    if (t < 12.2) return [1080, 425, 0.7];
+    if (t < 12.5) return [1080, 425, 0.7];
     return [1040, 460, 0];
   }
 
   window.renderFillProFrame = function renderFillProFrame(t) {
     const stage = document.getElementById('stage');
-    stage.classList.toggle('is-dark', t >= 7.7 && t < 17);
+    stage.classList.toggle('is-dark', t >= 8 && t < 17.2);
 
     const copy = copyFor(t);
     document.getElementById('eyebrow').textContent = copy[0];
@@ -555,7 +555,7 @@ const html = `<!doctype html>
     document.getElementById('subline').textContent = copy[2];
     document.getElementById('proof').innerHTML = copy[3].map((item) => '<span>' + item + '</span>').join('');
 
-    const phaseStarts = [0, 2.2, 7.7, 12, 17];
+    const phaseStarts = [0, 3.2, 8, 12.6, 17.2];
     const phaseStart = phaseStarts.slice().reverse().find((start) => t >= start) || 0;
     const phaseIntro = phaseStart === 0 ? 1 : smooth((t - phaseStart) / 0.42);
     const copyNode = document.getElementById('copy');
@@ -567,49 +567,49 @@ const html = `<!doctype html>
     document.getElementById('url').textContent = form.url;
     document.getElementById('fields').innerHTML = renderFields(t);
 
-    const panelIntro = smooth((t - 0.85) / 0.6);
+    const panelIntro = smooth((t - 0.08) / 0.35);
     const panel = document.getElementById('panel');
     panel.style.setProperty('--panel-opacity', panelIntro.toFixed(3));
     panel.style.setProperty('--panel-y', ((1 - panelIntro) * 12).toFixed(2) + 'px');
     panel.style.setProperty('--panel-scale', (0.985 + panelIntro * 0.015).toFixed(3));
-    document.getElementById('profileName').textContent = t >= 12 && t < 17 ? 'Team profile' : 'Work profile';
-    document.getElementById('profileMeta').textContent = t >= 12 && t < 17 ? 'Choices · preferences · custom fields' : '9 saved fields · 2 rules · 1 file';
-    document.getElementById('fillButton').textContent = t >= 12 && t < 17 ? 'Fill team form' : 'Fill Page';
+    document.getElementById('profileName').textContent = 'Job search profile';
+    document.getElementById('profileMeta').textContent = t >= 12.6 && t < 17.2 ? 'Choices · links · custom fields' : '12 saved fields · 2 rules · 1 file';
+    document.getElementById('fillButton').textContent = t >= 12.6 && t < 17.2 ? 'Fill application details' : 'Fill Page';
 
-    const buttonShine = t >= 1.2 && t < 2.15 ? mix(-130, 520, smooth((t - 1.2) / 0.95)) : -130;
+    const buttonShine = t >= 0.18 && t < 0.98 ? mix(-130, 520, smooth((t - 0.18) / 0.8)) : -130;
     document.getElementById('fillButton').style.setProperty('--button-shine', buttonShine.toFixed(1) + '%');
 
-    const firstResult = windowOpacity(t, 5.05, 11.8, 0.5);
-    const modernResult = windowOpacity(t, 15.25, 16.95, 0.35);
-    const resultOpacity = Math.max(firstResult, modernResult, t >= 17 ? 1 : 0);
+    const firstResult = windowOpacity(t, 2.55, 12.35, 0.45);
+    const modernResult = windowOpacity(t, 15.25, 17.1, 0.35);
+    const resultOpacity = Math.max(firstResult, modernResult, t >= 17.2 ? 1 : 0);
     const result = document.getElementById('result');
     result.style.setProperty('--result-opacity', resultOpacity.toFixed(3));
     result.style.setProperty('--result-y', ((1 - resultOpacity) * 7).toFixed(2) + 'px');
-    document.getElementById('resultCount').textContent = t >= 12 && t < 17 ? '5' : '4';
-    document.getElementById('resultText').textContent = t >= 12 && t < 17 ? 'modern form controls are ready to review' : 'fields and the resume are ready to review';
+    document.getElementById('resultCount').textContent = t >= 12.6 && t < 17.2 ? '5' : '4';
+    document.getElementById('resultText').textContent = t >= 12.6 && t < 17.2 ? 'application details are ready to review' : 'fields and your resume are ready to review';
 
-    const reviewNote = windowOpacity(t, 8.05, 11.75, 0.45);
-    const modernNote = windowOpacity(t, 15.2, 16.9, 0.35);
-    const finalNote = t >= 17 ? smooth((t - 17) / 0.55) : 0;
+    const reviewNote = windowOpacity(t, 8.35, 12.35, 0.45);
+    const modernNote = windowOpacity(t, 15.2, 17.1, 0.35);
+    const finalNote = t >= 17.2 ? smooth((t - 17.2) / 0.55) : 0;
     const noteOpacity = Math.max(reviewNote, modernNote, finalNote);
     const note = document.getElementById('floatingNote');
     note.style.setProperty('--note-opacity', noteOpacity.toFixed(3));
     note.style.setProperty('--note-y', ((1 - noteOpacity) * 8).toFixed(2) + 'px');
-    if (t >= 17) {
-      document.getElementById('noteTitle').textContent = 'Three profiles free';
-      document.getElementById('noteText').textContent = 'Upgrade only when your workflow needs more.';
-    } else if (t >= 12) {
-      document.getElementById('noteTitle').textContent = 'Late field caught';
-      document.getElementById('noteText').textContent = 'FillAhead checks again when the page changes.';
+    if (t >= 17.2) {
+      document.getElementById('noteTitle').textContent = '$39.99 lifetime';
+      document.getElementById('noteText').textContent = 'One payment. No renewal.';
+    } else if (t >= 12.6) {
+      document.getElementById('noteTitle').textContent = 'Application step complete';
+      document.getElementById('noteText').textContent = 'Late fields are included when the page changes.';
     } else {
       document.getElementById('noteTitle').textContent = 'Ready to review';
       document.getElementById('noteText').textContent = 'You decide when the form is submitted.';
     }
 
-    document.getElementById('topNote').textContent = t >= 17 ? '3 profiles free' : t >= 12 ? 'Modern form support' : t >= 7.7 ? 'Review and undo' : 'Private autofill';
+    document.getElementById('topNote').textContent = t >= 17.2 ? 'Lifetime Pro' : t >= 12.6 ? 'Application step two' : t >= 8 ? 'Review and undo' : 'Job application autofill';
 
     const browser = document.getElementById('browser');
-    const finalMove = t >= 17 ? smooth((t - 17) / 0.7) : 0;
+    const finalMove = t >= 17.2 ? smooth((t - 17.2) / 0.7) : 0;
     browser.style.setProperty('--browser-x', (finalMove * 12).toFixed(2) + 'px');
     browser.style.setProperty('--browser-y', (-finalMove * 5).toFixed(2) + 'px');
     browser.style.setProperty('--browser-scale', (1 - finalMove * 0.035).toFixed(3));
@@ -619,7 +619,7 @@ const html = `<!doctype html>
     cursor.style.setProperty('--cursor-x', cursorState[0].toFixed(1) + 'px');
     cursor.style.setProperty('--cursor-y', cursorState[1].toFixed(1) + 'px');
     cursor.style.setProperty('--cursor-opacity', cursorState[2].toFixed(3));
-    const click = t >= 1.48 && t <= 1.9 ? smooth((t - 1.48) / 0.42) : t > 1.9 && t < 2.15 ? 1 - smooth((t - 1.9) / 0.25) : 0;
+    const click = t >= 0.56 && t <= 0.78 ? smooth((t - 0.56) / 0.22) : t > 0.78 && t < 1.02 ? 1 - smooth((t - 0.78) / 0.24) : 0;
     cursor.style.setProperty('--click-opacity', click.toFixed(3));
     cursor.style.setProperty('--click-scale', (0.42 + click * 0.7).toFixed(3));
 

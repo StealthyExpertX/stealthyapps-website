@@ -1,66 +1,66 @@
-# FillAhead
+# Skip Retyping
 
-FillAhead is a private browser form autofill extension for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
+Skip Retyping is a private browser form autofill extension for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
 
-Website and canonical product page: https://stealthyapps.com/fillahead/
-Privacy: https://stealthyapps.com/fillahead/privacy/
+Website and canonical product page: https://stealthyapps.com/skip-retyping/
+Privacy: https://stealthyapps.com/skip-retyping/privacy/
 Support: https://stealthyapps.com/support/
-Setup guide: https://stealthyapps.com/fillahead/docs/getting-started/
+Setup guide: https://stealthyapps.com/skip-retyping/docs/getting-started/
 Contact: https://stealthyapps.com/contact/
 Last updated: 2026-08-25
 
 ## Product Facts
 
-- Product name: FillAhead
+- Product name: Skip Retyping
 - Brand: Stealthy Apps
 - Category: browser extension, browser autofill, productivity
 - Free tier: three saved profiles
-- Pro pricing: $3.99/month or $29.99/year
+- Pro pricing: $3.99/month, $29.99/year, or $39.99 lifetime
 - Pro license and plan status: ExtensionPay
 - Checkout and payment processing: Stripe
 
 ## Product Description
 
-FillAhead fills repeated web forms from profiles saved in your browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
+Skip Retyping fills repeated web forms from profiles saved in your browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
 
 ## What It Handles
 
-FillAhead supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, free profile export plus Pro backup imports, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
+Skip Retyping supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, free profile export plus Pro backup imports, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
 
 ## Privacy Boundary
 
-FillAhead does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in your browser unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillAhead is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+Skip Retyping does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in your browser unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Skip Retyping is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Useful Routes
 
-- Product: https://stealthyapps.com/fillahead/
-- Pricing: https://stealthyapps.com/fillahead/#pricing
-- Checkout handoff: https://stealthyapps.com/fillahead/checkout/
-- Comparison: https://stealthyapps.com/fillahead/#compare
-- Job application autofill: https://stealthyapps.com/fillahead/job-application-autofill/
-- Resume upload autofill: https://stealthyapps.com/fillahead/resume-upload-autofill/
-- Local form autofill: https://stealthyapps.com/fillahead/local-form-autofill/
-- Browser autofill comparison: https://stealthyapps.com/fillahead/browser-autofill-vs-fillahead/
-- Privacy: https://stealthyapps.com/fillahead/privacy/
-- Terms of sale: https://stealthyapps.com/fillahead/terms/
-- Refunds and cancellation: https://stealthyapps.com/fillahead/refunds/
+- Product: https://stealthyapps.com/skip-retyping/
+- Pricing: https://stealthyapps.com/skip-retyping/#pricing
+- Checkout handoff: https://stealthyapps.com/skip-retyping/checkout/
+- Comparison: https://stealthyapps.com/skip-retyping/#compare
+- Job application autofill: https://stealthyapps.com/skip-retyping/job-application-autofill/
+- Resume upload autofill: https://stealthyapps.com/skip-retyping/resume-upload-autofill/
+- Local form autofill: https://stealthyapps.com/skip-retyping/local-form-autofill/
+- Browser autofill comparison: https://stealthyapps.com/skip-retyping/browser-autofill-vs-skip-retyping/
+- Privacy: https://stealthyapps.com/skip-retyping/privacy/
+- Terms of sale: https://stealthyapps.com/skip-retyping/terms/
+- Refunds and cancellation: https://stealthyapps.com/skip-retyping/refunds/
 - Support: https://stealthyapps.com/support/
-- Smart Rules guide: https://stealthyapps.com/fillahead/docs/smart-rules/
+- Smart Rules guide: https://stealthyapps.com/skip-retyping/docs/smart-rules/
 - Contact: https://stealthyapps.com/contact/
-- Markdown product brief: https://stealthyapps.com/fillahead/index.md
+- Markdown product brief: https://stealthyapps.com/skip-retyping/index.md
 - Expanded product reference: https://stealthyapps.com/llms-full.txt
 
 ## Regional Product Pages
 
-- German: https://stealthyapps.com/fillahead/de/
-- Spanish: https://stealthyapps.com/fillahead/es/
-- French: https://stealthyapps.com/fillahead/fr/
-- Brazilian Portuguese: https://stealthyapps.com/fillahead/pt-br/
-- Japanese: https://stealthyapps.com/fillahead/ja/
-- Korean: https://stealthyapps.com/fillahead/ko/
-- Simplified Chinese: https://stealthyapps.com/fillahead/zh-cn/
-- Russian: https://stealthyapps.com/fillahead/ru/
+- German: https://stealthyapps.com/skip-retyping/de/
+- Spanish: https://stealthyapps.com/skip-retyping/es/
+- French: https://stealthyapps.com/skip-retyping/fr/
+- Brazilian Portuguese: https://stealthyapps.com/skip-retyping/pt-br/
+- Japanese: https://stealthyapps.com/skip-retyping/ja/
+- Korean: https://stealthyapps.com/skip-retyping/ko/
+- Simplified Chinese: https://stealthyapps.com/skip-retyping/zh-cn/
+- Russian: https://stealthyapps.com/skip-retyping/ru/
 
-## Where FillAhead Fits
+## Where Skip Retyping Fits
 
-FillAhead is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a useful free tier, and review-before-submit control. Browser autofill and password managers remain the better place for sign-ins and payment details; text expanders remain better for snippets and canned replies.
+Skip Retyping is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a useful free tier, and review-before-submit control. Browser autofill and password managers remain the better place for sign-ins and payment details; text expanders remain better for snippets and canned replies.

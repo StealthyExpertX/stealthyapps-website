@@ -1,3 +1,3 @@
 # Moved
 
-This page is now at [FillAhead](/fillahead/job-application-autofill/).
+This page is now at [Skip Retyping](/skip-retyping/job-application-autofill/).

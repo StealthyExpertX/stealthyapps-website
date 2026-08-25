@@ -8,24 +8,24 @@
 
   root.classList.add('js-enhanced');
 
-  var THEME_KEY = 'fillahead-theme';
+  var THEME_KEY = 'skip-retyping-theme';
   var THEMES = ['system', 'light', 'dark'];
   // Add the approved marketplace URLs here once each listing is public.
-  // Every data-fillahead-store link on the site will switch automatically.
-  var FILLAHEAD_STORE_LINKS = {
+  // Every data-skip-retyping-store link on the site will switch automatically.
+  var SKIP_RETYPING_STORE_LINKS = {
     chrome: '',
     edge: '',
     firefox: '',
   };
   // Add approved Chrome and Edge store IDs here after marketplace approval.
-  var FILLAHEAD_STORE_EXTENSION_IDS = [];
-  var FILLAHEAD_TEST_EXTENSION_IDS = Array.isArray(window.__FILLAHEAD_TEST_EXTENSION_IDS__)
-    ? window.__FILLAHEAD_TEST_EXTENSION_IDS__.filter(function (id) {
+  var SKIP_RETYPING_STORE_EXTENSION_IDS = [];
+  var SKIP_RETYPING_TEST_EXTENSION_IDS = Array.isArray(window.__SKIP_RETYPING_TEST_EXTENSION_IDS__)
+    ? window.__SKIP_RETYPING_TEST_EXTENSION_IDS__.filter(function (id) {
         return /^[a-p]{32}$/.test(String(id || ''));
       })
     : [];
-  var FILLAHEAD_EXTENSION_IDS = FILLAHEAD_STORE_EXTENSION_IDS.concat(
-    FILLAHEAD_TEST_EXTENSION_IDS,
+  var SKIP_RETYPING_EXTENSION_IDS = SKIP_RETYPING_STORE_EXTENSION_IDS.concat(
+    SKIP_RETYPING_TEST_EXTENSION_IDS,
   );
   var mediaDark =
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
@@ -43,22 +43,23 @@
   };
   var INSTALLED_COPY = {
     en: {
-      open: 'Open FillAhead',
-      monthly: 'Choose monthly in FillAhead',
-      yearly: 'Choose yearly in FillAhead',
-      installedTitle: 'FillAhead is installed in this browser.',
-      checkoutTitle: 'FillAhead is already installed.',
-      checkoutLead: 'Open FillAhead to keep using the free plan or choose Pro.',
+      open: 'Open Skip Retyping',
+      monthly: 'Choose monthly in Skip Retyping',
+      yearly: 'Choose yearly in Skip Retyping',
+      lifetime: 'Choose lifetime in Skip Retyping',
+      installedTitle: 'Skip Retyping is installed in this browser.',
+      checkoutTitle: 'Skip Retyping is already installed.',
+      checkoutLead: 'Open Skip Retyping to keep using the free plan or choose Pro.',
       checkoutNote: 'Use the toolbar button to create a profile, fill the current page, or manage billing.',
     },
-    de: { open: 'FillAhead öffnen', installedTitle: 'FillAhead ist in diesem Browser installiert.' },
-    es: { open: 'Abrir FillAhead', installedTitle: 'FillAhead está instalado en este navegador.' },
-    fr: { open: 'Ouvrir FillAhead', installedTitle: 'FillAhead est installé dans ce navigateur.' },
-    'pt-br': { open: 'Abrir o FillAhead', installedTitle: 'O FillAhead está instalado neste navegador.' },
-    ja: { open: 'FillAhead を開く', installedTitle: 'FillAhead はこのブラウザーにインストールされています。' },
-    ko: { open: 'FillAhead 열기', installedTitle: '이 브라우저에 FillAhead가 설치되어 있습니다.' },
-    'zh-cn': { open: '打开 FillAhead', installedTitle: '此浏览器已安装 FillAhead。' },
-    ru: { open: 'Открыть FillAhead', installedTitle: 'FillAhead установлен в этом браузере.' },
+    de: { open: 'Skip Retyping öffnen', lifetime: 'Dauerlizenz in Skip Retyping wählen', installedTitle: 'Skip Retyping ist in diesem Browser installiert.' },
+    es: { open: 'Abrir Skip Retyping', lifetime: 'Elegir acceso de por vida en Skip Retyping', installedTitle: 'Skip Retyping está instalado en este navegador.' },
+    fr: { open: 'Ouvrir Skip Retyping', lifetime: 'Choisir l’accès à vie dans Skip Retyping', installedTitle: 'Skip Retyping est installé dans ce navigateur.' },
+    'pt-br': { open: 'Abrir o Skip Retyping', lifetime: 'Escolher acesso vitalício no Skip Retyping', installedTitle: 'O Skip Retyping está instalado neste navegador.' },
+    ja: { open: 'Skip Retyping を開く', lifetime: 'Skip Retyping で買い切りプランを選ぶ', installedTitle: 'Skip Retyping はこのブラウザーにインストールされています。' },
+    ko: { open: 'Skip Retyping 열기', lifetime: 'Skip Retyping에서 평생 이용권 선택', installedTitle: '이 브라우저에 Skip Retyping이 설치되어 있습니다.' },
+    'zh-cn': { open: '打开 Skip Retyping', lifetime: '在 Skip Retyping 中选择终身版', installedTitle: '此浏览器已安装 Skip Retyping。' },
+    ru: { open: 'Открыть Skip Retyping', lifetime: 'Выбрать пожизненный доступ в Skip Retyping', installedTitle: 'Skip Retyping установлен в этом браузере.' },
   };
 
   function currentThemeCopy() {
@@ -162,9 +163,9 @@
   }
 
   function configureStoreLinks() {
-    document.querySelectorAll('[data-fillahead-store]').forEach(function (link) {
-      var store = (link.getAttribute('data-fillahead-store') || '').toLowerCase();
-      var url = FILLAHEAD_STORE_LINKS[store];
+    document.querySelectorAll('[data-skip-retyping-store]').forEach(function (link) {
+      var store = (link.getAttribute('data-skip-retyping-store') || '').toLowerCase();
+      var url = SKIP_RETYPING_STORE_LINKS[store];
       if (!url) {
         link.dataset.storeState = 'pending';
         link.hidden = true;
@@ -183,7 +184,7 @@
 
     document.querySelectorAll('[data-store-live-copy]').forEach(function (node) {
       var store = (node.getAttribute('data-store-live-copy') || '').toLowerCase();
-      if (!FILLAHEAD_STORE_LINKS[store]) return;
+      if (!SKIP_RETYPING_STORE_LINKS[store]) return;
       var liveText = node.getAttribute('data-live-text');
       if (liveText) node.textContent = liveText;
     });
@@ -192,7 +193,7 @@
   function sendInstalledExtensionAction(extensionId, link, message) {
     if (!extensionId || !window.chrome || !chrome.runtime?.sendMessage) return;
     var finished = false;
-    var fallback = link.href || '/fillahead/docs/getting-started/';
+    var fallback = link.href || '/skip-retyping/docs/getting-started/';
     link.setAttribute('aria-busy', 'true');
 
     var fallbackTimer = window.setTimeout(function () {
@@ -218,10 +219,10 @@
 
   function applyInstalledExtensionState(extensionId) {
     var copy = currentInstalledCopy();
-    root.dataset.fillaheadInstalled = 'true';
-    document.querySelectorAll('main a[href="/fillahead/download/"]').forEach(function (link) {
+    root.dataset.skipRetypingInstalled = 'true';
+    document.querySelectorAll('main a[href="/skip-retyping/download/"]').forEach(function (link) {
       var card = link.closest('[data-checkout-plan]');
-      var checkout = link.closest('[data-fillahead-checkout]');
+      var checkout = link.closest('[data-skip-retyping-checkout]');
       var selectedPlan = checkout?.dataset.selectedPlan || 'free';
       var paidPlan = card
         ? card.getAttribute('data-checkout-plan') !== 'free'
@@ -232,7 +233,7 @@
           ? selectedPlan
           : 'free';
       link.textContent = paidPlan ? copy[plan] || copy.yearly : copy.open;
-      link.href = '/fillahead/docs/getting-started/';
+      link.href = '/skip-retyping/docs/getting-started/';
       link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
       link.dataset.installedPlan = plan;
       link.title = copy.installedTitle;
@@ -247,7 +248,7 @@
         );
       });
     });
-    var checkout = document.querySelector('[data-fillahead-checkout]');
+    var checkout = document.querySelector('[data-skip-retyping-checkout]');
     if (checkout && !checkout.querySelector('[data-installed-note]')) {
       var checkoutTitle = checkout.querySelector('#checkout-title');
       var checkoutLead = checkout.querySelector('.launch-lead');
@@ -267,8 +268,8 @@
     if (!window.chrome || !chrome.runtime || typeof chrome.runtime.sendMessage !== 'function') return;
     var index = 0;
     function tryNext() {
-      if (index >= FILLAHEAD_EXTENSION_IDS.length) return;
-      var extensionId = FILLAHEAD_EXTENSION_IDS[index++];
+      if (index >= SKIP_RETYPING_EXTENSION_IDS.length) return;
+      var extensionId = SKIP_RETYPING_EXTENSION_IDS[index++];
       try {
         chrome.runtime.sendMessage(
           extensionId,
@@ -289,10 +290,10 @@
   }
 
   function setupCheckoutPlanState() {
-    var checkout = document.querySelector('[data-fillahead-checkout]');
+    var checkout = document.querySelector('[data-skip-retyping-checkout]');
     if (!checkout) return;
 
-    var allowedPlans = ['free', 'monthly', 'yearly'];
+    var allowedPlans = ['free', 'monthly', 'yearly', 'lifetime'];
     var selectedPlan = 'yearly';
     try {
       var params = new URLSearchParams(window.location.search);
@@ -303,16 +304,18 @@
     checkout.dataset.selectedPlan = selectedPlan;
     var checkoutAction = checkout.querySelector('[data-checkout-action]');
     if (checkoutAction) {
-      var actionLabels = FILLAHEAD_STORE_LINKS.chrome
+      var actionLabels = SKIP_RETYPING_STORE_LINKS.chrome
         ? {
-            free: 'Install FillAhead',
+            free: 'Install Skip Retyping',
             monthly: 'Install, then choose monthly',
             yearly: 'Install, then choose yearly',
+            lifetime: 'Install, then choose lifetime',
           }
         : {
             free: 'Check Chrome availability',
             monthly: 'Check Chrome availability',
             yearly: 'Check Chrome availability',
+            lifetime: 'Check Chrome availability',
           };
       checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.yearly;
     }
@@ -329,7 +332,7 @@
 
   function setupDemoPlayback() {
     var button = document.querySelector('.demo-play-button');
-    var poster = document.querySelector('[data-fillahead-demo-poster]');
+    var poster = document.querySelector('[data-skip-retyping-demo-poster]');
     if (!button || !poster) return;
 
     var reduceMotion =
@@ -344,22 +347,22 @@
     video.playsInline = true;
     video.autoplay = !reduceMotion;
     video.preload = 'auto';
-    video.poster = '/assets/fillahead-demo-poster.png';
-    video.src = '/assets/fillahead-demo.mp4';
+    video.poster = '/assets/skip-retyping-demo-poster.png';
+    video.src = '/assets/skip-retyping-demo.mp4';
     video.setAttribute(
       'aria-label',
-      'FillAhead filling a vendor onboarding form from a saved work profile',
+      'Skip Retyping filling a vendor onboarding form from a saved work profile',
     );
 
     function setPlaybackState(isPlaying) {
       button.dataset.state = isPlaying ? 'playing' : 'paused';
       button.setAttribute(
         'aria-label',
-        isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo',
+        isPlaying ? 'Pause the Skip Retyping demo' : 'Play the Skip Retyping demo',
       );
       button.setAttribute(
         'title',
-        isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo',
+        isPlaying ? 'Pause the Skip Retyping demo' : 'Play the Skip Retyping demo',
       );
     }
 
@@ -521,7 +524,7 @@
       }
 
       result.textContent = matched
-        ? 'Match found. FillAhead would use ' + valueDescription + '.'
+        ? 'Match found. Skip Retyping would use ' + valueDescription + '.'
         : 'No match. Try a shorter, distinctive phrase from the form label.';
       result.classList.toggle('is-match', matched);
     }

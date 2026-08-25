@@ -4,22 +4,22 @@ const path = require('path');
 const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
-const BASELINE_PATH = path.join(ROOT, 'assets', 'marketplace', 'fillahead-visual-baselines.json');
+const BASELINE_PATH = path.join(ROOT, 'assets', 'marketplace', 'skip-retyping-visual-baselines.json');
 const WRITE_MODE = process.argv.includes('--write');
 
 const ASSETS = [
-  'assets/fillahead-logo.png',
-  'assets/fillahead-og.png',
-  'assets/fillahead-demo-poster.png',
-  'assets/marketplace/fillahead-small-promo-440x280.png',
-  'assets/marketplace/fillahead-marquee-1400x560.png',
-  'assets/marketplace/fillahead-screenshot-fill-page-1280x800.png',
-  'assets/marketplace/fillahead-screenshot-modern-forms-1280x800.png',
-  'assets/marketplace/fillahead-screenshot-profiles-1280x800.png',
-  'assets/marketplace/fillahead-screenshot-privacy-1280x800.png',
-  'assets/marketplace/fillahead-screenshot-undo-1280x800.png',
-  'assets/marketplace/fillahead-store-demo-22s-thumb.png',
-  'assets/marketplace/fillahead-store-demo-22s.mp4',
+  'assets/skip-retyping-logo.png',
+  'assets/skip-retyping-og.png',
+  'assets/skip-retyping-demo-poster.png',
+  'assets/marketplace/skip-retyping-small-promo-440x280.png',
+  'assets/marketplace/skip-retyping-marquee-1400x560.png',
+  'assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png',
+  'assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png',
+  'assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png',
+  'assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png',
+  'assets/marketplace/skip-retyping-screenshot-undo-1280x800.png',
+  'assets/marketplace/skip-retyping-store-demo-22s-thumb.png',
+  'assets/marketplace/skip-retyping-store-demo-22s.mp4',
   '../fillpro/icons/icon16.png',
   '../fillpro/icons/icon32.png',
   '../fillpro/icons/icon48.png',
@@ -123,7 +123,7 @@ function compare(current, baseline) {
     };
     fs.writeFileSync(`${BASELINE_PATH}.tmp`, `${JSON.stringify(baseline, null, 2)}\n`);
     fs.renameSync(`${BASELINE_PATH}.tmp`, BASELINE_PATH);
-    console.log(`FillAhead visual baseline written: ${BASELINE_PATH}`);
+    console.log(`Skip Retyping visual baseline written: ${BASELINE_PATH}`);
     return;
   }
 
@@ -134,12 +134,12 @@ function compare(current, baseline) {
   const baseline = JSON.parse(fs.readFileSync(BASELINE_PATH, 'utf8'));
   const errors = compare(assets, baseline);
   if (errors.length) {
-    console.error(`FillAhead visual baseline audit failed with ${errors.length} issue(s):`);
+    console.error(`Skip Retyping visual baseline audit failed with ${errors.length} issue(s):`);
     for (const error of errors) console.error(`- ${error}`);
     process.exit(1);
   }
 
-  console.log(`FillAhead visual baseline audit passed: ${assets.length} assets locked.`);
+  console.log(`Skip Retyping visual baseline audit passed: ${assets.length} assets locked.`);
 })().catch((error) => {
   console.error(error.message || error);
   process.exit(1);

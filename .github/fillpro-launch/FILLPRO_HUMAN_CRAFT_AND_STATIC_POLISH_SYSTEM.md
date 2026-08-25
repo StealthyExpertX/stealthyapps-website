@@ -1,18 +1,18 @@
-# FillAhead Human Craft and Static Polish System
+# Skip Retyping Human Craft and Static Polish System
 
 Updated: 2026-06-14
 
-This is the working quality bar for FillAhead website copy, extension UI text, and static HTML/CSS/JS polish. Use it when writing a page, editing popup text, adding a state message, or reviewing a release.
+This is the working quality bar for Skip Retyping website copy, extension UI text, and static HTML/CSS/JS polish. Use it when writing a page, editing popup text, adding a state message, or reviewing a release.
 
-## 1. FillAhead Voice
+## 1. Skip Retyping Voice
 
-FillAhead should sound calm, practical, and specific. It is a privacy tool for repeated forms, so the voice should feel careful without sounding scared.
+Skip Retyping should sound calm, practical, and specific. It is a privacy tool for repeated forms, so the voice should feel careful without sounding scared.
 
 Write like this:
 
 - Short sentence first when the idea matters.
 - Use concrete nouns: profile, form, field, resume, upload, browser, page.
-- Say what FillAhead does and what it does not do.
+- Say what Skip Retyping does and what it does not do.
 - Prefer small confidence over loud excitement.
 - Let support copy sound like a person who will actually read the report.
 
@@ -31,13 +31,13 @@ Avoid this:
 
 ## 2. Before and After
 
-| Generic copy | FillAhead copy |
+| Generic copy | Skip Retyping copy |
 | --- | --- |
 | Unlock the power of effortless form completion. | Save the fields you keep retyping. Fill them when a form gets long. |
-| FillAhead seamlessly handles all your form needs. | FillAhead handles repeated profile fields. Passwords, cards, and one-time codes stay with tools built for them. |
+| Skip Retyping seamlessly handles all your form needs. | Skip Retyping handles repeated profile fields. Passwords, cards, and one-time codes stay with tools built for them. |
 | Your data is safe and secure. | Saved profiles, rules, and uploads stay inside the extension unless you export them, email support, or start Pro billing. |
 | No matching fields were found. | Nothing looked safe to fill on this page. |
-| An unexpected error occurred. | FillAhead hit a snag before it could fill this page. A short report helps us fix the site. |
+| An unexpected error occurred. | Skip Retyping hit a snag before it could fill this page. A short report helps us fix the site. |
 | Upgrade to unlock unlimited productivity. | Need more room? Pro adds more profiles, duplication, import, and export. |
 | The extension provides robust support for modern web forms. | It works on common modern form pieces: dropdowns, radios, checkboxes, textareas, same-origin frames, Shadow DOM, and upload fields. |
 
@@ -47,7 +47,7 @@ Use a varied rhythm:
 
 - 1 short sentence for control or privacy: "Review before submit."
 - 1 medium sentence for the job: "Pick a profile, fill the page, then check the result."
-- 1 longer sentence only when a boundary needs context: "The floating button asks for access to the current site only, and you can turn it off from FillAhead settings."
+- 1 longer sentence only when a boundary needs context: "The floating button asks for access to the current site only, and you can turn it off from Skip Retyping settings."
 
 Do not stack three medium marketing sentences in a row. It reads generated.
 
@@ -79,8 +79,8 @@ Good empty states answer two things: what is missing and what the user can do ne
 Examples:
 
 - "No profiles saved yet. Add the details you reuse most. You can fill the rest later."
-- "No smart rules yet. Run FillAhead on a tricky form, then save the label once."
-- "No disabled sites. FillAhead is available on pages you choose."
+- "No smart rules yet. Run Skip Retyping on a tricky form, then save the label once."
+- "No disabled sites. Skip Retyping is available on pages you choose."
 
 ### Error States
 
@@ -196,7 +196,7 @@ select:focus {
 
 ### CSS-Only Interactive Background
 
-Use the existing FillAhead pattern: a low-contrast grid and one pointer-reactive radial highlight. It is cheaper than canvas, works on static hosting, and is easy to disable.
+Use the existing Skip Retyping pattern: a low-contrast grid and one pointer-reactive radial highlight. It is cheaper than canvas, works on static hosting, and is easy to disable.
 
 Rules:
 
@@ -268,7 +268,7 @@ Dark mode should be readable before it is dramatic.
 
 ## 8. Combined Product Rules
 
-FillAhead should feel distinct because the product has a clear boundary:
+Skip Retyping should feel distinct because the product has a clear boundary:
 
 - It saves repeated profile fields.
 - It fills only when the user chooses.
@@ -280,7 +280,7 @@ Every page or popup view should reinforce one of those ideas without repeating a
 
 ## 9. Review Checklist
 
-Before shipping a FillAhead copy or UI change, check:
+Before shipping a Skip Retyping copy or UI change, check:
 
 - Does the copy say one specific thing instead of three generic things?
 - Could a privacy claim be proven from the current implementation?

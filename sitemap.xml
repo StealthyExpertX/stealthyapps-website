@@ -2,83 +2,83 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://stealthyapps.com/fillahead/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/</loc>
     <lastmod>2026-08-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/fillahead-og.png</image:loc>
-      <image:title>FillAhead private form autofill launch page</image:title>
+      <image:loc>https://stealthyapps.com/assets/skip-retyping-og.png</image:loc>
+      <image:title>Skip Retyping private form autofill launch page</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/checkout/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/checkout/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/download/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/download/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/download/chrome/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/download/chrome/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/privacy/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/privacy/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/terms/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/terms/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/refunds/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/refunds/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/docs/smart-rules/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/docs/smart-rules/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/job-application-autofill/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/job-application-autofill/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/resume-upload-autofill/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/resume-upload-autofill/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/local-form-autofill/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/local-form-autofill/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/browser-autofill-vs-fillahead/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/browser-autofill-vs-skip-retyping/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://stealthyapps.com/fillahead/docs/getting-started/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/docs/getting-started/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

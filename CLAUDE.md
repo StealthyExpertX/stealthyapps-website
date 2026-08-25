@@ -1,11 +1,11 @@
-# FillAhead Public Site Notes
+# Skip Retyping Public Site Notes
 
-- Product: FillAhead
+- Product: Skip Retyping
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/fillahead/
-- Canonical product page: https://stealthyapps.com/fillahead/
+- Website: https://stealthyapps.com/skip-retyping/
+- Canonical product page: https://stealthyapps.com/skip-retyping/
 - Last reviewed: 2026-06-14
 
-FillAhead is a private browser form autofill extension. It fills repeated profile-style web forms from profiles saved by the extension in the browser. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.
+Skip Retyping is a private browser form autofill extension. It fills repeated profile-style web forms from profiles saved by the extension in the browser. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust.
 
 Use /llms.txt for a compact product index and /llms-full.txt for the full plain-text corpus.

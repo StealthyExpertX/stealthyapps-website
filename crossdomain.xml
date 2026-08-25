@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE cross-domain-policy SYSTEM "http://www.adobe.com/xml/dtds/cross-domain-policy.dtd">
 <cross-domain-policy>
-  <!-- FillAhead is a static site with no cross-origin asset requirements. -->
+  <!-- Skip Retyping is a static site with no cross-origin asset requirements. -->
   <site-control permitted-cross-domain-policies="none"/>
 </cross-domain-policy>

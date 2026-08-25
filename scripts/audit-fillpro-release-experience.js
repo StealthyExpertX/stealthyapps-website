@@ -13,42 +13,42 @@ const VIEWPORTS = [
   { name: 'mobile', width: 390, height: 844 },
 ];
 const ROUTES = [
-  '/fillahead/',
-  '/fillahead/checkout/',
-  '/fillahead/changelog/',
-  '/fillahead/privacy/',
-  '/fillahead/terms/',
-  '/fillahead/refunds/',
-  '/fillahead/docs/getting-started/',
-  '/fillahead/docs/smart-rules/',
-  '/fillahead/download/',
-  '/fillahead/download/chrome/',
-  '/fillahead/download/edge/',
-  '/fillahead/download/firefox/',
+  '/skip-retyping/',
+  '/skip-retyping/checkout/',
+  '/skip-retyping/changelog/',
+  '/skip-retyping/privacy/',
+  '/skip-retyping/terms/',
+  '/skip-retyping/refunds/',
+  '/skip-retyping/docs/getting-started/',
+  '/skip-retyping/docs/smart-rules/',
+  '/skip-retyping/download/',
+  '/skip-retyping/download/chrome/',
+  '/skip-retyping/download/edge/',
+  '/skip-retyping/download/firefox/',
   '/support/',
   '/contact/',
-  '/fillahead/job-application-autofill/',
-  '/fillahead/resume-upload-autofill/',
-  '/fillahead/local-form-autofill/',
-  '/fillahead/browser-autofill-vs-fillahead/',
-  '/fillahead/de/',
-  '/fillahead/es/',
-  '/fillahead/fr/',
-  '/fillahead/pt-br/',
-  '/fillahead/ja/',
-  '/fillahead/ko/',
-  '/fillahead/zh-cn/',
-  '/fillahead/ru/',
+  '/skip-retyping/job-application-autofill/',
+  '/skip-retyping/resume-upload-autofill/',
+  '/skip-retyping/local-form-autofill/',
+  '/skip-retyping/browser-autofill-vs-skip-retyping/',
+  '/skip-retyping/de/',
+  '/skip-retyping/es/',
+  '/skip-retyping/fr/',
+  '/skip-retyping/pt-br/',
+  '/skip-retyping/ja/',
+  '/skip-retyping/ko/',
+  '/skip-retyping/zh-cn/',
+  '/skip-retyping/ru/',
 ];
 const LOCALIZED_THEME_MARKERS = {
-  '/fillahead/de/': ['Aktuelles Design:', 'Wechseln zu:'],
-  '/fillahead/es/': ['Tema actual:', 'Cambiar a:'],
-  '/fillahead/fr/': ['Thème actuel :', 'Passer au thème'],
-  '/fillahead/pt-br/': ['Tema atual:', 'Mudar para:'],
-  '/fillahead/ja/': ['現在のテーマ:', 'テーマに切り替えます'],
-  '/fillahead/ko/': ['현재 테마:', '테마로 전환합니다'],
-  '/fillahead/zh-cn/': ['当前主题：', '切换到'],
-  '/fillahead/ru/': ['Текущая тема:', 'Переключить на тему'],
+  '/skip-retyping/de/': ['Aktuelles Design:', 'Wechseln zu:'],
+  '/skip-retyping/es/': ['Tema actual:', 'Cambiar a:'],
+  '/skip-retyping/fr/': ['Thème actuel :', 'Passer au thème'],
+  '/skip-retyping/pt-br/': ['Tema atual:', 'Mudar para:'],
+  '/skip-retyping/ja/': ['現在のテーマ:', 'テーマに切り替えます'],
+  '/skip-retyping/ko/': ['현재 테마:', '테마로 전환합니다'],
+  '/skip-retyping/zh-cn/': ['当前主题：', '切换到'],
+  '/skip-retyping/ru/': ['Текущая тема:', 'Переключить на тему'],
 };
 
 const CONTENT_TYPES = {
@@ -128,7 +128,7 @@ function slug(route, viewport, theme) {
 
 async function auditPage(page, route, viewport, theme, errors) {
   await page.addInitScript((selectedTheme) => {
-    window.localStorage.setItem('fillahead-theme', selectedTheme);
+    window.localStorage.setItem('skip-retyping-theme', selectedTheme);
   }, theme);
 
   const response = await page.goto(route, { waitUntil: 'networkidle' });
@@ -147,11 +147,11 @@ async function auditPage(page, route, viewport, theme, errors) {
   });
 
   const pathname = new URL(route).pathname;
-  if (pathname === '/fillahead/') {
+  if (pathname === '/skip-retyping/') {
     try {
       await page.mouse.move(Math.max(12, viewport.width - 24), 120);
       await page.waitForFunction(() => {
-        const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+        const media = document.querySelector('.demo-shell video, [data-skip-retyping-demo-poster]');
         return Boolean(
           media &&
           (media.tagName === 'VIDEO' || (media.complete && media.naturalWidth > 0)),
@@ -182,7 +182,7 @@ async function auditPage(page, route, viewport, theme, errors) {
         const hero = document.querySelector('.launch-hero');
         const demo = document.querySelector('.launch-demo-card');
         const copy = document.querySelector('.launch-hero-copy');
-        const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+        const media = document.querySelector('.demo-shell video, [data-skip-retyping-demo-poster]');
         if (!shell || !hero || !demo || !copy || !media) return { ok: false };
 
         const shellStyle = getComputedStyle(shell);
@@ -405,9 +405,9 @@ async function auditStaticPresentation(browser, origin, errors) {
 
     try {
       await page.addInitScript((value) => {
-        window.localStorage.setItem('fillahead-theme', value);
+        window.localStorage.setItem('skip-retyping-theme', value);
       }, theme);
-      await page.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
+      await page.goto(`${origin}/skip-retyping/`, { waitUntil: 'networkidle' });
       const report = await page.evaluate(() => {
         const root = document.documentElement;
         const targetSelectors = [
@@ -445,10 +445,10 @@ async function auditStaticPresentation(browser, origin, errors) {
       });
 
       if (report.scrollY !== 0) {
-        errors.push(`/fillahead/: fresh page moved before user input on ${theme}`);
+        errors.push(`/skip-retyping/: fresh page moved before user input on ${theme}`);
       }
       if (report.hidden.length) {
-        errors.push(`/fillahead/: content starts hidden on ${theme}: ${report.hidden.slice(0, 8).join(', ')}`);
+        errors.push(`/skip-retyping/: content starts hidden on ${theme}: ${report.hidden.slice(0, 8).join(', ')}`);
       }
       if (
         report.pointerNode ||
@@ -458,10 +458,10 @@ async function auditStaticPresentation(browser, origin, errors) {
         report.revealClass ||
         report.revealItems
       ) {
-        errors.push(`/fillahead/: obsolete pointer/reveal behavior returned on ${theme}: ${JSON.stringify(report)}`);
+        errors.push(`/skip-retyping/: obsolete pointer/reveal behavior returned on ${theme}: ${JSON.stringify(report)}`);
       }
     } catch (error) {
-      errors.push(`/fillahead/: static presentation audit failed on ${theme}: ${error.message}`);
+      errors.push(`/skip-retyping/: static presentation audit failed on ${theme}: ${error.message}`);
     } finally {
       await page.close();
       await context.close();
@@ -478,15 +478,15 @@ async function auditProductHero(browser, origin, errors) {
   try {
     page.on('console', (message) => {
       if (message.type() === 'error') {
-        errors.push('/fillahead/: console error during product hero audit: ' + message.text());
+        errors.push('/skip-retyping/: console error during product hero audit: ' + message.text());
       }
     });
     page.on('pageerror', (error) => {
-      errors.push('/fillahead/: page error during product hero audit: ' + error.message);
+      errors.push('/skip-retyping/: page error during product hero audit: ' + error.message);
     });
-    await page.goto(origin + '/fillahead/', { waitUntil: 'networkidle' });
+    await page.goto(origin + '/skip-retyping/', { waitUntil: 'networkidle' });
     await page.waitForFunction(() => {
-      const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+      const media = document.querySelector('.demo-shell video, [data-skip-retyping-demo-poster]');
       return Boolean(
         media &&
         (media.tagName === 'VIDEO' || (media.complete && media.naturalWidth > 0)),
@@ -505,10 +505,10 @@ async function auditProductHero(browser, origin, errors) {
       };
     });
     if (playback.hasDecorativeCanvas) {
-      errors.push('/fillahead/: decorative WebGL canvas returned');
+      errors.push('/skip-retyping/: decorative WebGL canvas returned');
     }
     if (playback.buttonState !== 'playing' || !/^Pause/.test(playback.buttonLabel)) {
-      errors.push('/fillahead/: product demo must start in the playing state');
+      errors.push('/skip-retyping/: product demo must start in the playing state');
     }
 
     const demoButton = page.locator('.demo-play-button');
@@ -519,7 +519,7 @@ async function auditProductHero(browser, origin, errors) {
       label: button.getAttribute('aria-label') || '',
     }));
     if (pausedState.state !== 'paused' || !/^Play/.test(pausedState.label)) {
-      errors.push('/fillahead/: clicking the product demo did not pause it');
+      errors.push('/skip-retyping/: clicking the product demo did not pause it');
     }
     await demoButton.click();
     await page.waitForTimeout(120);
@@ -528,7 +528,7 @@ async function auditProductHero(browser, origin, errors) {
       label: button.getAttribute('aria-label') || '',
     }));
     if (resumedState.state !== 'playing' || !/^Pause/.test(resumedState.label)) {
-      errors.push('/fillahead/: clicking the product demo again did not resume it');
+      errors.push('/skip-retyping/: clicking the product demo again did not resume it');
     }
 
     const reviewRail = page.locator('.launch-review-rail');
@@ -556,12 +556,12 @@ async function auditProductHero(browser, origin, errors) {
       .reduce((sum, channel) => sum + channel.stdev, 0);
     if (reviewColorDeviation < 18) {
       errors.push(
-        '/fillahead/: review-before-submit reveal capture appears blank (' +
+        '/skip-retyping/: review-before-submit reveal capture appears blank (' +
         reviewColorDeviation.toFixed(2) + ')',
       );
     }
   } catch (error) {
-    errors.push('/fillahead/: product hero audit failed: ' + error.message);
+    errors.push('/skip-retyping/: product hero audit failed: ' + error.message);
   } finally {
     await page.close();
     await context.close();
@@ -586,7 +586,7 @@ async function auditContactSubmission(browser, origin, errors) {
       });
     });
 
-    await page.goto(`${origin}/contact/?topic=product&product=FillAhead`, {
+    await page.goto(`${origin}/contact/?topic=product&product=Skip%20Retyping`, {
       waitUntil: 'networkidle',
     });
 
@@ -617,11 +617,11 @@ async function auditContactSubmission(browser, origin, errors) {
       const expected = {
         email: 'release-test@example.com',
         name: 'Release Tester',
-        topic: 'FillAhead',
-        reason: 'Question about FillAhead',
+        topic: 'Skip Retyping',
+        reason: 'Question about Skip Retyping',
         _replyto: 'release-test@example.com',
         _captcha: 'false',
-        _subject: 'Product: Question about FillAhead | FillAhead',
+        _subject: 'Product: Question about Skip Retyping | Skip Retyping',
       };
       for (const [key, value] of Object.entries(expected)) {
         if (capturedPayload[key] !== value) {
@@ -635,7 +635,7 @@ async function auditContactSubmission(browser, origin, errors) {
 
     capturedPayload = null;
     await page.goto(
-      `${origin}/contact/?topic=product&reason=uninstall&product=FillAhead`,
+      `${origin}/contact/?topic=product&reason=uninstall&product=Skip%20Retyping`,
       { waitUntil: 'networkidle' },
     );
     const uninstallState = await page.evaluate(() => ({
@@ -649,7 +649,7 @@ async function auditContactSubmission(browser, origin, errors) {
     }));
     if (
       uninstallState.reason !== 'uninstall' ||
-      uninstallState.reasonLabel !== 'I removed FillAhead'
+      uninstallState.reasonLabel !== 'I removed Skip Retyping'
     ) {
       errors.push('/contact/: uninstall feedback reason was not preselected');
     }
@@ -668,7 +668,7 @@ async function auditContactSubmission(browser, origin, errors) {
       await sendButton.click();
       await page.locator('[data-contact-status][data-state="success"]').waitFor();
       if (
-        capturedPayload?.reason !== 'I removed FillAhead' ||
+        capturedPayload?.reason !== 'I removed Skip Retyping' ||
         'email' in (capturedPayload || {}) ||
         '_replyto' in (capturedPayload || {})
       ) {
@@ -685,7 +685,7 @@ async function auditContactSubmission(browser, origin, errors) {
       });
     });
 
-    await page.goto(`${origin}/contact/?topic=product&product=FillAhead`, {
+    await page.goto(`${origin}/contact/?topic=product&product=Skip%20Retyping`, {
       waitUntil: 'networkidle',
     });
     await page.locator('#contactName').fill('Release Tester');
@@ -698,8 +698,8 @@ async function auditContactSubmission(browser, origin, errors) {
     }
     const fallbackHref =
       (await page.locator('[data-compose-link="default"]').getAttribute('href')) || '';
-    if (!decodeURIComponent(fallbackHref).includes('| FillAhead')) {
-      errors.push('/contact/: email-app fallback subject is missing the FillAhead suffix');
+    if (!decodeURIComponent(fallbackHref).includes('| Skip Retyping')) {
+      errors.push('/contact/: email-app fallback subject is missing the Skip Retyping suffix');
     }
   } catch (error) {
     errors.push(`/contact/: submission audit failed: ${error.message}`);
@@ -716,11 +716,12 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
     free: 'Check Chrome availability',
     monthly: 'Check Chrome availability',
     yearly: 'Check Chrome availability',
+    lifetime: 'Check Chrome availability',
   };
 
   try {
     for (const [plan, action] of Object.entries(expected)) {
-      await page.goto(`${origin}/fillahead/checkout/?plan=${plan}`, {
+      await page.goto(`${origin}/skip-retyping/checkout/?plan=${plan}`, {
         waitUntil: 'networkidle',
       });
       const state = await page.evaluate(() => ({
@@ -728,23 +729,23 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
         action: document.querySelector('[data-checkout-action]')?.textContent?.trim() || '',
       }));
       if (state.selected !== plan || state.action !== action) {
-        errors.push(`/fillahead/checkout/: ${plan} selection regressed: ${JSON.stringify(state)}`);
+        errors.push(`/skip-retyping/checkout/: ${plan} selection regressed: ${JSON.stringify(state)}`);
       }
     }
 
-    for (const invalidPlan of ['unknown', 'lifetime']) {
-      await page.goto(origin + '/fillahead/checkout/?plan=' + invalidPlan, {
+    for (const invalidPlan of ['unknown']) {
+      await page.goto(origin + '/skip-retyping/checkout/?plan=' + invalidPlan, {
         waitUntil: 'networkidle',
       });
       const fallback = await page
         .locator('[data-checkout-plan][aria-current="true"]')
         .getAttribute('data-checkout-plan');
       const lifetimeCard = await page.locator('[data-checkout-plan="lifetime"]').count();
-      if (fallback !== 'yearly' || lifetimeCard) {
-        errors.push('/fillahead/checkout/: ' + invalidPlan + ' query exposed an unavailable plan');
+      if (fallback !== 'yearly' || lifetimeCard !== 1) {
+        errors.push('/skip-retyping/checkout/: ' + invalidPlan + ' query exposed an unavailable plan');
       }
     }  } catch (error) {
-    errors.push(`/fillahead/checkout/: plan interaction audit failed: ${error.message}`);
+    errors.push(`/skip-retyping/checkout/: plan interaction audit failed: ${error.message}`);
   } finally {
     await page.close();
     await context.close();
@@ -764,34 +765,34 @@ async function auditDemoPlayback(browser, origin, errors) {
   const reducedPage = await reducedContext.newPage();
 
   try {
-    await page.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/skip-retyping/`, { waitUntil: 'networkidle' });
     await page.locator('.demo-shell video').waitFor({ state: 'visible' });
     await page.waitForFunction(() => {
       const video = document.querySelector('.demo-shell video');
       return Boolean(video && !video.paused && video.currentTime > 0);
     });
-    const pauseButton = page.getByRole('button', { name: 'Pause the FillAhead demo' });
+    const pauseButton = page.getByRole('button', { name: 'Pause the Skip Retyping demo' });
     await pauseButton.click();
     await page.waitForFunction(() => document.querySelector('.demo-shell video')?.paused);
-    const playButton = page.getByRole('button', { name: 'Play the FillAhead demo' });
+    const playButton = page.getByRole('button', { name: 'Play the Skip Retyping demo' });
     await playButton.click();
     await page.waitForFunction(() => !document.querySelector('.demo-shell video')?.paused);
-    await page.getByRole('button', { name: 'Pause the FillAhead demo' }).waitFor();
+    await page.getByRole('button', { name: 'Pause the Skip Retyping demo' }).waitFor();
     await page.locator('.launch-demo-card').screenshot({
       path: path.join(OUT_DIR, 'hero-demo-playing.png'),
     });
 
-    await reducedPage.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
+    await reducedPage.goto(`${origin}/skip-retyping/`, { waitUntil: 'networkidle' });
     await reducedPage.locator('.demo-shell video').waitFor({ state: 'visible' });
     const reducedState = await reducedPage.evaluate(() => ({
       paused: document.querySelector('.demo-shell video')?.paused,
       label: document.querySelector('.demo-play-button')?.getAttribute('aria-label'),
     }));
-    if (!reducedState.paused || reducedState.label !== 'Play the FillAhead demo') {
-      errors.push(`/fillahead/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
+    if (!reducedState.paused || reducedState.label !== 'Play the Skip Retyping demo') {
+      errors.push(`/skip-retyping/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
     }
   } catch (error) {
-    errors.push(`/fillahead/: hero demo playback failed: ${error.message}`);
+    errors.push(`/skip-retyping/: hero demo playback failed: ${error.message}`);
   } finally {
     await page.close();
     await reducedPage.close();
@@ -808,34 +809,34 @@ async function auditSmartRuleLab(browser, origin, errors) {
   });
   page.on('pageerror', (error) => pageErrors.push(error.message));
   try {
-    await page.goto(`${origin}/fillahead/docs/smart-rules/`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/skip-retyping/docs/smart-rules/`, { waitUntil: 'networkidle' });
     const label = page.locator('#ruleLabLabel');
     const match = page.locator('#ruleLabMatch');
     const result = page.locator('[data-rule-result]');
     await label.fill('Business contact address');
     await match.fill('work email');
     if (!/No match/.test(await result.textContent())) {
-      errors.push('/fillahead/docs/smart-rules/: mismatch guidance did not appear');
+      errors.push('/skip-retyping/docs/smart-rules/: mismatch guidance did not appear');
     }
     await page.getByRole('button', { name: 'Portfolio' }).click();
     const labelFocused = await label.evaluate((node) => document.activeElement === node);
     if (!/Match found/.test(await result.textContent()) || !labelFocused) {
-      errors.push('/fillahead/docs/smart-rules/: preset did not update the example and return focus');
+      errors.push('/skip-retyping/docs/smart-rules/: preset did not update the example and return focus');
     }
     await label.fill('Work-email address');
     await match.fill('/work.?email/i');
     if (!/Match found/.test(await result.textContent())) {
-      errors.push('/fillahead/docs/smart-rules/: optional regex example did not match');
+      errors.push('/skip-retyping/docs/smart-rules/: optional regex example did not match');
     }
     await match.fill('/[/');
     if (!/not valid/.test(await result.textContent())) {
-      errors.push('/fillahead/docs/smart-rules/: invalid regex guidance did not appear');
+      errors.push('/skip-retyping/docs/smart-rules/: invalid regex guidance did not appear');
     }
     if (pageErrors.length) {
-      errors.push(`/fillahead/docs/smart-rules/: console/page errors: ${pageErrors.join(' | ')}`);
+      errors.push(`/skip-retyping/docs/smart-rules/: console/page errors: ${pageErrors.join(' | ')}`);
     }
   } catch (error) {
-    errors.push(`/fillahead/docs/smart-rules/: interactive guide failed: ${error.message}`);
+    errors.push(`/skip-retyping/docs/smart-rules/: interactive guide failed: ${error.message}`);
   } finally {
     await page.close();
   }
@@ -846,7 +847,7 @@ async function auditInstalledExtensionState(browser, origin, errors) {
   try {
     await page.addInitScript(() => {
       window.__fillProBridgeMessages = [];
-      window.__FILLAHEAD_TEST_EXTENSION_IDS__ = ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'];
+      window.__SKIP_RETYPING_TEST_EXTENSION_IDS__ = ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'];
       window.chrome = {
         runtime: {
           lastError: null,
@@ -865,8 +866,8 @@ async function auditInstalledExtensionState(browser, origin, errors) {
         },
       };
     });
-    await page.goto(`${origin}/fillahead/checkout/?plan=yearly`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => document.documentElement.dataset.fillaheadInstalled === 'true');
+    await page.goto(`${origin}/skip-retyping/checkout/?plan=yearly`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.skipRetypingInstalled === 'true');
     const report = await page.evaluate(() => ({
       note: document.querySelector('[data-installed-note]')?.textContent?.trim() || '',
       free: document.querySelector('[data-checkout-plan="free"] .launch-button')?.textContent?.trim() || '',
@@ -878,14 +879,14 @@ async function auditInstalledExtensionState(browser, origin, errors) {
     }));
     if (
       !/toolbar button/.test(report.note) ||
-      report.free !== 'Open FillAhead' ||
-      report.monthly !== 'Choose monthly in FillAhead' ||
-      report.yearly !== 'Choose yearly in FillAhead' ||
-      report.hero !== 'Choose yearly in FillAhead' ||
-      report.nav.includes('Open FillAhead') ||
-      report.title !== 'FillAhead is already installed.'
+      report.free !== 'Open Skip Retyping' ||
+      report.monthly !== 'Choose monthly in Skip Retyping' ||
+      report.yearly !== 'Choose yearly in Skip Retyping' ||
+      report.hero !== 'Choose yearly in Skip Retyping' ||
+      report.nav.includes('Open Skip Retyping') ||
+      report.title !== 'Skip Retyping is already installed.'
     ) {
-      errors.push(`/fillahead/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
+      errors.push(`/skip-retyping/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
     }
     await page.locator('[data-checkout-plan="monthly"] .launch-button').click();
     await page.locator('[data-checkout-plan="free"] .launch-button').click();
@@ -896,20 +897,20 @@ async function auditInstalledExtensionState(browser, origin, errors) {
       ) ||
       !bridgeMessages.some((message) => message?.action === 'openPublicSurface')
     ) {
-      errors.push(`/fillahead/checkout/: installed CTA bridge regressed: ${JSON.stringify(bridgeMessages)}`);
+      errors.push(`/skip-retyping/checkout/: installed CTA bridge regressed: ${JSON.stringify(bridgeMessages)}`);
     }
     await page.screenshot({ path: path.join(OUT_DIR, 'checkout-installed-extension-dark.png'), fullPage: true });
 
-    await page.goto(`${origin}/fillahead/de/`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => document.documentElement.dataset.fillaheadInstalled === 'true');
+    await page.goto(`${origin}/skip-retyping/de/`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.skipRetypingInstalled === 'true');
     const germanActions = await page
       .locator('main a[data-installed-action="installed"]')
       .allTextContents();
-    if (!germanActions.length || germanActions.some((label) => label.trim() !== 'FillAhead öffnen')) {
-      errors.push(`/fillahead/de/: installed CTA was not localized: ${JSON.stringify(germanActions)}`);
+    if (!germanActions.length || germanActions.some((label) => label.trim() !== 'Skip Retyping öffnen')) {
+      errors.push(`/skip-retyping/de/: installed CTA was not localized: ${JSON.stringify(germanActions)}`);
     }
   } catch (error) {
-    errors.push(`/fillahead/checkout/: installed-extension audit failed: ${error.message}`);
+    errors.push(`/skip-retyping/checkout/: installed-extension audit failed: ${error.message}`);
   } finally {
     await page.close();
   }
@@ -969,14 +970,14 @@ async function main() {
   }
 
   if (errors.length) {
-    console.error(`FillAhead release experience audit failed with ${errors.length} issue(s):`);
+    console.error(`Skip Retyping release experience audit failed with ${errors.length} issue(s):`);
     for (const error of errors) console.error(`- ${error}`);
     console.error(`Screenshots saved to ${OUT_DIR}`);
     process.exit(1);
   }
 
   console.log(
-    `FillAhead release experience audit passed: ${checks} rendered page checks, ${ROUTES.length} routes, ${VIEWPORTS.length} viewports, ${THEMES.length} themes. Screenshots saved to ${OUT_DIR}.`,
+    `Skip Retyping release experience audit passed: ${checks} rendered page checks, ${ROUTES.length} routes, ${VIEWPORTS.length} viewports, ${THEMES.length} themes. Screenshots saved to ${OUT_DIR}.`,
   );
 }
 

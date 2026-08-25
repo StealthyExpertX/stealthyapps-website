@@ -1,21 +1,21 @@
-/* FillAhead service worker.
+/* Skip Retyping service worker.
  * Small same-origin cache for static pages and assets.
  */
 
 const CACHE_NAME = 'fillpro-static-live';
 const CORE_ASSETS = [
   '/',
-  '/fillahead/',
-  '/fillahead/checkout/',
-  '/fillahead/download/',
-  '/fillahead/download/chrome/',
-  '/fillahead/download/edge/',
-  '/fillahead/download/firefox/',
-  '/fillahead/privacy/',
-  '/fillahead/job-application-autofill/',
-  '/fillahead/resume-upload-autofill/',
-  '/fillahead/local-form-autofill/',
-  '/fillahead/browser-autofill-vs-fillahead/',
+  '/skip-retyping/',
+  '/skip-retyping/checkout/',
+  '/skip-retyping/download/',
+  '/skip-retyping/download/chrome/',
+  '/skip-retyping/download/edge/',
+  '/skip-retyping/download/firefox/',
+  '/skip-retyping/privacy/',
+  '/skip-retyping/job-application-autofill/',
+  '/skip-retyping/resume-upload-autofill/',
+  '/skip-retyping/local-form-autofill/',
+  '/skip-retyping/browser-autofill-vs-skip-retyping/',
   '/support/',
   '/contact/',
   '/styles.css',
@@ -24,10 +24,10 @@ const CORE_ASSETS = [
   '/assets/browser-chrome.svg',
   '/assets/browser-edge.svg',
   '/assets/browser-firefox.svg',
-  '/assets/fillahead-logo.svg',
-  '/assets/fillahead-logo.png',
-  '/assets/fillahead-og.png',
-  '/assets/fillahead-demo-poster.png',
+  '/assets/skip-retyping-logo.svg',
+  '/assets/skip-retyping-logo.png',
+  '/assets/skip-retyping-og.png',
+  '/assets/skip-retyping-demo-poster.png',
   '/manifest.webmanifest',
   '/llms.txt',
   '/404.html',

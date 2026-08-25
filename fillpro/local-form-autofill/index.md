@@ -1,3 +1,3 @@
 # Moved
 
-This page is now at [FillAhead](/fillahead/local-form-autofill/).
+This page is now at [Skip Retyping](/skip-retyping/local-form-autofill/).

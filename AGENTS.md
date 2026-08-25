@@ -1,11 +1,11 @@
-# FillAhead Agent Notes
+# Skip Retyping Agent Notes
 
-This file describes the public FillAhead website for crawlers, assistants, and repository automation.
+This file describes the public Skip Retyping website for crawlers, assistants, and repository automation.
 
-- Product: FillAhead
+- Product: Skip Retyping
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/fillahead/
-- Canonical product route: /fillahead/
+- Website: https://stealthyapps.com/skip-retyping/
+- Canonical product route: /skip-retyping/
 - Current version: 1.0.0
 - Last reviewed: 2026-07-13
 
@@ -18,10 +18,10 @@ This file describes the public FillAhead website for crawlers, assistants, and r
 
 ## Canonical Routes
 
-- Home: /fillahead/
-- Product: /fillahead/
-- Pricing: /fillahead/#pricing
-- Privacy: /fillahead/privacy/
+- Home: /skip-retyping/
+- Product: /skip-retyping/
+- Pricing: /skip-retyping/#pricing
+- Privacy: /skip-retyping/privacy/
 - Support: /support/
 - Contact: /contact/
 - Sitemap: /sitemap.html
@@ -30,9 +30,9 @@ This file describes the public FillAhead website for crawlers, assistants, and r
 
 ## Product Positioning
 
-FillAhead is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
+Skip Retyping is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
 
-FillAhead does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+Skip Retyping does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Pricing
 
@@ -46,4 +46,4 @@ ExtensionPay handles Pro license and plan status. Stripe handles checkout and pa
 
 ## Future Pages
 
-FillAhead is the only public product right now. Future tools should get their own canonical product page, privacy notes if needed, support route, sitemap entry, and Markdown mirror.
+Skip Retyping is the only public product right now. Future tools should get their own canonical product page, privacy notes if needed, support route, sitemap entry, and Markdown mirror.

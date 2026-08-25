@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
-    <loc>https://stealthyapps.com/fillahead/</loc>
+    <loc>https://stealthyapps.com/skip-retyping/</loc>
     <lastmod>2026-08-25</lastmod>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/fillahead-og.png</image:loc>
-      <image:title>FillAhead private form autofill launch art</image:title>
-      <image:caption>FillAhead by Stealthy Apps: saved profiles, one-click fill, and review before submit.</image:caption>
+      <image:loc>https://stealthyapps.com/assets/skip-retyping-og.png</image:loc>
+      <image:title>Skip Retyping private form autofill launch art</image:title>
+      <image:caption>Skip Retyping by Stealthy Apps: saved profiles, one-click fill, and review before submit.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/fillahead-demo-poster.png</image:loc>
-      <image:title>FillAhead product demo</image:title>
-      <image:caption>FillAhead demo showing repeated form fields filled from a saved profile.</image:caption>
+      <image:loc>https://stealthyapps.com/assets/skip-retyping-demo-poster.png</image:loc>
+      <image:title>Skip Retyping product demo</image:title>
+      <image:caption>Skip Retyping demo showing repeated form fields filled from a saved profile.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/fillahead-logo.svg</image:loc>
-      <image:title>FillAhead logo</image:title>
-      <image:caption>FillAhead private form autofill logo.</image:caption>
+      <image:loc>https://stealthyapps.com/assets/skip-retyping-logo.svg</image:loc>
+      <image:title>Skip Retyping logo</image:title>
+      <image:caption>Skip Retyping private form autofill logo.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/marketplace/fillahead-screenshot-fill-page-1280x800.png</image:loc>
-      <image:title>FillAhead Fill Page workflow</image:title>
-      <image:caption>Choose a saved profile and autofill the current web form with FillAhead.</image:caption>
+      <image:loc>https://stealthyapps.com/assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png</image:loc>
+      <image:title>Skip Retyping Fill Page workflow</image:title>
+      <image:caption>Choose a saved profile and autofill the current web form with Skip Retyping.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/marketplace/fillahead-screenshot-profiles-1280x800.png</image:loc>
-      <image:title>FillAhead saved autofill profiles</image:title>
+      <image:loc>https://stealthyapps.com/assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png</image:loc>
+      <image:title>Skip Retyping saved autofill profiles</image:title>
       <image:caption>Create separate saved profiles for job applications, business forms, and repeated workflows.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/marketplace/fillahead-screenshot-modern-forms-1280x800.png</image:loc>
-      <image:title>FillAhead modern form support</image:title>
+      <image:loc>https://stealthyapps.com/assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png</image:loc>
+      <image:title>Skip Retyping modern form support</image:title>
       <image:caption>Autofill dropdowns, checkboxes, long answers, and modern web form controls.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/marketplace/fillahead-screenshot-privacy-1280x800.png</image:loc>
-      <image:title>FillAhead private autofill controls</image:title>
-      <image:caption>FillAhead keeps saved profiles in browser storage for the normal autofill workflow.</image:caption>
+      <image:loc>https://stealthyapps.com/assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png</image:loc>
+      <image:title>Skip Retyping private autofill controls</image:title>
+      <image:caption>Skip Retyping keeps saved profiles in browser storage for the normal autofill workflow.</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://stealthyapps.com/assets/marketplace/fillahead-screenshot-undo-1280x800.png</image:loc>
-      <image:title>FillAhead review and undo</image:title>
+      <image:loc>https://stealthyapps.com/assets/marketplace/skip-retyping-screenshot-undo-1280x800.png</image:loc>
+      <image:title>Skip Retyping review and undo</image:title>
       <image:caption>Review filled fields and undo the last fill before submitting the form.</image:caption>
     </image:image>
   </url>
