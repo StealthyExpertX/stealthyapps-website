@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const UPDATED_ISO = '2026-08-24';
+const UPDATED_ISO = '2026-08-25';
 const CHECK_ONLY = process.argv.includes('--check');
 
 const locales = [
@@ -17,6 +17,7 @@ const locales = [
     h1: 'Dieselben Formulardaten nicht immer wieder tippen.',
     lead: 'Skip Retyping speichert wiederverwendbare Profile im Browser. Wähle ein Profil, fülle die Seite aus und prüfe alles, bevor du das Formular absendest.',
     ctas: ['Kostenlos starten', 'Preise ansehen'],
+    actionNote: '3 Profile kostenlos. Zum Start ist kein Konto nötig.',
     quickTitle: 'In wenigen Schritten',
     quickItems: ['Profil einmal speichern', 'Formular mit einem Klick ausfüllen', 'Änderungen prüfen oder rückgängig machen'],
     features: [
@@ -24,16 +25,18 @@ const locales = [
       ['Profile bleiben im Browser', 'Für den normalen Ablauf ist kein Cloud-Konto nötig. Gespeicherte Profile werden nur exportiert oder für den Support verwendet, wenn du das selbst auswählst.'],
       ['Vor dem Absenden prüfen', 'Skip Retyping füllt die Seite aus, sendet sie aber nicht ab. Du kannst ungewöhnliche Felder korrigieren oder die letzte Ausfüllung rückgängig machen.'],
     ],
-    pricingTitle: 'Drei Profile kostenlos. Mehr nur bei Bedarf.',
-    freeTitle: 'Kostenlos', freeBody: '3 gespeicherte Profile, Smart Rules, benutzerdefinierte Felder, Upload-Zuordnung und Rückgängig-Funktion.',
-    proTitle: 'Pro', proBody: '3,99 US-Dollar pro Monat oder 29,99 US-Dollar pro Jahr.', billingNames: ['monatlich', 'jährlich'],
+    pricingTitle: '3 Profile kostenlos. Pro ab 3,99 USD.',
+    freeTitle: 'Kostenlos', freeBody: 'Die wichtigsten Ausfüllfunktionen mit bis zu 3 gespeicherten Profilen.',
+    proTitle: 'Pro', proBody: 'Bis zu 500 Profile, Duplizieren und Backup-Import. 3,99 US-Dollar monatlich oder 29,99 US-Dollar jährlich.', billingNames: ['monatlich', 'jährlich'],
+    lifetimeTitle: 'Dauerlizenz', lifetimeBody: 'Alle Pro-Funktionen für einmalig 39,99 US-Dollar. Keine Verlängerung.',
+    proCta: 'Pro-Pläne vergleichen', lifetimeCta: 'Dauerlizenz wählen',
     faqTitle: 'Häufige Fragen',
     faqs: [
       ['Welche Formulare kann Skip Retyping ausfüllen?', 'Bewerbungen, Registrierungen, Onboarding-, Lieferanten-, Support- und andere wiederkehrende Webformulare mit erreichbaren Formularfeldern.'],
       ['Funktioniert Skip Retyping offline?', 'Ja. Der normale Ablauf mit gespeicherten Profilen funktioniert offline. Für Pro-Lizenzprüfungen, Support und Downloads ist eine Verbindung erforderlich.'],
       ['Ersetzt Skip Retyping einen Passwortmanager?', 'Nein. Anmeldedaten, Karten und Einmalcodes bleiben bei den dafür vorgesehenen Browser- und Passwortmanager-Funktionen.'],
     ],
-    finalTitle: 'Das nächste lange Formular schneller erledigen.', finalCta: 'Skip Retyping herunterladen', languageLabel: 'Sprache', skip: 'Zum Inhalt springen', updated: 'Aktualisiert', dateLabel: '24. August 2026',
+    finalTitle: 'Das nächste lange Formular schneller erledigen.', finalCta: 'Skip Retyping herunterladen', languageLabel: 'Sprache', skip: 'Zum Inhalt springen', updated: 'Aktualisiert', dateLabel: '25. August 2026',
   },
   {
     slug: 'es', lang: 'es', hreflang: 'es', ogLocale: 'es_ES', languageName: 'Español',
@@ -45,6 +48,7 @@ const locales = [
     h1: 'Deja de escribir los mismos datos en cada formulario.',
     lead: 'Skip Retyping guarda perfiles reutilizables en el navegador. Elige un perfil, rellena la página y revisa el resultado antes de enviar el formulario.',
     ctas: ['Empezar gratis', 'Ver precios'],
+    actionNote: '3 perfiles gratis. No necesitas una cuenta para empezar.',
     quickTitle: 'Un proceso corto',
     quickItems: ['Guarda un perfil una vez', 'Rellena el formulario con un clic', 'Revisa los cambios o deshaz el rellenado'],
     features: [
@@ -52,16 +56,18 @@ const locales = [
       ['Los perfiles quedan en el navegador', 'El uso normal no necesita una cuenta en la nube. Los perfiles solo salen al exportarlos o al enviarlos voluntariamente a soporte.'],
       ['Revisa antes de enviar', 'Skip Retyping rellena la página, pero no la envía. Puedes corregir un campo poco habitual o deshacer el último rellenado.'],
     ],
-    pricingTitle: 'Tres perfiles gratis. Amplía solo cuando los necesites.',
-    freeTitle: 'Gratis', freeBody: '3 perfiles guardados, reglas inteligentes, campos personalizados, coincidencia de archivos y función de deshacer.',
-    proTitle: 'Pro', proBody: '3,99 USD al mes o 29,99 USD al año.', billingNames: ['mensual', 'anual'],
+    pricingTitle: '3 perfiles gratis. Pro desde 3,99 USD.',
+    freeTitle: 'Gratis', freeBody: 'Usa las funciones principales de rellenado con hasta 3 perfiles guardados.',
+    proTitle: 'Pro', proBody: 'Hasta 500 perfiles, duplicación e importación de copias de seguridad. 3,99 USD al mes o 29,99 USD al año.', billingNames: ['mensual', 'anual'],
+    lifetimeTitle: 'De por vida', lifetimeBody: 'Todas las funciones Pro por un solo pago de 39,99 USD. Sin renovación.',
+    proCta: 'Comparar planes Pro', lifetimeCta: 'Elegir acceso de por vida',
     faqTitle: 'Preguntas frecuentes',
     faqs: [
       ['¿Qué formularios puede rellenar Skip Retyping?', 'Solicitudes de empleo, registros, incorporación, proveedores, soporte y otros formularios web repetitivos con campos accesibles.'],
       ['¿Skip Retyping funciona sin conexión?', 'Sí. El flujo normal con perfiles guardados funciona sin conexión. La licencia Pro, el soporte y las descargas necesitan conexión.'],
       ['¿Sustituye a un gestor de contraseñas?', 'No. Los inicios de sesión, las tarjetas y los códigos de un solo uso siguen en las herramientas creadas para ellos.'],
     ],
-    finalTitle: 'Termina antes el próximo formulario largo.', finalCta: 'Descargar Skip Retyping', languageLabel: 'Idioma', skip: 'Saltar al contenido', updated: 'Actualizado', dateLabel: '24 de agosto de 2026',
+    finalTitle: 'Termina antes el próximo formulario largo.', finalCta: 'Descargar Skip Retyping', languageLabel: 'Idioma', skip: 'Saltar al contenido', updated: 'Actualizado', dateLabel: '25 de agosto de 2026',
   },
   {
     slug: 'fr', lang: 'fr', hreflang: 'fr', ogLocale: 'fr_FR', languageName: 'Français',
@@ -73,6 +79,7 @@ const locales = [
     h1: 'Ne saisissez plus les mêmes informations dans chaque formulaire.',
     lead: 'Skip Retyping enregistre des profils réutilisables dans le navigateur. Choisissez un profil, remplissez la page, puis vérifiez le résultat avant l’envoi.',
     ctas: ['Commencer gratuitement', 'Voir les tarifs'],
+    actionNote: '3 profils gratuits. Aucun compte nécessaire pour commencer.',
     quickTitle: 'Un parcours plus court',
     quickItems: ['Enregistrez un profil une fois', 'Remplissez le formulaire en un clic', 'Vérifiez les changements ou annulez le remplissage'],
     features: [
@@ -80,16 +87,18 @@ const locales = [
       ['Les profils restent dans le navigateur', 'Le fonctionnement normal ne demande aucun compte cloud. Les profils ne quittent l’extension que si vous les exportez ou les envoyez volontairement au support.'],
       ['Vérifiez avant d’envoyer', 'Skip Retyping remplit la page sans l’envoyer. Corrigez un champ inhabituel ou annulez le dernier remplissage si nécessaire.'],
     ],
-    pricingTitle: 'Trois profils gratuits. Passez à Pro seulement si nécessaire.',
-    freeTitle: 'Gratuit', freeBody: '3 profils enregistrés, règles intelligentes, champs personnalisés, association des fichiers et annulation.',
-    proTitle: 'Pro', proBody: '3,99 USD par mois ou 29,99 USD par an.', billingNames: ['mensuel', 'annuel'],
+    pricingTitle: '3 profils gratuits. Pro à partir de 3,99 USD.',
+    freeTitle: 'Gratuit', freeBody: 'Utilisez les fonctions principales de remplissage avec jusqu’à 3 profils enregistrés.',
+    proTitle: 'Pro', proBody: 'Jusqu’à 500 profils, duplication et importation de sauvegardes. 3,99 USD par mois ou 29,99 USD par an.', billingNames: ['mensuel', 'annuel'],
+    lifetimeTitle: 'À vie', lifetimeBody: 'Toutes les fonctions Pro pour un paiement unique de 39,99 USD. Aucun renouvellement.',
+    proCta: 'Comparer les offres Pro', lifetimeCta: 'Choisir l’accès à vie',
     faqTitle: 'Questions fréquentes',
     faqs: [
       ['Quels formulaires Skip Retyping peut-il remplir ?', 'Candidatures, inscriptions, intégration, fournisseurs, support et autres formulaires web répétitifs dont les champs sont accessibles.'],
       ['Skip Retyping fonctionne-t-il hors ligne ?', 'Oui. Le parcours normal avec les profils enregistrés fonctionne hors ligne. La licence Pro, le support et les téléchargements nécessitent une connexion.'],
       ['Skip Retyping remplace-t-il un gestionnaire de mots de passe ?', 'Non. Les identifiants, cartes et codes à usage unique restent dans les outils conçus pour ces données.'],
     ],
-    finalTitle: 'Terminez plus vite votre prochain formulaire.', finalCta: 'Télécharger Skip Retyping', languageLabel: 'Langue', skip: 'Aller au contenu', updated: 'Mis à jour', dateLabel: '24 août 2026',
+    finalTitle: 'Terminez plus vite votre prochain formulaire.', finalCta: 'Télécharger Skip Retyping', languageLabel: 'Langue', skip: 'Aller au contenu', updated: 'Mis à jour', dateLabel: '25 août 2026',
   },
   {
     slug: 'pt-br', lang: 'pt-BR', hreflang: 'pt-BR', ogLocale: 'pt_BR', languageName: 'Português (Brasil)',
@@ -101,6 +110,7 @@ const locales = [
     h1: 'Pare de digitar os mesmos dados em cada formulário.',
     lead: 'Skip Retyping salva perfis reutilizáveis no navegador. Escolha um perfil, preencha a página e confira o resultado antes de enviar.',
     ctas: ['Começar grátis', 'Ver preços'],
+    actionNote: '3 perfis grátis. Não é preciso criar uma conta para começar.',
     quickTitle: 'Um caminho mais curto',
     quickItems: ['Salve um perfil uma vez', 'Preencha o formulário com um clique', 'Revise as mudanças ou desfaça o preenchimento'],
     features: [
@@ -108,16 +118,18 @@ const locales = [
       ['Os perfis ficam no navegador', 'O uso normal não exige conta na nuvem. Os perfis só saem da extensão quando você exporta ou envia algo voluntariamente ao suporte.'],
       ['Revise antes de enviar', 'Skip Retyping preenche a página, mas não envia o formulário. Corrija um campo incomum ou desfaça o último preenchimento.'],
     ],
-    pricingTitle: 'Três perfis grátis. Mude para Pro só quando precisar.',
-    freeTitle: 'Grátis', freeBody: '3 perfis salvos, regras inteligentes, campos personalizados, correspondência de arquivos e desfazer.',
-    proTitle: 'Pro', proBody: 'US$ 3,99 por mês ou US$ 29,99 por ano.', billingNames: ['mensal', 'anual'],
+    pricingTitle: '3 perfis grátis. Pro a partir de US$ 3,99.',
+    freeTitle: 'Grátis', freeBody: 'Use os principais recursos de preenchimento com até 3 perfis salvos.',
+    proTitle: 'Pro', proBody: 'Até 500 perfis, duplicação e importação de backups. US$ 3,99 por mês ou US$ 29,99 por ano.', billingNames: ['mensal', 'anual'],
+    lifetimeTitle: 'Vitalício', lifetimeBody: 'Todos os recursos Pro por um pagamento único de US$ 39,99. Sem renovação.',
+    proCta: 'Comparar planos Pro', lifetimeCta: 'Escolher acesso vitalício',
     faqTitle: 'Perguntas frequentes',
     faqs: [
       ['Quais formulários o Skip Retyping preenche?', 'Candidaturas a vagas, cadastros, integração, fornecedores, suporte e outros formulários web repetitivos com campos acessíveis.'],
       ['O Skip Retyping funciona offline?', 'Sim. O fluxo normal com perfis salvos funciona offline. Licença Pro, suporte e downloads precisam de conexão.'],
       ['O Skip Retyping substitui um gerenciador de senhas?', 'Não. Logins, cartões e códigos de uso único continuam nas ferramentas criadas para esses dados.'],
     ],
-    finalTitle: 'Termine o próximo formulário longo mais rápido.', finalCta: 'Baixar Skip Retyping', languageLabel: 'Idioma', skip: 'Pular para o conteúdo', updated: 'Atualizado', dateLabel: '24 de agosto de 2026',
+    finalTitle: 'Termine o próximo formulário longo mais rápido.', finalCta: 'Baixar Skip Retyping', languageLabel: 'Idioma', skip: 'Pular para o conteúdo', updated: 'Atualizado', dateLabel: '25 de agosto de 2026',
   },
   {
     slug: 'ja', lang: 'ja', hreflang: 'ja', ogLocale: 'ja_JP', languageName: '日本語',
@@ -129,6 +141,7 @@ const locales = [
     h1: '同じ情報をフォームごとに入力する手間を減らします。',
     lead: 'Skip Retyping は再利用できるプロフィールをブラウザに保存します。プロフィールを選んでページ上のフォームに入力し、送信前に結果を確認できます。',
     ctas: ['無料で始める', '料金を見る'],
+    actionNote: 'プロフィール3件まで無料。開始時にアカウントは不要です。',
     quickTitle: '使い方はシンプル',
     quickItems: ['プロフィールを一度保存', 'ワンクリックでフォームを入力', '変更を確認、または元に戻す'],
     features: [
@@ -136,16 +149,18 @@ const locales = [
       ['プロフィールはブラウザ内に保存', '通常の利用にクラウドアカウントは不要です。プロフィールは、書き出しやサポートへの送信を自分で選んだ場合にだけ外部へ移動します。'],
       ['送信前に確認', 'Skip Retyping はページを入力しますが、フォームを送信しません。必要なら項目を直したり、最後の入力を元に戻したりできます。'],
     ],
-    pricingTitle: '3プロフィールまで無料。必要になったら Pro へ。',
-    freeTitle: '無料', freeBody: '保存プロフィール3件、スマートルール、カスタム項目、ファイル照合、元に戻す機能。',
-    proTitle: 'Pro', proBody: '月額3.99米ドルまたは年額29.99米ドル。', billingNames: ['月額', '年額'],
+    pricingTitle: 'プロフィール3件は無料。Proは月額3.99米ドルから。',
+    freeTitle: '無料', freeBody: '保存プロフィール3件まで、主要なフォーム入力機能を利用できます。',
+    proTitle: 'Pro', proBody: 'プロフィール500件まで、複製、バックアップの読み込みに対応。月額3.99米ドルまたは年額29.99米ドル。', billingNames: ['月額', '年額'],
+    lifetimeTitle: '買い切り', lifetimeBody: 'Proの全機能を39.99米ドルの一括払いで利用できます。更新はありません。',
+    proCta: 'Proプランを比較', lifetimeCta: '買い切りを選ぶ',
     faqTitle: 'よくある質問',
     faqs: [
       ['どのフォームに使えますか？', '求人応募、登録、オンボーディング、取引先、サポートなど、アクセス可能な入力欄を持つ繰り返し使うWebフォームに対応します。'],
       ['オフラインでも使えますか？', 'はい。保存プロフィールを使う通常の入力はオフラインで動作します。Proライセンス確認、サポート、ダウンロードには接続が必要です。'],
       ['パスワード管理ツールの代わりになりますか？', 'いいえ。ログイン情報、カード、ワンタイムコードは、それらを扱うためのブラウザ機能やパスワード管理ツールに任せます。'],
     ],
-    finalTitle: '次の長いフォームを、もっと短時間で。', finalCta: 'Skip Retyping をダウンロード', languageLabel: '言語', skip: '本文へ移動', updated: '更新日', dateLabel: '2026年8月24日',
+    finalTitle: '次の長いフォームを、もっと短時間で。', finalCta: 'Skip Retyping をダウンロード', languageLabel: '言語', skip: '本文へ移動', updated: '更新日', dateLabel: '2026年8月25日',
   },
   {
     slug: 'ko', lang: 'ko', hreflang: 'ko', ogLocale: 'ko_KR', languageName: '한국어',
@@ -157,6 +172,7 @@ const locales = [
     h1: '양식마다 같은 정보를 다시 입력하지 마세요.',
     lead: 'Skip Retyping은 다시 사용할 프로필을 브라우저에 저장합니다. 프로필을 고르고 페이지를 채운 뒤 제출 전에 결과를 확인하세요.',
     ctas: ['무료로 시작', '요금 보기'],
+    actionNote: '프로필 3개까지 무료입니다. 시작할 때 계정은 필요 없습니다.',
     quickTitle: '간단한 사용 흐름',
     quickItems: ['프로필을 한 번 저장', '한 번의 클릭으로 양식 입력', '변경 내용을 확인하거나 되돌리기'],
     features: [
@@ -164,16 +180,18 @@ const locales = [
       ['프로필은 브라우저에 저장', '일반 사용에는 클라우드 계정이 필요 없습니다. 직접 내보내거나 지원팀에 보내기로 선택한 경우에만 프로필이 외부로 이동합니다.'],
       ['제출 전에 확인', 'Skip Retyping은 페이지를 채우지만 제출하지 않습니다. 낯선 필드를 고치거나 마지막 입력을 되돌릴 수 있습니다.'],
     ],
-    pricingTitle: '프로필 3개는 무료. 더 필요할 때만 Pro로.',
-    freeTitle: '무료', freeBody: '저장 프로필 3개, 스마트 규칙, 사용자 지정 필드, 파일 매칭, 되돌리기 기능.',
-    proTitle: 'Pro', proBody: '월 US$3.99 또는 연 US$29.99.', billingNames: ['월간', '연간'],
+    pricingTitle: '프로필 3개는 무료. Pro는 월 US$3.99부터.',
+    freeTitle: '무료', freeBody: '저장 프로필을 최대 3개까지 만들고 핵심 입력 기능을 사용할 수 있습니다.',
+    proTitle: 'Pro', proBody: '프로필 최대 500개, 복제, 백업 가져오기. 월 US$3.99 또는 연 US$29.99.', billingNames: ['월간', '연간'],
+    lifetimeTitle: '평생 이용', lifetimeBody: 'US$39.99 한 번 결제로 모든 Pro 기능을 이용할 수 있습니다. 갱신은 없습니다.',
+    proCta: 'Pro 요금제 비교', lifetimeCta: '평생 이용 선택',
     faqTitle: '자주 묻는 질문',
     faqs: [
       ['어떤 양식을 채울 수 있나요?', '입사 지원, 가입, 온보딩, 공급업체, 고객 지원 등 접근 가능한 입력 필드가 있는 반복 웹 양식에 사용할 수 있습니다.'],
       ['오프라인에서도 작동하나요?', '예. 저장 프로필을 이용한 일반 입력은 오프라인에서 작동합니다. Pro 라이선스 확인, 지원, 다운로드에는 연결이 필요합니다.'],
       ['비밀번호 관리자를 대신하나요?', '아니요. 로그인, 카드, 일회용 코드는 해당 데이터를 위해 만든 브라우저 기능과 비밀번호 관리자에서 계속 처리합니다.'],
     ],
-    finalTitle: '다음 긴 양식을 더 빨리 끝내세요.', finalCta: 'Skip Retyping 다운로드', languageLabel: '언어', skip: '본문으로 건너뛰기', updated: '업데이트', dateLabel: '2026년 8월 24일',
+    finalTitle: '다음 긴 양식을 더 빨리 끝내세요.', finalCta: 'Skip Retyping 다운로드', languageLabel: '언어', skip: '본문으로 건너뛰기', updated: '업데이트', dateLabel: '2026년 8월 25일',
   },
   {
     slug: 'zh-cn', lang: 'zh-CN', hreflang: 'zh-CN', ogLocale: 'zh_CN', languageName: '简体中文',
@@ -185,6 +203,7 @@ const locales = [
     h1: '不必在每个表单中重复输入相同资料。',
     lead: 'Skip Retyping 将可重复使用的个人资料保存在浏览器扩展中。选择资料、填写页面，然后在提交前检查结果。',
     ctas: ['免费开始', '查看价格'],
+    actionNote: '可免费保存 3 个资料。开始使用无需注册账户。',
     quickTitle: '更短的操作流程',
     quickItems: ['只需保存一次资料', '一键填写表单', '检查更改或撤销填写'],
     features: [
@@ -192,16 +211,18 @@ const locales = [
       ['资料保存在浏览器中', '日常使用无需云端账户。只有当你主动导出资料或发送给支持团队时，资料才会离开扩展程序。'],
       ['提交前先检查', 'Skip Retyping 负责填写页面，但不会提交表单。你可以修正特殊字段，也可以撤销上一次填写。'],
     ],
-    pricingTitle: '免费使用 3 个资料。需要更多时再升级。',
-    freeTitle: '免费', freeBody: '3 个已保存资料、智能规则、自定义字段、文件匹配和撤销功能。',
-    proTitle: 'Pro', proBody: '每月 3.99 美元或每年 29.99 美元。', billingNames: ['月付', '年付'],
+    pricingTitle: '可免费保存 3 个资料。Pro 每月 3.99 美元起。',
+    freeTitle: '免费', freeBody: '最多保存 3 个资料，并可使用主要的表单填写功能。',
+    proTitle: 'Pro', proBody: '最多保存 500 个资料，可复制资料并导入备份。每月 3.99 美元或每年 29.99 美元。', billingNames: ['月付', '年付'],
+    lifetimeTitle: '终身版', lifetimeBody: '一次支付 39.99 美元即可使用全部 Pro 功能，无需续费。',
+    proCta: '比较 Pro 方案', lifetimeCta: '选择终身版',
     faqTitle: '常见问题',
     faqs: [
       ['Skip Retyping 可以填写哪些表单？', '可用于求职申请、注册、入职、供应商、支持等带有可访问字段的重复网页表单。'],
       ['Skip Retyping 可以离线使用吗？', '可以。使用已保存资料的日常填写可离线运行。Pro 许可证检查、支持和下载需要联网。'],
       ['Skip Retyping 会替代密码管理器吗？', '不会。登录信息、银行卡和一次性验证码仍由专门处理这些数据的浏览器功能或密码管理器负责。'],
     ],
-    finalTitle: '更快完成下一个长表单。', finalCta: '下载 Skip Retyping', languageLabel: '语言', skip: '跳到主要内容', updated: '更新日期', dateLabel: '2026年8月24日',
+    finalTitle: '更快完成下一个长表单。', finalCta: '下载 Skip Retyping', languageLabel: '语言', skip: '跳到主要内容', updated: '更新日期', dateLabel: '2026年8月25日',
   },
   {
     slug: 'ru', lang: 'ru', hreflang: 'ru', ogLocale: 'ru_RU', languageName: 'Русский',
@@ -213,6 +234,7 @@ const locales = [
     h1: 'Не вводите одни и те же данные в каждой форме.',
     lead: 'Skip Retyping сохраняет многоразовые профили в браузере. Выберите профиль, заполните страницу и проверьте результат перед отправкой.',
     ctas: ['Начать бесплатно', 'Посмотреть цены'],
+    actionNote: '3 профиля бесплатно. Для начала не нужен аккаунт.',
     quickTitle: 'Короткий путь',
     quickItems: ['Сохраните профиль один раз', 'Заполните форму одним кликом', 'Проверьте изменения или отмените заполнение'],
     features: [
@@ -220,16 +242,18 @@ const locales = [
       ['Профили остаются в браузере', 'Для обычной работы не нужна облачная учётная запись. Профили покидают расширение только при выбранном вами экспорте или обращении в поддержку.'],
       ['Проверка перед отправкой', 'Skip Retyping заполняет страницу, но не отправляет форму. Можно исправить необычное поле или отменить последнее заполнение.'],
     ],
-    pricingTitle: 'Три профиля бесплатно. Pro — только когда нужно больше.',
-    freeTitle: 'Бесплатно', freeBody: '3 сохранённых профиля, умные правила, пользовательские поля, сопоставление файлов и отмена.',
-    proTitle: 'Pro', proBody: '3,99 доллара в месяц или 29,99 доллара в год.', billingNames: ['ежемесячно', 'ежегодно'],
+    pricingTitle: '3 профиля бесплатно. Pro от 3,99 доллара в месяц.',
+    freeTitle: 'Бесплатно', freeBody: 'Основные функции заполнения и до 3 сохранённых профилей.',
+    proTitle: 'Pro', proBody: 'До 500 профилей, дублирование и импорт резервных копий. 3,99 доллара в месяц или 29,99 доллара в год.', billingNames: ['ежемесячно', 'ежегодно'],
+    lifetimeTitle: 'Навсегда', lifetimeBody: 'Все функции Pro за один платёж 39,99 доллара. Без продления.',
+    proCta: 'Сравнить планы Pro', lifetimeCta: 'Выбрать навсегда',
     faqTitle: 'Частые вопросы',
     faqs: [
       ['Какие формы заполняет Skip Retyping?', 'Заявки на работу, регистрации, онбординг, формы поставщиков, поддержки и другие повторяющиеся веб-формы с доступными полями.'],
       ['Skip Retyping работает офлайн?', 'Да. Обычное заполнение из сохранённых профилей работает офлайн. Для проверки Pro, поддержки и загрузок требуется подключение.'],
       ['Skip Retyping заменяет менеджер паролей?', 'Нет. Логины, карты и одноразовые коды остаются в браузере и менеджере паролей, созданных для этих данных.'],
     ],
-    finalTitle: 'Закончите следующую длинную форму быстрее.', finalCta: 'Скачать Skip Retyping', languageLabel: 'Язык', skip: 'Перейти к содержимому', updated: 'Обновлено', dateLabel: '24 августа 2026 г.',
+    finalTitle: 'Закончите следующую длинную форму быстрее.', finalCta: 'Скачать Skip Retyping', languageLabel: 'Язык', skip: 'Перейти к содержимому', updated: 'Обновлено', dateLabel: '25 августа 2026 г.',
   },
 ];
 
@@ -298,6 +322,7 @@ function makeJsonLd(locale, canonical) {
           { '@type': 'Offer', price: '0', priceCurrency: 'USD', name: locale.freeTitle },
           { '@type': 'Offer', price: '3.99', priceCurrency: 'USD', name: `${locale.proTitle} ${locale.billingNames[0]}` },
           { '@type': 'Offer', price: '29.99', priceCurrency: 'USD', name: `${locale.proTitle} ${locale.billingNames[1]}` },
+          { '@type': 'Offer', price: '39.99', priceCurrency: 'USD', name: locale.lifetimeTitle },
         ],
       },
       {
@@ -380,6 +405,7 @@ ${alternateLinks()}
           <a class="button primary" href="/skip-retyping/download/">${escapeHtml(locale.ctas[0])}</a>
           <a class="button" href="#pricing">${escapeHtml(locale.ctas[1])}</a>
         </div>
+        <p class="locale-action-note">${escapeHtml(locale.actionNote)}</p>
       </div>
       <div class="card callout">
         <h2>${escapeHtml(locale.quickTitle)}</h2>
@@ -391,14 +417,15 @@ ${alternateLinks()}
         ${locale.features.map(([title, body]) => `<article class="feature-card"><h2>${escapeHtml(title)}</h2><p>${escapeHtml(body)}</p></article>`).join('\n        ')}
       </div>
     </section>
-    <section class="section two-col" id="pricing">
+    <section class="section locale-pricing" id="pricing">
       <div class="page-intro">
         <p class="eyebrow">${escapeHtml(pricing)}</p>
         <h2>${escapeHtml(locale.pricingTitle)}</h2>
       </div>
       <div class="locale-price-grid">
-        <article class="card"><p class="eyebrow">${escapeHtml(locale.freeTitle)}</p><h3>$0</h3><p>${escapeHtml(locale.freeBody)}</p></article>
-        <article class="card"><p class="eyebrow">${escapeHtml(locale.proTitle)}</p><h3>$3.99</h3><p>${escapeHtml(locale.proBody)}</p></article>
+        <article class="card locale-price-card"><p class="eyebrow">${escapeHtml(locale.freeTitle)}</p><h3>$0</h3><p>${escapeHtml(locale.freeBody)}</p><a class="button primary" href="/skip-retyping/download/">${escapeHtml(locale.ctas[0])}</a></article>
+        <article class="card locale-price-card"><p class="eyebrow">${escapeHtml(locale.proTitle)}</p><h3>$3.99</h3><p>${escapeHtml(locale.proBody)}</p><a class="button" href="/skip-retyping/checkout/?plan=yearly">${escapeHtml(locale.proCta)}</a></article>
+        <article class="card locale-price-card"><p class="eyebrow">${escapeHtml(locale.lifetimeTitle)}</p><h3>$39.99</h3><p>${escapeHtml(locale.lifetimeBody)}</p><a class="button" href="/skip-retyping/checkout/?plan=lifetime">${escapeHtml(locale.lifetimeCta)}</a></article>
       </div>
     </section>
     <section class="section">

@@ -741,7 +741,7 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
         .locator('[data-checkout-plan][aria-current="true"]')
         .getAttribute('data-checkout-plan');
       const lifetimeCard = await page.locator('[data-checkout-plan="lifetime"]').count();
-      if (fallback !== 'yearly' || lifetimeCard !== 1) {
+      if (fallback !== 'lifetime' || lifetimeCard !== 1) {
         errors.push('/skip-retyping/checkout/: ' + invalidPlan + ' query exposed an unavailable plan');
       }
     }  } catch (error) {
@@ -878,7 +878,7 @@ async function auditInstalledExtensionState(browser, origin, errors) {
       title: document.getElementById('checkout-title')?.textContent?.trim() || '',
     }));
     if (
-      !/toolbar button/.test(report.note) ||
+      !/from the toolbar/.test(report.note) ||
       report.free !== 'Open Skip Retyping' ||
       report.monthly !== 'Choose monthly in Skip Retyping' ||
       report.yearly !== 'Choose yearly in Skip Retyping' ||

@@ -6,7 +6,7 @@ Skip Retyping is a browser extension from Stealthy Apps for people who keep seei
 - Privacy: https://stealthyapps.com/skip-retyping/privacy/
 - Category: browser extension, productivity, form autofill
 - Free tier: three saved profiles
-- Pro: $3.99/month or $29.99/year
+- Pro: $3.99/month, $29.99/year, or $39.99 lifetime
 - Last updated: 2026-08-25
 
 ## Where Skip Retyping fits
@@ -52,7 +52,7 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 
 Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
-Pro adds up to 500 saved profiles, profile duplication, and backup imports. Export stays available on every plan. Pro costs $3.99/month or $29.99/year.
+Pro adds up to 500 saved profiles, profile duplication, and backup imports. Export stays available on every plan. Pro costs $3.99/month, $29.99/year, or $39.99 once for lifetime access.
 
 Checkout starts from inside the extension so ExtensionPay can attach the license to the browser profile using Skip Retyping. The website explains plans and points users to the right browser install page.
 

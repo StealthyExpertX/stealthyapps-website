@@ -246,6 +246,8 @@ function checkStyles() {
     ['.checkout-grid', 'checkout plan grid'],
     ['.language-picker', 'localized language picker styles'],
     ['.locale-price-grid', 'localized pricing layout'],
+    ['.locale-action-note', 'localized free-plan reassurance'],
+    ['.locale-price-card', 'localized plan-card layout'],
     ['width: 100%', 'full-width landing footer'],
     ['max(24px, calc((100vw - 1220px) / 2))', 'responsive landing footer padding'],
     ['.browser-mark-chrome', 'Chrome browser badge styles'],
@@ -456,16 +458,16 @@ function checkLaunchPage() {
     ['demo-signal', 'hero product-signal overlay'],
     ['Work profile filled', 'hero profile signal copy'],
     ['ready to review', 'hero review signal copy'],
-    ['Autofill forms from saved profiles.', 'human first-view headline'],
-    ['Start free', 'low-friction primary CTA'],
-    ['href="/skip-retyping/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
-    ['No account required', 'clean privacy proof wording'],
-    ['See exactly what changes.', 'specific hero demo caption'],
+    ['Autofill the details you keep retyping.', 'human first-view headline'],
+    ['Add to Chrome - free', 'specific low-friction primary CTA'],
+    ['href="/skip-retyping/checkout/"', 'pricing CTA should use checkout handoff'],
+    ['No account to start', 'clean privacy proof wording'],
+    ['Watch a job application fill.', 'specific hero demo caption'],
     ['data-skip-retyping-demo-poster', 'stable hero demo poster'],
     ['demo-play-button', 'explicit hero demo play control'],
-    ['Check the fill before you send.', 'review-before-submit proof section'],
+    ['See what changed before you submit.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
-    ['Before you install.', 'plain FAQ heading'],
+    ['What people ask before installing.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`skip-retyping/index.html: missing ${label}`);
@@ -498,11 +500,14 @@ function checkLaunchPage() {
     ['data-checkout-plan="yearly"', 'yearly checkout highlight target'],
     ['data-checkout-plan="lifetime"', 'lifetime checkout target'],
     ['data-checkout-action', 'checkout plan-aware install handoff CTA'],
-    ['Checkout starts inside Skip Retyping.', 'checkout extension-driven payment boundary'],
+    ['Install first. Upgrade inside Skip Retyping.', 'checkout extension-driven payment boundary'],
     ['ExtensionPay', 'checkout billing provider disclosure'],
-    ['Stripe processes card details', 'checkout Stripe handoff disclosure'],
+    ['Stripe handles card details', 'checkout Stripe handoff disclosure'],
   ]) {
     if (!checkoutHtml.includes(needle)) fail(`skip-retyping/checkout/index.html: missing ${label}`);
+  }
+  if (/price-card price-card-featured" data-checkout-plan/.test(checkoutHtml)) {
+    fail('skip-retyping/checkout/index.html: checkout must use one dynamic selected-plan highlight');
   }
   if (/stripe\.com|extensionpay\.com\/extension/i.test(checkoutHtml)) {
     fail('skip-retyping/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
@@ -674,6 +679,16 @@ function checkLocalization() {
     }
     if (fileRel !== 'skip-retyping/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
       fail(`${fileRel}: JSON-LD inLanguage mismatch`);
+    }
+    if (fileRel !== 'skip-retyping/index.html') {
+      const planCards = (html.match(/class="card locale-price-card"/g) || []).length;
+      if (planCards !== 3) fail(`${fileRel}: expected Free, Pro, and Lifetime plan cards`);
+      if (!html.includes('$39.99') || !html.includes('/skip-retyping/checkout/?plan=lifetime')) {
+        fail(`${fileRel}: localized lifetime price or checkout action is missing`);
+      }
+      if (!html.includes('"price":"39.99"')) {
+        fail(`${fileRel}: localized lifetime offer is missing from structured data`);
+      }
     }
   }
 

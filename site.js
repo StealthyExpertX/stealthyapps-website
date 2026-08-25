@@ -49,17 +49,17 @@
       lifetime: 'Choose lifetime in Skip Retyping',
       installedTitle: 'Skip Retyping is installed in this browser.',
       checkoutTitle: 'Skip Retyping is already installed.',
-      checkoutLead: 'Open Skip Retyping to keep using the free plan or choose Pro.',
-      checkoutNote: 'Use the toolbar button to create a profile, fill the current page, or manage billing.',
+      checkoutLead: 'Keep using the free plan or choose Monthly, Yearly, or Lifetime Pro.',
+      checkoutNote: 'Open Skip Retyping from the toolbar to fill a page, create a profile, or manage billing.',
     },
-    de: { open: 'Skip Retyping öffnen', lifetime: 'Dauerlizenz in Skip Retyping wählen', installedTitle: 'Skip Retyping ist in diesem Browser installiert.' },
-    es: { open: 'Abrir Skip Retyping', lifetime: 'Elegir acceso de por vida en Skip Retyping', installedTitle: 'Skip Retyping está instalado en este navegador.' },
-    fr: { open: 'Ouvrir Skip Retyping', lifetime: 'Choisir l’accès à vie dans Skip Retyping', installedTitle: 'Skip Retyping est installé dans ce navigateur.' },
-    'pt-br': { open: 'Abrir o Skip Retyping', lifetime: 'Escolher acesso vitalício no Skip Retyping', installedTitle: 'O Skip Retyping está instalado neste navegador.' },
-    ja: { open: 'Skip Retyping を開く', lifetime: 'Skip Retyping で買い切りプランを選ぶ', installedTitle: 'Skip Retyping はこのブラウザーにインストールされています。' },
-    ko: { open: 'Skip Retyping 열기', lifetime: 'Skip Retyping에서 평생 이용권 선택', installedTitle: '이 브라우저에 Skip Retyping이 설치되어 있습니다.' },
-    'zh-cn': { open: '打开 Skip Retyping', lifetime: '在 Skip Retyping 中选择终身版', installedTitle: '此浏览器已安装 Skip Retyping。' },
-    ru: { open: 'Открыть Skip Retyping', lifetime: 'Выбрать пожизненный доступ в Skip Retyping', installedTitle: 'Skip Retyping установлен в этом браузере.' },
+    de: { open: 'Skip Retyping öffnen', monthly: 'Monatsplan in Skip Retyping wählen', yearly: 'Jahresplan in Skip Retyping wählen', lifetime: 'Dauerlizenz in Skip Retyping wählen', installedTitle: 'Skip Retyping ist in diesem Browser installiert.', checkoutTitle: 'Skip Retyping ist bereits installiert.', checkoutLead: 'Nutze die kostenlose Version weiter oder wähle Pro.', checkoutNote: 'Öffne Skip Retyping über die Symbolleiste, um eine Seite auszufüllen, ein Profil anzulegen oder die Abrechnung zu verwalten.' },
+    es: { open: 'Abrir Skip Retyping', monthly: 'Elegir el plan mensual en Skip Retyping', yearly: 'Elegir el plan anual en Skip Retyping', lifetime: 'Elegir acceso de por vida en Skip Retyping', installedTitle: 'Skip Retyping está instalado en este navegador.', checkoutTitle: 'Skip Retyping ya está instalado.', checkoutLead: 'Sigue con el plan gratis o elige Pro.', checkoutNote: 'Abre Skip Retyping desde la barra de herramientas para rellenar una página, crear un perfil o gestionar la facturación.' },
+    fr: { open: 'Ouvrir Skip Retyping', monthly: 'Choisir l’offre mensuelle dans Skip Retyping', yearly: 'Choisir l’offre annuelle dans Skip Retyping', lifetime: 'Choisir l’accès à vie dans Skip Retyping', installedTitle: 'Skip Retyping est installé dans ce navigateur.', checkoutTitle: 'Skip Retyping est déjà installé.', checkoutLead: 'Continuez avec l’offre gratuite ou choisissez Pro.', checkoutNote: 'Ouvrez Skip Retyping depuis la barre d’outils pour remplir une page, créer un profil ou gérer la facturation.' },
+    'pt-br': { open: 'Abrir o Skip Retyping', monthly: 'Escolher o plano mensal no Skip Retyping', yearly: 'Escolher o plano anual no Skip Retyping', lifetime: 'Escolher acesso vitalício no Skip Retyping', installedTitle: 'O Skip Retyping está instalado neste navegador.', checkoutTitle: 'O Skip Retyping já está instalado.', checkoutLead: 'Continue no plano grátis ou escolha o Pro.', checkoutNote: 'Abra o Skip Retyping pela barra de ferramentas para preencher uma página, criar um perfil ou gerenciar a cobrança.' },
+    ja: { open: 'Skip Retyping を開く', monthly: 'Skip Retyping で月額プランを選ぶ', yearly: 'Skip Retyping で年額プランを選ぶ', lifetime: 'Skip Retyping で買い切りプランを選ぶ', installedTitle: 'Skip Retyping はこのブラウザーにインストールされています。', checkoutTitle: 'Skip Retyping はすでにインストールされています。', checkoutLead: '無料プランを使い続けるか、Pro を選べます。', checkoutNote: 'ツールバーから Skip Retyping を開き、ページの入力、プロフィール作成、請求管理を行えます。' },
+    ko: { open: 'Skip Retyping 열기', monthly: 'Skip Retyping에서 월간 요금제 선택', yearly: 'Skip Retyping에서 연간 요금제 선택', lifetime: 'Skip Retyping에서 평생 이용권 선택', installedTitle: '이 브라우저에 Skip Retyping이 설치되어 있습니다.', checkoutTitle: 'Skip Retyping이 이미 설치되어 있습니다.', checkoutLead: '무료 요금제를 계속 사용하거나 Pro를 선택하세요.', checkoutNote: '도구 모음에서 Skip Retyping을 열어 페이지를 채우고, 프로필을 만들거나 결제를 관리하세요.' },
+    'zh-cn': { open: '打开 Skip Retyping', monthly: '在 Skip Retyping 中选择月付方案', yearly: '在 Skip Retyping 中选择年付方案', lifetime: '在 Skip Retyping 中选择终身版', installedTitle: '此浏览器已安装 Skip Retyping。', checkoutTitle: 'Skip Retyping 已安装。', checkoutLead: '继续使用免费方案，或选择 Pro。', checkoutNote: '从工具栏打开 Skip Retyping，即可填写页面、创建资料或管理账单。' },
+    ru: { open: 'Открыть Skip Retyping', monthly: 'Выбрать месячный план в Skip Retyping', yearly: 'Выбрать годовой план в Skip Retyping', lifetime: 'Выбрать пожизненный доступ в Skip Retyping', installedTitle: 'Skip Retyping установлен в этом браузере.', checkoutTitle: 'Skip Retyping уже установлен.', checkoutLead: 'Оставайтесь на бесплатном плане или выберите Pro.', checkoutNote: 'Откройте Skip Retyping на панели инструментов, чтобы заполнить страницу, создать профиль или управлять оплатой.' },
   };
 
   function currentThemeCopy() {
@@ -232,7 +232,7 @@
         : paidPlan
           ? selectedPlan
           : 'free';
-      link.textContent = paidPlan ? copy[plan] || copy.yearly : copy.open;
+      link.textContent = paidPlan ? copy[plan] || copy.lifetime : copy.open;
       link.href = '/skip-retyping/docs/getting-started/';
       link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
       link.dataset.installedPlan = plan;
@@ -294,7 +294,7 @@
     if (!checkout) return;
 
     var allowedPlans = ['free', 'monthly', 'yearly', 'lifetime'];
-    var selectedPlan = 'yearly';
+    var selectedPlan = 'lifetime';
     try {
       var params = new URLSearchParams(window.location.search);
       var requested = (params.get('plan') || '').toLowerCase();
@@ -306,10 +306,10 @@
     if (checkoutAction) {
       var actionLabels = SKIP_RETYPING_STORE_LINKS.chrome
         ? {
-            free: 'Install Skip Retyping',
-            monthly: 'Install, then choose monthly',
-            yearly: 'Install, then choose yearly',
-            lifetime: 'Install, then choose lifetime',
+            free: 'Add to Chrome - free',
+            monthly: 'Install, then choose Monthly',
+            yearly: 'Install, then choose Yearly',
+            lifetime: 'Install, then choose Lifetime',
           }
         : {
             free: 'Check Chrome availability',
@@ -317,7 +317,7 @@
             yearly: 'Check Chrome availability',
             lifetime: 'Check Chrome availability',
           };
-      checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.yearly;
+      checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.lifetime;
     }
     document.querySelectorAll('[data-checkout-plan]').forEach(function (card) {
       var matches =
