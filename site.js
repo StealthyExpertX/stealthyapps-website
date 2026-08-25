@@ -351,7 +351,7 @@
     video.src = '/assets/skip-retyping-demo.mp4';
     video.setAttribute(
       'aria-label',
-      'Skip Retyping filling a vendor onboarding form from a saved work profile',
+      'Skip Retyping filling a job application from a saved work profile',
     );
 
     function setPlaybackState(isPlaying) {

@@ -387,6 +387,7 @@ function checkProductHero() {
     [html, 'data-skip-retyping-demo-poster', 'Skip Retyping page should load the stable demo poster'],
     [html, 'class="demo-play-button"', 'Skip Retyping demo should have a clear pause/play control'],
     [siteScript, "video.src = '/assets/skip-retyping-demo.mp4'", 'demo should upgrade to the compact local MP4'],
+    [siteScript, "'Skip Retyping filling a job application from a saved work profile'", 'playing demo should keep the job-application accessibility label'],
     [css, 'scrollbar-width: none', 'demo shell should hide internal browser chrome scrollbars'],
     [css, 'prefers-reduced-motion: reduce', 'motion should respect reduced-motion preferences'],
     [sw, '/assets/skip-retyping-demo-poster.png', 'service worker should cache the stable demo poster'],
