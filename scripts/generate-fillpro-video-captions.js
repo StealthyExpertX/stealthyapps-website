@@ -9,9 +9,9 @@ const cues = {
   cs: ['Prázdný formulář. Jeden uložený profil.', 'Vyplňte opakované údaje a nahrajte životopis jedním kliknutím.', 'Výsledek zkontrolujte. V případě potřeby změny vraťte. Formulář odesíláte vy.', 'Podporuje nabídky, zaškrtávací políčka i pole, která se objeví později.', 'Začněte zdarma se 3 profily. Bez účtu.'],
   de: ['Ein leeres Formular. Ein gespeichertes Profil.', 'Wiederkehrende Angaben und Lebenslauf-Uploads mit einem Klick ausfüllen.', 'Ergebnis prüfen und bei Bedarf rückgängig machen. Sie senden das Formular ab.', 'Auch für Dropdowns, Kontrollkästchen und später eingeblendete Felder.', 'Kostenlos mit 3 Profilen starten. Kein Konto nötig.'],
   el: ['Μια κενή φόρμα. Ένα αποθηκευμένο προφίλ.', 'Συμπληρώστε επαναλαμβανόμενα στοιχεία και ανεβάστε βιογραφικό με ένα κλικ.', 'Ελέγξτε το αποτέλεσμα και αναιρέστε αν χρειάζεται. Εσείς υποβάλλετε τη φόρμα.', 'Υποστηρίζει λίστες, πλαίσια ελέγχου και πεδία που εμφανίζονται αργότερα.', 'Ξεκινήστε δωρεάν με 3 προφίλ. Χωρίς λογαριασμό.'],
-  en: ['A blank form. One saved profile.', 'Fill repeated details and attach your resume with one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
-  en_GB: ['A blank form. One saved profile.', 'Fill repeated details and attach your CV with one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
-  en_US: ['A blank form. One saved profile.', 'Fill repeated details and attach your resume with one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
+  en: ['A blank form. One saved profile.', 'Fill repeat details and add your saved resume in one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
+  en_GB: ['A blank form. One saved profile.', 'Fill repeat details and add your saved CV in one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
+  en_US: ['A blank form. One saved profile.', 'Fill repeat details and add your saved resume in one click.', 'Check the result. Undo any change. You decide when to submit.', 'Works with dropdowns, checkboxes, and fields that appear later.', 'Start free with three profiles. No account required.'],
   es: ['Un formulario vacío. Un perfil guardado.', 'Completa datos repetidos y carga tu currículum con un clic.', 'Revisa el resultado. Deshaz los cambios si hace falta. Tú envías el formulario.', 'Incluye listas, casillas y campos que aparecen más tarde.', 'Empieza gratis con 3 perfiles. Sin cuenta.'],
   es_419: ['Un formulario vacío. Un perfil guardado.', 'Completa datos repetidos y carga tu currículum con un clic.', 'Revisa el resultado. Deshaz los cambios si hace falta. Tú envías el formulario.', 'Incluye listas, casillas y campos que aparecen después.', 'Empieza gratis con 3 perfiles. No necesitas una cuenta.'],
   fr: ['Un formulaire vide. Un profil enregistré.', 'Remplissez les informations répétitives et ajoutez votre CV en un clic.', 'Vérifiez le résultat. Annulez si nécessaire. Vous envoyez le formulaire.', 'Listes, cases à cocher et champs tardifs sont pris en charge.', 'Commencez gratuitement avec 3 profils. Aucun compte requis.'],
@@ -48,7 +48,7 @@ for (const [locale, lines] of Object.entries(cues)) {
   }
   const body = lines.map((line, index) => `${times[index][0]} --> ${times[index][1]}\n${line}`).join('\n\n');
   const localeDir = path.join(OUTPUT, locale);
-  const outputPath = path.join(localeDir, 'fillpro-store-demo-22s.vtt');
+  const outputPath = path.join(localeDir, 'fillahead-store-demo-22s.vtt');
   const expected = `WEBVTT\n\n${body}\n`;
   if (CHECK_ONLY) {
     if (!fs.existsSync(outputPath) || fs.readFileSync(outputPath, 'utf8') !== expected) {
@@ -69,8 +69,8 @@ if (CHECK_ONLY) {
   if (staleFiles.length) {
     throw new Error(`Localized video captions are stale:\n- ${staleFiles.join('\n- ')}\nRun npm run generate:captions.`);
   }
-  console.log(`Verified ${Object.keys(cues).length} localized FillPro caption tracks.`);
+  console.log(`Verified ${Object.keys(cues).length} localized FillAhead caption tracks.`);
 } else {
   fs.writeFileSync(manifestPath, expectedManifest, 'utf8');
-  console.log(`Generated ${Object.keys(cues).length} localized FillPro caption tracks.`);
+  console.log(`Generated ${Object.keys(cues).length} localized FillAhead caption tracks.`);
 }

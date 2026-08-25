@@ -1,65 +1,66 @@
-# FillPro
+# FillAhead
 
-FillPro is a private browser form autofill extension for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
+FillAhead is a private browser form autofill extension for job applications, signup forms, intake pages, demo requests, onboarding, support forms, vendor forms, and repeated business workflows.
 
-Website and canonical product page: https://stealthyapps.com/fillpro/
-Privacy: https://stealthyapps.com/fillpro/privacy/
+Website and canonical product page: https://stealthyapps.com/fillahead/
+Privacy: https://stealthyapps.com/fillahead/privacy/
 Support: https://stealthyapps.com/support/
-Setup guide: https://stealthyapps.com/fillpro/docs/getting-started/
+Setup guide: https://stealthyapps.com/fillahead/docs/getting-started/
 Contact: https://stealthyapps.com/contact/
-Last updated: 2026-07-15
+Last updated: 2026-08-25
 
 ## Product Facts
 
-- Product name: FillPro
+- Product name: FillAhead
 - Brand: Stealthy Apps
 - Category: browser extension, browser autofill, productivity
 - Free tier: three saved profiles
-- Pro pricing: $3.99/month, $29.99/year, or $39.99 lifetime
-- Trial: 3 days, no card required
+- Pro pricing: $3.99/month or $29.99/year
 - Pro license and plan status: ExtensionPay
 - Checkout and payment processing: Stripe
 
 ## Product Description
 
-FillPro fills repeated web forms from profiles saved in FillPro's browser storage. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
+FillAhead fills repeated web forms from profiles saved in your browser. It is useful when the same details need to move across job applications, intake forms, signup flows, demo requests, vendor forms, onboarding, internal admin forms, and profile pages.
 
 ## What It Handles
 
-FillPro supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, import/export for Pro users, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
+FillAhead supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, free profile export plus Pro backup imports, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
 
 ## Privacy Boundary
 
-FillPro does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in FillPro's browser storage unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillPro is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+FillAhead does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in your browser unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. FillAhead is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
 
 ## Useful Routes
 
-- Product: https://stealthyapps.com/fillpro/
-- Pricing: https://stealthyapps.com/fillpro/#pricing
-- Checkout handoff: https://stealthyapps.com/fillpro/checkout/
-- Comparison: https://stealthyapps.com/fillpro/#compare
-- Job application autofill: https://stealthyapps.com/fillpro/job-application-autofill/
-- Resume upload autofill: https://stealthyapps.com/fillpro/resume-upload-autofill/
-- Local form autofill: https://stealthyapps.com/fillpro/local-form-autofill/
-- Browser autofill comparison: https://stealthyapps.com/fillpro/browser-autofill-vs-fillpro/
-- Privacy: https://stealthyapps.com/fillpro/privacy/
+- Product: https://stealthyapps.com/fillahead/
+- Pricing: https://stealthyapps.com/fillahead/#pricing
+- Checkout handoff: https://stealthyapps.com/fillahead/checkout/
+- Comparison: https://stealthyapps.com/fillahead/#compare
+- Job application autofill: https://stealthyapps.com/fillahead/job-application-autofill/
+- Resume upload autofill: https://stealthyapps.com/fillahead/resume-upload-autofill/
+- Local form autofill: https://stealthyapps.com/fillahead/local-form-autofill/
+- Browser autofill comparison: https://stealthyapps.com/fillahead/browser-autofill-vs-fillahead/
+- Privacy: https://stealthyapps.com/fillahead/privacy/
+- Terms of sale: https://stealthyapps.com/fillahead/terms/
+- Refunds and cancellation: https://stealthyapps.com/fillahead/refunds/
 - Support: https://stealthyapps.com/support/
-- Smart Rules guide: https://stealthyapps.com/fillpro/docs/smart-rules/
+- Smart Rules guide: https://stealthyapps.com/fillahead/docs/smart-rules/
 - Contact: https://stealthyapps.com/contact/
-- Markdown product brief: https://stealthyapps.com/fillpro/index.md
+- Markdown product brief: https://stealthyapps.com/fillahead/index.md
 - Expanded product reference: https://stealthyapps.com/llms-full.txt
 
 ## Regional Product Pages
 
-- German: https://stealthyapps.com/fillpro/de/
-- Spanish: https://stealthyapps.com/fillpro/es/
-- French: https://stealthyapps.com/fillpro/fr/
-- Brazilian Portuguese: https://stealthyapps.com/fillpro/pt-br/
-- Japanese: https://stealthyapps.com/fillpro/ja/
-- Korean: https://stealthyapps.com/fillpro/ko/
-- Simplified Chinese: https://stealthyapps.com/fillpro/zh-cn/
-- Russian: https://stealthyapps.com/fillpro/ru/
+- German: https://stealthyapps.com/fillahead/de/
+- Spanish: https://stealthyapps.com/fillahead/es/
+- French: https://stealthyapps.com/fillahead/fr/
+- Brazilian Portuguese: https://stealthyapps.com/fillahead/pt-br/
+- Japanese: https://stealthyapps.com/fillahead/ja/
+- Korean: https://stealthyapps.com/fillahead/ko/
+- Simplified Chinese: https://stealthyapps.com/fillahead/zh-cn/
+- Russian: https://stealthyapps.com/fillahead/ru/
 
-## Where FillPro Fits
+## Where FillAhead Fits
 
-FillPro is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a useful free tier, and review-before-submit control. Browser autofill and password managers remain the better place for sign-ins and payment details; text expanders remain better for snippets and canned replies.
+FillAhead is strongest when the user wants saved profiles, modern web form support, file upload matching, custom rules, a useful free tier, and review-before-submit control. Browser autofill and password managers remain the better place for sign-ins and payment details; text expanders remain better for snippets and canned replies.

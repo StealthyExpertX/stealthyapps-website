@@ -105,19 +105,31 @@ async function contactSheet(items, output, options = {}) {
     .toFile(output);
 }
 
+async function writeReviewCopy(input, output, width = 1200) {
+  await sharp(input)
+    .resize({ width, withoutEnlargement: true })
+    .jpeg({ quality: 84, mozjpeg: true })
+    .toFile(output);
+}
+
 async function renderMarketingSheet() {
   const items = [
-    ['Screenshot 1', 'Main promise', marketplace('fillpro-screenshot-fill-page-1280x800.png')],
-    ['Screenshot 2', 'Modern controls', marketplace('fillpro-screenshot-modern-forms-1280x800.png')],
-    ['Screenshot 3', 'Capture a filled page', marketplace('fillpro-screenshot-profiles-1280x800.png')],
-    ['Screenshot 4', 'Privacy proof', marketplace('fillpro-screenshot-privacy-1280x800.png')],
-    ['Screenshot 5', 'Undo and recovery', marketplace('fillpro-screenshot-undo-1280x800.png')],
-    ['Small promo', 'Chrome compact tile', marketplace('fillpro-small-promo-440x280.png')],
-    ['Marquee', 'Large feature tile', marketplace('fillpro-marquee-1400x560.png')],
-    ['Video thumbnail', 'Poster frame', marketplace('fillpro-store-demo-22s-thumb.png')],
+    ['Screenshot 1', 'Main promise', marketplace('fillahead-screenshot-fill-page-1280x800.png')],
+    ['Screenshot 2', 'Modern controls', marketplace('fillahead-screenshot-modern-forms-1280x800.png')],
+    ['Screenshot 3', 'Capture a filled page', marketplace('fillahead-screenshot-profiles-1280x800.png')],
+    ['Screenshot 4', 'Privacy proof', marketplace('fillahead-screenshot-privacy-1280x800.png')],
+    ['Screenshot 5', 'Undo and recovery', marketplace('fillahead-screenshot-undo-1280x800.png')],
+    ['Small promo', 'Chrome compact tile', marketplace('fillahead-small-promo-440x280.png')],
+    ['Marquee', 'Large feature tile', marketplace('fillahead-marquee-1400x560.png')],
+    ['Video thumbnail', 'Poster frame', marketplace('fillahead-store-demo-22s-thumb.png')],
   ].map(([title, subtitle, file]) => ({ title, subtitle, file }));
 
-  await contactSheet(items, path.join(OUT_DIR, 'marketing-contact-sheet-current.png'));
+  const output = path.join(OUT_DIR, 'marketing-contact-sheet-current.png');
+  await contactSheet(items, output);
+  await writeReviewCopy(
+    output,
+    path.join(OUT_DIR, 'marketing-contact-sheet-current-review.jpg'),
+  );
 }
 
 async function renderIconSheet() {
@@ -126,15 +138,17 @@ async function renderIconSheet() {
     { title: '32px', subtitle: 'Toolbar optical mark', file: extensionIcon('icon32.png'), pixelated: true },
     { title: '48px', subtitle: 'Extension manager', file: extensionIcon('icon48.png'), pixelated: true },
     { title: '128px', subtitle: 'Store icon', file: extensionIcon('icon128.png') },
-    { title: '512px', subtitle: 'Master preview', file: asset('fillpro-logo.png') },
+    { title: '512px', subtitle: 'Master preview', file: asset('fillahead-logo.png') },
   ];
 
-  await contactSheet(items, path.join(OUT_DIR, 'icon-scale-sheet-current.png'), {
+  const output = path.join(OUT_DIR, 'icon-scale-sheet-current.png');
+  await contactSheet(items, output, {
     columns: 5,
     tileWidth: 210,
     tileHeight: 250,
     gap: 18,
   });
+  await writeReviewCopy(output, path.join(OUT_DIR, 'icon-scale-sheet-current-review.jpg'));
 }
 
 async function renderLocalizedSheet() {
@@ -151,14 +165,15 @@ async function renderLocalizedSheet() {
       title: `${locale} · ${label}`,
       subtitle: `Localized store screenshot ${screenshots.findIndex(([value]) => value === slug) + 1}`,
       file: marketplace(
-        path.join('localized', locale, `fillpro-screenshot-${slug}-1280x800.png`),
+        path.join('localized', locale, `fillahead-screenshot-${slug}-1280x800.png`),
       ),
     })),
   );
 
+  const output = path.join(OUT_DIR, 'localized-contact-sheet-current.png');
   await contactSheet(
     items,
-    path.join(OUT_DIR, 'localized-contact-sheet-current.png'),
+    output,
     {
       columns: 5,
       tileWidth: 300,
@@ -166,6 +181,11 @@ async function renderLocalizedSheet() {
       gap: 12,
       padding: 18,
     },
+  );
+  await writeReviewCopy(
+    output,
+    path.join(OUT_DIR, 'localized-contact-sheet-current-review.jpg'),
+    1500,
   );
 }
 
@@ -180,7 +200,7 @@ async function extractVideoFrames() {
         '-ss',
         String(time),
         '-i',
-        marketplace('fillpro-store-demo-22s.mp4'),
+        marketplace('fillahead-store-demo-22s.mp4'),
         '-frames:v',
         '1',
         '-vf',
@@ -204,11 +224,13 @@ async function renderVideoSheet() {
       file: path.join(FRAME_DIR, file),
     }));
 
-  await contactSheet(files, path.join(OUT_DIR, 'video-contact-sheet-current.png'), {
+  const output = path.join(OUT_DIR, 'video-contact-sheet-current.png');
+  await contactSheet(files, output, {
     columns: 2,
     tileWidth: 560,
     tileHeight: 400,
   });
+  await writeReviewCopy(output, path.join(OUT_DIR, 'video-contact-sheet-current-review.jpg'));
 }
 
 (async () => {
@@ -217,7 +239,7 @@ async function renderVideoSheet() {
   await renderIconSheet();
   await renderLocalizedSheet();
   await renderVideoSheet();
-  console.log(`FillPro review sheets written to ${OUT_DIR}`);
+  console.log(`FillAhead review sheets written to ${OUT_DIR}`);
 })().catch((error) => {
   console.error(error);
   process.exit(1);

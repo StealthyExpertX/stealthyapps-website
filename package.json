@@ -8,18 +8,17 @@
     "submit:indexnow": "node scripts/submit-indexnow.js",
     "baseline:marketing": "node scripts/audit-fillpro-visual-baselines.js --write",
     "review:marketing": "node scripts/render-fillpro-review-sheets.js",
-    "test": "node scripts/generate-fillpro-locales.js --check && node scripts/generate-fillpro-video-captions.js --check && node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js && node scripts/audit-fillpro-release-experience.js && node scripts/audit-fillpro-clean-browser.js",
+    "test": "node scripts/generate-fillpro-locales.js --check && node scripts/generate-fillpro-video-captions.js --check && node scripts/audit-fillpro-css-usage.js && node scripts/audit-fillpro-site.js && node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js && node scripts/audit-fillpro-release-experience.js && node scripts/audit-fillpro-performance.js && node scripts/audit-fillpro-clean-browser.js && node scripts/audit-fillpro-resilience.js",
     "test:experience": "node scripts/audit-fillpro-release-experience.js",
     "test:marketing": "node scripts/audit-fillpro-marketing-assets.js && node scripts/audit-fillpro-visual-baselines.js",
     "test:site": "node scripts/audit-fillpro-site.js",
-    "test:clean-browser": "node scripts/audit-fillpro-clean-browser.js",
-    "test:live-browser": "node scripts/audit-fillpro-clean-browser.js"
+    "test:clean-browser": "node scripts/audit-fillpro-clean-browser.js && node scripts/audit-fillpro-resilience.js",
+    "test:css": "node scripts/audit-fillpro-css-usage.js",
+    "test:live-browser": "node scripts/audit-fillpro-clean-browser.js",
+    "test:performance": "node scripts/audit-fillpro-performance.js"
   },
   "devDependencies": {
     "playwright": "^1.59.1",
-    "sharp": "^0.34.5"
-  },
-  "dependencies": {
-    "three": "0.185.1"
+    "sharp": "^0.35.3"
   }
 }

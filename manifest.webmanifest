@@ -1,8 +1,8 @@
 {
-  "name": "FillPro - Private form autofill",
-  "short_name": "FillPro",
+  "name": "FillAhead - Private form autofill",
+  "short_name": "FillAhead",
   "description": "Private browser form autofill for job applications, signup forms, onboarding pages, and repeated business forms.",
-  "start_url": "/fillpro/?source=pwa",
+  "start_url": "/fillahead/?source=pwa",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",
@@ -13,19 +13,19 @@
   "categories": ["productivity", "utilities"],
   "icons": [
     {
-      "src": "/assets/fillpro-logo.png",
+      "src": "/assets/fillahead-logo.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/fillpro-logo.png",
+      "src": "/assets/fillahead-logo.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/assets/fillpro-logo.svg",
+      "src": "/assets/fillahead-logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -33,34 +33,34 @@
   ],
   "shortcuts": [
     {
-      "name": "Open FillPro",
-      "short_name": "FillPro",
+      "name": "Open FillAhead",
+      "short_name": "FillAhead",
       "description": "Private form autofill for repeated web forms.",
-      "url": "/fillpro/?source=pwa",
+      "url": "/fillahead/?source=pwa",
       "icons": [
         {
-          "src": "/assets/fillpro-logo.svg",
+          "src": "/assets/fillahead-logo.svg",
           "sizes": "any",
           "type": "image/svg+xml"
         }
       ]
     },
     {
-      "name": "Download FillPro",
+      "name": "Download FillAhead",
       "short_name": "Download",
-      "description": "Choose the Chrome, Edge, or Firefox download page for FillPro.",
-      "url": "/fillpro/download/?source=pwa"
+      "description": "Choose the Chrome, Edge, or Firefox download page for FillAhead.",
+      "url": "/fillahead/download/?source=pwa"
     },
     {
       "name": "Support",
       "short_name": "Support",
-      "description": "Get FillPro setup, compatibility, billing, and privacy help.",
+      "description": "Get FillAhead setup, compatibility, billing, and privacy help.",
       "url": "/support/?source=pwa"
     },
     {
       "name": "Contact",
       "short_name": "Contact",
-      "description": "Send a FillPro question or bug report.",
+      "description": "Send a FillAhead question or bug report.",
       "url": "/contact/?source=pwa"
     }
   ]

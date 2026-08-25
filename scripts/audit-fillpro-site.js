@@ -8,26 +8,26 @@ const INDEXNOW_KEY = '6a8bacc93dd54d8d2e9d685deb98159a40be6fa6023b7f5d';
 const PUBLIC_NAV = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const FOOTER_LINKS = ['Product', 'Download', 'Pricing', 'Privacy', 'Support', 'Contact'];
 const LOCALIZED_PAGES = {
-  'fillpro/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
-  'fillpro/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
-  'fillpro/fr/index.html': { lang: 'fr', hreflang: 'fr', phrase: 'Remplissage automatique de formulaires' },
-  'fillpro/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
-  'fillpro/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
-  'fillpro/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
-  'fillpro/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填充' },
-  'fillpro/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
+  'fillahead/de/index.html': { lang: 'de', hreflang: 'de', phrase: 'Formulare automatisch ausfüllen' },
+  'fillahead/es/index.html': { lang: 'es', hreflang: 'es', phrase: 'Autocompletar formularios' },
+  'fillahead/fr/index.html': { lang: 'fr', hreflang: 'fr', phrase: 'Remplissage automatique de formulaires' },
+  'fillahead/pt-br/index.html': { lang: 'pt-BR', hreflang: 'pt-BR', phrase: 'Preencher formulários automaticamente' },
+  'fillahead/ja/index.html': { lang: 'ja', hreflang: 'ja', phrase: 'フォーム自動入力' },
+  'fillahead/ko/index.html': { lang: 'ko', hreflang: 'ko', phrase: '양식 자동완성' },
+  'fillahead/zh-cn/index.html': { lang: 'zh-CN', hreflang: 'zh-CN', phrase: '表单自动填充' },
+  'fillahead/ru/index.html': { lang: 'ru', hreflang: 'ru', phrase: 'Автозаполнение форм' },
 };
 const HREFLANG_URLS = {
-  en: 'https://stealthyapps.com/fillpro/',
-  de: 'https://stealthyapps.com/fillpro/de/',
-  es: 'https://stealthyapps.com/fillpro/es/',
-  fr: 'https://stealthyapps.com/fillpro/fr/',
-  'pt-BR': 'https://stealthyapps.com/fillpro/pt-br/',
-  ja: 'https://stealthyapps.com/fillpro/ja/',
-  ko: 'https://stealthyapps.com/fillpro/ko/',
-  'zh-CN': 'https://stealthyapps.com/fillpro/zh-cn/',
-  ru: 'https://stealthyapps.com/fillpro/ru/',
-  'x-default': 'https://stealthyapps.com/fillpro/',
+  en: 'https://stealthyapps.com/fillahead/',
+  de: 'https://stealthyapps.com/fillahead/de/',
+  es: 'https://stealthyapps.com/fillahead/es/',
+  fr: 'https://stealthyapps.com/fillahead/fr/',
+  'pt-BR': 'https://stealthyapps.com/fillahead/pt-br/',
+  ja: 'https://stealthyapps.com/fillahead/ja/',
+  ko: 'https://stealthyapps.com/fillahead/ko/',
+  'zh-CN': 'https://stealthyapps.com/fillahead/zh-cn/',
+  ru: 'https://stealthyapps.com/fillahead/ru/',
+  'x-default': 'https://stealthyapps.com/fillahead/',
 };
 const STALE_COPY = [
   'Local profiles',
@@ -45,15 +45,15 @@ const STALE_COPY = [
   'Direct answers before install',
   '>Demo<',
   'See it fill a form',
-  'profiles stay in FillPro',
-  'Profiles stay in FillPro',
+  'profiles stay in FillAhead',
+  'Profiles stay in FillAhead',
   'No surprise submit',
   'Advanced repeat-use workflows',
-  'FillPro is installed. Choose Pro when you need it.',
+  'FillAhead is installed. Choose Pro when you need it.',
   'Powerful, but fussy.',
   'Smart Rules, without the guesswork.',
-  '/apps/fillpro/',
-  '/apps/fillpro/privacy',
+  '/apps/fillahead/',
+  '/apps/fillahead/privacy',
 ];
 
 const failures = [];
@@ -143,13 +143,23 @@ function checkFooter(file, html) {
   if (!/class=["'][^"']*footer-links/.test(footer)) fail(`${rel(file)}: footer missing footer-links`);
   const fileRel = rel(file);
   if (LOCALIZED_PAGES[fileRel]) {
-    for (const key of ['product', 'download', 'pricing', 'privacy', 'support', 'contact']) {
+    for (const key of ['product', 'download', 'pricing', 'privacy', 'terms', 'refunds', 'support', 'contact']) {
       if (!new RegExp(`data-nav-key=["']${key}["']`).test(footer)) fail(`${fileRel}: localized footer missing ${key}`);
     }
   } else {
     for (const label of FOOTER_LINKS) {
       if (!new RegExp(`>${label}<`).test(footer)) fail(`${fileRel}: footer missing ${label}`);
     }
+  }
+  const needsCommerceLinks =
+    fileRel.startsWith('fillahead/') ||
+    fileRel.startsWith('support/') ||
+    fileRel.startsWith('contact/') ||
+    fileRel === '404.html' ||
+    fileRel === 'sitemap.html';
+  if (needsCommerceLinks) {
+    if (!/href=["']\/fillahead\/terms\/["']/.test(footer)) fail(`${fileRel}: footer missing Terms`);
+    if (!/href=["']\/fillahead\/refunds\/["']/.test(footer)) fail(`${fileRel}: footer missing Refunds`);
   }
   if (/href=["']\/sitemap\.html["'][^>]*>Sitemap</i.test(footer)) {
     fail(`${rel(file)}: footer should not expose sitemap link`);
@@ -167,11 +177,13 @@ function checkNav(file, html) {
     isLocalizedPage ||
     fileRel.startsWith('contact/') ||
     fileRel.startsWith('support/') ||
-    fileRel.startsWith('fillpro/privacy/') ||
+    fileRel.startsWith('fillahead/privacy/') ||
+    fileRel.startsWith('fillahead/terms/') ||
+    fileRel.startsWith('fillahead/refunds/') ||
     fileRel.includes('/job-application-autofill/') ||
     fileRel.includes('/resume-upload-autofill/') ||
     fileRel.includes('/local-form-autofill/') ||
-    fileRel.includes('/browser-autofill-vs-fillpro/') ||
+    fileRel.includes('/browser-autofill-vs-fillahead/') ||
     fileRel === '404.html' ||
     fileRel === 'sitemap.html';
   if (!isPublicUtilityPage) return;
@@ -218,21 +230,19 @@ function checkStyles() {
     [':focus-visible', 'focus-visible styles'],
     ['prefers-reduced-motion', 'reduced-motion support'],
     ['data-theme="dark"', 'manual dark theme selectors'],
-    ['--pointer-x', 'interactive background variables'],
-    ['.site-pointer-glow', 'unclipped page-wide pointer glow layer'],
     ['.theme-toggle', 'manual theme toggle styles'],
     ['.theme-toggle[data-theme="system"]', 'system theme monitor icon'],
     ['.theme-toggle[data-theme="light"]', 'light theme sun icon'],
     ['.theme-toggle[data-theme="dark"]', 'dark theme moon icon'],
     [':root[data-theme="dark"] .step-list li::before', 'dark step-list badge override'],
-    ['launchCtaShine 7.2s', 'premium CTA shine timing'],
     ['.demo-signal', 'hero product-signal overlay'],
-    ['demoSignalSweep 7.2s', 'hero signal motion timing'],
     ['min-height: 46px', 'standard button tap target'],
     ['min-height: 52px', 'landing button tap target'],
     ['min-height: 34px', 'footer link tap target'],
     ['clip-path: inset(50%)', 'non-overflow honeypot hiding'],
     ['.launch-footer', 'landing footer rules'],
+    ['.launch-links a[href^="/contact/"]', 'compact mobile navigation contact rule'],
+    ['.launch-links .theme-toggle', 'mobile theme toggle placement'],
     ['.checkout-grid', 'checkout plan grid'],
     ['.language-picker', 'localized language picker styles'],
     ['.locale-price-grid', 'localized pricing layout'],
@@ -243,8 +253,8 @@ function checkStyles() {
     ['.browser-mark-firefox', 'Firefox browser badge styles'],
     ['--browser-surface', 'matched browser badge surface token'],
     ['--launch-icon-bg', 'launch feature icon surface token'],
-    ['body.fillpro-launch .browser-mark-chrome', 'dark launch browser badge override'],
-    ['body.fillpro-launch .launch-card-icon', 'dark launch card icon override'],
+    ['body.fillahead-launch .browser-mark-chrome', 'dark launch browser badge override'],
+    ['body.fillahead-launch .launch-card-icon', 'dark launch card icon override'],
     ['.launch-review-rail', 'review-before-submit product proof section'],
     ['.review-frame-actions button', 'review rail action affordances'],
     ['scroll-padding-top: 104px', 'desktop sticky-header anchor offset'],
@@ -253,12 +263,8 @@ function checkStyles() {
   for (const [needle, label] of required) {
     if (!css.includes(needle)) fail(`styles.css: missing ${label}`);
   }
-  const pointerUses = [...css.matchAll(/var\(--pointer-(?:x|y)\)/g)];
-  if (pointerUses.length !== 6) {
-    fail(`styles.css: pointer coordinates must be limited to the three page-wide glow gradients (found ${pointerUses.length} uses)`);
-  }
-  if (!/\.site-pointer-glow\s*\{[\s\S]*?position:\s*fixed;[\s\S]*?var\(--pointer-x\)[\s\S]*?var\(--pointer-y\)/.test(css)) {
-    fail('styles.css: page-wide pointer glow must stay fixed to the viewport');
+  for (const forbidden of ['.site-pointer-glow', '--pointer-x', '--pointer-y', 'pointer-glow-active', '.reveal-ready', '.reveal-item', 'launchCtaShine', 'demoSignalSweep', 'demoSignalLift', 'radial-gradient(']) {
+    if (css.includes(forbidden)) fail(`styles.css: obsolete motion effect returned: ${forbidden}`);
   }
   if (!/\.demo-shell\s*\{[\s\S]*?scrollbar-width:\s*none;/.test(css) || !css.includes('.demo-shell::-webkit-scrollbar')) {
     fail('styles.css: hero demo shell must hide its internal scrollbar without hiding page scroll');
@@ -273,64 +279,80 @@ function checkSiteScript() {
   const contactJs = fs.readFileSync(path.join(ROOT, 'contact.js'), 'utf8');
   checked.accessibility += 1;
   const required = [
-    ['fillpro-theme', 'theme localStorage key'],
+    ['fillahead-theme', 'theme localStorage key'],
     ['data-theme-resolved', 'resolved theme marker'],
     ['dataset.resolvedTheme', 'resolved theme toggle marker'],
     ['installThemeToggle', 'theme toggle installer'],
     ['Current theme:', 'explicit theme toggle accessible label'],
     ['Switch to', 'theme toggle next action label'],
-    ['setupInteractiveBackdrop', 'interactive background setup'],
-    ['site-pointer-glow', 'shared pointer glow node'],
     ['setupCheckoutPlanState', 'checkout plan query support'],
     ['prefers-reduced-motion: reduce', 'reduced-motion guard in JS'],
-    ['.browser-download-card', 'browser card reveal coverage'],
-    ['.privacy-snapshot', 'privacy snapshot reveal coverage'],
-    ['.preview-card', 'shared preview reveal coverage'],
+    ['link.hidden = true', 'pending store cards stay non-actionable'],
+    ['link.hidden = false', 'approved store cards become available'],
   ];
   for (const [needle, label] of required) {
     if (!js.includes(needle)) fail(`site.js: missing ${label}`);
   }
+  const forbiddenRuntimeSinks = [
+    [/\.innerHTML\s*=/, 'innerHTML assignment'],
+    [/insertAdjacentHTML\s*\(/, 'insertAdjacentHTML call'],
+    [/document\.write\s*\(/, 'document.write call'],
+    [/\beval\s*\(/, 'eval call'],
+    [/\bnew\s+Function\s*\(/, 'Function constructor'],
+    [/\bset(?:Timeout|Interval)\s*\(\s*["'`]/, 'string timer'],
+  ];
+  for (const [source, label] of [[js, 'site.js'], [contactJs, 'contact.js']]) {
+    for (const [pattern, sink] of forbiddenRuntimeSinks) {
+      if (pattern.test(source)) fail(`${label}: public runtime must not use ${sink}`);
+    }
+  }
+  for (const forbidden of ['setupInteractiveBackdrop', 'site-pointer-glow', 'pointer-glow-active', 'setupScrollReveals', 'reveal-ready', 'reveal-item']) {
+    if (js.includes(forbidden)) fail(`site.js: obsolete motion effect returned: ${forbidden}`);
+  }
   if (!contactJs.includes('`${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`')) {
-    fail('contact.js: FillPro/product email subject suffix is missing');
+    fail('contact.js: FillAhead/product email subject suffix is missing');
   }
 
-  const home = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const home = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
   const checkout = fs.readFileSync(
-    path.join(ROOT, 'fillpro', 'checkout', 'index.html'),
+    path.join(ROOT, 'fillahead', 'checkout', 'index.html'),
     'utf8',
   );
   const download = fs.readFileSync(
-    path.join(ROOT, 'fillpro', 'download', 'index.html'),
+    path.join(ROOT, 'fillahead', 'download', 'index.html'),
     'utf8',
   );
   const chrome = fs.readFileSync(
-    path.join(ROOT, 'fillpro', 'download', 'chrome', 'index.html'),
+    path.join(ROOT, 'fillahead', 'download', 'chrome', 'index.html'),
     'utf8',
   );
   const edge = fs.readFileSync(
-    path.join(ROOT, 'fillpro', 'download', 'edge', 'index.html'),
+    path.join(ROOT, 'fillahead', 'download', 'edge', 'index.html'),
     'utf8',
   );
   const firefox = fs.readFileSync(
-    path.join(ROOT, 'fillpro', 'download', 'firefox', 'index.html'),
+    path.join(ROOT, 'fillahead', 'download', 'firefox', 'index.html'),
     'utf8',
   );
-  for (const [source, label] of [
-    [home, 'fillpro/index.html'],
-    [checkout, 'fillpro/checkout/index.html'],
-    [download, 'fillpro/download/index.html'],
+  for (const [source, label, note] of [
+    [home, 'fillahead/index.html', 'Edge and Firefox coming soon.'],
+    [checkout, 'fillahead/checkout/index.html', 'Edge and Firefox coming soon.'],
+    [download, 'fillahead/download/index.html', 'Chrome, Edge, and Firefox coming soon.'],
   ]) {
-    if (!source.includes('Edge and Firefox coming soon.')) {
+    if (!source.includes(note)) {
       fail(`${label}: unreleased browsers need one concise availability note`);
     }
-    if (/href="\/fillpro\/download\/(?:edge|firefox)\//i.test(source)) {
+    if (!/data-fillahead-store="chrome" hidden/.test(source)) {
+      fail(label + ': pending Chrome card must stay hidden until a real store URL exists');
+    }
+    if (/href="\/fillahead\/download\/(?:edge|firefox)\//i.test(source)) {
       fail(`${label}: unreleased browser status must not look actionable`);
     }
   }
   for (const [source, label, browser] of [
-    [chrome, 'fillpro/download/chrome/index.html', 'Chrome'],
-    [edge, 'fillpro/download/edge/index.html', 'Microsoft Edge'],
-    [firefox, 'fillpro/download/firefox/index.html', 'Firefox'],
+    [chrome, 'fillahead/download/chrome/index.html', 'Chrome'],
+    [edge, 'fillahead/download/edge/index.html', 'Microsoft Edge'],
+    [firefox, 'fillahead/download/firefox/index.html', 'Firefox'],
   ]) {
     if (!/<meta name="robots" content="noindex, follow">/.test(source)) {
       fail(`${label}: unreleased ${browser} page must stay out of search indexes`);
@@ -339,93 +361,51 @@ function checkSiteScript() {
     if (comingSoonCount !== 1) {
       fail(`${label}: unreleased ${browser} page must show exactly one visible Coming soon message`);
     }
-    if (/reason=(?:chrome|edge|firefox)_store_link|data-fillpro-store=|class="launch-button/i.test(source)) {
+    if (/reason=(?:chrome|edge|firefox)_store_link|data-fillahead-store=|class="launch-button/i.test(source)) {
       fail(`${label}: unreleased ${browser} page must not present a fake store action`);
     }
   }
 
   const sitemapXml = fs.readFileSync(path.join(ROOT, 'sitemap.xml'), 'utf8');
-  if (/fillpro\/download\/(?:edge|firefox)\//.test(sitemapXml)) {
+  if (/fillahead\/download\/(?:edge|firefox)\//.test(sitemapXml)) {
     fail('sitemap.xml: unreleased Edge and Firefox holding pages must not be indexed');
   }
 }
 
-function checkHeroScene() {
+function checkProductHero() {
   const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
-  if (!packageJson.dependencies || !packageJson.dependencies.three) {
-    fail('package.json: missing pinned self-hosted three dependency');
+  if (packageJson.dependencies?.three) {
+    fail('package.json: decorative Three.js must not ship on the product landing page');
   }
 
-  const vendorPath = path.join(ROOT, 'vendor', 'three.module.min.js');
-  const vendorCorePath = path.join(ROOT, 'vendor', 'three.core.min.js');
-  const licensePath = path.join(ROOT, 'vendor', 'three-LICENSE.txt');
-  if (!fs.existsSync(vendorPath)) fail('vendor/three.module.min.js: missing self-hosted Three.js module');
-  else if (fs.statSync(vendorPath).size < 300 * 1024) fail('vendor/three.module.min.js: suspiciously small');
-  if (!fs.existsSync(vendorCorePath)) fail('vendor/three.core.min.js: missing self-hosted Three.js core module');
-  else if (fs.statSync(vendorCorePath).size < 300 * 1024) fail('vendor/three.core.min.js: suspiciously small');
-  if (!fs.existsSync(licensePath)) fail('vendor/three-LICENSE.txt: missing Three.js license');
-
-  const heroScript = fs.readFileSync(path.join(ROOT, 'fillpro-hero-scene.js'), 'utf8');
-  const heroLoader = fs.readFileSync(path.join(ROOT, 'fillpro-hero-loader.js'), 'utf8');
-  const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
   const sw = fs.readFileSync(path.join(ROOT, 'sw.js'), 'utf8');
   const css = fs.readFileSync(path.join(ROOT, 'styles.css'), 'utf8');
+  const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
-    [heroScript, "import * as THREE from './vendor/three.module.min.js';", 'hero script should use self-hosted Three.js'],
-    [heroScript, 'WebGLRenderer', 'hero script should create a WebGLRenderer'],
-    [heroScript, 'prefers-reduced-motion: reduce', 'hero script should respect reduced motion'],
-    [heroScript, 'ResizeObserver', 'hero script should handle responsive canvas sizing'],
-    [heroScript, 'glassStage', 'hero scene should use one restrained glass stage'],
-    [heroScript, 'studioPlate', 'hero scene should use one calm studio plate'],
-    [heroScript, 'formDepthStack', 'hero scene should use product-relevant form depth'],
-    [heroScript, 'fieldChips', 'hero scene should keep its depth cues tied to real form fields'],
-    [heroScript, 'fillCursor', 'hero scene should use one compact fill-progress accent'],
-    [heroScript, 'guidedFillPath', 'hero scene should include one readable fill path'],
-    [heroScript, 'guidedFillCurve.getPoint(progress, cursorPoint)', 'hero fill cursor should travel along one fill path without per-frame allocations'],
-    [heroScript, 'safeSkipRail', 'hero scene should imply sensitive-field review without scary copy'],
-    [heroScript, 'warmGlint', 'hero scene should include one small warm accent'],
-    [heroScript, 'MutationObserver', 'hero scene should react to theme changes without a reload'],
-    [heroScript, 'trackedGeometries.forEach', 'hero scene should dispose WebGL geometries'],
-    [heroScript, 'trackedMaterials.forEach', 'hero scene should dispose WebGL materials'],
-    [heroScript, 'renderer.dispose()', 'hero scene should clean up WebGL resources on pagehide'],
-    [heroLoader, "import('./fillpro-hero-scene.js')", 'hero loader should import the scene on demand'],
-    [heroLoader, 'requestIdleCallback', 'hero loader should wait for idle time'],
-    [heroLoader, "'pointermove'", 'hero loader should react to real user intent'],
-    [heroLoader, '12000', 'hero loader should retain a late static-reader fallback'],
-    [html, 'class="hero-3d-canvas"', 'FillPro page should include hero canvas'],
-    [html, 'type="module" src="/fillpro-hero-loader.js', 'FillPro page should load the progressive hero loader'],
-    [css, '.hero-3d-canvas', 'styles should define hero 3D canvas'],
-    [css, '.hero-3d-ready .hero-3d-canvas', 'styles should reveal hero 3D only after ready'],
-    [css, 'mask-image: linear-gradient(90deg, transparent 0 62%', 'styles should use a softened hero 3D mask edge'],
-    [css, 'mix-blend-mode: multiply', 'light theme should blend the hero render into the product edge'],
-    [css, 'mix-blend-mode: screen', 'dark theme should blend the hero render into the product edge'],
-    [sw, '/fillpro-hero-loader.js', 'service worker should cache the progressive hero loader'],
+    [html, 'class="launch-demo-card"', 'FillAhead page should show the real product demo'],
+    [html, 'data-fillahead-demo-poster', 'FillAhead page should load the stable demo poster'],
+    [html, 'class="demo-play-button"', 'FillAhead demo should have a clear pause/play control'],
+    [siteScript, "video.src = '/assets/fillahead-demo.mp4'", 'demo should upgrade to the compact local MP4'],
+    [css, 'scrollbar-width: none', 'demo shell should hide internal browser chrome scrollbars'],
+    [css, 'prefers-reduced-motion: reduce', 'motion should respect reduced-motion preferences'],
+    [sw, '/assets/fillahead-demo-poster.png', 'service worker should cache the stable demo poster'],
   ];
   for (const [source, needle, label] of required) {
     if (!source.includes(needle)) fail(label);
   }
-  for (const eagerAsset of ["'/fillpro-hero-scene.js'", "'/vendor/three.module.min.js'", "'/vendor/three.core.min.js'"]) {
-    if (sw.includes(eagerAsset)) fail(`service worker should not eagerly cache ${eagerAsset}`);
+  if (!/\.demo-shell\s*\{[\s\S]*?overflow:\s*hidden;[\s\S]*?scrollbar-width:\s*none;/.test(css)) {
+    fail('hero demo must not become an internal scroll container');
   }
-  [
-    ['heroCardStack', 'old stacked card scene'],
-    ['uploadBadge', 'old upload badge clutter'],
-    ['reviewBadge', 'old review badge clutter'],
-    ['quietParticles', 'old particle-heavy scene'],
-    ['profileSignal', 'old profile-card clutter'],
-    ['fieldRails', 'old form-rail clutter'],
-    ['ambientNodes', 'old floating-node clutter'],
-    ['nodeOffsets', 'old floating-node animation'],
-    ['productWindow', 'old duplicate browser-window hero object'],
-    ['productFace', 'old duplicate browser-window face'],
-    ['chromeBar', 'old duplicate browser chrome'],
-    ['fillRows', 'old duplicate form-row stack'],
-    ['profileDock', 'duplicate floating brand token'],
-  ].forEach(([needle, label]) => {
-    if (heroScript.includes(needle)) fail(`fillpro-hero-scene.js: remove ${label}`);
-  });
+  for (const [source, label] of [
+    [html, 'landing page'],
+    [sw, 'service worker'],
+  ]) {
+    for (const forbidden of ['hero-3d-canvas', 'fillpro-hero-loader.js', 'three.module.min.js']) {
+      if (source.includes(forbidden)) fail(label + ': remove decorative ' + forbidden);
+    }
+  }
 }
-
 function checkPackageScripts() {
   const packageJson = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const scripts = packageJson.scripts || {};
@@ -434,6 +414,12 @@ function checkPackageScripts() {
   }
   if (!scripts['test:experience'] || !scripts['test:experience'].includes('audit-fillpro-release-experience.js')) {
     fail('package.json: missing test:experience script for release experience audit');
+  }
+  if (!scripts.test || !scripts.test.includes('audit-fillpro-performance.js')) {
+    fail('package.json: full site test must enforce throttled performance budgets');
+  }
+  if (!scripts['test:performance'] || !scripts['test:performance'].includes('audit-fillpro-performance.js')) {
+    fail('package.json: missing direct performance test command');
   }
   if (!scripts['generate:locales'] || !scripts['generate:locales'].includes('generate-fillpro-locales.js')) {
     fail('package.json: missing localized page generator');
@@ -454,7 +440,7 @@ function checkDemoGenerator() {
   if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
     fail('render-fillpro-assets.js: demo should show safe fill boundary and review moment');
   }
-  for (const marker of ['fillpro-demo.mp4', 'libx264', '+faststart']) {
+  for (const marker of ['fillahead-demo.mp4', 'libx264', '+faststart']) {
     if (!renderer.includes(marker)) {
       fail(`render-fillpro-assets.js: hero demo renderer missing ${marker}`);
     }
@@ -462,8 +448,8 @@ function checkDemoGenerator() {
 }
 
 function checkLaunchPage() {
-  const html = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
-  const checkoutHtml = fs.readFileSync(path.join(ROOT, 'fillpro', 'checkout', 'index.html'), 'utf8');
+  const html = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
+  const checkoutHtml = fs.readFileSync(path.join(ROOT, 'fillahead', 'checkout', 'index.html'), 'utf8');
   const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
     ['demo-signal', 'hero product-signal overlay'],
@@ -471,59 +457,59 @@ function checkLaunchPage() {
     ['ready to review', 'hero review signal copy'],
     ['Stop retyping the same form details.', 'human first-view headline'],
     ['Start free', 'low-friction primary CTA'],
-    ['href="/fillpro/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
+    ['href="/fillahead/checkout/?plan=yearly"', 'pricing CTA should use checkout handoff'],
     ['No account required', 'clean privacy proof wording'],
     ['See exactly what changes.', 'specific hero demo caption'],
-    ['data-fillpro-demo-poster', 'stable hero demo poster'],
+    ['data-fillahead-demo-poster', 'stable hero demo poster'],
     ['demo-play-button', 'explicit hero demo play control'],
     ['Check the fill before you send.', 'review-before-submit proof section'],
     ['Undo snapshot saved', 'review/undo product proof copy'],
-    ['What to know before you install.', 'plain FAQ heading'],
+    ['Before you install.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
-    if (!html.includes(needle)) fail(`fillpro/index.html: missing ${label}`);
+    if (!html.includes(needle)) fail(`fillahead/index.html: missing ${label}`);
   }
-  if (/rel="preload"[^>]+fillpro-demo\.gif/i.test(html)) {
-    fail('fillpro/index.html: hero demo should use the compact MP4, not preload the GIF');
+  if (/rel="preload"[^>]+fillahead-demo\.gif/i.test(html)) {
+    fail('fillahead/index.html: hero demo should use the compact MP4, not preload the GIF');
   }
-  if (!siteScript.includes("video.src = '/assets/fillpro-demo.mp4'")) {
+  if (!siteScript.includes("video.src = '/assets/fillahead-demo.mp4'")) {
     fail('site.js: hero demo is not wired to the MP4');
   }
   if (
     !siteScript.includes('video.autoplay = !reduceMotion') ||
     !siteScript.includes('togglePlayback') ||
-    !siteScript.includes("isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo'")
+    !siteScript.includes("isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo'")
   ) {
     fail('site.js: hero demo must autoplay, pause/resume on click, and respect reduced motion');
   }
   const proList = (html.match(/<article class="price-card price-card-featured">([\s\S]*?)<\/article>/) || [])[1] || '';
-  if (!proList.includes('Import and export backups')) {
-    fail('fillpro/index.html: Pro pricing should use concrete import/export backup copy');
+  if (!proList.includes('Import backups; export stays available on every plan')) {
+    fail('fillahead/index.html: pricing must say that export stays free');
   }
-  if (/Import and export<\/li>[\s\S]*Import, export/i.test(proList)) {
-    fail('fillpro/index.html: Pro pricing repeats import/export copy');
+  if (/\$39\.99|data-checkout-plan="lifetime"|Three-day Pro trial|no card required/i.test(html)) {
+    fail('fillahead/index.html: legacy Lifetime or unverified trial claim returned');
   }
   for (const [needle, label] of [
-    ['data-fillpro-checkout', 'checkout plan state hook'],
+    ['data-fillahead-checkout', 'checkout plan state hook'],
     ['data-checkout-plan="yearly"', 'yearly checkout highlight target'],
     ['data-checkout-action', 'checkout plan-aware install handoff CTA'],
-    ['Upgrade from the extension.', 'checkout extension-driven payment boundary'],
+    ['Checkout starts inside FillAhead.', 'checkout extension-driven payment boundary'],
     ['ExtensionPay', 'checkout billing provider disclosure'],
-    ['Stripe handles card details', 'checkout Stripe handoff disclosure'],
+    ['Stripe processes card details', 'checkout Stripe handoff disclosure'],
   ]) {
-    if (!checkoutHtml.includes(needle)) fail(`fillpro/checkout/index.html: missing ${label}`);
+    if (!checkoutHtml.includes(needle)) fail(`fillahead/checkout/index.html: missing ${label}`);
   }
   if (/stripe\.com|extensionpay\.com\/extension/i.test(checkoutHtml)) {
-    fail('fillpro/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
+    fail('fillahead/checkout/index.html: website must not contain raw Stripe or direct ExtensionPay checkout URLs');
   }
 }
 
 function checkRelatedGuides() {
   const guides = {
-    'fillpro/job-application-autofill/index.html': '/fillpro/job-application-autofill/',
-    'fillpro/resume-upload-autofill/index.html': '/fillpro/resume-upload-autofill/',
-    'fillpro/local-form-autofill/index.html': '/fillpro/local-form-autofill/',
-    'fillpro/browser-autofill-vs-fillpro/index.html': '/fillpro/browser-autofill-vs-fillpro/',
+    'fillahead/job-application-autofill/index.html': '/fillahead/job-application-autofill/',
+    'fillahead/resume-upload-autofill/index.html': '/fillahead/resume-upload-autofill/',
+    'fillahead/local-form-autofill/index.html': '/fillahead/local-form-autofill/',
+    'fillahead/browser-autofill-vs-fillahead/index.html': '/fillahead/browser-autofill-vs-fillahead/',
   };
 
   for (const [fileRel, selfHref] of Object.entries(guides)) {
@@ -543,7 +529,7 @@ function checkRelatedGuides() {
 }
 
 function checkChangelog(files) {
-  const changelogRel = 'fillpro/changelog/index.html';
+  const changelogRel = 'fillahead/changelog/index.html';
   const changelog = fs.readFileSync(path.join(ROOT, changelogRel), 'utf8');
   const versions = Array.from(
     changelog.matchAll(/data-changelog-version="([^"]+)"/g),
@@ -558,9 +544,10 @@ function checkChangelog(files) {
 
   const linkedFrom = files
     .filter((file) => file.endsWith('.html') && rel(file) !== changelogRel)
-    .filter((file) =>
-      fs.readFileSync(file, 'utf8').includes('href="/fillpro/changelog/"'),
-    )
+    .filter((file) => {
+      const source = fs.readFileSync(file, 'utf8');
+      return !hasMetaRefresh(source) && source.includes('href="/fillahead/changelog/"');
+    })
     .map(rel);
   if (linkedFrom.length !== 1 || linkedFrom[0] !== 'support/index.html') {
     fail(
@@ -574,7 +561,7 @@ function checkAssetVersioning(files) {
   if (!sw.includes("const CACHE_NAME = 'fillpro-static-live';")) {
     fail('sw.js: missing stable, non-numbered cache name');
   }
-  if (/fillpro-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
+  if (/fillahead-launch-v\d+|[?&]v=fillpro-/i.test(sw)) {
     fail('sw.js: public preview/build numbering returned');
   }
   if (/caches\.match\(request\)[\s\S]{0,120}if \(cached\) return cached/.test(sw)) {
@@ -582,7 +569,7 @@ function checkAssetVersioning(files) {
   }
   for (const file of files.filter((item) => item.endsWith('.html'))) {
     const html = fs.readFileSync(file, 'utf8');
-    if (/fillpro-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-(?:loader|scene)\.js)\?v=/i.test(html)) {
+    if (/fillahead-launch-v\d+|(?:styles\.css|site\.js|contact\.js|fillpro-hero-(?:loader|scene)\.js)\?v=/i.test(html)) {
       fail(`${rel(file)}: public preview/build numbering returned`);
     }
   }
@@ -627,8 +614,10 @@ function checkCrawlerSurfaces() {
   const llms = fs.readFileSync(path.join(ROOT, 'llms.txt'), 'utf8');
   const llmsFull = fs.readFileSync(path.join(ROOT, 'llms-full.txt'), 'utf8');
   const requiredRoutes = [
-    'https://stealthyapps.com/fillpro/',
-    'https://stealthyapps.com/fillpro/privacy/',
+    'https://stealthyapps.com/fillahead/',
+    'https://stealthyapps.com/fillahead/privacy/',
+    'https://stealthyapps.com/fillahead/terms/',
+    'https://stealthyapps.com/fillahead/refunds/',
     'https://stealthyapps.com/support/',
     'https://stealthyapps.com/contact/',
   ];
@@ -659,7 +648,7 @@ function checkCrawlerSurfaces() {
 
 function checkLocalization() {
   const pages = {
-    'fillpro/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
+    'fillahead/index.html': { lang: 'en', hreflang: 'en', phrase: 'Autofill Forms' },
     ...LOCALIZED_PAGES,
   };
   for (const [fileRel, config] of Object.entries(pages)) {
@@ -678,7 +667,7 @@ function checkLocalization() {
       const pathOnly = new URL(url).pathname;
       if (!html.includes(`href="${pathOnly}"`)) fail(`${fileRel}: language picker missing ${pathOnly}`);
     }
-    if (fileRel !== 'fillpro/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
+    if (fileRel !== 'fillahead/index.html' && !html.includes(`"inLanguage":"${config.lang}"`)) {
       fail(`${fileRel}: JSON-LD inLanguage mismatch`);
     }
   }
@@ -693,15 +682,93 @@ function checkLocalization() {
     if (!localeSitemap.includes(`<loc>${url}</loc>`)) fail(`sitemap-locales.xml: missing URL ${url}`);
   }
 
-  const main = fs.readFileSync(path.join(ROOT, 'fillpro', 'index.html'), 'utf8');
+  const main = fs.readFileSync(path.join(ROOT, 'fillahead', 'index.html'), 'utf8');
   for (const type of ['WebSite', 'WebPage', 'SoftwareApplication', 'FAQPage']) {
-    if (!main.includes(`"@type": "${type}"`)) fail(`fillpro/index.html: entity graph missing ${type}`);
+    if (!main.includes(`"@type": "${type}"`)) fail(`fillahead/index.html: entity graph missing ${type}`);
   }
   if (!main.includes('"operatingSystem": "Google Chrome"')) {
-    fail('fillpro/index.html: structured data must match the current Chrome-first release');
+    fail('fillahead/index.html: structured data must match the current Chrome-first release');
   }
   if (main.includes('"operatingSystem": "Chrome, Microsoft Edge, Firefox"')) {
-    fail('fillpro/index.html: structured data must not present coming-soon browser stores as released');
+    fail('fillahead/index.html: structured data must not present coming-soon browser stores as released');
+  }
+}
+
+
+function checkCommercePolicies() {
+  const routes = {
+    terms: 'fillahead/terms/index.html',
+    refunds: 'fillahead/refunds/index.html',
+    privacy: 'fillahead/privacy/index.html',
+    home: 'fillahead/index.html',
+    checkout: 'fillahead/checkout/index.html',
+  };
+  const source = {};
+  for (const [key, fileRel] of Object.entries(routes)) {
+    const file = path.join(ROOT, fileRel);
+    if (!fs.existsSync(file)) {
+      fail(fileRel + ': required commerce page missing');
+      source[key] = '';
+    } else {
+      source[key] = fs.readFileSync(file, 'utf8');
+    }
+  }
+
+  for (const phrase of [
+    '$3.99',
+    '$29.99',
+    'renews each month until canceled',
+    'renews each year until canceled',
+    'Google, Microsoft, and Mozilla are not the seller',
+    '14-day refund window',
+    'Consumer rights still apply.',
+  ]) {
+    if (!source.terms.includes(phrase)) fail(routes.terms + ': missing "' + phrase + '"');
+  }
+
+  for (const phrase of [
+    'within 14 days',
+    'Manage billing',
+    'original payment method',
+    '2 business days',
+    'consumer law',
+  ]) {
+    if (!source.refunds.includes(phrase)) fail(routes.refunds + ': missing "' + phrase + '"');
+  }
+
+  const limitedUse =
+    'The use of information received from Google APIs by FillAhead adheres to the Chrome Web Store User Data Policy, including the Limited Use requirements.';
+  if (!source.privacy.includes(limitedUse)) {
+    fail(routes.privacy + ': missing Chrome Web Store Limited Use disclosure');
+  }
+
+  for (const [key, fileRel] of [['home', routes.home], ['checkout', routes.checkout]]) {
+    const html = source[key];
+    if (!html.includes('href="/fillahead/terms/"')) fail(fileRel + ': pricing surface missing Terms link');
+    if (!html.includes('href="/fillahead/refunds/"')) fail(fileRel + ': pricing surface missing Refunds link');
+    if (!/renew(?:s|al)/i.test(html)) fail(fileRel + ': pricing surface must disclose renewal');
+    if (!/14-day/i.test(html)) fail(fileRel + ': pricing surface must disclose refund window');
+  }
+
+  for (const fileRel of ['sitemap.xml', 'sitemap.html', 'llms.txt', 'llms-full.txt']) {
+    const html = fs.readFileSync(path.join(ROOT, fileRel), 'utf8');
+    for (const route of ['/fillahead/terms/', '/fillahead/refunds/']) {
+      if (!html.includes(route)) fail(fileRel + ': missing ' + route);
+    }
+  }
+
+  if (!source.terms.includes('reason=pro_access')) {
+    fail(routes.terms + ': billing support link must use the supported pro_access reason');
+  }
+  if (!source.refunds.includes('reason=refund')) {
+    fail(routes.refunds + ': refund support link must use the supported refund reason');
+  }
+  for (const unsupportedReason of ['reason=refund_request', 'reason=billing_question']) {
+    for (const [key, fileRel] of Object.entries(routes)) {
+      if (source[key].includes(unsupportedReason)) {
+        fail(fileRel + ': unsupported contact route remains: ' + unsupportedReason);
+      }
+    }
   }
 }
 
@@ -718,6 +785,82 @@ function checkStaleCopy(file, text) {
   }
 }
 
+function checkPublicIdentityAndRedirects(files) {
+  for (const unsupportedAgentFile of [
+    '.well-known/ai-plugin.json',
+    '.well-known/mcp.json',
+    '.well-known/openapi.yaml',
+  ]) {
+    if (fs.existsSync(path.join(ROOT, unsupportedAgentFile))) {
+      fail(unsupportedAgentFile + ': unsupported plugin or agent endpoint must not ship');
+    }
+  }
+  const publicIdentityFiles = files.filter((file) => {
+    const fileRel = rel(file);
+    return (
+      fileRel.startsWith('fillahead/') ||
+      fileRel.startsWith('support/') ||
+      fileRel.startsWith('contact/') ||
+      ['index.html', 'index.md', 'llms.txt', 'llms-full.txt', 'humans.txt', 'site.js', 'manifest.webmanifest', 'opensearch.xml', 'sitemap.xml', 'sitemap-index.xml', 'sitemap-images.xml', 'sitemap-locales.xml'].includes(fileRel)
+    );
+  });
+  const slopPatterns = [
+    /\b(?:delve|leverage|utilize|seamless|robust|elevate|streamline|ecosystem|synergy|empower|meticulously|tapestry|underscore|pivotal|groundbreaking)\b/i,
+    /\b(?:game-changer|cutting-edge|next-gen)\b/i,
+    /in today['’]s fast-paced world/i,
+    /whether you['’]re (?:a|an) /i,
+    /let['’]s (?:dive|unpack)/i,
+    /what does this mean for you\?/i,
+    /[🚀✨📊]/u,
+  ];
+  for (const file of publicIdentityFiles) {
+    const source = fs.readFileSync(file, 'utf8');
+    if (/(?:^|[^A-Za-z0-9_])FillPro(?:[^A-Za-z0-9_]|$)|Entryhand/i.test(source)) {
+      fail(`${rel(file)}: public source contains a retired product name`);
+    }
+    if (/stealthyapps\.com\/fillpro\/|(?:href|content|url)=["']\/fillpro\//i.test(source)) {
+      fail(`${rel(file)}: public source contains the retired product route`);
+    }
+    for (const pattern of slopPatterns) {
+      if (pattern.test(source)) fail(`${rel(file)}: public copy matches banned AI-template pattern ${pattern}`);
+    }
+  }
+
+  const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
+  for (const retiredIdentifier of ['FILLPRO_STORE_LINKS', 'FILLPRO_EXTENSION_IDS']) {
+    if (siteScript.includes(retiredIdentifier)) fail(`site.js: retired site-only identifier remains: ${retiredIdentifier}`);
+  }
+
+  const redirectScript = fs.readFileSync(path.join(ROOT, 'legacy-product-redirect.js'), 'utf8');
+  if (!redirectScript.includes('window.location.replace(target + window.location.search + window.location.hash)')) {
+    fail('legacy-product-redirect.js: legacy redirects must preserve query strings and hashes');
+  }
+
+  const legacyPages = files.filter((file) => {
+    const fileRel = rel(file);
+    return file.endsWith('.html') && (
+      fileRel === 'fillpro.html' ||
+      fileRel.startsWith('fillpro/') ||
+      fileRel.startsWith('fillpro.com/') ||
+      fileRel.startsWith('apps/fillpro/') ||
+      fileRel.startsWith('extensions/fillpro/')
+    );
+  });
+  for (const file of legacyPages) {
+    const source = fs.readFileSync(file, 'utf8');
+    const target = (source.match(/data-redirect-target=["']([^"']+)["']/i) || [])[1] || '';
+    if (!target || !/^\/(?:fillahead|support|contact)(?:\/|$)/.test(target)) {
+      fail(`${rel(file)}: legacy page is missing a safe canonical redirect target`);
+    }
+    if (!/<meta name="robots" content="noindex, follow">/.test(source)) {
+      fail(`${rel(file)}: legacy page must be noindex, follow`);
+    }
+    if (!source.includes('/legacy-product-redirect.js')) {
+      fail(`${rel(file)}: legacy page must use the shared query/hash-preserving redirect`);
+    }
+    if (/\/fillpro\//i.test(target)) fail(`${rel(file)}: legacy page redirects back to the retired route`);
+  }
+}
 const files = walk(ROOT);
 for (const file of files) {
   const fileRel = rel(file);
@@ -737,7 +880,7 @@ for (const file of files) {
 }
 checkStyles();
 checkSiteScript();
-checkHeroScene();
+checkProductHero();
 checkPackageScripts();
 checkDemoGenerator();
 checkLaunchPage();
@@ -747,13 +890,15 @@ checkAssetVersioning(files);
 checkIndexNowKey();
 checkCrawlerSurfaces();
 checkLocalization();
+checkCommercePolicies();
+checkPublicIdentityAndRedirects(files);
 
 if (failures.length) {
-  console.error(`FillPro site audit failed with ${failures.length} issue(s):`);
+  console.error(`FillAhead site audit failed with ${failures.length} issue(s):`);
   for (const failure of failures) console.error(`- ${failure}`);
   process.exit(1);
 }
 
 console.log(
-  `FillPro site audit passed: ${checked.html} HTML, ${checked.jsonLd} JSON-LD, ${checked.images} images, ${checked.footers} footers, ${checked.navs} navs, ${checked.metadata} metadata groups, ${checked.accessibility} CSS/accessibility suite.`,
+  `FillAhead site audit passed: ${checked.html} HTML, ${checked.jsonLd} JSON-LD, ${checked.images} images, ${checked.footers} footers, ${checked.navs} navs, ${checked.metadata} metadata groups, ${checked.accessibility} CSS/accessibility suite.`,
 );

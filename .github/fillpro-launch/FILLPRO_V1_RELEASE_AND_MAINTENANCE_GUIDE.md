@@ -1,10 +1,10 @@
-# FillPro v1.0.0 Release and Maintenance Guide
+# FillAhead v1.0.0 Release and Maintenance Guide
 
 Date: 2026-06-14
 
 ## Daily Release Rule
 
-Keep FillPro at `1.0.0` for the initial release. Do not bump the version unless there is a real user-facing fix or you explicitly choose to ship a new store update.
+Keep FillAhead at `1.0.0` for the initial release. Do not bump the version unless there is a real user-facing fix or you explicitly choose to ship a new store update.
 
 ## Build and Test Everything
 
@@ -40,9 +40,9 @@ npm test
 - Chrome: `D:\root\projects\PluginMassCreation\dist\fillpro-chrome.zip`
 - Edge: `D:\root\projects\PluginMassCreation\dist\fillpro-edge.zip`
 - Firefox: `D:\root\projects\PluginMassCreation\dist\fillpro-firefox.zip`
-- Product URL: `https://stealthyapps.com/fillpro/`
+- Product URL: `https://stealthyapps.com/fillahead/`
 - Support URL: `https://stealthyapps.com/support/`
-- Privacy URL: `https://stealthyapps.com/fillpro/privacy/`
+- Privacy URL: `https://stealthyapps.com/fillahead/privacy/`
 
 ## Store Submission Order
 
@@ -63,7 +63,7 @@ Use five screenshots:
 4. Add rules for unusual field labels.
 5. Review, undo, then submit when ready.
 
-Use one 20-35 second clip: start with a realistic long form, open FillPro, choose a profile, fill safe fields, show the upload match, show password/payment fields untouched, finish on review-before-submit.
+Use one 20-35 second clip: start with a realistic long form, open FillAhead, choose a profile, fill safe fields, show the upload match, show password/payment fields untouched, finish on review-before-submit.
 
 ## Review and Support Plan
 
@@ -96,7 +96,7 @@ Website:
 cd /d D:\root\projects\PluginMassCreation\fillpro-site
 git status
 git add .
-git commit -m "Polish FillPro v1 launch site"
+git commit -m "Polish FillAhead v1 launch site"
 git push origin main
 ```
 
@@ -106,7 +106,7 @@ Extension:
 cd /d D:\root\projects\PluginMassCreation\fillpro
 git status
 git add .
-git commit -m "Harden FillPro v1 launch extension"
+git commit -m "Harden FillAhead v1 launch extension"
 git push origin main
 ```
 

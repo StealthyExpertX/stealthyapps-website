@@ -7,9 +7,9 @@ const { chromium } = require('playwright');
 const siteRoot = path.resolve(__dirname, '..');
 const assetsDir = path.join(siteRoot, 'assets');
 const marketplaceDir = path.join(assetsDir, 'marketplace');
-const logoSvgPath = path.join(assetsDir, 'fillpro-logo.svg');
-const outputMp4 = path.join(marketplaceDir, 'fillpro-store-demo-22s.mp4');
-const outputThumb = path.join(marketplaceDir, 'fillpro-store-demo-22s-thumb.png');
+const logoSvgPath = path.join(assetsDir, 'fillahead-logo.svg');
+const outputMp4 = path.join(marketplaceDir, 'fillahead-store-demo-22s.mp4');
+const outputThumb = path.join(marketplaceDir, 'fillahead-store-demo-22s-thumb.png');
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
   .toString('base64')}`;
@@ -422,7 +422,7 @@ const html = `<!doctype html>
 </head>
 <body>
 <main class="stage" id="stage">
-  <div class="brand"><img src="${logoDataUrl}" alt=""><span>FillPro</span></div>
+  <div class="brand"><img src="${logoDataUrl}" alt=""><span>FillAhead</span></div>
   <div class="top-note" id="topNote">Private autofill</div>
   <section class="copy" id="copy">
     <p class="eyebrow" id="eyebrow">Ready when you are</p>
@@ -437,7 +437,7 @@ const html = `<!doctype html>
       <div id="fields"></div>
       <div class="result" id="result"><strong id="resultCount">4</strong><span id="resultText">fields and the resume are ready to review</span></div>
       <aside class="extension-panel" id="panel">
-        <div class="panel-head"><img src="${logoDataUrl}" alt=""><span>FillPro</span></div>
+        <div class="panel-head"><img src="${logoDataUrl}" alt=""><span>FillAhead</span></div>
         <div class="profile"><strong id="profileName">Work profile</strong><span id="profileMeta">9 saved fields · 2 rules · 1 file</span></div>
         <div class="fill-button" id="fillButton">Fill Page</div>
         <div class="undo-button" id="undoButton">Undo last fill</div>
@@ -446,7 +446,7 @@ const html = `<!doctype html>
   </section>
   <aside class="floating-note" id="floatingNote"><strong id="noteTitle">Ready to review</strong><span id="noteText">You decide when the form is submitted.</span></aside>
   <div class="cursor" id="cursor"></div>
-  <div class="footer-line"><span>Chrome · Edge · Firefox</span><span>stealthyapps.com/fillpro</span></div>
+  <div class="footer-line"><span>Chrome · Edge · Firefox</span><span>stealthyapps.com/fillahead</span></div>
   <div class="progress"><span id="progress"></span></div>
 </main>
 <script>
@@ -477,10 +477,10 @@ const html = `<!doctype html>
 
   function copyFor(t) {
     if (t < 2.2) return ['Ready when you are', 'A blank form.\\nOne profile.', 'Choose Fill Page to add the details you saved.', ['3 profiles free', 'No account']];
-    if (t < 7.7) return ['Filling now', 'One click fills the repeated details.', 'Name, email, company, and resume fill one by one.', ['One click', 'Upload matching']];
-    if (t < 12) return ['Ready to review', 'Check it. Undo it. Submit when ready.', 'FillPro fills the page. You review and submit it.', ['Undo ready', 'No auto-submit']];
-    if (t < 17) return ['Modern form fields', 'Works with dropdowns and fields that appear later.', 'Fill the controls basic autofill often misses.', ['Dropdowns', 'Checkboxes', 'Dynamic fields']];
-    return ['Start free', 'Three profiles are included.', 'No FillPro account. Pro adds more profiles and backups.', ['3 profiles free', 'No account', 'Review first']];
+    if (t < 7.7) return ['Filling now', 'Fill repeat details in one click.', 'Name, email, company, and your saved resume, all from one profile.', ['One click', 'Upload matching']];
+    if (t < 12) return ['Ready to review', 'Check it. Undo it. Submit when ready.', 'FillAhead fills the page. You review and submit it.', ['Undo ready', 'No auto-submit']];
+    if (t < 17) return ['Modern form fields', 'Works with dropdowns and fields that appear later.', 'Dropdowns, checkboxes, and late-loading fields are handled too.', ['Dropdowns', 'Checkboxes', 'Dynamic fields']];
+    return ['Start free', 'Start with 3 profiles free.', 'No FillAhead account. Pro adds more profiles and backup imports.', ['3 profiles free', 'No account', 'Review first']];
   }
 
   function formFor(t) {
@@ -600,7 +600,7 @@ const html = `<!doctype html>
       document.getElementById('noteText').textContent = 'Upgrade only when your workflow needs more.';
     } else if (t >= 12) {
       document.getElementById('noteTitle').textContent = 'Late field caught';
-      document.getElementById('noteText').textContent = 'FillPro checks again when the page changes.';
+      document.getElementById('noteText').textContent = 'FillAhead checks again when the page changes.';
     } else {
       document.getElementById('noteTitle').textContent = 'Ready to review';
       document.getElementById('noteText').textContent = 'You decide when the form is submitted.';

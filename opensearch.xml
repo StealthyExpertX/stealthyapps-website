@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
-  <ShortName>FillPro</ShortName>
-  <LongName>FillPro - private browser form autofill</LongName>
-  <Description>Search FillPro product, pricing, privacy, support, and contact pages.</Description>
+  <ShortName>FillAhead</ShortName>
+  <LongName>FillAhead - private browser form autofill</LongName>
+  <Description>Search FillAhead product, pricing, privacy, support, and contact pages.</Description>
   <InputEncoding>UTF-8</InputEncoding>
   <OutputEncoding>UTF-8</OutputEncoding>
   <Language>en-US</Language>
-  <Image width="16" height="16" type="image/png">https://stealthyapps.com/assets/fillpro-logo.png</Image>
-  <Image width="64" height="64" type="image/png">https://stealthyapps.com/assets/fillpro-logo.png</Image>
-  <Url type="text/html" method="get" template="https://stealthyapps.com/fillpro/?q={searchTerms}"/>
+  <Image width="16" height="16" type="image/png">https://stealthyapps.com/assets/fillahead-logo.png</Image>
+  <Image width="64" height="64" type="image/png">https://stealthyapps.com/assets/fillahead-logo.png</Image>
+  <Url type="text/html" method="get" template="https://stealthyapps.com/fillahead/?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://stealthyapps.com/opensearch.xml"/>
-  <moz:SearchForm>https://stealthyapps.com/fillpro/</moz:SearchForm>
+  <moz:SearchForm>https://stealthyapps.com/fillahead/</moz:SearchForm>
   <Developer>Stealthy Apps</Developer>
   <Contact>support@stealthyapps.com</Contact>
   <Attribution>Search results from stealthyapps.com</Attribution>

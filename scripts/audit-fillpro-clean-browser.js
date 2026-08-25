@@ -6,13 +6,15 @@ const { chromium } = require('playwright');
 const ROOT = path.resolve(__dirname, '..');
 const REMOTE_ORIGIN = (process.env.FILLPRO_AUDIT_ORIGIN || '').replace(/\/$/, '');
 const ROUTES = [
-  '/fillpro/',
-  '/fillpro/download/',
-  '/fillpro/#pricing',
-  '/fillpro/privacy/',
+  '/fillahead/',
+  '/fillahead/download/',
+  '/fillahead/#pricing',
+  '/fillahead/privacy/',
+  '/fillahead/terms/',
+  '/fillahead/refunds/',
   '/support/',
   '/contact/',
-  '/fillpro/docs/getting-started/',
+  '/fillahead/docs/getting-started/',
 ];
 const CONTENT_TYPES = {
   '.css': 'text/css; charset=utf-8',
@@ -137,14 +139,13 @@ async function main() {
       const response = await page.goto(`${server.origin}${route}`, { waitUntil: 'networkidle' });
       if (!response || !response.ok()) failures.push(`${route}: load failed`);
 
-      if (route === '/fillpro/') {
+      if (route === '/fillahead/') {
         await page.mouse.move(1180, 220);
-        await page.waitForFunction(
-          () => document.documentElement.classList.contains('hero-3d-ready'),
-          null,
-          { timeout: 10000 },
-        );
-        await page.waitForTimeout(1400);
+        await page.waitForFunction(() => {
+          const poster = document.querySelector('[data-fillahead-demo-poster], .demo-shell video');
+          return Boolean(poster && (poster.tagName === 'VIDEO' || (poster.complete && poster.naturalWidth > 0)));
+        });
+        await page.waitForTimeout(180);
       }
 
       const report = await page.evaluate(() => {

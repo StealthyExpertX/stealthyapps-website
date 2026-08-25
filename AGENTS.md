@@ -1,11 +1,11 @@
-# FillPro Agent Notes
+# FillAhead Agent Notes
 
-This file describes the public FillPro website for crawlers, assistants, and repository automation.
+This file describes the public FillAhead website for crawlers, assistants, and repository automation.
 
-- Product: FillPro
+- Product: FillAhead
 - Brand: Stealthy Apps
-- Website: https://stealthyapps.com/fillpro/
-- Canonical product route: /fillpro/
+- Website: https://stealthyapps.com/fillahead/
+- Canonical product route: /fillahead/
 - Current version: 1.0.0
 - Last reviewed: 2026-07-13
 
@@ -18,10 +18,10 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 
 ## Canonical Routes
 
-- Home: /fillpro/
-- Product: /fillpro/
-- Pricing: /fillpro/#pricing
-- Privacy: /fillpro/privacy/
+- Home: /fillahead/
+- Product: /fillahead/
+- Pricing: /fillahead/#pricing
+- Privacy: /fillahead/privacy/
 - Support: /support/
 - Contact: /contact/
 - Sitemap: /sitemap.html
@@ -30,9 +30,9 @@ This file describes the public FillPro website for crawlers, assistants, and rep
 
 ## Product Positioning
 
-FillPro is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
+FillAhead is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
 
-FillPro does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+FillAhead does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Pricing
 
@@ -46,4 +46,4 @@ ExtensionPay handles Pro license and plan status. Stripe handles checkout and pa
 
 ## Future Pages
 
-FillPro is the only public product right now. Future tools should get their own canonical product page, privacy notes if needed, support route, sitemap entry, and Markdown mirror.
+FillAhead is the only public product right now. Future tools should get their own canonical product page, privacy notes if needed, support route, sitemap entry, and Markdown mirror.

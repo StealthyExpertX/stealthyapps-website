@@ -37,16 +37,16 @@ const WEBMAIL_PROVIDERS = {
 
 const DIRECT_SEND_URL_BASE = 'https://formsubmit.co/ajax/';
 const DIRECT_SEND_AUTORESPONSE =
-  'Thanks for writing in about FillPro. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
+  'Thanks for writing in about FillAhead. Stealthy Apps received your message and will reply by email. Please keep passwords, payment details, IDs, one-time codes, and saved profile values out of support email.';
 const MIN_NAME_LENGTH = 2;
 const MIN_MESSAGE_LENGTH = 12;
 const KNOWN_PRODUCTS = {
-  fillpro: 'FillPro',
+  fillpro: 'FillAhead',
 };
 
 const CONTACT_CONTEXTS = {
   general: {
-    subjectPrefix: 'FillPro',
+    subjectPrefix: 'FillAhead',
     requireName: true,
     requireReplyEmail: true,
     idleMessage: 'Add a name, email, and message to send.',
@@ -54,7 +54,7 @@ const CONTACT_CONTEXTS = {
       general: {
         label: 'General',
         recipient: 'support',
-        inboxLabel: 'FillPro inbox',
+        inboxLabel: 'FillAhead inbox',
         reasons: [
           ['question', 'General question'],
           ['feedback', 'Feedback'],
@@ -62,22 +62,22 @@ const CONTACT_CONTEXTS = {
         ],
       },
       product: {
-        label: 'FillPro',
+        label: 'FillAhead',
         recipient: 'support',
-        inboxLabel: 'FillPro product inbox',
+        inboxLabel: 'FillAhead product inbox',
         reasons: [
-          ['product_help', 'Question about FillPro'],
+          ['product_help', 'Question about FillAhead'],
           ['site_report', 'A page did not fill correctly'],
           ['feature', 'Feature request'],
           ['bug', 'Something is not working'],
-          ['uninstall', 'I removed FillPro'],
+          ['uninstall', 'I removed FillAhead'],
           ['idea', 'Future tool idea'],
         ],
       },
       business: {
         label: 'Business',
         recipient: 'support',
-        inboxLabel: 'FillPro business inbox',
+        inboxLabel: 'FillAhead business inbox',
         reasons: [
           ['business', 'Business or partnership'],
           ['press', 'Press or media'],
@@ -88,7 +88,7 @@ const CONTACT_CONTEXTS = {
       billing: {
         label: 'Billing',
         recipient: 'support',
-        inboxLabel: 'FillPro billing inbox',
+        inboxLabel: 'FillAhead billing inbox',
         reasons: [
           ['pro_access', 'Upgrade, access, or purchase issue'],
           ['restore', 'Restore purchase or subscription'],
@@ -99,7 +99,7 @@ const CONTACT_CONTEXTS = {
       privacy: {
         label: 'Privacy',
         recipient: 'privacy',
-        inboxLabel: 'FillPro privacy inbox',
+        inboxLabel: 'FillAhead privacy inbox',
         reasons: [
           ['privacy_question', 'Privacy or policy question'],
           ['saved_profiles', 'Saved profiles or deletion question'],
@@ -210,10 +210,15 @@ function getTopicConfig(topics, topic) {
   return topics[topic] || topics[getDefaultTopicKey(topics)];
 }
 
-function buildReasonOptions(config) {
-  return config.reasons
-    .map(([value, label]) => `<option value="${value}">${label}</option>`)
-    .join('');
+function replaceReasonOptions(select, config) {
+  const fragment = document.createDocumentFragment();
+  for (const [value, label] of config.reasons) {
+    const option = document.createElement('option');
+    option.value = value;
+    option.textContent = label;
+    fragment.append(option);
+  }
+  select.replaceChildren(fragment);
 }
 
 function findReasonLabel(config, reasonValue) {
@@ -244,7 +249,7 @@ function buildComposePayload(
 ) {
   const recipient = decodeMailbox(CONTACT_MAILBOXES[config.recipient]);
   const subjectLabel =
-    config.label === 'FillPro' ? 'Product' : config.label;
+    config.label === 'FillAhead' ? 'Product' : config.label;
   const subjectPrefix = productLabel || context.subjectPrefix;
   const subject = `${subjectLabel}: ${reasonLabel} | ${subjectPrefix}`;
   const bodyLines = [
@@ -450,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (composeSummary) {
-      composeSummary.textContent = `Ready for ${compose.to}. Use any option below if you would rather send it through your own email app.`;
+      composeSummary.textContent = 'Choose an email app below, or copy the message details.';
     }
 
     emailOptions.hidden = false;
@@ -571,7 +576,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const config = getTopicConfig(topics, topicField.value);
-    reasonField.innerHTML = buildReasonOptions(config);
+    replaceReasonOptions(reasonField, config);
     reasonField.value = config.reasons[0][0];
     if (
       !hasAppliedPrefillReason &&
@@ -591,7 +596,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contextNote) {
       contextNote.hidden = false;
       contextNote.textContent =
-        'What made you remove FillPro? One sentence is enough. Name and email are optional.';
+        'What made you remove FillAhead? One sentence is enough. Name and email are optional.';
     }
     messageField.placeholder = 'What got in the way?';
     nameField.required = false;

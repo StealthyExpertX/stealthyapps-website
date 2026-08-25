@@ -10,7 +10,7 @@ const siteRoot = path.resolve(__dirname, '..');
 const projectRoot = path.resolve(siteRoot, '..');
 const assetsDir = path.join(siteRoot, 'assets');
 const marketplaceDir = path.join(assetsDir, 'marketplace');
-const logoSvgPath = path.join(assetsDir, 'fillpro-logo.svg');
+const logoSvgPath = path.join(assetsDir, 'fillahead-logo.svg');
 
 const logoDataUrl = `data:image/svg+xml;base64,${fs
   .readFileSync(logoSvgPath)
@@ -736,6 +736,26 @@ const css = `
   .promo-marquee .brand-lockup img { width: 104px; height: 104px; }
   .promo-marquee .brand-lockup span { font-size: 62px; }
   .promo-marquee .brand-panel { transform: translateY(-2px); }
+  .promo-small .brand-panel {
+    width: 126px;
+    align-content: start;
+    padding-top: 8px;
+  }
+  .promo-small .brand-lockup {
+    display: grid;
+    gap: 8px;
+  }
+  .promo-small .brand-lockup img { width: 60px; height: 60px; }
+  .promo-small .brand-lockup span {
+    font-size: 23px;
+    line-height: 1;
+  }
+  .promo-small .promo-product {
+    right: 22px;
+    bottom: 22px;
+    width: 250px;
+    padding: 15px;
+  }
   .promo-marquee .promo-product {
     right: 96px;
     bottom: 56px;
@@ -766,7 +786,7 @@ function chromeFrame(url, inner) {
 function beforeAfter(copy = {}) {
   const labels = {
     beforeTitle: 'Client onboarding',
-    afterTitle: 'After FillPro',
+    afterTitle: 'After FillAhead',
     fullName: 'Full name',
     workEmail: 'Work email',
     company: 'Company',
@@ -804,7 +824,7 @@ function field(label, value = '') {
 function popup(title, detail, copy = {}) {
   return `
     <div class="popup">
-      <div class="popup-head"><img src="${logoDataUrl}" alt="">FillPro</div>
+      <div class="popup-head"><img src="${logoDataUrl}" alt="">FillAhead</div>
       <div class="profile"><strong>${title}</strong><span>${detail}</span></div>
       <div class="button">${copy.fillPage || 'Fill Page'}</div>
       <div class="button ghost">${copy.undoLastFill || 'Undo last fill'}</div>
@@ -840,12 +860,12 @@ function promoProduct(label = 'Fill Page') {
     </div>`;
 }
 
-function brandPromo(stageClass, label = 'FillPro', productLabel = 'Saved profile') {
+function brandPromo(stageClass, label = 'FillAhead', productLabel = 'Saved profile') {
   const marqueeCopy = stageClass.includes('promo-marquee')
     ? `<div class="promo-copy">
         <div class="promo-kicker">Private autofill</div>
-        <h1 class="promo-head">Fill repeat forms without handing over your data.</h1>
-        <div class="promo-proof"><span>3 profiles free</span><span>No account</span><span>Review before submit</span></div>
+        <h1 class="promo-head">Fill repeat forms from saved profiles.</h1>
+        <div class="promo-proof"><span>3 profiles free</span><span>Stored in your browser</span><span>Review before you submit</span></div>
       </div>`
     : '';
   return `
@@ -922,11 +942,11 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-screenshot-fill-page-1280x800.png'),
+    path.join(marketplaceDir, 'fillahead-screenshot-fill-page-1280x800.png'),
     1280,
     800,
     `<main class="stage first-shot shot-outcome">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account needed</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">No account needed</span></div>
       <div><h1>Fill the fields you keep retyping.</h1><p class="sub">Choose a saved profile, fill the page, then review before you submit.</p></div>
       ${chromeFrame('apply.example.com/onboarding', beforeAfter())}
     </main>`,
@@ -934,11 +954,11 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-screenshot-profiles-1280x800.png'),
+    path.join(marketplaceDir, 'fillahead-screenshot-profiles-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-profiles">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Save what you entered</span></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Save what you entered</span></div>
       <div><h1>Turn a filled form into a reusable profile.</h1><p class="sub">Keep what you already entered, review it once, and use it on the next form.</p></div>
       ${chromeFrame('forms.example.com/demo-request', `
         <div class="grid2">
@@ -949,7 +969,7 @@ async function renderStaticAssets(browser) {
             ${field('Company', 'Stealthy Apps')}
           </div>
           <div class="panel">
-            <h2>New FillPro profile</h2>
+            <h2>New FillAhead profile</h2>
             <div class="profile"><strong>Profile 3</strong><span>3 supported values found</span></div>
             <div class="cardline"><span>Review first</span><strong>You choose what stays</strong></div>
             <div class="cardline"><span>Next form</span><strong>Ready to reuse</strong></div>
@@ -961,12 +981,12 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-screenshot-modern-forms-1280x800.png'),
+    path.join(marketplaceDir, 'fillahead-screenshot-modern-forms-1280x800.png'),
     1280,
     800,
     `<main class="stage shot-modern">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Modern form support</span></div>
-      <div><h1>Fill the controls basic autofill skips.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Modern form support</span></div>
+      <div><h1>Fill more than basic text boxes.</h1><p class="sub">Dropdowns, checkboxes, uploads, and fields that appear after the page loads.</p></div>
       ${chromeFrame('forms.example.com/team-intake', `
         <div class="grid2">
           <div class="form">
@@ -990,15 +1010,15 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-screenshot-privacy-1280x800.png'),
+    path.join(marketplaceDir, 'fillahead-screenshot-privacy-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-privacy">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">No account required</span></div>
-      <div><h1>Your saved details stay in FillPro.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">No account required</span></div>
+      <div><h1>Saved profiles stay in your browser.</h1><p class="sub">Fill the page you choose without creating a cloud profile account.</p></div>
       <div class="privacy-proof">
         <div class="privacy-grid">
-          <div class="privacy-card"><strong>Profile storage</strong><span>Stored by FillPro in your browser.</span></div>
+          <div class="privacy-card"><strong>Profile storage</strong><span>Stored by FillAhead in your browser.</span></div>
           <div class="privacy-card"><strong>Page access</strong><span>Runs on the page you choose.</span></div>
           <div class="privacy-card"><strong>Final say</strong><span>You review and submit.</span></div>
         </div>
@@ -1015,12 +1035,12 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-screenshot-undo-1280x800.png'),
+    path.join(marketplaceDir, 'fillahead-screenshot-undo-1280x800.png'),
     1280,
     800,
     `<main class="stage dark shot-undo">
-      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">Undo ready</span></div>
-      <div><h1>Review the fill. Undo it if needed.</h1><p class="sub">Roll the last FillPro changes back without reloading the page.</p></div>
+      <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">Undo ready</span></div>
+      <div><h1>Review the fill. Undo it if needed.</h1><p class="sub">Roll the last FillAhead changes back without reloading the page.</p></div>
       ${chromeFrame('careers.example.com/apply', `
         <div class="review-proof review-proof-light">
           <div class="review-form">
@@ -1031,7 +1051,7 @@ async function renderStaticAssets(browser) {
             <div class="review-row"><span>Resume</span><strong>alex-morgan.pdf</strong></div>
           </div>
           <div class="review-stack">
-            <h2>After FillPro runs</h2>
+            <h2>After FillAhead runs</h2>
             <div class="review-card accent"><strong>8 fields changed</strong><span>Repeat details filled from the selected profile.</span></div>
             <div class="review-card"><strong>Upload matched</strong><span>Resume field is ready for review.</span></div>
             <div class="review-card"><strong>Undo snapshot saved</strong><span>Roll back the fill without reloading the page.</span></div>
@@ -1043,28 +1063,28 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-small-promo-440x280.png'),
+    path.join(marketplaceDir, 'fillahead-small-promo-440x280.png'),
     440,
     280,
-    brandPromo('small-stage promo-small', 'FillPro', 'Fill Page'),
+    brandPromo('small-stage promo-small', 'FillAhead', 'Fill Page'),
   );
 
   await renderHtml(
     browser,
-    path.join(marketplaceDir, 'fillpro-marquee-1400x560.png'),
+    path.join(marketplaceDir, 'fillahead-marquee-1400x560.png'),
     1400,
     560,
-    brandPromo('marquee promo-marquee', 'FillPro', 'Work profile ready'),
+    brandPromo('marquee promo-marquee', 'FillAhead', 'Work profile ready'),
   );
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillpro-og.png'),
+    path.join(assetsDir, 'fillahead-og.png'),
     1200,
     630,
     `<main class="stage marquee">
       <div>
-        <div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div>
+        <div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div>
         <h1 style="margin-top:28px;">Private autofill for repeated forms</h1>
         <p class="sub">Saved profiles. Smart rules. Upload matching. Review before submit.</p>
       </div>
@@ -1079,7 +1099,7 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillpro-popup.png'),
+    path.join(assetsDir, 'fillahead-popup.png'),
     760,
     540,
     `<main class="stage small-stage" style="padding:42px;">
@@ -1089,7 +1109,7 @@ async function renderStaticAssets(browser) {
 
   await renderHtml(
     browser,
-    path.join(assetsDir, 'fillpro-demo-poster.png'),
+    path.join(assetsDir, 'fillahead-demo-poster.png'),
     960,
     540,
     demoScene([
@@ -1114,11 +1134,11 @@ async function renderLocalizedFirstScreenshots(browser) {
     fs.mkdirSync(localeDir, { recursive: true });
     await renderHtml(
       browser,
-      path.join(localeDir, 'fillpro-screenshot-fill-page-1280x800.png'),
+      path.join(localeDir, 'fillahead-screenshot-fill-page-1280x800.png'),
       1280,
       800,
       `<main class="stage first-shot shot-outcome">
-        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">${copy.badge}</span></div>
+        <div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">${copy.badge}</span></div>
         <div><h1>${copy.headline}</h1><p class="sub">${copy.intro}</p></div>
         ${chromeFrame('apply.example.com/onboarding', beforeAfter(ui))}
       </main>`,
@@ -1134,17 +1154,17 @@ async function renderLocalizedFirstScreenshots(browser) {
       const proof = slug === 'privacy' ? scene : chromeFrame('forms.example.com/fill', scene);
       await renderHtml(
         browser,
-        path.join(localeDir, `fillpro-screenshot-${slug}-1280x800.png`),
+        path.join(localeDir, `fillahead-screenshot-${slug}-1280x800.png`),
         1280,
         800,
-        `<main class="stage ${slug === 'profiles' || slug === 'privacy' || slug === 'undo' ? 'dark' : ''}"><div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillPro</div><span class="pill">FillPro</span></div><div><h1>${title}</h1></div>${proof}</main>`,
+        `<main class="stage ${slug === 'profiles' || slug === 'privacy' || slug === 'undo' ? 'dark' : ''}"><div class="topline"><div class="brand"><img src="${logoDataUrl}" alt="">FillAhead</div><span class="pill">FillAhead</span></div><div><h1>${title}</h1></div>${proof}</main>`,
       );
     }
   }
 }
 
 async function renderDemoGif(browser) {
-  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fillpro-demo-'));
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'fillahead-demo-'));
   const framePaths = [];
   const frames = [
     ['Full name', '', 'Work email', '', 'Company', '', 'Resume upload', '', 'Password', ''],
@@ -1184,7 +1204,7 @@ async function renderDemoGif(browser) {
         path.join(tmp, 'frame-%02d.png'),
         '-vf',
         'split[s0][s1];[s0]palettegen=max_colors=128[p];[s1][p]paletteuse=dither=bayer',
-        path.join(assetsDir, 'fillpro-demo.gif'),
+        path.join(assetsDir, 'fillahead-demo.gif'),
       ],
       { stdio: 'ignore' },
     );
@@ -1207,7 +1227,7 @@ async function renderDemoGif(browser) {
         'yuv420p',
         '-movflags',
         '+faststart',
-        path.join(assetsDir, 'fillpro-demo.mp4'),
+        path.join(assetsDir, 'fillahead-demo.mp4'),
       ],
       { stdio: 'ignore' },
     );
@@ -1238,7 +1258,7 @@ async function renderIcons() {
   await sharp(logoSvgPath)
     .resize(512, 512)
     .png()
-    .toFile(path.join(assetsDir, 'fillpro-logo.png'));
+    .toFile(path.join(assetsDir, 'fillahead-logo.png'));
 }
 
 function smallIconSvg(size) {

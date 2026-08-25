@@ -1,10 +1,10 @@
 /* TEAM */
 Brand: Stealthy Apps
 Site: https://stealthyapps.com/
-Product: FillPro
+Product: FillAhead
 Location: United States
 
 /* SITE */
 Languages: English, German, Spanish, French, Brazilian Portuguese, Japanese, Korean, Simplified Chinese, Russian
-Purpose: Public website for FillPro, a private browser form autofill extension.
-Last updated: 2026-07-15
+Purpose: Public website for FillAhead, a private browser form autofill extension.
+Last updated: 2026-08-24

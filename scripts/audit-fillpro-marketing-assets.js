@@ -48,7 +48,7 @@ function checkLocalizedCaptions() {
     return;
   }
   for (const locale of manifest.locales) {
-    const target = path.join(root, locale, 'fillpro-store-demo-22s.vtt');
+    const target = path.join(root, locale, 'fillahead-store-demo-22s.vtt');
     if (!fs.existsSync(target)) {
       fail(`localized captions: missing ${locale}`);
       continue;
@@ -129,7 +129,7 @@ function checkLocalizedScreenshotCopy() {
   ];
   const untranslatedDefaults = new Set([
     'Client onboarding',
-    'After FillPro',
+    'After FillAhead',
     'Work profile',
     '12 fields, 1 upload, 2 smart rules',
     'Fill Page',
@@ -150,7 +150,7 @@ function checkLocalizedScreenshotCopy() {
     'Matched from the profile.',
     'Ready for review',
     'Profile storage',
-    'Stored by FillPro in your browser.',
+    'Stored by FillAhead in your browser.',
     'Page access',
     'Runs on the page you choose.',
     'Final say',
@@ -195,7 +195,7 @@ async function checkLocalizedScreenshots() {
   for (const locale of locales) {
     for (const name of names) {
       await checkImage(
-        `assets/marketplace/localized/${locale}/fillpro-screenshot-${name}-1280x800.png`,
+        `assets/marketplace/localized/${locale}/fillahead-screenshot-${name}-1280x800.png`,
         1280,
         800,
         { requireOpaque: true },
@@ -450,15 +450,15 @@ function checkRenderer() {
     'const FIRST_FILL_BEFORE_SECONDS = 3;',
     'const POSTER_FRAME_SECONDS = 5.2;',
     'requestAnimationFrame(resolve)',
-    'fillpro-store-demo-22s.mp4',
-    'fillpro-store-demo-22s-thumb.png',
+    'fillahead-store-demo-22s.mp4',
+    'fillahead-store-demo-22s-thumb.png',
     'Mute-safe captions',
     'A blank form.\\nOne profile.',
-    'One click fills the repeated details.',
+    'Fill repeat details in one click.',
     'Check it. Undo it. Submit when ready.',
     'Works with dropdowns and fields that appear later.',
-    'Three profiles are included.',
-    'No FillPro account.',
+    'Start with 3 profiles free.',
+    'No FillAhead account.',
     'No account',
     'careers.example.com/apply',
     'forms.example.com/team-intake',
@@ -501,22 +501,23 @@ function checkStillRenderer() {
   if (!target) return;
   const source = fs.readFileSync(target, 'utf8');
   const required = [
-    'fillpro-screenshot-fill-page-1280x800.png',
-    'fillpro-screenshot-modern-forms-1280x800.png',
-    'fillpro-screenshot-profiles-1280x800.png',
-    'fillpro-screenshot-privacy-1280x800.png',
-    'fillpro-screenshot-undo-1280x800.png',
-    'fillpro-small-promo-440x280.png',
-    'fillpro-marquee-1400x560.png',
+    'fillahead-screenshot-fill-page-1280x800.png',
+    'fillahead-screenshot-modern-forms-1280x800.png',
+    'fillahead-screenshot-profiles-1280x800.png',
+    'fillahead-screenshot-privacy-1280x800.png',
+    'fillahead-screenshot-undo-1280x800.png',
+    'fillahead-small-promo-440x280.png',
+    'fillahead-marquee-1400x560.png',
     'Fill the fields you keep retyping.',
     'Choose a saved profile, fill the page, then review before you submit.',
     'Turn a filled form into a reusable profile.',
     'Save this filled page',
-    'Fill the controls basic autofill skips.',
+    'Fill more than basic text boxes.',
     'Review the fill. Undo it if needed.',
-    'Roll the last FillPro changes back without reloading the page.',
-    'Fill repeat forms without handing over your data.',
-    'Your saved details stay in FillPro.',
+    'Roll the last FillAhead changes back without reloading the page.',
+    'Fill repeat forms from saved profiles.',
+    'Stored in your browser',
+    'Saved profiles stay in your browser.',
     'shot-outcome',
     'shot-modern',
     'shot-profiles',
@@ -600,8 +601,25 @@ function checkStillRenderer() {
   }
 }
 
+function checkReviewRenderer() {
+  const relativePath = 'scripts/render-fillpro-review-sheets.js';
+  const target = assertFile(relativePath, 1024);
+  if (!target) return;
+  const source = fs.readFileSync(target, 'utf8');
+  for (const needle of [
+    'fillahead-small-promo-440x280.png',
+    'fillahead-marquee-1400x560.png',
+    'marketing-contact-sheet-current-review.jpg',
+    'localized-contact-sheet-current-review.jpg',
+    'video-contact-sheet-current-review.jpg',
+    'writeReviewCopy',
+  ]) {
+    if (!source.includes(needle)) fail(relativePath + ': missing ' + needle);
+  }
+}
+
 async function checkIconSystem() {
-  const siteSvg = fs.readFileSync(filePath('assets/fillpro-logo.svg'), 'utf8').trim();
+  const siteSvg = fs.readFileSync(filePath('assets/fillahead-logo.svg'), 'utf8').trim();
   const extensionSvgPath = path.join(WORKSPACE, 'fillpro', 'icons', 'icon-source.svg');
   if (!fs.existsSync(extensionSvgPath)) {
     fail('fillpro/icons/icon-source.svg: missing');
@@ -609,17 +627,17 @@ async function checkIconSystem() {
   }
   const extensionSvg = fs.readFileSync(extensionSvgPath, 'utf8').trim();
   if (siteSvg !== extensionSvg) {
-    fail('FillPro logo mismatch: website SVG and extension source SVG must stay identical');
+    fail('FillAhead logo mismatch: website SVG and extension source SVG must stay identical');
   }
   for (const [label, source] of [
-    ['assets/fillpro-logo.svg', siteSvg],
+    ['assets/fillahead-logo.svg', siteSvg],
     ['fillpro/icons/icon-source.svg', extensionSvg],
   ]) {
     if (/<text|<image|<foreignObject|href=|data:image/i.test(source)) {
       fail(`${label}: logo source should stay self-owned vector paths, not text, raster embeds, or remote assets`);
     }
-    if (!/aria-label="FillPro icon"/.test(source)) {
-      fail(`${label}: missing FillPro icon aria label`);
+    if (!/aria-label="FillAhead icon"/.test(source)) {
+      fail(`${label}: missing FillAhead icon aria label`);
     }
   }
   const manifestPath = path.join(WORKSPACE, 'fillpro', 'manifest.json');
@@ -671,47 +689,48 @@ async function checkIconSystem() {
 }
 
 async function main() {
-  await checkImage('assets/fillpro-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
-  await checkImage('assets/fillpro-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
-  await checkImage('assets/fillpro-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
-  checkHeroVideo('assets/fillpro-demo.mp4');
-  await checkImage('assets/marketplace/fillpro-small-promo-440x280.png', 440, 280, {
+  await checkImage('assets/fillahead-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
+  await checkImage('assets/fillahead-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
+  await checkImage('assets/fillahead-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
+  checkHeroVideo('assets/fillahead-demo.mp4');
+  await checkImage('assets/marketplace/fillahead-small-promo-440x280.png', 440, 280, {
     maxBytes: 1024 * 1024,
     maxMeanLuma: 190,
     minColorSpread: 35,
   });
-  await checkImage('assets/marketplace/fillpro-marquee-1400x560.png', 1400, 560, {
+  await checkImage('assets/marketplace/fillahead-marquee-1400x560.png', 1400, 560, {
     maxBytes: 2 * 1024 * 1024,
     maxMeanLuma: 190,
     minColorSpread: 35,
   });
   const screenshots = [
-    'assets/marketplace/fillpro-screenshot-fill-page-1280x800.png',
-    'assets/marketplace/fillpro-screenshot-modern-forms-1280x800.png',
-    'assets/marketplace/fillpro-screenshot-profiles-1280x800.png',
-    'assets/marketplace/fillpro-screenshot-privacy-1280x800.png',
-    'assets/marketplace/fillpro-screenshot-undo-1280x800.png',
+    'assets/marketplace/fillahead-screenshot-fill-page-1280x800.png',
+    'assets/marketplace/fillahead-screenshot-modern-forms-1280x800.png',
+    'assets/marketplace/fillahead-screenshot-profiles-1280x800.png',
+    'assets/marketplace/fillahead-screenshot-privacy-1280x800.png',
+    'assets/marketplace/fillahead-screenshot-undo-1280x800.png',
   ];
   for (const screenshot of screenshots) {
     await checkImage(screenshot, 1280, 800, { requireOpaque: true });
   }
   await checkLocalizedScreenshots();
   await checkScreenshotDistinctness(screenshots);
-  await checkImage('assets/marketplace/fillpro-store-demo-22s-thumb.png', 1280, 720);
-  checkVideo('assets/marketplace/fillpro-store-demo-22s.mp4');
+  await checkImage('assets/marketplace/fillahead-store-demo-22s-thumb.png', 1280, 720);
+  checkVideo('assets/marketplace/fillahead-store-demo-22s.mp4');
   checkLocalizedCaptions();
   checkRenderer();
   checkStillRenderer();
+  checkReviewRenderer();
   await checkIconSystem();
 
   if (failures.length) {
-    console.error(`FillPro marketing asset audit failed with ${failures.length} issue(s):`);
+    console.error(`FillAhead marketing asset audit failed with ${failures.length} issue(s):`);
     for (const failure of failures) console.error(`- ${failure}`);
     process.exit(1);
   }
 
   console.log(
-    `FillPro marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
+    `FillAhead marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
   );
 }
 

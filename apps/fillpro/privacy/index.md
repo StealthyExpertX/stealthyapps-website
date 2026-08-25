@@ -1,7 +1,7 @@
-# FillPro Privacy Moved
+# FillAhead Privacy Moved
 
-The current FillPro privacy policy is:
+The current FillAhead privacy policy is:
 
-https://stealthyapps.com/fillpro/privacy/
+https://stealthyapps.com/fillahead/privacy/
 
-That page is the canonical source for FillPro privacy, saved profile handling, support-message handling, and billing-provider notes.
+That page is the canonical source for FillAhead privacy, saved profile handling, support-message handling, and billing-provider notes.

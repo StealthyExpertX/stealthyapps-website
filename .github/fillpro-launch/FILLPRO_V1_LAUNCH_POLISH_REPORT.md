@@ -1,4 +1,4 @@
-# FillPro v1.0.0 Launch Polish Report
+# FillAhead v1.0.0 Launch Polish Report
 
 Date: 2026-06-14
 Status: v1.0.0 launch acceptance record.
@@ -6,13 +6,13 @@ Scope: current static HTML/CSS/JS website and Manifest V3 extension only.
 
 ## 1. Executive Summary and Strategic Rationale
 
-FillPro stays on the existing static website and Manifest V3 extension stack for the initial release. That is the right launch decision because the biggest risk before submission is not framework choice; it is trust, clarity, compatibility, privacy fit, and store-package correctness. A framework migration would add build risk without improving the Chrome Web Store, Edge Add-ons, or Firefox AMO review path.
+FillAhead stays on the existing static website and Manifest V3 extension stack for the initial release. That is the right launch decision because the biggest risk before submission is not framework choice; it is trust, clarity, compatibility, privacy fit, and store-package correctness. A framework migration would add build risk without improving the Chrome Web Store, Edge Add-ons, or Firefox AMO review path.
 
 The focused launch scope is complete: visual-system upgrade, first-class system/light/dark modes, calmer human copy, cleaned navigation, regenerated demo assets, broader fixture coverage, payment-state hardening, Firefox privacy declaration, and release documentation.
 
 Expected impact ranges are directional:
 
-- Website conversion: low-to-moderate lift from clearer CTA hierarchy, shorter benefit-first copy, visible privacy proof, and reduced friction. Unbounce's conversion benchmark work treats 6.6% as a broad landing-page median, while SaaS pages are lower; FillPro's no-account/no-card/free-first path is designed to improve visitor-to-install intent, not guarantee a fixed rate.
+- Website conversion: low-to-moderate lift from clearer CTA hierarchy, shorter benefit-first copy, visible privacy proof, and reduced friction. Unbounce's conversion benchmark work treats 6.6% as a broad landing-page median, while SaaS pages are lower; FillAhead's no-account/no-card/free-first path is designed to improve visitor-to-install intent, not guarantee a fixed rate.
 - Trust and perceived quality: moderate lift from consistent nav, professional dark mode, reduced-motion support, stable footer spacing, and no awkward internal metadata on public pages.
 - Store performance: moderate lift from accurate metadata, 22 locales, strong screenshots/clip plan, no broad host permissions, AMO data-collection declaration, and real compatibility tests.
 - Rating protection: high practical value from 1,009 form fixtures, sensitive-field skips, upload regression coverage, support flow, and explicit payment-state tests.
@@ -59,15 +59,15 @@ Why these choices:
 
 - Chrome and Edge explicitly evaluate UX, design, privacy, performance, and reliability for high-quality listings.
 - WCAG requires accessible contrast and user-respecting motion. Dark mode does not replace contrast; both themes need readable tokens.
-- Baymard-style button work favors clear target states, obvious primary actions, and avoiding extra friction. FillPro's CTAs are direct and large.
+- Baymard-style button work favors clear target states, obvious primary actions, and avoiding extra friction. FillAhead's CTAs are direct and large.
 - NN/g's web-writing findings favor concise, scannable, objective text. The website copy now avoids overexplaining edge cases in the hero and moves technical boundaries into privacy/support where users expect them.
 
 ## 3. Website Redesign
 
 Canonical product experience:
 
-- Primary product page: `https://stealthyapps.com/fillpro/`.
-- Redirect/support pages remain available, but `/fillpro/` is the link to use in stores.
+- Primary product page: `https://stealthyapps.com/fillahead/`.
+- Redirect/support pages remain available, but `/fillahead/` is the link to use in stores.
 - Navigation is consistent: Product, Pricing, Privacy, Support, Contact.
 - Removed redundant Demo nav.
 - Footer spacing is audited so links do not touch mobile edges.
@@ -76,7 +76,7 @@ Canonical product experience:
 Page-level updates:
 
 - `fillpro/index.html`: tightened hero, CTA, demo label, FAQ, pricing, and trust copy.
-- `fillpro/privacy/index.html`: rewrote privacy copy around plain user language. The core promise is profiles are saved inside the extension, not sent to a FillPro profile server.
+- `fillpro/privacy/index.html`: rewrote privacy copy around plain user language. The core promise is profiles are saved inside the extension, not sent to a FillAhead profile server.
 - `support/index.html` and `contact/index.html`: kept support lightweight and product-focused, without technical scorecards or internal launch-kit text.
 - `styles.css`: added launch tokens, dark theme, nav/footer/page-surface consistency, theme toggle, CTA treatment, and reduced-motion safety.
 - `site.js`: added shared theme system and procedural background.
@@ -93,14 +93,14 @@ Production references:
 
 - Theme system: `fillpro-site/site.js`.
 - Theme and motion CSS: `fillpro-site/styles.css`.
-- Main page: `fillpro-site/fillpro/index.html`.
-- Privacy page: `fillpro-site/fillpro/privacy/index.html`.
+- Main page: `fillpro-site/fillahead/index.html`.
+- Privacy page: `fillpro-site/fillahead/privacy/index.html`.
 - Demo generator: `fillpro-site/scripts/render-fillpro-assets.js`.
 - Site audit: `fillpro-site/scripts/audit-fillpro-site.js`.
 
 Demo asset direction:
 
-- Current GIF/poster: empty repeated form, FillPro profile card, safe field fill, upload match, sensitive field left untouched, review-before-submit note.
+- Current GIF/poster: empty repeated form, FillAhead profile card, safe field fill, upload match, sensitive field left untouched, review-before-submit note.
 - Final store clip should be 20-35 seconds.
 - Website loop should stay 6-8 seconds and cleanly show: empty form -> profile select -> fill -> upload match -> sensitive skip -> success/review state.
 - Do not use a nested browser-in-browser frame on the website.
@@ -155,7 +155,7 @@ Implemented corpus:
 - The expansion covers 100 topics with 10 targets each: 5 popular targets and 5 less-covered targets per topic.
 - The targets are fixture and live-audit candidates, not verified live support claims until a visual/live audit confirms usable forms.
 
-This does not count as a normal FillPro failure:
+This does not count as a normal FillAhead failure:
 
 - Auth walls.
 - CAPTCHA or anti-bot gates.
@@ -255,7 +255,7 @@ SEO and AI search:
 
 Website:
 
-- Product page uses `/fillpro/` as canonical.
+- Product page uses `/fillahead/` as canonical.
 - Navigation labels are consistent.
 - Privacy copy is plain and consistent with actual extension behavior.
 - Footer spacing passes mobile checks.
@@ -285,13 +285,13 @@ Store and docs:
 - Marketplace metadata is aligned with real features.
 - Store pages should use the website product URL, support URL, and privacy URL.
 - Screenshot/clip plan is ready for your final visual capture.
-- Internal launch docs live under `.github/fillpro-launch/`, not as public website pages.
+- Internal launch docs live under `.github/fillahead-launch/`, not as public website pages.
 
 ## 9. Implementation Order
 
 1. Remove stale/risky public language and internal launch-kit copy from the website.
 2. Implement website theme system, CTA shine/lift, focus states, and procedural background.
-3. Clean `/fillpro/` navigation and product copy.
+3. Clean `/fillahead/` navigation and product copy.
 4. Rewrite privacy/support language in plain terms.
 5. Regenerate website demo and marketplace asset bases.
 6. Add extension Appearance setting and first-class dark mode.
@@ -322,5 +322,5 @@ Risk controls:
 - Do not add broad host permissions for convenience.
 - Do not add telemetry before launch.
 - Do not reward or gate reviews.
-- Do not claim support for protected pages FillPro cannot reach.
+- Do not claim support for protected pages FillAhead cannot reach.
 - Keep every public claim testable.

@@ -13,40 +13,42 @@ const VIEWPORTS = [
   { name: 'mobile', width: 390, height: 844 },
 ];
 const ROUTES = [
-  '/fillpro/',
-  '/fillpro/checkout/',
-  '/fillpro/changelog/',
-  '/fillpro/privacy/',
-  '/fillpro/docs/getting-started/',
-  '/fillpro/docs/smart-rules/',
-  '/fillpro/download/',
-  '/fillpro/download/chrome/',
-  '/fillpro/download/edge/',
-  '/fillpro/download/firefox/',
+  '/fillahead/',
+  '/fillahead/checkout/',
+  '/fillahead/changelog/',
+  '/fillahead/privacy/',
+  '/fillahead/terms/',
+  '/fillahead/refunds/',
+  '/fillahead/docs/getting-started/',
+  '/fillahead/docs/smart-rules/',
+  '/fillahead/download/',
+  '/fillahead/download/chrome/',
+  '/fillahead/download/edge/',
+  '/fillahead/download/firefox/',
   '/support/',
   '/contact/',
-  '/fillpro/job-application-autofill/',
-  '/fillpro/resume-upload-autofill/',
-  '/fillpro/local-form-autofill/',
-  '/fillpro/browser-autofill-vs-fillpro/',
-  '/fillpro/de/',
-  '/fillpro/es/',
-  '/fillpro/fr/',
-  '/fillpro/pt-br/',
-  '/fillpro/ja/',
-  '/fillpro/ko/',
-  '/fillpro/zh-cn/',
-  '/fillpro/ru/',
+  '/fillahead/job-application-autofill/',
+  '/fillahead/resume-upload-autofill/',
+  '/fillahead/local-form-autofill/',
+  '/fillahead/browser-autofill-vs-fillahead/',
+  '/fillahead/de/',
+  '/fillahead/es/',
+  '/fillahead/fr/',
+  '/fillahead/pt-br/',
+  '/fillahead/ja/',
+  '/fillahead/ko/',
+  '/fillahead/zh-cn/',
+  '/fillahead/ru/',
 ];
 const LOCALIZED_THEME_MARKERS = {
-  '/fillpro/de/': ['Aktuelles Design:', 'Wechseln zu:'],
-  '/fillpro/es/': ['Tema actual:', 'Cambiar a:'],
-  '/fillpro/fr/': ['Thème actuel :', 'Passer au thème'],
-  '/fillpro/pt-br/': ['Tema atual:', 'Mudar para:'],
-  '/fillpro/ja/': ['現在のテーマ:', 'テーマに切り替えます'],
-  '/fillpro/ko/': ['현재 테마:', '테마로 전환합니다'],
-  '/fillpro/zh-cn/': ['当前主题：', '切换到'],
-  '/fillpro/ru/': ['Текущая тема:', 'Переключить на тему'],
+  '/fillahead/de/': ['Aktuelles Design:', 'Wechseln zu:'],
+  '/fillahead/es/': ['Tema actual:', 'Cambiar a:'],
+  '/fillahead/fr/': ['Thème actuel :', 'Passer au thème'],
+  '/fillahead/pt-br/': ['Tema atual:', 'Mudar para:'],
+  '/fillahead/ja/': ['現在のテーマ:', 'テーマに切り替えます'],
+  '/fillahead/ko/': ['현재 테마:', '테마로 전환합니다'],
+  '/fillahead/zh-cn/': ['当前主题：', '切换到'],
+  '/fillahead/ru/': ['Текущая тема:', 'Переключить на тему'],
 };
 
 const CONTENT_TYPES = {
@@ -126,7 +128,7 @@ function slug(route, viewport, theme) {
 
 async function auditPage(page, route, viewport, theme, errors) {
   await page.addInitScript((selectedTheme) => {
-    window.localStorage.setItem('fillpro-theme', selectedTheme);
+    window.localStorage.setItem('fillahead-theme', selectedTheme);
   }, theme);
 
   const response = await page.goto(route, { waitUntil: 'networkidle' });
@@ -135,137 +137,110 @@ async function auditPage(page, route, viewport, theme, errors) {
     return;
   }
 
+  await page.addStyleTag({
+    content: 'html * { content-visibility: visible !important; contain-intrinsic-size: none !important; }',
+  });
+  await page.waitForTimeout(50);
   await page.screenshot({
     path: path.join(OUT_DIR, slug(new URL(route).pathname, viewport.name, theme)),
     fullPage: true,
   });
 
   const pathname = new URL(route).pathname;
-  if (pathname === '/fillpro/') {
+  if (pathname === '/fillahead/') {
     try {
       await page.mouse.move(Math.max(12, viewport.width - 24), 120);
-      await page.waitForFunction(
-        () => document.documentElement.classList.contains('hero-3d-ready'),
-        null,
-        { timeout: 8000 },
-      );
-      await page.locator('.launch-hero').screenshot({
-        path: path.join(OUT_DIR, `hero-visual-${viewport.name}-${theme}.png`),
+      await page.waitForFunction(() => {
+        const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+        return Boolean(
+          media &&
+          (media.tagName === 'VIDEO' || (media.complete && media.naturalWidth > 0)),
+        );
       });
-      const canvas = page.locator('.hero-3d-canvas');
-      const canvasPath = path.join(OUT_DIR, `hero-3d-${viewport.name}-${theme}.png`);
-      await canvas.screenshot({ path: canvasPath });
-      const stats = await sharp(canvasPath).stats();
-      const alphaMean = stats.channels[3] ? stats.channels[3].mean : 255;
+      await page.waitForTimeout(120);
+      await page.locator('.launch-hero').screenshot({
+        path: path.join(OUT_DIR, 'hero-visual-' + viewport.name + '-' + theme + '.png'),
+      });
+      const demoPath = path.join(
+        OUT_DIR,
+        'hero-demo-' + viewport.name + '-' + theme + '.png',
+      );
+      await page.locator('.launch-demo-card').screenshot({ path: demoPath });
+      const stats = await sharp(demoPath).stats();
       const colorDeviation = stats.channels
         .slice(0, 3)
         .reduce((sum, channel) => sum + channel.stdev, 0);
-      const contextReport = await page.evaluate(() => {
-        const canvas = document.querySelector('.hero-3d-canvas');
-        const gl = canvas && (canvas.getContext('webgl2') || canvas.getContext('webgl'));
-        return {
-          hasContext: Boolean(gl),
-          width: gl?.drawingBufferWidth || 0,
-          height: gl?.drawingBufferHeight || 0,
-        };
-      });
-      if (!contextReport.hasContext || contextReport.width < 1 || contextReport.height < 1) {
+      if (colorDeviation < 18) {
         errors.push(
-          `${route}: hero 3D WebGL context is unavailable on ${viewport.name}/${theme}: ${JSON.stringify(contextReport)}`,
-        );
-      }
-      if (alphaMean < 0.5 || colorDeviation < 2) {
-        errors.push(
-          `${route}: captured hero 3D pixels appear blank on ${viewport.name}/${theme} (alpha ${alphaMean.toFixed(2)}, deviation ${colorDeviation.toFixed(2)})`,
+          route + ': real product demo appears blank on ' + viewport.name + '/' + theme +
+          ' (' + colorDeviation.toFixed(2) + ')',
         );
       }
 
-      const framingReport = await page.evaluate(() => {
-        const canvas = document.querySelector('.hero-3d-canvas');
-        const demo = document.querySelector('.launch-demo-card');
-        const copy = document.querySelector('.launch-hero-copy');
-        if (!canvas || !demo || !copy) return { ok: false };
-
-        const rect = (element) => {
-          const bounds = element.getBoundingClientRect();
-          return {
-            left: bounds.left,
-            top: bounds.top,
-            right: bounds.right,
-            bottom: bounds.bottom,
-            width: bounds.width,
-            height: bounds.height,
-          };
-        };
-        const overlapArea = (a, b) => {
-          const width = Math.max(0, Math.min(a.right, b.right) - Math.max(a.left, b.left));
-          const height = Math.max(0, Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top));
-          return width * height;
-        };
-
-        const canvasRect = rect(canvas);
-        const demoRect = rect(demo);
-        const copyRect = rect(copy);
-        const demoArea = demoRect.width * demoRect.height || 1;
-        return {
-          ok: true,
-          canvasOpacity: Number.parseFloat(window.getComputedStyle(canvas).opacity) || 0,
-          demoOverlapRatio: overlapArea(canvasRect, demoRect) / demoArea,
-          copyToDemoOverlap: overlapArea(canvasRect, copyRect) / Math.max(overlapArea(canvasRect, demoRect), 1),
-        };
-      });
-      if (!framingReport.ok) {
-        errors.push(`${route}: hero 3D framing elements are missing on ${viewport.name}/${theme}`);
-      } else {
-        if (framingReport.canvasOpacity < 0.08) {
-          errors.push(
-            `${route}: hero 3D layer is too faint to be a useful product visual on ${viewport.name}/${theme} (${framingReport.canvasOpacity.toFixed(2)})`,
-          );
-        }
-        if (framingReport.demoOverlapRatio < 0.45) {
-          errors.push(
-            `${route}: hero 3D layer is not anchored to the product demo on ${viewport.name}/${theme} (${framingReport.demoOverlapRatio.toFixed(2)})`,
-          );
-        }
-        if (framingReport.copyToDemoOverlap > 0.55) {
-          errors.push(
-            `${route}: hero 3D layer is competing with the hero copy on ${viewport.name}/${theme} (${framingReport.copyToDemoOverlap.toFixed(2)})`,
-          );
-        }
-      }
-
-      const demoShellReport = await page.evaluate(() => {
+      const heroReport = await page.evaluate(() => {
         const shell = document.querySelector('.demo-shell');
         const hero = document.querySelector('.launch-hero');
-        if (!shell || !hero) return { ok: false };
-        const style = getComputedStyle(shell);
+        const demo = document.querySelector('.launch-demo-card');
+        const copy = document.querySelector('.launch-hero-copy');
+        const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+        if (!shell || !hero || !demo || !copy || !media) return { ok: false };
+
+        const shellStyle = getComputedStyle(shell);
         const heroStyle = getComputedStyle(hero);
+        const demoRect = demo.getBoundingClientRect();
+        const copyRect = copy.getBoundingClientRect();
+        const overlapWidth = Math.max(
+          0,
+          Math.min(demoRect.right, copyRect.right) - Math.max(demoRect.left, copyRect.left),
+        );
+        const overlapHeight = Math.max(
+          0,
+          Math.min(demoRect.bottom, copyRect.bottom) - Math.max(demoRect.top, copyRect.top),
+        );
         return {
           ok: true,
-          overflowX: style.overflowX,
-          overflowY: style.overflowY,
-          scrollbarWidth: style.scrollbarWidth || '',
-          heroOverflowX: heroStyle.overflowX,
+          hasDecorativeCanvas: Boolean(document.querySelector('.hero-3d-canvas')),
+          mediaReady:
+            media.tagName === 'VIDEO' ||
+            Boolean(media.complete && media.naturalWidth > 0),
+          overflowX: shellStyle.overflowX,
+          overflowY: shellStyle.overflowY,
+          scrollbarWidth: shellStyle.scrollbarWidth || '',
           heroOverflowY: heroStyle.overflowY,
-          heroScrollHeight: hero.scrollHeight,
-          heroClientHeight: hero.clientHeight,
+          copyDemoOverlap: overlapWidth * overlapHeight,
         };
       });
-      if (!demoShellReport.ok) {
-        errors.push(`${route}: hero demo shell missing on ${viewport.name}/${theme}`);
-      } else if (demoShellReport.scrollbarWidth !== 'none' || demoShellReport.overflowY !== 'hidden') {
-        errors.push(
-          `${route}: hero demo shell scrollbar can become visible on ${viewport.name}/${theme}: ${JSON.stringify(demoShellReport)}`,
-        );
-      } else if (['auto', 'scroll'].includes(demoShellReport.heroOverflowY)) {
-        errors.push(
-          `${route}: hero became an internal scroll container on ${viewport.name}/${theme}: ${JSON.stringify(demoShellReport)}`,
-        );
+      if (!heroReport.ok || !heroReport.mediaReady) {
+        errors.push(route + ': product demo media is missing on ' + viewport.name + '/' + theme);
+      } else {
+        if (heroReport.hasDecorativeCanvas) {
+          errors.push(route + ': decorative WebGL canvas returned on ' + viewport.name + '/' + theme);
+        }
+        if (heroReport.scrollbarWidth !== 'none' || heroReport.overflowY !== 'hidden') {
+          errors.push(
+            route + ': hero demo shell scrollbar can become visible on ' +
+            viewport.name + '/' + theme + ': ' + JSON.stringify(heroReport),
+          );
+        }
+        if (['auto', 'scroll'].includes(heroReport.heroOverflowY)) {
+          errors.push(
+            route + ': hero became an internal scroll container on ' +
+            viewport.name + '/' + theme + ': ' + JSON.stringify(heroReport),
+          );
+        }
+        if (heroReport.copyDemoOverlap > 1) {
+          errors.push(
+            route + ': hero copy overlaps the product demo on ' +
+            viewport.name + '/' + theme,
+          );
+        }
       }
     } catch (error) {
-      errors.push(`${route}: hero 3D canvas check failed on ${viewport.name}/${theme}: ${error.message}`);
+      errors.push(
+        route + ': product hero check failed on ' +
+        viewport.name + '/' + theme + ': ' + error.message,
+      );
     }
-
     try {
       const reviewRail = page.locator('.launch-review-rail');
       await reviewRail.scrollIntoViewIfNeeded();
@@ -337,12 +312,15 @@ async function auditPage(page, route, viewport, theme, errors) {
       hasThemeToggle: Boolean(document.querySelector('.theme-toggle')),
       themeToggle: (() => {
         const button = document.querySelector('.theme-toggle');
+        const rect = button ? button.getBoundingClientRect() : null;
         return button
           ? {
               mode: button.dataset.theme || '',
               resolved: button.dataset.resolvedTheme || '',
               label: button.getAttribute('aria-label') || '',
               title: button.getAttribute('title') || '',
+              width: rect.width,
+              height: rect.height,
             }
           : null;
       })(),
@@ -363,6 +341,11 @@ async function auditPage(page, route, viewport, theme, errors) {
   if (!report.hasFooter) errors.push(`${route}: missing footer`);
   if (!report.hasThemeToggle) errors.push(`${route}: missing theme toggle`);
   if (report.themeToggle) {
+    if (viewport.width <= 720 && report.themeToggle.width > 46) {
+      errors.push(
+        `${route}: mobile theme control stretched to ${Math.round(report.themeToggle.width)}px`,
+      );
+    }
     const expectedNextTheme = theme === 'dark' ? 'light' : 'system';
     if (report.themeToggle.mode !== theme) {
       errors.push(`${route}: theme toggle mode expected ${theme}, got ${report.themeToggle.mode || 'unset'}`);
@@ -409,110 +392,83 @@ async function auditPage(page, route, viewport, theme, errors) {
   }
 }
 
-async function imageMeanDifference(leftPath, rightPath) {
-  const left = await sharp(leftPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const right = await sharp(rightPath)
-    .resize(left.info.width, left.info.height, { fit: 'fill' })
-    .ensureAlpha()
-    .raw()
-    .toBuffer();
-  let diff = 0;
-  for (let index = 0; index < left.data.length; index += 4) {
-    diff += Math.abs(left.data[index] - right[index]);
-    diff += Math.abs(left.data[index + 1] - right[index + 1]);
-    diff += Math.abs(left.data[index + 2] - right[index + 2]);
-  }
-  return diff / (left.info.width * left.info.height * 3);
-}
-
-async function auditPointerGlow(browser, origin, errors) {
-  const context = await browser.newContext({
-    viewport: { width: 1440, height: 1000 },
-    deviceScaleFactor: 1,
-    reducedMotion: 'no-preference',
-    hasTouch: false,
-    colorScheme: 'dark',
-  });
-  const page = await context.newPage();
-
-  try {
-    await page.addInitScript(() => {
-      window.localStorage.setItem('fillpro-theme', 'dark');
+async function auditStaticPresentation(browser, origin, errors) {
+  for (const theme of ['light', 'dark']) {
+    const context = await browser.newContext({
+      viewport: { width: 1440, height: 1000 },
+      deviceScaleFactor: 1,
+      reducedMotion: 'no-preference',
+      hasTouch: false,
+      colorScheme: theme,
     });
-    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    const page = await context.newPage();
 
-    const downloads = page.locator('.launch-downloads');
-    await downloads.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(350);
-    await page.mouse.move(260, 520);
-    await page.waitForTimeout(240);
+    try {
+      await page.addInitScript((value) => {
+        window.localStorage.setItem('fillahead-theme', value);
+      }, theme);
+      await page.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
+      const report = await page.evaluate(() => {
+        const root = document.documentElement;
+        const targetSelectors = [
+          '.launch-strip',
+          '.launch-section',
+          '.launch-band',
+          '.launch-final',
+          '.browser-download-card',
+          '.launch-use-grid article',
+          '.workflow-list article',
+          '.compare-lanes article',
+          '.price-card',
+          '.launch-faq-list details',
+        ].join(',');
+        const hidden = Array.from(document.querySelectorAll(targetSelectors))
+          .filter((element) => {
+            const style = getComputedStyle(element);
+            return (
+              Number.parseFloat(style.opacity) < 0.99 ||
+              style.visibility !== 'visible' ||
+              style.display === 'none'
+            );
+          })
+          .map((element) => element.className || element.tagName);
+        return {
+          scrollY: window.scrollY,
+          hidden,
+          pointerNode: Boolean(document.querySelector('.site-pointer-glow')),
+          pointerClass: root.classList.contains('pointer-glow-active'),
+          pointerX: root.style.getPropertyValue('--pointer-x'),
+          pointerY: root.style.getPropertyValue('--pointer-y'),
+          revealClass: root.classList.contains('reveal-ready'),
+          revealItems: document.querySelectorAll('.reveal-item').length,
+        };
+      });
 
-    const glowReport = await page.evaluate(() => {
-      const root = document.documentElement;
-      const glowElement = document.querySelector('.site-pointer-glow');
-      const glow = glowElement ? getComputedStyle(glowElement) : null;
-      const localSelectors = [
-        '.launch-downloads',
-        '.launch-section',
-        '.review-rail-stage',
-        '.trust-page .section',
-      ];
-      return {
-        active: root.classList.contains('pointer-glow-active'),
-        hasGlowElement: Boolean(glowElement),
-        x: root.style.getPropertyValue('--pointer-x'),
-        y: root.style.getPropertyValue('--pointer-y'),
-        position: glow ? glow.position : '',
-        inset: glow ? [glow.top, glow.right, glow.bottom, glow.left] : [],
-        opacity: glow ? Number.parseFloat(glow.opacity) : 0,
-        localPointerDecorations: localSelectors.filter((selector) => {
-          const element = document.querySelector(selector);
-          if (!element) return false;
-          const style = getComputedStyle(element, '::before');
-          return `${style.backgroundImage} ${style.maskImage}`.includes('--pointer-');
-        }),
-      };
-    });
-
-    if (!glowReport.active) errors.push('/fillpro/: pointer glow did not activate for a fine pointer');
-    if (!glowReport.hasGlowElement) errors.push('/fillpro/: pointer glow element was not installed');
-    if (glowReport.position !== 'fixed' || glowReport.inset.some((value) => value !== '0px')) {
-      errors.push(`/fillpro/: pointer glow is not viewport-wide (${JSON.stringify(glowReport)})`);
+      if (report.scrollY !== 0) {
+        errors.push(`/fillahead/: fresh page moved before user input on ${theme}`);
+      }
+      if (report.hidden.length) {
+        errors.push(`/fillahead/: content starts hidden on ${theme}: ${report.hidden.slice(0, 8).join(', ')}`);
+      }
+      if (
+        report.pointerNode ||
+        report.pointerClass ||
+        report.pointerX ||
+        report.pointerY ||
+        report.revealClass ||
+        report.revealItems
+      ) {
+        errors.push(`/fillahead/: obsolete pointer/reveal behavior returned on ${theme}: ${JSON.stringify(report)}`);
+      }
+    } catch (error) {
+      errors.push(`/fillahead/: static presentation audit failed on ${theme}: ${error.message}`);
+    } finally {
+      await page.close();
+      await context.close();
     }
-    if (!/^260px$/.test(glowReport.x) || !/^520px$/.test(glowReport.y)) {
-      errors.push(`/fillpro/: pointer glow did not track viewport pixels (${glowReport.x}, ${glowReport.y})`);
-    }
-    if (glowReport.opacity < 0.99) errors.push('/fillpro/: pointer glow remained visually inactive');
-    if (glowReport.localPointerDecorations.length) {
-      errors.push(`/fillpro/: section-local pointer glow returned: ${glowReport.localPointerDecorations.join(', ')}`);
-    }
-
-    const downloadsLeft = path.join(OUT_DIR, 'pointer-glow-downloads-dark-left.png');
-    const downloadsRight = path.join(OUT_DIR, 'pointer-glow-downloads-dark-right.png');
-    await page.screenshot({ path: downloadsLeft });
-    await page.mouse.move(1180, 520);
-    await page.waitForTimeout(240);
-    await page.screenshot({ path: downloadsRight });
-    const pointerDiff = await imageMeanDifference(downloadsLeft, downloadsRight);
-    if (pointerDiff < 0.02) {
-      errors.push(`/fillpro/: pointer glow did not visibly follow the cursor (${pointerDiff.toFixed(3)})`);
-    }
-
-    const reviewRail = page.locator('.launch-review-rail');
-    await reviewRail.scrollIntoViewIfNeeded();
-    await page.waitForTimeout(650);
-    await page.mouse.move(980, 500);
-    await page.waitForTimeout(240);
-    await page.screenshot({ path: path.join(OUT_DIR, 'pointer-glow-review-dark.png') });
-  } catch (error) {
-    errors.push(`/fillpro/: pointer glow audit failed: ${error.message}`);
-  } finally {
-    await page.close();
-    await context.close();
   }
 }
-
-async function auditHeroSceneMotion(browser, origin, errors) {
+async function auditProductHero(browser, origin, errors) {
   const context = await browser.newContext({
     viewport: { width: 1440, height: 1000 },
     deviceScaleFactor: 1,
@@ -522,29 +478,57 @@ async function auditHeroSceneMotion(browser, origin, errors) {
   try {
     page.on('console', (message) => {
       if (message.type() === 'error') {
-        errors.push(`/fillpro/: console error during hero 3D motion audit: ${message.text()}`);
+        errors.push('/fillahead/: console error during product hero audit: ' + message.text());
       }
     });
     page.on('pageerror', (error) => {
-      errors.push(`/fillpro/: page error during hero 3D motion audit: ${error.message}`);
+      errors.push('/fillahead/: page error during product hero audit: ' + error.message);
     });
-    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
-    await page.mouse.move(1120, 160);
-    await page.waitForFunction(
-      () => document.documentElement.classList.contains('hero-3d-ready'),
-      null,
-      { timeout: 8000 },
-    );
-    const canvas = page.locator('.hero-3d-canvas');
-    const before = path.join(OUT_DIR, 'hero-3d-motion-before.png');
-    const after = path.join(OUT_DIR, 'hero-3d-motion-after.png');
-    await canvas.screenshot({ path: before });
-    await page.mouse.move(1180, 190);
-    await page.waitForTimeout(450);
-    await canvas.screenshot({ path: after });
-    const meanDiff = await imageMeanDifference(before, after);
-    if (meanDiff < 0.18) {
-      errors.push(`/fillpro/: hero 3D scene did not show enough motion/interaction difference (${meanDiff.toFixed(3)})`);
+    await page.goto(origin + '/fillahead/', { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => {
+      const media = document.querySelector('.demo-shell video, [data-fillahead-demo-poster]');
+      return Boolean(
+        media &&
+        (media.tagName === 'VIDEO' || (media.complete && media.naturalWidth > 0)),
+      );
+    });
+
+    const playback = await page.evaluate(() => {
+      const button = document.querySelector('.demo-play-button');
+      const video = document.querySelector('.demo-shell video');
+      return {
+        buttonState: button?.dataset.state || '',
+        buttonLabel: button?.getAttribute('aria-label') || '',
+        videoPresent: Boolean(video),
+        videoPaused: video ? video.paused : null,
+        hasDecorativeCanvas: Boolean(document.querySelector('.hero-3d-canvas')),
+      };
+    });
+    if (playback.hasDecorativeCanvas) {
+      errors.push('/fillahead/: decorative WebGL canvas returned');
+    }
+    if (playback.buttonState !== 'playing' || !/^Pause/.test(playback.buttonLabel)) {
+      errors.push('/fillahead/: product demo must start in the playing state');
+    }
+
+    const demoButton = page.locator('.demo-play-button');
+    await demoButton.click();
+    await page.waitForTimeout(120);
+    const pausedState = await demoButton.evaluate((button) => ({
+      state: button.dataset.state,
+      label: button.getAttribute('aria-label') || '',
+    }));
+    if (pausedState.state !== 'paused' || !/^Play/.test(pausedState.label)) {
+      errors.push('/fillahead/: clicking the product demo did not pause it');
+    }
+    await demoButton.click();
+    await page.waitForTimeout(120);
+    const resumedState = await demoButton.evaluate((button) => ({
+      state: button.dataset.state,
+      label: button.getAttribute('aria-label') || '',
+    }));
+    if (resumedState.state !== 'playing' || !/^Pause/.test(resumedState.label)) {
+      errors.push('/fillahead/: clicking the product demo again did not resume it');
     }
 
     const reviewRail = page.locator('.launch-review-rail');
@@ -560,9 +544,8 @@ async function auditHeroSceneMotion(browser, origin, errors) {
     await page.waitForFunction(() => {
       const rail = document.querySelector('.launch-review-rail');
       if (!rail) return false;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
-      if (!document.documentElement.classList.contains('reveal-ready')) return false;
-      return rail.classList.contains('is-visible') || Number.parseFloat(getComputedStyle(rail).opacity) > 0.98;
+      const style = getComputedStyle(rail);
+      return Number.parseFloat(style.opacity) > 0.98 && style.visibility === 'visible';
     });
     await page.waitForTimeout(700);
     const reviewPath = path.join(OUT_DIR, 'review-rail-motion-light.png');
@@ -572,16 +555,18 @@ async function auditHeroSceneMotion(browser, origin, errors) {
       .slice(0, 3)
       .reduce((sum, channel) => sum + channel.stdev, 0);
     if (reviewColorDeviation < 18) {
-      errors.push(`/fillpro/: review-before-submit reveal capture appears blank (${reviewColorDeviation.toFixed(2)})`);
+      errors.push(
+        '/fillahead/: review-before-submit reveal capture appears blank (' +
+        reviewColorDeviation.toFixed(2) + ')',
+      );
     }
   } catch (error) {
-    errors.push(`/fillpro/: hero 3D motion audit failed: ${error.message}`);
+    errors.push('/fillahead/: product hero audit failed: ' + error.message);
   } finally {
     await page.close();
     await context.close();
   }
 }
-
 async function auditContactSubmission(browser, origin, errors) {
   const context = await browser.newContext({
     viewport: { width: 1024, height: 900 },
@@ -601,7 +586,7 @@ async function auditContactSubmission(browser, origin, errors) {
       });
     });
 
-    await page.goto(`${origin}/contact/?topic=product&product=FillPro`, {
+    await page.goto(`${origin}/contact/?topic=product&product=FillAhead`, {
       waitUntil: 'networkidle',
     });
 
@@ -632,11 +617,11 @@ async function auditContactSubmission(browser, origin, errors) {
       const expected = {
         email: 'release-test@example.com',
         name: 'Release Tester',
-        topic: 'FillPro',
-        reason: 'Question about FillPro',
+        topic: 'FillAhead',
+        reason: 'Question about FillAhead',
         _replyto: 'release-test@example.com',
         _captcha: 'false',
-        _subject: 'Product: Question about FillPro | FillPro',
+        _subject: 'Product: Question about FillAhead | FillAhead',
       };
       for (const [key, value] of Object.entries(expected)) {
         if (capturedPayload[key] !== value) {
@@ -650,7 +635,7 @@ async function auditContactSubmission(browser, origin, errors) {
 
     capturedPayload = null;
     await page.goto(
-      `${origin}/contact/?topic=product&reason=uninstall&product=FillPro`,
+      `${origin}/contact/?topic=product&reason=uninstall&product=FillAhead`,
       { waitUntil: 'networkidle' },
     );
     const uninstallState = await page.evaluate(() => ({
@@ -664,7 +649,7 @@ async function auditContactSubmission(browser, origin, errors) {
     }));
     if (
       uninstallState.reason !== 'uninstall' ||
-      uninstallState.reasonLabel !== 'I removed FillPro'
+      uninstallState.reasonLabel !== 'I removed FillAhead'
     ) {
       errors.push('/contact/: uninstall feedback reason was not preselected');
     }
@@ -683,7 +668,7 @@ async function auditContactSubmission(browser, origin, errors) {
       await sendButton.click();
       await page.locator('[data-contact-status][data-state="success"]').waitFor();
       if (
-        capturedPayload?.reason !== 'I removed FillPro' ||
+        capturedPayload?.reason !== 'I removed FillAhead' ||
         'email' in (capturedPayload || {}) ||
         '_replyto' in (capturedPayload || {})
       ) {
@@ -700,7 +685,7 @@ async function auditContactSubmission(browser, origin, errors) {
       });
     });
 
-    await page.goto(`${origin}/contact/?topic=product&product=FillPro`, {
+    await page.goto(`${origin}/contact/?topic=product&product=FillAhead`, {
       waitUntil: 'networkidle',
     });
     await page.locator('#contactName').fill('Release Tester');
@@ -713,8 +698,8 @@ async function auditContactSubmission(browser, origin, errors) {
     }
     const fallbackHref =
       (await page.locator('[data-compose-link="default"]').getAttribute('href')) || '';
-    if (!decodeURIComponent(fallbackHref).includes('| FillPro')) {
-      errors.push('/contact/: email-app fallback subject is missing the FillPro suffix');
+    if (!decodeURIComponent(fallbackHref).includes('| FillAhead')) {
+      errors.push('/contact/: email-app fallback subject is missing the FillAhead suffix');
     }
   } catch (error) {
     errors.push(`/contact/: submission audit failed: ${error.message}`);
@@ -728,15 +713,14 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await context.newPage();
   const expected = {
-    free: 'Install FillPro',
-    monthly: 'Install, then choose monthly',
-    yearly: 'Install, then choose yearly',
-    lifetime: 'Install, then choose lifetime',
+    free: 'Check Chrome availability',
+    monthly: 'Check Chrome availability',
+    yearly: 'Check Chrome availability',
   };
 
   try {
     for (const [plan, action] of Object.entries(expected)) {
-      await page.goto(`${origin}/fillpro/checkout/?plan=${plan}`, {
+      await page.goto(`${origin}/fillahead/checkout/?plan=${plan}`, {
         waitUntil: 'networkidle',
       });
       const state = await page.evaluate(() => ({
@@ -744,21 +728,23 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
         action: document.querySelector('[data-checkout-action]')?.textContent?.trim() || '',
       }));
       if (state.selected !== plan || state.action !== action) {
-        errors.push(`/fillpro/checkout/: ${plan} selection regressed: ${JSON.stringify(state)}`);
+        errors.push(`/fillahead/checkout/: ${plan} selection regressed: ${JSON.stringify(state)}`);
       }
     }
 
-    await page.goto(`${origin}/fillpro/checkout/?plan=unknown`, {
-      waitUntil: 'networkidle',
-    });
-    const fallback = await page
-      .locator('[data-checkout-plan][aria-current="true"]')
-      .getAttribute('data-checkout-plan');
-    if (fallback !== 'yearly') {
-      errors.push('/fillpro/checkout/: invalid plan query did not fall back to yearly');
-    }
-  } catch (error) {
-    errors.push(`/fillpro/checkout/: plan interaction audit failed: ${error.message}`);
+    for (const invalidPlan of ['unknown', 'lifetime']) {
+      await page.goto(origin + '/fillahead/checkout/?plan=' + invalidPlan, {
+        waitUntil: 'networkidle',
+      });
+      const fallback = await page
+        .locator('[data-checkout-plan][aria-current="true"]')
+        .getAttribute('data-checkout-plan');
+      const lifetimeCard = await page.locator('[data-checkout-plan="lifetime"]').count();
+      if (fallback !== 'yearly' || lifetimeCard) {
+        errors.push('/fillahead/checkout/: ' + invalidPlan + ' query exposed an unavailable plan');
+      }
+    }  } catch (error) {
+    errors.push(`/fillahead/checkout/: plan interaction audit failed: ${error.message}`);
   } finally {
     await page.close();
     await context.close();
@@ -778,34 +764,34 @@ async function auditDemoPlayback(browser, origin, errors) {
   const reducedPage = await reducedContext.newPage();
 
   try {
-    await page.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
     await page.locator('.demo-shell video').waitFor({ state: 'visible' });
     await page.waitForFunction(() => {
       const video = document.querySelector('.demo-shell video');
       return Boolean(video && !video.paused && video.currentTime > 0);
     });
-    const pauseButton = page.getByRole('button', { name: 'Pause the FillPro demo' });
+    const pauseButton = page.getByRole('button', { name: 'Pause the FillAhead demo' });
     await pauseButton.click();
     await page.waitForFunction(() => document.querySelector('.demo-shell video')?.paused);
-    const playButton = page.getByRole('button', { name: 'Play the FillPro demo' });
+    const playButton = page.getByRole('button', { name: 'Play the FillAhead demo' });
     await playButton.click();
     await page.waitForFunction(() => !document.querySelector('.demo-shell video')?.paused);
-    await page.getByRole('button', { name: 'Pause the FillPro demo' }).waitFor();
+    await page.getByRole('button', { name: 'Pause the FillAhead demo' }).waitFor();
     await page.locator('.launch-demo-card').screenshot({
       path: path.join(OUT_DIR, 'hero-demo-playing.png'),
     });
 
-    await reducedPage.goto(`${origin}/fillpro/`, { waitUntil: 'networkidle' });
+    await reducedPage.goto(`${origin}/fillahead/`, { waitUntil: 'networkidle' });
     await reducedPage.locator('.demo-shell video').waitFor({ state: 'visible' });
     const reducedState = await reducedPage.evaluate(() => ({
       paused: document.querySelector('.demo-shell video')?.paused,
       label: document.querySelector('.demo-play-button')?.getAttribute('aria-label'),
     }));
-    if (!reducedState.paused || reducedState.label !== 'Play the FillPro demo') {
-      errors.push(`/fillpro/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
+    if (!reducedState.paused || reducedState.label !== 'Play the FillAhead demo') {
+      errors.push(`/fillahead/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
     }
   } catch (error) {
-    errors.push(`/fillpro/: hero demo playback failed: ${error.message}`);
+    errors.push(`/fillahead/: hero demo playback failed: ${error.message}`);
   } finally {
     await page.close();
     await reducedPage.close();
@@ -822,34 +808,34 @@ async function auditSmartRuleLab(browser, origin, errors) {
   });
   page.on('pageerror', (error) => pageErrors.push(error.message));
   try {
-    await page.goto(`${origin}/fillpro/docs/smart-rules/`, { waitUntil: 'networkidle' });
+    await page.goto(`${origin}/fillahead/docs/smart-rules/`, { waitUntil: 'networkidle' });
     const label = page.locator('#ruleLabLabel');
     const match = page.locator('#ruleLabMatch');
     const result = page.locator('[data-rule-result]');
     await label.fill('Business contact address');
     await match.fill('work email');
     if (!/No match/.test(await result.textContent())) {
-      errors.push('/fillpro/docs/smart-rules/: mismatch guidance did not appear');
+      errors.push('/fillahead/docs/smart-rules/: mismatch guidance did not appear');
     }
     await page.getByRole('button', { name: 'Portfolio' }).click();
     const labelFocused = await label.evaluate((node) => document.activeElement === node);
     if (!/Match found/.test(await result.textContent()) || !labelFocused) {
-      errors.push('/fillpro/docs/smart-rules/: preset did not update the example and return focus');
+      errors.push('/fillahead/docs/smart-rules/: preset did not update the example and return focus');
     }
     await label.fill('Work-email address');
     await match.fill('/work.?email/i');
     if (!/Match found/.test(await result.textContent())) {
-      errors.push('/fillpro/docs/smart-rules/: optional regex example did not match');
+      errors.push('/fillahead/docs/smart-rules/: optional regex example did not match');
     }
     await match.fill('/[/');
     if (!/not valid/.test(await result.textContent())) {
-      errors.push('/fillpro/docs/smart-rules/: invalid regex guidance did not appear');
+      errors.push('/fillahead/docs/smart-rules/: invalid regex guidance did not appear');
     }
     if (pageErrors.length) {
-      errors.push(`/fillpro/docs/smart-rules/: console/page errors: ${pageErrors.join(' | ')}`);
+      errors.push(`/fillahead/docs/smart-rules/: console/page errors: ${pageErrors.join(' | ')}`);
     }
   } catch (error) {
-    errors.push(`/fillpro/docs/smart-rules/: interactive guide failed: ${error.message}`);
+    errors.push(`/fillahead/docs/smart-rules/: interactive guide failed: ${error.message}`);
   } finally {
     await page.close();
   }
@@ -860,12 +846,13 @@ async function auditInstalledExtensionState(browser, origin, errors) {
   try {
     await page.addInitScript(() => {
       window.__fillProBridgeMessages = [];
+      window.__FILLAHEAD_TEST_EXTENSION_IDS__ = ['aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'];
       window.chrome = {
         runtime: {
           lastError: null,
           sendMessage(extensionId, message, callback) {
             window.__fillProBridgeMessages.push(message);
-            if (extensionId !== 'hklppjjdpnndpdahnfpjpamhefgcolai') {
+            if (extensionId !== 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa') {
               callback(undefined);
               return;
             }
@@ -878,8 +865,8 @@ async function auditInstalledExtensionState(browser, origin, errors) {
         },
       };
     });
-    await page.goto(`${origin}/fillpro/checkout/?plan=yearly`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => document.documentElement.dataset.fillproInstalled === 'true');
+    await page.goto(`${origin}/fillahead/checkout/?plan=yearly`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.fillaheadInstalled === 'true');
     const report = await page.evaluate(() => ({
       note: document.querySelector('[data-installed-note]')?.textContent?.trim() || '',
       free: document.querySelector('[data-checkout-plan="free"] .launch-button')?.textContent?.trim() || '',
@@ -891,14 +878,14 @@ async function auditInstalledExtensionState(browser, origin, errors) {
     }));
     if (
       !/toolbar button/.test(report.note) ||
-      report.free !== 'Open FillPro' ||
-      report.monthly !== 'Choose monthly in FillPro' ||
-      report.yearly !== 'Choose yearly in FillPro' ||
-      report.hero !== 'Choose yearly in FillPro' ||
-      report.nav.includes('Open FillPro') ||
-      report.title !== 'FillPro is installed. Choose free or Pro.'
+      report.free !== 'Open FillAhead' ||
+      report.monthly !== 'Choose monthly in FillAhead' ||
+      report.yearly !== 'Choose yearly in FillAhead' ||
+      report.hero !== 'Choose yearly in FillAhead' ||
+      report.nav.includes('Open FillAhead') ||
+      report.title !== 'FillAhead is already installed.'
     ) {
-      errors.push(`/fillpro/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
+      errors.push(`/fillahead/checkout/: installed-extension state regressed: ${JSON.stringify(report)}`);
     }
     await page.locator('[data-checkout-plan="monthly"] .launch-button').click();
     await page.locator('[data-checkout-plan="free"] .launch-button').click();
@@ -909,20 +896,20 @@ async function auditInstalledExtensionState(browser, origin, errors) {
       ) ||
       !bridgeMessages.some((message) => message?.action === 'openPublicSurface')
     ) {
-      errors.push(`/fillpro/checkout/: installed CTA bridge regressed: ${JSON.stringify(bridgeMessages)}`);
+      errors.push(`/fillahead/checkout/: installed CTA bridge regressed: ${JSON.stringify(bridgeMessages)}`);
     }
     await page.screenshot({ path: path.join(OUT_DIR, 'checkout-installed-extension-dark.png'), fullPage: true });
 
-    await page.goto(`${origin}/fillpro/de/`, { waitUntil: 'networkidle' });
-    await page.waitForFunction(() => document.documentElement.dataset.fillproInstalled === 'true');
+    await page.goto(`${origin}/fillahead/de/`, { waitUntil: 'networkidle' });
+    await page.waitForFunction(() => document.documentElement.dataset.fillaheadInstalled === 'true');
     const germanActions = await page
       .locator('main a[data-installed-action="installed"]')
       .allTextContents();
-    if (!germanActions.length || germanActions.some((label) => label.trim() !== 'FillPro öffnen')) {
-      errors.push(`/fillpro/de/: installed CTA was not localized: ${JSON.stringify(germanActions)}`);
+    if (!germanActions.length || germanActions.some((label) => label.trim() !== 'FillAhead öffnen')) {
+      errors.push(`/fillahead/de/: installed CTA was not localized: ${JSON.stringify(germanActions)}`);
     }
   } catch (error) {
-    errors.push(`/fillpro/checkout/: installed-extension audit failed: ${error.message}`);
+    errors.push(`/fillahead/checkout/: installed-extension audit failed: ${error.message}`);
   } finally {
     await page.close();
   }
@@ -944,6 +931,7 @@ async function main() {
           viewport: { width: viewport.width, height: viewport.height },
           deviceScaleFactor: 1,
           reducedMotion: 'reduce',
+          bypassCSP: true,
         });
 
         for (const route of ROUTES) {
@@ -967,8 +955,8 @@ async function main() {
         await context.close();
       }
     }
-    await auditPointerGlow(browser, server.origin, errors);
-    await auditHeroSceneMotion(browser, server.origin, errors);
+    await auditStaticPresentation(browser, server.origin, errors);
+    await auditProductHero(browser, server.origin, errors);
     await auditDemoPlayback(browser, server.origin, errors);
     await auditContactSubmission(browser, server.origin, errors);
     await auditCheckoutPlanSelection(browser, server.origin, errors);
@@ -981,14 +969,14 @@ async function main() {
   }
 
   if (errors.length) {
-    console.error(`FillPro release experience audit failed with ${errors.length} issue(s):`);
+    console.error(`FillAhead release experience audit failed with ${errors.length} issue(s):`);
     for (const error of errors) console.error(`- ${error}`);
     console.error(`Screenshots saved to ${OUT_DIR}`);
     process.exit(1);
   }
 
   console.log(
-    `FillPro release experience audit passed: ${checks} rendered page checks, ${ROUTES.length} routes, ${VIEWPORTS.length} viewports, ${THEMES.length} themes. Screenshots saved to ${OUT_DIR}.`,
+    `FillAhead release experience audit passed: ${checks} rendered page checks, ${ROUTES.length} routes, ${VIEWPORTS.length} viewports, ${THEMES.length} themes. Screenshots saved to ${OUT_DIR}.`,
   );
 }
 

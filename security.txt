@@ -1,6 +1,6 @@
-# FillPro security policy (fallback)
+# FillAhead security policy (fallback)
 Contact: mailto:support@stealthyapps.com
 Preferred-Languages: en
 Canonical: https://stealthyapps.com/.well-known/security.txt
-Policy: https://stealthyapps.com/fillpro/privacy/
+Policy: https://stealthyapps.com/fillahead/privacy/
 Expires: 2027-06-12T00:00:00Z

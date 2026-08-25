@@ -8,21 +8,25 @@
 
   root.classList.add('js-enhanced');
 
-  var THEME_KEY = 'fillpro-theme';
+  var THEME_KEY = 'fillahead-theme';
   var THEMES = ['system', 'light', 'dark'];
   // Add the approved marketplace URLs here once each listing is public.
-  // Every data-fillpro-store link on the site will switch automatically.
-  var FILLPRO_STORE_LINKS = {
+  // Every data-fillahead-store link on the site will switch automatically.
+  var FILLAHEAD_STORE_LINKS = {
     chrome: '',
     edge: '',
     firefox: '',
   };
-  // Add the final Chrome and Edge store IDs here after marketplace approval.
-  var FILLPRO_EXTENSION_IDS = [
-    'hklppjjdpnndpdahnfpjpamhefgcolai',
-    'fjgpmpnjfpmjdckmachaolobhjekencl',
-    'gdnljemokcmlnglhlblafbolkhhcipld',
-  ];
+  // Add approved Chrome and Edge store IDs here after marketplace approval.
+  var FILLAHEAD_STORE_EXTENSION_IDS = [];
+  var FILLAHEAD_TEST_EXTENSION_IDS = Array.isArray(window.__FILLAHEAD_TEST_EXTENSION_IDS__)
+    ? window.__FILLAHEAD_TEST_EXTENSION_IDS__.filter(function (id) {
+        return /^[a-p]{32}$/.test(String(id || ''));
+      })
+    : [];
+  var FILLAHEAD_EXTENSION_IDS = FILLAHEAD_STORE_EXTENSION_IDS.concat(
+    FILLAHEAD_TEST_EXTENSION_IDS,
+  );
   var mediaDark =
     window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
   var themeButton = null;
@@ -39,23 +43,22 @@
   };
   var INSTALLED_COPY = {
     en: {
-      open: 'Open FillPro',
-      monthly: 'Choose monthly in FillPro',
-      yearly: 'Choose yearly in FillPro',
-      lifetime: 'Choose lifetime in FillPro',
-      installedTitle: 'FillPro is installed in this browser.',
-      checkoutTitle: 'FillPro is installed. Choose free or Pro.',
-      checkoutLead: 'Keep the free plan, or add Pro for up to 500 profiles, backups, and profile duplication.',
-      checkoutNote: 'Use the FillPro toolbar button to create a profile, fill a page, or manage Pro.',
+      open: 'Open FillAhead',
+      monthly: 'Choose monthly in FillAhead',
+      yearly: 'Choose yearly in FillAhead',
+      installedTitle: 'FillAhead is installed in this browser.',
+      checkoutTitle: 'FillAhead is already installed.',
+      checkoutLead: 'Open FillAhead to keep using the free plan or choose Pro.',
+      checkoutNote: 'Use the toolbar button to create a profile, fill the current page, or manage billing.',
     },
-    de: { open: 'FillPro öffnen', installedTitle: 'FillPro ist in diesem Browser installiert.' },
-    es: { open: 'Abrir FillPro', installedTitle: 'FillPro está instalado en este navegador.' },
-    fr: { open: 'Ouvrir FillPro', installedTitle: 'FillPro est installé dans ce navigateur.' },
-    'pt-br': { open: 'Abrir o FillPro', installedTitle: 'O FillPro está instalado neste navegador.' },
-    ja: { open: 'FillPro を開く', installedTitle: 'FillPro はこのブラウザーにインストールされています。' },
-    ko: { open: 'FillPro 열기', installedTitle: '이 브라우저에 FillPro가 설치되어 있습니다.' },
-    'zh-cn': { open: '打开 FillPro', installedTitle: '此浏览器已安装 FillPro。' },
-    ru: { open: 'Открыть FillPro', installedTitle: 'FillPro установлен в этом браузере.' },
+    de: { open: 'FillAhead öffnen', installedTitle: 'FillAhead ist in diesem Browser installiert.' },
+    es: { open: 'Abrir FillAhead', installedTitle: 'FillAhead está instalado en este navegador.' },
+    fr: { open: 'Ouvrir FillAhead', installedTitle: 'FillAhead est installé dans ce navigateur.' },
+    'pt-br': { open: 'Abrir o FillAhead', installedTitle: 'O FillAhead está instalado neste navegador.' },
+    ja: { open: 'FillAhead を開く', installedTitle: 'FillAhead はこのブラウザーにインストールされています。' },
+    ko: { open: 'FillAhead 열기', installedTitle: '이 브라우저에 FillAhead가 설치되어 있습니다.' },
+    'zh-cn': { open: '打开 FillAhead', installedTitle: '此浏览器已安装 FillAhead。' },
+    ru: { open: 'Открыть FillAhead', installedTitle: 'FillAhead установлен в этом браузере.' },
   };
 
   function currentThemeCopy() {
@@ -159,14 +162,17 @@
   }
 
   function configureStoreLinks() {
-    document.querySelectorAll('[data-fillpro-store]').forEach(function (link) {
-      var store = (link.getAttribute('data-fillpro-store') || '').toLowerCase();
-      var url = FILLPRO_STORE_LINKS[store];
+    document.querySelectorAll('[data-fillahead-store]').forEach(function (link) {
+      var store = (link.getAttribute('data-fillahead-store') || '').toLowerCase();
+      var url = FILLAHEAD_STORE_LINKS[store];
       if (!url) {
         link.dataset.storeState = 'pending';
+        link.hidden = true;
+        link.removeAttribute('href');
         return;
       }
 
+      link.hidden = false;
       link.href = url;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
@@ -177,7 +183,7 @@
 
     document.querySelectorAll('[data-store-live-copy]').forEach(function (node) {
       var store = (node.getAttribute('data-store-live-copy') || '').toLowerCase();
-      if (!FILLPRO_STORE_LINKS[store]) return;
+      if (!FILLAHEAD_STORE_LINKS[store]) return;
       var liveText = node.getAttribute('data-live-text');
       if (liveText) node.textContent = liveText;
     });
@@ -186,7 +192,7 @@
   function sendInstalledExtensionAction(extensionId, link, message) {
     if (!extensionId || !window.chrome || !chrome.runtime?.sendMessage) return;
     var finished = false;
-    var fallback = link.href || '/fillpro/docs/getting-started/';
+    var fallback = link.href || '/fillahead/docs/getting-started/';
     link.setAttribute('aria-busy', 'true');
 
     var fallbackTimer = window.setTimeout(function () {
@@ -212,10 +218,10 @@
 
   function applyInstalledExtensionState(extensionId) {
     var copy = currentInstalledCopy();
-    root.dataset.fillproInstalled = 'true';
-    document.querySelectorAll('main a[href="/fillpro/download/"]').forEach(function (link) {
+    root.dataset.fillaheadInstalled = 'true';
+    document.querySelectorAll('main a[href="/fillahead/download/"]').forEach(function (link) {
       var card = link.closest('[data-checkout-plan]');
-      var checkout = link.closest('[data-fillpro-checkout]');
+      var checkout = link.closest('[data-fillahead-checkout]');
       var selectedPlan = checkout?.dataset.selectedPlan || 'free';
       var paidPlan = card
         ? card.getAttribute('data-checkout-plan') !== 'free'
@@ -226,7 +232,7 @@
           ? selectedPlan
           : 'free';
       link.textContent = paidPlan ? copy[plan] || copy.yearly : copy.open;
-      link.href = '/fillpro/docs/getting-started/';
+      link.href = '/fillahead/docs/getting-started/';
       link.dataset.installedAction = paidPlan ? 'upgrade' : 'installed';
       link.dataset.installedPlan = plan;
       link.title = copy.installedTitle;
@@ -241,7 +247,7 @@
         );
       });
     });
-    var checkout = document.querySelector('[data-fillpro-checkout]');
+    var checkout = document.querySelector('[data-fillahead-checkout]');
     if (checkout && !checkout.querySelector('[data-installed-note]')) {
       var checkoutTitle = checkout.querySelector('#checkout-title');
       var checkoutLead = checkout.querySelector('.launch-lead');
@@ -261,8 +267,8 @@
     if (!window.chrome || !chrome.runtime || typeof chrome.runtime.sendMessage !== 'function') return;
     var index = 0;
     function tryNext() {
-      if (index >= FILLPRO_EXTENSION_IDS.length) return;
-      var extensionId = FILLPRO_EXTENSION_IDS[index++];
+      if (index >= FILLAHEAD_EXTENSION_IDS.length) return;
+      var extensionId = FILLAHEAD_EXTENSION_IDS[index++];
       try {
         chrome.runtime.sendMessage(
           extensionId,
@@ -283,10 +289,10 @@
   }
 
   function setupCheckoutPlanState() {
-    var checkout = document.querySelector('[data-fillpro-checkout]');
+    var checkout = document.querySelector('[data-fillahead-checkout]');
     if (!checkout) return;
 
-    var allowedPlans = ['free', 'monthly', 'yearly', 'lifetime'];
+    var allowedPlans = ['free', 'monthly', 'yearly'];
     var selectedPlan = 'yearly';
     try {
       var params = new URLSearchParams(window.location.search);
@@ -297,12 +303,17 @@
     checkout.dataset.selectedPlan = selectedPlan;
     var checkoutAction = checkout.querySelector('[data-checkout-action]');
     if (checkoutAction) {
-      var actionLabels = {
-        free: 'Install FillPro',
-        monthly: 'Install, then choose monthly',
-        yearly: 'Install, then choose yearly',
-        lifetime: 'Install, then choose lifetime',
-      };
+      var actionLabels = FILLAHEAD_STORE_LINKS.chrome
+        ? {
+            free: 'Install FillAhead',
+            monthly: 'Install, then choose monthly',
+            yearly: 'Install, then choose yearly',
+          }
+        : {
+            free: 'Check Chrome availability',
+            monthly: 'Check Chrome availability',
+            yearly: 'Check Chrome availability',
+          };
       checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.yearly;
     }
     document.querySelectorAll('[data-checkout-plan]').forEach(function (card) {
@@ -318,7 +329,7 @@
 
   function setupDemoPlayback() {
     var button = document.querySelector('.demo-play-button');
-    var poster = document.querySelector('[data-fillpro-demo-poster]');
+    var poster = document.querySelector('[data-fillahead-demo-poster]');
     if (!button || !poster) return;
 
     var reduceMotion =
@@ -333,22 +344,22 @@
     video.playsInline = true;
     video.autoplay = !reduceMotion;
     video.preload = 'auto';
-    video.poster = '/assets/fillpro-demo-poster.png';
-    video.src = '/assets/fillpro-demo.mp4';
+    video.poster = '/assets/fillahead-demo-poster.png';
+    video.src = '/assets/fillahead-demo.mp4';
     video.setAttribute(
       'aria-label',
-      'FillPro filling a vendor onboarding form from a saved work profile',
+      'FillAhead filling a vendor onboarding form from a saved work profile',
     );
 
     function setPlaybackState(isPlaying) {
       button.dataset.state = isPlaying ? 'playing' : 'paused';
       button.setAttribute(
         'aria-label',
-        isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo',
+        isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo',
       );
       button.setAttribute(
         'title',
-        isPlaying ? 'Pause the FillPro demo' : 'Play the FillPro demo',
+        isPlaying ? 'Pause the FillAhead demo' : 'Play the FillAhead demo',
       );
     }
 
@@ -393,59 +404,6 @@
       setPlaybackState(true);
       playVideo();
     }
-  }
-
-  function setupInteractiveBackdrop() {
-    var reduceMotion =
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var finePointer =
-      !window.matchMedia ||
-      window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    if (reduceMotion || !finePointer) {
-      root.classList.remove('pointer-glow-active');
-      return;
-    }
-
-    var glow = document.querySelector('.site-pointer-glow');
-    if (!glow) {
-      glow = document.createElement('div');
-      glow.className = 'site-pointer-glow';
-      glow.setAttribute('aria-hidden', 'true');
-      body.appendChild(glow);
-    }
-
-    var frame = 0;
-    var nextX = window.innerWidth * 0.5;
-    var nextY = window.innerHeight * 0.18;
-
-    function updatePointer() {
-      frame = 0;
-      root.style.setProperty('--pointer-x', Math.round(nextX) + 'px');
-      root.style.setProperty('--pointer-y', Math.round(nextY) + 'px');
-      root.classList.add('pointer-glow-active');
-    }
-
-    function hidePointer() {
-      root.classList.remove('pointer-glow-active');
-    }
-
-    window.addEventListener(
-      'pointermove',
-      function (event) {
-        nextX = Math.max(0, Math.min(window.innerWidth, event.clientX));
-        nextY = Math.max(0, Math.min(window.innerHeight, event.clientY));
-        if (!frame) {
-          frame = window.requestAnimationFrame(updatePointer);
-        }
-      },
-      { passive: true },
-    );
-    document.documentElement.addEventListener('pointerleave', hidePointer, { passive: true });
-    window.addEventListener('blur', hidePointer);
-    document.addEventListener('visibilitychange', function () {
-      if (document.hidden) hidePointer();
-    });
   }
 
   setTheme(getStoredTheme());
@@ -493,7 +451,6 @@
       frame = window.requestAnimationFrame(update);
     }
 
-    update();
     window.addEventListener('scroll', queueUpdate, { passive: true });
     window.addEventListener('resize', queueUpdate);
   }
@@ -564,7 +521,7 @@
       }
 
       result.textContent = matched
-        ? 'Match found. FillPro would use ' + valueDescription + '.'
+        ? 'Match found. FillAhead would use ' + valueDescription + '.'
         : 'No match. Try a shorter, distinctive phrase from the form label.';
       result.classList.toggle('is-match', matched);
     }
@@ -635,77 +592,6 @@
     });
   }
 
-  function setupScrollReveals() {
-    if (!body.classList.contains('fillpro-launch')) {
-      return;
-    }
-    var reduceMotion =
-      window.matchMedia &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-      return;
-    }
-
-    var revealSelectors = [
-      '.launch-strip',
-      '.launch-section',
-      '.launch-band',
-      '.launch-final',
-      '.browser-download-card',
-      '.launch-use-grid article',
-      '.workflow-list article',
-      '.support-columns article',
-      '.compare-lanes article',
-      '.price-card',
-      '.launch-faq-list details',
-      '.privacy-snapshot',
-      '.privacy-card',
-      '.privacy-lane-grid article',
-      '.privacy-plain',
-      '.card',
-      '.surface',
-      '.contact-card',
-      '.feature-card',
-      '.support-card',
-      '.info-card',
-      '.policy-card',
-      '.boundary-card',
-      '.mini-card',
-      '.preview-card',
-    ].join(',');
-    var items = Array.prototype.slice.call(
-      document.querySelectorAll(revealSelectors),
-    );
-    if (!items.length) {
-      return;
-    }
-
-    root.classList.add('reveal-ready');
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.16,
-        rootMargin: '0px 0px -8% 0px',
-      },
-    );
-
-    items.forEach(function (item, index) {
-      item.classList.add('reveal-item');
-      item.style.setProperty('--reveal-delay', (index % 4) * 45 + 'ms');
-      observer.observe(item);
-    });
-  }
-
   var lastHashScrollToken = '';
 
   function scrollToInitialHash(force) {
@@ -739,7 +625,7 @@
     }
 
     function getTargetTop() {
-      var header = document.querySelector('.site-header, .premium-header, .launch-header');
+      var header = document.querySelector('.site-header, .launch-header');
       var headerOffset = header ? header.getBoundingClientRect().height + 20 : 92;
       return {
         offset: headerOffset,
@@ -793,27 +679,24 @@
   }
 
   function ready(callback) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', callback);
+    if (document.readyState === 'complete') {
+      window.setTimeout(callback, 0);
       return;
     }
-
-    callback();
+    window.addEventListener('load', callback, { once: true });
   }
 
   installProgressBar();
   setupScrollProgress();
+  installThemeToggle();
   ready(function () {
     configureStoreLinks();
     setupCheckoutPlanState();
     detectInstalledExtension();
     setupDemoPlayback();
-    installThemeToggle();
-    setupInteractiveBackdrop();
     setupCopyCode();
     setupSmartRuleLab();
     setupCurrentHashLink();
-    setupScrollReveals();
     scrollToInitialHash();
   });
   window.setTimeout(scrollToInitialHash, 0);

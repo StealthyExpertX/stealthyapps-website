@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "authorityDate": "2026-08-25",
+  "brand": "FillAhead",
+  "version": "1.0.0",
+  "storeTitle": "FillAhead: Autofill Forms with Saved Profiles",
+  "storeSummary": "Private form filler. Save 3 profiles in your browser. Fill repeat forms; skip passwords, cards, one-time codes, and government IDs.",
+  "website": "https://stealthyapps.com/fillahead/",
+  "privacy": "https://stealthyapps.com/fillahead/privacy/",
+  "support": "https://stealthyapps.com/support/",
+  "contact": "https://stealthyapps.com/contact/?topic=product&product=FillAhead",
+  "freeProfiles": 3,
+  "proProfiles": 500,
+  "monthlyUsd": "3.99",
+  "yearlyUsd": "29.99",
+  "purchasablePlans": [
+    "fillpro-monthly",
+    "fillpro-yearly"
+  ],
+  "legacyEntitlements": [
+    "fillpro-lifetime"
+  ],
+  "billingProviders": [
+    "ExtensionPay",
+    "Stripe"
+  ],
+  "publicSafetyBoundary": [
+    "passwords",
+    "payment cards",
+    "CVCs",
+    "one-time codes",
+    "government IDs"
+  ]
+}
