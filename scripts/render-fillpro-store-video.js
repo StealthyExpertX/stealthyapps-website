@@ -39,35 +39,50 @@ const html = `<!doctype html>
     font-family: "Aptos", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
   }
   .stage {
+    --stage-text: rgba(16, 35, 31, 1);
+    --stage-grid-x: rgba(15, 118, 110, 0.05);
+    --stage-grid-y: rgba(15, 118, 110, 0.045);
+    --stage-bg-a: rgba(251, 253, 251, 1);
+    --stage-bg-b: rgba(237, 247, 243, 1);
+    --stage-bg-c: rgba(246, 241, 229, 1);
+    --stage-frame-border: rgba(15, 118, 110, 0.11);
+    --top-border: rgba(16, 35, 31, 0.14);
+    --top-bg: rgba(255, 255, 255, 0.84);
+    --top-text: rgba(67, 84, 78, 1);
+    --eyebrow-text: rgba(15, 118, 110, 1);
+    --sub-text: rgba(67, 84, 78, 1);
+    --proof-border: rgba(15, 118, 110, 0.16);
+    --proof-bg: rgba(255, 255, 255, 0.76);
+    --proof-text: rgba(56, 82, 75, 1);
+    --browser-border: rgba(16, 35, 31, 0.14);
+    --browser-shadow: 0 42px 90px rgba(16, 35, 31, 0.18);
+    --note-border: rgba(15, 118, 110, 0.2);
+    --note-bg: rgba(255, 255, 255, 0.94);
+    --note-text: rgba(56, 82, 75, 1);
+    --note-strong: rgba(16, 35, 31, 1);
+    --footer-text: rgba(100, 118, 111, 1);
     position: relative;
     isolation: isolate;
     width: 1280px;
     height: 720px;
     overflow: hidden;
+    color: var(--stage-text);
     background:
-      linear-gradient(90deg, rgba(15, 118, 110, 0.05) 1px, transparent 1px) 0 0 / 72px 72px,
-      linear-gradient(180deg, rgba(15, 118, 110, 0.045) 1px, transparent 1px) 0 0 / 72px 72px,
-      linear-gradient(135deg, #fbfdfb 0%, #edf7f3 62%, #f6f1e5 100%);
+      linear-gradient(90deg, var(--stage-grid-x) 1px, transparent 1px) 0 0 / 72px 72px,
+      linear-gradient(180deg, var(--stage-grid-y) 1px, transparent 1px) 0 0 / 72px 72px,
+      linear-gradient(135deg, var(--stage-bg-a) 0%, var(--stage-bg-b) 62%, var(--stage-bg-c) 100%);
   }
   .stage::before {
     content: "";
     position: absolute;
     inset: 22px;
     z-index: -1;
-    border: 1px solid rgba(15, 118, 110, 0.11);
+    border: 1px solid var(--stage-frame-border);
     border-radius: 8px;
     background:
       linear-gradient(128deg, transparent 0 48%, rgba(15, 118, 110, 0.09) 48% 48.7%, transparent 48.7%),
       linear-gradient(128deg, transparent 0 64%, rgba(213, 157, 55, 0.12) 64% 64.8%, transparent 64.8%);
   }
-  .stage.is-dark {
-    color: #f6fffc;
-    background:
-      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px) 0 0 / 72px 72px,
-      linear-gradient(180deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px) 0 0 / 72px 72px,
-      linear-gradient(135deg, #081b18 0%, #0d2b26 62%, #12382f 100%);
-  }
-  .stage.is-dark::before { border-color: rgba(94, 234, 221, 0.14); }
   .brand {
     position: absolute;
     left: 52px;
@@ -78,13 +93,13 @@ const html = `<!doctype html>
     gap: 12px;
     font-size: 25px;
     font-weight: 920;
+    color: var(--stage-text);
   }
   .brand img {
     width: 52px;
     height: 52px;
     filter: drop-shadow(0 12px 18px rgba(15, 118, 110, 0.22));
   }
-  .stage.is-dark .brand { color: #f6fffc; }
   .top-note {
     position: absolute;
     right: 52px;
@@ -94,17 +109,14 @@ const html = `<!doctype html>
     display: inline-flex;
     align-items: center;
     padding: 7px 13px;
-    border: 1px solid rgba(16, 35, 31, 0.14);
+    border: 1px solid var(--top-border);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.84);
-    color: #43544e;
+    background: var(--top-bg);
+    color: var(--top-text);
     font-size: 13px;
     font-weight: 820;
-  }
-  .stage.is-dark .top-note {
-    border-color: rgba(94, 234, 221, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(246, 255, 252, 0.86);
+    opacity: var(--top-opacity, 1);
+    transform: translateY(var(--top-y, 0px));
   }
   .copy {
     position: absolute;
@@ -117,12 +129,11 @@ const html = `<!doctype html>
   }
   .eyebrow {
     margin: 0 0 12px;
-    color: #0f766e;
+    color: var(--eyebrow-text);
     font-size: 12px;
     font-weight: 930;
     text-transform: uppercase;
   }
-  .stage.is-dark .eyebrow { color: #5eeadd; }
   h1 {
     margin: 0;
     max-width: 12ch;
@@ -133,12 +144,11 @@ const html = `<!doctype html>
   .sub {
     max-width: 410px;
     margin: 18px 0 0;
-    color: #43544e;
+    color: var(--sub-text);
     font-size: 19px;
     line-height: 1.4;
     font-weight: 620;
   }
-  .stage.is-dark .sub { color: rgba(246, 255, 252, 0.76); }
   .proof {
     display: flex;
     flex-wrap: wrap;
@@ -150,17 +160,12 @@ const html = `<!doctype html>
     display: inline-flex;
     align-items: center;
     padding: 6px 11px;
-    border: 1px solid rgba(15, 118, 110, 0.16);
+    border: 1px solid var(--proof-border);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.76);
-    color: #38524b;
+    background: var(--proof-bg);
+    color: var(--proof-text);
     font-size: 12px;
     font-weight: 820;
-  }
-  .stage.is-dark .proof span {
-    border-color: rgba(94, 234, 221, 0.2);
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(246, 255, 252, 0.9);
   }
   .browser {
     position: absolute;
@@ -170,16 +175,12 @@ const html = `<!doctype html>
     width: 744px;
     height: 540px;
     overflow: hidden;
-    border: 1px solid rgba(16, 35, 31, 0.14);
+    border: 1px solid var(--browser-border);
     border-radius: 8px;
     background: #fff;
-    box-shadow: 0 42px 90px rgba(16, 35, 31, 0.18);
+    box-shadow: var(--browser-shadow);
     transform: translate3d(var(--browser-x, 0px), var(--browser-y, 0px), 0) scale(var(--browser-scale, 1));
     transform-origin: 76% 54%;
-  }
-  .stage.is-dark .browser {
-    border-color: rgba(94, 234, 221, 0.18);
-    box-shadow: 0 46px 100px rgba(0, 0, 0, 0.34);
   }
   .chrome {
     height: 44px;
@@ -350,18 +351,16 @@ const html = `<!doctype html>
     display: grid;
     gap: 4px;
     padding: 13px 15px;
-    border: 1px solid rgba(15, 118, 110, 0.2);
+    border: 1px solid var(--note-border);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.94);
-    color: #38524b;
+    background: var(--note-bg);
+    color: var(--note-text);
     box-shadow: 0 20px 44px rgba(16, 35, 31, 0.12);
     opacity: var(--note-opacity, 0);
     transform: translateY(var(--note-y, 8px));
   }
-  .floating-note strong { color: #10231f; font-size: 14px; }
+  .floating-note strong { color: var(--note-strong); font-size: 14px; }
   .floating-note span { font-size: 12px; line-height: 1.35; }
-  .stage.is-dark .floating-note { border-color: rgba(94, 234, 221, 0.22); background: rgba(13, 35, 30, 0.96); color: rgba(246, 255, 252, 0.72); }
-  .stage.is-dark .floating-note strong { color: #f6fffc; }
   .cursor {
     position: absolute;
     z-index: 12;
@@ -402,11 +401,10 @@ const html = `<!doctype html>
     z-index: 8;
     display: flex;
     justify-content: space-between;
-    color: #64766f;
+    color: var(--footer-text);
     font-size: 11px;
     font-weight: 760;
   }
-  .stage.is-dark .footer-line { color: rgba(246, 255, 252, 0.58); }
   .progress {
     position: absolute;
     left: 52px;
@@ -473,6 +471,60 @@ const html = `<!doctype html>
     if (t < start + fade) return smooth((t - start) / fade);
     if (t > end - fade) return 1 - smooth((t - (end - fade)) / fade);
     return 1;
+  }
+
+  const themeTokens = [
+    ['--stage-text', [16, 35, 31, 1], [246, 255, 252, 1]],
+    ['--stage-grid-x', [15, 118, 110, 0.05], [255, 255, 255, 0.055]],
+    ['--stage-grid-y', [15, 118, 110, 0.045], [255, 255, 255, 0.045]],
+    ['--stage-bg-a', [251, 253, 251, 1], [8, 27, 24, 1]],
+    ['--stage-bg-b', [237, 247, 243, 1], [13, 43, 38, 1]],
+    ['--stage-bg-c', [246, 241, 229, 1], [18, 56, 47, 1]],
+    ['--stage-frame-border', [15, 118, 110, 0.11], [94, 234, 221, 0.14]],
+    ['--top-border', [16, 35, 31, 0.14], [94, 234, 221, 0.2]],
+    ['--top-bg', [255, 255, 255, 0.84], [255, 255, 255, 0.08]],
+    ['--top-text', [67, 84, 78, 1], [246, 255, 252, 0.86]],
+    ['--eyebrow-text', [15, 118, 110, 1], [94, 234, 221, 1]],
+    ['--sub-text', [67, 84, 78, 1], [246, 255, 252, 0.76]],
+    ['--proof-border', [15, 118, 110, 0.16], [94, 234, 221, 0.2]],
+    ['--proof-bg', [255, 255, 255, 0.76], [255, 255, 255, 0.08]],
+    ['--proof-text', [56, 82, 75, 1], [246, 255, 252, 0.9]],
+    ['--browser-border', [16, 35, 31, 0.14], [94, 234, 221, 0.18]],
+    ['--note-border', [15, 118, 110, 0.2], [94, 234, 221, 0.22]],
+    ['--note-bg', [255, 255, 255, 0.94], [13, 35, 30, 0.96]],
+    ['--note-text', [56, 82, 75, 1], [246, 255, 252, 0.72]],
+    ['--note-strong', [16, 35, 31, 1], [246, 255, 252, 1]],
+    ['--footer-text', [100, 118, 111, 1], [246, 255, 252, 0.58]],
+  ];
+
+  function colorBetween(light, dark, amount) {
+    return 'rgba(' +
+      Math.round(mix(light[0], dark[0], amount)) + ', ' +
+      Math.round(mix(light[1], dark[1], amount)) + ', ' +
+      Math.round(mix(light[2], dark[2], amount)) + ', ' +
+      mix(light[3], dark[3], amount).toFixed(3) + ')';
+  }
+
+  function themeFor(t) {
+    const darkIn = smooth((t - 7.45) / 1.1);
+    const darkOut = 1 - smooth((t - 16.65) / 1.1);
+    return darkIn * darkOut;
+  }
+
+  function formSwapOpacity(t, center) {
+    if (t < center - 0.45 || t >= center + 0.45) return 1;
+    if (t < center) return 1 - smooth((t - (center - 0.45)) / 0.45);
+    return smooth((t - center) / 0.45);
+  }
+
+  function applyTheme(stage, amount) {
+    themeTokens.forEach((token) => {
+      stage.style.setProperty(token[0], colorBetween(token[1], token[2], amount));
+    });
+    const shadowY = mix(42, 46, amount).toFixed(1);
+    const shadowBlur = mix(90, 100, amount).toFixed(1);
+    const shadowColor = colorBetween([16, 35, 31, 0.18], [0, 0, 0, 0.34], amount);
+    stage.style.setProperty('--browser-shadow', '0 ' + shadowY + 'px ' + shadowBlur + 'px ' + shadowColor);
   }
 
   function copyFor(t) {
@@ -547,7 +599,7 @@ const html = `<!doctype html>
 
   window.renderFillProFrame = function renderFillProFrame(t) {
     const stage = document.getElementById('stage');
-    stage.classList.toggle('is-dark', t >= 8 && t < 17.2);
+    applyTheme(stage, themeFor(t));
 
     const copy = copyFor(t);
     document.getElementById('eyebrow').textContent = copy[0];
@@ -557,15 +609,23 @@ const html = `<!doctype html>
 
     const phaseStarts = [0, 3.2, 8, 12.6, 17.2];
     const phaseStart = phaseStarts.slice().reverse().find((start) => t >= start) || 0;
+    const phaseEnd = phaseStarts.find((start) => start > t) || ${DURATION};
     const phaseIntro = phaseStart === 0 ? 1 : smooth((t - phaseStart) / 0.42);
+    const phaseOutro = phaseEnd < ${DURATION} ? 1 - smooth((t - (phaseEnd - 0.38)) / 0.38) : 1;
+    const phaseOpacity = phaseIntro * phaseOutro;
     const copyNode = document.getElementById('copy');
-    copyNode.style.setProperty('--copy-opacity', phaseIntro.toFixed(3));
+    copyNode.style.setProperty('--copy-opacity', phaseOpacity.toFixed(3));
     copyNode.style.setProperty('--copy-y', ((1 - phaseIntro) * 12).toFixed(2) + 'px');
+    const topNote = document.getElementById('topNote');
+    topNote.style.setProperty('--top-opacity', phaseOpacity.toFixed(3));
+    topNote.style.setProperty('--top-y', ((1 - phaseIntro) * 5).toFixed(2) + 'px');
 
     const form = formFor(t);
     document.getElementById('formTitle').textContent = form.title;
     document.getElementById('url').textContent = form.url;
     document.getElementById('fields').innerHTML = renderFields(t);
+    const formOpacity = Math.min(formSwapOpacity(t, 12.6), formSwapOpacity(t, 17.2));
+    document.querySelector('.page').style.opacity = (0.18 + formOpacity * 0.82).toFixed(3);
 
     const panelIntro = smooth((t - 0.08) / 0.35);
     const panel = document.getElementById('panel');
@@ -606,7 +666,7 @@ const html = `<!doctype html>
       document.getElementById('noteText').textContent = 'You decide when the form is submitted.';
     }
 
-    document.getElementById('topNote').textContent = t >= 17.2 ? 'Lifetime Pro' : t >= 12.6 ? 'Application step two' : t >= 8 ? 'Review and undo' : 'Job application autofill';
+    topNote.textContent = t >= 17.2 ? 'Lifetime Pro' : t >= 12.6 ? 'Application step two' : t >= 8 ? 'Review and undo' : 'Job application autofill';
 
     const browser = document.getElementById('browser');
     const finalMove = t >= 17.2 ? smooth((t - 17.2) / 0.7) : 0;

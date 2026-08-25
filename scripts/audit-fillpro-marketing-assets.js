@@ -13,6 +13,7 @@ const checked = {
   renderer: 0,
   icons: 0,
   captions: 0,
+  transitions: 0,
 };
 
 function fail(message) {
@@ -370,6 +371,44 @@ function parseRate(rate) {
   return num / den;
 }
 
+function checkTransitionContinuity(relativePath, target) {
+  const nullDevice = process.platform === 'win32' ? 'NUL' : '/dev/null';
+  const centers = [3.2, 8, 12.6, 17.2];
+  for (const center of centers) {
+    let output;
+    try {
+      output = execFileSync(
+        'ffmpeg',
+        [
+          '-hide_banner',
+          '-loglevel', 'error',
+          '-ss', String(center - 0.8),
+          '-i', target,
+          '-t', '1.6',
+          '-vf', 'tblend=all_mode=difference,signalstats,metadata=print:file=-',
+          '-an',
+          '-f', 'null',
+          nullDevice,
+        ],
+        { encoding: 'utf8', windowsHide: true },
+      );
+    } catch (error) {
+      fail(`${relativePath}: transition probe failed near ${center}s (${error.message})`);
+      continue;
+    }
+    const deltas = Array.from(output.matchAll(/lavfi\.signalstats\.YAVG=([0-9.]+)/g), (match) => Number(match[1]));
+    if (!deltas.length) {
+      fail(`${relativePath}: transition probe returned no frame deltas near ${center}s`);
+      continue;
+    }
+    const maxDelta = Math.max(...deltas);
+    if (maxDelta > 12) {
+      fail(`${relativePath}: hard visual cut near ${center}s (${maxDelta.toFixed(2)} adjacent-frame luma delta)`);
+    }
+    checked.transitions += 1;
+  }
+}
+
 function checkVideo(relativePath) {
   checked.videos += 1;
   const target = assertFile(relativePath, 250 * 1024, 20 * 1024 * 1024);
@@ -402,6 +441,7 @@ function checkVideo(relativePath) {
   }
   if (duration < 20 || duration > 35) fail(`${relativePath}: expected 20-35 seconds, got ${duration.toFixed(2)}s`);
   if (fps < 23.5 || fps > 30.5) fail(`${relativePath}: expected 24-30fps, got ${fps.toFixed(2)}fps`);
+  checkTransitionContinuity(relativePath, target);
 }
 
 function checkHeroVideo(relativePath) {
@@ -472,6 +512,12 @@ function checkRenderer() {
     'Use your password manager',
     'No auto-submit',
     'windowOpacity',
+    'const themeTokens = [',
+    'function themeFor(t)',
+    'function formSwapOpacity(t, center)',
+    'function applyTheme(stage, amount)',
+    '--stage-bg-a',
+    'const phaseOutro =',
     'cursorFor',
     '--field-shine',
     '--button-shine',
@@ -496,6 +542,9 @@ function checkRenderer() {
   }
   if (/Client intake|Partner intake|Team intake|team-intake/i.test(source)) {
     fail(`${relativePath}: unrelated intake copy returned to the job-application story`);
+  }
+  if (/classList\.toggle\(['"]is-dark/.test(source)) {
+    fail(`${relativePath}: hard theme cuts must not replace the timed color crossfade`);
   }
   if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
     fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
@@ -743,7 +792,7 @@ async function main() {
   }
 
   console.log(
-    `Skip Retyping marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks.`,
+    `Skip Retyping marketing asset audit passed: ${checked.images} images, ${checked.videos} video, ${checked.captions} caption tracks, ${checked.renderer} renderer, ${checked.icons} icon checks, ${checked.transitions} transition checks.`,
   );
 }
 

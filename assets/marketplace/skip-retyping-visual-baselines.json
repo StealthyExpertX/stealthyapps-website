@@ -94,8 +94,8 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s-thumb.png",
-      "bytes": 315103,
-      "sha256": "8ac230af5f0a904e4364fbdc25df1274dc8e704f40ce1805262d28eeb00ab96a",
+      "bytes": 318591,
+      "sha256": "fe2128076c31899f15022345b693bab21513c42d42b3c52b76ee525760fe9396",
       "width": 1280,
       "height": 720,
       "meanLuma": 228.67,
@@ -103,8 +103,8 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s.mp4",
-      "bytes": 925401,
-      "sha256": "122d9f98c5e50e94380e3ef40775663872aedaf675efc68dbe21bcdbcd6f94bf"
+      "bytes": 1372689,
+      "sha256": "9e9a4a64213b4dc2b845bbf21c576623bc1c708e263619088c246c4205f5c8ea"
     },
     {
       "file": "../fillpro/icons/icon16.png",
