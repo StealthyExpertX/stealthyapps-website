@@ -27,7 +27,7 @@ const CORE_ASSETS = [
   '/assets/skip-retyping-logo.svg',
   '/assets/skip-retyping-logo.png',
   '/assets/skip-retyping-og.png',
-  '/assets/skip-retyping-demo-poster.png',
+  '/assets/skip-retyping-demo-poster.webp',
   '/manifest.webmanifest',
   '/llms.txt',
   '/404.html',

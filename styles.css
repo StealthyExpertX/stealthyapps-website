@@ -4226,7 +4226,7 @@ html:has(body.skip-retyping-launch) {
   }
 
   .launch-demo-card img {
-    content: url("/assets/skip-retyping-demo-poster.png");
+    content: url("/assets/skip-retyping-demo-poster.webp");
   }
 
   .launch-brand::before,

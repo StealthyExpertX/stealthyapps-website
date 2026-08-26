@@ -345,14 +345,20 @@
     video.defaultMuted = true;
     video.loop = true;
     video.playsInline = true;
-    video.autoplay = !reduceMotion;
-    video.preload = 'auto';
-    video.poster = '/assets/skip-retyping-demo-poster.png';
-    video.src = '/assets/skip-retyping-demo.mp4';
+    video.autoplay = false;
+    video.preload = reduceMotion ? 'none' : 'metadata';
+    video.poster = '/assets/skip-retyping-demo-poster.webp';
     video.setAttribute(
       'aria-label',
       'Skip Retyping filling a job application from a saved work profile',
     );
+    var userChangedPlayback = false;
+
+    function ensureVideoSource() {
+      if (!video.getAttribute('src')) {
+        video.src = '/assets/skip-retyping-demo.mp4';
+      }
+    }
 
     function setPlaybackState(isPlaying) {
       button.dataset.state = isPlaying ? 'playing' : 'paused';
@@ -367,6 +373,7 @@
     }
 
     function playVideo() {
+      ensureVideoSource();
       setPlaybackState(true);
       var playback = video.play();
       if (playback && typeof playback.catch === 'function') {
@@ -379,6 +386,7 @@
     function togglePlayback(event) {
       event?.preventDefault?.();
       event?.stopPropagation?.();
+      userChangedPlayback = true;
       if (video.paused) playVideo();
       else video.pause();
     }
@@ -405,7 +413,15 @@
       setPlaybackState(false);
     } else {
       setPlaybackState(true);
-      playVideo();
+      var startAutoplayAfterLoad = function () {
+        if (userChangedPlayback) return;
+        window.requestAnimationFrame(playVideo);
+      };
+      if (document.readyState === 'complete') {
+        startAutoplayAfterLoad();
+      } else {
+        window.addEventListener('load', startAutoplayAfterLoad, { once: true });
+      }
     }
   }
 

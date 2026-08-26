@@ -40,4 +40,6 @@ Where privacy law applies, you may ask to access, correct, delete, restrict, or 
 
 Skip Retyping is for repeated profile fields around a form. Keep passwords, payment cards, CVCs, one-time codes, wallets, and protected identity details with your browser, password manager, wallet, or the site itself.
 
+Salary, work-authorization, demographic, and health answers stay blank during Fill Page. Fill one only when you choose that field.
+
 Privacy contact: https://stealthyapps.com/contact/?topic=privacy&reason=privacy_question&product=Skip%20Retyping

@@ -787,8 +787,13 @@ async function auditDemoPlayback(browser, origin, errors) {
     const reducedState = await reducedPage.evaluate(() => ({
       paused: document.querySelector('.demo-shell video')?.paused,
       label: document.querySelector('.demo-play-button')?.getAttribute('aria-label'),
+      source: document.querySelector('.demo-shell video')?.getAttribute('src') || '',
     }));
-    if (!reducedState.paused || reducedState.label !== 'Play the Skip Retyping demo') {
+    if (
+      !reducedState.paused ||
+      reducedState.label !== 'Play the Skip Retyping demo' ||
+      reducedState.source
+    ) {
       errors.push(`/skip-retyping/: reduced-motion demo state regressed: ${JSON.stringify(reducedState)}`);
     }
   } catch (error) {

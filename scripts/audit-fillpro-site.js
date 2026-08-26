@@ -392,7 +392,10 @@ function checkProductHero() {
     [siteScript, "'Skip Retyping filling a job application from a saved work profile'", 'playing demo should keep the job-application accessibility label'],
     [css, 'scrollbar-width: none', 'demo shell should hide internal browser chrome scrollbars'],
     [css, 'prefers-reduced-motion: reduce', 'motion should respect reduced-motion preferences'],
-    [sw, '/assets/skip-retyping-demo-poster.png', 'service worker should cache the stable demo poster'],
+    [html, '/assets/skip-retyping-demo-poster.webp', 'landing page should deliver the compact WebP demo poster'],
+    [siteScript, "video.poster = '/assets/skip-retyping-demo-poster.webp'", 'playing demo should retain the compact WebP poster'],
+    [css, 'content: url("/assets/skip-retyping-demo-poster.webp")', 'reduced motion should retain the compact WebP poster'],
+    [sw, '/assets/skip-retyping-demo-poster.webp', 'service worker should cache the compact demo poster'],
   ];
   for (const [source, needle, label] of required) {
     if (!source.includes(needle)) fail(label);
@@ -479,7 +482,9 @@ function checkLaunchPage() {
     fail('site.js: hero demo is not wired to the MP4');
   }
   if (
-    !siteScript.includes('video.autoplay = !reduceMotion') ||
+    !siteScript.includes('video.autoplay = false') ||
+    !siteScript.includes('startAutoplayAfterLoad') ||
+    !siteScript.includes("video.preload = reduceMotion ? 'none' : 'metadata'") ||
     !siteScript.includes('togglePlayback') ||
     !siteScript.includes("isPlaying ? 'Pause the Skip Retyping demo' : 'Play the Skip Retyping demo'")
   ) {
@@ -806,13 +811,15 @@ function checkStaleCopy(file, text) {
 }
 
 function checkPublicIdentityAndRedirects(files) {
-  for (const unsupportedAgentFile of [
+  for (const unsupportedPublicFile of [
     '.well-known/ai-plugin.json',
     '.well-known/mcp.json',
     '.well-known/openapi.yaml',
+    'debug.log',
+    'opensearch.xml',
   ]) {
-    if (fs.existsSync(path.join(ROOT, unsupportedAgentFile))) {
-      fail(unsupportedAgentFile + ': unsupported plugin or agent endpoint must not ship');
+    if (fs.existsSync(path.join(ROOT, unsupportedPublicFile))) {
+      fail(unsupportedPublicFile + ': unsupported or nonfunctional public file must not ship');
     }
   }
   const publicIdentityFiles = files.filter((file) => {
@@ -821,7 +828,7 @@ function checkPublicIdentityAndRedirects(files) {
       fileRel.startsWith('skip-retyping/') ||
       fileRel.startsWith('support/') ||
       fileRel.startsWith('contact/') ||
-      ['index.html', 'index.md', 'llms.txt', 'llms-full.txt', 'humans.txt', 'site.js', 'manifest.webmanifest', 'opensearch.xml', 'sitemap.xml', 'sitemap-index.xml', 'sitemap-images.xml', 'sitemap-locales.xml'].includes(fileRel)
+      ['index.html', 'index.md', 'llms.txt', 'llms-full.txt', 'humans.txt', 'site.js', 'manifest.webmanifest', 'sitemap.xml', 'sitemap-index.xml', 'sitemap-images.xml', 'sitemap-locales.xml'].includes(fileRel)
     );
   });
   const slopPatterns = [

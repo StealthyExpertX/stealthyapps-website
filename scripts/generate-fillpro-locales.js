@@ -17,7 +17,7 @@ const locales = [
     h1: 'Dieselben Formulardaten nicht immer wieder tippen.',
     lead: 'Skip Retyping speichert wiederverwendbare Profile im Browser. Wähle ein Profil, fülle die Seite aus und prüfe alles, bevor du das Formular absendest.',
     ctas: ['Kostenlos starten', 'Preise ansehen'],
-    actionNote: '3 Profile kostenlos. Zum Start ist kein Konto nötig.',
+    actionNote: '3 Profile kostenlos. Zum Start ist kein Konto nötig. Die Erweiterungsoberfläche ist derzeit auf Englisch.',
     quickTitle: 'In wenigen Schritten',
     quickItems: ['Profil einmal speichern', 'Formular mit einem Klick ausfüllen', 'Änderungen prüfen oder rückgängig machen'],
     features: [
@@ -48,7 +48,7 @@ const locales = [
     h1: 'Deja de escribir los mismos datos en cada formulario.',
     lead: 'Skip Retyping guarda perfiles reutilizables en el navegador. Elige un perfil, rellena la página y revisa el resultado antes de enviar el formulario.',
     ctas: ['Empezar gratis', 'Ver precios'],
-    actionNote: '3 perfiles gratis. No necesitas una cuenta para empezar.',
+    actionNote: '3 perfiles gratis. No necesitas una cuenta para empezar. La interfaz de la extensión está disponible actualmente en inglés.',
     quickTitle: 'Un proceso corto',
     quickItems: ['Guarda un perfil una vez', 'Rellena el formulario con un clic', 'Revisa los cambios o deshaz el rellenado'],
     features: [
@@ -79,7 +79,7 @@ const locales = [
     h1: 'Ne saisissez plus les mêmes informations dans chaque formulaire.',
     lead: 'Skip Retyping enregistre des profils réutilisables dans le navigateur. Choisissez un profil, remplissez la page, puis vérifiez le résultat avant l’envoi.',
     ctas: ['Commencer gratuitement', 'Voir les tarifs'],
-    actionNote: '3 profils gratuits. Aucun compte nécessaire pour commencer.',
+    actionNote: '3 profils gratuits. Aucun compte nécessaire pour commencer. L’interface de l’extension est actuellement en anglais.',
     quickTitle: 'Un parcours plus court',
     quickItems: ['Enregistrez un profil une fois', 'Remplissez le formulaire en un clic', 'Vérifiez les changements ou annulez le remplissage'],
     features: [
@@ -110,7 +110,7 @@ const locales = [
     h1: 'Pare de digitar os mesmos dados em cada formulário.',
     lead: 'Skip Retyping salva perfis reutilizáveis no navegador. Escolha um perfil, preencha a página e confira o resultado antes de enviar.',
     ctas: ['Começar grátis', 'Ver preços'],
-    actionNote: '3 perfis grátis. Não é preciso criar uma conta para começar.',
+    actionNote: '3 perfis grátis. Não é preciso criar uma conta para começar. A interface da extensão está disponível atualmente em inglês.',
     quickTitle: 'Um caminho mais curto',
     quickItems: ['Salve um perfil uma vez', 'Preencha o formulário com um clique', 'Revise as mudanças ou desfaça o preenchimento'],
     features: [
@@ -141,7 +141,7 @@ const locales = [
     h1: '同じ情報をフォームごとに入力する手間を減らします。',
     lead: 'Skip Retyping は再利用できるプロフィールをブラウザに保存します。プロフィールを選んでページ上のフォームに入力し、送信前に結果を確認できます。',
     ctas: ['無料で始める', '料金を見る'],
-    actionNote: 'プロフィール3件まで無料。開始時にアカウントは不要です。',
+    actionNote: 'プロフィール3件まで無料。開始時にアカウントは不要です。拡張機能の画面は現在英語です。',
     quickTitle: '使い方はシンプル',
     quickItems: ['プロフィールを一度保存', 'ワンクリックでフォームを入力', '変更を確認、または元に戻す'],
     features: [
@@ -172,7 +172,7 @@ const locales = [
     h1: '양식마다 같은 정보를 다시 입력하지 마세요.',
     lead: 'Skip Retyping은 다시 사용할 프로필을 브라우저에 저장합니다. 프로필을 고르고 페이지를 채운 뒤 제출 전에 결과를 확인하세요.',
     ctas: ['무료로 시작', '요금 보기'],
-    actionNote: '프로필 3개까지 무료입니다. 시작할 때 계정은 필요 없습니다.',
+    actionNote: '프로필 3개까지 무료입니다. 시작할 때 계정은 필요 없습니다. 확장 프로그램 인터페이스는 현재 영어로 제공됩니다.',
     quickTitle: '간단한 사용 흐름',
     quickItems: ['프로필을 한 번 저장', '한 번의 클릭으로 양식 입력', '변경 내용을 확인하거나 되돌리기'],
     features: [
@@ -203,7 +203,7 @@ const locales = [
     h1: '不必在每个表单中重复输入相同资料。',
     lead: 'Skip Retyping 将可重复使用的个人资料保存在浏览器扩展中。选择资料、填写页面，然后在提交前检查结果。',
     ctas: ['免费开始', '查看价格'],
-    actionNote: '可免费保存 3 个资料。开始使用无需注册账户。',
+    actionNote: '可免费保存 3 个资料。开始使用无需注册账户。扩展程序界面目前为英文。',
     quickTitle: '更短的操作流程',
     quickItems: ['只需保存一次资料', '一键填写表单', '检查更改或撤销填写'],
     features: [
@@ -234,7 +234,7 @@ const locales = [
     h1: 'Не вводите одни и те же данные в каждой форме.',
     lead: 'Skip Retyping сохраняет многоразовые профили в браузере. Выберите профиль, заполните страницу и проверьте результат перед отправкой.',
     ctas: ['Начать бесплатно', 'Посмотреть цены'],
-    actionNote: '3 профиля бесплатно. Для начала не нужен аккаунт.',
+    actionNote: '3 профиля бесплатно. Для начала не нужен аккаунт. Интерфейс расширения пока доступен на английском языке.',
     quickTitle: 'Короткий путь',
     quickItems: ['Сохраните профиль один раз', 'Заполните форму одним кликом', 'Проверьте изменения или отмените заполнение'],
     features: [
