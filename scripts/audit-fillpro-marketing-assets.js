@@ -36,6 +36,27 @@ function assertFile(relativePath, minBytes = 1024, maxBytes = 25 * 1024 * 1024) 
   return target;
 }
 
+function getRuntimeMarketingLocales() {
+  const sourcePath = path.join(
+    WORKSPACE,
+    'fillpro',
+    'release-tools',
+    'runtime-ui-locales.json',
+  );
+  if (!fs.existsSync(sourcePath)) {
+    fail('localized screenshots: runtime UI locale source missing');
+    return [];
+  }
+  const source = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
+  const locales = (source.supportedLocales || []).filter(
+    (locale) => locale !== 'en',
+  );
+  if (!locales.length) {
+    fail('localized screenshots: runtime UI locale source has no translated languages');
+  }
+  return locales;
+}
+
 function checkLocalizedCaptions() {
   const root = filePath('assets/marketplace/localized');
   const manifestPath = path.join(root, 'caption-manifest.json');
@@ -71,7 +92,7 @@ function checkLocalizedScreenshotCopy() {
     return;
   }
   const copy = JSON.parse(fs.readFileSync(sourcePath, 'utf8'));
-  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const locales = getRuntimeMarketingLocales();
   const topLevelKeys = [
     'badge',
     'headline',
@@ -193,7 +214,7 @@ function checkLocalizedScreenshotCopy() {
 
 async function checkLocalizedScreenshots() {
   checkLocalizedScreenshotCopy();
-  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const locales = getRuntimeMarketingLocales();
   const names = ['fill-page', 'profiles', 'modern-forms', 'privacy', 'undo'];
   for (const locale of locales) {
     for (const name of names) {
