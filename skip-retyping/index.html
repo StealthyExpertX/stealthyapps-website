@@ -29,7 +29,7 @@
   <link rel="sitemap" type="application/xml" href="/sitemap.xml">
   <link rel="preload" href="/assets/fonts/AtkinsonHyperlegibleNext[wght].woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="preload" as="image" href="/assets/skip-retyping-demo-poster.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image" href="/assets/skip-retyping-demo-poster.webp" type="image/webp" media="(min-width: 601px)" fetchpriority="high">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Stealthy Apps">
@@ -183,9 +183,9 @@
         <p class="launch-kicker">Private form autofill</p>
         <h1 id="skip-retyping-title">Skip Retyping</h1>
         <p class="launch-product-promise">Autofill the details you keep retyping.</p>
-        <p class="launch-lead">Save a profile once. Use it for job applications and other repeat forms, then check every change before you submit.</p>
+        <p class="launch-lead">Your contact details. Your resume. The answers you have typed a hundred times. Save them once, fill from a profile, and make each application your own.</p>
         <div class="launch-actions" aria-label="Skip Retyping actions">
-          <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Check Chrome availability</a>
+          <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Add to Chrome - free</a>
           <a class="launch-button" href="#pricing">See pricing</a>
           <p class="launch-action-note">3 profiles free. No account to start.</p>
         </div>
@@ -193,18 +193,19 @@
 
       <figure class="launch-demo-card" id="demo">
         <div class="demo-shell">
-          <img data-skip-retyping-demo-poster src="/assets/skip-retyping-demo-poster.webp" alt="Skip Retyping filling a job application from a saved work profile" width="960" height="540" fetchpriority="high">
+          <picture><source media="(max-width: 600px)" srcset="/assets/skip-retyping-demo-mobile-poster.webp"><img data-skip-retyping-demo-poster src="/assets/skip-retyping-demo-poster.webp" alt="Skip Retyping filling a job application from a saved work profile" width="1920" height="1080" fetchpriority="high"></picture>
         </div>
         <figcaption>
           <button class="demo-play-button" type="button" data-state="playing" aria-label="Pause the Skip Retyping demo" title="Pause the Skip Retyping demo" hidden></button>
-          <strong>Watch the actual extension fill a test application.</strong>
-          <span>Contact details and a saved resume fill; the password stays blank. Recorded on a local test form and edited for readability, not a speed benchmark.</span>
-          <a href="/assets/marketplace/skip-retyping-store-demo-22s.mp4">View full-size video</a>
+          <strong>Your details, without the retyping.</strong>
+          <span>Fill, review, and get on with your day.</span>
+          <a href="/assets/skip-retyping-demo.mp4">Watch the 22-second demo</a>
         </figcaption>
       </figure>
       <details class="demo-transcript">
-        <summary>Demo transcript</summary>
-        <p>A saved Job search profile fills the name, email, phone and resume fields. The extension reports 4 filled fields and 1 skipped field. Undo restores the original empty fields and file input. Skip Retyping does not submit the form.</p>
+        <summary>Demo transcript &amp; recording details</summary>
+        <p>Watch the actual extension fill a test application. Edited demo using a fictional local form; timing is condensed for readability.</p>
+        <p>A saved Job search profile fills the name, email, phone and resume fields. The extension reports the filled and skipped fields. Undo restores the original empty fields and file input. Skip Retyping does not submit the form.</p>
         <p>3 profiles are free, including export and selected backup recovery. Pro raises the limit to 500 profiles and adds duplication: $3.99 monthly, $29.99 yearly or $39.99 once for lifetime access.</p>
       </details>
     </section>
@@ -219,17 +220,17 @@
     <section class="launch-downloads" aria-labelledby="browser-download-title">
       <div class="section-heading-tight">
         <p class="launch-kicker">Browser downloads</p>
-        <h2 id="browser-download-title" data-store-live-copy="chrome" data-live-text="Add Skip Retyping to Chrome.">Skip Retyping for Chrome is coming soon.</h2>
-        <p>Edge and Firefox coming soon.</p>
+        <h2 id="browser-download-title" data-store-live-copy="chrome" data-live-text="Add Skip Retyping to Chrome.">Add Skip Retyping to Chrome.</h2>
+        <p>Save your first profile and put it to work.</p>
       </div>
       <div class="browser-download-grid" aria-label="Skip Retyping browser download pages">
-        <a class="browser-download-card" href="/skip-retyping/download/chrome/" data-skip-retyping-store="chrome" hidden aria-label="Install Skip Retyping from the Chrome Web Store">
+        <a class="browser-download-card" href="/skip-retyping/download/" aria-label="Download Skip Retyping for Chrome">
           <span class="browser-mark browser-mark-chrome" aria-hidden="true">
             <img src="/assets/browser-chrome.svg" alt="" width="24" height="24" decoding="async">
           </span>
           <span>
             <strong>Chrome</strong>
-            <small data-store-live-copy="chrome" data-live-text="Chrome Web Store page">Chrome launch status</small>
+            <small data-store-live-copy="chrome" data-live-text="Chrome Web Store page">Free browser extension</small>
           </span>
           <em aria-hidden="true">Install</em>
         </a>
@@ -294,7 +295,7 @@
         <article>
           <span>03</span>
           <h3>Check before you submit</h3>
-          <p>Review every filled field. Use Undo if needed. A website can read or autosave filled values before you press Submit.</p>
+          <p>Make the final edits yourself, or undo the fill and try another profile. You decide when to submit.</p>
         </article>
       </div>
     </section>
@@ -303,11 +304,11 @@
       <div class="review-rail-copy">
         <p class="launch-kicker">Before submit</p>
         <h2 id="review-rail-title">See what changed before you submit.</h2>
-        <p>See filled, skipped and review-needed fields in the result. Undo restores the previous values when the same fields are still on the page; it cannot retract data a website already received.</p>
+        <p>Know what filled and what needs your attention. Check the result, make your edits, or undo the last fill.</p>
       </div>
       <figure class="review-rail-stage actual-result">
-        <img src="/assets/marketplace/captures/filled-popup.png" alt="Actual Skip Retyping result: 4 fields filled, 1 skipped, with field details and Undo" width="360" height="377" loading="lazy" decoding="async">
-        <figcaption>Actual result from the test form above. <a href="/skip-retyping/docs/smart-rules/">Need help with an unusual field label?</a></figcaption>
+        <img src="/assets/marketplace/captures/filled-popup.png" alt="Actual Skip Retyping fill result with field details and Undo" width="360" height="377" loading="lazy" decoding="async">
+        <figcaption>Your fill result, at a glance. <a href="/skip-retyping/docs/smart-rules/">Need help with an unusual field label?</a></figcaption>
       </figure>
     </section>
 
@@ -385,7 +386,7 @@
             <li>Upload matching</li>
             <li>Right-click field capture</li>
           </ul>
-          <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Check Chrome availability</a>
+          <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Add to Chrome - free</a>
         </article>
         <article class="price-card price-card-featured">
           <div>
@@ -435,7 +436,7 @@
         </details>
         <details>
           <summary>Does Skip Retyping send saved profiles to a server?</summary>
-          <p>No cloud profile account is needed. Profiles are saved in your browser. Filling shares entered values and files with the destination website, which may autosave before submission. Exports and support share what you choose. Pro checkout sends license and payment details, not saved profile values.</p>
+          <p>No cloud profile account is needed. Profiles are saved in your browser. Filling shares entered values and files with the destination website, which may autosave before submission. Undo cannot retract data a website already received. Exports and support share what you choose. Pro checkout sends license and payment details, not saved profile values.</p>
         </details>
         <details>
           <summary>What site access does it need?</summary>
@@ -456,7 +457,7 @@
       <p class="launch-kicker">Skip Retyping by Stealthy Apps</p>
       <h2>Fill your next form from a saved profile.</h2>
       <div class="launch-actions">
-        <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Check Chrome availability</a>
+        <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Add to Chrome - free</a>
         <a class="launch-button" href="/skip-retyping/docs/getting-started/">Read the setup guide</a>
       </div>
     </section>

@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-06T08:42:48.062Z",
-  "captureReceiptHash": "1aa0ba9167d30d261266ba209285fdf58ad3bef1cfa75d7be5bfbd90878d258a",
-  "rendererHash": "516ad259a2cfb0e9497d18036e3a1cebd2bf02ee9a1bc39b8f62b2c4bfcefcd9",
+  "generatedAt": "2026-09-06T12:36:48.393Z",
+  "captureReceiptHash": "7af8f1dacdb8a76beedf5916318acfb2ecfa916b513062be64e6273cbdf1c9c1",
+  "rendererHash": "2d2cdcee8923c85d74dc845d8867cac91cf74035db83a91a219f4f689aaa2e9b",
   "durationSeconds": 22,
   "fps": 24,
   "transitions": [
@@ -32,11 +32,13 @@
     }
   ],
   "artifacts": {
-    "marketplace/skip-retyping-store-demo-22s.mp4": "7755a7e4c2cc71d0867fe2a7f39b0e73211528fc973bd3ec23d26e62320bbc59",
-    "marketplace/skip-retyping-store-demo-22s-thumb.png": "90b1704de0fd0e64d3c878b019cc1ec8107ad8f6c4fcc2722724954b068480aa",
-    "skip-retyping-demo.mp4": "24a84b4fc24a5db9072390d1ccf3cf2a65b8d0238ba7ed359e33ca90ed1218e4",
-    "skip-retyping-demo.gif": "e148674ff32a2ba6536124329c469c52e3393b0cdffa868a5621f7751fd5a8b1",
-    "skip-retyping-demo-poster.png": "392ffdbf2ff7dc0d8425815fd048ce0e8471f3c83b98ca06bce0b1c2c3a58c9b",
-    "skip-retyping-demo-poster.webp": "bed47b386753d367e2072cf8f581afb444efc8854d997e02ef85e67be087870c"
+    "marketplace/skip-retyping-store-demo-22s.mp4": "934a9ec0f571bff2ab6257ee134745ccfb16aeb1eb58bddea086533ad2388624",
+    "marketplace/skip-retyping-store-demo-22s-thumb.png": "4e4f83045895251eb6000654dba53682a8a1c22a9032ba00cca459fc2a4f4f24",
+    "skip-retyping-demo.mp4": "4d178ef0efdb399580702fa59bce90c84dd12577ddee49ac78056e79846d4268",
+    "skip-retyping-demo.gif": "f8b25000b4d7c5b5fc31b32e2c34fce03ea68ec4e6d7744f7dcc06bf9781afb5",
+    "skip-retyping-demo-poster.png": "9b9c5ee1151ee37912bb823e2963b4db6ac4dc68b870750ea838289c208fa8e3",
+    "skip-retyping-demo-poster.webp": "2deeb832555e53361f391044954c2d3b1cdf6c99e3e03406b94c59831769d4ff",
+    "skip-retyping-demo-mobile.mp4": "6be156ee3a8c2f6f620b58c21a34d2e441e2cb7452eb8e1b8eb3ff2bf62ca25c",
+    "skip-retyping-demo-mobile-poster.webp": "c42f686da6b7db63860297909a904fcd8b2e76e060dea02ed9617a5192f58e05"
   }
 }

@@ -239,7 +239,8 @@ async function checkImage(relativePath, width, height, options = {}) {
   if (metadata.width !== width || metadata.height !== height) {
     fail(`${relativePath}: expected ${width}x${height}, got ${metadata.width}x${metadata.height}`);
   }
-  if (metadata.format !== 'png') fail(`${relativePath}: expected PNG, got ${metadata.format}`);
+  const expectedFormat = options.format || 'png';
+  if (metadata.format !== expectedFormat) fail(`${relativePath}: expected ${expectedFormat}, got ${metadata.format}`);
   if (options.requireOpaque && metadata.hasAlpha) {
     fail(`${relativePath}: store screenshots must be fully opaque`);
   }
@@ -468,9 +469,9 @@ function checkVideo(relativePath) {
   checkTransitionContinuity(relativePath, target);
 }
 
-function checkHeroVideo(relativePath) {
+function checkHeroVideo(relativePath, width = 1920, height = 1080, maxBytes = 2 * 1024 * 1024) {
   checked.videos += 1;
-  const target = assertFile(relativePath, 30 * 1024, 500 * 1024);
+  const target = assertFile(relativePath, 30 * 1024, maxBytes);
   if (!target) return;
   let data;
   try {
@@ -495,8 +496,8 @@ function checkHeroVideo(relativePath) {
   const fps = parseRate(video.avg_frame_rate);
   if (audio) fail(`${relativePath}: hero demo should be mute-safe`);
   if (video.codec_name !== 'h264') fail(`${relativePath}: expected H.264, got ${video.codec_name}`);
-  if (video.width !== 960 || video.height !== 540) {
-    fail(`${relativePath}: expected 960x540, got ${video.width}x${video.height}`);
+  if (video.width !== width || video.height !== height) {
+    fail(`${relativePath}: expected ${width}x${height}, got ${video.width}x${video.height}`);
   }
   if (Math.abs(duration - 22) > 0.1) fail(`${relativePath}: expected the same 22-second story as the store demo, got ${duration.toFixed(2)}s`);
   if (fps < 23.5 || fps > 24.5) fail(`${relativePath}: expected 24fps, got ${fps.toFixed(2)}fps`);
@@ -522,12 +523,13 @@ function checkRenderer() {
   if (Object.keys(capture.artifacts || {}).length < 6 || !checkHashes(capture.artifacts, filePath('assets/marketplace/captures'))) fail('Captured product pixels changed');
   if (capture.captureScriptHash !== hash(filePath('scripts/capture-fillpro-demo.js'))) fail('Capture script changed after verification');
   if (video.captureReceiptHash !== hash(receiptPath) || video.rendererHash !== hash(filePath('scripts/render-fillpro-store-video.js'))) fail('Video provenance does not match its capture or renderer');
-  if (Object.keys(video.artifacts || {}).length !== 6 || !checkHashes(video.artifacts, filePath('assets'))) fail('Video output bytes changed');
+  if (Object.keys(video.artifacts || {}).length !== 8 || !checkHashes(video.artifacts, filePath('assets'))) fail('Video output bytes changed');
   if (capture.filled?.name !== 'Alex Morgan' || capture.filled?.password !== '' || capture.filled?.resume !== 'alex-resume.pdf') fail('Real capture did not demonstrate the claimed name/upload/safety result');
   if (capture.assertions?.length < 3 || video.durationSeconds !== 22 || video.fps !== 24) fail('Real task assertions or video format missing');
   if (checkHashes({ 'filled-form.png': 'deliberately-invalid-hash' }, filePath('assets/marketplace/captures'))) fail('Negative control: capture hash verification accepted altered evidence');
   const renderer = fs.readFileSync(filePath('scripts/render-fillpro-store-video.js'), 'utf8');
-  if (!renderer.includes('not a speed benchmark') || !renderer.includes('Actual extension UI. Local test form. Edited for readability.')) fail('Edited demonstration must disclose its scope');
+  const landingPage = fs.readFileSync(filePath('skip-retyping/index.html'), 'utf8');
+  if (!renderer.includes('not a speed benchmark') || !renderer.includes('Edited product demo') || !landingPage.includes('fictional local form; timing is condensed')) fail('Edited demonstration must disclose its scope in the video and adjacent transcript');
   if (/themeFor|renderFields|fillButton.*textContent/.test(renderer)) fail('Synthetic UI or cosmetic theme switching returned to the real capture renderer');
 }
 
@@ -642,8 +644,10 @@ async function checkIconSystem() {
 async function main() {
   await checkImage('assets/skip-retyping-logo.png', 512, 512, { maxBytes: 1024 * 1024 });
   await checkImage('assets/skip-retyping-og.png', 1200, 630, { maxBytes: 2 * 1024 * 1024 });
-  await checkImage('assets/skip-retyping-demo-poster.png', 960, 540, { maxBytes: 2 * 1024 * 1024 });
+  await checkImage('assets/skip-retyping-demo-poster.png', 1920, 1080, { maxBytes: 2 * 1024 * 1024 });
+  await checkImage('assets/skip-retyping-demo-mobile-poster.webp', 720, 900, { maxBytes: 120 * 1024, format: 'webp' });
   checkHeroVideo('assets/skip-retyping-demo.mp4');
+  checkHeroVideo('assets/skip-retyping-demo-mobile.mp4', 720, 900, 500 * 1024);
   await checkImage('assets/marketplace/skip-retyping-small-promo-440x280.png', 440, 280, {
     maxBytes: 1024 * 1024,
     maxMeanLuma: 190,

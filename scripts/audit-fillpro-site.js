@@ -337,8 +337,6 @@ function checkSiteScript() {
     'utf8',
   );
   for (const [source, label, note] of [
-    [home, 'skip-retyping/index.html', 'Edge and Firefox coming soon.'],
-    [checkout, 'skip-retyping/checkout/index.html', 'Edge and Firefox coming soon.'],
     [download, 'skip-retyping/download/index.html', 'Chrome, Edge, and Firefox coming soon.'],
   ]) {
     if (!source.includes(note)) {
@@ -350,6 +348,10 @@ function checkSiteScript() {
     if (/href="\/skip-retyping\/download\/(?:edge|firefox)\//i.test(source)) {
       fail(`${label}: unreleased browser status must not look actionable`);
     }
+  }
+  for (const [source, label] of [[home, 'product'], [checkout, 'checkout']]) {
+    if (/coming soon|listing pending|Check Chrome availability/i.test(source)) fail(`${label}: launch status belongs on the download page`);
+    if (!source.includes('href="/skip-retyping/download/"')) fail(`${label}: installation must route through the real download page`);
   }
   for (const [source, label, browser] of [
     [chrome, 'skip-retyping/download/chrome/index.html', 'Chrome'],

@@ -5,7 +5,7 @@ const sharp = require('sharp');
 
 const ROOT = path.resolve(__dirname, '..');
 const WORKSPACE = path.resolve(ROOT, '..');
-const OUT_DIR = path.join(ROOT, '.tmp', 'marketing-review');
+const OUT_DIR = process.env.FILLPRO_REVIEW_DIR || path.join(ROOT, '.tmp', 'marketing-review');
 const FRAME_DIR = path.join(OUT_DIR, 'video-frames-current');
 const VIDEO_REVIEW_TIMES = [0, 0.8, 2.6, 4.8, 8.4, 12.9, 15.5, 18.6, 21.2];
 

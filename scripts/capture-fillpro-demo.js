@@ -18,11 +18,11 @@ const fingerprint = () => Object.fromEntries(inputs.map((file) => [file, digest(
 
 const fixture = `<!doctype html><html lang="en"><meta charset="utf-8">
 <title>Job application - local demonstration</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7f6;color:#152c27;font:18px/1.45 system-ui}
-main{padding:24px 32px;max-width:820px}h1{font-size:28px;margin:0 0 6px}p{margin:0 0 20px;color:#455e55}
-form{display:grid;grid-template-columns:1fr 1fr;gap:16px 20px}label{display:grid;gap:6px;font-weight:600}
-input,select{font:17px system-ui;color:#152c27;background:white;border:1px solid #849c93;border-radius:4px;width:100%;height:44px;padding:8px}
-input[type=file]{font-size:14px}input[type=checkbox]{width:22px;height:22px;accent-color:#087d6a}
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#172c29;font:18px/1.45 system-ui}
+main{padding:30px 32px;max-width:820px}h1{font-size:30px;margin:0 0 6px}p{margin:0 0 24px;color:#52645f}
+form{display:grid;grid-template-columns:1fr 1fr;gap:22px 20px}label{display:grid;gap:8px;font-weight:600}
+input,select{font:18px system-ui;color:#172c29;background:#fafcfb;border:1px solid #afbeb9;border-radius:6px;width:100%;height:52px;padding:10px 12px}
+input[type=file]{font-size:14px;padding:12px 8px}input[type=checkbox]{width:22px;height:22px;accent-color:#087d6a}
 .wide{grid-column:1/-1}.check{display:flex;align-items:center;gap:10px}small{font-size:13px;color:#52685f;font-weight:400}
 </style><main><h1>Job application</h1><p>Contact details</p><form id="application">
 <label>Full name<input id="full_name" name="full_name" autocomplete="name"></label>
@@ -43,9 +43,11 @@ async function capture() {
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   let context;
   const assertions = [];
+  const framing = {};
   try {
     context = await chromium.launchPersistentContext(userData, {
       channel: 'chromium', headless: true, viewport: { width: 820, height: 540 },
+      deviceScaleFactor: 2,
       args: [`--disable-extensions-except=${extension}`, `--load-extension=${extension}`, '--enable-unsafe-extension-debugging'],
     });
     const worker = context.serviceWorkers().find((item) => item.url().endsWith('/background.js')) ||
@@ -85,6 +87,13 @@ async function capture() {
       assert(lastProfile, 'Capture must include a real saved profile');
       assert(lastProfile.y + lastProfile.height <= 540, 'The saved profile must fit without cropping controls');
       await popup.screenshot({ path: path.join(output, `${name}-popup.png`), clip: { x: 0, y: 0, width: 360, height: Math.min(540, Math.ceil(lastProfile.y + lastProfile.height + 14)) } });
+      if (['before', 'filled', 'undo'].includes(name)) {
+        framing[name] = {
+          fill: await popup.locator('[data-fill]').first().boundingBox(),
+          undo: await popup.locator('#btnUndoResult').boundingBox(),
+          password: await form.locator('label').filter({ has: form.locator('#password') }).boundingBox(),
+        };
+      }
     };
     await popup.reload();
     await popup.locator('[data-fill]').waitFor();
@@ -156,7 +165,7 @@ async function capture() {
     }
     assert.deepEqual(fingerprint(), hashes, 'Extension inputs changed during capture');
     const artifacts = Object.fromEntries(fs.readdirSync(output).filter((file) => file.endsWith('.png')).map((file) => [file, digest(path.join(output, file))]));
-    fs.writeFileSync(path.join(output, 'provenance.json'), `${JSON.stringify({ schemaVersion: 1, capturedAt: new Date().toISOString(), buildVersion: '1.0.0', source: 'Unpacked working source, not a certified store ZIP', fixture: 'Local fictional form; not a compatibility claim for any job website', extensionHashes: hashes, captureScriptHash: digest(__filename), assertions, filled, artifacts }, null, 2)}\n`);
+    fs.writeFileSync(path.join(output, 'provenance.json'), `${JSON.stringify({ schemaVersion: 1, capturedAt: new Date().toISOString(), buildVersion: '1.0.0', source: 'Unpacked working source, not a certified store ZIP', fixture: 'Local fictional form; not a compatibility claim for any job website', pixelRatio: 2, framing, extensionHashes: hashes, captureScriptHash: digest(__filename), assertions, filled, artifacts }, null, 2)}\n`);
     console.log(`Real extension capture passed: ${assertions.length} task assertions; ${Object.keys(artifacts).length} images.`);
   } finally {
     await context?.close();

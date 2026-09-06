@@ -304,18 +304,11 @@
     checkout.dataset.selectedPlan = selectedPlan;
     var checkoutAction = checkout.querySelector('[data-checkout-action]');
     if (checkoutAction) {
-      var actionLabels = SKIP_RETYPING_STORE_LINKS.chrome
-        ? {
+      var actionLabels = {
             free: 'Add to Chrome - free',
             monthly: 'Install, then choose Monthly',
             yearly: 'Install, then choose Yearly',
             lifetime: 'Install, then choose Lifetime',
-          }
-        : {
-            free: 'Check Chrome availability',
-            monthly: 'Check Chrome availability',
-            yearly: 'Check Chrome availability',
-            lifetime: 'Check Chrome availability',
           };
       checkoutAction.textContent = actionLabels[selectedPlan] || actionLabels.lifetime;
     }
@@ -340,15 +333,17 @@
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     var video = document.createElement('video');
-    video.width = 960;
-    video.height = 540;
+    video.width = 1920;
+    video.height = 1080;
     video.muted = true;
     video.defaultMuted = true;
-    video.loop = true;
+    video.loop = false;
     video.playsInline = true;
     video.autoplay = false;
     video.preload = reduceMotion ? 'none' : 'metadata';
     video.poster = '/assets/skip-retyping-demo-poster.webp';
+    var mobileDemo = window.matchMedia('(max-width: 600px)').matches;
+    if (mobileDemo) video.poster = '/assets/skip-retyping-demo-mobile-poster.webp';
     var captions = document.createElement('track');
     captions.kind = 'captions';
     captions.srclang = 'en';
@@ -364,6 +359,7 @@
     function ensureVideoSource() {
       if (!video.getAttribute('src')) {
         video.src = '/assets/skip-retyping-demo.mp4';
+        if (mobileDemo) video.src = '/assets/skip-retyping-demo-mobile.mp4';
       }
     }
 
@@ -404,6 +400,7 @@
     video.addEventListener('pause', function () {
       setPlaybackState(false);
     });
+    video.addEventListener('ended', function () { setPlaybackState(false); });
     video.addEventListener(
       'error',
       function () {
@@ -414,7 +411,7 @@
     );
     video.addEventListener('click', togglePlayback);
     button.addEventListener('click', togglePlayback);
-    poster.replaceWith(video);
+    (poster.closest('picture') || poster).replaceWith(video);
 
     if (reduceMotion) {
       setPlaybackState(false);
@@ -422,7 +419,14 @@
       setPlaybackState(true);
       var startAutoplayAfterLoad = function () {
         if (userChangedPlayback) return;
-        window.requestAnimationFrame(playVideo);
+        if ('IntersectionObserver' in window) {
+          var visibilityObserver = new IntersectionObserver(function (entries) {
+            if (userChangedPlayback || video.ended) return;
+            if (entries[0].isIntersecting) playVideo();
+            else video.pause();
+          }, { threshold: 0.15 });
+          visibilityObserver.observe(video);
+        } else window.requestAnimationFrame(playVideo);
       };
       if (document.readyState === 'complete') {
         startAutoplayAfterLoad();

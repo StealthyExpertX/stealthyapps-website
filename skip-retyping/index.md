@@ -61,3 +61,7 @@ Checkout starts from inside the extension so ExtensionPay can attach the license
 For site reports, send the page, field label, what happened, and what should have happened. Leave passwords, payment details, private IDs, and customer records out.
 
 Support: https://stealthyapps.com/contact/?topic=product&product=Skip%20Retyping
+
+## Product demo
+
+Your details, without the retyping. Fill, review, and get on with your day. The 22-second edited demonstration uses the actual extension with a fictional local application form. It shows a saved profile filling contact details and a resume, then Undo restoring the original fields.

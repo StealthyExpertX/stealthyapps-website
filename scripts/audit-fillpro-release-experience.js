@@ -721,10 +721,10 @@ async function auditCheckoutPlanSelection(browser, origin, errors) {
   const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
   const page = await context.newPage();
   const expected = {
-    free: 'Check Chrome availability',
-    monthly: 'Check Chrome availability',
-    yearly: 'Check Chrome availability',
-    lifetime: 'Check Chrome availability',
+    free: 'Add to Chrome - free',
+    monthly: 'Install, then choose Monthly',
+    yearly: 'Install, then choose Yearly',
+    lifetime: 'Install, then choose Lifetime',
   };
 
   try {

@@ -4,7 +4,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
-const ARTIFACTS = path.join(ROOT, '.tmp', 'resilience');
+const ARTIFACTS = fs.mkdtempSync(path.join(require('os').tmpdir(), 'skip-retyping-resilience-'));
 const ROUTES = [
   '/skip-retyping/',
   '/skip-retyping/checkout/',
