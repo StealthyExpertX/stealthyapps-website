@@ -7,7 +7,7 @@ Skip Retyping is a browser extension from Stealthy Apps for people who keep seei
 - Category: browser extension, productivity, form autofill
 - Free tier: three saved profiles
 - Pro: $3.99/month, $29.99/year, or $39.99 lifetime
-- Last updated: 2026-08-25
+- Last updated: 2026-09-06
 
 ## Where Skip Retyping fits
 
@@ -44,7 +44,7 @@ Skip Retyping is strongest when structured profile data has to move across many 
 
 ## Privacy and control
 
-Skip Retyping does not run a cloud profile account for form values. Saved profiles, smart rules, custom fields, and upload matches stay in your browser unless the user exports them or manually includes them in a support message. Pro billing does not send saved profile values to ExtensionPay or Stripe. Fill Page uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
+Skip Retyping stores profiles locally without a cloud profile account. Filling makes entered values and files available to the destination website, which may read or autosave them before submission. Undo cannot retract data the website already received. Exports and manual support messages can also contain selected profile data. Pro billing does not send saved profile values to ExtensionPay or Stripe. Fill Page uses active-tab access. Optional site access is for the floating button and auto-fill behavior on sites the user enables.
 
 The normal Fill Page action works on the page the user chooses. The optional floating button asks for access to the current site only, and that access can be turned off from Skip Retyping settings.
 

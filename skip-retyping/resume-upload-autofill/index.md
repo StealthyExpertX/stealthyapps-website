@@ -22,7 +22,7 @@ Upload matching is useful when applications, vendor portals, onboarding pages, i
 
 ## Private by design
 
-The selected file data stays in browser storage with the profile unless you export it.
+The file is saved with your local profile. When matched to a file input, it becomes available to the destination website, which may upload it before you submit the form.
 
 ## Review before submit
 

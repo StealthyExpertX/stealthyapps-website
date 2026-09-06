@@ -29,7 +29,7 @@ Skip Retyping supports saved profiles, smart rules, custom fields, right-click f
 
 ## Privacy Boundary
 
-Skip Retyping does not run a cloud profile account for form values. Saved profiles, rules, fields, and upload matches stay in your browser unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Skip Retyping is for repeated profile-style fields around sign-in, checkout, account, and intake flows. Browser autofill, password managers, wallets, and site controls should keep handling the sensitive parts they are built for.
+Skip Retyping stores profiles locally without a cloud profile account. Filling makes entered values and files available to the destination website, which may read or autosave them before submission. Undo cannot retract data already received. Exports and manual support messages may also contain selected profile data. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Browser autofill, password managers, wallets, and site controls should keep handling sign-ins and payment details.
 
 ## Useful Routes
 

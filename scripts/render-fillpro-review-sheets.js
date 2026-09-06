@@ -115,7 +115,7 @@ async function writeReviewCopy(input, output, width = 1200) {
 async function renderMarketingSheet() {
   const items = [
     ['Screenshot 1', 'Main promise', marketplace('skip-retyping-screenshot-fill-page-1280x800.png')],
-    ['Screenshot 2', 'Modern controls', marketplace('skip-retyping-screenshot-modern-forms-1280x800.png')],
+    ['Screenshot 2', 'Saved resume', marketplace('skip-retyping-screenshot-modern-forms-1280x800.png')],
     ['Screenshot 3', 'Capture a filled page', marketplace('skip-retyping-screenshot-profiles-1280x800.png')],
     ['Screenshot 4', 'Privacy proof', marketplace('skip-retyping-screenshot-privacy-1280x800.png')],
     ['Screenshot 5', 'Undo and recovery', marketplace('skip-retyping-screenshot-undo-1280x800.png')],
@@ -156,7 +156,7 @@ async function renderLocalizedSheet() {
   const screenshots = [
     ['fill-page', 'Main promise'],
     ['profiles', 'Profiles'],
-    ['modern-forms', 'Modern controls'],
+    ['modern-forms', 'Saved resume'],
     ['privacy', 'Privacy'],
     ['undo', 'Undo'],
   ];
@@ -207,7 +207,7 @@ async function extractVideoFrames() {
         'scale=640:-1',
         path.join(FRAME_DIR, `frame-${String(index + 1).padStart(2, '0')}.png`),
       ],
-      { stdio: 'ignore' },
+      { stdio: 'ignore', windowsHide: true },
     );
   });
 }

@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-09-06T05:56:22.798Z",
+  "captureReceiptHash": "beadd7d5a1a3930b8a77f66f8a2e398476db6b229126f590ab7cabeef14052a1",
+  "rendererHash": "f41de44f72e0db5435f0e77c1de7a3fe8a3a9c5207a3b18fb8a903d253777067",
+  "durationSeconds": 22,
+  "fps": 24,
+  "transitions": [
+    {
+      "at": 1,
+      "seconds": 0.3,
+      "type": "same-background crossfade"
+    },
+    {
+      "at": 3.2,
+      "seconds": 0.3,
+      "type": "same-background crossfade"
+    },
+    {
+      "at": 8,
+      "seconds": 0.3,
+      "type": "same-background crossfade"
+    },
+    {
+      "at": 12.6,
+      "seconds": 0.3,
+      "type": "same-background crossfade"
+    },
+    {
+      "at": 17.2,
+      "seconds": 0.3,
+      "type": "same-background crossfade"
+    }
+  ],
+  "artifacts": {
+    "marketplace/skip-retyping-store-demo-22s.mp4": "4eb5b06e219741bdcf0e0ada92a36d45baf8a19e41651dc2ec8cca5c7a959c34",
+    "marketplace/skip-retyping-store-demo-22s-thumb.png": "f4cd5877fd21182936d5ba57ae9ef84ef8db7d26cc0252a4320dab256ba7ee31",
+    "skip-retyping-demo.mp4": "ca993fb51d5f8228e4266400db89e53005f49bf891141a4f0a38990ad40903b0",
+    "skip-retyping-demo.gif": "63e4bdd3f11ce13a23fe9676e9283a5e563746d0f80a7ccd316ee8fe5ddc68e4",
+    "skip-retyping-demo-poster.png": "1c25bf548a3787575cb2bd3cc163594c42cc59a57c48820dc3d08e78b1193ee2",
+    "skip-retyping-demo-poster.webp": "775712d9bbc81dd5d44b7077856c8b020cdd684c41ff50067fd8ffcd6679ec36"
+  }
+}

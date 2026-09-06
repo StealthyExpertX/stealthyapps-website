@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const UPDATED_ISO = '2026-08-25';
+const UPDATED_ISO = '2026-09-06';
 const CHECK_ONLY = process.argv.includes('--check');
 
 const locales = [
@@ -22,7 +22,7 @@ const locales = [
     quickItems: ['Profil einmal speichern', 'Formular mit einem Klick ausfüllen', 'Änderungen prüfen oder rückgängig machen'],
     features: [
       ['Mehr als Name und Adresse', 'Skip Retyping füllt Bewerbungsfragen, Geschäftsangaben, Dropdowns, Kontrollkästchen, längere Antworten und erreichbare Datei-Uploads aus.'],
-      ['Profile bleiben im Browser', 'Für den normalen Ablauf ist kein Cloud-Konto nötig. Gespeicherte Profile werden nur exportiert oder für den Support verwendet, wenn du das selbst auswählst.'],
+      ['Profile bleiben im Browser', 'Ein Cloud-Konto ist nicht nötig. Beim Ausfüllen erhält die Website die eingetragenen Daten und Dateien. Sie kann sie schon vor dem Absenden lesen oder automatisch speichern. Rückgängig kann bereits übertragene Daten nicht zurückholen.'],
       ['Vor dem Absenden prüfen', 'Skip Retyping füllt die Seite aus, sendet sie aber nicht ab. Du kannst ungewöhnliche Felder korrigieren oder die letzte Ausfüllung rückgängig machen.'],
     ],
     pricingTitle: '3 Profile kostenlos. Pro ab 3,99 USD.',
@@ -53,7 +53,7 @@ const locales = [
     quickItems: ['Guarda un perfil una vez', 'Rellena el formulario con un clic', 'Revisa los cambios o deshaz el rellenado'],
     features: [
       ['Más que nombre y dirección', 'Skip Retyping rellena preguntas de empleo, datos de empresa, menús, casillas, respuestas largas y campos de carga de archivos accesibles.'],
-      ['Los perfiles quedan en el navegador', 'El uso normal no necesita una cuenta en la nube. Los perfiles solo salen al exportarlos o al enviarlos voluntariamente a soporte.'],
+      ['Los perfiles quedan en el navegador', 'No necesitas una cuenta en la nube. Al rellenar, el sitio recibe los datos y archivos introducidos y puede leerlos o guardarlos antes de pulsar Enviar. Deshacer no retira datos que el sitio ya haya recibido.'],
       ['Revisa antes de enviar', 'Skip Retyping rellena la página, pero no la envía. Puedes corregir un campo poco habitual o deshacer el último rellenado.'],
     ],
     pricingTitle: '3 perfiles gratis. Pro desde 3,99 USD.',
@@ -84,7 +84,7 @@ const locales = [
     quickItems: ['Enregistrez un profil une fois', 'Remplissez le formulaire en un clic', 'Vérifiez les changements ou annulez le remplissage'],
     features: [
       ['Au-delà du nom et de l’adresse', 'Skip Retyping remplit les questions de candidature, données d’entreprise, listes, cases, réponses longues et champs de téléversement accessibles.'],
-      ['Les profils restent dans le navigateur', 'Le fonctionnement normal ne demande aucun compte cloud. Les profils ne quittent l’extension que si vous les exportez ou les envoyez volontairement au support.'],
+      ['Les profils restent dans le navigateur', 'Aucun compte cloud nécessaire. Le site reçoit les données et fichiers remplis et peut les lire ou les enregistrer avant l’envoi. Annuler ne retire pas les données que le site a déjà reçues.'],
       ['Vérifiez avant d’envoyer', 'Skip Retyping remplit la page sans l’envoyer. Corrigez un champ inhabituel ou annulez le dernier remplissage si nécessaire.'],
     ],
     pricingTitle: '3 profils gratuits. Pro à partir de 3,99 USD.',
@@ -115,7 +115,7 @@ const locales = [
     quickItems: ['Salve um perfil uma vez', 'Preencha o formulário com um clique', 'Revise as mudanças ou desfaça o preenchimento'],
     features: [
       ['Mais que nome e endereço', 'Skip Retyping preenche perguntas de processos seletivos, dados da empresa, listas, caixas, respostas longas e campos de upload acessíveis.'],
-      ['Os perfis ficam no navegador', 'O uso normal não exige conta na nuvem. Os perfis só saem da extensão quando você exporta ou envia algo voluntariamente ao suporte.'],
+      ['Os perfis ficam no navegador', 'Não é preciso ter uma conta na nuvem. Ao preencher, o site recebe os dados e arquivos e pode lê-los ou salvá-los antes do envio. Desfazer não retira dados que o site já recebeu.'],
       ['Revise antes de enviar', 'Skip Retyping preenche a página, mas não envia o formulário. Corrija um campo incomum ou desfaça o último preenchimento.'],
     ],
     pricingTitle: '3 perfis grátis. Pro a partir de US$ 3,99.',
@@ -146,7 +146,7 @@ const locales = [
     quickItems: ['プロフィールを一度保存', 'ワンクリックでフォームを入力', '変更を確認、または元に戻す'],
     features: [
       ['氏名と住所だけではありません', '求人応募の質問、会社情報、選択欄、チェックボックス、長文回答、アクセス可能なファイルアップロード欄に対応します。'],
-      ['プロフィールはブラウザ内に保存', '通常の利用にクラウドアカウントは不要です。プロフィールは、書き出しやサポートへの送信を自分で選んだ場合にだけ外部へ移動します。'],
+      ['プロフィールはブラウザ内に保存', 'クラウドアカウントは不要です。入力したデータやファイルは入力先のサイトで読み取れる状態になり、送信ボタンを押す前に自動保存される場合もあります。元に戻しても、サイトがすでに受け取ったデータは取り消せません。'],
       ['送信前に確認', 'Skip Retyping はページを入力しますが、フォームを送信しません。必要なら項目を直したり、最後の入力を元に戻したりできます。'],
     ],
     pricingTitle: 'プロフィール3件は無料。Proは月額3.99米ドルから。',
@@ -177,7 +177,7 @@ const locales = [
     quickItems: ['프로필을 한 번 저장', '한 번의 클릭으로 양식 입력', '변경 내용을 확인하거나 되돌리기'],
     features: [
       ['이름과 주소 그 이상', '입사 지원 질문, 회사 정보, 드롭다운, 체크박스, 긴 답변, 접근 가능한 파일 업로드 필드를 채웁니다.'],
-      ['프로필은 브라우저에 저장', '일반 사용에는 클라우드 계정이 필요 없습니다. 직접 내보내거나 지원팀에 보내기로 선택한 경우에만 프로필이 외부로 이동합니다.'],
+      ['프로필은 브라우저에 저장', '클라우드 계정은 필요하지 않습니다. 채워진 데이터와 파일은 해당 웹사이트에서 읽거나 제출 전에 자동 저장할 수 있습니다. 실행 취소해도 사이트가 이미 받은 데이터는 회수할 수 없습니다.'],
       ['제출 전에 확인', 'Skip Retyping은 페이지를 채우지만 제출하지 않습니다. 낯선 필드를 고치거나 마지막 입력을 되돌릴 수 있습니다.'],
     ],
     pricingTitle: '프로필 3개는 무료. Pro는 월 US$3.99부터.',
@@ -208,7 +208,7 @@ const locales = [
     quickItems: ['只需保存一次资料', '一键填写表单', '检查更改或撤销填写'],
     features: [
       ['不只是姓名和地址', '可填写求职问题、公司资料、下拉菜单、复选框、长文本回答以及可访问的文件上传字段。'],
-      ['资料保存在浏览器中', '日常使用无需云端账户。只有当你主动导出资料或发送给支持团队时，资料才会离开扩展程序。'],
+      ['资料保存在浏览器中', '无需云端账户。填写后，目标网站可以读取填入的数据和文件，也可能在提交前自动保存。撤销无法收回网站已经收到的数据。'],
       ['提交前先检查', 'Skip Retyping 负责填写页面，但不会提交表单。你可以修正特殊字段，也可以撤销上一次填写。'],
     ],
     pricingTitle: '可免费保存 3 个资料。Pro 每月 3.99 美元起。',
@@ -239,7 +239,7 @@ const locales = [
     quickItems: ['Сохраните профиль один раз', 'Заполните форму одним кликом', 'Проверьте изменения или отмените заполнение'],
     features: [
       ['Не только имя и адрес', 'Skip Retyping заполняет вопросы в заявках, данные компании, списки, флажки, длинные ответы и доступные поля загрузки файлов.'],
-      ['Профили остаются в браузере', 'Для обычной работы не нужна облачная учётная запись. Профили покидают расширение только при выбранном вами экспорте или обращении в поддержку.'],
+      ['Профили остаются в браузере', 'Облачная учётная запись не нужна. Сайт может прочитать или автоматически сохранить заполненные данные и файлы до нажатия кнопки отправки. Отмена не удаляет данные, которые сайт уже получил.'],
       ['Проверка перед отправкой', 'Skip Retyping заполняет страницу, но не отправляет форму. Можно исправить необычное поле или отменить последнее заполнение.'],
     ],
     pricingTitle: '3 профиля бесплатно. Pro от 3,99 доллара в месяц.',
@@ -399,7 +399,8 @@ ${alternateLinks()}
     <section class="section two-col locale-hero">
       <div class="page-intro">
         <p class="eyebrow">${escapeHtml(locale.kicker)}</p>
-        <h1>${escapeHtml(locale.h1)}</h1>
+        <h1>Skip Retyping</h1>
+        <p class="locale-promise">${escapeHtml(locale.h1)}</p>
         <p class="lead">${escapeHtml(locale.lead)}</p>
         <div class="actions">
           <a class="button primary" href="/skip-retyping/download/">${escapeHtml(locale.ctas[0])}</a>
@@ -438,7 +439,7 @@ ${alternateLinks()}
   </main>
   <footer>
     <div class="footer-inner">
-      <div class="footer-copy"><strong>Skip Retyping by Stealthy Apps</strong><span>${escapeHtml(locale.updated)} <time datetime="${UPDATED_ISO}">${escapeHtml(locale.dateLabel)}</time>.</span></div>
+      <div class="footer-copy"><strong>Skip Retyping by Stealthy Apps</strong><span>${escapeHtml(locale.updated)} <time datetime="${UPDATED_ISO}">${escapeHtml(new Intl.DateTimeFormat(locale.lang, { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(UPDATED_ISO)))}</time>.</span></div>
       <nav class="footer-links" aria-label="Footer">
         <a data-nav-key="product" href="${localePath(locale)}">${escapeHtml(product)}</a>
         <a data-nav-key="download" href="/skip-retyping/download/">${escapeHtml(download)}</a>

@@ -422,6 +422,31 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  const selectValues = [topicField, reasonField].map((select) => {
+    const value = document.createElement('span');
+    value.className = 'select-current-value';
+    value.hidden = true;
+    // Native selects already announce their full value to assistive technology.
+    value.setAttribute('aria-hidden', 'true');
+    select.insertAdjacentElement('afterend', value);
+    return { select, value };
+  });
+
+  function refreshSelectValues() {
+    for (const { select, value } of selectValues) {
+      value.textContent = select.selectedOptions[0]?.textContent || '';
+      value.hidden = !value.textContent || select.scrollWidth <= select.clientWidth + 2;
+    }
+  }
+
+  if (typeof ResizeObserver === 'function') {
+    const selectObserver = new ResizeObserver(refreshSelectValues);
+    selectValues.forEach(({ select }) => selectObserver.observe(select));
+  }
+  window.addEventListener('resize', refreshSelectValues);
+  document.fonts?.ready.then(refreshSelectValues);
+  form.addEventListener('change', refreshSelectValues);
+
   function hideEmailOptions() {
     currentCompose = null;
 
@@ -586,6 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
       reasonField.value = prefill.reason;
       hasAppliedPrefillReason = true;
     }
+    refreshSelectValues();
     if (recipientNote) {
       recipientNote.textContent = '';
     }

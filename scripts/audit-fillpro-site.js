@@ -235,7 +235,7 @@ function checkStyles() {
     ['.theme-toggle[data-theme="light"]', 'light theme sun icon'],
     ['.theme-toggle[data-theme="dark"]', 'dark theme moon icon'],
     [':root[data-theme="dark"] .step-list li::before', 'dark step-list badge override'],
-    ['.demo-signal', 'hero product-signal overlay'],
+    ['.demo-transcript', 'readable alternative to demo playback'],
     ['min-height: 46px', 'standard button tap target'],
     ['min-height: 52px', 'landing button tap target'],
     ['min-height: 34px', 'footer link tap target'],
@@ -258,7 +258,7 @@ function checkStyles() {
     ['body.skip-retyping-launch .browser-mark-chrome', 'dark launch browser badge override'],
     ['body.skip-retyping-launch .launch-card-icon', 'dark launch card icon override'],
     ['.launch-review-rail', 'review-before-submit product proof section'],
-    ['.review-frame-actions button', 'review rail action affordances'],
+    ['.actual-result', 'real result screenshot presentation'],
     ['scroll-padding-top: 104px', 'desktop sticky-header anchor offset'],
     ['scroll-padding-top: 146px', 'mobile sticky-header anchor offset'],
   ];
@@ -436,20 +436,9 @@ function checkPackageScripts() {
 }
 
 function checkDemoGenerator() {
-  const renderer = fs.readFileSync(path.join(ROOT, 'scripts', 'render-fillpro-assets.js'), 'utf8');
-  const demoStart = renderer.indexOf('async function renderDemoGif');
-  const demoEnd = renderer.indexOf('async function renderIcons', demoStart);
-  const demoRenderer = renderer.slice(demoStart, demoEnd > demoStart ? demoEnd : undefined);
-  if (demoRenderer.includes('chromeFrame(')) {
-    fail('render-fillpro-assets.js: demo asset should not render a nested browser frame');
-  }
-  if (!renderer.includes('Password') || !renderer.includes('Review before submit')) {
-    fail('render-fillpro-assets.js: demo should show safe fill boundary and review moment');
-  }
-  for (const marker of ['skip-retyping-demo.mp4', 'libx264', '+faststart']) {
-    if (!renderer.includes(marker)) {
-      fail(`render-fillpro-assets.js: hero demo renderer missing ${marker}`);
-    }
+  const renderer = fs.readFileSync(path.join(ROOT, 'scripts', 'render-fillpro-store-video.js'), 'utf8');
+  for (const marker of ['skip-retyping-demo.mp4', 'libx264', '+faststart', 'provenance.json', 'Recapture current source']) {
+    if (!renderer.includes(marker)) fail('Real demo pipeline missing ' + marker);
   }
 }
 
@@ -458,23 +447,24 @@ function checkLaunchPage() {
   const checkoutHtml = fs.readFileSync(path.join(ROOT, 'skip-retyping', 'checkout', 'index.html'), 'utf8');
   const siteScript = fs.readFileSync(path.join(ROOT, 'site.js'), 'utf8');
   const required = [
-    ['demo-signal', 'hero product-signal overlay'],
-    ['Work profile filled', 'hero profile signal copy'],
-    ['ready to review', 'hero review signal copy'],
+    ['demo-transcript', 'equivalent text for the product demo'],
+    ['id="skip-retyping-title">Skip Retyping</h1>', 'prominent product name'],
+    ['filled-popup.png', 'real captured result'],
     ['Autofill the details you keep retyping.', 'human first-view headline'],
     ['Add to Chrome - free', 'specific low-friction primary CTA'],
     ['href="/skip-retyping/checkout/"', 'pricing CTA should use checkout handoff'],
     ['No account to start', 'clean privacy proof wording'],
-    ['Watch a job application fill.', 'specific hero demo caption'],
+    ['Watch the actual extension fill a test application.', 'honest hero demo scope'],
     ['data-skip-retyping-demo-poster', 'stable hero demo poster'],
     ['demo-play-button', 'explicit hero demo play control'],
     ['See what changed before you submit.', 'review-before-submit proof section'],
-    ['Undo snapshot saved', 'review/undo product proof copy'],
+    ['cannot retract data a website already received', 'destination-site data boundary'],
     ['What people ask before installing.', 'plain FAQ heading'],
   ];
   for (const [needle, label] of required) {
     if (!html.includes(needle)) fail(`skip-retyping/index.html: missing ${label}`);
   }
+  if (/class="review-frame-actions"/.test(html)) fail('Decorative review buttons must not look like working controls');
   if (/rel="preload"[^>]+skip-retyping-demo\.gif/i.test(html)) {
     fail('skip-retyping/index.html: hero demo should use the compact MP4, not preload the GIF');
   }

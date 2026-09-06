@@ -2,7 +2,7 @@
 
 Last updated: 2026-08-24
 
-Skip Retyping is built for private, repeat form filling. Saved profiles remain in browser extension storage unless you export them or include their details in a support message.
+Skip Retyping stores profiles in browser extension storage. Filling makes entered values and files available to the destination website, which may read or autosave them before submission. Undo cannot retract data a website already received. Exports and manual support messages may also contain selected profile data.
 
 ## Short version
 

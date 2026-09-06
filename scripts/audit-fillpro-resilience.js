@@ -4,6 +4,7 @@ const path = require('path');
 const { chromium } = require('playwright');
 
 const ROOT = path.resolve(__dirname, '..');
+const ARTIFACTS = path.join(ROOT, '.tmp', 'resilience');
 const ROUTES = [
   '/skip-retyping/',
   '/skip-retyping/checkout/',
@@ -40,9 +41,22 @@ function resolveFile(rawUrl) {
 function startServer() {
   return new Promise((resolve, reject) => {
     const server = http.createServer((request, response) => {
+      if (new URL(request.url, 'http://127.0.0.1').pathname === '/_audit-layout-fault.css') {
+        response.setHeader('Content-Type', 'text/css; charset=utf-8');
+        response.end('.launch-main { grid-template-columns: 760px !important; } html, body { overflow-x: hidden !important; }');
+        return;
+      }
+      if (new URL(request.url, 'http://127.0.0.1').pathname === '/_audit-control-fault.css') {
+        response.setHeader('Content-Type', 'text/css; charset=utf-8');
+        response.end('#contactName, #contactMessage { height: 12px !important; min-height: 0 !important; padding: 0 !important; line-height: 40px !important; }');
+        return;
+      }
       if (new URL(request.url, 'http://127.0.0.1').pathname === '/_audit-text-scale.css') {
         response.setHeader('Content-Type', 'text/css; charset=utf-8');
-        response.end('html { font-size: 200% !important; }');
+        const sizes = new URL(request.url, 'http://127.0.0.1').searchParams.get('sizes') || '';
+        response.end(sizes.split(',').filter((size) => /^\d+(?:\.\d+)?$/.test(size))
+          .map((size) => `[data-audit-font-size="${size}"] { font-size: ${Number(size) * 2}px !important; }`)
+          .join('\n'));
         return;
       }
       const target = resolveFile(request.url);
@@ -95,9 +109,22 @@ async function inspectPage(page) {
       }
       return !(node.getAttribute('aria-label') || node.textContent.trim() || node.getAttribute('title'));
     });
-    const clipped = interactive.filter(
-      (node) => node.scrollWidth > node.clientWidth + 2 || node.scrollHeight > node.clientHeight + 2,
-    );
+    const clipped = interactive.filter((node) => {
+      const style = getComputedStyle(node);
+      const textEntry = node.matches('textarea, input:not([type]), input[type="text"], input[type="email"], input[type="search"], input[type="url"], input[type="tel"], input[type="password"], input[type="number"]');
+      if (textEntry || node.matches('select')) {
+        const line = parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.2;
+        const available = node.clientHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+        if (available + 2 < line) return true;
+        // Editing can scroll within a native field; commands must remain fully visible.
+        if (textEntry) return false;
+        const value = node.nextElementSibling;
+        if (value?.matches('.select-current-value') && !value.hidden &&
+          getComputedStyle(value).display !== 'none' &&
+          value.textContent === node.selectedOptions[0]?.textContent) return false;
+      }
+      return node.scrollWidth > node.clientWidth + 2 || node.scrollHeight > node.clientHeight + 2;
+    });
     const smallCommands = interactive.filter((node) => {
       if (node.tagName === 'A' && !node.matches('.button, .launch-button')) return false;
       const rect = node.getBoundingClientRect();
@@ -105,12 +132,28 @@ async function inspectPage(page) {
     });
     const main = document.querySelector('main');
     const footer = document.querySelector('footer');
+    const viewportWidth = document.documentElement.clientWidth;
+    // Root overflow can be hidden while an entire grid track is off-screen.
+    const outsideViewport = Array.from(document.querySelectorAll(
+      'main, main > *, h1, h2, h3, p, li, button, a.button, a.launch-button, input, select, textarea, video, iframe, .select-current-value',
+    )).filter((node) => {
+      if (node.closest('.table-scroll, pre.copyable')) return false;
+      const rect = node.getBoundingClientRect();
+      const style = getComputedStyle(node);
+      return rect.width > 0 && rect.height > 0 && style.display !== 'none' &&
+        style.visibility !== 'hidden' && (rect.left < -1 || rect.right > viewportWidth + 1);
+    }).map((node) => ({
+      element: node.outerHTML.slice(0, 100),
+      left: Math.round(node.getBoundingClientRect().left),
+      right: Math.round(node.getBoundingClientRect().right),
+    }));
     return {
       duplicates: [...new Set(duplicates)],
       unnamed: unnamed.map((node) => node.outerHTML.slice(0, 140)),
       clipped: clipped.map((node) => node.outerHTML.slice(0, 140)),
       smallCommands: smallCommands.map((node) => node.outerHTML.slice(0, 140)),
       overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
+      outsideViewport,
       hasMain: Boolean(main),
       hasHeading: Boolean(main?.querySelector('h1')),
       footerLeft: footer?.getBoundingClientRect().left ?? 0,
@@ -120,7 +163,20 @@ async function inspectPage(page) {
   });
 }
 
+async function enlargeText(page, origin) {
+  const sizes = await page.evaluate(() => {
+    const elements = Array.from(document.querySelectorAll('body, body *'));
+    const measured = elements.map((node) => [node, parseFloat(getComputedStyle(node).fontSize)]);
+    for (const [node, size] of measured) {
+      if (Number.isFinite(size) && size > 0) node.setAttribute('data-audit-font-size', String(size));
+    }
+    return [...new Set(measured.map(([, size]) => size).filter((size) => Number.isFinite(size) && size > 0))];
+  });
+  await page.addStyleTag({ url: `${origin}/_audit-text-scale.css?sizes=${sizes.join(',')}` });
+}
+
 async function main() {
+  fs.mkdirSync(ARTIFACTS, { recursive: true });
   const server = await startServer();
   const browser = await chromium.launch({ headless: true });
   const failures = [];
@@ -141,6 +197,7 @@ async function main() {
       if (report.clipped.length) failures.push(`${route}: clipped controls ${report.clipped.join(' | ')}`);
       if (report.smallCommands.length) failures.push(`${route}: command target below 24px ${report.smallCommands.join(' | ')}`);
       if (report.overflow) failures.push(`${route}: horizontal overflow at 320px`);
+      if (report.outsideViewport.length) failures.push(`${route}: content outside 320px viewport ${JSON.stringify(report.outsideViewport.slice(0, 5))}`);
       if (!report.hasMain || !report.hasHeading) failures.push(`${route}: missing main heading structure`);
       if (report.footerLeft < -1 || report.footerRight > report.viewportWidth + 1) {
         failures.push(`${route}: footer exceeds the mobile viewport`);
@@ -183,28 +240,88 @@ async function main() {
     const noScriptPage = await noScript.newPage();
     const response = await noScriptPage.goto(`${server.origin}/skip-retyping/`, { waitUntil: 'load' });
     if (!response?.ok()) failures.push('no-script: product page failed to load');
-    const noScriptReport = await noScriptPage.evaluate(() => ({
-      heading: document.querySelector('main h1')?.textContent?.trim() || '',
-      primaryLink: Boolean(document.querySelector('main a[href]')),
-      overflow: document.documentElement.scrollWidth > document.documentElement.clientWidth + 1,
-    }));
-    if (!noScriptReport.heading || !noScriptReport.primaryLink || noScriptReport.overflow) {
-      failures.push(`no-script: core product page is not usable ${JSON.stringify(noScriptReport)}`);
+    const noScriptReport = await inspectPage(noScriptPage);
+    if (!noScriptReport.hasHeading || noScriptReport.overflow || noScriptReport.outsideViewport.length) {
+      failures.push(`no-script: core product page is not usable ${JSON.stringify({ ...noScriptReport, outsideViewport: noScriptReport.outsideViewport.slice(0, 5) })}`);
     }
     await noScript.close();
 
     const textScale = await browser.newContext({ viewport: { width: 390, height: 844 } });
-    for (const route of ['/skip-retyping/', '/skip-retyping/privacy/', '/skip-retyping/terms/', '/skip-retyping/refunds/', '/support/']) {
+    for (const route of ROUTES) {
       const page = await textScale.newPage();
       await page.goto(`${server.origin}${route}`, { waitUntil: 'networkidle' });
-      await page.addStyleTag({ url: `${server.origin}/_audit-text-scale.css` });
+      const before = await page.locator('h1').evaluate((node) => parseFloat(getComputedStyle(node).fontSize));
+      await enlargeText(page, server.origin);
+      await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+      const after = await page.locator('h1').evaluate((node) => parseFloat(getComputedStyle(node).fontSize));
+      if (after < before * 1.95) failures.push(`${route}: text enlargement did not double heading size`);
       const report = await inspectPage(page);
-      if (report.overflow || report.clipped.length) {
-        failures.push(`${route}: 200% text stress failed ${JSON.stringify(report.clipped)}`);
+      if (report.overflow || report.clipped.length || report.outsideViewport.length) {
+        failures.push(`${route}: 200% text stress failed ${JSON.stringify({ clipped: report.clipped, outsideViewport: report.outsideViewport.slice(0, 5) })}`);
       }
       await page.close();
     }
     await textScale.close();
+
+    for (const colorScheme of ['light', 'dark']) {
+      const layoutContext = await browser.newContext({ colorScheme, reducedMotion: 'reduce' });
+      const page = await layoutContext.newPage();
+      for (const width of [320, 390, 768, 1440]) {
+        await page.setViewportSize({ width, height: 844 });
+        for (const route of ['/skip-retyping/', '/skip-retyping/checkout/']) {
+          await page.goto(`${server.origin}${route}`, { waitUntil: 'networkidle' });
+          const sections = page.locator('main > section');
+          // content-visibility can defer layout until a section is scrolled into view.
+          for (let index = 0; index < await sections.count(); index++) {
+            await sections.nth(index).scrollIntoViewIfNeeded();
+            await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
+            const report = await inspectPage(page);
+            if (report.overflow || report.outsideViewport.length) {
+              failures.push(`${route}: ${colorScheme}/${width}px section ${index} clips content ${JSON.stringify(report.outsideViewport.slice(0, 3))}`);
+              break;
+            }
+          }
+          if (route === '/skip-retyping/' && width === 390) {
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.screenshot({ path: path.join(ARTIFACTS, `product-mobile-${colorScheme}.png`) });
+          }
+        }
+      }
+      await layoutContext.close();
+    }
+
+    const faultContext = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    const faultPage = await faultContext.newPage();
+    await faultPage.goto(`${server.origin}/skip-retyping/`, { waitUntil: 'networkidle' });
+    await faultPage.addStyleTag({ url: `${server.origin}/_audit-layout-fault.css` });
+    const fault = await inspectPage(faultPage);
+    if (fault.overflow || !fault.outsideViewport.length) {
+      failures.push('detector self-test: must detect the original hidden-overflow grid defect independently of root scroll width');
+    }
+    await faultPage.goto(`${server.origin}/contact/`, { waitUntil: 'networkidle' });
+    await enlargeText(faultPage, server.origin);
+    await faultPage.locator('#contactName').fill('A long editable value '.repeat(12));
+    await faultPage.locator('#contactMessage').fill('A long editable message\n'.repeat(30));
+    await faultPage.locator('#contactName').press('End');
+    const scrolls = await faultPage.locator('#contactName').evaluate((node) => node.scrollLeft > 0);
+    const editReport = await inspectPage(faultPage);
+    if (!scrolls || editReport.clipped.length) {
+      failures.push('detector self-test: accessible scrolling native text controls must remain editable at 200% text');
+    }
+    await faultPage.addStyleTag({ url: `${server.origin}/_audit-control-fault.css` });
+    const shortControls = await inspectPage(faultPage);
+    for (const id of ['contactName', 'contactMessage']) {
+      if (!shortControls.clipped.some((node) => node.includes(`id="${id}"`))) {
+        failures.push(`detector self-test: missed clipped text line in ${id}`);
+      }
+    }
+    await faultPage.locator('#contactReason').selectOption('product_help');
+    await faultPage.locator('.select-current-value').evaluateAll((nodes) => nodes.forEach((node) => node.remove()));
+    const missingValue = await inspectPage(faultPage);
+    if (!missingValue.clipped.some((node) => node.includes('id="contactReason"'))) {
+      failures.push('detector self-test: missed inaccessible selected reason without its readable value');
+    }
+    await faultContext.close();
   } finally {
     await browser.close();
     await server.close();
@@ -216,7 +333,7 @@ async function main() {
     process.exit(1);
   }
   console.log(
-    `Skip Retyping website resilience audit passed: ${ROUTES.length} core routes at 320px/system dark/reduced motion, persisted theme, keyboard skip link, no-script fallback, and 200% text stress.`,
+    `Skip Retyping website resilience audit passed: ${ROUTES.length} core routes, true 200% text, 320/390/768/1440px scrolled light/dark layouts, keyboard, no-script, and hidden-clipping detector self-test.`,
   );
 }
 

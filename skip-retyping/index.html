@@ -181,7 +181,8 @@
     <section class="launch-hero" aria-labelledby="skip-retyping-title">
       <div class="launch-hero-copy">
         <p class="launch-kicker">Private form autofill</p>
-        <h1 id="skip-retyping-title">Autofill the details you keep retyping.</h1>
+        <h1 id="skip-retyping-title">Skip Retyping</h1>
+        <p class="launch-product-promise">Autofill the details you keep retyping.</p>
         <p class="launch-lead">Save a profile once. Use it for job applications and other repeat forms, then check every change before you submit.</p>
         <div class="launch-actions" aria-label="Skip Retyping actions">
           <a class="launch-button launch-button-primary" href="/skip-retyping/download/" data-store-live-copy="chrome" data-live-text="Add to Chrome - free">Check Chrome availability</a>
@@ -192,24 +193,20 @@
 
       <figure class="launch-demo-card" id="demo">
         <div class="demo-shell">
-          <div class="demo-chrome" aria-hidden="true">
-            <span></span><span></span><span></span>
-          <b>Job application</b>
-          </div>
           <img data-skip-retyping-demo-poster src="/assets/skip-retyping-demo-poster.webp" alt="Skip Retyping filling a job application from a saved work profile" width="960" height="540" fetchpriority="high">
           <button class="demo-play-button" type="button" data-state="playing" aria-label="Pause the Skip Retyping demo" title="Pause the Skip Retyping demo"></button>
-          <div class="demo-signal" aria-hidden="true">
-            <span>
-              <b>Work profile filled</b>
-              <small>Name, email, company, and resume upload are ready to review.</small>
-            </span>
-          </div>
         </div>
         <figcaption>
-          <strong>Watch a job application fill.</strong>
-          <span>Contact details, company info, and a resume are matched. The password stays blank.</span>
+          <strong>Watch the actual extension fill a test application.</strong>
+          <span>Contact details and a saved resume fill; the password stays blank. Recorded on a local test form and edited for readability, not a speed benchmark.</span>
+          <a href="/assets/marketplace/skip-retyping-store-demo-22s.mp4">View full-size video</a>
         </figcaption>
       </figure>
+      <details class="demo-transcript">
+        <summary>Demo transcript</summary>
+        <p>A saved Job search profile fills the name, email, phone and resume fields. The extension reports 4 filled fields and 1 skipped field. Undo restores the original empty fields and file input. Skip Retyping does not submit the form.</p>
+        <p>3 profiles are free. Pro adds up to 500 profiles, duplication and backup imports: $3.99 monthly, $29.99 yearly or $39.99 once for lifetime access.</p>
+      </details>
     </section>
 
     <section class="launch-strip" aria-label="Skip Retyping highlights">
@@ -280,29 +277,24 @@
     <section class="launch-section launch-product" aria-labelledby="workflow-title">
       <div class="launch-product-copy">
         <p class="launch-kicker">The workflow</p>
-        <h2 id="workflow-title">Fill a page in four steps.</h2>
-        <p>Open the form, choose a profile, fill the page, then review the result. No account needed for the core flow. You submit only when ready.</p>
+        <h2 id="workflow-title">Save. Fill. Check.</h2>
+        <p>Start with the details you reuse. No account needed for filling, and no automatic submission.</p>
       </div>
       <div class="workflow-list" aria-label="Skip Retyping workflow">
         <article>
           <span>01</span>
           <h3>Save a profile once</h3>
-          <p>Keep separate profiles for work, personal admin, clients, vendors, QA users, or hiring workflows.</p>
+          <p>Add your contact details and any answers or files you want to reuse.</p>
         </article>
         <article>
           <span>02</span>
           <h3>Fill from the page</h3>
-          <p>Use the popup, side panel, on-page picker, right-click action, or keyboard shortcut.</p>
+          <p>Open a form, choose your saved profile and click Fill Page.</p>
         </article>
         <article>
           <span>03</span>
-          <h3>Fix weird labels once</h3>
-          <p>Add a smart rule when a site uses unusual wording. Skip Retyping remembers it for the next similar form.</p>
-        </article>
-        <article>
-          <span>04</span>
-          <h3>Review before submit</h3>
-          <p>Undo the fill if the page needs another pass. You decide when the form leaves the browser.</p>
+          <h3>Check before you submit</h3>
+          <p>Review every filled field. Use Undo if needed. A website can read or autosave filled values before you press Submit.</p>
         </article>
       </div>
     </section>
@@ -311,55 +303,12 @@
       <div class="review-rail-copy">
         <p class="launch-kicker">Before submit</p>
         <h2 id="review-rail-title">See what changed before you submit.</h2>
-        <p>Check matched fields and uploads after every fill. Undo returns the form to its earlier state if anything needs another pass.</p>
+        <p>See filled, skipped and review-needed fields in the result. Undo restores the previous values when the same fields are still on the page; it cannot retract data a website already received.</p>
       </div>
-      <div class="review-rail-stage" aria-label="Review before submit preview">
-        <div class="review-frame">
-          <div class="review-frame-head">
-            <span aria-hidden="true"></span>
-            <strong>careers.studio/apply</strong>
-            <em>Ready</em>
-          </div>
-          <div class="review-columns">
-            <div class="review-form-list" aria-label="Filled fields">
-              <div>
-                <span>First name</span>
-                <strong>Alex</strong>
-              </div>
-              <div>
-                <span>Work email</span>
-                <strong>alex@studio.co</strong>
-              </div>
-              <div>
-                <span>Resume</span>
-                <strong>Alex-Resume.pdf</strong>
-              </div>
-              <div class="is-skipped">
-                <span>Password</span>
-                <strong>Skipped</strong>
-              </div>
-            </div>
-            <div class="review-result-list" aria-label="Skip Retyping review notes">
-              <div class="review-result-card is-active">
-                <strong>12 fields changed</strong>
-                <span>Profile details, long answers, dropdowns, and contact fields filled.</span>
-              </div>
-              <div class="review-result-card">
-                <strong>1 upload matched</strong>
-                <span>Resume picked from the Work profile for this application.</span>
-              </div>
-              <div class="review-result-card">
-                <strong>Undo snapshot saved</strong>
-                <span>One click returns the form to the state before Skip Retyping ran.</span>
-              </div>
-            </div>
-          </div>
-          <div class="review-frame-actions">
-            <button type="button">Undo fill</button>
-            <button type="button">Looks right</button>
-          </div>
-        </div>
-      </div>
+      <figure class="review-rail-stage actual-result">
+        <img src="/assets/marketplace/captures/filled-popup.png" alt="Actual Skip Retyping result: 4 fields filled, 1 skipped, with field details and Undo" width="360" height="377" loading="lazy" decoding="async">
+        <figcaption>Actual result from the test form above. <a href="/skip-retyping/docs/smart-rules/">Need help with an unusual field label?</a></figcaption>
+      </figure>
     </section>
 
     <section class="launch-band" aria-labelledby="support-title">
@@ -486,7 +435,7 @@
         </details>
         <details>
           <summary>Does Skip Retyping send saved profiles to a server?</summary>
-          <p>No. Profiles are saved in your browser unless you export them. Export and support share only what you choose. Pro checkout sends license and payment details, not saved profile values.</p>
+          <p>No cloud profile account is needed. Profiles are saved in your browser. Filling shares entered values and files with the destination website, which may autosave before submission. Exports and support share what you choose. Pro checkout sends license and payment details, not saved profile values.</p>
         </details>
         <details>
           <summary>What site access does it need?</summary>

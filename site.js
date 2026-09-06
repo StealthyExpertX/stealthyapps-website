@@ -348,6 +348,12 @@
     video.autoplay = false;
     video.preload = reduceMotion ? 'none' : 'metadata';
     video.poster = '/assets/skip-retyping-demo-poster.webp';
+    var captions = document.createElement('track');
+    captions.kind = 'captions';
+    captions.srclang = 'en';
+    captions.label = 'English';
+    captions.src = '/assets/marketplace/localized/en/skip-retyping-store-demo-22s.vtt';
+    video.appendChild(captions);
     video.setAttribute(
       'aria-label',
       'Skip Retyping filling a job application from a saved work profile',

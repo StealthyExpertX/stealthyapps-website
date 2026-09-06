@@ -495,193 +495,57 @@ function checkHeroVideo(relativePath) {
   if (video.width !== 960 || video.height !== 540) {
     fail(`${relativePath}: expected 960x540, got ${video.width}x${video.height}`);
   }
-  if (duration < 1.5 || duration > 3) fail(`${relativePath}: expected 1.5-3 seconds, got ${duration.toFixed(2)}s`);
-  if (fps < 2.5 || fps > 4) fail(`${relativePath}: expected about 3fps, got ${fps.toFixed(2)}fps`);
+  if (Math.abs(duration - 22) > 0.1) fail(`${relativePath}: expected the same 22-second story as the store demo, got ${duration.toFixed(2)}s`);
+  if (fps < 23.5 || fps > 24.5) fail(`${relativePath}: expected 24fps, got ${fps.toFixed(2)}fps`);
+  checkTransitionContinuity(relativePath, target);
 }
 
 function checkRenderer() {
   checked.renderer += 1;
-  const relativePath = 'scripts/render-fillpro-store-video.js';
-  const target = assertFile(relativePath, 8 * 1024, 80 * 1024);
-  if (!target) return;
-  const source = fs.readFileSync(target, 'utf8');
-  const required = [
-    'const WIDTH = 1280;',
-    'const HEIGHT = 720;',
-    'const FPS = 24;',
-    'const DURATION = 22;',
-    'const FIRST_FILL_BEFORE_SECONDS = 1.25;',
-    'const POSTER_FRAME_SECONDS = 3.75;',
-    'requestAnimationFrame(resolve)',
-    'skip-retyping-store-demo-22s.mp4',
-    'skip-retyping-store-demo-22s-thumb.png',
-    'Mute-safe captions',
-    'Another job\\\\napplication?',
-    'Fill the details you already saved.',
-    'One click.\\\\nDetails filled.',
-    'Your name, email, phone, and saved resume are ready to check.',
-    'Review first.\\\\nSubmit yourself.',
-    'It keeps up\\\\nwith the form.',
-    'Start free.\\\\nLifetime Pro: $39.99.',
-    'Every Pro plan adds up to 500 profiles, duplication, and backup imports.',
-    'One payment',
-    'Monthly + yearly available',
-    'careers.example.com/apply',
-    'careers.example.com/apply/step-2',
-    'fields and your resume are ready to review',
-    'application details are ready to review',
-    'Use your password manager',
-    'No auto-submit',
-    'windowOpacity',
-    'const themeTokens = [',
-    'function themeFor(t)',
-    'function formSwapOpacity(t, center)',
-    'function applyTheme(stage, amount)',
-    '--stage-bg-a',
-    'const phaseOutro =',
-    'cursorFor',
-    '--field-shine',
-    '--button-shine',
-    'validateFrame(page, time)',
-    'Video frame ${time.toFixed(2)}s failed layout QA',
-    'frame % FPS === 0',
-  ];
-  for (const needle of required) {
-    if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
+  const hash = (target) => require('crypto').createHash('sha256').update(fs.readFileSync(target)).digest('hex');
+  const receiptPath = filePath('assets/marketplace/captures/provenance.json');
+  const videoReceiptPath = filePath('assets/marketplace/video-provenance.json');
+  if (!fs.existsSync(receiptPath) || !fs.existsSync(videoReceiptPath)) {
+    fail('Real-source media provenance is missing');
+    return;
   }
-  if (!/if \(t < 1\.2\) return 1;/.test(source)) {
-    fail(`${relativePath}: the first field should fill during the opening hook`);
-  }
-  if (!/if \(t < 2\.55\) return 4;/.test(source)) {
-    fail(`${relativePath}: the resume should be filled before the first proof scene`);
-  }
-  if (!/String\(POSTER_FRAME_SECONDS\)/.test(source)) {
-    fail(`${relativePath}: poster thumbnail should render from the early value frame`);
-  }
-  if (/radial-gradient|payoff-card|kinetic-layer|sceneFor\(|class="version"|v1\.0\.0|Passwords skipped/i.test(source)) {
-    fail(`${relativePath}: old slideshow, orb, version-badge, or repetitive-boundary treatment returned`);
-  }
-  if (/Client intake|Partner intake|Team intake|team-intake/i.test(source)) {
-    fail(`${relativePath}: unrelated intake copy returned to the job-application story`);
-  }
-  if (/classList\.toggle\(['"]is-dark/.test(source)) {
-    fail(`${relativePath}: hard theme cuts must not replace the timed color crossfade`);
-  }
-  if (!source.includes('Screenshots are rendered by render-fillpro-assets.js')) {
-    fail(`${relativePath}: should leave still screenshots to the dedicated still renderer`);
-  }
+  const capture = JSON.parse(fs.readFileSync(receiptPath));
+  const video = JSON.parse(fs.readFileSync(videoReceiptPath));
+  const checkHashes = (entries, root) => Object.entries(entries).every(([file, expected]) => {
+    const target = path.resolve(root, file);
+    return target.startsWith(path.resolve(root) + path.sep) && fs.existsSync(target) && hash(target) === expected;
+  });
+  if (Object.keys(capture.extensionHashes || {}).length < 9 || !checkHashes(capture.extensionHashes, path.join(WORKSPACE, 'fillpro'))) fail('Recapture the current extension: source hashes changed');
+  if (Object.keys(capture.artifacts || {}).length < 6 || !checkHashes(capture.artifacts, filePath('assets/marketplace/captures'))) fail('Captured product pixels changed');
+  if (capture.captureScriptHash !== hash(filePath('scripts/capture-fillpro-demo.js'))) fail('Capture script changed after verification');
+  if (video.captureReceiptHash !== hash(receiptPath) || video.rendererHash !== hash(filePath('scripts/render-fillpro-store-video.js'))) fail('Video provenance does not match its capture or renderer');
+  if (Object.keys(video.artifacts || {}).length !== 6 || !checkHashes(video.artifacts, filePath('assets'))) fail('Video output bytes changed');
+  if (capture.filled?.name !== 'Alex Morgan' || capture.filled?.password !== '' || capture.filled?.resume !== 'alex-resume.pdf') fail('Real capture did not demonstrate the claimed name/upload/safety result');
+  if (capture.assertions?.length < 3 || video.durationSeconds !== 22 || video.fps !== 24) fail('Real task assertions or video format missing');
+  if (checkHashes({ 'filled-form.png': 'deliberately-invalid-hash' }, filePath('assets/marketplace/captures'))) fail('Negative control: capture hash verification accepted altered evidence');
+  const renderer = fs.readFileSync(filePath('scripts/render-fillpro-store-video.js'), 'utf8');
+  if (!renderer.includes('not a speed benchmark') || !renderer.includes('Actual extension UI. Local test form. Edited for readability.')) fail('Edited demonstration must disclose its scope');
+  if (/themeFor|renderFields|fillButton.*textContent/.test(renderer)) fail('Synthetic UI or cosmetic theme switching returned to the real capture renderer');
 }
 
 function checkStillRenderer() {
   checked.renderer += 1;
-  const relativePath = 'scripts/render-fillpro-assets.js';
-  const target = assertFile(relativePath, 8 * 1024, 100 * 1024);
-  if (!target) return;
-  const source = fs.readFileSync(target, 'utf8');
-  const required = [
-    'skip-retyping-screenshot-fill-page-1280x800.png',
-    'skip-retyping-screenshot-modern-forms-1280x800.png',
-    'skip-retyping-screenshot-profiles-1280x800.png',
-    'skip-retyping-screenshot-privacy-1280x800.png',
-    'skip-retyping-screenshot-undo-1280x800.png',
-    'skip-retyping-small-promo-440x280.png',
-    'skip-retyping-marquee-1400x560.png',
-    'Fill the fields you keep retyping.',
-    'Choose a saved profile, fill the page, then review before you submit.',
-    'Turn a filled form into a reusable profile.',
-    'Save this filled page',
-    'Fill more than basic text boxes.',
-    'Review the fill. Undo it if needed.',
-    'Roll the last Skip Retyping changes back without reloading the page.',
-    'Fill repeat forms from saved profiles.',
-    'Stored in your browser',
-    'Saved profiles stay in your browser.',
-    'shot-outcome',
-    'shot-modern',
-    'shot-profiles',
-    'shot-privacy',
-    'shot-undo',
-    'What Skip Retyping handles',
-    'field-grid',
-    'Catch fields that appear after the first pass.',
-    'forms.example.com/demo-request',
-    'careers.example.com/apply',
-    "values[7] ? 'Ready for review' : 'Filling application fields'",
-    'brandPromo',
-    'promo-row',
-    'alex-morgan.pdf',
-    'smallIconSvg',
-    'size <= 48',
-  ];
-  for (const needle of required) {
-    if (!source.includes(needle)) fail(`${relativePath}: missing ${needle}`);
+  const receiptPath = filePath('assets/marketplace/stills-provenance.json');
+  if (!fs.existsSync(receiptPath)) { fail('Real still-asset provenance missing'); return; }
+  const receipt = JSON.parse(fs.readFileSync(receiptPath));
+  const hash = (file) => require('crypto').createHash('sha256').update(fs.readFileSync(file)).digest('hex');
+  if (receipt.captureReceiptHash !== hash(filePath('assets/marketplace/captures/provenance.json'))) fail('Still assets use stale captures');
+  if (receipt.rendererHash !== hash(filePath('scripts/render-fillpro-real-stills.js'))) fail('Still renderer changed after capture');
+  if (receipt.localizedCopyHash !== hash(filePath('scripts/fillpro-localized-marketplace-copy.json'))) fail('Localized still copy changed');
+  if (Object.keys(receipt.artifacts || {}).length !== 49) fail('Expected 45 localized screenshots plus four promotional assets');
+  for (const [file, expected] of Object.entries(receipt.artifacts || {})) {
+    const target = path.resolve(ROOT, 'assets', file);
+    if (!target.startsWith(path.resolve(ROOT, 'assets') + path.sep) || !fs.existsSync(target) || hash(target) !== expected) fail('Still output changed: ' + file);
   }
-  if (source.includes('radial-gradient')) {
-    fail(`${relativePath}: marketing renderer should use structured geometry, not gradient orbs`);
-  }
-  if (!source.includes('.profile strong { color: #10231f;')) {
-    fail(`${relativePath}: light profile cards need an explicit dark text color inside dark compositions`);
-  }
-  if (!source.includes('color: #10231f;\n    font-size: 24px;')) {
-    fail(`${relativePath}: light form and panel headings need an explicit dark text color`);
-  }
-  if (!source.includes("const clipped = await page.evaluate")) {
-    fail(`${relativePath}: renderer should reject clipped marketing UI before writing screenshots`);
-  }
-  if (/Keep submit in your hands/i.test(source)) {
-    fail(`${relativePath}: first screenshot copy uses awkward submit phrasing`);
-  }
-  if (/Fill the repeated fields/i.test(source)) {
-    fail(`${relativePath}: first screenshot copy should not use stiff repeated-fields phrasing`);
-  }
-  if (/Save once\. Fill the next long form\./i.test(source)) {
-    fail(`${relativePath}: first screenshot headline should avoid the old repetitive launch line`);
-  }
-  if (/Save your details once\./i.test(source)) {
-    fail(`${relativePath}: first screenshot should use the direct one-click outcome, not generic save-once copy`);
-  }
-  if (/Pick a profile, fill the page, then review before you submit\./i.test(source)) {
-    fail(`${relativePath}: first screenshot should avoid generic pick-fill-review phrasing`);
-  }
-  if (/core filling|core fill|core use/i.test(source)) {
-    fail(`${relativePath}: still screenshots should avoid stiff "core" account phrasing`);
-  }
-  if (/form leaves the page/i.test(source)) {
-    fail(`${relativePath}: still screenshots should use plain submit language`);
-  }
-  if (/Review everything before submit/i.test(source)) {
-    fail(`${relativePath}: first screenshot copy should use natural review phrasing`);
-  }
-  if (/Fill repeated forms faster\./.test(source)) {
-    fail(`${relativePath}: small promo should be brand-forward, not a text-heavy mini ad`);
-  }
-  if (/real workflows|Clean fallback|Messy forms are part of the job/i.test(source)) {
-    fail(`${relativePath}: marketing copy should use concrete outcomes instead of generic workflow/fallback phrasing`);
-  }
-  if (/forms browsers leave unfinished|No cloud profile account|repeat work|repeat fields|late fields included/i.test(source)) {
-    fail(`${relativePath}: still marketing contains stiff or synthetic phrasing`);
-  }
-  if (/Google Forms-style|ARIA radios|ARIA checkboxes|React inputs|Vue fields|Angular forms|Shadow DOM/i.test(source)) {
-    fail(`${relativePath}: store screenshots should use buyer-facing field language, not framework jargon or third-party product phrasing`);
-  }
-  if (/Same-page sections|<span class="chip">Radios<\/span>|If a page labels a field oddly/i.test(source)) {
-    fail(`${relativePath}: store screenshots should avoid technical or cramped fallback wording`);
-  }
-  if (/Client intake|Partner intake|Team intake|team-intake/i.test(source)) {
-    fail(`${relativePath}: unrelated intake copy returned to the marketing assets`);
-  }
-  if (/Tricky fields|Fields browser autofill often misses|<div class="chips">[\s\S]*Choice buttons|Grouped sections/i.test(source)) {
-    fail(`${relativePath}: modern-form screenshot should use a product-proof field grid, not pill-heavy template copy`);
-  }
-  if (/stroke="#ffffff" stroke-width="1" opacity="0\.16"|<rect x="1" y="1" width="14" height="14" rx="3"/i.test(source)) {
-    fail(`${relativePath}: 16px toolbar icon should use the pixel-cut optical mark, not the old stroked rounded rect`);
-  }
-  if (/chromeFrame\('Demo request'/i.test(source)) {
-    fail(`${relativePath}: profile screenshot should use a realistic URL-like browser label`);
-  }
-  if (/promo-line/i.test(source)) {
-    fail(`${relativePath}: promo tiles should use concrete product rows, not generic bars`);
-  }
+  const source = fs.readFileSync(filePath('scripts/render-fillpro-real-stills.js'), 'utf8');
+  if (!source.includes('marketing bounds') || !source.includes('Some advanced UI remains in English')) fail('Still layout checks or honest localization scope missing');
+  const wrapper = fs.readFileSync(filePath('scripts/render-fillpro-assets.js'), 'utf8');
+  for (const file of ['capture-fillpro-demo.js', 'render-fillpro-real-stills.js', 'render-fillpro-store-video.js']) if (!wrapper.includes(file)) fail('Asset pipeline must rebuild real captures, stills and video together: ' + file);
 }
 
 function checkReviewRenderer() {

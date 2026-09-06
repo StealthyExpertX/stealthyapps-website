@@ -32,6 +32,38 @@ const cues = {
   zh_CN: ['又要填写求职申请？直接使用已经保存的信息。', '一次点击即可填写姓名、邮箱和电话，并匹配已保存的简历。', '逐项检查更改，需要时可以撤销。何时提交由您决定。', '支持下拉菜单、复选框和稍后出现的字段。', '免费使用 3 个资料。终身版 Pro 售价 39.99 美元；另有月付和年付方案。'],
 };
 
+const undoCaptions = {
+  ar: 'يعيد التراجع القيم السابقة. هنا تعود الحقول وخانة الملف فارغة.',
+  cs: 'Zpět obnoví původní hodnoty. Zde jsou pole i příloha opět prázdné.',
+  de: 'Rückgängig stellt die ursprünglichen Werte wieder her. Hier sind Felder und Dateiauswahl wieder leer.',
+  el: 'Η αναίρεση επαναφέρει τις αρχικές τιμές. Εδώ τα πεδία και η επιλογή αρχείου είναι ξανά κενά.',
+  en: 'Undo restores the original values. Here, the fields and file input are empty again.',
+  en_GB: 'Undo restores the original values. Here, the fields and file input are empty again.',
+  en_US: 'Undo restores the original values. Here, the fields and file input are empty again.',
+  es: 'Deshacer restaura los valores originales. Aquí, los campos y el archivo vuelven a quedar vacíos.',
+  es_419: 'Deshacer restaura los valores originales. Aquí, los campos y el archivo vuelven a quedar vacíos.',
+  fr: 'Annuler rétablit les valeurs initiales. Ici, les champs et le fichier sont à nouveau vides.',
+  hi: 'पूर्ववत करने से पहले के मान लौट आते हैं। यहाँ फ़ील्ड और फ़ाइल इनपुट फिर से खाली हैं।',
+  id: 'Urungkan mengembalikan nilai semula. Di sini, kolom dan pilihan berkas kembali kosong.',
+  it: 'Annulla ripristina i valori originali. Qui i campi e la selezione del file tornano vuoti.',
+  ja: '元に戻すと、入力前の値に戻ります。この例では、入力欄とファイル選択が再び空になります。',
+  ko: '실행 취소하면 원래 값으로 돌아갑니다. 이 예에서는 입력란과 파일 선택이 다시 비워집니다.',
+  nl: 'Ongedaan maken herstelt de oorspronkelijke waarden. Hier zijn de velden en de bestandskeuze weer leeg.',
+  pl: 'Cofnięcie przywraca poprzednie wartości. Tutaj pola i wybór pliku znów są puste.',
+  pt_BR: 'Desfazer restaura os valores originais. Aqui, os campos e a seleção de arquivo ficam vazios novamente.',
+  ru: 'Отмена восстанавливает исходные значения. В этом примере поля и выбор файла снова пусты.',
+  sv: 'Ångra återställer de ursprungliga värdena. Här är fälten och filvalet tomma igen.',
+  th: 'เลิกทำจะคืนค่าเดิม ในตัวอย่างนี้ ช่องกรอกข้อมูลและช่องเลือกไฟล์กลับมาว่างอีกครั้ง',
+  tr: 'Geri al, önceki değerleri geri yükler. Bu örnekte alanlar ve dosya seçimi yeniden boştur.',
+  uk: 'Скасування відновлює початкові значення. У цьому прикладі поля та вибір файлу знову порожні.',
+  vi: 'Hoàn tác khôi phục giá trị ban đầu. Trong ví dụ này, các trường và mục chọn tệp lại để trống.',
+  zh_CN: '撤销会恢复原来的值。在这个示例中，输入框和文件选择重新变为空白。',
+};
+for (const locale of Object.keys(cues)) {
+  if (!undoCaptions[locale]) throw new Error(`Missing updated Undo caption: ${locale}`);
+  cues[locale][3] = undoCaptions[locale];
+}
+
 const times = [
   ['00:00:00.000', '00:00:03.200'],
   ['00:00:03.200', '00:00:08.000'],

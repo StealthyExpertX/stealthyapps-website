@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-25",
+  "updated": "2026-09-06",
   "note": "Update this file only after rerendering assets, running npm run review:marketing, and visually approving the contact sheets.",
   "assets": [
     {
@@ -13,98 +13,98 @@
     },
     {
       "file": "assets/skip-retyping-og.png",
-      "bytes": 281091,
-      "sha256": "0c86dde50b657a7976bee5d2fca20f65f638e217337bd6eb1a16cf2735d7b7cf",
+      "bytes": 92259,
+      "sha256": "24d1013f4a0c64451fde84587c7aa70253a540a19f744249762e79d861ef8467",
       "width": 1200,
       "height": 630,
-      "meanLuma": 238.26,
-      "meanColorSpread": 8.22
+      "meanLuma": 120.14,
+      "meanColorSpread": 61.89
     },
     {
       "file": "assets/skip-retyping-demo-poster.png",
-      "bytes": 109606,
-      "sha256": "75bb2791aa2062c637ee73b27b8b7d1fb98d1f727c6aebbc4e810587f089ceae",
+      "bytes": 119284,
+      "sha256": "1c25bf548a3787575cb2bd3cc163594c42cc59a57c48820dc3d08e78b1193ee2",
       "width": 960,
       "height": 540,
-      "meanLuma": 238.47,
-      "meanColorSpread": 7.79
+      "meanLuma": 241.45,
+      "meanColorSpread": 3.69
     },
     {
       "file": "assets/marketplace/skip-retyping-small-promo-440x280.png",
-      "bytes": 79838,
-      "sha256": "5bafa9d3ca6ea32ec5d1f79cec9772dde244a108cd9ed04f10207c5d7f266797",
+      "bytes": 23534,
+      "sha256": "9cc23157812ef68989851323ec05d53acb79cdcdaac9a3c6c9a7aa087f5df6ae",
       "width": 440,
       "height": 280,
-      "meanLuma": 144.79,
-      "meanColorSpread": 47.2
+      "meanLuma": 113.06,
+      "meanColorSpread": 64.96
     },
     {
       "file": "assets/marketplace/skip-retyping-marquee-1400x560.png",
-      "bytes": 505691,
-      "sha256": "5aaeb6bfa800dd914d9b01e17f509e566b200bf1fb1128a505212eea762a2dfb",
+      "bytes": 85564,
+      "sha256": "3988513ee5a9ba3cd31f32c41473d8a8d859e0f88fc341e166d4fdf15ebb5fa0",
       "width": 1400,
       "height": 560,
-      "meanLuma": 115.58,
-      "meanColorSpread": 62.71
+      "meanLuma": 111.28,
+      "meanColorSpread": 65.96
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png",
-      "bytes": 281750,
-      "sha256": "0072a857853d8121fdccc7c7c70141af1bed14eadcf32be95585e63cdc42fc05",
+      "bytes": 93706,
+      "sha256": "535d3bf09b0cf602a2258aa4be7754f7d3ecb132aecb5f4c6ed4d990591dfba8",
       "width": 1280,
       "height": 800,
-      "meanLuma": 227.94,
-      "meanColorSpread": 6.66
+      "meanLuma": 241.63,
+      "meanColorSpread": 4
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png",
-      "bytes": 314647,
-      "sha256": "dca42b1373579d8485a751023325ee4a823e72b2fc79b08fb196c04c1ef70369",
+      "bytes": 90325,
+      "sha256": "1caac055139454008f7b735cb063d12db1f2884050f861e279175cda48719e0b",
       "width": 1280,
       "height": 800,
-      "meanLuma": 230.57,
-      "meanColorSpread": 7.47
+      "meanLuma": 146.5,
+      "meanColorSpread": 5.82
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png",
-      "bytes": 259163,
-      "sha256": "1e953adb3736748ab2df0c9b17b7c296fcd12a3f293f27307c01b5b6097f4cdf",
+      "bytes": 137502,
+      "sha256": "4b98e6fdf67ba90210d814bc7cc2f260d489686c52371aca6b5c823d4d9d4ffb",
       "width": 1280,
       "height": 800,
-      "meanLuma": 121.71,
-      "meanColorSpread": 11.05
+      "meanLuma": 238.41,
+      "meanColorSpread": 8.33
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png",
-      "bytes": 363839,
-      "sha256": "efbf0c503dcade053fc5c2b7c48c51f362da8e120dfc24cc8d8261bf6f43c571",
+      "bytes": 84465,
+      "sha256": "5375e15938d6d83d6e57cfa8bf34de4041e4eefc84cc866e9f8dc2e476624ac4",
       "width": 1280,
       "height": 800,
-      "meanLuma": 45.26,
-      "meanColorSpread": 14.77
+      "meanLuma": 67.66,
+      "meanColorSpread": 21.18
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-undo-1280x800.png",
-      "bytes": 288925,
-      "sha256": "c95d58d97260ae3b69b9cc89953fc3479dee07275a8348dc01c69ca48bcbc581",
+      "bytes": 107058,
+      "sha256": "985fd4225954e98b8f5ac525f456edd1a7c4872f41194e6762acca5cd9de0ff0",
       "width": 1280,
       "height": 800,
-      "meanLuma": 141.77,
-      "meanColorSpread": 11.33
+      "meanLuma": 239.11,
+      "meanColorSpread": 6.99
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s-thumb.png",
-      "bytes": 318591,
-      "sha256": "fe2128076c31899f15022345b693bab21513c42d42b3c52b76ee525760fe9396",
+      "bytes": 185522,
+      "sha256": "f4cd5877fd21182936d5ba57ae9ef84ef8db7d26cc0252a4320dab256ba7ee31",
       "width": 1280,
       "height": 720,
-      "meanLuma": 228.67,
-      "meanColorSpread": 8.16
+      "meanLuma": 240.87,
+      "meanColorSpread": 3.63
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s.mp4",
-      "bytes": 1372689,
-      "sha256": "9e9a4a64213b4dc2b845bbf21c576623bc1c708e263619088c246c4205f5c8ea"
+      "bytes": 364796,
+      "sha256": "4eb5b06e219741bdcf0e0ada92a36d45baf8a19e41651dc2ec8cca5c7a959c34"
     },
     {
       "file": "../fillpro/icons/icon16.png",
