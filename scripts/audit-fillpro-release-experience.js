@@ -496,7 +496,12 @@ async function auditProductHero(browser, origin, errors) {
     const playback = await page.evaluate(() => {
       const button = document.querySelector('.demo-play-button');
       const video = document.querySelector('.demo-shell video');
+      const controlBounds = button?.getBoundingClientRect();
+      const mediaBounds = video?.getBoundingClientRect();
       return {
+        controlOverlapsVideo: Boolean(controlBounds && mediaBounds &&
+          controlBounds.left < mediaBounds.right && controlBounds.right > mediaBounds.left &&
+          controlBounds.top < mediaBounds.bottom && controlBounds.bottom > mediaBounds.top),
         buttonState: button?.dataset.state || '',
         buttonLabel: button?.getAttribute('aria-label') || '',
         videoPresent: Boolean(video),
@@ -506,6 +511,9 @@ async function auditProductHero(browser, origin, errors) {
     });
     if (playback.hasDecorativeCanvas) {
       errors.push('/skip-retyping/: decorative WebGL canvas returned');
+    }
+    if (playback.controlOverlapsVideo) {
+      errors.push('/skip-retyping/: playback control obscures actual product footage');
     }
     if (playback.buttonState !== 'playing' || !/^Pause/.test(playback.buttonLabel)) {
       errors.push('/skip-retyping/: product demo must start in the playing state');

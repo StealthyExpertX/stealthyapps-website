@@ -334,6 +334,7 @@
     var button = document.querySelector('.demo-play-button');
     var poster = document.querySelector('[data-skip-retyping-demo-poster]');
     if (!button || !poster) return;
+    button.hidden = false;
 
     var reduceMotion =
       window.matchMedia &&
