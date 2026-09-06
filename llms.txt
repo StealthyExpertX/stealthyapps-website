@@ -25,7 +25,7 @@ Skip Retyping fills repeated web forms from profiles saved in your browser. It i
 
 ## What It Handles
 
-Skip Retyping supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, free profile export plus Pro backup imports, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels.
+Skip Retyping supports saved profiles, smart rules, custom fields, right-click field capture, on-page profile picking, undo, file upload matching for resumes, documents, CSVs, and spreadsheets, free profile export and selected backup recovery, and the form pieces browser autofill often misses: custom selects, comboboxes, dropdowns, radio groups, checkboxes, textareas, segmented phone fields, split birthdays, embedded same-page sections, fields that appear after the page loads, and multilingual contact labels. Free recovery stays within the three-profile limit; Pro supports up to 500 profiles. Protected or ambiguous controls may be skipped.
 
 ## Privacy Boundary
 

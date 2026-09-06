@@ -28,7 +28,7 @@ const scenes = [
   { start: 3.2, state: 'filled', title: 'Your details. Ready to check.', detail: 'Name, email, phone and your saved resume.' },
   { start: 8, state: 'filled', title: 'Review first. Submit yourself.', detail: 'The password stays empty. Undo is available.' },
   { start: 12.6, state: 'undo', title: 'Undo brings the original values back.', detail: 'Here, the empty fields and file input are restored.' },
-  { start: 17.2, state: 'filled', title: '3 profiles free. Lifetime Pro: $39.99.', detail: 'Pro adds up to 500 profiles, duplication and backup imports. Monthly and yearly also available.' },
+  { start: 17.2, state: 'filled', title: '3 profiles free. Lifetime Pro: $39.99.', detail: 'Up to 500 profiles and duplication. Monthly and yearly plans also available.' },
 ];
 
 function html(scene) {

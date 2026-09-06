@@ -102,6 +102,8 @@ function checkLocalizedScreenshotCopy() {
     'modernHeadline',
     'privacyHeadline',
     'undoHeadline',
+    'actualUiNote',
+    'destinationPrivacyNote',
   ];
   const uiKeys = [
     'beforeTitle',
@@ -149,6 +151,7 @@ function checkLocalizedScreenshotCopy() {
     'fieldsChanged',
     'undoAvailable',
     'rollbackWithoutReload',
+    'password',
   ];
   const untranslatedDefaults = new Set([
     'Client onboarding',
@@ -202,7 +205,7 @@ function checkLocalizedScreenshotCopy() {
     for (const key of uiKeys) {
       const value = String(entry.ui?.[key] || '').trim();
       if (!value) fail(`localized screenshots: ${locale} missing ui.${key}`);
-      if (untranslatedDefaults.has(value)) {
+      if (!/^en_/.test(locale) && untranslatedDefaults.has(value)) {
         fail(`localized screenshots: ${locale} left ui.${key} in English`);
       }
     }
@@ -440,7 +443,7 @@ function checkVideo(relativePath) {
       execFileSync(
         'ffprobe',
         ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', target],
-        { encoding: 'utf8' },
+        { encoding: 'utf8', windowsHide: true },
       ),
     );
   } catch (error) {
@@ -475,7 +478,7 @@ function checkHeroVideo(relativePath) {
       execFileSync(
         'ffprobe',
         ['-v', 'error', '-print_format', 'json', '-show_format', '-show_streams', target],
-        { encoding: 'utf8' },
+        { encoding: 'utf8', windowsHide: true },
       ),
     );
   } catch (error) {
@@ -537,7 +540,8 @@ function checkStillRenderer() {
   if (receipt.captureReceiptHash !== hash(filePath('assets/marketplace/captures/provenance.json'))) fail('Still assets use stale captures');
   if (receipt.rendererHash !== hash(filePath('scripts/render-fillpro-real-stills.js'))) fail('Still renderer changed after capture');
   if (receipt.localizedCopyHash !== hash(filePath('scripts/fillpro-localized-marketplace-copy.json'))) fail('Localized still copy changed');
-  if (Object.keys(receipt.artifacts || {}).length !== 49) fail('Expected 45 localized screenshots plus four promotional assets');
+  const expectedStills = (getRuntimeMarketingLocales().length + 1) * 5 + 4;
+  if (Object.keys(receipt.artifacts || {}).length !== expectedStills) fail(`Expected ${expectedStills} stills covering every runtime locale and four promotional assets`);
   for (const [file, expected] of Object.entries(receipt.artifacts || {})) {
     const target = path.resolve(ROOT, 'assets', file);
     if (!target.startsWith(path.resolve(ROOT, 'assets') + path.sep) || !fs.existsSync(target) || hash(target) !== expected) fail('Still output changed: ' + file);

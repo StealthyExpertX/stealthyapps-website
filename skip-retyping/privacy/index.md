@@ -1,6 +1,6 @@
 # Skip Retyping Privacy
 
-Last updated: 2026-08-24
+Last updated: 2026-09-06
 
 Skip Retyping stores profiles in browser extension storage. Filling makes entered values and files available to the destination website, which may read or autosave them before submission. Undo cannot retract data a website already received. Exports and manual support messages may also contain selected profile data.
 
@@ -32,7 +32,11 @@ The use of information received from Google APIs by Skip Retyping adheres to the
 
 ## Retention and controls
 
-Local extension data stays until you delete it, clear extension storage, or uninstall. Support records stay only as long as needed to answer the request, prevent abuse, or meet legal duties. Billing providers keep transaction records under their policies and applicable tax and accounting rules.
+Editor drafts and deleted-profile recovery copies are stored locally. Open More tools > Recovery to resume, restore or permanently discard them. Erase profile data removes profiles, attachments, drafts, recovery copies and prepared backup parts; it preserves payment-account state and settings. A crash can lose edits not yet written to storage or a file still loading. Downloaded backups and information already read by a destination website must be handled separately.
+
+Exports are unencrypted. Large backups have multiple parts; keep every part. Free selected recovery stays within the three-profile limit; Pro supports up to 500 profiles. Temporary export parts are normally removed on closing the dialog, or after 24 hours on the next extension open following an interrupted export.
+
+Support records stay only as long as needed to answer the request, prevent abuse, or meet legal duties. Billing providers keep transaction records under their policies and applicable tax and accounting rules.
 
 Where privacy law applies, you may ask to access, correct, delete, restrict, or receive the personal information Stealthy Apps controls. You may also object to or withdraw consent-based processing. UK users may complain to the Information Commissioner's Office.
 

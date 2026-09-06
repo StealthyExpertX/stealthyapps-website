@@ -32,7 +32,7 @@ This file describes the public Skip Retyping website for crawlers, assistants, a
 
 Skip Retyping is a private browser form autofill extension for job applications, signup forms, onboarding pages, intake forms, demo requests, vendor forms, and repeated business forms.
 
-Skip Retyping does not run a cloud profile account for form values. Saved profiles, rules, custom fields, and upload matches stay inside the browser extension unless the user exports them or manually includes them in a support message. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
+Skip Retyping does not run a cloud profile account for form values. Profiles, drafts and recovery copies are stored in the browser. When a user fills a form, the destination website can read and autosave those values and selected uploads before submission. Exported backups also contain those details. Pro billing sends license and payment information to ExtensionPay and Stripe, not saved profile values. Sign-ins, cards, CVCs, one-time codes, and protected identity details should stay with the browser, password manager, payment wallet, or site controls users already trust for those jobs.
 
 ## Pricing
 

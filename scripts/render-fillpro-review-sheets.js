@@ -152,7 +152,7 @@ async function renderIconSheet() {
 }
 
 async function renderLocalizedSheet() {
-  const locales = ['de', 'es', 'fr', 'pt_BR', 'ja', 'ko', 'ru', 'zh_CN'];
+  const locales = Object.keys(require('./fillpro-localized-marketplace-copy.json'));
   const screenshots = [
     ['fill-page', 'Main promise'],
     ['profiles', 'Profiles'],

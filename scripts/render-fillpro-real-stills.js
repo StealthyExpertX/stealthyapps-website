@@ -26,17 +26,19 @@ const notes = {
 
 function document(locale, story) {
   const c = copy[locale];
+  const localeNotes = locale === 'en' ? notes.en : [c.actualUiNote, c.destinationPrivacyNote];
+  assert(localeNotes.every((note) => typeof note === 'string' && note.trim()), `${locale}: missing disclosure`);
   const ui = c.ui;
   const titles = { 'fill-page': c.headline, profiles: ui.savedProfiles, 'modern-forms': ui.resume, privacy: c.privacyHeadline, undo: c.undoHeadline };
-  const subtitle = story === 'privacy' ? notes[locale][1] : story === 'profiles' ? ui.profileContents : story === 'modern-forms' ? ui.matchedFromProfile || 'Matched from your saved profile' : c.intro;
+  const subtitle = story === 'privacy' ? localeNotes[1] : story === 'profiles' ? ui.profileContents : story === 'modern-forms' ? ui.matchedFromProfile || 'Matched from your saved profile' : c.intro;
   const form = img(`${locale}-filled-form.png`, 'form');
   const popup = img(`${locale}-filled-popup.png`, 'popup');
   let content = form + popup;
   if (story === 'profiles') content = `<div class="statement"><h2>${escape(ui.applicantProfile || 'Job search profile')}</h2><p>${escape(ui.profileContents)}</p>${popup}</div>${img(`${locale}-editor.png`, 'editor')}`;
   if (story === 'modern-forms') content = `<div class="file-proof"><h2>${escape(ui.resume)}</h2>${img(`${locale}-files.png`, 'file')}</div>${form}`;
-  if (story === 'privacy') content = `<div class="statement"><h2>${escape(ui.savedByExtension)}</h2><p>${escape(notes[locale][1])}</p><strong>3 ${escape(ui.savedProfiles.toLowerCase())} · $0</strong></div>${popup}`;
+  if (story === 'privacy') content = `<div class="statement"><h2>${escape(ui.savedByExtension)}</h2><p>${escape(localeNotes[1])}</p><strong><bdi>3</bdi> ${escape(ui.savedProfiles.toLowerCase())} · <bdi>$0</bdi></strong></div>${popup}`;
   if (story === 'undo') content = `${popup}<div class="statement"><h2>${escape(ui.reviewBeforeSubmit)}</h2><p>${escape(ui.undoAvailable)}</p>${form}</div>`;
-  return `<!doctype html><html lang="${locale.replace('_', '-')}"><meta charset="utf-8"><style>
+  return `<!doctype html><html lang="${locale.replace('_', '-')}" dir="${locale === 'ar' ? 'rtl' : 'ltr'}"><meta charset="utf-8"><style>
 *{box-sizing:border-box}body{margin:0;width:1280px;height:800px;font-family:system-ui;letter-spacing:0;background:#f4f7f5;color:#152d26}
 header{height:180px;padding:28px 42px 12px;display:grid;gap:10px;align-content:start}header b{font-size:19px;color:#0a7b68}h1{font-size:38px;line-height:1.14;margin:0;max-width:1160px}header p{font-size:18px;line-height:1.4;margin:0}
 main{height:556px;display:flex;justify-content:space-between;align-items:flex-start;gap:28px;padding:0 42px}img{display:block;object-fit:contain;object-position:top;max-width:100%}.form{width:790px;height:auto}.popup{width:360px;height:auto}.editor{width:380px;height:556px}.file{width:460px;height:auto}
@@ -44,7 +46,7 @@ main{height:556px;display:flex;justify-content:space-between;align-items:flex-st
 .file-proof{width:440px;flex-shrink:0;padding-top:45px;display:grid;gap:26px}.file-proof+.form{width:730px;margin-top:25px}.privacy{background:#142b25;color:#f4fbf8}.privacy header b{color:#7ae2c7}.privacy main{align-items:center;gap:70px}.privacy .statement{max-width:620px}.profiles{background:#ecf2f5}.undo{background:#edf5f1}.undo main{gap:70px}.undo .popup{width:390px}
 .modern-forms{background:#24282e;color:#f4f7f5}.modern-forms header b{color:#7ae2c7}
 footer{padding:15px 42px;height:64px;font-size:14px;line-height:1.4}
-</style><body class="${story}"><header><b>Skip Retyping</b><h1>${escape(titles[story])}</h1><p>${escape(subtitle)}</p></header><main>${content}</main><footer>${escape(notes[locale][0])}</footer></body></html>`;
+</style><body class="${story}"><header><b dir="ltr">Skip Retyping</b><h1>${escape(titles[story])}</h1><p>${escape(subtitle)}</p></header><main>${content}</main><footer>${escape(localeNotes[0])}</footer></body></html>`;
 }
 
 async function main() {
@@ -63,7 +65,7 @@ async function main() {
         await page.evaluate(async () => { await document.fonts.ready; await Promise.all([...document.images].map((image) => image.decode())); });
         const violations = await page.evaluate(() => [...document.querySelectorAll('h1,h2,p,b,strong,footer,img')].filter((el) => {
           const r = el.getBoundingClientRect();
-          return r.right > 1281 || r.bottom > 801 || el.scrollWidth > el.clientWidth + 1;
+          return r.left < -1 || r.right > 1281 || r.top < -1 || r.bottom > 801 || el.scrollWidth > el.clientWidth + 1;
         }).map((el) => el.textContent || el.tagName));
         assert.deepEqual(violations, [], `${locale}/${story}: marketing bounds`);
         const file = path.join(out, `skip-retyping-screenshot-${story}-1280x800.png`);

@@ -29,7 +29,7 @@ Focused pages:
 - Smart rules and custom fields for unusual labels.
 - Resume, CV, cover letter, portfolio, document, CSV, and spreadsheet upload matching.
 - Undo last fill.
-- Export is free. Pro adds backup import and profile duplication.
+- Export and selected backup recovery are free within the three-profile limit. Pro raises the limit to 500 and adds profile duplication.
 - Support for the form pieces browser autofill often misses: dropdowns, custom selects, comboboxes, radio groups, checkboxes, textareas, upload fields, split birthdays, segmented phones, country/state/month aliases, multilingual contact labels, embedded same-page sections, and fields that appear after the page loads.
 
 ## Competitive fit
@@ -52,7 +52,7 @@ The normal Fill Page action works on the page the user chooses. The optional flo
 
 Free includes three saved profiles, Fill Page, side panel, on-page picker, smart rules, custom fields, upload matching, and right-click capture.
 
-Pro adds up to 500 saved profiles, profile duplication, and backup imports. Export stays available on every plan. Pro costs $3.99/month, $29.99/year, or $39.99 once for lifetime access.
+Pro supports up to 500 saved profiles and profile duplication. Export and selected backup recovery stay available on every plan within its profile limit. Pro costs $3.99/month, $29.99/year, or $39.99 once for lifetime access.
 
 Checkout starts from inside the extension so ExtensionPay can attach the license to the browser profile using Skip Retyping. The website explains plans and points users to the right browser install page.
 

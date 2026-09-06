@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-06T05:56:22.798Z",
-  "captureReceiptHash": "beadd7d5a1a3930b8a77f66f8a2e398476db6b229126f590ab7cabeef14052a1",
-  "rendererHash": "f41de44f72e0db5435f0e77c1de7a3fe8a3a9c5207a3b18fb8a903d253777067",
+  "generatedAt": "2026-09-06T08:42:48.062Z",
+  "captureReceiptHash": "1aa0ba9167d30d261266ba209285fdf58ad3bef1cfa75d7be5bfbd90878d258a",
+  "rendererHash": "516ad259a2cfb0e9497d18036e3a1cebd2bf02ee9a1bc39b8f62b2c4bfcefcd9",
   "durationSeconds": 22,
   "fps": 24,
   "transitions": [
@@ -32,11 +32,11 @@
     }
   ],
   "artifacts": {
-    "marketplace/skip-retyping-store-demo-22s.mp4": "4eb5b06e219741bdcf0e0ada92a36d45baf8a19e41651dc2ec8cca5c7a959c34",
-    "marketplace/skip-retyping-store-demo-22s-thumb.png": "f4cd5877fd21182936d5ba57ae9ef84ef8db7d26cc0252a4320dab256ba7ee31",
-    "skip-retyping-demo.mp4": "ca993fb51d5f8228e4266400db89e53005f49bf891141a4f0a38990ad40903b0",
-    "skip-retyping-demo.gif": "63e4bdd3f11ce13a23fe9676e9283a5e563746d0f80a7ccd316ee8fe5ddc68e4",
-    "skip-retyping-demo-poster.png": "1c25bf548a3787575cb2bd3cc163594c42cc59a57c48820dc3d08e78b1193ee2",
-    "skip-retyping-demo-poster.webp": "775712d9bbc81dd5d44b7077856c8b020cdd684c41ff50067fd8ffcd6679ec36"
+    "marketplace/skip-retyping-store-demo-22s.mp4": "7755a7e4c2cc71d0867fe2a7f39b0e73211528fc973bd3ec23d26e62320bbc59",
+    "marketplace/skip-retyping-store-demo-22s-thumb.png": "90b1704de0fd0e64d3c878b019cc1ec8107ad8f6c4fcc2722724954b068480aa",
+    "skip-retyping-demo.mp4": "24a84b4fc24a5db9072390d1ccf3cf2a65b8d0238ba7ed359e33ca90ed1218e4",
+    "skip-retyping-demo.gif": "e148674ff32a2ba6536124329c469c52e3393b0cdffa868a5621f7751fd5a8b1",
+    "skip-retyping-demo-poster.png": "392ffdbf2ff7dc0d8425815fd048ce0e8471f3c83b98ca06bce0b1c2c3a58c9b",
+    "skip-retyping-demo-poster.webp": "bed47b386753d367e2072cf8f581afb444efc8854d997e02ef85e67be087870c"
   }
 }

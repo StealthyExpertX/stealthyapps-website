@@ -10,7 +10,9 @@ const root = path.resolve(__dirname, '..');
 const extension = path.resolve(root, '../fillpro');
 const output = path.join(root, 'assets/marketplace/captures');
 const inputs = ['manifest.json', 'background.js', 'popup.js', 'popup.html', 'popup.css',
-  'ui-i18n.js', 'file-store.js', 'licensing.js', 'page-picker.js'];
+  'ui-i18n.js', 'file-store.js', 'licensing.js', 'page-picker.js',
+  'profile-backup.js', 'safe-patterns.js', 'vendor/re2js-2.8.6.umd.js',
+  'recovery-store.js', 'profile-recovery.js', 'editor-recovery-ui.js'];
 const digest = (file) => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const fingerprint = () => Object.fromEntries(inputs.map((file) => [file, digest(path.join(extension, file))]));
 
@@ -121,17 +123,17 @@ async function capture() {
     await shot('undo');
     const localized = require('./fillpro-localized-marketplace-copy.json');
     const locales = { en: { ui: { beforeTitle: 'Job application', fullName: 'Full name', email: 'Email', phone: 'Phone', resume: 'Resume' } }, ...localized };
-    const passwordLabels = { en: 'Account password', de: 'Passwort', es: 'Contraseña', fr: 'Mot de passe', pt_BR: 'Senha', ja: 'パスワード', ko: '비밀번호', ru: 'Пароль', zh_CN: '密码' };
     for (const [locale, copy] of Object.entries(locales)) {
       await worker.evaluate((language) => chrome.storage.local.set({ interfaceLanguage: language }), locale);
       await form.reload();
       await form.evaluate(({ ui, password, language }) => {
         document.documentElement.lang = language.replace('_', '-');
+        document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
         document.querySelector('h1').textContent = ui.beforeTitle;
         document.querySelector('main > p').remove();
         document.querySelector('small').remove();
         for (const [id, label] of Object.entries({ full_name: ui.fullName, email: ui.email, phone: ui.phone, resume: ui.resume, password })) document.querySelector(`#${id}`).parentElement.firstChild.textContent = label;
-      }, { ui: copy.ui, password: passwordLabels[locale], language: locale });
+      }, { ui: copy.ui, password: locale === 'en' ? 'Account password' : copy.ui.password, language: locale });
       await popup.reload();
       await popup.locator('[data-fill]').waitFor();
       await form.bringToFront();
@@ -143,6 +145,9 @@ async function capture() {
       await shot(`${locale}-filled`);
       await popup.locator('[data-edit]').click();
       await popup.locator('#profileName').waitFor();
+      const saveBounds = await popup.locator('#editorSave').boundingBox();
+      assert(saveBounds && saveBounds.y >= 0 && saveBounds.y + saveBounds.height <= 540,
+        `${locale}: editor Save must remain visible without scrolling through the entire form`);
       await popup.screenshot({ path: path.join(output, `${locale}-editor.png`) });
       if (!await popup.locator('details.advanced-fields').evaluate((details) => details.open)) await popup.locator('details.advanced-fields > summary').click();
       await popup.locator('#profileFiles').screenshot({ path: path.join(output, `${locale}-files.png`) });

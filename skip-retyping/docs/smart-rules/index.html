@@ -164,10 +164,11 @@ Value: @email</code></pre>
         <section id="regex" class="docs-section">
           <p class="eyebrow">Optional</p>
           <h2>Use regex only when plain text cannot cover the variations.</h2>
-          <p>A regex rule uses JavaScript literal syntax. Keep it narrow and test it on the page you care about.</p>
+          <p>Regex rules use the bounded RE2 engine. Put the pattern between slashes and use only the <code>i</code>, <code>m</code> or <code>s</code> flags. Lookahead, lookbehind and backreferences are not supported. Keep the pattern narrow and test it on the page you care about.</p>
           <pre class="copyable"><code>Match: /work.?email/i
 Value: @email</code></pre>
           <p>This matches “work email,” “work-email,” and “work_email.” The trailing <code>i</code> makes the match case-insensitive.</p>
+          <p>A disabled pattern stays saved so you can review it, but it does not run. The profile editor explains what needs changing. Prefer plain words from the label when they are enough.</p>
         </section>
 
         <section id="examples" class="docs-section">

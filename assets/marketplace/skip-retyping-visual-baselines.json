@@ -13,17 +13,17 @@
     },
     {
       "file": "assets/skip-retyping-og.png",
-      "bytes": 92259,
-      "sha256": "24d1013f4a0c64451fde84587c7aa70253a540a19f744249762e79d861ef8467",
+      "bytes": 92428,
+      "sha256": "369b35e21001066881622ff9557a90300735ee5cca0b7f9a82a61596bb7ee8dc",
       "width": 1200,
       "height": 630,
-      "meanLuma": 120.14,
+      "meanLuma": 120.13,
       "meanColorSpread": 61.89
     },
     {
       "file": "assets/skip-retyping-demo-poster.png",
-      "bytes": 119284,
-      "sha256": "1c25bf548a3787575cb2bd3cc163594c42cc59a57c48820dc3d08e78b1193ee2",
+      "bytes": 119367,
+      "sha256": "392ffdbf2ff7dc0d8425815fd048ce0e8471f3c83b98ca06bce0b1c2c3a58c9b",
       "width": 960,
       "height": 540,
       "meanLuma": 241.45,
@@ -31,8 +31,8 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-small-promo-440x280.png",
-      "bytes": 23534,
-      "sha256": "9cc23157812ef68989851323ec05d53acb79cdcdaac9a3c6c9a7aa087f5df6ae",
+      "bytes": 23535,
+      "sha256": "4f4492b56c2e2da3592733c6d0c0ff94d3474decda753eff1e7f456ff2ac97c2",
       "width": 440,
       "height": 280,
       "meanLuma": 113.06,
@@ -40,26 +40,26 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-marquee-1400x560.png",
-      "bytes": 85564,
-      "sha256": "3988513ee5a9ba3cd31f32c41473d8a8d859e0f88fc341e166d4fdf15ebb5fa0",
+      "bytes": 85728,
+      "sha256": "34328a01a844681692df172b233878563bcd5d779d02e2ae6aad78a8eb788b71",
       "width": 1400,
       "height": 560,
-      "meanLuma": 111.28,
+      "meanLuma": 111.27,
       "meanColorSpread": 65.96
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-fill-page-1280x800.png",
-      "bytes": 93706,
-      "sha256": "535d3bf09b0cf602a2258aa4be7754f7d3ecb132aecb5f4c6ed4d990591dfba8",
+      "bytes": 93805,
+      "sha256": "c22e8516a51fc341608de1f458171da3dfd4fd33f4c1ae7c8065936edabeabc8",
       "width": 1280,
       "height": 800,
-      "meanLuma": 241.63,
+      "meanLuma": 241.62,
       "meanColorSpread": 4
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-modern-forms-1280x800.png",
-      "bytes": 90325,
-      "sha256": "1caac055139454008f7b735cb063d12db1f2884050f861e279175cda48719e0b",
+      "bytes": 90456,
+      "sha256": "4698feee2a9c83b3cc75990d713e6db2935f715f17350fd6f7868531e6694d30",
       "width": 1280,
       "height": 800,
       "meanLuma": 146.5,
@@ -67,17 +67,17 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-profiles-1280x800.png",
-      "bytes": 137502,
-      "sha256": "4b98e6fdf67ba90210d814bc7cc2f260d489686c52371aca6b5c823d4d9d4ffb",
+      "bytes": 142939,
+      "sha256": "3c5b73d115a2b04bbcdf4183e0762f607e718c6e3b47331e72cfda2e74de18e3",
       "width": 1280,
       "height": 800,
-      "meanLuma": 238.41,
-      "meanColorSpread": 8.33
+      "meanLuma": 237.17,
+      "meanColorSpread": 9.01
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-privacy-1280x800.png",
-      "bytes": 84465,
-      "sha256": "5375e15938d6d83d6e57cfa8bf34de4041e4eefc84cc866e9f8dc2e476624ac4",
+      "bytes": 84567,
+      "sha256": "6c5202b3402f78c1ba00fbb7e1d5f9f75946f5c05b60cdbc43a34cb30a09dfc8",
       "width": 1280,
       "height": 800,
       "meanLuma": 67.66,
@@ -85,8 +85,8 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-screenshot-undo-1280x800.png",
-      "bytes": 107058,
-      "sha256": "985fd4225954e98b8f5ac525f456edd1a7c4872f41194e6762acca5cd9de0ff0",
+      "bytes": 107175,
+      "sha256": "a7e54ffd84bc7adccb3dcc80301dab75ac7ea34d718f89d36b6c158d8d849fb7",
       "width": 1280,
       "height": 800,
       "meanLuma": 239.11,
@@ -94,17 +94,17 @@
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s-thumb.png",
-      "bytes": 185522,
-      "sha256": "f4cd5877fd21182936d5ba57ae9ef84ef8db7d26cc0252a4320dab256ba7ee31",
+      "bytes": 185612,
+      "sha256": "90b1704de0fd0e64d3c878b019cc1ec8107ad8f6c4fcc2722724954b068480aa",
       "width": 1280,
       "height": 720,
       "meanLuma": 240.87,
-      "meanColorSpread": 3.63
+      "meanColorSpread": 3.64
     },
     {
       "file": "assets/marketplace/skip-retyping-store-demo-22s.mp4",
-      "bytes": 364796,
-      "sha256": "4eb5b06e219741bdcf0e0ada92a36d45baf8a19e41651dc2ec8cca5c7a959c34"
+      "bytes": 359094,
+      "sha256": "7755a7e4c2cc71d0867fe2a7f39b0e73211528fc973bd3ec23d26e62320bbc59"
     },
     {
       "file": "../fillpro/icons/icon16.png",

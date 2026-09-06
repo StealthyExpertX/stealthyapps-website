@@ -20,7 +20,7 @@ Canonical product page: https://stealthyapps.com/skip-retyping/
 - Right-click field capture.
 - File upload matching for resumes, CVs, cover letters, portfolios, business documents, CSV files, and spreadsheets.
 - Undo last fill.
-- Export is free. Pro adds backup import and profile duplication.
+- Export and selected backup recovery are free within the three-profile limit. Pro raises the limit to 500 and adds profile duplication.
 - Field-learning suggestions.
 - Support for the form pieces browser autofill often misses: dropdowns, custom selects, comboboxes, radio groups, checkboxes, textareas, upload fields, segmented phone fields, split birthdays, country/state/month aliases, middle names, pronouns, multilingual contact labels, embedded same-page sections, and fields that appear after the page loads.
 
